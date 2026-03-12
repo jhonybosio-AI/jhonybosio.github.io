@@ -23,7 +23,7 @@ export default function MentoriaPage() {
         </h1>
         
         <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Proteja seu patrimônio, identifique riscos ocultos e tenha uma visão técnica profunda sobre seus investimentos com Jhony Bosio.
+          1 hora ao vivo comigo para analisar sua carteira posição por posição. Riscos, custos ocultos e clareza total para quem tem R$ 200k+ investidos.
         </p>
 
         <a href="https://buy.stripe.com/cNi5kF5Mqeg1cT71f04ko05" className="inline-block bg-[var(--color-blue3-secondary)] hover:bg-[var(--color-blue3-accent)] text-white font-bold py-4 px-10 rounded-xl text-lg transition-all transform hover:scale-105 shadow-[0_0_40px_-10px_rgba(0,146,255,0.5)]">
@@ -38,7 +38,9 @@ export default function MentoriaPage() {
         <div className="max-w-lg mx-auto bg-gradient-to-b from-white/10 to-transparent p-1 rounded-3xl">
           <div className="bg-[var(--color-blue3-primary)] p-8 md:p-12 rounded-[22px] border border-white/10">
             <h2 className="text-3xl font-bold mb-2">Raio-X Educativo</h2>
-            <p className="text-gray-400 mb-8">Sessão individual estratégica para blindagem e clareza do seu patrimônio.</p>
+            <p className="text-gray-400 mb-8 text-sm leading-relaxed">
+              1 hora ao vivo comigo. Analiso posição por posição: riscos e custos ocultos. Plano de ação por escrito e 7 dias de suporte no WhatsApp. Garantia incondicional de 7 dias.
+            </p>
             
             <div className="flex justify-center items-baseline gap-2 mb-8">
               <span className="text-xl text-gray-400 font-medium">R$</span>

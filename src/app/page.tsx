@@ -116,8 +116,8 @@ export default function Home() {
                    </div>
                 </div>
                 
-                <p className="text-gray-300 text-sm leading-relaxed relative z-10 mb-6">
-                  Sessão estratégica individual. Diagnóstico estrutural completo, identificação de riscos e blindagem de patrimônio com Jhony Bosio.
+                <p className="text-gray-300 text-[11px] leading-relaxed relative z-10 mb-6 font-medium">
+                  1 hora ao vivo comigo. Analiso posição por posição: riscos, custos ocultos e o que investidores diversificados fazem diferente. Plano de ação por escrito + 7 dias de suporte. Foco: R$200k+. Sem produtos para vender.
                 </p>
                 
                 <div className="flex items-center justify-between relative z-10 border-t border-white/10 pt-4">
