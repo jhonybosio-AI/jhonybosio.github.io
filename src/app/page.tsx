@@ -155,7 +155,6 @@ export default function Home() {
                    Agendar Reunião
                 </a>
               </div>
-            </div>
           </div>
           
         </section>
