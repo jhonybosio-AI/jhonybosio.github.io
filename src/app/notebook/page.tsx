@@ -15,11 +15,25 @@ export default function NotebookPage() {
   const [unlocked, setUnlocked] = useState(false);
   const [formData, setFormData] = useState({ nome: "", whatsapp: "", investimento: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.nome && formData.whatsapp && formData.investimento) {
-      setUnlocked(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Enviar para Formspree
+    try {
+      const response = await fetch("https://formspree.io/f/xreyqjey", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setUnlocked(true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        alert("Erro ao enviar dados. Por favor, tente novamente.");
+      }
+    } catch (error) {
+      alert("Erro de conexão. Verifique sua internet.");
     }
   };
 
