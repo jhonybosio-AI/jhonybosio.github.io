@@ -19,7 +19,6 @@ import {
   TrendingUp,
   User, 
   Users, 
-  Youtube,
   Zap 
 } from "lucide-react";
 
@@ -128,8 +127,6 @@ export default function Home() {
                 </div>
               </div>
           </a>
-          
-        </section>
 
           {/* Card 4: Assessoria Fee Fixo (HIGH TICKET) */}
           <div className="group block w-full relative mt-2">
@@ -155,6 +152,7 @@ export default function Home() {
                    Agendar Reunião
                 </a>
               </div>
+            </div>
           </div>
           
         </section>
