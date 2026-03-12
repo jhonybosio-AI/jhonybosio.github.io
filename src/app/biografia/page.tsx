@@ -109,14 +109,14 @@ export default function BiografiaPage() {
                <p className="text-gray-400">
                  Se você busca uma gestão profissional, técnica e alinhada com seus objetivos de vida, vamos conversar.
                </p>
-               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                  <Link href="/mentoria" className="bg-[var(--color-blue3-secondary)] hover:bg-[var(--color-blue3-accent)] text-white font-bold py-4 px-8 rounded-2xl transition-all shadow-lg flex items-center justify-center gap-2">
-                     Ver Mentoria <ArrowRight className="w-4 h-4" />
-                  </Link>
-                  <a href="https://wa.me/YOUR_NUMBER" className="bg-white/10 hover:bg-white/20 text-white font-bold py-4 px-8 rounded-2xl transition-all border border-white/10 flex items-center justify-center gap-2">
-                     Falar no WhatsApp
-                  </a>
-               </div>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                   <a href="https://buy.stripe.com/cNi5kF5Mqeg1cT71f04ko05" target="_blank" rel="noreferrer" className="bg-[var(--color-blue3-secondary)] hover:bg-[var(--color-blue3-accent)] text-white font-bold py-4 px-8 rounded-2xl transition-all shadow-lg flex items-center justify-center gap-2">
+                      Reservar Raio-X <ArrowRight className="w-4 h-4" />
+                   </a>
+                   <a href="https://api.whatsapp.com/send?phone=5516996045700" className="bg-white/10 hover:bg-white/20 text-white font-bold py-4 px-8 rounded-2xl transition-all border border-white/10 flex items-center justify-center gap-2">
+                      Falar no WhatsApp
+                   </a>
+                </div>
             </div>
           </div>
 

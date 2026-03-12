@@ -95,46 +95,38 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* Card 3: Diagnóstico Educacional R$ 497 */}
-          <Link href="/diagnostico" className="group block w-full relative mt-2">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-[var(--color-blue3-secondary)] to-[var(--color-blue3-accent)] rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
-            <div className="relative w-full rounded-2xl bg-[var(--color-blue3-primary)] border border-[var(--color-blue3-secondary)]/30 p-5 shadow-lg transition-all duration-300 group-hover:-translate-y-1">
-              <div className="flex items-center justify-between mb-2">
-                 <div className="flex items-center gap-3">
-                    <BarChart3 className="text-[var(--color-blue3-secondary)] w-5 h-5" />
-                    <h2 className="text-white font-bold text-lg leading-tight">Diagnóstico de Carteira</h2>
-                 </div>
-                 <span className="text-[var(--color-blue3-secondary)] font-bold text-sm bg-[var(--color-blue3-secondary)]/10 px-2.5 py-1 rounded-md">R$ 497</span>
-              </div>
-              <p className="text-gray-400 text-xs leading-relaxed ml-8">Avaliação estrutural e mapa de riscos detalhado dos seus investimentos.</p>
-            </div>
-          </Link>
-
-          {/* Card 3: Mentoria Premium R$ 997 (Destaque Principal) */}
-          <Link href="/mentoria" className="group block w-full relative mt-2">
+          {/* Card 3: Raio-X Educativo R$ 497 (UNIFIED OFFER) */}
+          <a href="https://buy.stripe.com/cNi5kF5Mqeg1cT71f04ko05" target="_blank" rel="noreferrer" className="group block w-full relative mt-2">
              <div className="absolute -inset-0.5 bg-gradient-to-r from-[var(--color-blue3-secondary)] to-[#1e90ff] rounded-2xl blur opacity-50 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
-              <div className="relative w-full rounded-2xl bg-gradient-to-br from-[var(--color-blue3-primary)] to-[#00175a] border border-[var(--color-blue3-secondary)] p-5 shadow-2xl transition-all duration-300 group-hover:-translate-y-1 overflow-hidden">
+              <div className="relative w-full rounded-2xl bg-gradient-to-br from-[var(--color-blue3-primary)] to-[#00175a] border border-[var(--color-blue3-secondary)] p-6 shadow-2xl transition-all duration-300 group-hover:-translate-y-1 overflow-hidden">
                 
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-blue3-secondary)]/20 rounded-full blur-[40px] -mr-10 -mt-10" />
 
-                <div className="flex items-center justify-between mb-2 relative z-10">
+                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 relative z-10 gap-4">
                    <div className="flex items-center gap-3">
-                      <TrendingUp className="text-white w-6 h-6" />
-                      <h2 className="text-white font-extrabold text-xl tracking-tight">Mentoria Individual</h2>
+                      <TrendingUp className="text-white w-7 h-7" />
+                      <h2 className="text-white font-extrabold text-xl tracking-tight leading-tight">
+                        Raio-X Educativo da <br className="hidden md:block"/> Sua Carteira
+                      </h2>
                    </div>
-                   <span className="text-white font-black text-sm bg-white/20 backdrop-blur-sm border border-white/20 px-3 py-1 rounded-md shadow-sm">R$ 997</span>
+                   <div className="flex flex-col items-end">
+                      <span className="text-white font-black text-lg bg-white/20 backdrop-blur-sm border border-white/20 px-4 py-1.5 rounded-xl shadow-sm">R$ 497</span>
+                      <span className="text-[10px] text-blue-300 font-bold uppercase tracking-widest mt-1">Oferta Unificada</span>
+                   </div>
                 </div>
-                <p className="text-gray-300 text-xs leading-relaxed ml-9 relative z-10 max-w-[250px]">
-                  Sessão estratégica ao vivo. Planejamento completo, blindagem de patrimônio e rebalanceamento.
+                
+                <p className="text-gray-300 text-sm leading-relaxed relative z-10 mb-6">
+                  Sessão estratégica individual. Diagnóstico estrutural completo, identificação de riscos e blindagem de patrimônio com Jhony Bosio.
                 </p>
                 
-                <div className="mt-4 flex items-center justify-end relative z-10">
-                   <span className="text-[var(--color-blue3-secondary)] text-xs font-bold uppercase tracking-wider flex items-center gap-1 group-hover:text-white transition-colors">
-                     Reservar Vaga <ArrowRight className="w-4 h-4" />
+                <div className="flex items-center justify-between relative z-10 border-t border-white/10 pt-4">
+                   <span className="text-[10px] text-gray-400 uppercase font-bold tracking-[0.2em]">Vagas Limitadas para Março</span>
+                   <span className="text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 group-hover:scale-105 transition-transform bg-[var(--color-blue3-secondary)] px-4 py-2 rounded-lg shadow-lg">
+                     Reservar Agora <ArrowRight className="w-4 h-4" />
                    </span>
                 </div>
               </div>
-          </Link>
+          </a>
           
         </section>
 
@@ -146,7 +138,7 @@ export default function Home() {
           <a href="https://youtube.com/seu.canal" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#FF0000]/80 hover:border-transparent transition-all shadow-sm">
             <Youtube className="w-5 h-5" />
           </a>
-          <a href="https://wa.me/seunumero" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#25D366]/80 hover:border-transparent transition-all shadow-sm">
+          <a href="https://api.whatsapp.com/send?phone=5516996045700" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#25D366]/80 hover:border-transparent transition-all shadow-sm">
             <MessageCircle className="w-5 h-5" />
           </a>
         </section>
