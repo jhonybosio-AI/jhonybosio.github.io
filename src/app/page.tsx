@@ -7,6 +7,7 @@ import {
   ChevronRight, 
   CircleDollarSign, 
   ExternalLink, 
+  Facebook,
   Instagram, 
   Linkedin, 
   Lock, 
@@ -130,13 +131,45 @@ export default function Home() {
           
         </section>
 
+          {/* Card 4: Assessoria Fee Fixo (HIGH TICKET) */}
+          <div className="group block w-full relative mt-2">
+            <div className="w-full rounded-2xl bg-white/5 border border-white/10 p-5 transition-all duration-300 hover:bg-white/10 hover:border-blue-400/50">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="bg-blue-400/10 p-3 rounded-xl flex-shrink-0 text-blue-400 group-hover:bg-blue-400 group-hover:text-white transition-all">
+                  <Star className="w-6 h-6" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-white font-bold text-base leading-tight">Assessoria Completa (Fee Fixo)</h2>
+                    <span className="bg-blue-500/20 text-blue-400 text-[9px] font-black px-1.5 py-0.5 rounded border border-blue-500/20 shadow-sm uppercase tracking-widest">Exclusivo</span>
+                  </div>
+                  <p className="text-gray-400 text-xs mt-1">Gestão patrimonial para investidores acima de R$ 500 mil.</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-white/5">
+                <a href="https://api.whatsapp.com/send?phone=5516996045700&text=tenho%20mais%20de%20500mil%20e%20quero%20assessoria%20no%20modelo%20fee%20fixo" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-blue-600/10 text-blue-400 text-xs font-bold hover:bg-blue-600 hover:text-white transition-all border border-blue-600/20">
+                   WhatsApp
+                </a>
+                <a href="https://outlook.office.com/bookwithme/user/9fda1584224147cdba97205d3501d2a2@investimentosblue.com.br/meetingtype/nQI_YkfutkiuHFTydHmxXA2?anonymous&ismsaljsauthenabled&ep=mlink" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 text-white text-xs font-bold hover:bg-white/10 transition-all border border-white/10">
+                   Agendar Reunião
+                </a>
+              </div>
+            </div>
+          </div>
+          
+        </section>
+
         {/* Social Links Rápidos */}
         <section className="w-full flex justify-center gap-4 pt-4">
-          <a href="https://instagram.com/seu.instagram" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#E1306C]/80 hover:border-transparent transition-all shadow-sm">
+          <a href="https://instagram.com/jhonybosio" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#E1306C]/80 hover:border-transparent transition-all shadow-sm">
             <Instagram className="w-5 h-5" />
           </a>
-          <a href="https://youtube.com/seu.canal" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#FF0000]/80 hover:border-transparent transition-all shadow-sm">
-            <Youtube className="w-5 h-5" />
+          <a href="https://www.linkedin.com/in/jhonybosio/" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#0077B5]/80 hover:border-transparent transition-all shadow-sm">
+            <Linkedin className="w-5 h-5" />
+          </a>
+          <a href="https://www.facebook.com/jhonybosio" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#1877F2]/80 hover:border-transparent transition-all shadow-sm">
+            <Facebook className="w-5 h-5" />
           </a>
           <a href="https://api.whatsapp.com/send?phone=5516996045700" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#25D366]/80 hover:border-transparent transition-all shadow-sm">
             <MessageCircle className="w-5 h-5" />
