@@ -125,14 +125,14 @@ export default function Home() {
 
         {/* Secondary Links */}
         <section className="w-full max-w-2xl space-y-4 mb-20">
-          <a className="flex items-center justify-between p-5 md:p-6 rounded-2xl bg-surface-container/30 border border-outline-variant/10 hover:bg-surface-container/50 transition-colors group" href="#">
+          <a className="flex items-center justify-between p-5 md:p-6 rounded-2xl bg-surface-container/30 border border-outline-variant/10 hover:bg-surface-container/50 transition-colors group" href="/notebook">
             <div className="flex items-center gap-4 text-left">
               <span className="material-symbols-outlined text-outline text-2xl group-hover:text-primary transition-colors">menu_book</span>
               <span className="font-semibold text-sm md:text-base">Notebook de Educação</span>
             </div>
             <span className="material-symbols-outlined text-outline text-lg">chevron_right</span>
           </a>
-          <a className="flex items-center justify-between p-5 md:p-6 rounded-2xl bg-surface-container/30 border border-outline-variant/10 hover:bg-surface-container/50 transition-colors group" href="#">
+          <a className="flex items-center justify-between p-5 md:p-6 rounded-2xl bg-surface-container/30 border border-outline-variant/10 hover:bg-surface-container/50 transition-colors group" href="https://api.whatsapp.com/send?phone=5516996045700&text=tenho%20mais%20de%20500mil%20e%20quero%20assessoria%20no%20modelo%20fee%20fixo" target="_blank" rel="noopener noreferrer">
             <div className="flex items-center gap-4 text-left">
               <span className="material-symbols-outlined text-outline text-2xl group-hover:text-primary transition-colors">groups</span>
               <span className="font-semibold text-sm md:text-base">Assessoria Completa</span>
