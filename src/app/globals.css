@@ -1,20 +1,56 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #b7c4ff;
-  --color-primary-container: #1c4ed8;
-  --color-on-primary: #002681;
-  --color-surface: #08112e;
-  --color-surface-dim: #08112e;
   --color-surface-container: #151e3b;
+  --color-on-tertiary-fixed: #1b1c1c;
+  --color-on-secondary-fixed: #111a37;
+  --color-tertiary-fixed: #e4e2e2;
+  --color-inverse-primary: #2051db;
+  --color-surface-bright: #303856;
+  --color-on-secondary: #272f4d;
+  --color-on-primary-fixed: #001551;
+  --color-inverse-on-surface: #272f4d;
   --color-on-surface: #dce1ff;
-  --color-on-surface-variant: #c4c5d7;
-  --color-outline: #8e90a0;
+  --color-tertiary: #c8c6c6;
+  --color-on-primary: #002681;
+  --color-on-secondary-fixed-variant: #3d4565;
+  --color-error-container: #93000a;
+  --color-surface-tint: #b7c4ff;
+  --color-surface-variant: #2b3352;
+  --color-surface-container-low: #111a37;
+  --color-surface-container-highest: #2b3352;
   --color-outline-variant: #434655;
-  
-  --color-blue3-primary: #000D38;
-  --color-blue3-secondary: #0092FF;
-  --color-blue3-accent: #4d65ff;
+  --color-on-error-container: #ffdad6;
+  --color-primary: #b7c4ff;
+  --color-on-primary-fixed-variant: #0039b5;
+  --color-secondary-fixed: #dce1ff;
+  --color-surface-container-lowest: #040c29;
+  --color-primary-fixed-dim: #b7c4ff;
+  --color-on-tertiary-container: #d6d5d4;
+  --color-primary-fixed: #dce1ff;
+  --color-outline: #8e90a0;
+  --color-inverse-surface: #dce1ff;
+  --color-background: #08112e;
+  --color-secondary-container: #3d4565;
+  --color-surface-container-high: #202846;
+  --color-surface: #08112e;
+  --color-on-tertiary-fixed-variant: #474747;
+  --color-on-surface-variant: #c4c5d7;
+  --color-secondary-fixed-dim: #bdc5eb;
+  --color-on-primary-container: #cad3ff;
+  --color-primary-container: #1c4ed8;
+  --color-tertiary-container: #5c5c5c;
+  --color-error: #ffb4ab;
+  --color-on-secondary-container: #acb4d9;
+  --color-on-background: #dce1ff;
+  --color-tertiary-fixed-dim: #c8c6c6;
+  --color-surface-dim: #08112e;
+  --color-secondary: #bdc5eb;
+  --color-on-tertiary: #303030;
+  --color-on-error: #690005;
+
+  --font-manrope: "Manrope", sans-serif;
+  --font-inter: "Inter", sans-serif;
 }
 
 @layer components {
@@ -27,7 +63,12 @@
   }
 }
 
+:root {
+  background-color: #08112e;
+  color: #dce1ff;
+}
+
 body {
-  @apply bg-surface-dim text-on-surface;
-  font-family: var(--font- Geist-sans), sans-serif;
+  background-color: #08112e;
+  color: #dce1ff;
 }
