@@ -1,14 +1,33 @@
 @import "tailwindcss";
 
 @theme {
+  --color-primary: #b7c4ff;
+  --color-primary-container: #1c4ed8;
+  --color-on-primary: #002681;
+  --color-surface: #08112e;
+  --color-surface-dim: #08112e;
+  --color-surface-container: #151e3b;
+  --color-on-surface: #dce1ff;
+  --color-on-surface-variant: #c4c5d7;
+  --color-outline: #8e90a0;
+  --color-outline-variant: #434655;
+  
   --color-blue3-primary: #000D38;
   --color-blue3-secondary: #0092FF;
   --color-blue3-accent: #4d65ff;
-  --color-blue3-light: #ffffff;
+}
+
+@layer components {
+  .neon-glow {
+    background: radial-gradient(circle, rgba(28, 78, 216, 0.15) 0%, rgba(8, 17, 46, 0) 70%);
+  }
+  .glass-card {
+    background: rgba(21, 30, 59, 0.6);
+    backdrop-filter: blur(12px);
+  }
 }
 
 body {
-  background-color: var(--color-blue3-primary);
-  color: var(--color-blue3-light);
-  font-family: var(--font-geist-sans), sans-serif;
+  @apply bg-surface-dim text-on-surface;
+  font-family: var(--font- Geist-sans), sans-serif;
 }

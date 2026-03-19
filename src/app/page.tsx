@@ -1,185 +1,174 @@
-import Link from "next/link";
-import { 
-  ArrowRight,
-  BarChart3,
-  BookOpen,
-  Briefcase, 
-  ChevronRight, 
-  CircleDollarSign, 
-  ExternalLink, 
-  Facebook,
-  Instagram, 
-  Linkedin, 
-  Lock, 
-  Mail, 
-  MessageCircle,
-  MessageSquare, 
-  PlayCircle, 
-  Star, 
-  TrendingUp,
-  User, 
-  Users, 
-  Zap 
-} from "lucide-react";
-
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center justify-start p-6 sm:p-12 relative overflow-hidden">
-      
-      {/* Elementos visuais de fundo (Glow) */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-96 bg-[var(--color-blue3-secondary)]/20 blur-[120px] rounded-full pointer-events-none" />
-      
-      <div className="max-w-md w-full flex flex-col items-center space-y-10 relative z-10 animate-fade-in-up mt-8">
-        
-        {/* Profile Card */}
-        <header className="flex flex-col items-center text-center w-full">
-          <div className="relative group mb-6">
-            <div className="absolute -inset-1 bg-gradient-to-r from-[var(--color-blue3-secondary)] to-[var(--color-blue3-accent)] rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-            <div className="w-32 h-32 rounded-full overflow-hidden border-2 border-[var(--color-blue3-primary)] relative bg-[var(--color-blue3-primary)]">
+    <main className="max-w-5xl mx-auto px-6 py-12 md:py-20 flex flex-col items-center font-inter">
+      {/* Hero & Profile Section */}
+      <section className="w-full mb-16 relative">
+        <div className="absolute top-0 right-0 w-64 h-64 neon-glow -z-10 translate-x-1/4 -translate-y-1/4"></div>
+        <div className="flex flex-col items-center text-center">
+          <div className="relative mb-6">
+            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-primary-container p-1 shadow-2xl shadow-primary-container/20">
               <img 
-                src="/profile.png" 
                 alt="Jhony Bosio" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-full" 
+                src="/FotoJhonyBosiosemfundo.png" 
               />
             </div>
           </div>
-          
-          <h1 className="text-3xl font-extrabold tracking-tight text-white mb-2">
+          <h1 className="text-4xl md:text-5xl font-extrabold font-manrope tracking-tight text-on-surface mb-2 leading-tight">
             Jhony Bosio
           </h1>
-          
-          <div className="flex items-center gap-2 mb-4">
-             <span className="bg-white/10 border border-white/20 text-white/90 text-xs px-3 py-1 rounded-full font-medium flex items-center gap-1.5 shadow-sm">
-                <Briefcase className="w-3 h-3" /> Assessor de Investimentos
-             </span>
-          </div>
-
-          <p className="text-gray-400 text-sm max-w-sm leading-relaxed">
-            Estratégias institucionais para proteção e multiplicação do seu patrimônio.
+          <p className="text-primary font-semibold tracking-wide text-sm md:text-base uppercase mb-8">
+            Assessor de Investimentos
           </p>
-        </header>
-
-        {/* Links Principais (Serviços e Info) */}
-        <section className="w-full space-y-4">
           
-          {/* Card 1: Quem é Jhony Bosio (Soft Link) */}
-          <Link href="/biografia" className="w-full bg-white/5 hover:bg-white/10 border border-white/10 p-5 rounded-2xl transition-all group flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-[var(--color-blue3-secondary)]/10 flex items-center justify-center">
-                <User className="w-5 h-5 text-[var(--color-blue3-secondary)]" />
-              </div>
-              <div className="text-left">
-                <p className="text-white font-bold text-sm">Quem é Jhony Bosio?</p>
-                <p className="text-gray-500 text-[10px] uppercase tracking-wider font-bold">Trajetória e Visão</p>
-              </div>
+          <a 
+            className="w-full max-w-2xl flex items-center gap-4 p-5 md:p-6 mb-8 rounded-2xl bg-gradient-to-r from-primary-container to-blue-600 text-white shadow-xl shadow-primary-container/20 hover:scale-[1.01] transition-all group" 
+            href="https://t.me/Deia_assistente_bot" 
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm group-hover:scale-110 transition-transform">
+              <span className="material-symbols-outlined text-3xl">psychology</span>
             </div>
-            <ChevronRight className="w-4 h-4 text-gray-600 group-hover:text-white group-hover:translate-x-1 transition-all" />
-          </Link>
-
-          {/* Card 2: Notebook (FREE LEAD MAGNET) */}
-          <Link href="/notebook" className="group block w-full">
-            <div className="w-full rounded-2xl bg-white/5 border border-white/10 p-4 transition-all duration-300 hover:bg-white/10 hover:border-[var(--color-blue3-secondary)]/40">
-              <div className="flex items-center gap-4">
-                <div className="bg-[var(--color-blue3-secondary)]/10 p-2.5 rounded-xl flex-shrink-0 text-[var(--color-blue3-secondary)] group-hover:bg-[var(--color-blue3-secondary)] group-hover:text-white transition-all">
-                  <BookOpen className="w-5 h-5" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-white font-semibold text-base">Notebook de Educação</h2>
-                    <span className="bg-green-500/20 text-green-400 text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-tighter shadow-sm border border-green-500/20 group-hover:bg-green-500 group-hover:text-white transition-all">Grátis</span>
-                  </div>
-                  <p className="text-gray-400 text-xs mt-0.5">Acesse meus insights e pesquisas de mercado.</p>
-                </div>
-                <ArrowRight className="text-gray-500 w-4 h-4 group-hover:translate-x-1 group-hover:text-white transition-all transform" />
-              </div>
+            <div className="text-left">
+              <h3 className="font-manrope font-bold text-base md:text-lg leading-tight uppercase tracking-tight text-white">
+                FALAR COM A DÉIA (TESTE GRÁTIS)
+              </h3>
+              <p className="text-xs md:text-sm font-medium text-white/90">
+                Minha assistente de IA para novos investidores
+              </p>
             </div>
-          </Link>
+            <span className="material-symbols-outlined ml-auto text-white/50 group-hover:translate-x-1 transition-transform">
+              arrow_forward
+            </span>
+          </a>
 
-          {/* Card 3: Raio-X Educativo R$ 497 (UNIFIED OFFER) */}
-          <a href="https://buy.stripe.com/cNi5kF5Mqeg1cT71f04ko05" target="_blank" rel="noreferrer" className="group block w-full relative mt-2">
-             <div className="absolute -inset-0.5 bg-gradient-to-r from-[var(--color-blue3-secondary)] to-[#1e90ff] rounded-2xl blur opacity-50 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
-              <div className="relative w-full rounded-2xl bg-gradient-to-br from-[var(--color-blue3-primary)] to-[#00175a] border border-[var(--color-blue3-secondary)] p-6 shadow-2xl transition-all duration-300 group-hover:-translate-y-1 overflow-hidden">
-                
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--color-blue3-secondary)]/20 rounded-full blur-[40px] -mr-10 -mt-10" />
+          <div className="glass-card w-full max-w-2xl p-6 md:p-8 rounded-2xl border border-outline-variant/10 text-left">
+            <h2 className="text-lg md:text-xl font-bold font-manrope mb-4 flex items-center gap-2 text-white">
+              <span className="material-symbols-outlined text-primary">info</span>
+              Quem é Jhony Bosio
+            </h2>
+            <p className="text-on-surface-variant text-sm md:text-base leading-relaxed">
+              Especialista em gestão patrimonial com mais de 10 anos de mercado. Dedico-me a transformar a complexidade financeira em clareza estratégica para famílias e investidores de alta performance. Minha missão é proteger e potencializar o seu legado.
+            </p>
+          </div>
+        </div>
+      </section>
 
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 relative z-10 gap-4">
-                   <div className="flex items-center gap-3">
-                      <TrendingUp className="text-white w-7 h-7" />
-                      <h2 className="text-white font-extrabold text-xl tracking-tight leading-tight">
-                        Raio-X Educativo da <br className="hidden md:block"/> Sua Carteira
-                      </h2>
-                   </div>
-                   <div className="flex flex-col items-end">
-                      <span className="text-white font-black text-lg bg-white/20 backdrop-blur-sm border border-white/20 px-4 py-1.5 rounded-xl shadow-sm">R$ 497</span>
-                      <span className="text-[10px] text-blue-300 font-bold uppercase tracking-widest mt-1">Oferta Unificada</span>
-                   </div>
-                </div>
-                
-                <p className="text-gray-300 text-[11px] leading-relaxed relative z-10 mb-6 font-medium">
-                  1 hora ao vivo comigo. Analiso posição por posição: riscos, custos ocultos e o que investidores diversificados fazem diferente. Plano de ação por escrito + 7 dias de suporte. Foco: R$200k+. Sem produtos para vender.
+      {/* Social Proof */}
+      <section className="w-full mb-20">
+        <p className="text-center text-[10px] md:text-xs uppercase tracking-[0.2em] text-outline mb-8">
+          Autoridade e Confiança
+        </p>
+        <div className="flex justify-center flex-wrap gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all">
+          <a className="flex items-center gap-3 hover:text-primary transition-colors" href="https://blue3investimentos.com.br" target="_blank" rel="noopener noreferrer">
+            <span className="material-symbols-outlined text-3xl">account_balance</span>
+            <span className="font-manrope font-bold text-sm md:text-base uppercase tracking-wider">Blue3</span>
+          </a>
+          <a className="flex items-center gap-3 hover:text-primary transition-colors" href="https://xpi.com.br" target="_blank" rel="noopener noreferrer">
+            <span className="material-symbols-outlined text-3xl">monitoring</span>
+            <span className="font-manrope font-bold text-sm md:text-base uppercase tracking-wider">XP Investimentos</span>
+          </a>
+        </div>
+      </section>
+
+      {/* Main Product: Raio-X Educativo */}
+      <section className="w-full max-w-3xl mb-20 relative text-left">
+        <div className="absolute -left-20 top-1/2 w-80 h-80 neon-glow -z-10 -translate-y-1/2 hidden md:block"></div>
+        <div className="bg-surface-container rounded-3xl border border-primary/20 overflow-hidden shadow-2xl shadow-blue-900/10">
+          <div className="bg-primary-container p-6 md:p-8 flex justify-between items-center">
+            <div>
+              <h3 className="font-manrope font-extrabold text-xl md:text-2xl text-white">Raio-X Educativo</h3>
+              <p className="text-xs md:text-sm text-white/90">Análise profunda da sua carteira</p>
+            </div>
+            <div className="text-right">
+              <span className="block text-[10px] md:text-xs text-white/60 line-through">R$ 1.200</span>
+              <span className="text-2xl md:text-3xl font-black text-white">R$ 497</span>
+            </div>
+          </div>
+          <div className="p-8 md:p-10">
+            <ul className="space-y-6 mb-10">
+              <li className="flex items-start gap-4">
+                <span className="material-symbols-outlined text-primary bg-primary/10 rounded-full p-1.5 text-sm md:text-base" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                <p className="text-sm md:text-base text-on-surface-variant">
+                  <strong className="text-on-surface">Diagnóstico de Risco:</strong> Identificação de vulnerabilidades ocultas em seus ativos.
                 </p>
-                
-                <div className="flex items-center justify-between relative z-10 border-t border-white/10 pt-4">
-                   <span className="text-[10px] text-gray-400 uppercase font-bold tracking-[0.2em]">Vagas Limitadas para Março</span>
-                   <span className="text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 group-hover:scale-105 transition-transform bg-[var(--color-blue3-secondary)] px-4 py-2 rounded-lg shadow-lg">
-                     Reservar Agora <ArrowRight className="w-4 h-4" />
-                   </span>
-                </div>
-              </div>
-          </a>
-
-          {/* Card 4: Assessoria Fee Fixo (HIGH TICKET) */}
-          <div className="group block w-full relative mt-2">
-            <div className="w-full rounded-2xl bg-white/5 border border-white/10 p-5 transition-all duration-300 hover:bg-white/10 hover:border-blue-400/50">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="bg-blue-400/10 p-3 rounded-xl flex-shrink-0 text-blue-400 group-hover:bg-blue-400 group-hover:text-white transition-all">
-                  <Star className="w-6 h-6" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-white font-bold text-base leading-tight">Assessoria Completa (Fee Fixo)</h2>
-                    <span className="bg-blue-500/20 text-blue-400 text-[9px] font-black px-1.5 py-0.5 rounded border border-blue-500/20 shadow-sm uppercase tracking-widest">Exclusivo</span>
-                  </div>
-                  <p className="text-gray-400 text-xs mt-1">Gestão patrimonial para investidores acima de R$ 500 mil.</p>
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-white/5">
-                <a href="https://api.whatsapp.com/send?phone=5516996045700&text=tenho%20mais%20de%20500mil%20e%20quero%20assessoria%20no%20modelo%20fee%20fixo" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-blue-600/10 text-blue-400 text-xs font-bold hover:bg-blue-600 hover:text-white transition-all border border-blue-600/20">
-                   WhatsApp
-                </a>
-                <a href="https://outlook.office.com/bookwithme/user/9fda1584224147cdba97205d3501d2a2@investimentosblue.com.br/meetingtype/nQI_YkfutkiuHFTydHmxXA2?anonymous&ismsaljsauthenabled&ep=mlink" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/5 text-white text-xs font-bold hover:bg-white/10 transition-all border border-white/10">
-                   Agendar Reunião
-                </a>
-              </div>
-            </div>
+              </li>
+              <li className="flex items-start gap-4">
+                <span className="material-symbols-outlined text-primary bg-primary/10 rounded-full p-1.5 text-sm md:text-base" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                <p className="text-sm md:text-base text-on-surface-variant">
+                  <strong className="text-on-surface">Otimização de Taxas:</strong> Como reduzir custos desnecessários com bancos e corretoras.
+                </p>
+              </li>
+              <li className="flex items-start gap-4">
+                <span className="material-symbols-outlined text-primary bg-primary/10 rounded-full p-1.5 text-sm md:text-base" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                <p className="text-sm md:text-base text-on-surface-variant">
+                  <strong className="text-on-surface">Rebalanceamento:</strong> Sugestão técnica para alinhar sua carteira ao seu perfil real.
+                </p>
+              </li>
+            </ul>
+            <a 
+              href="https://buy.stripe.com/cNi5kF5Mqeg1cT71f04ko05" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold py-5 rounded-2xl shadow-xl shadow-primary-container/30 hover:shadow-primary-container/50 hover:scale-[1.01] transition-all active:scale-95 text-center text-base md:text-lg"
+            >
+              RESERVAR AGORA
+            </a>
+            <p className="text-center text-[10px] md:text-xs text-outline mt-5 italic uppercase tracking-wider">
+              Vagas limitadas para análise mensal
+            </p>
           </div>
-          
-        </section>
+        </div>
+      </section>
 
-        {/* Social Links Rápidos */}
-        <section className="w-full flex justify-center gap-4 pt-4">
-          <a href="https://instagram.com/jhonybosio" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#E1306C]/80 hover:border-transparent transition-all shadow-sm">
-            <Instagram className="w-5 h-5" />
+      {/* Secondary Links */}
+      <section className="w-full max-w-2xl space-y-4 mb-20">
+        <a className="flex items-center justify-between p-5 md:p-6 rounded-2xl bg-surface-container/30 border border-outline-variant/10 hover:bg-surface-container/50 transition-colors group" href="#">
+          <div className="flex items-center gap-4 text-left">
+            <span className="material-symbols-outlined text-outline text-2xl group-hover:text-primary transition-colors">menu_book</span>
+            <span className="font-semibold text-sm md:text-base">Notebook de Educação</span>
+          </div>
+          <span className="material-symbols-outlined text-outline text-lg">chevron_right</span>
+        </a>
+        <a className="flex items-center justify-between p-5 md:p-6 rounded-2xl bg-surface-container/30 border border-outline-variant/10 hover:bg-surface-container/50 transition-colors group" href="#">
+          <div className="flex items-center gap-4 text-left">
+            <span className="material-symbols-outlined text-outline text-2xl group-hover:text-primary transition-colors">groups</span>
+            <span className="font-semibold text-sm md:text-base">Assessoria Completa</span>
+          </div>
+          <span className="material-symbols-outlined text-outline text-lg">chevron_right</span>
+        </a>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="w-full max-w-2xl mb-12">
+        <h4 className="text-center text-xs font-bold text-outline uppercase tracking-widest mb-8">
+          Fale Diretamente Comigo
+        </h4>
+        <div className="flex flex-col md:flex-row gap-4">
+          <a href="https://wa.me/5516996045700" target="_blank" rel="noopener noreferrer" className="flex-1 flex flex-col items-center justify-center gap-2 p-6 md:p-8 rounded-3xl bg-[#25D366]/10 border border-[#25D366]/20 text-[#25D366] hover:bg-[#25D366]/20 transition-all">
+            <span className="material-symbols-outlined text-3xl md:text-4xl">chat</span>
+            <span className="text-xs md:text-sm font-bold uppercase tracking-wide">WhatsApp</span>
           </a>
-          <a href="https://www.linkedin.com/in/jhonybosio/" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#0077B5]/80 hover:border-transparent transition-all shadow-sm">
-            <Linkedin className="w-5 h-5" />
+          <a href="https://outlook.office.com/bookwithme/user/9fda1584224147cdba97205d3501d2a2@investimentosblue.com.br/meetingtype/nQI_YkfutkiuHFTydHmxXA2?anonymous&ismsaljsauthenabled&ep=mlink" target="_blank" rel="noopener noreferrer" className="flex-1 flex flex-col items-center justify-center gap-2 p-6 md:p-8 rounded-3xl bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 transition-all">
+            <span className="material-symbols-outlined text-3xl md:text-4xl">calendar_month</span>
+            <span className="text-xs md:text-sm font-bold uppercase tracking-wide">Agendar Reunião</span>
           </a>
-          <a href="https://www.facebook.com/jhonybosio" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#1877F2]/80 hover:border-transparent transition-all shadow-sm">
-            <Facebook className="w-5 h-5" />
-          </a>
-          <a href="https://api.whatsapp.com/send?phone=5516996045700" target="_blank" rel="noreferrer" className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#25D366]/80 hover:border-transparent transition-all shadow-sm">
-            <MessageCircle className="w-5 h-5" />
-          </a>
-        </section>
-        
-        <footer className="w-full pb-8">
-          <p className="text-center text-[10px] text-gray-500 leading-relaxed max-w-[280px] mx-auto">
-            © {new Date().getFullYear()} Jhony Bosio. Todos os direitos reservados.
-            Nenhum link constitui oferta ou recomendação de valores mobiliários.
+        </div>
+      </section>
+
+      {/* Footer Branding */}
+      <footer className="w-full pt-16 border-t border-outline-variant/10">
+        <div className="flex flex-col items-center gap-6">
+          <p className="text-center text-[10px] text-outline leading-relaxed max-w-md mx-auto">
+            © {new Date().getFullYear()} Jhony Bosio. Todos os direitos reservados. 
+            Investimentos envolvem riscos. O desempenho passado não garante resultados futuros.
           </p>
-        </footer>
-      </div>
+          <span className="text-xl font-bold text-on-surface block font-manrope tracking-tight">
+            Jhony Bosio
+          </span>
+        </div>
+      </footer>
     </main>
   );
 }
