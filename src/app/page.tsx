@@ -22,27 +22,6 @@ export default function Home() {
               Assessor de Investimentos
             </p>
             
-            <a 
-              className="w-full max-w-2xl flex items-center gap-4 p-5 md:p-6 mb-8 rounded-2xl bg-gradient-to-r from-primary-container to-blue-600 text-white shadow-xl shadow-primary-container/20 hover:scale-[1.01] transition-all group" 
-              href="https://t.me/Deia_assistente_bot" 
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className="bg-white/10 p-3 rounded-xl backdrop-blur-sm group-hover:scale-110 transition-transform">
-                <span className="material-symbols-outlined text-3xl">psychology</span>
-              </div>
-              <div className="text-left">
-                <h3 className="font-manrope font-bold text-base md:text-lg leading-tight uppercase tracking-tight text-white">
-                  FALAR COM A DÉIA (TESTE GRÁTIS)
-                </h3>
-                <p className="text-xs md:text-sm font-medium text-white/90">
-                  Minha assistente de IA para novos investidores
-                </p>
-              </div>
-              <span className="material-symbols-outlined ml-auto text-white/50 group-hover:translate-x-1 transition-transform">
-                arrow_forward
-              </span>
-            </a>
 
             <div className="glass-card w-full max-w-2xl p-6 md:p-8 rounded-2xl border border-outline-variant/10 text-left">
               <h2 className="text-lg md:text-xl font-bold font-manrope mb-4 flex items-center gap-2 text-white">
