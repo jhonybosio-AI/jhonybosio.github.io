@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-surface-dim text-on-surface selection:bg-primary selection:text-on-primary">
@@ -52,17 +54,78 @@ export default function Home() {
           </div>
         </section>
 
+        {/* NEW Product: Mentoria Assessor 3.0 */}
+        <section className="w-full max-w-3xl mb-12 relative text-left group">
+          <div className="absolute -right-20 top-1/2 w-80 h-80 bg-primary/10 rounded-full blur-[100px] -z-10 -translate-y-1/2 hidden md:block"></div>
+          <div className="bg-gradient-to-br from-surface-container to-surface-container-high rounded-3xl border border-primary/30 overflow-hidden shadow-2xl shadow-primary/10 hover:border-primary transition-all">
+            <div className="bg-gradient-to-r from-primary-container to-[#0039b5] p-6 md:p-8 flex justify-between items-center relative overflow-hidden">
+               <div className="absolute top-0 right-0 p-2 bg-yellow-400 text-black text-[10px] font-black uppercase tracking-widest rotate-12 translate-x-4 -translate-y-2 shadow-lg">
+                 Assessor nº1
+               </div>
+              <div>
+                <h3 className="font-manrope font-extrabold text-xl md:text-2xl text-white">Mentoria Assessor 3.0</h3>
+                <p className="text-xs md:text-sm text-white/90">Fee Fixo + ETF + IA</p>
+              </div>
+              <div className="text-right">
+                <span className="block text-[10px] md:text-xs text-white/60 line-through">R$ 3.999</span>
+                <span className="text-2xl md:text-3xl font-black text-white">R$ 1.999*</span>
+              </div>
+            </div>
+            <div className="p-8 md:p-10">
+              <p className="text-on-surface-variant text-sm md:text-base mb-8 leading-relaxed font-medium">
+                O método para assessores XP escalarem sua operação com Inteligência Artificial e alinhamento total via Fee Fixo.
+              </p>
+              <ul className="grid md:grid-cols-2 gap-4 mb-10">
+                <li className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-primary text-sm">bolt</span>
+                  <span className="text-xs md:text-sm text-on-surface">Instalação de IA Local</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-primary text-sm">contract</span>
+                  <span className="text-xs md:text-sm text-on-surface">Discurso CVM 179</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-primary text-sm">public</span>
+                  <span className="text-xs md:text-sm text-on-surface">Estratégia ETF Global</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-primary text-sm">group</span>
+                  <span className="text-xs md:text-sm text-on-surface">Grupo de Conteúdo IA</span>
+                </li>
+              </ul>
+              <div className="flex flex-col gap-4">
+                <a 
+                  href="/mentoria-assessor" 
+                  className="block w-full bg-white text-surface-container-lowest font-black py-5 rounded-2xl shadow-xl hover:bg-primary-fixed hover:scale-[1.01] transition-all active:scale-95 text-center text-base md:text-lg uppercase tracking-tight"
+                >
+                  CONHECER A MENTORIA
+                </a>
+                <p className="text-center text-[10px] text-outline uppercase tracking-[0.2em]">
+                  *Com cupom exclusivo para escritórios
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Separator / Divider */}
+        <div className="w-full flex items-center gap-4 mb-12 opacity-20">
+          <div className="h-px bg-outline flex-1"></div>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-outline whitespace-nowrap">Para Investidores PF</span>
+          <div className="h-px bg-outline flex-1"></div>
+        </div>
+
         {/* Main Product: Raio-X Educativo */}
         <section className="w-full max-w-3xl mb-20 relative text-left">
           <div className="absolute -left-20 top-1/2 w-80 h-80 neon-glow -z-10 -translate-y-1/2 hidden md:block"></div>
-          <div className="bg-surface-container rounded-3xl border border-primary/20 overflow-hidden shadow-2xl shadow-blue-900/10">
-            <div className="bg-primary-container p-6 md:p-8 flex justify-between items-center">
+          <div className="bg-surface-container/50 rounded-3xl border border-outline-variant/20 overflow-hidden shadow-xl">
+            <div className="bg-surface-container p-6 md:p-8 flex justify-between items-center border-b border-outline-variant/10">
               <div>
                 <h3 className="font-manrope font-extrabold text-xl md:text-2xl text-white">Raio-X Educativo</h3>
-                <p className="text-xs md:text-sm text-white/90">Análise profunda da sua carteira</p>
+                <p className="text-xs md:text-sm text-outline">Análise profunda da sua carteira</p>
               </div>
               <div className="text-right">
-                <span className="block text-[10px] md:text-xs text-white/60 line-through">R$ 1.200</span>
+                <span className="block text-[10px] md:text-xs text-outline line-through">R$ 1.200</span>
                 <span className="text-2xl md:text-3xl font-black text-white">R$ 497</span>
               </div>
             </div>
@@ -71,19 +134,13 @@ export default function Home() {
                 <li className="flex items-start gap-4">
                   <span className="material-symbols-outlined text-primary bg-primary/10 rounded-full p-1.5 text-sm md:text-base" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
                   <p className="text-sm md:text-base text-on-surface-variant">
-                    <strong className="text-on-surface">Diagnóstico de Risco:</strong> Identificação de vulnerabilidades ocultas em seus ativos.
+                    <strong className="text-on-surface">Diagnóstico de Risco:</strong> Identificação de vulnerabilidades ocultas.
                   </p>
                 </li>
                 <li className="flex items-start gap-4">
                   <span className="material-symbols-outlined text-primary bg-primary/10 rounded-full p-1.5 text-sm md:text-base" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
                   <p className="text-sm md:text-base text-on-surface-variant">
-                    <strong className="text-on-surface">Otimização de Taxas:</strong> Como reduzir custos desnecessários com bancos e corretoras.
-                  </p>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="material-symbols-outlined text-primary bg-primary/10 rounded-full p-1.5 text-sm md:text-base" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                  <p className="text-sm md:text-base text-on-surface-variant">
-                    <strong className="text-on-surface">Rebalanceamento:</strong> Sugestão técnica para alinhar sua carteira ao seu perfil real.
+                    <strong className="text-on-surface">Otimização de Taxas:</strong> Redução de custos com bancos e corretoras.
                   </p>
                 </li>
               </ul>
@@ -91,19 +148,23 @@ export default function Home() {
                 href="https://buy.stripe.com/cNi5kF5Mqeg1cT71f04ko05" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="block w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold py-5 rounded-2xl shadow-xl shadow-primary-container/30 hover:shadow-primary-container/50 hover:scale-[1.01] transition-all active:scale-95 text-center text-base md:text-lg"
+                className="block w-full bg-surface-container-highest text-white font-bold py-5 rounded-2xl border border-outline-variant/20 hover:bg-outline-variant/30 transition-all text-center text-base"
               >
                 RESERVAR AGORA
               </a>
-              <p className="text-center text-[10px] md:text-xs text-outline mt-5 italic uppercase tracking-wider">
-                Vagas limitadas para análise mensal
-              </p>
             </div>
           </div>
         </section>
 
         {/* Secondary Links */}
         <section className="w-full max-w-2xl space-y-4 mb-20">
+          <Link className="flex items-center justify-between p-5 md:p-6 rounded-2xl bg-surface-container/30 border border-outline-variant/10 hover:bg-surface-container/50 transition-colors group" href="/mentoria-assessor">
+            <div className="flex items-center gap-4 text-left">
+              <span className="material-symbols-outlined text-outline text-2xl group-hover:text-primary transition-colors">rocket_launch</span>
+              <span className="font-semibold text-sm md:text-base">Módulo Mentoria Assessor 3.0</span>
+            </div>
+            <span className="material-symbols-outlined text-outline text-lg">chevron_right</span>
+          </Link>
           <a className="flex items-center justify-between p-5 md:p-6 rounded-2xl bg-surface-container/30 border border-outline-variant/10 hover:bg-surface-container/50 transition-colors group" href="/notebook">
             <div className="flex items-center gap-4 text-left">
               <span className="material-symbols-outlined text-outline text-2xl group-hover:text-primary transition-colors">menu_book</span>
@@ -114,11 +175,12 @@ export default function Home() {
           <a className="flex items-center justify-between p-5 md:p-6 rounded-2xl bg-surface-container/30 border border-outline-variant/10 hover:bg-surface-container/50 transition-colors group" href="https://api.whatsapp.com/send?phone=5516996045700&text=tenho%20mais%20de%20500mil%20e%20quero%20assessoria%20no%20modelo%20fee%20fixo" target="_blank" rel="noopener noreferrer">
             <div className="flex items-center gap-4 text-left">
               <span className="material-symbols-outlined text-outline text-2xl group-hover:text-primary transition-colors">groups</span>
-              <span className="font-semibold text-sm md:text-base">Assessoria Completa</span>
+              <span className="font-semibold text-sm md:text-base">Assessoria Completa (Alta Renda)</span>
             </div>
             <span className="material-symbols-outlined text-outline text-lg">chevron_right</span>
           </a>
         </section>
+
 
         {/* Contact CTA */}
         <section className="w-full max-w-2xl mb-12">
