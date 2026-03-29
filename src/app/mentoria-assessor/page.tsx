@@ -148,7 +148,7 @@ export default function MentoriaAssessorPage() {
               <span className="text-outline line-through text-xl md:text-2xl mb-2">R$ 3.999,00</span>
               <div className="flex justify-center items-baseline gap-2">
                 <span className="text-2xl text-primary font-bold">R$</span>
-                <span className="text-6xl md:text-8xl font-black text-white tracking-tighter">1.999</span>
+                <span className="text-6xl md:text-8xl font-black text-white tracking-tighter">1.997</span>
                 <span className="text-primary text-2xl">,00</span>
               </div>
               <p className="text-primary font-bold mt-4 uppercase tracking-[0.2em] text-sm">À vista com cupom</p>
