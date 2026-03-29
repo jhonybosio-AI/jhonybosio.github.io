@@ -31,7 +31,7 @@ export default function Home() {
                 Quem é Jhony Bosio
               </h2>
               <p className="text-on-surface-variant text-sm md:text-base leading-relaxed">
-                Especialista em gestão patrimonial com mais de 10 anos de mercado. Dedico-me a transformar a complexidade financeira em clareza estratégica para famílias e investidores de alta performance. Minha missão é proteger e potencializar o seu legado.
+                Especialista em gestão patrimonial com mais de 10 anos de mercado e <strong>Assessor nº1 em Fee Fixo da Blue3 Investimentos</strong>. Pioneiro na implementação de IA local para gestão de carteiras, transformo a complexidade financeira em clareza estratégica para famílias e investidores de alta performance. Minha missão é unir transparência radical e tecnologia de ponta para proteger e potencializar o seu legado.
               </p>
             </div>
           </div>
