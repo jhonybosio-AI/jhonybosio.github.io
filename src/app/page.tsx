@@ -58,8 +58,8 @@ export default function Home() {
         <section className="w-full max-w-3xl mb-12 relative text-left group">
           <div className="absolute -right-20 top-1/2 w-80 h-80 bg-primary/10 rounded-full blur-[100px] -z-10 -translate-y-1/2 hidden md:block"></div>
           <div className="bg-gradient-to-br from-surface-container to-surface-container-high rounded-3xl border border-primary/30 overflow-hidden shadow-2xl shadow-primary/10 hover:border-primary transition-all">
-            <div className="bg-gradient-to-r from-primary-container to-[#0039b5] p-6 md:p-8 flex justify-between items-center relative overflow-hidden">
-               <div className="absolute top-0 right-0 p-2 bg-yellow-400 text-black text-[10px] font-black uppercase tracking-widest rotate-12 translate-x-4 -translate-y-2 shadow-lg">
+            <div className="bg-gradient-to-r from-primary-container to-[#0039b5] p-6 md:p-8 flex justify-between items-center relative">
+               <div className="absolute top-0 right-0 p-2 bg-yellow-400 text-black text-[10px] font-black uppercase tracking-widest rotate-12 translate-x-2 -translate-y-2 shadow-lg z-10 border border-black/10">
                  Assessor nº1
                </div>
               <div>
@@ -67,8 +67,8 @@ export default function Home() {
                 <p className="text-xs md:text-sm text-white/90">Fee Fixo + ETF + IA</p>
               </div>
               <div className="text-right">
-                <span className="block text-[10px] md:text-xs text-white/60 line-through">R$ 3.999</span>
-                <span className="text-2xl md:text-3xl font-black text-white">R$ 1.999*</span>
+                <span className="block text-[10px] md:text-xs text-white/60 line-through">R$ 3.997</span>
+                <span className="text-2xl md:text-3xl font-black text-white">R$ 1.997*</span>
               </div>
             </div>
             <div className="p-8 md:p-10">
@@ -115,8 +115,8 @@ export default function Home() {
           <div className="h-px bg-outline flex-1"></div>
         </div>
 
-        {/* Main Product: Raio-X Educativo */}
-        <section className="w-full max-w-3xl mb-20 relative text-left">
+        {/* 🛡️ Level 2: Raio-X Educativo */}
+        <section className="w-full max-w-3xl mb-12 relative text-left">
           <div className="absolute -left-20 top-1/2 w-80 h-80 neon-glow -z-10 -translate-y-1/2 hidden md:block"></div>
           <div className="bg-surface-container/50 rounded-3xl border border-outline-variant/20 overflow-hidden shadow-xl">
             <div className="bg-surface-container p-6 md:p-8 flex justify-between items-center border-b border-outline-variant/10">
@@ -148,10 +148,47 @@ export default function Home() {
                 href="https://buy.stripe.com/cNi5kF5Mqeg1cT71f04ko05" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="block w-full bg-surface-container-highest text-white font-bold py-5 rounded-2xl border border-outline-variant/20 hover:bg-outline-variant/30 transition-all text-center text-base"
+                className="block w-full bg-surface-container-highest text-white font-bold py-5 rounded-2xl border border-outline-variant/20 hover:bg-outline-variant/30 transition-all text-center text-base uppercase tracking-widest"
               >
                 RESERVAR AGORA
               </a>
+            </div>
+          </div>
+        </section>
+
+        {/* 💎 LEVEL 3: MENTORIA PREMIUM (Alto Ticket) */}
+        <section className="w-full max-w-3xl mb-20 relative text-left">
+          <div className="absolute -right-20 top-1/2 w-80 h-80 bg-amber-500/10 rounded-full blur-[100px] -z-10 -translate-y-1/2 hidden md:block"></div>
+          <div className="bg-gradient-to-br from-[#1c1917] to-surface-container-high rounded-3xl border border-amber-500/30 overflow-hidden shadow-2xl shadow-amber-500/5 hover:border-amber-500 transition-all">
+            <div className="bg-gradient-to-r from-[#292524] to-[#1c1917] p-6 md:p-8 flex justify-between items-center border-b border-amber-500/10">
+              <div className="flex items-center gap-4">
+                <div className="bg-amber-500/10 p-3 rounded-2xl text-amber-500">
+                  <span className="material-symbols-outlined text-3xl">diamond</span>
+                </div>
+                <div>
+                  <h3 className="font-manrope font-extrabold text-xl md:text-2xl text-white">Mentoria Premium</h3>
+                  <p className="text-xs md:text-sm text-white/50 uppercase tracking-widest">Escritórios & Alta Renda</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <span className="block text-[10px] md:text-xs text-white/30 line-through">Consultoria</span>
+                <span className="text-2xl md:text-3xl font-black text-amber-500">R$ 9.997</span>
+              </div>
+            </div>
+            <div className="p-8 md:p-10">
+              <p className="text-on-surface-variant text-sm md:text-base mb-8 leading-relaxed font-medium">
+                Implementação direta no seu escritório ou carteira. Eu construo seu sistema de IA e curadoria completo. Edição limitada para garantir exclusividade.
+              </p>
+              <div className="flex flex-col gap-4">
+                <a 
+                  href="https://buy.stripe.com/00w9AV4Im8VH4mB9Lw4ko0a" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block w-full bg-amber-500 text-black font-black py-5 rounded-2xl shadow-xl shadow-amber-500/20 hover:bg-amber-400 hover:scale-[1.01] transition-all active:scale-95 text-center text-lg uppercase tracking-tight"
+                >
+                  SOLICITAR ACESSO VIP
+                </a>
+              </div>
             </div>
           </div>
         </section>
