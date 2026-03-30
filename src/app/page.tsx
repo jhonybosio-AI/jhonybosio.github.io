@@ -3,19 +3,18 @@
 import Link from "next/link";
 import { 
   Info, 
-  AccountBalance, 
-  Monitoring, 
-  Bolt, 
-  Contract, 
-  Public, 
-  Group, 
-  CheckCircle,
+  Landmark, 
+  Activity, 
+  Zap, 
+  FileText, 
+  Globe, 
+  Users, 
+  CheckCircle2,
   Diamond,
-  RocketLaunch,
-  MenuBook,
-  Groups,
-  Chat,
-  CalendarMonth,
+  Rocket,
+  BookOpen,
+  MessageCircle,
+  Calendar,
   ChevronRight
 } from "lucide-react";
 
@@ -142,10 +141,10 @@ export default function Home() {
               
               <ul className="grid md:grid-cols-2 gap-6 mb-12">
                 {[
-                  { icon: Bolt, label: "Instalação de IA Local" },
-                  { icon: Contract, label: "Discurso CVM 179" },
-                  { icon: Public, label: "Estratégia ETF Global" },
-                  { icon: Group, label: "Grupo de Conteúdo IA" }
+                  { icon: Zap, label: "Instalação de IA Local" },
+                  { icon: FileText, label: "Discurso CVM 179" },
+                  { icon: Globe, label: "Estratégia ETF Global" },
+                  { icon: Users, label: "Grupo de Conteúdo IA" }
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-4 text-gray-300">
                     <div className="bg-gold-400/10 p-2 rounded-lg">
@@ -195,13 +194,13 @@ export default function Home() {
             
             <ul className="space-y-4 mb-10 flex-1">
               <li className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-gold-400 shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-gold-400 shrink-0" />
                 <p className="text-sm text-gray-400 leading-snug">
                   <strong className="text-white">Diagnóstico de Risco:</strong> Identificação de vulnerabilidades ocultas.
                 </p>
               </li>
               <li className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-gold-400 shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-gold-400 shrink-0" />
                 <p className="text-sm text-gray-400 leading-snug">
                   <strong className="text-white">Otimização de Taxas:</strong> Redução de custos com bancos e corretoras.
                 </p>
@@ -253,9 +252,9 @@ export default function Home() {
         {/* Secondary Navigation Section */}
         <section className="w-full max-w-2xl space-y-4 mb-32 animate-premium-fade" style={{ animationDelay: '0.6s' }}>
           {[
-            { href: "/mentoria", label: "Módulo Mentoria Assessor 3.0", icon: RocketLaunch, isExternal: false },
-            { href: "/notebook", label: "Notebook de Educação Patrimonial", icon: MenuBook, isExternal: false },
-            { href: "https://api.whatsapp.com/send?phone=5516996045700&text=tenho%20mais%20de%20500mil%20e%20quero%20assessoria%20no%20modelo%20fee%20fixo", label: "Assessoria Completa (Alta Renda)", icon: Groups, isExternal: true }
+            { href: "/mentoria", label: "Módulo Mentoria Assessor 3.0", icon: Rocket, isExternal: false },
+            { href: "/notebook", label: "Notebook de Educação Patrimonial", icon: BookOpen, isExternal: false },
+            { href: "https://api.whatsapp.com/send?phone=5516996045700&text=tenho%20mais%20de%20500mil%20e%20quero%20assessoria%20no%20modelo%20fee%20fixo", label: "Assessoria Completa (Alta Renda)", icon: Users, isExternal: true }
           ].map((item, i) => (
             <div key={i}>
               {item.isExternal ? (
@@ -298,11 +297,11 @@ export default function Home() {
           </h4>
           <div className="grid grid-cols-2 gap-6">
             <a href="https://wa.me/5516996045700" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-4 p-8 rounded-3xl bg-green-500/5 border border-green-500/20 text-green-500 hover:bg-green-500/10 transition-all group">
-              <Chat className="w-8 h-8 group-hover:scale-110 transition-transform" />
+              <MessageCircle className="w-8 h-8 group-hover:scale-110 transition-transform" />
               <span className="text-[10px] font-black uppercase tracking-widest">WhatsApp</span>
             </a>
             <a href="https://outlook.office.com/bookwithme/user/9fda1584224147cdba97205d3501d2a2@investimentosblue.com.br/meetingtype/nQI_YkfutkiuHFTydHmxXA2?anonymous&ismsaljsauthenabled&ep=mlink" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center gap-4 p-8 rounded-3xl bg-gold-400/5 border border-gold-400/20 text-gold-400 hover:bg-gold-400/10 transition-all group">
-              <CalendarMonth className="w-8 h-8 group-hover:scale-110 transition-transform" />
+              <Calendar className="w-8 h-8 group-hover:scale-110 transition-transform" />
               <span className="text-[10px] font-black uppercase tracking-widest">Agendar</span>
             </a>
           </div>

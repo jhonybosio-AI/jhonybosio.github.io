@@ -186,19 +186,3 @@ export default function NotebookPage() {
     </main>
   );
 }
-y-4 px-10 rounded-xl hover:scale-105 transition-all shadow-xl">
-                Agendar Diagnóstico Individual <ArrowRight className="w-4 h-4" />
-             </Link>
-          </div>
-        </div>
-      )}
-
-      {/* Footer Legal */}
-      <footer className="py-20 border-t border-white/5 opacity-40 bg-black/20 text-[9px] text-center px-6 leading-loose uppercase tracking-[0.2em] text-gray-400">
-         <div className="max-w-2xl mx-auto">
-            Este conteúdo é meramente educativo e não constitui recomendação de investimento. Jhony Bosio é Assessor de Investimentos credenciado. A rentabilidade passada não garante resultados futuros.
-         </div>
-      </footer>
-    </main>
-  );
-}
