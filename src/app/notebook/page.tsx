@@ -38,21 +38,21 @@ export default function NotebookPage() {
   };
 
   return (
-    <main className="min-h-screen bg-deep-950 text-white font-sans selection:bg-gold-500/30 overflow-x-hidden">
+    <main className="min-h-screen bg-blue3-deep text-white font-inter selection:bg-blue3-sky/30 overflow-x-hidden">
       {/* Background Glows */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-gold-500/5 blur-[120px] rounded-full" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-gold-500/5 blur-[120px] rounded-full" />
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue3-sky/5 blur-[120px] rounded-full" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue3-sky/3 blur-[120px] rounded-full" />
       </div>
 
       {/* Header */}
-      <nav className="sticky top-0 z-50 w-full bg-deep-950/80 backdrop-blur-md border-b border-white/5">
+      <nav className="sticky top-0 z-50 w-full bg-blue3-deep/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-4xl mx-auto p-4 flex justify-between items-center">
-          <Link href="/" className="text-gray-400 hover:text-gold-400 transition-all flex items-center gap-2 text-sm font-medium group">
+          <Link href="/" className="text-gray-400 hover:text-blue3-sky transition-all flex items-center gap-2 text-sm font-medium group">
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Voltar ao Início
           </Link>
           <div className="flex items-center gap-2">
-             <BookOpen className="w-5 h-5 text-gold-400" />
+             <BookOpen className="w-5 h-5 text-blue3-sky" />
              <span className="font-bold tracking-tighter uppercase text-[10px] text-gray-500 tracking-[0.2em]">Notebook do Jhony</span>
           </div>
         </div>
@@ -61,15 +61,15 @@ export default function NotebookPage() {
       {!unlocked ? (
         /* Tela de Captura (Gated) */
         <section className="relative z-10 max-w-xl mx-auto px-6 py-20 text-center animate-premium-fade">
-          <div className="w-16 h-16 bg-gold-400/10 rounded-2xl flex items-center justify-center mx-auto mb-8 border border-gold-400/20 shadow-[0_0_50px_-12px_rgba(251,191,36,0.2)]">
-            <Lock className="w-8 h-8 text-gold-400" />
+          <div className="w-16 h-16 bg-blue3-sky/10 rounded-2xl flex items-center justify-center mx-auto mb-8 border border-blue3-sky/20 shadow-[0_0_50px_-12px_rgba(0,141,255,0.2)]">
+            <Lock className="w-8 h-8 text-blue3-sky" />
           </div>
           
           <h1 className="text-3xl font-extrabold tracking-tight mb-4 text-white">
             Filosofia de Investimentos
           </h1>
           <p className="text-gray-400 mb-10 text-sm leading-relaxed max-w-sm mx-auto">
-            Acesso exclusivo aos manifestos de <span className="text-gold-400">Alinhamento Fiduciário</span> e <span className="text-gold-400">Construção de Patrimônio Global</span>.
+            Acesso exclusivo aos manifestos de <span className="text-blue3-sky">Alinhamento Fiduciário</span> e <span className="text-blue3-sky">Construção de Patrimônio Global</span>.
           </p>
 
           <form onSubmit={handleSubmit} className="glass-card p-8 text-left space-y-6 shadow-2xl animate-premium-fade" style={{ animationDelay: '0.1s' }}>
@@ -111,7 +111,7 @@ export default function NotebookPage() {
               <ChevronDown className="absolute right-4 top-[38px] w-4 h-4 text-gray-500 pointer-events-none" />
             </div>
 
-            <button type="submit" className="w-full bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-deep-950 font-bold py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest text-xs animate-magnetic-hover">
+            <button type="submit" className="w-full bg-blue3-sky hover:bg-blue3-sky/90 text-white font-bold py-4 rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest text-xs animate-magnetic-hover">
               Liberar Leitura Completa <Send className="w-3 h-3" />
             </button>
           </form>
@@ -124,14 +124,14 @@ export default function NotebookPage() {
                 Minha filosofia de investimentos
              </h1>
              <div className="flex items-center gap-3 mb-10">
-                <div className="w-10 h-10 rounded-full border border-gold-400/30 p-0.5">
+                <div className="w-10 h-10 rounded-full border border-blue3-sky/30 p-0.5">
                    <div className="w-full h-full rounded-full overflow-hidden">
-                      <img src="/profile.png" alt="Jhony Bosio" className="w-full h-full object-cover" />
+                      <img src="/profile.png" alt="Jhony Bosio" className="w-full h-full object-cover grayscale" />
                    </div>
                 </div>
                 <div className="flex flex-col">
                    <span className="text-white font-bold text-sm tracking-tight text-gradient">Jhony Bosio</span>
-                   <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Alinhamento Fiduciário • Elite IP</span>
+                   <span className="text-[10px] text-gray-500 uppercase font-bold tracking-widest">Sócio Blue3 Investimentos • Assessor nº1 Fee Fixo</span>
                 </div>
              </div>
           </header>
@@ -166,10 +166,10 @@ export default function NotebookPage() {
               Asset Allocation é a definição estratégica de como o patrimônio será distribuído entre diferentes classes de ativos. É a escolha dos percentuais de renda fixa pós-fixada, renda fixa atrelada à inflação, renda variável global, ativos reais e proteção cambial.
             </p>
 
-            <div className="my-12 p-10 bg-gradient-to-br from-gold-500 to-gold-700 rounded-3xl text-center shadow-2xl animate-magnetic-hover">
-              <h3 className="text-2xl font-black mb-4 text-deep-950 tracking-tight">Pronto para aplicar esta estratégia?</h3>
-              <p className="mb-8 text-deep-900/80 font-medium">Vamos transformar esse manifesto em um plano real para o seu futuro através de um diagnóstico individual.</p>
-              <Link href="/mentoria" className="inline-flex items-center gap-2 bg-deep-950 text-white font-black py-4 px-10 rounded-xl hover:scale-105 transition-all shadow-xl">
+            <div className="my-12 p-10 bg-gradient-to-br from-blue3-sky to-blue-900 rounded-3xl text-center shadow-2xl animate-magnetic-hover">
+              <h3 className="text-2xl font-black mb-4 text-white tracking-tight">Pronto para aplicar esta estratégia?</h3>
+              <p className="mb-8 text-white/80 font-medium">Vamos transformar esse manifesto em um plano real para o seu futuro através de um diagnóstico individual.</p>
+              <Link href="/mentoria" className="inline-flex items-center gap-2 bg-white text-blue3-deep font-black py-4 px-10 rounded-xl hover:scale-105 transition-all shadow-xl">
                  Agendar Diagnóstico Individual <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

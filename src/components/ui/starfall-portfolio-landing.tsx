@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import React, { useEffect, useState } from 'react';
+import { BrandLogo } from './logos';
 
 // --- TYPE DEFINITIONS FOR PROPS ---
 interface NavLink { label: string; href: string; }
@@ -9,9 +9,8 @@ interface Project { title: string; description: string; tags: string[]; imageCon
 interface Stat { value: string; label: string; }
 
 export interface PortfolioPageProps {
-  logo?: { initials: React.ReactNode; name: React.ReactNode; };
+  logo?: React.ReactNode;
   navLinks?: NavLink[];
-  resume?: { label: string; onClick?: () => void; };
   hero?: { titleLine1: React.ReactNode; titleLine2Gradient: React.ReactNode; subtitle: React.ReactNode; };
   ctaButtons?: { primary: { label: string; onClick?: () => void; }; secondary: { label: string; onClick?: () => void; }; };
   projects?: Project[];
@@ -19,60 +18,28 @@ export interface PortfolioPageProps {
   showAnimatedBackground?: boolean;
 }
 
-// --- INTERNAL ANIMATED BACKGROUND COMPONENT ---
-const AuroraBackground: React.FC = () => {
-    const mountRef = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        if (!mountRef.current) return;
-        const currentMount = mountRef.current;
-        const scene = new THREE.Scene();
-        const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-        const renderer = new THREE.WebGLRenderer({ alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.domElement.style.position = 'fixed';
-        renderer.domElement.style.top = '0';
-        renderer.domElement.style.left = '0';
-        renderer.domElement.style.zIndex = '0';
-        renderer.domElement.style.display = 'block';
-        renderer.setClearColor(0x000000, 1);
-        currentMount.appendChild(renderer.domElement);
-        const material = new THREE.ShaderMaterial({
-            uniforms: { iTime: { value: 0 }, iResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) } },
-            vertexShader: `void main() { gl_Position = vec4(position, 1.0); }`,
-            fragmentShader: `
-                uniform float iTime; uniform vec2 iResolution;
-                #define NUM_OCTAVES 3
-                float rand(vec2 n) { return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }
-                float noise(vec2 p){ vec2 ip=floor(p);vec2 u=fract(p);u=u*u*(3.0-2.0*u);float res=mix(mix(rand(ip),rand(ip+vec2(1.0,0.0)),u.x),mix(rand(ip+vec2(0.0,1.0)),rand(ip+vec2(1.0,1.0)),u.x),u.y);return res*res; }
-                float fbm(vec2 x) { float v=0.0;float a=0.3;vec2 shift=vec2(100);mat2 rot=mat2(cos(0.5),sin(0.5),-sin(0.5),cos(0.50));for(int i=0;i<NUM_OCTAVES;++i){v+=a*noise(x);x=rot*x*2.0+shift;a*=0.4;}return v;}
-                void main() {
-                    vec2 p=((gl_FragCoord.xy)-iResolution.xy*0.5)/iResolution.y*mat2(6.,-4.,4.,6.);vec4 o=vec4(0.);float f=2.+fbm(p+vec2(iTime*5.,0.))*.5;
-                    for(float i=0.;i++<35.;){vec2 v=p+cos(i*i+(iTime+p.x*.08)*.025+i*vec2(13.,11.))*3.5;float tailNoise=fbm(v+vec2(iTime*.5,i))*.3*(1.-(i/35.));vec4 auroraColors=vec4(.1+.3*sin(i*.2+iTime*.4),.3+.5*cos(i*.3+iTime*.5),.7+.3*sin(i*.4+iTime*.3),1.);vec4 currentContribution=auroraColors*exp(sin(i*i+iTime*.8))/length(max(v,vec2(v.x*f*.015,v.y*1.5)));float thinnessFactor=smoothstep(0.,1.,i/35.)*.6;o+=currentContribution*(1.+tailNoise*.8)*thinnessFactor;}
-                    o=tanh(pow(o/100.,vec4(1.6)));gl_FragColor=o*1.5;
-                }`
-        });
-        const geometry = new THREE.PlaneGeometry(2, 2);
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
-        let animationFrameId: number;
-        const animate = () => { animationFrameId = requestAnimationFrame(animate); material.uniforms.iTime.value += 0.016; renderer.render(scene, camera); };
-        const handleResize = () => { renderer.setSize(window.innerWidth, window.innerHeight); material.uniforms.iResolution.value.set(window.innerWidth, window.innerHeight); };
-        window.addEventListener('resize', handleResize);
-        animate();
-        return () => { cancelAnimationFrame(animationFrameId); window.removeEventListener('resize', handleResize); if (currentMount.contains(renderer.domElement)) currentMount.removeChild(renderer.domElement); renderer.dispose(); material.dispose(); geometry.dispose(); };
-    }, []);
-    return <div ref={mountRef} className="pointer-events-none" />;
+// --- INTERNAL CORPORATE BACKGROUND COMPONENT ---
+const Blue3Background: React.FC = () => {
+    return (
+        <div className="fixed inset-0 z-0 bg-blue3-deep">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(0,141,255,0.15),transparent_50%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0)_0%,rgba(0,26,53,1)_100%)]" />
+            <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none overflow-hidden">
+                <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-blue3-sky/20 blur-[120px]" />
+                <div className="absolute top-[40%] -right-[10%] w-[30%] h-[30%] rounded-full bg-blue3-sky/10 blur-[100px]" />
+            </div>
+        </div>
+    );
 };
 
 // --- DEFAULT DATA ---
-const defaultData: Required<PortfolioPageProps> = {
-  logo: { initials: 'JB', name: 'Jhony Bosio' },
+const defaultData: Required<Omit<PortfolioPageProps, 'logo'>> & { logo: React.ReactNode } = {
+  logo: <BrandLogo />,
   navLinks: [ 
     { label: 'Sobre', href: '#about' }, 
     { label: 'Mentoria', href: '#projects' }, 
-    { label: 'Expertise', href: '#skills' } 
+    { label: 'Radar', href: '#skills' } 
   ],
-  resume: { label: 'Assessor 3.0', onClick: () => {} },
   hero: { 
     titleLine1: 'Assessor nº1 Fee Fixo &', 
     titleLine2Gradient: 'Mentor Assessor 3.0', 
@@ -100,93 +67,107 @@ const defaultData: Required<PortfolioPageProps> = {
 const PortfolioPage: React.FC<PortfolioPageProps> = ({
   logo = defaultData.logo,
   navLinks = defaultData.navLinks,
-  resume = defaultData.resume,
   hero = defaultData.hero,
   ctaButtons = defaultData.ctaButtons,
   projects = defaultData.projects,
   stats = defaultData.stats,
   showAnimatedBackground = true,
 }) => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="bg-background text-foreground geist-font min-h-screen">
-      {showAnimatedBackground && <AuroraBackground />}
-      <div className="relative z-10">
-        <nav className="w-full px-6 py-4">
+    <div className="bg-blue3-deep text-white min-h-screen selection:bg-blue3-sky/30">
+      <Blue3Background />
+      <div className="relative z-10 font-outfit">
+        <nav className={`fixed top-0 w-full px-6 py-4 transition-all duration-300 ${scrolled ? 'bg-blue3-deep/80 backdrop-blur-md border-b border-white/5' : 'bg-transparent'}`}>
             <div className="max-w-7xl mx-auto flex justify-between items-center">
-                <div className="flex items-center space-x-2">
-                    <div className="w-8 h-8 rounded-lg bg-black/20 backdrop-blur-md border border-white/10 flex items-center justify-center">
-                        <span className="geist-font text-sm font-bold text-foreground">{logo.initials}</span>
-                    </div>
-                    <span className="geist-font text-lg font-medium text-foreground">{logo.name}</span>
+                <div className="flex items-center">
+                    {logo}
                 </div>
                 <div className="hidden md:flex items-center space-x-8">
                     {navLinks.map(link => (
-                        <a key={link.label} href={link.href} className="text-muted-foreground hover:text-foreground transition-colors inter-font text-sm">{link.label}</a>
+                        <a key={link.label} href={link.href} className="text-gray-400 hover:text-blue3-sky transition-colors text-sm font-medium tracking-tight">{link.label}</a>
                     ))}
                 </div>
-                <button onClick={resume.onClick} className="glass-button px-4 py-2 rounded-lg text-foreground text-sm font-medium inter-font border border-white/10 bg-white/5 hover:bg-white/10 transition-all">{resume.label}</button>
             </div>
         </nav>
         
-        <main id="about" className="w-full min-h-screen flex flex-col items-center justify-center px-6 py-20">
+        <main id="about" className="w-full min-h-screen flex flex-col items-center justify-center px-6 pt-32 pb-20">
             <div className="max-w-6xl mx-auto text-center">
-                <div className="mb-8 animate-float">
-                    <h1 className="md:text-6xl lg:text-7xl leading-[1.1] geist-font text-5xl font-light text-foreground tracking-tight mb-4">
+                <div className="mb-12 flex flex-col items-center">
+                    <img src="/profile.png" alt="Jhony Bosio" className="w-32 h-32 rounded-full mb-8 object-cover border-2 border-white/10 shadow-[0_0_30px_rgba(0,141,255,0.2)] grayscale" />
+                    <h1 className="md:text-7xl lg:text-8xl leading-[1] text-5xl font-bold text-white tracking-tighter mb-6">
                         {hero.titleLine1}
-                        <span className="gradient-text block tracking-tight bg-gradient-to-r from-blue-400 via-emerald-400 to-indigo-400 bg-clip-text text-transparent font-bold">{hero.titleLine2Gradient}</span>
+                        <span className="block text-blue3-sky drop-shadow-[0_0_15px_rgba(0,141,255,0.3)]">{hero.titleLine2Gradient}</span>
                     </h1>
-                    <p className="md:text-xl max-w-3xl leading-relaxed inter-font text-lg font-light text-muted-foreground mx-auto">{hero.subtitle}</p>
+                    <p className="md:text-xl max-w-3xl leading-relaxed text-lg font-light text-gray-400 mx-auto mb-10">{hero.subtitle}</p>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-                    <button onClick={ctaButtons.primary.onClick} className="primary-button px-6 py-3 bg-foreground text-background rounded-lg font-medium text-sm min-w-[160px] hover:opacity-90 transition-opacity">{ctaButtons.primary.label}</button>
-                    <button onClick={ctaButtons.secondary.onClick} className="glass-button min-w-[160px] inter-font text-sm font-medium text-foreground rounded-lg px-6 py-3 border border-white/10 bg-white/5 hover:bg-white/10 transition-all">{ctaButtons.secondary.label}</button>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-24">
+                    <button onClick={ctaButtons.primary.onClick} className="px-8 py-4 bg-blue3-sky text-white rounded-full font-bold text-sm min-w-[200px] shadow-[0_10px_20px_-5px_rgba(0,141,255,0.4)] hover:bg-blue3-sky/90 transition-all hover:scale-105 active:scale-95">
+                      {ctaButtons.primary.label}
+                    </button>
+                    <button onClick={ctaButtons.secondary.onClick} className="px-8 py-4 border border-white/20 text-white rounded-full font-bold text-sm min-w-[200px] hover:bg-white/5 transition-all">
+                      {ctaButtons.secondary.label}
+                    </button>
                 </div>
                 
-                <div id="projects" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
+                <div id="projects" className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-24 text-left">
                     {projects.map((project, index) => (
-                        <div key={index} className="glass-card rounded-2xl p-6 text-left border border-white/5 bg-white/5 backdrop-blur-sm group hover:border-white/20 transition-all">
-                            <div className="project-image rounded-xl h-32 mb-4 flex items-center justify-center bg-black/20 overflow-hidden">{project.imageContent}</div>
-                            <h3 className="text-lg font-medium text-card-foreground mb-2 geist-font">{project.title}</h3>
-                            <p className="text-muted-foreground text-sm inter-font mb-4 min-h-[40px]">{project.description}</p>
-                            <div className="flex flex-wrap gap-2">
-                                {project.tags.map(tag => (
-                                    <span key={tag} className="skill-badge px-2 py-1 rounded text-xs text-muted-foreground bg-white/5 border border-white/10">{tag}</span>
-                                ))}
+                        <div key={index} className="group relative liquid-glass p-8 hover:border-blue3-sky/30 transition-all duration-500 overflow-hidden">
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue3-sky/5 blur-3xl -mr-16 -mt-16 rounded-full group-hover:bg-blue3-sky/10 transition-colors" />
+                            <div className="relative z-10">
+                                <div className="mb-6 h-12 flex items-center">{project.imageContent}</div>
+                                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{project.title}</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed mb-6 min-h-[48px]">{project.description}</p>
+                                <div className="flex flex-wrap gap-2">
+                                    {project.tags.map(tag => (
+                                        <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-blue3-sky bg-blue3-sky/10 border border-blue3-sky/20">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     ))}
                 </div>
                 
-                <div id="skills" className="flex flex-col sm:flex-row justify-center items-center gap-8 text-center bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10">
-                    {stats.map((stat, index) => (
-                        <React.Fragment key={stat.label}>
-                            <div>
-                                <div className="text-3xl md:text-4xl font-light text-foreground mb-1 geist-font tracking-tight">{stat.value}</div>
-                                <div className="text-muted-foreground text-sm inter-font font-normal">{stat.label}</div>
-                            </div>
-                            {index < stats.length - 1 && <div className="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-white/10 to-transparent" />}
-                        </React.Fragment>
-                    ))}
-                </div>
+                {stats && stats.length > 0 && (
+                  <div id="skills" className="grid grid-cols-1 md:grid-cols-2 gap-12 text-center py-12 px-8 liquid-glass max-w-4xl mx-auto">
+                      {stats.map((stat, index) => (
+                          <div key={stat.label} className="relative">
+                              <div className="text-4xl md:text-5xl font-black text-white mb-2 tracking-tighter">{stat.value}</div>
+                              <div className="text-gray-500 text-xs font-bold uppercase tracking-widest">{stat.label}</div>
+                              {index < stats.length - 1 && (
+                                  <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 h-12 w-px bg-white/5" />
+                              )}
+                          </div>
+                      ))}
+                  </div>
+                )}
             </div>
         </main>
+
+        <footer className="w-full py-12 px-6 border-t border-white/5 bg-blue3-deep/50">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <BrandLogo className="opacity-50 grayscale hover:grayscale-0 transition-all cursor-pointer" />
+            <div className="text-gray-500 text-xs font-medium tracking-tight">
+              © 2026 Jhony Bosio. Todos os direitos reservados.
+            </div>
+            <div className="flex gap-6">
+               <a href="https://www.instagram.com/jhonybosio/" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest">Instagram</a>
+               <a href="https://www.linkedin.com/in/jhonybosio/" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest">LinkedIn</a>
+               <a href="https://x.com/jhonhybosio" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest">X (Twitter)</a>
+               <a href="https://www.facebook.com/jhonybosio" target="_blank" rel="noreferrer" className="text-gray-500 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest">Facebook</a>
+            </div>
+          </div>
+        </footer>
       </div>
-      <style jsx global>{`
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-15px); }
-        }
-        .gradient-text {
-          background-size: 200% auto;
-          animation: shine 5s linear infinite;
-        }
-        @keyframes shine {
-          to { background-position: 200% center; }
-        }
-      `}</style>
     </div>
   );
 };

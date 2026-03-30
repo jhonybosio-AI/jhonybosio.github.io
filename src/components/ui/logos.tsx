@@ -1,21 +1,19 @@
 import React from "react";
 
-export function Blue3Logo({ className }: { className?: string }) {
+export function BrandLogo({ className = "h-8" }: { className?: string }) {
   return (
-    <div className={`flex items-center gap-1 font-outfit font-black tracking-tighter ${className}`}>
-      <span className="text-white">BLUE</span>
-      <span className="text-gold-400">3</span>
-      <span className="ml-1 text-[8px] text-gray-500 uppercase tracking-widest font-bold">Investimentos</span>
-    </div>
-  );
-}
-
-export function XPLogo({ className }: { className?: string }) {
-  return (
-    <div className={`flex items-center gap-1 font-inter font-black tracking-tighter ${className}`}>
-      <span className="text-white tracking-widest">XP</span>
-      <div className="w-1.5 h-6 bg-gold-400 -skew-x-12 ml-1" />
-      <span className="ml-1 text-[8px] text-gray-500 uppercase tracking-widest font-bold">Investimentos</span>
+    <div className={`flex items-center gap-2 ${className}`}>
+      <span
+        className="text-white font-black text-2xl tracking-tighter"
+        style={{ fontFamily: 'var(--font-outfit)' }}
+      >
+        JHONY<span className="text-blue3-sky">BOSIO</span>
+      </span>
+      <div className="flex flex-col -ml-1">
+        <span className="text-[7px] text-blue3-sky font-bold uppercase tracking-[0.2em] leading-none">
+          Investimentos
+        </span>
+      </div>
     </div>
   );
 }

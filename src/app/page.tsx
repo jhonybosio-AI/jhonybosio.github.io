@@ -1,23 +1,17 @@
 "use client"
 
 import { PortfolioPage, PortfolioPageProps } from "@/components/ui/starfall-portfolio-landing";
-import { Blue3Logo, XPLogo } from "@/components/ui/logos";
+import { BrandLogo } from "@/components/ui/logos";
+import { Brain, TrendingUp, ShieldCheck } from "lucide-react";
 
 export default function Home() {
   const customPortfolioData: PortfolioPageProps = {
-    logo: {
-      initials: 'JB',
-      name: 'Jhony Bosio',
-    },
+    logo: <BrandLogo className="h-10 text-white" />,
     navLinks: [
       { label: 'Bio', href: '#about' },
       { label: 'Mentoria', href: '#projects' },
       { label: 'Radar', href: '#skills' },
     ],
-    resume: {
-      label: 'Área do Aluno',
-      onClick: () => { window.open('https://jhonybosio.com.br', '_blank'); },
-    },
     hero: {
       titleLine1: 'Assessor nº1 Fee Fixo &',
       titleLine2Gradient: 'Mentor Assessor 3.0',
@@ -26,42 +20,48 @@ export default function Home() {
     ctaButtons: {
       primary: {
         label: 'Ver Mentoria',
-        onClick: () => { document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); },
+        onClick: () => { window.location.href = '/mentoria-assessor'; },
       },
       secondary: {
         label: 'Falar no WhatsApp',
-        onClick: () => { window.open('https://wa.me/5516991234567', '_blank'); }, // Link genérico, pode ajustar depois
+        onClick: () => { window.open('https://wa.me/5516996045700', '_blank'); },
       },
     },
     projects: [
       { 
         title: 'Mentoria Assessor 3.0', 
-        description: 'Transição completa para o Fee Fixo, domínio de ETFs e uso de IA no dia a dia.',
+        description: 'Transição completa para o Fee Fixo, domínio de ETFs e uso de IA no dia a dia para ganhar escala e liberdade.',
         tags: ['Fee Fixo', 'ETFs', 'IA Local'],
-        imageContent: <div className="text-4xl text-white/50">🚀</div>
+        imageContent: (
+          <div className="flex items-center justify-center h-full bg-blue3-deep/50">
+            <TrendingUp className="w-20 h-20 text-blue3-sky opacity-80" />
+          </div>
+        )
       },
       { 
         title: 'Radar de Mercado IA', 
-        description: 'Sistema de curadoria automatizada que gera resumos de mercado para clientes em segundos.',
+        description: 'Sistema de curadoria automatizada que gera resumos de mercado para clientes em segundos, elevando o seu NPS.',
         tags: ['Python', 'Telegram', 'Vercel'],
-        imageContent: <div className="text-4xl text-white/50">🤖</div>
+        imageContent: (
+          <div className="flex items-center justify-center h-full bg-blue3-deep/50">
+            <Brain className="w-20 h-20 text-blue3-sky opacity-80" />
+          </div>
+        )
       },
       { 
-        title: 'Institutional Partners', 
-        description: 'Parcerias estratégicas com as maiores instituições financeiras do Brasil.',
-        tags: ['Blue3', 'XP Investimentos'],
+        title: 'Clareza Patrimonial', 
+        description: 'Metodologia exclusiva para análise de carteiras focada em eficiência tributária e sucessão.',
+        tags: ['Alocação Global', 'Fee Fixo'],
         imageContent: (
-          <div className="flex flex-col items-center gap-4 bg-black/40 p-4 rounded-xl w-full">
-            <Blue3Logo className="h-6 text-white" />
-            <XPLogo className="h-6 text-white" />
+          <div className="flex items-center justify-center h-full bg-blue3-deep/50">
+            <ShieldCheck className="w-20 h-20 text-blue3-sky opacity-80" />
           </div>
         )
       },
     ],
     stats: [
-      { value: '100+', label: 'Assessores Mentorados' },
-      { value: '10 anos', label: 'de Mercado Financeiro' },
-      { value: 'R$ 500M+', label: 'Custódia Influenciada' },
+      { value: '12 anos', label: 'de Mercado Financeiro' },
+      { value: 'R$ 1B+', label: 'Custódia Assessorada' },
     ],
     showAnimatedBackground: true,
   };

@@ -1,34 +1,33 @@
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2, Cpu, LineChart, MessageSquare, ShieldCheck, Zap, TrendingUp, Users, Video } from "lucide-react";
-import { Blue3Logo, XPLogo } from "@/components/ui/logos";
+import { BrandLogo } from "@/components/ui/logos";
 
 export default function MentoriaAssessorPage() {
   const stripeLink = "https://buy.stripe.com/4gM5kF3EidbX7yNf5Q4ko08";
   const couponCode = "ESCRITORIO50";
 
   return (
-    <main className="min-h-screen bg-background text-on-surface font-inter selection:bg-amber-gold selection:text-black">
+    <main className="min-h-screen bg-blue3-deep text-white font-inter selection:bg-blue3-sky/30">
       {/* Header/Nav */}
-      <nav className="w-full max-w-5xl mx-auto p-6 flex justify-between items-center bg-transparent">
-        <Link href="/" className="text-outline hover:text-primary transition flex items-center gap-2 text-sm font-medium">
+      <nav className="w-full max-w-5xl mx-auto p-6 flex justify-between items-center bg-transparent relative z-10">
+        <Link href="/" className="text-gray-400 hover:text-blue3-sky transition flex items-center gap-2 text-sm font-medium">
           <ArrowLeft className="w-4 h-4" /> Voltar
         </Link>
-        <div className="font-bold text-xl tracking-tighter text-white">Jhony Bosio</div>
+        <BrandLogo className="h-6 text-white" />
       </nav>
 
-      {/* Hero Section */}
-      <section className="max-w-5xl mx-auto px-6 pt-16 pb-24 text-center">
-        <div className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-bold mb-8 border border-primary/20 uppercase tracking-widest">
+      <section className="relative z-10 max-w-5xl mx-auto px-6 pt-16 pb-24 text-center">
+        <div className="inline-block px-4 py-1.5 rounded-full bg-blue3-sky/10 text-blue3-sky text-xs md:text-sm font-bold mb-8 border border-blue3-sky/20 uppercase tracking-widest">
           🔥 Exclusivo para Assessores XP
         </div>
         
         <h1 className="text-5xl md:text-8xl font-black font-outfit tracking-tighter mb-8 leading-[0.9] text-white">
           Fee Fixo + ETF + IA:<br /> 
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-gold to-amber-gold-low">Assessor 3.0</span>
+          <span className="text-gradient">Assessor 3.0</span>
         </h1>
         
-        <p className="text-lg md:text-2xl text-on-surface-variant max-w-3xl mx-auto mb-12 leading-relaxed">
-          O método que me tornou o <span className="text-white font-bold underline decoration-primary underline-offset-4">assessor nº1 em Fee Fixo na Blue3</span>. Aprenda a blindar sua carteira e escalar seu atendimento com Inteligência Artificial.
+        <p className="text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+          O método que me tornou o <span className="text-white font-bold underline decoration-blue3-sky underline-offset-4">assessor nº1 em Fee Fixo na Blue3</span>. Aprenda a blindar sua carteira e escalar seu atendimento com Inteligência Artificial.
         </p>
 
         <div className="flex flex-col items-center gap-6">
@@ -36,35 +35,34 @@ export default function MentoriaAssessorPage() {
             href={stripeLink} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-block bg-white text-black font-black py-6 px-14 rounded-2xl text-xl transition-all transform hover:bg-amber-gold hover:scale-[1.05] shadow-2xl active:scale-95 uppercase tracking-tight"
+            className="inline-block bg-blue3-sky text-white font-black py-6 px-14 rounded-2xl text-xl transition-all transform hover:bg-blue3-sky/90 hover:scale-[1.05] shadow-2xl active:scale-95 uppercase tracking-tight"
           >
             QUERO SER ASSESSOR 3.0
           </a>
           <div className="flex flex-col gap-1">
-             <p className="text-sm font-bold text-primary">Use o cupom: <span className="bg-primary/20 px-2 py-1 rounded select-all">{couponCode}</span></p>
-             <p className="text-xs text-outline uppercase tracking-widest">50% de desconto para o seu escritório</p>
+             <p className="text-sm font-bold text-blue3-sky">Use o cupom: <span className="bg-blue3-sky/20 px-2 py-1 rounded select-all">{couponCode}</span></p>
+             <p className="text-xs text-gray-500 uppercase tracking-widest">50% de desconto para o seu escritório</p>
           </div>
         </div>
       </section>
 
       {/* Proof Section */}
-      <section className="bg-surface-container/30 py-20 border-y border-outline-variant/10">
+      <section className="bg-blue3-sky/5 py-20 border-y border-white/5 relative z-10">
         <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center text-left">
-          <div className="bg-gradient-to-br from-surface-container to-surface-dim p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-gold/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl group-hover:bg-amber-gold/10 transition-colors"></div>
+          <div className="bg-blue3-deep p-8 md:p-12 rounded-[2rem] border border-white/10 shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue3-sky/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl group-hover:bg-blue3-sky/10 transition-colors"></div>
             <h3 className="text-3xl font-black mb-8 text-white flex items-center gap-4 font-outfit">
-              <TrendingUp className="text-amber-gold w-8 h-8" />
+              <TrendingUp className="text-blue3-sky w-8 h-8" />
               Resultado Real
             </h3>
             <p className="text-white/60 leading-relaxed text-lg mb-8">
               Não é teoria. Eu apliquei este método na minha própria base de clientes na <strong className="text-white">Blue3 Investimentos</strong>. O resultado? Liderança no ranking de Fee Fixo e uma operação 10x mais eficiente usando IA.
             </p>
             <div className="flex gap-4 mb-4">
-               <Blue3Logo />
-               <XPLogo />
+               <BrandLogo />
             </div>
             <div className="mt-8 flex items-center gap-6 border-t border-white/10 pt-8">
-               <div className="w-16 h-16 rounded-2xl bg-amber-gold/10 flex items-center justify-center font-black text-amber-gold text-2xl border border-amber-gold/20">#1</div>
+               <div className="w-16 h-16 rounded-2xl bg-blue3-sky/10 flex items-center justify-center font-black text-blue3-sky text-2xl border border-blue3-sky/20">#1</div>
                <div>
                  <p className="text-lg font-black text-white">Líder Nacional em Fee Fixo</p>
                  <p className="text-xs text-white/40 uppercase tracking-widest font-bold">Ranking Blue3 Investimentos</p>
@@ -85,9 +83,8 @@ export default function MentoriaAssessorPage() {
         </div>
       </section>
 
-      {/* Triad Section */}
-      <section className="max-w-5xl mx-auto px-6 py-24">
-        <h2 className="text-center text-3xl md:text-5xl font-black mb-16 text-white">A Tríade do Assessor 3.0</h2>
+      <section className="max-w-5xl mx-auto px-6 py-24 relative z-10">
+        <h2 className="text-center text-3xl md:text-5xl font-black mb-16 text-white leading-tight">A Tríade do Assessor 3.0</h2>
         <div className="grid md:grid-cols-3 gap-8">
           {[
             {
@@ -106,10 +103,10 @@ export default function MentoriaAssessorPage() {
               desc: "Seu assistente sênior 24/7. Roda na sua máquina, sem nuvem, garantindo sigilo total dos dados do seu cliente."
             }
           ].map((item, i) => (
-            <div key={i} className="bg-surface-container p-8 rounded-3xl border border-outline-variant/10 hover:border-primary/30 transition-all flex flex-col items-center text-center">
-              <div className="text-primary mb-6 bg-primary/10 p-4 rounded-2xl">{item.icon}</div>
+            <div key={i} className="bg-blue3-sky/5 p-8 rounded-3xl border border-white/10 hover:border-blue3-sky/30 transition-all flex flex-col items-center text-center group">
+              <div className="text-blue3-sky mb-6 bg-blue3-sky/10 p-4 rounded-2xl group-hover:scale-110 transition-transform">{item.icon}</div>
               <h4 className="text-xl font-bold mb-4 text-white uppercase tracking-wider">{item.title}</h4>
-              <p className="text-on-surface-variant text-sm leading-relaxed">{item.desc}</p>
+              <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
