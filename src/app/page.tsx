@@ -29,22 +29,13 @@ export default function Home() {
     },
     projects: [
       { 
-        title: 'Mentoria Premium Assessor 3.0', 
-        description: 'Acompanhamento VIP 1-a-1. Estruture seu sistema de IA, curadoria automatizada e transição completa para Fee Fixo.',
-        tags: ['R$ 9.997,00', 'VIP', '1-a-1'],
+        title: 'Radar Assessor 3.0', 
+        description: 'Sistema de curadoria automatizada com IA que gera resumos de mercado para clientes em segundos.',
+        tags: ['R$ 97,00/mês', 'Assinatura', 'IA'],
+        href: 'https://buy.stripe.com/4gM5kF1wa5Jv8CR4rc4ko09',
         imageContent: (
-          <div className="flex items-center justify-center h-full bg-blue3-deep/50">
-            <TrendingUp className="w-20 h-20 text-blue3-sky opacity-80" />
-          </div>
-        )
-      },
-      { 
-        title: 'Fee Fixo + ETF + IA: A Fórmula do Assessor 3.0', 
-        description: 'O método que me tornou o assessor número 1 em Fee Fixo. Domínio de ETFs e uso de IA no dia a dia.',
-        tags: ['R$ 3.999,00', 'Mentoria', 'Online'],
-        imageContent: (
-          <div className="flex items-center justify-center h-full bg-blue3-deep/50">
-            <ShieldCheck className="w-20 h-20 text-blue3-sky opacity-80" />
+          <div className="flex items-center justify-center h-full bg-blue3-deep/50 rounded-xl">
+            <Brain className="w-16 h-16 text-blue3-sky opacity-80" />
           </div>
         )
       },
@@ -52,19 +43,37 @@ export default function Home() {
         title: 'Raio-X Educativo da Sua Carteira', 
         description: '1 hora ao vivo comigo. Análises de riscos, custos ocultos e o que investidores diversificados fazem diferente.',
         tags: ['R$ 497,00', 'Consultoria', '1 Hora'],
+        href: 'https://buy.stripe.com/cNi5kF5Mqeg1cT71f04ko05',
         imageContent: (
-          <div className="flex items-center justify-center h-full bg-blue3-deep/50">
-            <Brain className="w-20 h-20 text-blue3-sky opacity-80" />
+          <div className="flex items-center justify-center h-full bg-blue3-deep/50 rounded-xl">
+            <ShieldCheck className="w-16 h-16 text-blue3-sky opacity-80" />
           </div>
         )
       },
       { 
-        title: 'Radar Assessor 3.0', 
-        description: 'Sistema de curadoria automatizada com IA que gera resumos de mercado para clientes em segundos.',
-        tags: ['R$ 97,00/mês', 'Assinatura', 'IA'],
+        title: 'Fee Fixo + ETF + IA: A Fórmula do Assessor 3.0', 
+        description: 'O método que me tornou o assessor número 1 em Fee Fixo. Domínio de ETFs e uso de IA no dia a dia.',
+        tags: ['R$ 1.997,50', 'Mentoria'],
+        href: 'https://buy.stripe.com/4gM5kF3EidbX7yNf5Q4ko08',
+        highlight: true,
+        limitedSpots: true,
+        originalPrice: 'De R$ 3.999,00',
+        promotionalMessage: 'R$ 1.997,50 por tempo limitado',
         imageContent: (
-          <div className="flex items-center justify-center h-full bg-blue3-deep/50">
-            <Brain className="w-20 h-20 text-blue3-sky opacity-80" />
+          <div className="flex items-center justify-center h-full bg-blue3-deep/50 rounded-xl">
+            <TrendingUp className="w-16 h-16 text-blue3-sky opacity-100" />
+          </div>
+        )
+      },
+      { 
+        title: 'Mentoria Premium Assessor 3.0', 
+        description: 'Acompanhamento VIP 1-a-1. Estruture seu sistema de IA, curadoria automatizada e transição completa para Fee Fixo.',
+        tags: ['R$ 9.997,00', 'VIP', '1-a-1'],
+        href: 'https://buy.stripe.com/00w9AV4Im8VH4mB9Lw4ko0a',
+        limitedSpots: true,
+        imageContent: (
+          <div className="flex items-center justify-center h-full bg-blue3-deep/50 rounded-xl">
+            <TrendingUp className="w-16 h-16 text-gray-300 opacity-80" />
           </div>
         )
       },

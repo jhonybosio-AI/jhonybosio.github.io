@@ -5,7 +5,17 @@ import { BrandLogo } from './logos';
 
 // --- TYPE DEFINITIONS FOR PROPS ---
 interface NavLink { label: string; href: string; }
-interface Project { title: string; description: string; tags: string[]; imageContent?: React.ReactNode; }
+interface Project { 
+  title: string; 
+  description: string; 
+  tags: string[]; 
+  imageContent?: React.ReactNode; 
+  href?: string;
+  originalPrice?: string;
+  promotionalMessage?: string;
+  limitedSpots?: boolean;
+  highlight?: boolean;
+}
 interface Stat { value: string; label: string; }
 
 export interface PortfolioPageProps {
@@ -117,24 +127,61 @@ const PortfolioPage: React.FC<PortfolioPageProps> = ({
                     </button>
                 </div>
                 
-                <div id="projects" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-24 text-left">
-                    {projects.map((project, index) => (
-                        <div key={index} className="group relative liquid-glass p-8 hover:border-blue3-sky/30 transition-all duration-500 overflow-hidden">
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-blue3-sky/5 blur-3xl -mr-16 -mt-16 rounded-full group-hover:bg-blue3-sky/10 transition-colors" />
-                            <div className="relative z-10">
+                <div id="projects" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-24 text-left items-stretch">
+                    {projects.map((project, index) => {
+                        const CardWrapper = project.href ? 'a' : 'div';
+                        const wrapperProps = project.href ? { href: project.href, target: "_blank", rel: "noreferrer" } : {};
+                        
+                        return (
+                        <CardWrapper 
+                            key={index} 
+                            {...wrapperProps}
+                            className={`group block relative p-8 transition-all duration-500 overflow-hidden rounded-[32px] cursor-pointer
+                                ${project.highlight 
+                                    ? 'bg-blue3-deep border border-blue3-sky shadow-[0_0_30px_rgba(0,141,255,0.2)] hover:shadow-[0_0_50px_rgba(0,141,255,0.4)] hover:-translate-y-2' 
+                                    : 'liquid-glass hover:border-blue3-sky/30 hover:-translate-y-1'
+                                }
+                            `}
+                        >
+                            <div className={`absolute top-0 right-0 w-32 h-32 blur-3xl -mr-16 -mt-16 rounded-full transition-colors ${project.highlight ? 'bg-blue3-sky/20 group-hover:bg-blue3-sky/30' : 'bg-blue3-sky/5 group-hover:bg-blue3-sky/10'}`} />
+                            
+                            {project.limitedSpots && (
+                                <div className="absolute top-4 left-4 z-20">
+                                    <span className="px-3 py-1 bg-red-500/10 border border-red-500/20 text-red-400 text-[10px] font-bold uppercase tracking-widest rounded-full flex items-center gap-1">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                                        Vagas Limitadas
+                                    </span>
+                                </div>
+                            )}
+
+                            {project.highlight && (
+                                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-blue3-sky to-transparent opacity-50"></div>
+                            )}
+
+                            <div className="relative z-10 mt-4">
                                 <div className="mb-6 h-12 flex items-center">{project.imageContent}</div>
-                                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{project.title}</h3>
+                                <h3 className={`text-xl font-bold mb-3 tracking-tight ${project.highlight ? 'text-blue3-sky drop-shadow-[0_0_10px_rgba(0,141,255,0.2)]' : 'text-white'}`}>{project.title}</h3>
                                 <p className="text-gray-400 text-sm leading-relaxed mb-6 min-h-[48px]">{project.description}</p>
+                                
+                                {project.originalPrice && (
+                                    <div className="mb-4">
+                                        <div className="text-gray-500 text-xs line-through mb-1">{project.originalPrice}</div>
+                                        {project.promotionalMessage && (
+                                            <div className="text-green-400 text-xs font-bold uppercase tracking-wider mb-2">{project.promotionalMessage}</div>
+                                        )}
+                                    </div>
+                                )}
+
                                 <div className="flex flex-wrap gap-2">
                                     {project.tags.map(tag => (
-                                        <span key={tag} className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider text-blue3-sky bg-blue3-sky/10 border border-blue3-sky/20">
+                                        <span key={tag} className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${project.highlight ? 'text-white bg-blue3-sky/20 border border-blue3-sky/40' : 'text-blue3-sky bg-blue3-sky/10 border border-blue3-sky/20'}`}>
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        </CardWrapper>
+                    )})}
                 </div>
                 
                 {stats && stats.length > 0 && (
