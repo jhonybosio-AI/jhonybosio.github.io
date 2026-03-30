@@ -23,8 +23,20 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Jhony Bosio — Assessor de Investimentos",
-  description: "Especialista em gestão patrimonial com mais de 10 anos de mercado. Dedico-me a transformar a complexidade financeira em clareza estratégica.",
+  title: "Jhony Bosio — Assessor nº1 Fee Fixo | Especialista em IA e ETFs",
+  description: "Mentoria para assessores de investimentos XP. Especialista em gestão patrimonial, remuneração por Fee Fixo, alocação em ETFs globais e implementação de IA local.",
+  keywords: ["Jhony Bosio", "Assessor 3.0", "Fee Fixo", "ETF Global", "IA para Assessores", "Blue3", "XP Investimentos"],
+  openGraph: {
+    title: "Jhony Bosio — Estrategista de Investimentos & Mentor",
+    description: "Transformando o mercado de assessoria com Fee Fixo e IA.",
+    type: "website",
+    locale: "pt_BR",
+    url: "https://jhonybosio.github.io",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 };
 
 export default function RootLayout({

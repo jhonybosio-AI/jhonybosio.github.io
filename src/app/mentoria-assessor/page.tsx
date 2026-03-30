@@ -6,7 +6,7 @@ export default function MentoriaAssessorPage() {
   const couponCode = "ESCRITORIO50";
 
   return (
-    <main className="min-h-screen bg-[#08112e] text-[#dce1ff] font-sans selection:bg-[#1c4ed8] selection:text-white">
+    <main className="min-h-screen bg-background text-on-surface font-inter selection:bg-amber-gold selection:text-black">
       {/* Header/Nav */}
       <nav className="w-full max-w-5xl mx-auto p-6 flex justify-between items-center bg-transparent">
         <Link href="/" className="text-outline hover:text-primary transition flex items-center gap-2 text-sm font-medium">
@@ -21,9 +21,9 @@ export default function MentoriaAssessorPage() {
           🔥 Exclusivo para Assessores XP
         </div>
         
-        <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1] text-white">
+        <h1 className="text-5xl md:text-8xl font-black font-outfit tracking-tighter mb-8 leading-[0.9] text-white">
           Fee Fixo + ETF + IA:<br /> 
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-fixed">A Fórmula do Assessor 3.0</span>
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-gold to-amber-gold-low">Assessor 3.0</span>
         </h1>
         
         <p className="text-lg md:text-2xl text-on-surface-variant max-w-3xl mx-auto mb-12 leading-relaxed">
@@ -35,7 +35,7 @@ export default function MentoriaAssessorPage() {
             href={stripeLink} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-block bg-primary text-[#002681] font-black py-5 px-12 rounded-2xl text-xl transition-all transform hover:scale-[1.03] shadow-[0_0_50px_-10px_rgba(183,196,255,0.4)] hover:shadow-primary/40 active:scale-95"
+            className="inline-block bg-white text-black font-black py-6 px-14 rounded-2xl text-xl transition-all transform hover:bg-amber-gold hover:scale-[1.05] shadow-2xl active:scale-95 uppercase tracking-tight"
           >
             QUERO SER ASSESSOR 3.0
           </a>
@@ -49,20 +49,20 @@ export default function MentoriaAssessorPage() {
       {/* Proof Section */}
       <section className="bg-surface-container/30 py-20 border-y border-outline-variant/10">
         <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center text-left">
-          <div className="glass-card p-8 rounded-3xl border border-outline-variant/20 shadow-2xl relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl group-hover:bg-primary/10 transition-colors"></div>
-            <h3 className="text-2xl font-bold mb-6 text-white flex items-center gap-3">
-              <TrendingUp className="text-primary w-6 h-6" />
-              Resultado Comprovado
+          <div className="bg-gradient-to-br from-surface-container to-surface-dim p-8 md:p-12 rounded-[2rem] border border-white/5 shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-gold/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl group-hover:bg-amber-gold/10 transition-colors"></div>
+            <h3 className="text-3xl font-black mb-8 text-white flex items-center gap-4 font-outfit">
+              <TrendingUp className="text-amber-gold w-8 h-8" />
+              Resultado Real
             </h3>
-            <p className="text-on-surface-variant leading-relaxed text-base">
+            <p className="text-white/60 leading-relaxed text-lg mb-8">
               Não é teoria. Eu apliquei este método na minha própria base de clientes na Blue3 Investimentos. O resultado? Liderança no ranking de Fee Fixo e uma operação 10x mais eficiente usando IA.
             </p>
-            <div className="mt-8 flex items-center gap-4 border-t border-outline-variant/10 pt-6">
-               <div className="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center font-bold text-white">#1</div>
+            <div className="mt-8 flex items-center gap-6 border-t border-white/10 pt-8">
+               <div className="w-16 h-16 rounded-2xl bg-amber-gold/10 flex items-center justify-center font-black text-amber-gold text-2xl border border-amber-gold/20">#1</div>
                <div>
-                 <p className="text-sm font-bold text-white">Líder em Fee Fixo</p>
-                 <p className="text-xs text-outline">Ranking Blue3 Investimentos</p>
+                 <p className="text-lg font-black text-white">Líder Nacional em Fee Fixo</p>
+                 <p className="text-xs text-white/40 uppercase tracking-widest font-bold">Ranking Blue3 Investimentos</p>
                </div>
             </div>
           </div>
@@ -163,9 +163,9 @@ export default function MentoriaAssessorPage() {
               href={stripeLink} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="block w-full bg-gradient-to-r from-primary to-primary-container text-[#002681] font-black py-6 rounded-2xl text-xl md:text-2xl transition-all hover:shadow-[0_0_60px_-15px_rgba(28,78,216,0.6)] hover:scale-[1.02] active:scale-95 shadow-xl"
+              className="block w-full bg-white text-black font-black py-7 rounded-2xl text-xl md:text-2xl transition-all hover:bg-amber-gold hover:scale-[1.02] active:scale-95 shadow-2xl uppercase tracking-tight"
             >
-               GARANTIR MINHA VAGA
+               GARANTIR MINHA VAGA AGORA
             </a>
             
             <p className="text-xs text-outline mt-6 flex items-center justify-center gap-2">
