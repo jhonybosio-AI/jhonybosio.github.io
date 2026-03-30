@@ -117,7 +117,7 @@ const PortfolioPage: React.FC<PortfolioPageProps> = ({
                     </button>
                 </div>
                 
-                <div id="projects" className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto mb-24 text-left">
+                <div id="projects" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-24 text-left">
                     {projects.map((project, index) => (
                         <div key={index} className="group relative liquid-glass p-8 hover:border-blue3-sky/30 transition-all duration-500 overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-blue3-sky/5 blur-3xl -mr-16 -mt-16 rounded-full group-hover:bg-blue3-sky/10 transition-colors" />

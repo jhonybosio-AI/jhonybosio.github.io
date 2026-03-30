@@ -29,9 +29,9 @@ export default function Home() {
     },
     projects: [
       { 
-        title: 'Mentoria Assessor 3.0', 
-        description: 'Transição completa para o Fee Fixo, domínio de ETFs e uso de IA no dia a dia para ganhar escala e liberdade.',
-        tags: ['Fee Fixo', 'ETFs', 'IA Local'],
+        title: 'Mentoria Premium Assessor 3.0', 
+        description: 'Acompanhamento VIP 1-a-1. Estruture seu sistema de IA, curadoria automatizada e transição completa para Fee Fixo.',
+        tags: ['R$ 9.997,00', 'VIP', '1-a-1'],
         imageContent: (
           <div className="flex items-center justify-center h-full bg-blue3-deep/50">
             <TrendingUp className="w-20 h-20 text-blue3-sky opacity-80" />
@@ -39,9 +39,19 @@ export default function Home() {
         )
       },
       { 
-        title: 'Radar de Mercado IA', 
-        description: 'Sistema de curadoria automatizada que gera resumos de mercado para clientes em segundos, elevando o seu NPS.',
-        tags: ['Python', 'Telegram', 'Vercel'],
+        title: 'Fee Fixo + ETF + IA: A Fórmula do Assessor 3.0', 
+        description: 'O método que me tornou o assessor número 1 em Fee Fixo. Domínio de ETFs e uso de IA no dia a dia.',
+        tags: ['R$ 3.999,00', 'Mentoria', 'Online'],
+        imageContent: (
+          <div className="flex items-center justify-center h-full bg-blue3-deep/50">
+            <ShieldCheck className="w-20 h-20 text-blue3-sky opacity-80" />
+          </div>
+        )
+      },
+      { 
+        title: 'Raio-X Educativo da Sua Carteira', 
+        description: '1 hora ao vivo comigo. Análises de riscos, custos ocultos e o que investidores diversificados fazem diferente.',
+        tags: ['R$ 497,00', 'Consultoria', '1 Hora'],
         imageContent: (
           <div className="flex items-center justify-center h-full bg-blue3-deep/50">
             <Brain className="w-20 h-20 text-blue3-sky opacity-80" />
@@ -49,19 +59,19 @@ export default function Home() {
         )
       },
       { 
-        title: 'Clareza Patrimonial', 
-        description: 'Metodologia exclusiva para análise de carteiras focada em eficiência tributária e sucessão.',
-        tags: ['Alocação Global', 'Fee Fixo'],
+        title: 'Radar Assessor 3.0', 
+        description: 'Sistema de curadoria automatizada com IA que gera resumos de mercado para clientes em segundos.',
+        tags: ['R$ 97,00/mês', 'Assinatura', 'IA'],
         imageContent: (
           <div className="flex items-center justify-center h-full bg-blue3-deep/50">
-            <ShieldCheck className="w-20 h-20 text-blue3-sky opacity-80" />
+            <Brain className="w-20 h-20 text-blue3-sky opacity-80" />
           </div>
         )
       },
     ],
     stats: [
-      { value: '12 anos', label: 'de Mercado Financeiro' },
-      { value: 'R$ 1B+', label: 'Custódia Assessorada' },
+      { value: '+20 anos', label: 'de Mercado Financeiro' },
+      { value: '+300', label: 'Clientes Assessorados' },
     ],
     showAnimatedBackground: true,
   };
