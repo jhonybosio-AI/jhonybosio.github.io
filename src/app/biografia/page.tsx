@@ -1,5 +1,5 @@
-import { ArrowLeft, Award, Briefcase, GraduationCap, MapPin, Star, TrendingUp, Users } from "lucide-react";
 import Link from "next/link";
+import { Blue3Logo, XPLogo } from "@/components/ui/logos";
 
 export default function BiografiaPage() {
   return (
@@ -54,9 +54,9 @@ export default function BiografiaPage() {
 
             <div className="p-6 bg-white/5 border border-white/10 rounded-2xl space-y-4">
               <h3 className="text-xs font-bold uppercase tracking-widest text-gray-500">Credenciais</h3>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-amber-gold/10 text-amber-gold rounded-full text-[10px] font-black border border-amber-gold/20 tracking-wider">Assessor nº 1 FEE FIXO</span>
-                <span className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-[10px] font-black border border-blue-500/20 tracking-wider">XP INVESTIMENTOS</span>
+              <div className="flex flex-col gap-4">
+                <Blue3Logo className="scale-90 origin-left opacity-80" />
+                <XPLogo className="scale-90 origin-left opacity-80" />
               </div>
             </div>
           </div>

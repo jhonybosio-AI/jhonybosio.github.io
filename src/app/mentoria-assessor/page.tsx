@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { ArrowLeft, CheckCircle2, Cpu, LineChart, MessageSquare, ShieldCheck, Zap, TrendingUp, Users, Video } from "lucide-react";
+import { Blue3Logo, XPLogo } from "@/components/ui/logos";
 
 export default function MentoriaAssessorPage() {
   const stripeLink = "https://buy.stripe.com/4gM5kF3EidbX7yNf5Q4ko08";
@@ -56,8 +56,12 @@ export default function MentoriaAssessorPage() {
               Resultado Real
             </h3>
             <p className="text-white/60 leading-relaxed text-lg mb-8">
-              Não é teoria. Eu apliquei este método na minha própria base de clientes na Blue3 Investimentos. O resultado? Liderança no ranking de Fee Fixo e uma operação 10x mais eficiente usando IA.
+              Não é teoria. Eu apliquei este método na minha própria base de clientes na <strong className="text-white">Blue3 Investimentos</strong>. O resultado? Liderança no ranking de Fee Fixo e uma operação 10x mais eficiente usando IA.
             </p>
+            <div className="flex gap-4 mb-4">
+               <Blue3Logo />
+               <XPLogo />
+            </div>
             <div className="mt-8 flex items-center gap-6 border-t border-white/10 pt-8">
                <div className="w-16 h-16 rounded-2xl bg-amber-gold/10 flex items-center justify-center font-black text-amber-gold text-2xl border border-amber-gold/20">#1</div>
                <div>

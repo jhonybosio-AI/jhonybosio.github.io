@@ -14,9 +14,10 @@ import {
   Rocket,
   BookOpen,
   MessageCircle,
-  Calendar,
   ChevronRight
 } from "lucide-react";
+import { ParticleTextEffect } from "@/components/ui/particle-text-effect";
+import { Blue3Logo, XPLogo } from "@/components/ui/logos";
 
 export default function Home() {
   const jsonLd = {
@@ -54,6 +55,13 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      {/* Background Particle Effect */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl opacity-40">
+           <ParticleTextEffect words={["Jhony Bosio", "Assessor 3.0", "Fee Fixo", "ETFs", "IA Local"]} />
+        </div>
+      </div>
 
       {/* Background Glows */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -101,16 +109,12 @@ export default function Home() {
           <p className="text-center text-[10px] md:text-xs uppercase tracking-[0.3em] text-gray-500 font-black mb-10">
             Autoridade e Fiduciário
           </p>
-          <div className="flex justify-center flex-wrap gap-10 md:gap-20 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700">
-            <a className="flex items-center gap-3 group transition-colors" href="https://blue3investimentos.com.br" target="_blank" rel="noopener noreferrer">
-              <div className="bg-white p-2 rounded-lg">
-                <img src="/blue3-logo.png" alt="Blue3" className="h-6 md:h-8 object-contain invert" />
-              </div>
+          <div className="flex justify-center flex-wrap gap-10 md:gap-20 opacity-60 hover:opacity-100 transition-all duration-700">
+            <a className="flex items-center gap-3 group transition-all hover:scale-105" href="https://blue3investimentos.com.br" target="_blank" rel="noopener noreferrer">
+              <Blue3Logo className="scale-110" />
             </a>
-            <a className="flex items-center gap-3 group transition-colors" href="https://xpi.com.br" target="_blank" rel="noopener noreferrer">
-              <div className="bg-white p-2 rounded-lg">
-                <img src="/xp-logo.png" alt="XP" className="h-6 md:h-8 object-contain invert" />
-              </div>
+            <a className="flex items-center gap-3 group transition-all hover:scale-105" href="https://xpi.com.br" target="_blank" rel="noopener noreferrer">
+              <XPLogo className="scale-110" />
             </a>
           </div>
         </section>
