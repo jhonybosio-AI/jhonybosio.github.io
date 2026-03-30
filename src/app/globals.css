@@ -19,6 +19,14 @@
   --font-manrope: "Manrope", sans-serif;
   --font-inter: "Inter", sans-serif;
   --font-outfit: "Outfit", sans-serif;
+
+  /* New Animations */
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
 }
 
 @layer components {
@@ -65,3 +73,20 @@ body {
   background-color: #020617;
   color: #f8fafc;
 }
+
+.divider {
+  @apply w-full h-px bg-white/10 my-8;
+}
+
+.primary-button {
+  @apply bg-white text-black hover:bg-white/90 transition-all;
+}
+
+.glass-button {
+  @apply backdrop-blur-sm border border-white/10 bg-white/5 hover:bg-white/10 transition-all;
+}
+
+.skill-badge {
+  @apply bg-white/10 text-white/70;
+}
+

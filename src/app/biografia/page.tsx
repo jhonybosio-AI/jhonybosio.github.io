@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeft, Briefcase, Award, MapPin, TrendingUp, Users, Star, ArrowRight } from "lucide-react";
 import { Blue3Logo, XPLogo } from "@/components/ui/logos";
 
 export default function BiografiaPage() {
@@ -127,20 +128,5 @@ export default function BiografiaPage() {
          Jhony Bosio • Sócio Blue3 Investimentos • Todos os direitos reservados
       </footer>
     </main>
-  );
-}
-
-function ArrowRight(props: any) {
-  return (
-    <svg 
-      {...props}
-      fill="none" 
-      stroke="currentColor" 
-      strokeWidth="2" 
-      viewBox="0 0 24 24" 
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
-    </svg>
   );
 }

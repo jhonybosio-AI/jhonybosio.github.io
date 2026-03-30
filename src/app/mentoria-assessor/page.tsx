@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowLeft, CheckCircle2, Cpu, LineChart, MessageSquare, ShieldCheck, Zap, TrendingUp, Users, Video } from "lucide-react";
 import { Blue3Logo, XPLogo } from "@/components/ui/logos";
 
