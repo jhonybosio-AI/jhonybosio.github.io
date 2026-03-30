@@ -13,6 +13,7 @@ interface Project {
   href?: string;
   originalPrice?: string;
   promotionalMessage?: string;
+  couponMessage?: string;
   limitedSpots?: boolean;
   highlight?: boolean;
 }
@@ -168,6 +169,9 @@ const PortfolioPage: React.FC<PortfolioPageProps> = ({
                                         <div className="text-gray-500 text-xs line-through mb-1">{project.originalPrice}</div>
                                         {project.promotionalMessage && (
                                             <div className="text-green-400 text-xs font-bold uppercase tracking-wider mb-2">{project.promotionalMessage}</div>
+                                        )}
+                                        {project.couponMessage && (
+                                            <div className="inline-block mt-1 px-2 py-1 bg-white/5 border border-white/10 rounded-md text-white text-[10px] font-mono tracking-widest">{project.couponMessage}</div>
                                         )}
                                     </div>
                                 )}

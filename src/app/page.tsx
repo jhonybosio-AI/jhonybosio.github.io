@@ -7,11 +7,7 @@ import { Brain, TrendingUp, ShieldCheck } from "lucide-react";
 export default function Home() {
   const customPortfolioData: PortfolioPageProps = {
     logo: <BrandLogo className="h-10 text-white" />,
-    navLinks: [
-      { label: 'Bio', href: '#about' },
-      { label: 'Mentoria', href: '#projects' },
-      { label: 'Radar', href: '#skills' },
-    ],
+    navLinks: [],
     hero: {
       titleLine1: 'Assessor nº1 Fee Fixo &',
       titleLine2Gradient: 'Mentor Assessor 3.0',
@@ -41,8 +37,8 @@ export default function Home() {
       },
       { 
         title: 'Raio-X Educativo da Sua Carteira', 
-        description: '1 hora ao vivo comigo. Análises de riscos, custos ocultos e o que investidores diversificados fazem diferente.',
-        tags: ['R$ 497,00', 'Consultoria', '1 Hora'],
+        description: '1 hora ao vivo comigo. Análises de riscos, custos ocultos e o que grandes investidores diversificados fazem diferente. (Exclusivo para Investidores)',
+        tags: ['Para Investidores', 'Consultoria', '1 Hora'],
         href: 'https://buy.stripe.com/cNi5kF5Mqeg1cT71f04ko05',
         imageContent: (
           <div className="flex items-center justify-center h-full bg-blue3-deep/50 rounded-xl">
@@ -59,6 +55,7 @@ export default function Home() {
         limitedSpots: true,
         originalPrice: 'De R$ 3.999,00',
         promotionalMessage: 'R$ 1.997,50 por tempo limitado',
+        couponMessage: 'Use o cupom: ESCRITORIO50',
         imageContent: (
           <div className="flex items-center justify-center h-full bg-blue3-deep/50 rounded-xl">
             <TrendingUp className="w-16 h-16 text-blue3-sky opacity-100" />
