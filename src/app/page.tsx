@@ -25,17 +25,6 @@ export default function Home() {
     },
     projects: [
       { 
-        title: 'Radar Assessor 3.0', 
-        description: 'Sistema de curadoria automatizada com IA que gera resumos de mercado para clientes em segundos.',
-        tags: ['R$ 97,00/mês', 'Assinatura', 'IA'],
-        href: 'https://buy.stripe.com/4gM5kF1wa5Jv8CR4rc4ko09',
-        imageContent: (
-          <div className="flex items-center justify-center h-full bg-blue3-deep/50 rounded-xl">
-            <Brain className="w-16 h-16 text-blue3-sky opacity-80" />
-          </div>
-        )
-      },
-      { 
         title: 'Raio-X Educativo da Sua Carteira', 
         description: '1 hora ao vivo comigo. Análises de riscos, custos ocultos e o que grandes investidores diversificados fazem diferente. (Exclusivo para Investidores)',
         tags: ['Para Investidores', 'Consultoria', '1 Hora'],
