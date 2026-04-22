@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/moabi", "destination": "/moabi/index.html" },
+    { "source": "/moabi/", "destination": "/moabi/index.html" }
+  ]
+}
