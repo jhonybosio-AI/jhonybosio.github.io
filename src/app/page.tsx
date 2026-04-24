@@ -1,21 +1,20 @@
 "use client";
 import { PortfolioPage, PortfolioPageProps } from "@/components/ui/starfall-portfolio-landing";
 import { BrandLogo } from "@/components/ui/logos";
-import { TrendingUp, ShieldCheck } from "lucide-react";
+import { TrendingUp, ShieldCheck, Cpu } from "lucide-react";
 
 export default function Home() {
   const customPortfolioData: PortfolioPageProps = {
     logo: <BrandLogo className="h-10 text-white" />,
     navLinks: [
       { label: 'Protocolo 9A', href: 'https://lpls1.jhonybosio.com' },
-      { label: 'Mentoria', href: '/mentoria-assessor' },
       { label: 'Carteiras ETF', href: '/carteira-etfs' },
       { label: 'Moabi', href: '/moabi' },
     ],
     hero: {
-      titleLine1: 'Assessor nº1 Fee Fixo &',
-      titleLine2Gradient: 'Mentor Assessor 3.0',
-      subtitle: 'Especialista em alocação via ETFs Globais e automação com IA Local. Transformando a carreira de assessores através do modelo de remuneração transparente e tecnológico.',
+      titleLine1: 'Wealth Management &',
+      titleLine2Gradient: 'Gestão Passiva via ETFs Globais',
+      subtitle: 'Investimentos globais eficientes com tecnologia de ponta. Utilizo Inteligência Artificial exclusiva (Assessor 3.0) para curadoria de portfólios, eliminando custos ocultos e protegendo seu patrimônio.',
     },
     ctaButtons: {
       primary: {
@@ -58,14 +57,13 @@ export default function Home() {
         )
       },
       {
-        title: 'Mentoria Premium Assessor 3.0',
-        description: 'Acompanhamento VIP 1-a-1. Estruture seu sistema de IA, curadoria automatizada e transição completa para Fee Fixo.',
-        tags: ['R$ 9.997,00', 'VIP', '1-a-1'],
-        href: 'https://buy.stripe.com/00w9AV4Im8VH4mB9Lw4ko0a',
-        limitedSpots: true,
+        title: 'Assessoria Exclusiva (Fee Fixo)',
+        description: 'Atendimento private para investidores (R$ 300k+). Alinhamento total de interesses, zero conflitos (rebates) e curadoria impulsionada por IA Local.',
+        tags: ['Wealth Management', 'Blue3', 'XP Investimentos'],
+        href: 'https://wa.me/5516996045700',
         imageContent: (
           <div className="flex items-center justify-center h-full bg-blue3-deep/50 rounded-xl">
-            <TrendingUp className="w-16 h-16 text-gray-300 opacity-80" />
+            <Cpu className="w-16 h-16 text-gray-300 opacity-80" />
           </div>
         )
       },
