@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentoria Assessor 3.0 · Jhony Bosio</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --n9:#07111F; --n8:#0D1C3A; --n7:#132651; --n6:#1A3168;
+  --b5:#1B6FEF; --b4:#4488F5; --b3:#7AABF8;
+  --g5:#C9A84C; --g4:#D4AF6A; --g3:#E2C98A;
+  --w:#FFFFFF;
+  --gb:rgba(255,255,255,0.05);
+  --gborder:rgba(255,255,255,0.10);
+  --gblur:blur(24px) saturate(1.6);
+  --fd:'Plus Jakarta Sans',sans-serif;
+  --fb:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden}
+
+/* BG */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(155deg,#09152A 0%,#07111F 55%,#040C16 100%)}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:fl 14s ease-in-out infinite}
+.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.5;
+  background:radial-gradient(circle,rgba(201,168,76,.15),transparent 70%)}
+.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.4;animation-delay:-6s;
+  background:radial-gradient(circle,rgba(27,111,239,.2),transparent 70%)}
+@keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(18px,-28px) scale(1.04)}70%{transform:translate(-14px,18px) scale(.97)}}
+
+/* LAYOUT */
+.page{position:relative;z-index:1}
+.wrap{max-width:1000px;margin:0 auto;padding:0 40px}
+.glass{background:var(--gb);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);border:1px solid var(--gborder);border-radius:24px}
+
+/* NAV */
+.nav{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
+.nbrand{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nlogo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--b5),var(--n6));border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;font-weight:800;color:#fff}
+.nname{font-family:var(--fd);font-size:15px;font-weight:700;color:#fff;letter-spacing:-.01em}
+
+/* HERO */
+.hero{padding:60px 0 80px;text-align:center}
+.heyebrow{display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,.10);border:1px solid rgba(201,168,76,.22);
+  border-radius:999px;padding:6px 14px;margin-bottom:26px}
+.heyebrow-txt{font-size:12px;font-weight:700;color:var(--g4);letter-spacing:.05em;text-transform:uppercase}
+.htitle{font-family:var(--fd);font-size:clamp(36px,5vw,56px);font-weight:800;
+  line-height:1.05;letter-spacing:-.04em;color:#fff;margin-bottom:22px}
+.htitle span{background:linear-gradient(135deg,var(--g4),var(--g3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hsub{font-size:19px;color:rgba(255,255,255,.58);line-height:1.6;max-width:700px;margin:0 auto 40px}
+.hsub b{color:var(--w)}
+
+/* CHECKOUT CARD */
+.ccard{max-width:600px;margin:0 auto;padding:56px 48px;text-align:center;position:relative;overflow:hidden;border-color:rgba(201,168,76,.2)}
+.ccard::before{content:'';position:absolute;top:-100px;right:-100px;width:300px;height:300px;
+  background:radial-gradient(circle,rgba(201,168,76,.1),transparent 70%);pointer-events:none}
+.ctitle{font-family:var(--fd);font-size:28px;font-weight:800;color:#fff;margin-bottom:8px}
+.cdesc{font-size:15px;color:rgba(255,255,255,.45);margin-bottom:32px;line-height:1.6}
+
+.cold{font-size:18px;color:rgba(255,255,255,.2);text-decoration:line-through;font-weight:600;margin-bottom:-10px}
+.cprice{display:flex;justify-content:center;align-items:baseline;gap:4px;margin-bottom:24px}
+.cpur{font-size:20px;color:var(--g4);font-weight:700}
+.cpval{font-family:var(--fd);font-size:82px;font-weight:800;color:#fff;letter-spacing:-.05em}
+.cpdec{font-size:28px;color:rgba(255,255,255,.4);font-weight:600}
+
+.coupon-box{background:rgba(201,168,76,.1);border:1px dashed rgba(201,168,76,.4);border-radius:12px;padding:16px;margin-bottom:40px}
+.cp-label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--g4);font-weight:700;margin-bottom:4px}
+.cp-code{font-family:var(--fd);font-size:24px;font-weight:800;color:#fff;letter-spacing:.05em}
+
+.cfeats{text-align:left;display:flex;flex-direction:column;gap:18px;margin-bottom:48px}
+.cfeat{display:flex;gap:14px;align-items:flex-start}
+.cic{width:22px;height:22px;color:var(--g4);flex-shrink:0}
+.ctxt{font-size:16px;color:rgba(255,255,255,.75);line-height:1.5}
+.ctxt b{color:#fff}
+
+.btn-buy{display:block;width:100%;font-family:var(--fd);font-size:18px;font-weight:800;
+  background:linear-gradient(135deg,var(--g4),#A68336);color:var(--n9);border:none;border-radius:14px;
+  padding:22px;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s;text-transform:uppercase;letter-spacing:.02em}
+.btn-buy:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,168,76,.3)}
+
+/* FOOTER */
+.fdiscl{padding:80px 0 60px;text-align:center;max-width:700px;margin:0 auto}
+.fdtxt{font-size:11px;color:rgba(255,255,255,.25);line-height:1.8;text-transform:uppercase;letter-spacing:.07em}
+
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+</div>
+
+<div class="page">
+  <nav class="nav">
+    <a href="/" class="nbrand">
+      <div class="nlogo">JB</div>
+      <div class="nname">Jhony Bosio</div>
+    </a>
+  </nav>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="heyebrow">
+        <span class="heyebrow-txt">🔥 Exclusivo para Assessores XP</span>
+      </div>
+      <h1 class="htitle">Fee Fixo + ETF + IA:<br><span>Assessor 3.0</span></h1>
+      <p class="hsub">O método que me tornou o <b>assessor nº1 em Fee Fixo na Blue3</b>. Aprenda a blindar sua carteira e escalar seu atendimento com Inteligência Artificial.</p>
+
+      <div class="ccard glass">
+        <h2 class="ctitle">Mentoria Individual</h2>
+        <p class="cdesc">Mentoria 100% individual e personalizada. Vagas limitadas por design para garantir sua implementação completa.</p>
+        
+        <div class="cold">R$ 3.999,00</div>
+        <div class="cprice">
+          <span class="cpur">R$</span>
+          <span class="cpval">1.997</span>
+          <span class="cpdec">,00</span>
+        </div>
+
+        <div class="coupon-box">
+          <div class="cp-label">Cupom de Desconto Escritório</div>
+          <div class="cp-code">ESCRITORIO50</div>
+        </div>
+
+        <div class="cfeats">
+          <div class="cfeat">
+            <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <span class="ctxt"><b>Instalação e configuração</b> da IA local na sua máquina</span>
+          </div>
+          <div class="cfeat">
+            <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+            <span class="ctxt"><b>Skills personalizadas</b> com o seu playbook e sua voz</span>
+          </div>
+          <div class="cfeat">
+            <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+            <span class="ctxt">Estratégia de <b>Fee Fixo</b> líder do ranking Blue3</span>
+          </div>
+          <div class="cfeat">
+            <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <span class="ctxt">Discurso passo a passo da <b>Resolução CVM 179</b></span>
+          </div>
+          <div class="cfeat">
+            <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <span class="ctxt"><b>Acesso 1 a 1</b> direto comigo durante toda a jornada</span>
+          </div>
+        </div>
+
+        <a href="https://buy.stripe.com/4gM5kF3EidbX7yNf5Q4ko08" class="btn-buy">Quero ser Assessor 3.0</a>
+        <div class="csafe">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Pagamento 100% Seguro via Stripe
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="fdiscl">
+    <div class="wrap">
+      <p class="fdtxt">Mentoria Assessor 3.0 — Metodologia Exclusiva Jhony Bosio. Resultados passados não garantem retornos futuros. A implementação das ferramentas de IA é de responsabilidade técnica do mentorado seguindo as orientações dadas.</p>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

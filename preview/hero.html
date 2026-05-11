@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; }
+  .hero {
+    background: #0D1C3A;
+    min-height: 320px;
+    padding: 64px 48px 60px;
+    position: relative;
+    overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(27,111,239,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #4488F5; margin-bottom: 20px;
+  }
+  .hero-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700; color: white;
+    line-height: 1.1; letter-spacing: -0.03em;
+    max-width: 560px; margin-bottom: 20px;
+  }
+  .hero-title em { font-style: normal; color: #4488F5; }
+  .hero-sub {
+    font-size: 17px; color: rgba(255,255,255,0.65);
+    line-height: 1.65; max-width: 440px; margin-bottom: 32px;
+  }
+  .hero-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-primary {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 600;
+    background: #1B6FEF; color: white; border: none; border-radius: 6px;
+    padding: 13px 26px; cursor: pointer;
+  }
+  .btn-ghost {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 600;
+    background: transparent; color: white;
+    border: 1.5px solid rgba(255,255,255,0.30); border-radius: 6px;
+    padding: 12px 26px; cursor: pointer;
+  }
+  .hero-stats {
+    display: flex; gap: 36px; margin-top: 48px;
+    padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-item .num {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 28px; font-weight: 700; color: white; line-height: 1;
+  }
+  .stat-item .unit { font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.5); }
+  .stat-item .desc { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 5px; }
+
+  /* Video placeholder */
+  .video-bg {
+    position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+    width: 280px; height: 200px; border-radius: 12px;
+    background: linear-gradient(135deg, #132651, #1E3D80);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.7;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .play-btn {
+    width: 48px; height: 48px; background: rgba(255,255,255,0.15);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(8px);
+  }
+</style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-label">Assessoria de Investimentos</div>
+    <h1 class="hero-title">Sua jornada tem<br>um <em>plano.</em></h1>
+    <p class="hero-sub">Somos a Blue3. Seremos o guia na sua jornada desde o primeiro investimento à liberdade financeira.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">Abra sua conta</button>
+      <button class="btn-ghost">Fale conosco</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="num">+45<span class="unit"> mil</span></div><div class="desc">Clientes</div></div>
+      <div class="stat-item"><div class="num">+50<span class="unit"> Bi</span></div><div class="desc">Sob custódia</div></div>
+      <div class="stat-item"><div class="num">94<span class="unit">,5</span></div><div class="desc">NPS</div></div>
+      <div class="stat-item"><div class="num">16</div><div class="desc">Escritórios</div></div>
+    </div>
+    <div class="video-bg">
+      <div class="play-btn">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 3.5l10 5.5-10 5.5V3.5z" fill="white"/></svg>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

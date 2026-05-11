@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F5F6F8; padding: 20px; font-family: 'DM Sans', sans-serif; }
+  .label { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #9AA5B4; margin-bottom: 10px; margin-top: 16px; }
+  .shadow-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .shadow-card { background: white; border-radius: 12px; padding: 16px 18px; width: 140px; }
+  .s-name { font-size: 11px; font-weight: 600; color: #374151; margin-top: 8px; }
+  .s-val { font-size: 10px; color: #9AA5B4; margin-top: 2px; line-height: 1.4; }
+</style>
+</head>
+<body>
+  <div class="label">Elevation / Shadows</div>
+  <div class="shadow-row">
+    <div class="shadow-card" style="box-shadow:0 1px 4px rgba(13,28,58,0.06)">
+      <div class="s-name">--shadow-sm</div>
+      <div class="s-val">0 1px 4px rgba(13,28,58,.06)</div>
+    </div>
+    <div class="shadow-card" style="box-shadow:0 2px 12px rgba(13,28,58,0.09)">
+      <div class="s-name">--shadow-md</div>
+      <div class="s-val">0 2px 12px rgba(13,28,58,.09)</div>
+    </div>
+    <div class="shadow-card" style="box-shadow:0 8px 32px rgba(13,28,58,0.12)">
+      <div class="s-name">--shadow-lg</div>
+      <div class="s-val">0 8px 32px rgba(13,28,58,.12)</div>
+    </div>
+    <div class="shadow-card" style="box-shadow:0 16px 56px rgba(13,28,58,0.18)">
+      <div class="s-name">--shadow-xl</div>
+      <div class="s-val">0 16px 56px rgba(13,28,58,.18)</div>
+    </div>
+  </div>
+
+  <div class="label">Border Styles</div>
+  <div class="shadow-row">
+    <div style="background:white;border-radius:10px;padding:14px 16px;border:1px solid #E2E6EC;width:160px">
+      <div class="s-name">--border-light</div>
+      <div class="s-val">1px solid #E2E6EC<br>(on white/light bg)</div>
+    </div>
+    <div style="background:#0D1C3A;border-radius:10px;padding:14px 16px;border:1px solid rgba(255,255,255,0.10);width:160px">
+      <div class="s-name" style="color:white">--border-dark</div>
+      <div class="s-val" style="color:rgba(255,255,255,0.4)">rgba(255,255,255,.10)<br>(on dark bg)</div>
+    </div>
+    <div style="background:white;border-radius:10px;padding:14px 16px;border:2px solid #1B6FEF;width:160px">
+      <div class="s-name">--border-focus</div>
+      <div class="s-val">2px solid #1B6FEF<br>(focus state)</div>
+    </div>
+  </div>
+</body>
+</html>

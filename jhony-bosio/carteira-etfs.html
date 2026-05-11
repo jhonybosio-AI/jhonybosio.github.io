@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carteiras ETF | Jhony Bosio · Blue3 Investimentos</title>
+    <meta name="description" content="Carteiras de alocação via ETFs Globais. Filosofia de gestão passiva com baixos custos, diversificação global e eficiência tributária.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #04050a; --card-bg: rgba(255,255,255,0.05); --glass-border: rgba(255,255,255,0.1);
+            --blue: #0066ff; --gold: #ffcc00; --text: #ffffff; --muted: #a1a1aa;
+            --success: #10b981; --danger: #ef4444;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+        .ticker-wrap { background:#000 !important; border-bottom:1px solid var(--glass-border); min-height:46px; }
+        .wrap { max-width:1200px; margin:0 auto; padding:2rem; }
+        header { display:flex; justify-content:space-between; align-items:center; padding:1.5rem 0; margin-bottom:3rem; }
+        .hdr-left { display:flex; align-items:center; gap:1rem; }
+        .avatar { width:48px; height:48px; background:var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; }
+        .brand .name { font-weight:700; font-size:1.05rem; display:block; }
+        .brand .role { font-size:.75rem; color:var(--muted); display:block; }
+        nav a { color:var(--muted); text-decoration:none; font-weight:500; margin-left:1.5rem; transition:color .2s; }
+        nav a:hover { color:#fff; }
+        .hero { margin-bottom:3rem; }
+        .badge { background:rgba(0,102,255,.1); color:var(--blue); display:inline-block; padding:.4rem 1rem; border-radius:100px; font-size:.75rem; font-weight:700; margin-bottom:1rem; border:1px solid rgba(0,102,255,.2); }
+        .hero h1 { font-size:clamp(2.2rem,5vw,3.5rem); line-height:1.05; font-weight:700; letter-spacing:-.03em; margin-bottom:1rem; }
+        .blue { color:var(--blue); } .gold { color:var(--gold); }
+        .hero p { color:var(--muted); font-size:1.05rem; max-width:640px; line-height:1.7; }
+        .glass { background:var(--card-bg); backdrop-filter:blur(24px); border:1px solid var(--glass-border); border-radius:24px; padding:2rem; position:relative; overflow:hidden; transition:transform .3s; }
+        .glass::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, rgba(255,255,255,.2), transparent); }
+        .glass:hover { transform:translateY(-4px); }
+
+        /* Philosophy */
+        .philosophy { margin-bottom:3rem; }
+        .philosophy h2 { font-size:1.3rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:.75rem; }
+        .pillar-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1.5rem; margin-bottom:2rem; }
+        .pillar { background:var(--card-bg); border:1px solid var(--glass-border); border-radius:20px; padding:1.5rem; }
+        .pillar-icon { font-size:1.6rem; margin-bottom:.75rem; }
+        .pillar h3 { font-size:.95rem; font-weight:700; margin-bottom:.5rem; }
+        .pillar p { font-size:.85rem; color:var(--muted); line-height:1.6; }
+
+        /* Market widget */
+        .market-section { margin-bottom:3rem; }
+        .market-section h2 { font-size:1.3rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:.75rem; }
+        .widget-wrap { border-radius:24px; overflow:hidden; border:1px solid var(--glass-border); }
+
+        /* Allocation table */
+        .alloc-section { margin-bottom:3rem; }
+        .alloc-section h2 { font-size:1.3rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:.75rem; }
+        .profile-tabs { display:flex; gap:.75rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+        .tab-btn { background:transparent; border:1px solid var(--glass-border); color:var(--muted); padding:.6rem 1.4rem; border-radius:10px; cursor:pointer; font-family:'Inter',sans-serif; font-weight:600; font-size:.85rem; transition:all .25s; }
+        .tab-btn.active { background:var(--blue); color:#fff; border-color:var(--blue); box-shadow:0 0 20px rgba(0,102,255,.3); }
+        .alloc-table { width:100%; border-collapse:collapse; }
+        .alloc-table thead tr { border-bottom:1px solid var(--glass-border); }
+        .alloc-table th { padding:.75rem 1rem; text-align:left; font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; font-weight:600; }
+        .alloc-table th:not(:first-child) { text-align:center; }
+        .alloc-table tbody tr { border-bottom:1px solid rgba(255,255,255,.04); transition:background .2s; }
+        .alloc-table tbody tr:hover { background:rgba(255,255,255,.03); }
+        .alloc-table td { padding:.9rem 1rem; font-size:.9rem; }
+        .alloc-table td:not(:first-child) { text-align:center; font-weight:600; }
+        .cat-label { font-weight:700; color:#fff; }
+        .sub-label { font-size:.8rem; color:var(--muted); }
+        .alloc-bar-wrap { height:6px; background:rgba(255,255,255,.07); border-radius:99px; margin-top:4px; }
+        .alloc-bar { height:6px; border-radius:99px; background:var(--blue); transition:width .6s ease; }
+        .highlight-col { background:rgba(0,102,255,.05); }
+
+        /* Profile cards */
+        .profile-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-bottom:3rem; }
+        @media(max-width:700px) { .profile-cards { grid-template-columns:1fr; } }
+        .profile-card { border-radius:20px; padding:1.5rem; border:1px solid var(--glass-border); background:var(--card-bg); }
+        .profile-card.active-card { border-color:var(--blue); background:rgba(0,102,255,.07); }
+        .profile-name { font-weight:700; font-size:1rem; margin-bottom:.4rem; }
+        .profile-desc { font-size:.82rem; color:var(--muted); line-height:1.6; margin-bottom:1rem; }
+        .profile-risk { font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; padding:.3rem .8rem; border-radius:100px; display:inline-block; }
+        .risk-low { background:rgba(16,185,129,.1); color:var(--success); }
+        .risk-med { background:rgba(0,102,255,.1); color:var(--blue); }
+        .risk-high { background:rgba(255,204,0,.1); color:var(--gold); }
+
+        footer { margin-top:4rem; text-align:center; padding-bottom:2rem; color:var(--muted); font-size:.8rem; }
+        @media(max-width:600px) { .wrap { padding:1rem; } }
+    .input-row{display:flex;gap:1rem;align-items:flex-end;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.input-group{display:flex;flex-direction:column;gap:.4rem}
+.input-amount{background:rgba(0,102,255,.08);border:2px solid var(--blue);box-shadow:0 0 20px rgba(0,102,255,.25);border-radius:12px;padding:1rem 1.2rem;color:#fff;font-size:1.5rem;font-weight:800;font-family:'Inter',sans-serif;width:320px;text-align:center;outline:none;transition:all .3s}
+.input-amount:focus{box-shadow:0 0 35px rgba(0,102,255,.5);transform:scale(1.02)}
+.input-group label{font-size:.95rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;text-align:center;margin-bottom:.5rem}
+.profile-tabs{display:flex;gap:.5rem;justify-content:center;margin-bottom:2rem}
+.profile-tab{padding:.65rem 1.5rem;border-radius:100px;font-size:.82rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .25s}
+.profile-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 4px 20px rgba(0,102,255,.3)}
+.profile-tab:hover:not(.active){background:rgba(255,255,255,.05);color:#fff}
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;position:relative}
+.table-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(255,255,255,.15),transparent)}
+table{width:100%;border-collapse:collapse}
+thead th{padding:.9rem 1rem;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);text-align:left;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02)}
+tbody td{padding:.75rem 1rem;font-size:.85rem;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:rgba(0,102,255,.04)}
+.cat-main{font-weight:700;font-size:.85rem;color:#fff;display:block}
+.cat-sub{font-size:.7rem;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2rem}
+.pct-bar-wrap{display:flex;align-items:center;gap:.6rem}
+.pct-val{font-weight:700;font-size:.85rem;min-width:48px;text-align:right}
+.pct-bar{height:6px;border-radius:3px;background:rgba(255,255,255,.08);flex:1;min-width:40px;max-width:80px;overflow:hidden}
+.pct-bar-fill{height:100%;border-radius:3px;background:var(--blue);transition:width .4s ease}
+select.etf-select{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:8px;padding:.45rem .6rem;color:#fff;font-size:.8rem;font-family:'Inter',sans-serif;cursor:pointer;outline:none;min-width:90px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23a1a1aa'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:24px}
+select.etf-select:focus{border-color:var(--blue)}
+select.etf-select option{background:#1a1a2e;color:#fff}
+td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;font-size:.85rem}
+td.qty{text-align:right;font-weight:800;font-size:1rem;color:var(--blue)}
+.total-row{background:rgba(0,102,255,.06)!important}
+.total-row td{font-weight:800;border-top:1px solid rgba(0,102,255,.2);padding:1rem}
+.etf-link{color:var(--blue);font-size:.7rem;font-weight:500;text-decoration:none;opacity:.7;transition:opacity .2s}
+.etf-link:hover{opacity:1;text-decoration:underline}
+.disclaimer-box{margin-top:2rem;padding:1.25rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;font-size:.75rem;color:var(--muted);line-height:1.7;text-align:center}
+.disclaimer-box strong{color:#fff}
+.legend{display:flex;gap:2rem;justify-content:center;margin-top:1.5rem;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:.4rem;font-size:.72rem;color:var(--muted)}
+.legend-dot{width:10px;height:10px;border-radius:3px}
+@media(max-width:768px){
+  .sim-section{padding:0 .75rem 3rem}
+  .input-amount{width:100%}.input-row{flex-direction:column;align-items:stretch}
+  .profile-tabs{gap:.35rem}.profile-tab{padding:.55rem 1rem;font-size:.75rem}
+  .table-wrap{border-radius:14px;overflow-x:auto}
+  table{min-width:700px}
+  thead th,tbody td{padding:.6rem .7rem}
+}
+.sim-section{padding:0 2rem 4rem}
+
+    </style>
+</head>
+<body>
+
+<div class="ticker-wrap">
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        {"symbols":[{"proName":"BMFBOVESPA:IMAB11","title":"IMAB11"},{"proName":"BMFBOVESPA:FIXA11","title":"FIXA11"},{"proName":"BMFBOVESPA:B5P211","title":"B5P211"},{"proName":"BMFBOVESPA:POSB11","title":"POSB11"},{"proName":"BMFBOVESPA:BOVA11","title":"BOVA11"},{"proName":"BMFBOVESPA:IVVB11","title":"IVVB11"},{"proName":"BMFBOVESPA:HASH11","title":"HASH11"},{"proName":"BMFBOVESPA:XFIX11","title":"XFIX11"},{"proName":"BMFBOVESPA:GOLD11","title":"GOLD11"},{"proName":"NASDAQ:ACWI","title":"ACWI"},{"proName":"AMEX:VOO","title":"VOO"}],"showSymbolLogo":true,"colorTheme":"dark","isTransparent":false,"displayMode":"adaptive","locale":"pt"}
+        </script>
+    </div>
+</div>
+
+<div class="wrap">
+    <header>
+        <div class="hdr-left">
+            <div class="avatar">JB</div>
+            <div class="brand">
+                <span class="name">Jhony Bosio</span>
+                <span class="role">Sócio · Blue3 Investimentos</span>
+            </div>
+        </div>
+        <nav>
+            <a href="/">Início</a>
+            <a href="#filosofia">Filosofia</a>
+            <a href="#alocacao">Carteiras</a>
+            <a href="https://wa.me/5516996045700" target="_blank">Falar com Jhony</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Gestão Passiva · ETFs Globais · Blue3</div>
+        <h1>Carteiras <span class="blue">Inteligentes</span><br>via <span class="gold">ETFs Globais</span></h1>
+        <p>Uma filosofia de investimento baseada em baixos custos, ampla diversificação e eficiência tributária. Menos ruído de mercado, mais resultado no longo prazo.</p>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section class="philosophy" id="filosofia">
+        <h2>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            Filosofia de Gestão Passiva
+        </h2>
+        <div class="pillar-grid">
+            <div class="pillar">
+                <div class="pillar-icon">💰</div>
+                <h3>Baixo Custo</h3>
+                <p>ETFs com TER abaixo de 0,20% ao ano eliminam o principal inimigo do retorno: os custos ocultos de fundos ativos.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">🌍</div>
+                <h3>Diversificação Global</h3>
+                <p>Exposição a mais de 50 países e 9.000 empresas com um único instrumento. O risco específico praticamente desaparece.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">📊</div>
+                <h3>Eficiência Tributária</h3>
+                <p>Menor giro de carteira significa menos eventos tributáveis. O imposto é postergado e o capital composto cresce mais rápido.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">🔄</div>
+                <h3>Rebalanceamento Disciplinado</h3>
+                <p>Revisão periódica das alocações garante que o perfil de risco se mantenha alinhado com seus objetivos ao longo do tempo.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">🛡️</div>
+                <h3>Proteção Patrimonial</h3>
+                <p>A combinação entre renda fixa brasileira, renda variável global e ativos reais cria uma proteção robusta contra diferentes cenários.</p>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">🤖</div>
+                <h3>Curadoria com IA</h3>
+                <p>Monitoramento automatizado dos principais indicadores para que você receba apenas o que importa, no momento certo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARKET OVERVIEW -->
+    <section class="market-section">
+        <h2>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><path d="M17 6h6v6"/></svg>
+            Mercados em Tempo Real
+        </h2>
+        <div class="widget-wrap">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                {"colorTheme":"dark","dateRange":"12M","locale":"pt","isTransparent":true,"showFloatingTooltip":false,"plotLineColorGrowing":"rgba(0,102,255,1)","plotLineColorFalling":"rgba(0,102,255,1)","gridLineColor":"rgba(240,243,250,0)","scaleFontColor":"#FFFFFF","belowLineFillColorGrowing":"rgba(0,102,255,0.12)","belowLineFillColorFalling":"rgba(0,102,255,0.12)","belowLineFillColorGrowingBottom":"rgba(0,102,255,0)","belowLineFillColorFallingBottom":"rgba(0,102,255,0)","symbolActiveColor":"rgba(0,102,255,0.12)","tabs":[{"title":"Renda Fixa BR","symbols":[{"s":"BMFBOVESPA:IMAB11","d":"IMA-B 5+"},{"s":"BMFBOVESPA:B5P211","d":"IMA-B 5"},{"s":"BMFBOVESPA:FIXA11","d":"Prefixado"},{"s":"BMFBOVESPA:POSB11","d":"Pós-fixado"},{"s":"BMFBOVESPA:XFIX11","d":"XFIX11"}],"originalTitle":"Bonds"},{"title":"Renda Variável","symbols":[{"s":"BMFBOVESPA:BOVA11","d":"Ibovespa"},{"s":"BMFBOVESPA:IVVB11","d":"S&P 500 BR"},{"s":"NASDAQ:ACWI","d":"Global"},{"s":"AMEX:VOO","d":"VOO"}],"originalTitle":"Stocks"},{"title":"Alternativos","symbols":[{"s":"BMFBOVESPA:GOLD11","d":"Ouro BR"},{"s":"AMEX:GLD","d":"Gold US"},{"s":"BMFBOVESPA:HASH11","d":"Cripto"}],"originalTitle":"Alternatives"}],"width":"100%","height":"480"}
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALLOCATION TABLE -->
+    <section class="alloc-section" id="alocacao">
+        <h2>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            Simulador de Alocação por Perfil
+        </h2>
+  <div class="input-row">
+    <div class="input-group">
+      <label>Valor para investir</label>
+      <input type="text" id="investAmount" class="input-amount" placeholder="R$ 150.000,00" value="R$ 150.000,00">
+    </div>
+  </div>
+
+  <div class="profile-tabs">
+    <button class="profile-tab active" data-profile="conservador">Conservador</button>
+    <button class="profile-tab" data-profile="moderado">Moderado</button>
+    <button class="profile-tab" data-profile="sofisticado">Sofisticado</button>
+  </div>
+
+  <div class="table-wrap">
+    <table id="simTable">
+      <thead>
+        <tr>
+          <th>Classe</th>
+          <th>Peso</th>
+          <th>ETF</th>
+          <th>Cotação (R$)</th>
+          <th>Qtd Cotas</th>
+        </tr>
+      </thead>
+      <tbody id="simBody"></tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#0066ff"></div>Renda Fixa</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ffcc00"></div>Multimercados</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>Renda Variável</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f97316"></div>Alternativos</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>Global</div>
+  </div>
+
+  <div class="disclaimer-box">
+    <strong>Importante:</strong> Este simulador é apenas educacional. Cotações aproximadas — consulte sua corretora para valores em tempo real.
+    Não constitui recomendação de investimento. Rentabilidade passada não garante resultados futuros.<br>
+    <strong>Jhony Bosio</strong> · Assessor · Blue3 Investimentos · Parceiro XP CCTVM S/A
+  </div>
+</section>
+
+    <section class="glass" style="margin-bottom:3rem; background:linear-gradient(135deg,rgba(0,102,255,.08),rgba(255,204,0,.04));">
+        <h2 style="font-size:1.1rem; margin-bottom:1rem; display:flex; align-items:center; gap:.75rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.63 19.79 19.79 0 01.22 4.04 2 2 0 012.2 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.16 6.16l1.48-1.48a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Quer uma carteira personalizada para você?
+        </h2>
+        <p style="color:var(--muted); margin-bottom:1.5rem; font-size:.95rem; max-width:540px;">Agende um Raio-X da sua carteira atual. Em 1 hora, analiso custos ocultos, riscos e oportunidades de melhoria.</p>
+        <a href="https://wa.me/5516996045700" target="_blank" style="display:inline-block; background:var(--blue); color:#fff; padding:.85rem 2rem; border-radius:100px; font-weight:700; font-size:.9rem; text-decoration:none; box-shadow:0 10px 20px -5px rgba(0,102,255,.4); transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Falar com Jhony no WhatsApp</a>
+    </section>
+
+    <footer>&copy; 2026 Jhony Bosio · Blue3 Investimentos · Todos os direitos reservados</footer>
+</div>
+
+<script>
+const CATEGORIES = [
+  {id:'posfixado', group:'RENDA FIXA BR', label:'Pós-fixado (CDI)', color:'#0066ff',
+   etfs:[
+     {ticker:'LFTS11',price:317.50,url:'https://etf1.com.br/etf/LFTS11'},
+     {ticker:'LFTB11',price:140.20,url:'https://etf1.com.br/etf/LFTB11'},
+     {ticker:'NCDI11',price:102.80,url:'https://etf1.com.br/etf/NCDI11'},
+     {ticker:'POSB11',price:10.50,url:'https://etf1.com.br/etf/POSB11'}
+   ], defaultIdx:{conservador:1,moderado:1,sofisticado:0}},
+  {id:'inflacao', group:'RENDA FIXA BR', label:'Inflação (IPCA+)', color:'#0066ff',
+   etfs:[
+     {ticker:'B5P211',price:106.83,url:'https://etf1.com.br/etf/B5P211'},
+     {ticker:'PHIP11',price:10.20,url:'https://etf1.com.br/etf/PHIP11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'prefixado', group:'RENDA FIXA BR', label:'Prefixado', color:'#0066ff',
+   etfs:[
+     {ticker:'FIXA11',price:19.15,url:'https://etf1.com.br/etf/FIXA11'},
+     {ticker:'5PRE11',price:10.30,url:'https://etf1.com.br/etf/5PRE11'},
+     {ticker:'IRFM11',price:82.50,url:'https://etf1.com.br/etf/IRFM11'}
+   ], defaultIdx:{conservador:2,moderado:2,sofisticado:2}},
+  {id:'multi', group:'MULTIMERCADOS', label:'Multimercados', color:'#ffcc00',
+   etfs:[
+     {ticker:'WRLD11',price:11.20,url:'https://etf1.com.br/etf/WRLD11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'rvbr', group:'RENDA VARIÁVEL BR', label:'Renda Variável Brasil', color:'#10b981',
+   etfs:[
+     {ticker:'BOVA11',price:187.87,url:'https://etf1.com.br/etf/BOVA11'},
+     {ticker:'BOVV11',price:130.50,url:'https://etf1.com.br/etf/BOVV11'},
+     {ticker:'BOVX11',price:120.40,url:'https://etf1.com.br/etf/BOVX11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'fundos', group:'FUNDOS LISTADOS', label:'FIIs / FI-Infra / FI-Agro', color:'#10b981',
+   etfs:[
+     {ticker:'XFIX11',price:10.10,url:'https://etf1.com.br/etf/XFIX11'},
+     {ticker:'HERT11',price:10.05,url:'https://etf1.com.br/etf/HERT11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'alt', group:'ALTERNATIVOS', label:'Ouro / Cripto / Commodities', color:'#f97316',
+   etfs:[
+     {ticker:'GOLD11',price:44.30,url:'https://etf1.com.br/etf/GOLD11'},
+     {ticker:'HASH11',price:78.50,url:'https://etf1.com.br/etf/HASH11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'globalrf', group:'GLOBAL', label:'Renda Fixa Internacional', color:'#8b5cf6',
+   etfs:[
+     {ticker:'HGBR11',price:53.75,url:'https://www.etfsbrasil.com.br/etfs/hgbr11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'globalrv', group:'GLOBAL', label:'Renda Variável Internacional', color:'#8b5cf6',
+   etfs:[
+     {ticker:'IVVB11',price:400.56,url:'https://etf1.com.br/etf/IVVB11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}}
+];
+
+const PROFILES = {
+  conservador: {posfixado:72.5, inflacao:12.5, prefixado:5.0, multi:2.5, rvbr:0, fundos:2.5, alt:0, globalrf:2.5, globalrv:2.5},
+  moderado:    {posfixado:32.5, inflacao:22.5, prefixado:10.0, multi:14.0, rvbr:7.5, fundos:4.0, alt:3.0, globalrf:2.5, globalrv:4.0},
+  sofisticado: {posfixado:12.5, inflacao:27.5, prefixado:7.5, multi:10.0, rvbr:17.5, fundos:9.5, alt:7.0, globalrf:2.5, globalrv:6.0}
+};
+
+let currentProfile = 'conservador';
+
+function parseAmount(str) {
+  return parseFloat(str.replace(/[^\d,]/g,'').replace(',','.')) || 0;
+}
+
+function formatBRL(v) {
+  return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+}
+
+function formatInput(el) {
+  let v = parseAmount(el.value);
+  if (v > 0) el.value = 'R$ ' + v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+function getSelectedEtfIdx(catId) {
+  const sel = document.getElementById('sel_'+catId);
+  return sel ? parseInt(sel.value) : 0;
+}
+
+function render() {
+  const total = parseAmount(document.getElementById('investAmount').value);
+  const alloc = PROFILES[currentProfile];
+  const tbody = document.getElementById('simBody');
+  let html = '';
+  let totalInvested = 0;
+  let totalQty = 0;
+
+  CATEGORIES.forEach(cat => {
+    const pct = alloc[cat.id];
+    const amount = total * pct / 100;
+    const eidx = getSelectedEtfIdx(cat.id);
+    const etf = cat.etfs[eidx] || cat.etfs[0];
+    const qty = pct > 0 ? Math.floor(amount / etf.price) : 0;
+    const invested = qty * etf.price;
+    totalInvested += invested;
+    totalQty += qty;
+
+    const optionsHtml = cat.etfs.map((e,i) =>
+      `<option value="${i}" ${i===eidx?'selected':''}>${e.ticker}</option>`
+    ).join('');
+
+    html += `<tr>
+      <td><div class="cat-label"><span class="cat-sub">${cat.group}</span><span class="cat-main">${cat.label}</span></div></td>
+      <td><div class="pct-bar-wrap"><span class="pct-val" style="color:${pct>0?'#fff':'var(--muted)'}">${pct.toFixed(1)}%</span><div class="pct-bar"><div class="pct-bar-fill" style="width:${pct}%;background:${cat.color}"></div></div></div></td>
+      <td>
+        <select class="etf-select" id="sel_${cat.id}" onchange="render()">
+          ${optionsHtml}
+        </select>
+        <a href="${etf.url}" target="_blank" class="etf-link" style="display:block;margin-top:3px">ver ETF ↗</a>
+      </td>
+      <td class="num">${pct>0 ? formatBRL(etf.price) : '—'}</td>
+      <td class="qty">${pct>0 ? qty : '—'}</td>
+    </tr>`;
+  });
+
+  const remainder = total - totalInvested;
+  html += `<tr class="total-row">
+    <td colspan="2" style="text-align:right;color:var(--muted);font-size:.8rem">Total investido: ${formatBRL(totalInvested)} · Troco: ${formatBRL(remainder > 0 ? remainder : 0)}</td>
+    <td></td>
+    <td class="num" style="color:var(--blue)">TOTAL</td>
+    <td class="qty" style="font-size:1.1rem">${totalQty} cotas</td>
+  </tr>`;
+
+  tbody.innerHTML = html;
+}
+
+// Profile tabs
+document.querySelectorAll('.profile-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentProfile = tab.dataset.profile;
+    CATEGORIES.forEach(cat => {
+      const sel = document.getElementById('sel_'+cat.id);
+      if (sel) sel.value = cat.defaultIdx[currentProfile];
+    });
+    render();
+  });
+});
+
+// Input formatting
+const amountInput = document.getElementById('investAmount');
+amountInput.addEventListener('blur', function(){ formatInput(this); render(); });
+amountInput.addEventListener('keydown', function(e){ if(e.key==='Enter'){formatInput(this);render();this.blur();} });
+
+// Initial render
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Fee vs Commission | Performance Invest</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/performanceInvest/simulador/simulador.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <img src="/performanceInvest/recrutamento/assets/Logoatual.png" alt="Performance Invest" style="height:38px; filter: brightness(1.1);" onerror="this.style.display='none'">
+                <div class="pi-text-stack">
+                    <span class="pi-name">Performance</span>
+                    <span class="pi-invest">Invest</span>
+                </div>
+                <div class="nav-divider"></div>
+                <span class="nav-tool-label">⚡ Simulador Comercial</span>
+            </div>
+            <a href="https://www.jhonybosio.com/performanceInvest/hub" class="btn-back">← Voltar ao Hub</a>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="page-header">
+            <h1>Simulador <span class="gold">Fee Based</span> vs <span class="blue">Commission Based</span></h1>
+            <p>Compare os dois modelos e demonstre o valor real do Fee Fixo para o seu cliente.</p>
+        </div>
+
+        <div class="sim-layout">
+            <!-- PAINEL ESQUERDO: INPUTS -->
+            <aside class="panel-inputs">
+
+                <!-- DADOS DO CLIENTE -->
+                <div class="card-input">
+                    <h3>👤 Dados do Cliente</h3>
+                    <div class="field-group">
+                        <label>AUC – Total da Carteira (R$) <span class="tip" title="Assets Under Custody: Total do patrimônio investido">ⓘ</span></label>
+                        <input type="text" id="auc" value="1.000.000,00" oninput="formatCurrency(this); calcular()">
+                    </div>
+                </div>
+
+                <!-- FEE BASED -->
+                <div class="card-input">
+                    <h3>💰 Modalidade Fee Based</h3>
+                    <div class="field-group">
+                        <label>Taxa Fee Based (% a.a.) <span class="tip" title="Taxa anual cobrada sobre o patrimônio">ⓘ</span></label>
+                        <div class="range-wrapper">
+                            <input type="range" id="taxa-fee-range" min="0.6" max="1.3" step="0.05" value="0.7" oninput="syncRange('taxa-fee'); calcular()">
+                            <input type="number" id="taxa-fee" value="0.70" step="0.05" min="0.6" max="1.3" oninput="syncInput('taxa-fee'); calcular()">
+                            <span class="unit">%</span>
+                        </div>
+                    </div>
+
+                    <div class="tabela-faixas">
+                        <div class="tabela-header">
+                            <span>📋 Tabela de Taxas Fee Based</span>
+                            <span class="badge-nova">+ NOVA TABELA 2026</span>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr><th>FAIXA DE INVESTIMENTO</th><th>FAIXA % REMUNERAÇÃO</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr class="faixa-row" data-auc="200000" data-fee="1.2" onclick="aplicarFaixa(this)"><td>De 100k à 300k</td><td>1,1% – 1,30%</td></tr>
+                                <tr class="faixa-row" data-auc="400000" data-fee="1.1" onclick="aplicarFaixa(this)"><td>300k à 500k</td><td>1,0% – 1,20%</td></tr>
+                                <tr class="faixa-row" data-auc="750000" data-fee="0.95" onclick="aplicarFaixa(this)"><td>500k à 1 Milhão</td><td>0,90% – 1,0%</td></tr>
+                                <tr class="faixa-row" data-auc="2000000" data-fee="0.85" onclick="aplicarFaixa(this)"><td>1 Milhão à 3 Milhões</td><td>0,80% – 0,90%</td></tr>
+                                <tr class="faixa-row" data-auc="4000000" data-fee="0.75" onclick="aplicarFaixa(this)"><td>3 Milhões à 5 Milhões</td><td>0,70% – 0,80%</td></tr>
+                                <tr class="faixa-row" data-auc="7500000" data-fee="0.675" onclick="aplicarFaixa(this)"><td>5 Milhões à 10 Milhões</td><td>0,60% – 0,75%</td></tr>
+                            </tbody>
+                        </table>
+                        <p class="tabela-hint">💡 Clique em uma faixa para preencher automaticamente a taxa e o AUC sugerido</p>
+                    </div>
+
+                    <div class="field-group">
+                        <label>Taxa de Cashback – Fee Based (%) <span class="tip" title="Rebate recebido pelo cliente na modalidade Fee Based">ⓘ</span></label>
+                        <div class="input-suffix">
+                            <input type="number" id="cashback" value="0" step="0.1" min="0" max="1" oninput="calcular()">
+                            <span class="unit">%</span>
+                        </div>
+                        <small>Rebate recebido pelo cliente na modalidade Fee Based</small>
+                    </div>
+                </div>
+
+                <!-- COMMISSION BASED -->
+                <div class="card-input">
+                    <h3>📊 Modalidade Commission Based</h3>
+                    <div class="field-group">
+                        <label>Configuração Commission Based</label>
+                        <select id="preset-commission" onchange="aplicarPresetCommission()">
+                            <option value="custom">Personalizado</option>
+                            <option value="0.29">Conservador (ROA: 0,29%)</option>
+                            <option value="0.51" selected>Moderado (ROA: 0,51%)</option>
+                            <option value="0.75">Agressivo (ROA: 0,75%)</option>
+                        </select>
+                        <small>Escolha um preset ou configure manualmente</small>
+                    </div>
+                    <div class="field-group">
+                        <label>ROA Líquido Projetado – Commission Based <span class="tip" title="Return on Assets: receita gerada sobre o patrimônio">ⓘ</span></label>
+                        <div class="input-suffix">
+                            <input type="number" id="roa" value="0.51" step="0.01" min="0" max="2" oninput="calcular()">
+                            <span class="unit">%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJEÇÕES -->
+                <div class="card-input">
+                    <h3>📈 Projeções</h3>
+                    <div class="field-group">
+                        <label>Crescimento Patrimonial / Rentabilidade Cliente <span class="tip" title="Taxa de crescimento anual do patrimônio do cliente">ⓘ</span></label>
+                        <div class="input-suffix">
+                            <input type="number" id="crescimento" value="12" step="1" min="0" max="30" oninput="calcular()">
+                            <span class="unit">%</span>
+                        </div>
+                    </div>
+                    <div class="carteira-split">
+                        <label>Composição da Carteira</label>
+                        <div class="split-row">
+                            <div>
+                                <span>Renda Variável</span>
+                                <div class="input-suffix">
+                                    <input type="number" id="rv" value="30" step="5" min="0" max="100" oninput="syncRV(); calcular()">
+                                    <span class="unit">%</span>
+                                </div>
+                            </div>
+                            <div>
+                                <span>Outros Ativos</span>
+                                <div class="input-suffix">
+                                    <input type="number" id="outros" value="70" step="5" min="0" max="100" oninput="syncOutros(); calcular()">
+                                    <span class="unit">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="check-rv">
+                            <input type="checkbox" id="rv-no-fee"> 
+                            <label for="rv-no-fee">Considerar RV no Fee Based</label>
+                        </div>
+                        <small>Por padrão, Fee Based considera apenas "Outros Ativos"<br>Outros: RF, Fundos, Previdência, COE, etc.</small>
+                    </div>
+                </div>
+
+                <!-- CONFIGURAÇÕES AVANÇADAS -->
+                <div class="card-input">
+                    <div class="config-toggle" onclick="toggleConfig()">
+                        ⚙️ 🔒 <span id="config-toggle-label">Exibir Configurações Avançadas</span>
+                    </div>
+                    <div id="config-avancado" class="config-avancado hidden">
+                        <div class="repasse-tabs">
+                            <label>Modelo de Repasse do Assessor</label>
+                            <div class="tab-group">
+                                <button class="tab-btn active" onclick="setRepasse(50, this)">50% — Mercado</button>
+                                <button class="tab-btn" onclick="setRepasse(70, this)">70% — Performance Invest</button>
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <label>Repasse Assessor – Commission (%)</label>
+                            <div class="input-suffix">
+                                <input type="number" id="repasse-commission" value="50" step="1" min="0" max="100" oninput="calcular()">
+                                <span class="unit">%</span>
+                            </div>
+                            <small>Percentual bruto que o assessor recebe da receita total</small>
+                        </div>
+                        <div class="field-group">
+                            <label>Repasse Assessor – Fee (%)</label>
+                            <div class="input-suffix">
+                                <input type="number" id="repasse-fee" value="50" step="1" min="0" max="100" oninput="calcular()">
+                                <span class="unit">%</span>
+                            </div>
+                            <small>Percentual bruto que o assessor recebe do fee based</small>
+                        </div>
+                        <div class="field-group">
+                            <label>Alíquota IR (%)</label>
+                            <div class="input-suffix">
+                                <input type="number" id="aliquota-ir" value="18.5" step="0.5" min="0" max="27.5" oninput="calcular()">
+                                <span class="unit">%</span>
+                            </div>
+                            <small>Alíquota de Imposto de Renda</small>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- PAINEL DIREITO: RESULTADOS -->
+            <main class="panel-results">
+
+                <!-- COMPARAÇÃO PRINCIPAL -->
+                <div class="card-result comparacao-card">
+                    <div class="comp-header">
+                        <h3>💎 Comparação de Custos para o Cliente</h3>
+                        <p>Os valores abaixo representam o custo efetivo líquido anual para o seu cliente nos dois modelos.</p>
+                    </div>
+                    <div class="comp-boxes">
+                        <div class="comp-box fee-box">
+                            <div class="comp-label">Fee Based</div>
+                            <div class="comp-value" id="res-fee-cliente">R$ 7.840,00</div>
+                            <div class="comp-sub">Fee base pago por: <span id="res-fee-base-label">Cálculo...</span></div>
+                        </div>
+                        <div class="comp-box comm-box">
+                            <div class="comp-label">Commission Based</div>
+                            <div class="comp-value" id="res-commission-cliente">R$ 5.712,00</div>
+                            <div class="comp-sub" id="res-commission-sub">Comissões embutidas nos produtos</div>
+                        </div>
+                    </div>
+                    <div class="diferenca-banner" id="diferenca-banner">
+                        <span id="res-diferenca-texto">Fee Based custa R$ 2.128,00 a mais que o Commission no Ano 1</span>
+                    </div>
+                </div>
+
+                <!-- GRÁFICO BARRAS -->
+                <div class="card-result">
+                    <h3>📊 Custos Anuais – Valores Líquidos Pagos pelo Cliente</h3>
+                    <div class="chart-area" id="chart-barras"></div>
+                    <div class="chart-legend">
+                        <span class="legend-fee">■ Fee Based Líquido</span>
+                        <span class="legend-comm">■ Comissionado</span>
+                    </div>
+                </div>
+
+                <!-- PROJEÇÃO DETALHADA -->
+                <div class="card-result">
+                    <h3>📋 Projeção Detalhada – Valores Pagos pelo Cliente</h3>
+                    <div class="table-scroll">
+                        <table class="proj-table" id="tabela-projecao">
+                            <thead>
+                                <tr>
+                                    <th>ANO</th>
+                                    <th>AUC</th>
+                                    <th>FEE BASED</th>
+                                    <th>CASHBACK</th>
+                                    <th>FEE LÍQUIDO</th>
+                                    <th>COMMISSION</th>
+                                    <th>DIFERENÇA</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-body"></tbody>
+                            <tfoot id="tabela-foot"></tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- GRÁFICO ACUMULADO -->
+                <div class="card-result">
+                    <h3>📈 Custos Acumulados – Cliente (5 anos)</h3>
+                    <div class="chart-area" id="chart-acumulado"></div>
+                    <div class="chart-legend">
+                        <span class="legend-fee">— Fee Based Líquido (Acumulado)</span>
+                        <span class="legend-comm">— Commission Based (Acumulado)</span>
+                    </div>
+                </div>
+
+                <!-- TOTAIS 5 ANOS -->
+                <div class="card-result totais-5anos">
+                    <div class="total-box fee">
+                        <div class="total-label">Fee Based Total (5 anos)</div>
+                        <div class="total-value" id="total-fee-5">R$ 49.806,32</div>
+                    </div>
+                    <div class="total-box comm">
+                        <div class="total-label">Commission Total (5 anos)</div>
+                        <div class="total-value" id="total-comm-5">R$ 36.287,46</div>
+                    </div>
+                    <div class="total-box diff">
+                        <div class="total-label">Diferença Total (5 anos)</div>
+                        <div class="total-value" id="total-diff-5">+R$ 13.518,86</div>
+                    </div>
+                </div>
+
+                <!-- FÓRMULAS -->
+                <div class="card-result formulas-card">
+                    <h3>🧮 Fórmulas (Ano 1)</h3>
+                    <div id="formulas-text"></div>
+                </div>
+
+                <!-- RESULTADO DO ASSESSOR -->
+                <div class="card-result assessor-card">
+                    <h3>🏆 Ganho do Assessor – Comparativo</h3>
+                    <div class="assessor-grid">
+                        <div class="assessor-box comm-box">
+                            <div class="label">Modelo 50% (Mercado)</div>
+                            <div class="value" id="assessor-50-comm">—</div>
+                            <small>Commission Based</small>
+                        </div>
+                        <div class="assessor-box fee-box">
+                            <div class="label">Modelo 70% (Performance Invest)</div>
+                            <div class="value gold" id="assessor-70-fee">—</div>
+                            <small>Fee Based</small>
+                        </div>
+                    </div>
+                    <div class="assessor-ganho" id="assessor-ganho-extra"></div>
+                </div>
+
+                <!-- GLOSSÁRIO -->
+                <div class="card-result glossario-card">
+                    <h3>📖 Glossário</h3>
+                    <div class="glossario-grid">
+                        <div><strong>AUC (ASSETS UNDER CUSTODY)</strong><p>Total do patrimônio custodiado pelo cliente.</p></div>
+                        <div><strong>FEE BASED</strong><p>Modelo onde o cliente paga uma taxa fixa sobre o patrimônio (Fee). O assessor devolve 100% dos rebates (Cashback).</p></div>
+                        <div><strong>COMMISSION BASED</strong><p>Modelo onde o assessor ganha comissões embutidas nos produtos investidos.</p></div>
+                        <div><strong>ROA (RETURN ON ASSETS)</strong><p>Receita gerada sobre o patrimônio. Representa a receita bruta do escritório em relação ao AUC.</p></div>
+                        <div><strong>CASHBACK</strong><p>Devolução dos rebates ao cliente no modelo Fee Based. Na Performance Invest: 100% devolvido.</p></div>
+                        <div><strong>FEE BRUTO</strong><p>Taxa Fee multiplicada pelo AUC. Fee Bruto = AUC × Taxa Fee.</p></div>
+                        <div><strong>FEE LÍQUIDO</strong><p>Fee Bruto menos o Cashback. Valor líquido que o cliente paga no Fee Based.</p></div>
+                        <div><strong>REPASSE DO ASSESSOR</strong><p>Percentual da receita que vai para o assessor. Performance Invest: 70%. Mercado padrão: ~50%.</p></div>
+                        <div><strong>AUC EFETIVO</strong><p>AUC considerado no cálculo do Fee Based. Pode incluir ou excluir Renda Variável conforme configuração.</p></div>
+                        <div><strong>SIMULAÇÃO 5 ANOS</strong><p>Projeção do custo acumulado, aplicando crescimento patrimonial composto ao longo de 5 anos.</p></div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <footer class="sim-footer">
+        <p>Performance Invest – Assessoria de Investimentos | Ferramenta para uso interno e apresentações comerciais.</p>
+        <p style="font-size:0.75rem; opacity:0.5; margin-top:4px;">Os valores apresentados são estimativas baseadas nos dados inseridos. Não constituem garantia de rentabilidade.</p>
+    </footer>
+
+    <script src="/performanceInvest/simulador/simulador.js"></script>
+</body>
+</html>

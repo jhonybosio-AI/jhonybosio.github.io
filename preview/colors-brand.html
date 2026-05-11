@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: #F5F6F8; padding: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .swatch { border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .color-block { height: 72px; }
+  .color-label { background: white; padding: 8px 10px; }
+  .color-name { font-size: 11px; font-weight: 600; color: #374151; }
+  .color-hex { font-size: 11px; color: #9AA5B4; font-family: monospace; }
+  .section-label { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #9AA5B4; margin: 16px 0 8px; grid-column: 1/-1; }
+</style>
+</head>
+<body>
+<div class="grid">
+  <div class="section-label">Navy / Dark</div>
+  <div class="swatch"><div class="color-block" style="background:#07111F"></div><div class="color-label"><div class="color-name">Navy 900</div><div class="color-hex">#07111F</div></div></div>
+  <div class="swatch"><div class="color-block" style="background:#0D1C3A"></div><div class="color-label"><div class="color-name">Navy 800</div><div class="color-hex">#0D1C3A</div></div></div>
+  <div class="swatch"><div class="color-block" style="background:#132651"></div><div class="color-label"><div class="color-name">Navy 700</div><div class="color-hex">#132651</div></div></div>
+  <div class="swatch"><div class="color-block" style="background:#1A3168"></div><div class="color-label"><div class="color-name">Navy 600</div><div class="color-hex">#1A3168</div></div></div>
+  <div class="swatch"><div class="color-block" style="background:#1E3D80"></div><div class="color-label"><div class="color-name">Navy 500</div><div class="color-hex">#1E3D80</div></div></div>
+
+  <div class="section-label">Blue Accent</div>
+  <div class="swatch"><div class="color-block" style="background:#0F4AC0"></div><div class="color-label"><div class="color-name">Blue 700</div><div class="color-hex">#0F4AC0</div></div></div>
+  <div class="swatch"><div class="color-block" style="background:#1456D6"></div><div class="color-label"><div class="color-name">Blue 600</div><div class="color-hex">#1456D6</div></div></div>
+  <div class="swatch"><div class="color-block" style="background:#1B6FEF"></div><div class="color-label"><div class="color-name">Blue 500 ★</div><div class="color-hex">#1B6FEF</div></div></div>
+  <div class="swatch"><div class="color-block" style="background:#4488F5"></div><div class="color-label"><div class="color-name">Blue 400</div><div class="color-hex">#4488F5</div></div></div>
+  <div class="swatch"><div class="color-block" style="background:#D6E6FD"></div><div class="color-label"><div class="color-name">Blue 100</div><div class="color-hex">#D6E6FD</div></div></div>
+
+  <div class="section-label">Gold (Premium)</div>
+  <div class="swatch"><div class="color-block" style="background:#A8893C"></div><div class="color-label"><div class="color-name">Gold 600</div><div class="color-hex">#A8893C</div></div></div>
+  <div class="swatch"><div class="color-block" style="background:#C9A84C"></div><div class="color-label"><div class="color-name">Gold 500</div><div class="color-hex">#C9A84C</div></div></div>
+  <div class="swatch"><div class="color-block" style="background:#D4AF6A"></div><div class="color-label"><div class="color-name">Gold 400</div><div class="color-hex">#D4AF6A</div></div></div>
+</div>
+</body>
+</html>

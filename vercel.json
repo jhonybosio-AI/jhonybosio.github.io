@@ -1,0 +1,84 @@
+{
+  "rewrites": [
+    {
+      "source": "/performanceInvest/novosite",
+      "destination": "/performanceInvest/index.html"
+    },
+    {
+      "source": "/performanceInvest/hub",
+      "destination": "/performanceInvest/hub.html"
+    },
+    {
+      "source": "/performanceInvest/recrutamento",
+      "destination": "/performanceInvest/recrutamento/index.html"
+    },
+    {
+      "source": "/performanceInvest/simulador",
+      "destination": "/performanceInvest/simulador/index.html"
+    },
+    {
+      "source": "/politicas",
+      "destination": "/jhony-bosio/politicas.html"
+    },
+    {
+      "source": "/protocolo-9a",
+      "destination": "/jhony-bosio/protocolo-9a.html"
+    },
+    {
+      "source": "/moabi",
+      "destination": "/jhony-bosio/moabi.html"
+    },
+    {
+      "source": "/carteira-etfs",
+      "destination": "/jhony-bosio/carteira-etfs.html"
+    },
+    {
+      "source": "/obrigado",
+      "destination": "/jhony-bosio/obrigado.html"
+    },
+    {
+      "source": "/aula-vip",
+      "destination": "/jhony-bosio/captacao-protocolo9a.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "lpls1.jhonybosio.com"
+        }
+      ],
+      "destination": "/jhony-bosio/captacao-protocolo9a.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(.*)jhonybosio.com"
+        }
+      ],
+      "destination": "/jhony-bosio/landing-page.html"
+    },
+    {
+      "source": "/",
+      "destination": "/jhony-bosio/landing-page.html"
+    },
+    {
+      "source": "/jhony-bosio.jpg",
+      "destination": "/jhony-bosio/jhony-bosio.jpg"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/mentoria",
+      "destination": "https://lpls1.jhonybosio.com",
+      "permanent": false
+    },
+    {
+      "source": "/mentoria-assessor",
+      "destination": "https://lpls1.jhonybosio.com",
+      "permanent": false
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0D1C3A; font-family: 'DM Sans', sans-serif; }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 72px;
+    background: rgba(7,17,31,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .logo {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 20px; font-weight: 800;
+    color: white; letter-spacing: -0.02em;
+  }
+  .logo span { color: #1B6FEF; }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-link { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.15s; cursor: pointer; }
+  .nav-link:hover, .nav-link.active { color: white; }
+  .nav-link.active { position: relative; }
+  .nav-link.active::after { content:''; position:absolute; bottom:-4px; left:0; right:0; height:2px; background:#1B6FEF; border-radius:2px; }
+  .nav-cta {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 600;
+    background: #1B6FEF; color: white;
+    border: none; border-radius: 6px;
+    padding: 9px 20px; cursor: pointer;
+    text-decoration: none;
+  }
+  .nav-cta-outline {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 600;
+    background: transparent; color: white;
+    border: 1.5px solid rgba(255,255,255,0.3); border-radius: 6px;
+    padding: 8px 20px; cursor: pointer; margin-right: 10px;
+    text-decoration: none;
+  }
+  .label { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: rgba(255,255,255,0.3); padding: 10px 40px 8px; }
+</style>
+</head>
+<body>
+  <div class="label">Scrolled / transparent dark</div>
+  <nav>
+    <div class="logo">blue<span>3</span></div>
+    <div class="nav-links">
+      <a class="nav-link active">Para você</a>
+      <a class="nav-link">Para empresas</a>
+      <a class="nav-link">Assessores</a>
+      <a class="nav-link">Sobre</a>
+      <a class="nav-link">Blog</a>
+    </div>
+    <div style="display:flex;align-items:center">
+      <a class="nav-cta-outline">Entrar</a>
+      <a class="nav-cta">Abra sua conta</a>
+    </div>
+  </nav>
+
+  <div class="label" style="margin-top:16px">Solid / scrolled state</div>
+  <nav style="background:#07111F;border-bottom:1px solid rgba(255,255,255,0.08);">
+    <div class="logo">blue<span>3</span></div>
+    <div class="nav-links">
+      <a class="nav-link">Para você</a>
+      <a class="nav-link">Para empresas</a>
+      <a class="nav-link">Assessores</a>
+      <a class="nav-link">Sobre</a>
+      <a class="nav-link">Blog</a>
+    </div>
+    <div style="display:flex;align-items:center">
+      <a class="nav-cta-outline">Entrar</a>
+      <a class="nav-cta">Abra sua conta</a>
+    </div>
+  </nav>
+</body>
+</html>

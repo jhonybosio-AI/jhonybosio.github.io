@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jhony Bosio — Assessor de Investimentos · Blue3</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --n9:#07111F; --n8:#0D1C3A; --n7:#132651; --n6:#1A3168;
+  --b5:#1B6FEF; --b4:#4488F5; --b3:#7AABF8;
+  --g5:#C9A84C; --g4:#D4AF6A; --g3:#E2C98A;
+  --w:#FFFFFF;
+  --gb:rgba(255,255,255,0.05);
+  --gborder:rgba(255,255,255,0.10);
+  --gblur:blur(24px) saturate(1.6);
+  --fd:'Plus Jakarta Sans',sans-serif;
+  --fb:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden}
+
+/* BG */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(155deg,#09152A 0%,#07111F 55%,#040C16 100%)}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:fl 14s ease-in-out infinite}
+.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.5;
+  background:radial-gradient(circle,rgba(27,111,239,.5),transparent 70%)}
+.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.4;animation-delay:-6s;
+  background:radial-gradient(circle,rgba(201,168,76,.28),transparent 70%)}
+.o3{width:320px;height:320px;top:42%;left:42%;opacity:.35;animation-delay:-10s;
+  background:radial-gradient(circle,rgba(27,111,239,.35),transparent 70%)}
+@keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(18px,-28px) scale(1.04)}70%{transform:translate(-14px,18px) scale(.97)}}
+
+/* LAYOUT */
+.page{position:relative;z-index:1}
+.wrap{max-width:1100px;margin:0 auto;padding:0 40px}
+.glass{background:var(--gb);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);border:1px solid var(--gborder);border-radius:20px}
+.glass-hi{background:rgba(255,255,255,.08);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);border:1px solid rgba(255,255,255,.13);border-radius:20px}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;
+  background:rgba(7,17,31,.65);backdrop-filter:blur(28px) saturate(1.8);-webkit-backdrop-filter:blur(28px) saturate(1.8);
+  border-bottom:1px solid rgba(255,255,255,.07)}
+.nbrand{display:flex;align-items:center;gap:11px}
+.nlogo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--b5),var(--n6));border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;font-weight:800;color:#fff}
+.nname{font-family:var(--fd);font-size:15px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.nsub{font-size:11px;color:rgba(255,255,255,.38);margin-top:1px}
+.nlinks{display:flex;gap:26px}
+.nlink{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);cursor:pointer;text-decoration:none;transition:color .15s}
+.nlink:hover{color:#fff}
+.ncta{font-family:var(--fd);font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--b5),#1456D6);
+  color:#fff;border:none;border-radius:7px;padding:9px 20px;cursor:pointer;box-shadow:0 4px 16px rgba(27,111,239,.35);transition:opacity .15s,transform .12s}
+.ncta:hover{opacity:.9;transform:translateY(-1px)}
+
+/* HERO */
+.hero{min-height:calc(100vh - 66px);display:flex;align-items:center;padding:80px 0 56px}
+.hgrid{display:grid;grid-template-columns:1fr 400px;gap:56px;align-items:center}
+.heyebrow{display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,.10);border:1px solid rgba(201,168,76,.22);
+  border-radius:999px;padding:6px 14px;margin-bottom:26px}
+.heyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--g4)}
+.heyebrow-txt{font-size:12px;font-weight:600;color:var(--g4);letter-spacing:.05em}
+.htitle{font-family:var(--fd);font-size:clamp(40px,5.2vw,66px);font-weight:800;
+  line-height:1.07;letter-spacing:-.035em;color:#fff;margin-bottom:22px}
+.htitle .ba{color:var(--b4)}
+.htitle .ga{color:var(--g4)}
+.hsub{font-size:17px;color:rgba(255,255,255,.58);line-height:1.72;max-width:460px;margin-bottom:36px}
+.hbtns{display:flex;gap:11px;align-items:center;flex-wrap:wrap}
+.btnp{font-family:var(--fd);font-size:15px;font-weight:700;
+  background:linear-gradient(135deg,var(--b5),#1456D6);color:#fff;border:none;border-radius:7px;
+  padding:13px 28px;cursor:pointer;box-shadow:0 4px 20px rgba(27,111,239,.4);transition:transform .15s,box-shadow .15s}
+.btnp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(27,111,239,.5)}
+.btng{font-family:var(--fd);font-size:15px;font-weight:600;
+  background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:7px;
+  padding:12px 26px;cursor:pointer;backdrop-filter:blur(12px);transition:background .15s,border-color .15s}
+.btng:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.35)}
+.hpartners{display:flex;align-items:center;gap:14px;margin-top:44px}
+.hplabel{font-size:11px;color:rgba(255,255,255,.32);letter-spacing:.07em;text-transform:uppercase}
+.hpchip{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:5px 12px;
+  font-size:12px;font-weight:600;color:rgba(255,255,255,.65)}
+.hpchip-dot{width:7px;height:7px;border-radius:50%;background:var(--b4)}
+
+/* PROFILE CARD */
+.pcard{padding:28px;position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(27,111,239,.28),transparent 70%);pointer-events:none}
+.pavatar{width:82px;height:82px;border-radius:20px;background:linear-gradient(135deg,var(--n6),var(--b5));
+  display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:30px;font-weight:800;
+  color:#fff;margin-bottom:18px;border:2px solid rgba(255,255,255,.12);box-shadow:0 8px 28px rgba(27,111,239,.28);position:relative;z-index:1}
+.pname{font-family:var(--fd);font-size:21px;font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:3px}
+.prole{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:20px}
+.prole span{color:var(--b4);font-weight:600}
+.pstats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.ps{background:rgba(255,255,255,.05);border-radius:12px;padding:13px;border:1px solid rgba(255,255,255,.07)}
+.psn{font-family:var(--fd);font-size:21px;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1}
+.psu{font-size:13px;color:rgba(255,255,255,.38);font-weight:400}
+.psl{font-size:11px;color:rgba(255,255,255,.38);margin-top:4px}
+.pbadge{display:flex;align-items:center;gap:8px;background:rgba(201,168,76,.09);
+  border:1px solid rgba(201,168,76,.20);border-radius:12px;padding:10px 13px}
+.pbadge-ic{width:26px;height:26px;border-radius:6px;background:rgba(201,168,76,.14);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pbadge-txt{font-size:12px;color:var(--g4);font-weight:600;line-height:1.4}
+
+/* STATS BAR */
+.sbar{padding:30px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.sbinner{display:flex;justify-content:space-around}
+.si{text-align:center}
+.sin{font-family:var(--fd);font-size:34px;font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1}
+.siu{font-size:17px;color:rgba(255,255,255,.38)}
+.sil{font-size:12px;color:rgba(255,255,255,.38);margin-top:6px}
+.sdiv{width:1px;background:rgba(255,255,255,.07)}
+
+/* SECTIONS */
+.sec{padding:88px 0}
+.slabel{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:11px}
+.stitle{font-family:var(--fd);font-size:clamp(26px,3.4vw,40px);font-weight:800;
+  letter-spacing:-.03em;line-height:1.14;margin-bottom:15px;text-wrap:pretty}
+.sbody{font-size:17px;color:rgba(255,255,255,.52);line-height:1.72;max-width:500px}
+
+/* PROPOSTA */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.pillars{display:flex;flex-direction:column;gap:12px;margin-top:36px}
+.pillar{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;transition:background .2s;cursor:default}
+.pillar:hover{background:rgba(255,255,255,.04)}
+.pic{width:42px;height:42px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.ptitle{font-family:var(--fd);font-size:14px;font-weight:700;color:#fff;margin-bottom:3px}
+.ptext{font-size:13px;color:rgba(255,255,255,.48);line-height:1.6}
+.phaselist{display:flex;flex-direction:column;gap:11px}
+.phase{display:flex;align-items:center;gap:12px;padding:14px 15px;border-radius:13px;
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+.phnum{width:30px;height:30px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--fd);font-size:12px;font-weight:800}
+.phname{font-family:var(--fd);font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.phdesc{font-size:11px;color:rgba(255,255,255,.42)}
+.phtag{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:999px;white-space:nowrap}
+
+/* TIERS */
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:44px}
+.tc{border-radius:18px;padding:24px;transition:transform .2s;cursor:pointer}
+.tc:hover{transform:translateY(-4px)}
+.tdot{width:9px;height:9px;border-radius:50%;margin-bottom:14px}
+.tname{font-family:var(--fd);font-size:17px;font-weight:800;color:#fff;margin-bottom:3px}
+.trange{font-size:12px;color:rgba(255,255,255,.42);margin-bottom:13px;font-weight:500}
+.tfeats{display:flex;flex-direction:column;gap:7px}
+.tfeat{display:flex;align-items:center;gap:7px;font-size:13px;color:rgba(255,255,255,.62)}
+.fcheck{width:15px;height:15px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+
+/* DEPOS */
+.dgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:44px}
+.dc{border-radius:18px;padding:24px}
+.dstars{display:flex;gap:3px;margin-bottom:13px;color:var(--g4);font-size:14px}
+.dtext{font-size:14px;color:rgba(255,255,255,.68);line-height:1.65;margin-bottom:16px;font-style:italic}
+.dauth{display:flex;align-items:center;gap:9px}
+.dav{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--n6),var(--b5));
+  display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:12px;font-weight:800;flex-shrink:0}
+.dname{font-family:var(--fd);font-size:13px;font-weight:700;color:#fff}
+.drole{font-size:11px;color:rgba(255,255,255,.38)}
+
+/* CTA */
+.ctasec{padding:96px 0;text-align:center}
+.ctacard{border-radius:28px;padding:60px 44px;max-width:660px;margin:0 auto;position:relative;overflow:hidden}
+.ctacard::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);
+  width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(27,111,239,.22),transparent 70%);pointer-events:none}
+.ctatitle{font-family:var(--fd);font-size:clamp(26px,3.8vw,42px);font-weight:800;
+  letter-spacing:-.03em;line-height:1.1;color:#fff;margin-bottom:14px;position:relative;z-index:1}
+.ctasub{font-size:16px;color:rgba(255,255,255,.52);margin-bottom:32px;line-height:1.68;position:relative;z-index:1}
+.ctaform{position:relative;z-index:1;max-width:400px;margin:0 auto}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:9px}
+.fi{width:100%;font-family:var(--fb);font-size:14px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.11);border-radius:7px;padding:11px 13px;color:#fff;outline:none;transition:border-color .15s,background .15s}
+.fi::placeholder{color:rgba(255,255,255,.32)}
+.fi:focus{border-color:rgba(27,111,239,.55);background:rgba(255,255,255,.10)}
+.ff{width:100%;margin-bottom:9px}
+.sbtn{width:100%;font-family:var(--fd);font-size:15px;font-weight:700;
+  background:linear-gradient(135deg,var(--b5),#1456D6);color:#fff;border:none;border-radius:7px;
+  padding:14px;cursor:pointer;margin-top:4px;box-shadow:0 4px 20px rgba(27,111,239,.4);transition:transform .15s,box-shadow .15s}
+.sbtn:hover{transform:translateY(-1px);box-shadow:0 8px 26px rgba(27,111,239,.5)}
+.fdiscl{font-size:11px;color:rgba(255,255,255,.22);margin-top:11px;line-height:1.6;text-align:center}
+
+/* FOOTER */
+footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
+.finner{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.fbrand{font-family:var(--fd);font-size:15px;font-weight:800;color:#fff}
+.fbrand span{color:var(--b4)}
+.flegal{font-size:11px;color:rgba(255,255,255,.22);text-align:center;max-width:440px;line-height:1.6}
+.flinks{display:flex;gap:18px}
+.flink{font-size:12px;color:rgba(255,255,255,.38);cursor:pointer;text-decoration:none;transition:color .15s}
+.flink:hover{color:rgba(255,255,255,.7)}
+
+/* TWEAKS */
+#twk{display:none;position:fixed;bottom:20px;right:20px;z-index:9999;width:262px;border-radius:18px;padding:20px 18px;
+  background:rgba(10,20,40,.92);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  border:1px solid rgba(255,255,255,.12);box-shadow:0 16px 56px rgba(0,0,0,.55)}
+#twk.open{display:block}
+.twktitle{font-family:var(--fd);font-size:13px;font-weight:700;color:#fff;margin-bottom:16px}
+.twkrow{margin-bottom:14px}
+.twklbl{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:7px}
+.twkopts{display:flex;gap:5px;flex-wrap:wrap}
+.twkb{font-family:var(--fb);font-size:12px;font-weight:500;border:1px solid rgba(255,255,255,.14);border-radius:5px;
+  padding:5px 9px;cursor:pointer;background:rgba(255,255,255,.05);color:rgba(255,255,255,.58);transition:all .15s}
+.twkb:hover{background:rgba(255,255,255,.10);color:#fff}
+.twkb.on{background:rgba(27,111,239,.24);border-color:rgba(27,111,239,.48);color:#fff}
+.twksw{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .15s;flex-shrink:0}
+.twksw.on{border-color:#fff}
+
+/* === RESPONSIVIDADE GLOBAL === */
+@media(max-width:900px){
+  .wrap{padding:0 20px!important}
+  .nav{padding:0 20px!important}
+  .nlinks,.ncta{display:none!important}
+  .hgrid{grid-template-columns:1fr!important}
+  .pcard{margin-top:2rem}
+  .pgrid{grid-template-columns:1fr!important}
+  .tgrid{grid-template-columns:1fr!important}
+  .dgrid{grid-template-columns:1fr!important}
+  .sbinner{flex-wrap:wrap!important;gap:1.5rem!important;justify-content:center!important}
+  .sdiv{display:none!important}
+  .si{min-width:40%}
+  .finner{flex-direction:column!important;text-align:center!important;gap:16px!important}
+  .flinks{justify-content:center!important}
+  .frow{grid-template-columns:1fr!important}
+  .hero{min-height:auto!important;padding:48px 0 36px!important}
+  .ctacard{padding:40px 24px!important}
+  .hbtns{flex-direction:column!important}
+  .btnp,.btng{width:100%!important;text-align:center!important}
+  .sec{padding:56px 0!important}
+  .hpartners{flex-wrap:wrap!important}
+}
+@media(max-width:600px){
+  .wrap{padding:0 14px!important}
+  .nav{padding:0 14px!important;height:56px!important}
+  .sin{font-size:26px!important}
+  .ctacard{padding:32px 16px!important}
+  .htitle{font-size:clamp(28px,8vw,40px)!important}
+}
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+</div>
+
+<div class="page">
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nbrand">
+    <div class="nlogo">JB</div>
+    <div>
+      <div class="nname">Jhony Bosio</div>
+      <div class="nsub">Assessor · Blue3 Investimentos</div>
+    </div>
+  </div>
+  <div class="nlinks">
+    <a class="nlink" href="#proposta">Proposta</a>
+    <a class="nlink" href="#seg">Segmentações</a>
+    <a class="nlink" href="#depo">Depoimentos</a>
+    <a class="nlink" href="#cta">Contato</a>
+  </div>
+  <button class="ncta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Falar com Jhony</button>
+</nav><div style="background:linear-gradient(90deg,rgba(0,102,255,.18),rgba(0,102,255,.08));border-bottom:1px solid rgba(0,102,255,.22);padding:.55rem 2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.8)">🚀 <strong style="color:#fff">Novo:</strong> Comunidade Protocolo 9A — metodologia de 9 ativos para transformar sua carteira &nbsp;<a href="/protocolo-9a" style="color:#4488F5;font-weight:700;text-decoration:none">Saiba mais →</a></div>
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hgrid">
+      <div>
+        <div class="heyebrow">
+          <div class="heyebrow-dot"></div>
+          <span class="heyebrow-txt">Sócio Blue3 · Parceiro XP Investimentos</span>
+        </div>
+        <h1 class="htitle" id="htitle">
+          Seu patrimônio<br>merece um <span class="ba">plano</span><br>feito pra <span class="ga">você.</span>
+        </h1>
+        <p class="hsub">Assessoria personalizada para quem quer mais do que rentabilidade — quer segurança, clareza e um assessor que entende sua história.</p>
+        <div class="hbtns">
+          <button class="btnp" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Quero meu plano gratuito</button>
+          <button class="btng" onclick="document.getElementById('proposta').scrollIntoView({behavior:'smooth'})">Entenda minha proposta</button>
+        </div>
+        <div class="hpartners">
+          <span class="hplabel">Parceiro</span>
+          <div class="hpchip"><div class="hpchip-dot"></div>Blue3 Investimentos</div>
+          <div class="hpchip"><div class="hpchip-dot" style="background:var(--g4)"></div>XP Investimentos</div>
+        </div>
+      </div>
+
+      <!-- Profile Card -->
+      <div class="pcard glass">
+        <div class="pavatar" style="background:none;padding:0;overflow:hidden"><img src="jhony-bosio.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:18px"></div>
+        <div class="pname">Jhony Bosio</div>
+        <div class="prole">Sócio · <span>Blue3 Investimentos</span></div>
+        <div class="pstats">
+          <div class="ps"><div class="psn">+10<span class="psu"> anos</span></div><div class="psl">de mercado</div></div>
+          <div class="ps"><div class="psn">+67</div><div class="psl">famílias atendidas</div></div>
+          <div class="ps"><div class="psn">+100<span class="psu"> Mi</span></div><div class="psl">sob custódia</div></div>
+          <div class="ps"><div class="psn">XP</div><div class="psl">Plataforma</div></div>
+        </div>
+        <div class="pbadge">
+          <div class="pbadge-ic">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5l1.5 3 3.3.5-2.4 2.3.6 3.2L7 9l-3 1.5.6-3.2L2.2 5l3.3-.5L7 1.5z" stroke="#D4AF6A" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="pbadge-txt">Top Assessor Blue3 · Private &amp; Unique</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="sbar">
+  <div class="wrap">
+    <div class="sbinner">
+      <div class="si"><div class="sin">+67</div><div class="sil">Famílias atendidas</div></div>
+      <div class="sdiv"></div>
+      <div class="si"><div class="sin">+100<span class="siu"> Mi</span></div><div class="sil">Sob custódia</div></div>
+      <div class="sdiv"></div>
+      <div class="si"><div class="sin">+10<span class="siu"> anos</span></div><div class="sil">De experiência</div></div>
+      <div class="sdiv"></div>
+      <div class="si"><div class="sin">Blue3</div><div class="sil">Escritório parceiro XP</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROPOSTA -->
+<section class="sec" id="proposta">
+  <div class="wrap">
+    <div class="pgrid">
+      <div>
+        <div class="slabel" style="color:var(--b4)">Minha proposta</div>
+        <h2 class="stitle">Investir com clareza.<br>Crescer com segurança.</h2>
+        <p class="sbody">Meu trabalho vai além de recomendar produtos. Entendo o seu momento, monto um plano e fico ao seu lado em cada decisão importante.</p>
+        <div class="pillars">
+          <div class="pillar">
+            <div class="pic" style="background:rgba(27,111,239,.12)">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 15l4-5 3 3 3-4 4 5" stroke="#4488F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div><div class="ptitle">Diagnóstico personalizado</div><div class="ptext">Análise completa da sua situação e definição de objetivos claros e alcançáveis.</div></div>
+          </div>
+          <div class="pillar">
+            <div class="pic" style="background:rgba(201,168,76,.12)">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3l2 4 5 .7-3.5 3.3.8 5L10 14l-4.3 2 .8-5L4 7.7l5-.7L10 3z" stroke="#D4AF6A" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </div>
+            <div><div class="ptitle">Estratégia sob medida</div><div class="ptext">Carteira com os melhores produtos da plataforma XP, alinhada ao seu perfil e horizonte.</div></div>
+          </div>
+          <div class="pillar">
+            <div class="pic" style="background:rgba(27,111,239,.09)">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#4488F5" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="#4488F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div><div class="ptitle">Acompanhamento contínuo</div><div class="ptext">Revisões periódicas, relatórios claros e acesso direto a mim quando precisar.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="glass-hi" style="padding:26px">
+          <div style="font-family:var(--fd);font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.09em;text-transform:uppercase;margin-bottom:18px">Jornada do investidor</div>
+          <div class="phaselist">
+            <div class="phase">
+              <div class="phnum" style="background:rgba(27,111,239,.14);color:#4488F5">01</div>
+              <div><div class="phname">Acumular</div><div class="phdesc">Construindo patrimônio com consistência</div></div>
+              <div class="phtag" style="background:rgba(27,111,239,.12);color:#4488F5">Digital · Exclusive</div>
+            </div>
+            <div class="phase">
+              <div class="phnum" style="background:rgba(27,111,239,.20);color:#fff">02</div>
+              <div><div class="phname">Rentabilizar</div><div class="phdesc">Maximizando retornos com diversificação</div></div>
+              <div class="phtag" style="background:rgba(27,111,239,.17);color:#7AABF8">Signature</div>
+            </div>
+            <div class="phase" style="border-color:rgba(201,168,76,.18)">
+              <div class="phnum" style="background:rgba(201,168,76,.14);color:#D4AF6A">03</div>
+              <div><div class="phname">Preservar</div><div class="phdesc">Protegendo e perpetuando o legado</div></div>
+              <div class="phtag" style="background:rgba(201,168,76,.11);color:#D4AF6A">Unique · Private</div>
+            </div>
+          </div>
+          <div style="margin-top:18px;padding-top:15px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between">
+            <span style="font-size:12px;color:rgba(255,255,255,.35)">Plataforma Blue3 + XP</span>
+            <span style="font-size:12px;font-weight:600;color:var(--b4);cursor:pointer">Ver perfil →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENTAÇÕES -->
+<section class="sec" id="seg" style="padding-top:0">
+  <div class="wrap">
+    <div class="slabel" style="color:var(--g4)">Para quem atendo</div>
+    <h2 class="stitle">Encontre o seu momento</h2>
+    <p class="sbody">Atendo clientes em todas as fases — do primeiro investimento ao maior patrimônio.</p>
+    <div class="tgrid">
+      <div class="tc glass">
+        <div class="tdot" style="background:var(--b4)"></div>
+        <div class="tname">Exclusive</div>
+        <div class="trange">R$ 100 mil – R$ 300 mil</div>
+        <div class="tfeats">
+          <div class="tfeat"><div class="fcheck" style="background:rgba(68,136,245,.14)"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="#4488F5" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Diagnóstico financeiro</div>
+          <div class="tfeat"><div class="fcheck" style="background:rgba(68,136,245,.14)"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="#4488F5" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Carteira diversificada</div>
+          <div class="tfeat"><div class="fcheck" style="background:rgba(68,136,245,.14)"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="#4488F5" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Reuniões trimestrais</div>
+        </div>
+      </div>
+      <div class="tc glass-hi">
+        <div class="tdot" style="background:#fff"></div>
+        <div class="tname">Signature</div>
+        <div class="trange">R$ 300 mil – R$ 3 milhões</div>
+        <div class="tfeats">
+          <div class="tfeat"><div class="fcheck" style="background:rgba(255,255,255,.09)"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Financial planning completo</div>
+          <div class="tfeat"><div class="fcheck" style="background:rgba(255,255,255,.09)"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Produtos exclusivos XP</div>
+          <div class="tfeat"><div class="fcheck" style="background:rgba(255,255,255,.09)"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Reuniões mensais dedicadas</div>
+          <div class="tfeat"><div class="fcheck" style="background:rgba(255,255,255,.09)"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Previdência e sucessão</div>
+        </div>
+      </div>
+      <div class="tc" style="background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.17);backdrop-filter:blur(24px)">
+        <div class="tdot" style="background:var(--g4)"></div>
+        <div class="tname" style="color:var(--g4)">Unique · Private</div>
+        <div class="trange" style="color:rgba(212,175,106,.45)">Acima de R$ 3 milhões</div>
+        <div class="tfeats">
+          <div class="tfeat" style="color:rgba(212,175,106,.78)"><div class="fcheck" style="background:rgba(201,168,76,.12)"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="#D4AF6A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Relacionamento exclusivo</div>
+          <div class="tfeat" style="color:rgba(212,175,106,.78)"><div class="fcheck" style="background:rgba(201,168,76,.12)"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="#D4AF6A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Holding e estruturas societárias</div>
+          <div class="tfeat" style="color:rgba(212,175,106,.78)"><div class="fcheck" style="background:rgba(201,168,76,.12)"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="#D4AF6A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Planejamento sucessório</div>
+          <div class="tfeat" style="color:rgba(212,175,106,.78)"><div class="fcheck" style="background:rgba(201,168,76,.12)"><svg width="9" height="9" viewBox="0 0 9 9"><path d="M1.5 4.5l2 2 4-4" stroke="#D4AF6A" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Fundos exclusivos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="sec" id="depo" style="padding-top:0">
+  <div class="wrap">
+    <div class="slabel" style="color:var(--b4)">Depoimentos</div>
+    <h2 class="stitle">O que dizem meus clientes</h2>
+    <div class="dgrid">
+      <div class="dc glass">
+        <div class="dstars">★★★★★</div>
+        <div class="dtext">"O Jhony mudou completamente minha relação com dinheiro. Pela primeira vez me sinto seguro sobre o futuro da minha família."</div>
+        <div class="dauth"><div class="dav">MR</div><div><div class="dname">Marcelo R.</div><div class="drole">Empresário · Signature</div></div></div>
+      </div>
+      <div class="dc glass">
+        <div class="dstars">★★★★★</div>
+        <div class="dtext">"Profissional excepcional. Explica tudo com clareza, está sempre disponível e os resultados falam por si."</div>
+        <div class="dauth"><div class="dav">AF</div><div><div class="dname">Ana F.</div><div class="drole">Médica · Unique</div></div></div>
+      </div>
+      <div class="dc glass">
+        <div class="dstars">★★★★★</div>
+        <div class="dtext">"Migrei meu patrimônio inteiro para o Jhony há 3 anos. A diferença no retorno e na tranquilidade é incomparável."</div>
+        <div class="dauth"><div class="dav">CS</div><div><div class="dname">Carlos S.</div><div class="drole">Executivo · Private</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / FORM -->
+<section class="ctasec" id="cta">
+  <div class="wrap">
+    <div class="ctacard glass-hi">
+      <h2 class="ctatitle">Pronto para o<br>próximo passo?</h2>
+      <p class="ctasub">Preencha e entro em contato em até 24h para uma conversa sem compromisso.</p>
+      <div class="ctaform">
+        <div class="frow">
+          <input class="fi" type="text" placeholder="Seu nome">
+          <input class="fi" type="tel" placeholder="(16) 99604-5700">
+        </div>
+        <input class="fi ff" type="email" placeholder="Seu e-mail">
+        <select class="fi ff" style="appearance:none;cursor:pointer">
+          <option value="" disabled selected>Quanto você tem para investir?</option>
+          <option>Até R$ 100 mil</option>
+          <option>R$ 100 mil – R$ 300 mil</option>
+          <option>R$ 300 mil – R$ 3 milhões</option>
+          <option>R$ 3 milhões – R$ 5 milhões</option>
+          <option>Acima de R$ 5 milhões</option>
+        </select>
+        <button class="sbtn">Quero falar com Jhony Bosio →</button>
+        <p class="fdiscl">Seus dados são protegidos. Nenhum spam — só uma conversa honesta sobre seu futuro financeiro.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="finner">
+      <div class="fbrand">Jhony <span>Bosio</span></div>
+      <div class="flegal">Assessor vinculado à Blue3 Investimentos, parceiro XP Investimentos CCTVM S/A. Rentabilidade passada não garante resultado futuro. Investimentos envolvem riscos.</div>
+      <div class="flinks">
+        <a class="flink" href="/politicas">Privacidade e Termos</a>
+        <a class="flink" href="https://instagram.com/jhonybosio" target="_blank">Instagram</a>
+        <a class="flink" href="https://linkedin.com/in/jhonybosio" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+
+<!-- TWEAKS -->
+<div id="twk">
+  <div class="twktitle">Tweaks</div>
+  <div class="twkrow">
+    <div class="twklbl">Estilo visual</div>
+    <div class="twkopts">
+      <button class="twkb on" onclick="setStyle('dark-glass',this)">Dark Glass</button>
+      <button class="twkb" onclick="setStyle('deep-navy',this)">Deep Navy</button>
+      <button class="twkb" onclick="setStyle('gold-prem',this)">Gold Premium</button>
+    </div>
+  </div>
+  <div class="twkrow">
+    <div class="twklbl">Cor de destaque</div>
+    <div class="twkopts">
+      <div class="twksw on" style="background:#1B6FEF" onclick="setAccent('blue',this)"></div>
+      <div class="twksw" style="background:#C9A84C" onclick="setAccent('gold',this)"></div>
+      <div class="twksw" style="background:#0D9488" onclick="setAccent('teal',this)"></div>
+      <div class="twksw" style="background:#7C3AED" onclick="setAccent('violet',this)"></div>
+    </div>
+  </div>
+  <div class="twkrow">
+    <div class="twklbl">Título hero</div>
+    <div class="twkopts">
+      <button class="twkb on" onclick="setHero('plano',this)">Plano</button>
+      <button class="twkb" onclick="setHero('parceiro',this)">Parceiro</button>
+      <button class="twkb" onclick="setHero('liberdade',this)">Liberdade</button>
+    </div>
+  </div>
+  <div class="twkrow">
+    <div class="twklbl">Intensidade glass</div>
+    <div class="twkopts">
+      <button class="twkb" onclick="setBlur('light',this)">Sutil</button>
+      <button class="twkb on" onclick="setBlur('medium',this)">Médio</button>
+      <button class="twkb" onclick="setBlur('heavy',this)">Forte</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "style": "deep-navy",
+  "accent": "blue",
+  "heroVariant": "plano",
+  "blurIntensity": "heavy"
+}/*EDITMODE-END*/;
+
+window.addEventListener('message',e=>{
+  if(e.data?.type==='__activate_edit_mode') document.getElementById('twk').classList.add('open');
+  if(e.data?.type==='__deactivate_edit_mode') document.getElementById('twk').classList.remove('open');
+});
+window.parent.postMessage({type:'__edit_mode_available'},'*');
+
+function setStyle(s,el){
+  const r=document.documentElement,bg=document.querySelector('.bg'),orbs=document.querySelectorAll('.orb');
+  if(s==='dark-glass'){
+    r.style.setProperty('--gb','rgba(255,255,255,0.05)');
+    r.style.setProperty('--gborder','rgba(255,255,255,0.10)');
+    bg.style.background='linear-gradient(155deg,#09152A 0%,#07111F 55%,#040C16 100%)';
+    orbs.forEach(o=>{o.style.opacity='';o.style.background=''});
+  } else if(s==='deep-navy'){
+    r.style.setProperty('--gb','rgba(13,28,58,0.65)');
+    r.style.setProperty('--gborder','rgba(27,111,239,0.18)');
+    bg.style.background='linear-gradient(155deg,#0D1C3A 0%,#07111F 100%)';
+    orbs.forEach(o=>o.style.opacity='0.25');
+  } else if(s==='gold-prem'){
+    r.style.setProperty('--gb','rgba(201,168,76,0.05)');
+    r.style.setProperty('--gborder','rgba(201,168,76,0.14)');
+    bg.style.background='linear-gradient(155deg,#0E1208 0%,#07111F 55%,#120C02 100%)';
+    orbs[0].style.background='radial-gradient(circle,rgba(201,168,76,0.38),transparent 70%)';
+    orbs[0].style.opacity='0.55';
+  }
+  document.querySelectorAll('.twkb').forEach(b=>b.parentNode===el.parentNode&&b.classList.remove('on'));
+  el.classList.add('on');
+  window.parent.postMessage({type:'__edit_mode_set_keys',edits:{style:s}},'*');
+}
+function setAccent(a,el){
+  const m={blue:['#1B6FEF','#4488F5'],gold:['#C9A84C','#D4AF6A'],teal:['#0D9488','#14B8A6'],violet:['#7C3AED','#8B5CF6']};
+  document.documentElement.style.setProperty('--b5',m[a][0]);
+  document.documentElement.style.setProperty('--b4',m[a][1]);
+  document.querySelectorAll('.twksw').forEach(s=>s.classList.remove('on'));
+  el.classList.add('on');
+  window.parent.postMessage({type:'__edit_mode_set_keys',edits:{accent:a}},'*');
+}
+function setHero(v,el){
+  const t={plano:'Seu patrimônio<br>merece um <span class="ba">plano</span><br>feito pra <span class="ga">você.</span>',parceiro:'O assessor que<br>caminha com <span class="ba">você</span><br>em cada <span class="ga">etapa.</span>',liberdade:'Transforme seu<br><span class="ba">dinheiro</span> em<br><span class="ga">liberdade.</span>'};
+  document.getElementById('htitle').innerHTML=t[v];
+  document.querySelectorAll('.twkb').forEach(b=>b.parentNode===el.parentNode&&b.classList.remove('on'));
+  el.classList.add('on');
+  window.parent.postMessage({type:'__edit_mode_set_keys',edits:{heroVariant:v}},'*');
+}
+function setBlur(i,el){
+  const m={light:'blur(6px) saturate(1.2)',medium:'blur(24px) saturate(1.6)',heavy:'blur(48px) saturate(2.0)'};
+  document.documentElement.style.setProperty('--gblur',m[i]);
+  document.querySelectorAll('.twkb').forEach(b=>b.parentNode===el.parentNode&&b.classList.remove('on'));
+  el.classList.add('on');
+  window.parent.postMessage({type:'__edit_mode_set_keys',edits:{blurIntensity:i}},'*');
+}
+</script>
+</body>
+</html>

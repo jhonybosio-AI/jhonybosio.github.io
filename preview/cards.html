@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F5F6F8; padding: 20px; font-family: 'DM Sans', sans-serif; }
+  .label { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #9AA5B4; margin-bottom: 10px; margin-top: 16px; }
+  .cards-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .card {
+    background: white; border-radius: 14px; padding: 24px;
+    box-shadow: 0 2px 12px rgba(13,28,58,0.09);
+    width: 220px;
+  }
+  .card-icon { width: 40px; height: 40px; background: #EBF3FF; border-radius: 10px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; }
+  .card-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; color: #0D1C3A; margin-bottom: 6px; }
+  .card-body { font-size: 13px; color: #6B7280; line-height: 1.6; }
+
+  .card-dark {
+    background: #132651; border-radius: 14px; padding: 24px;
+    border: 1px solid rgba(255,255,255,0.10);
+    width: 220px;
+  }
+  .card-dark .card-title { color: white; }
+  .card-dark .card-body { color: rgba(255,255,255,0.6); }
+  .card-dark .card-icon { background: rgba(255,255,255,0.08); }
+
+  .card-stat { background: white; border-radius: 14px; padding: 22px 24px; box-shadow: 0 2px 12px rgba(13,28,58,0.09); width: 160px; }
+  .stat-num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 36px; font-weight: 700; color: #0D1C3A; line-height: 1; }
+  .stat-unit { font-size: 16px; font-weight: 500; color: #6B7280; }
+  .stat-label { font-size: 12px; color: #9AA5B4; margin-top: 6px; }
+
+  .card-press { background: white; border-radius: 12px; padding: 18px 20px; box-shadow: 0 1px 6px rgba(13,28,58,0.07); width: 180px; display: flex; flex-direction: column; gap: 10px; }
+  .press-logo { height: 22px; background: #E2E6EC; border-radius: 4px; width: 90px; }
+  .press-quote { font-size: 12px; color: #6B7280; line-height: 1.55; font-style: italic; }
+
+  .svg-icon { width: 20px; height: 20px; }
+</style>
+</head>
+<body>
+  <div class="label">Service Cards (Light)</div>
+  <div class="cards-row">
+    <div class="card">
+      <div class="card-icon">
+        <svg class="svg-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#1B6FEF" stroke-width="1.5"/><path d="M10 7v3l2 2" stroke="#1B6FEF" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="card-title">Financial Planning</div>
+      <div class="card-body">Plano personalizado para construção e proteção do seu patrimônio.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg class="svg-icon" viewBox="0 0 20 20" fill="none"><path d="M3 14l5-5 4 4 5-6" stroke="#1B6FEF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="card-title">Gestão Ativa</div>
+      <div class="card-body">Acompanhamento contínuo da sua carteira com assessoria especializada.</div>
+    </div>
+    <div class="card" style="box-shadow: 0 8px 32px rgba(13,28,58,0.14); transform: translateY(-2px);">
+      <div class="card-icon">
+        <svg class="svg-icon" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1.5" stroke="#1B6FEF" stroke-width="1.5"/><rect x="11" y="3" width="6" height="6" rx="1.5" stroke="#1B6FEF" stroke-width="1.5"/><rect x="3" y="11" width="6" height="6" rx="1.5" stroke="#1B6FEF" stroke-width="1.5"/><rect x="11" y="11" width="6" height="6" rx="1.5" stroke="#1B6FEF" stroke-width="1.5"/></svg>
+      </div>
+      <div class="card-title">Diversificação</div>
+      <div class="card-body">Acesso às melhores soluções do mercado, de renda fixa a fundos exclusivos.</div>
+    </div>
+  </div>
+
+  <div class="label">Service Cards (Dark)</div>
+  <div class="cards-row" style="background:#0D1C3A; padding:16px; border-radius:12px;">
+    <div class="card-dark">
+      <div class="card-icon">
+        <svg class="svg-icon" viewBox="0 0 20 20" fill="none"><path d="M10 3L17 8v9H3V8l7-5z" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="card-title">Blue3 Private</div>
+      <div class="card-body">Soluções exclusivas para patrimônios acima de R$ 5 milhões.</div>
+    </div>
+    <div class="card-dark">
+      <div class="card-icon">
+        <svg class="svg-icon" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4l6 6-6 6" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="card-title">Blue3 Asset</div>
+      <div class="card-body">Fundos de investimento geridos com estratégia e transparência.</div>
+    </div>
+  </div>
+
+  <div class="label">Stat Cards</div>
+  <div class="cards-row">
+    <div class="card-stat"><div class="stat-num">+45<span class="stat-unit"> mil</span></div><div class="stat-label">Clientes</div></div>
+    <div class="card-stat"><div class="stat-num">+50<span class="stat-unit"> Bi</span></div><div class="stat-label">Sob custódia</div></div>
+    <div class="card-stat"><div class="stat-num">94<span class="stat-unit">,5</span></div><div class="stat-label">NPS</div></div>
+    <div class="card-stat"><div class="stat-num">16</div><div class="stat-label">Escritórios</div></div>
+  </div>
+
+  <div class="label">Press Cards</div>
+  <div class="cards-row">
+    <div class="card-press">
+      <div class="press-logo"></div>
+      <div class="press-quote">"Blue3 é eleita uma das melhores assessorias de investimentos do Brasil."</div>
+    </div>
+    <div class="card-press">
+      <div class="press-logo" style="width:60px"></div>
+      <div class="press-quote">"A empresa que mais cresceu em captação líquida na XP Investimentos."</div>
+    </div>
+  </div>
+</body>
+</html>

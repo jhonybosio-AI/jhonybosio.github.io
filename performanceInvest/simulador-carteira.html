@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Carteira ETF | Performance Invest</title>
+    <meta name="description" content="Simulador de alocação via ETFs Globais. Estratégia institucional da Performance Invest com foco em baixos custos e eficiência.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #04050a; 
+            --card-bg: rgba(255,255,255,0.05); 
+            --glass-border: rgba(255,255,255,0.1);
+            --blue: #0066ff; 
+            --gold: #d4af37; /* Performance Invest Gold */
+            --text: #ffffff; 
+            --muted: #a1a1aa;
+            --success: #10b981; 
+            --danger: #ef4444;
+            --accent-gold: #d4af37;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter', sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+        
+        .ticker-wrap { background:#000 !important; border-bottom:1px solid var(--glass-border); min-height:46px; }
+        
+        .wrap { max-width:1200px; margin:0 auto; padding:2rem; }
+        
+        header { display:flex; justify-content:space-between; align-items:center; padding:1.5rem 0; margin-bottom:3rem; border-bottom: 1px solid var(--glass-border); }
+        
+        .logo-wrapper { display: flex; align-items: center; gap: 15px; }
+        .pi-text-stack { display: flex; flex-direction: column; line-height: 1.1; }
+        .pi-name { font-size: 1.2rem; font-weight: 500; color: #fff; letter-spacing: 0.5px; }
+        .pi-invest { font-size: 1.3rem; font-weight: 800; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; }
+
+        nav a { color:var(--muted); text-decoration:none; font-weight:500; margin-left:1.5rem; transition:color .2s; font-family: 'Outfit', sans-serif; }
+        nav a:hover { color:var(--gold); }
+        
+        .hero { margin-bottom:3rem; }
+        .badge { background:rgba(212, 175, 55, 0.1); color:var(--gold); display:inline-block; padding:.4rem 1rem; border-radius:100px; font-size:.75rem; font-weight:700; margin-bottom:1rem; border:1px solid rgba(212, 175, 55, 0.2); text-transform: uppercase; letter-spacing: 1px; }
+        .hero h1 { font-family: 'Outfit', sans-serif; font-size:clamp(2.2rem,5vw,3.5rem); line-height:1.05; font-weight:800; letter-spacing:-.03em; margin-bottom:1rem; }
+        .highlight-gold { color:var(--gold); }
+        .hero p { color:var(--muted); font-size:1.1rem; max-width:700px; line-height:1.7; }
+        
+        .glass { background:var(--card-bg); backdrop-filter:blur(24px); border:1px solid var(--glass-border); border-radius:24px; padding:2rem; position:relative; overflow:hidden; transition:transform .3s; }
+        .glass:hover { transform:translateY(-4px); }
+
+        /* Allocation table */
+        .alloc-section { margin-bottom:3rem; }
+        .alloc-section h2 { font-family: 'Outfit', sans-serif; font-size:1.5rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:.75rem; color: #fff; }
+        
+        .input-row { display:flex; gap:1rem; align-items:flex-end; justify-content:center; flex-wrap:wrap; margin-bottom:2.5rem; }
+        .input-group { display:flex; flex-direction:column; gap:.6rem; align-items: center; }
+        .input-group label { font-family: 'Outfit', sans-serif; font-size:.9rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:.1em; }
+        .input-amount { background:rgba(212, 175, 55, 0.05); border:2px solid var(--gold); box-shadow:0 0 20px rgba(212, 175, 55, 0.15); border-radius:12px; padding:1.2rem; color:#fff; font-size:1.8rem; font-weight:800; font-family:'Outfit', sans-serif; width:360px; text-align:center; outline:none; transition:all .3s; }
+        .input-amount:focus { box-shadow:0 0 35px rgba(212, 175, 55, 0.3); transform:scale(1.02); }
+
+        .profile-tabs { display:flex; gap:.75rem; justify-content:center; margin-bottom:2.5rem; }
+        .profile-tab { padding:.7rem 1.8rem; border-radius:100px; font-size:.85rem; font-weight:700; cursor:pointer; border:1px solid var(--glass-border); background:transparent; color:var(--muted); transition:all .25s; font-family: 'Outfit', sans-serif; text-transform: uppercase; }
+        .profile-tab.active { background:var(--gold); border-color:var(--gold); color:#000; box-shadow:0 4px 20px rgba(212, 175, 55, 0.3); }
+        .profile-tab:hover:not(.active) { background:rgba(255,255,255,0.05); color:#fff; }
+
+        .table-wrap { background:rgba(255,255,255,0.02); border:1px solid var(--glass-border); border-radius:20px; overflow:hidden; position:relative; }
+        table { width:100%; border-collapse:collapse; }
+        thead th { padding:1.2rem 1rem; font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); text-align:left; border-bottom:1px solid var(--glass-border); background:rgba(255,255,255,0.03); }
+        tbody td { padding:1rem; font-size:.9rem; border-bottom:1px solid rgba(255,255,255,0.04); vertical-align:middle; }
+        tbody tr:hover { background:rgba(212, 175, 55, 0.03); }
+        
+        .cat-main { font-weight:700; color:#fff; display:block; }
+        .cat-sub { font-size:.7rem; color:var(--muted); display:block; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px; }
+        
+        .pct-bar-wrap { display:flex; align-items:center; gap:.8rem; }
+        .pct-val { font-weight:700; min-width:45px; text-align:right; }
+        .pct-bar { height:6px; border-radius:3px; background:rgba(255,255,255,0.05); flex:1; max-width:100px; overflow:hidden; }
+        .pct-bar-fill { height:100%; border-radius:3px; background:var(--gold); transition:width .4s ease; }
+
+        select.etf-select { background:rgba(255,255,255,0.06); border:1px solid var(--glass-border); border-radius:8px; padding:.5rem .8rem; color:#fff; font-size:.85rem; cursor:pointer; outline:none; min-width:100px; appearance:none; background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23d4af37'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; }
+        select.etf-select:focus { border-color:var(--gold); }
+        
+        td.num { text-align:right; font-variant-numeric:tabular-nums; font-weight:500; }
+        td.qty { text-align:right; font-weight:700; color:var(--gold); font-size:1.1rem; }
+        
+        .total-row { background:rgba(212, 175, 55, 0.05) !important; }
+        .total-row td { font-weight:800; border-top:1px solid rgba(212, 175, 55, 0.2); padding:1.2rem 1rem; }
+        
+        .etf-link { color:var(--gold); font-size:.75rem; font-weight:600; text-decoration:none; opacity:.8; transition:opacity .2s; display:block; margin-top:4px; }
+        .etf-link:hover { opacity:1; text-decoration:underline; }
+
+        .disclaimer-box { margin-top:2.5rem; padding:1.5rem; background:rgba(255,255,255,0.02); border:1px solid var(--glass-border); border-radius:16px; font-size:.8rem; color:var(--muted); line-height:1.7; text-align:center; }
+        .disclaimer-box strong { color:var(--gold); }
+
+        footer { margin-top:4rem; text-align:center; padding:2rem 0; color:var(--muted); font-size:.85rem; border-top: 1px solid var(--glass-border); }
+
+        @media(max-width:768px){
+            .wrap { padding: 1rem; }
+            .input-amount { width: 100%; font-size: 1.5rem; }
+            .profile-tabs { flex-wrap: wrap; }
+            .table-wrap { overflow-x: auto; }
+            table { min-width: 650px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="ticker-wrap">
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        {"symbols":[{"proName":"BMFBOVESPA:IMAB11","title":"IMAB11"},{"proName":"BMFBOVESPA:FIXA11","title":"FIXA11"},{"proName":"BMFBOVESPA:B5P211","title":"B5P211"},{"proName":"BMFBOVESPA:POSB11","title":"POSB11"},{"proName":"BMFBOVESPA:BOVA11","title":"BOVA11"},{"proName":"BMFBOVESPA:IVVB11","title":"IVVB11"},{"proName":"BMFBOVESPA:HASH11","title":"HASH11"},{"proName":"BMFBOVESPA:XFIX11","title":"XFIX11"},{"proName":"BMFBOVESPA:GOLD11","title":"GOLD11"}],"showSymbolLogo":true,"colorTheme":"dark","isTransparent":false,"displayMode":"adaptive","locale":"pt"}
+        </script>
+    </div>
+</div>
+
+<div class="wrap">
+    <header>
+        <div class="logo-wrapper">
+            <img src="/performanceInvest/recrutamento/assets/Logoatual.png" alt="Performance Invest Logo" style="height: 40px;">
+            <div class="pi-text-stack">
+                <span class="pi-name">Performance</span>
+                <span class="pi-invest">Invest</span>
+            </div>
+        </div>
+        <nav>
+            <a href="/performanceInvest/hub">Hub do Assessor</a>
+            <a href="https://wa.me/5511987457001" target="_blank">Suporte Comercial</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Estratégia Institucional · Performance Invest</div>
+        <h1>Simulador de Alocação <br><span class="highlight-gold">via ETFs Globais</span></h1>
+        <p>Demonstre para o seu cliente o poder da gestão passiva: baixos custos, diversificação extrema e eficiência tributária. Menos ruído, mais patrimônio.</p>
+    </section>
+
+    <section class="alloc-section" id="alocacao">
+        <div class="input-row">
+            <div class="input-group">
+                <label>Patrimônio Projetado</label>
+                <input type="text" id="investAmount" class="input-amount" placeholder="R$ 1.000.000,00" value="R$ 1.000.000,00">
+            </div>
+        </div>
+
+        <div class="profile-tabs">
+            <button class="profile-tab active" data-profile="conservador">Conservador</button>
+            <button class="profile-tab" data-profile="moderado">Moderado</button>
+            <button class="profile-tab" data-profile="sofisticado">Sofisticado</button>
+        </div>
+
+        <div class="table-wrap">
+            <table id="simTable">
+                <thead>
+                    <tr>
+                        <th>Classe de Ativo</th>
+                        <th>Peso na Carteira</th>
+                        <th>Sugestão ETF</th>
+                        <th>Cotação (R$)</th>
+                        <th>Qtd Estimada</th>
+                    </tr>
+                </thead>
+                <tbody id="simBody"></tbody>
+            </table>
+        </div>
+
+        <div class="disclaimer-box">
+            <strong>Uso Interno:</strong> Este simulador é uma ferramenta de apoio comercial para assessores da <strong>Performance Invest</strong>. 
+            Cotações são referenciais. Não constitui recomendação direta de investimento sem análise prévia de Suitability.<br>
+            <strong>Performance Invest Wealth Management</strong> · Parceiro XP Investimentos
+        </div>
+    </section>
+
+    <footer>&copy; 2026 Performance Invest · Todos os direitos reservados para uso institucional.</footer>
+</div>
+
+<script>
+const CATEGORIES = [
+  {id:'posfixado', group:'RENDA FIXA BR', label:'Pós-fixado (CDI)', color:'#0066ff',
+   etfs:[
+     {ticker:'LFTS11',price:317.50,url:'https://etf1.com.br/etf/LFTS11'},
+     {ticker:'LFTB11',price:140.20,url:'https://etf1.com.br/etf/LFTB11'},
+     {ticker:'NCDI11',price:102.80,url:'https://etf1.com.br/etf/NCDI11'},
+     {ticker:'POSB11',price:10.50,url:'https://etf1.com.br/etf/POSB11'}
+   ], defaultIdx:{conservador:1,moderado:1,sofisticado:0}},
+  {id:'inflacao', group:'RENDA FIXA BR', label:'Inflação (IPCA+)', color:'#0066ff',
+   etfs:[
+     {ticker:'B5P211',price:106.83,url:'https://etf1.com.br/etf/B5P211'},
+     {ticker:'PHIP11',price:10.20,url:'https://etf1.com.br/etf/PHIP11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'prefixado', group:'RENDA FIXA BR', label:'Prefixado', color:'#0066ff',
+   etfs:[
+     {ticker:'FIXA11',price:19.15,url:'https://etf1.com.br/etf/FIXA11'},
+     {ticker:'5PRE11',price:10.30,url:'https://etf1.com.br/etf/5PRE11'},
+     {ticker:'IRFM11',price:82.50,url:'https://etf1.com.br/etf/IRFM11'}
+   ], defaultIdx:{conservador:2,moderado:2,sofisticado:2}},
+  {id:'multi', group:'MULTIMERCADOS', label:'Multimercados', color:'#ffcc00',
+   etfs:[
+     {ticker:'WRLD11',price:11.20,url:'https://etf1.com.br/etf/WRLD11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'rvbr', group:'RENDA VARIÁVEL BR', label:'Renda Variável Brasil', color:'#10b981',
+   etfs:[
+     {ticker:'BOVA11',price:187.87,url:'https://etf1.com.br/etf/BOVA11'},
+     {ticker:'BOVV11',price:130.50,url:'https://etf1.com.br/etf/BOVV11'},
+     {ticker:'BOVX11',price:120.40,url:'https://etf1.com.br/etf/BOVX11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'fundos', group:'FUNDOS LISTADOS', label:'FIIs / FI-Infra / FI-Agro', color:'#10b981',
+   etfs:[
+     {ticker:'XFIX11',price:10.10,url:'https://etf1.com.br/etf/XFIX11'},
+     {ticker:'HERT11',price:10.05,url:'https://etf1.com.br/etf/HERT11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'alt', group:'ALTERNATIVOS', label:'Ouro / Cripto / Commodities', color:'#f97316',
+   etfs:[
+     {ticker:'GOLD11',price:44.30,url:'https://etf1.com.br/etf/GOLD11'},
+     {ticker:'HASH11',price:78.50,url:'https://etf1.com.br/etf/HASH11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'globalrf', group:'GLOBAL', label:'Renda Fixa Internacional', color:'#8b5cf6',
+   etfs:[
+     {ticker:'HGBR11',price:53.75,url:'https://www.etfsbrasil.com.br/etfs/hgbr11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
+  {id:'globalrv', group:'GLOBAL', label:'Renda Variável Internacional', color:'#8b5cf6',
+   etfs:[
+     {ticker:'IVVB11',price:400.56,url:'https://etf1.com.br/etf/IVVB11'}
+   ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}}
+];
+
+const PROFILES = {
+  conservador: {posfixado:72.5, inflacao:12.5, prefixado:5.0, multi:2.5, rvbr:0, fundos:2.5, alt:0, globalrf:2.5, globalrv:2.5},
+  moderado:    {posfixado:32.5, inflacao:22.5, prefixado:10.0, multi:14.0, rvbr:7.5, fundos:4.0, alt:3.0, globalrf:2.5, globalrv:4.0},
+  sofisticado: {posfixado:12.5, inflacao:27.5, prefixado:7.5, multi:10.0, rvbr:17.5, fundos:9.5, alt:7.0, globalrf:2.5, globalrv:6.0}
+};
+
+let currentProfile = 'conservador';
+
+function parseAmount(str) {
+  return parseFloat(str.replace(/[^\d,]/g,'').replace(',','.')) || 0;
+}
+
+function formatBRL(v) {
+  return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+}
+
+function formatInput(el) {
+  let v = parseAmount(el.value);
+  if (v > 0) el.value = 'R$ ' + v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+function getSelectedEtfIdx(catId) {
+  const sel = document.getElementById('sel_'+catId);
+  return sel ? parseInt(sel.value) : 0;
+}
+
+function render() {
+  const total = parseAmount(document.getElementById('investAmount').value);
+  const alloc = PROFILES[currentProfile];
+  const tbody = document.getElementById('simBody');
+  let html = '';
+  let totalInvested = 0;
+
+  CATEGORIES.forEach(cat => {
+    const pct = alloc[cat.id];
+    const amount = total * pct / 100;
+    const eidx = getSelectedEtfIdx(cat.id);
+    const etf = cat.etfs[eidx] || cat.etfs[0];
+    const qty = pct > 0 ? Math.floor(amount / etf.price) : 0;
+    const invested = qty * etf.price;
+    totalInvested += invested;
+
+    const optionsHtml = cat.etfs.map((e,i) =>
+      `<option value="${i}" ${i===eidx?'selected':''}>${e.ticker}</option>`
+    ).join('');
+
+    html += `<tr>
+      <td><div class="cat-label"><span class="cat-sub">${cat.group}</span><span class="cat-main">${cat.label}</span></div></td>
+      <td>
+        <div class="pct-bar-wrap">
+            <span class="pct-val" style="color:${pct>0?'#fff':'var(--muted)'}">${pct.toFixed(1)}%</span>
+            <div class="pct-bar"><div class="pct-bar-fill" style="width:${pct}%;"></div></div>
+        </div>
+      </td>
+      <td>
+        <select class="etf-select" id="sel_${cat.id}" onchange="render()">
+          ${optionsHtml}
+        </select>
+        <a href="${etf.url}" target="_blank" class="etf-link">ver detalhes ↗</a>
+      </td>
+      <td class="num">${pct>0 ? formatBRL(etf.price) : '—'}</td>
+      <td class="qty">${pct>0 ? qty : '—'}</td>
+    </tr>`;
+  });
+
+  const remainder = total - totalInvested;
+  html += `<tr class="total-row">
+    <td colspan="2" style="text-align:right;color:var(--muted);font-size:.8rem">Total investido: ${formatBRL(totalInvested)} · Troco: ${formatBRL(remainder > 0 ? remainder : 0)}</td>
+    <td></td>
+    <td class="num" style="color:var(--gold); font-weight:800;">TOTAL ESTIMADO</td>
+    <td class="qty" style="font-size:1.2rem">${formatBRL(totalInvested)}</td>
+  </tr>`;
+
+  tbody.innerHTML = html;
+}
+
+// Profile tabs
+document.querySelectorAll('.profile-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentProfile = tab.dataset.profile;
+    CATEGORIES.forEach(cat => {
+      const sel = document.getElementById('sel_'+cat.id);
+      if (sel) sel.value = cat.defaultIdx[currentProfile];
+    });
+    render();
+  });
+});
+
+// Input formatting
+const amountInput = document.getElementById('investAmount');
+amountInput.addEventListener('blur', function(){ formatInput(this); render(); });
+amountInput.addEventListener('keydown', function(e){ if(e.key==='Enter'){formatInput(this);render();this.blur();} });
+
+// Initial render
+render();
+</script>
+</body>
+</html>

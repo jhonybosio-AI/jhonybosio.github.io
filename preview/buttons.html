@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F5F6F8; padding: 20px; font-family: 'DM Sans', sans-serif; }
+  .label { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #9AA5B4; margin-bottom: 10px; margin-top: 16px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 6px; }
+
+  /* Primary CTA */
+  .btn-primary {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px; font-weight: 600;
+    background: #1B6FEF; color: white;
+    border: none; border-radius: 6px;
+    padding: 12px 24px; cursor: pointer;
+    transition: background 0.18s;
+  }
+  .btn-primary:hover { background: #1456D6; }
+  .btn-primary.hover { background: #1456D6; }
+  .btn-primary.pressed { background: #0F4AC0; }
+  .btn-primary.disabled { background: #9AA5B4; cursor: default; }
+
+  /* Secondary (outline) */
+  .btn-secondary {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px; font-weight: 600;
+    background: transparent; color: #1B6FEF;
+    border: 1.5px solid #1B6FEF; border-radius: 6px;
+    padding: 11px 24px; cursor: pointer;
+    transition: all 0.18s;
+  }
+  .btn-secondary.hover { background: #EBF3FF; }
+  .btn-secondary.disabled { color: #9AA5B4; border-color: #C5CDD9; cursor: default; }
+
+  /* Ghost / dark bg */
+  .btn-ghost-dark {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px; font-weight: 600;
+    background: transparent; color: white;
+    border: 1.5px solid rgba(255,255,255,0.35); border-radius: 6px;
+    padding: 11px 24px; cursor: pointer;
+  }
+  .btn-ghost-dark.hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.07); }
+
+  /* Small */
+  .btn-sm {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    background: #1B6FEF; color: white;
+    border: none; border-radius: 6px;
+    padding: 8px 16px; cursor: pointer;
+  }
+
+  /* Link style */
+  .btn-link {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    background: none; border: none;
+    color: #1B6FEF; cursor: pointer;
+    text-decoration: underline; text-underline-offset: 3px;
+    padding: 0;
+  }
+
+  .dark-bg { background: #0D1C3A; border-radius: 10px; padding: 14px 16px; display: flex; gap: 10px; align-items: center; }
+  .state-chip { font-size: 10px; color: #9AA5B4; padding: 2px 6px; background: white; border-radius: 4px; margin-left: 4px; }
+</style>
+</head>
+<body>
+  <div class="label">Primary CTA</div>
+  <div class="row">
+    <button class="btn-primary">Abra sua conta</button><span class="state-chip">default</span>
+    <button class="btn-primary hover">Abra sua conta</button><span class="state-chip">hover</span>
+    <button class="btn-primary pressed">Abra sua conta</button><span class="state-chip">pressed</span>
+    <button class="btn-primary disabled" disabled>Abra sua conta</button><span class="state-chip">disabled</span>
+  </div>
+
+  <div class="label">Secondary (Outline)</div>
+  <div class="row">
+    <button class="btn-secondary">Monte seu plano</button><span class="state-chip">default</span>
+    <button class="btn-secondary hover">Monte seu plano</button><span class="state-chip">hover</span>
+    <button class="btn-secondary disabled" disabled>Monte seu plano</button><span class="state-chip">disabled</span>
+  </div>
+
+  <div class="label">On Dark Background</div>
+  <div class="dark-bg">
+    <button class="btn-primary">Abra sua conta</button>
+    <button class="btn-ghost-dark">Fale conosco</button>
+    <button class="btn-ghost-dark hover">Fale conosco</button><span style="font-size:10px;color:rgba(255,255,255,0.4)">hover</span>
+  </div>
+
+  <div class="label">Sizes & Link Style</div>
+  <div class="row">
+    <button class="btn-primary" style="font-size:17px;padding:14px 28px">Large</button>
+    <button class="btn-primary">Default</button>
+    <button class="btn-sm">Small</button>
+    <button class="btn-link">Fale conosco →</button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F5F6F8; padding: 20px; font-family: 'DM Sans', sans-serif; }
+  .label { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #9AA5B4; margin-bottom: 10px; margin-top: 16px; }
+  .form-group { margin-bottom: 14px; max-width: 360px; }
+  .field-label { font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 5px; display: block; }
+  input, select {
+    width: 100%; font-family: 'DM Sans', sans-serif; font-size: 15px;
+    border: 1.5px solid #E2E6EC; border-radius: 6px;
+    padding: 10px 14px; color: #0D1C3A; background: white; outline: none;
+    transition: border-color 0.15s;
+  }
+  input::placeholder { color: #9AA5B4; }
+  input:focus, select:focus { border-color: #1B6FEF; }
+  input.error { border-color: #DC2626; }
+  .error-msg { font-size: 12px; color: #DC2626; margin-top: 4px; }
+  .success-msg { font-size: 12px; color: #16A34A; margin-top: 4px; }
+  .row { display: flex; gap: 12px; max-width: 360px; }
+  .row .form-group { flex: 1; }
+  .checkbox-row { display: flex; gap: 8px; align-items: flex-start; max-width: 360px; }
+  .checkbox-row input { width: 16px; height: 16px; margin-top: 2px; accent-color: #1B6FEF; flex-shrink: 0; }
+  .checkbox-row span { font-size: 13px; color: #6B7280; line-height: 1.5; }
+  .checkbox-row a { color: #1B6FEF; }
+</style>
+</head>
+<body>
+  <div class="label">Form Fields — Default & States</div>
+  <div class="form-group">
+    <label class="field-label">Nome completo</label>
+    <input type="text" placeholder="Seu nome completo">
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <label class="field-label">Telefone</label>
+      <input type="tel" placeholder="(11) 99999-9999">
+    </div>
+    <div class="form-group">
+      <label class="field-label">E-mail</label>
+      <input type="email" placeholder="seu@email.com" style="border-color:#1B6FEF">
+      <div class="success-msg">✓ E-mail válido</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="field-label">Quanto você tem para investir?</label>
+    <select>
+      <option value="" disabled selected>Selecione</option>
+      <option>Digital — Até R$ 100 mil</option>
+      <option>Exclusive — R$ 100 mil a R$ 300 mil</option>
+      <option>Signature — R$ 300 mil a R$ 3 milhões</option>
+      <option>Unique — R$ 3 milhões a R$ 5 milhões</option>
+      <option>Private — Acima de R$ 5 milhões</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="field-label">Campo com erro</label>
+    <input type="text" placeholder="Preencha este campo" class="error" value="valor inválido">
+    <div class="error-msg">Por favor, preencha corretamente.</div>
+  </div>
+  <div class="checkbox-row">
+    <input type="checkbox" checked>
+    <span>Aceito compartilhar minhas informações e estou de acordo com as <a href="#">políticas de privacidade</a> do site.</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Performance Invest</title>
+    <style>
+        :root {
+            --bg-dark: #05050A;
+            --bg-panel: rgba(255, 255, 255, 0.05);
+            --text-primary: #F0F0F5;
+            --text-secondary: #A0A0B0;
+            --accent-gold: #D4AF37;
+            --accent-blue: #3A86FF;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h1 span {
+            color: var(--accent-gold);
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            background: var(--bg-panel);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        button.primary {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+
+        button.primary:hover {
+            background: #2a6edc;
+        }
+
+        .table-container {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow-x: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+        }
+
+        th {
+            color: var(--accent-gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        td {
+            font-size: 0.95rem;
+            transition: background 0.2s;
+        }
+
+        /* Editando célula */
+        td[contenteditable="true"] {
+            outline: none;
+            cursor: text;
+        }
+
+        td[contenteditable="true"]:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        td[contenteditable="true"]:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .delete-btn {
+            background: transparent;
+            color: #ff4444;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background: rgba(255, 68, 68, 0.1);
+        }
+
+        /* Hub de Educação */
+        .education-hub {
+            margin-top: 4rem;
+        }
+
+        .education-hub h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent-gold);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .hub-section {
+            margin-bottom: 3rem;
+        }
+
+        .hub-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .doc-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-blue);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .doc-card .icon {
+            font-size: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .doc-info h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .doc-info p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Performance Invest | Dashboard <span>Gestão & KPIs</span></h1>
+        <div class="actions">
+            <button onclick="addRow()">+ Adicionar Mês</button>
+            <button onclick="exportCSV()" class="primary">⬇️ Exportar CSV</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="kpiTable">
+            <thead>
+                <tr>
+                    <th>Mês/Ano</th>
+                    <th>ROA Médio (%)</th>
+                    <th>Custódia Total (MM)</th>
+                    <th>Receita Mensal (R$)</th>
+                    <th>Novos Assessores</th>
+                    <th>Novos Squads Formados</th>
+                    <th>Captação Líquida Mês (MM)</th>
+                    <th>Clientes Migrados Fee Fixo (%)</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Data will be loaded here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Nova Central de Educação e Compliance -->
+    <div class="education-hub">
+        <h2>Central de Educação e Manuais (Framework XP)</h2>
+        
+        <div class="hub-section">
+            <h3>Para os Sócios: Governança, Compliance e Qualidade</h3>
+            <p class="section-desc">Materiais essenciais para a transição de "Assessores de Alta Renda" para "CEOs de um Wealth Management". Foco no Modelo de Servir da XP.</p>
+            <div class="cards-grid">
+                <a href="pdfs/modelo_de_servir.pdf" target="_blank" class="doc-card">
+                    <div class="icon">📄</div>
+                    <div class="doc-info">
+                        <h4>Modelo de Servir: Qualidade e Alocação</h4>
+                        <p>Diretrizes para aumentar o NPS e a qualidade da carteira XP.</p>
+                    </div>
+                </a>
+                <a href="pdfs/playbook_alocacoes.pdf" target="_blank" class="doc-card">
+                    <div class="icon">📘</div>
+                    <div class="doc-info">
+                        <h4>Playbook de Alocações e Controle</h4>
+                        <p>Padronização institucional das teses de investimento do escritório.</p>
+                    </div>
+                </a>
+                <a href="pdfs/manual_compliance.pdf" target="_blank" class="doc-card">
+                    <div class="icon">⚖️</div>
+                    <div class="doc-info">
+                        <h4>Manual de Compliance e Ética</h4>
+                        <p>Regras CVM e BSM para blindagem regulatória dos sócios.</p>
+                    </div>
+                </a>
+                <a href="pdfs/ecossistema_xp.pdf" target="_blank" class="doc-card">
+                    <div class="icon">🚀</div>
+                    <div class="doc-info">
+                        <h4>Desmistificando o Ecossistema XP</h4>
+                        <p>Estruturas avançadas para captação de clientes Ultra-High.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="hub-section">
+            <h3>Para Assessores: Operacional, Fee Fixo e Ruptura</h3>
+            <p class="section-desc">Playbooks táticos para a ponta comercial convencer clientes a migrarem para o Fee Fixo e transferirem custódia.</p>
+            <div class="cards-grid">
+                <a href="pdfs/ruptura.pdf" target="_blank" class="doc-card">
+                    <div class="icon">🎯</div>
+                    <div class="doc-info">
+                        <h4>Material de Apoio: A Ruptura</h4>
+                        <p>Como apresentar o modelo Fee Fixo contra o modelo bancário.</p>
+                    </div>
+                </a>
+                <a href="pdfs/politica_fee_based.pdf" target="_blank" class="doc-card">
+                    <div class="icon">💰</div>
+                    <div class="doc-info">
+                        <h4>Nova Política Fee Based (2026)</h4>
+                        <p>Faixas de remuneração e regras de comissionamento da XP.</p>
+                    </div>
+                </a>
+                <a href="pdfs/faq_fee_fixo.pdf" target="_blank" class="doc-card">
+                    <div class="icon">❓</div>
+                    <div class="doc-info">
+                        <h4>FAQ Completo: Fee Fixo XP</h4>
+                        <p>Como quebrar objeções de clientes sobre a mudança de modelo.</p>
+                    </div>
+                </a>
+                <a href="pdfs/processo_transferencia.pdf" target="_blank" class="doc-card">
+                    <div class="icon">🔄</div>
+                    <div class="doc-info">
+                        <h4>Processo de Transferência de Ativos</h4>
+                        <p>Guia passo a passo para STVM e entrada rápida de recursos na XP.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initial Data
+        const initialData = [
+            ["Jan/2026", "0.50", "450", "2.250.000", "0", "0", "0", "0"],
+            ["Fev/2026", "0.50", "455", "2.275.000", "1", "0", "5", "2"],
+            ["Mar/2026", "0.51", "470", "2.397.000", "2", "1", "15", "5"],
+            ["Abr/2026", "0.52", "500", "2.600.000", "3", "1", "30", "12"]
+        ];
+
+        // Load data from LocalStorage or use initial data
+        function loadData() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            let data = JSON.parse(localStorage.getItem('kpiData'));
+            if (!data || data.length === 0) {
+                data = initialData;
+            }
+
+            data.forEach((row, index) => {
+                createRowElement(row);
+            });
+        }
+
+        function createRowElement(rowData) {
+            const tbody = document.getElementById('tableBody');
+            const tr = document.createElement('tr');
+            
+            rowData.forEach(cellData => {
+                const td = document.createElement('td');
+                td.textContent = cellData;
+                td.setAttribute('contenteditable', 'true');
+                td.addEventListener('input', saveData);
+                tr.appendChild(td);
+            });
+
+            // Action column
+            const tdAction = document.createElement('td');
+            const btnDelete = document.createElement('button');
+            btnDelete.textContent = '✖';
+            btnDelete.className = 'delete-btn';
+            btnDelete.onclick = function() {
+                tr.remove();
+                saveData();
+            };
+            tdAction.appendChild(btnDelete);
+            tr.appendChild(tdAction);
+
+            tbody.appendChild(tr);
+        }
+
+        // Save table data to LocalStorage
+        function saveData() {
+            const tbody = document.getElementById('tableBody');
+            const rows = tbody.querySelectorAll('tr');
+            const data = [];
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td[contenteditable="true"]');
+                const rowData = Array.from(cells).map(cell => cell.textContent);
+                data.push(rowData);
+            });
+
+            localStorage.setItem('kpiData', JSON.stringify(data));
+        }
+
+        // Add new empty row
+        function addRow() {
+            createRowElement(["Mês/Ano", "0", "0", "0", "0", "0", "0", "0"]);
+            saveData();
+        }
+
+        // Export Table to CSV
+        function exportCSV() {
+            const table = document.getElementById('kpiTable');
+            let csvContent = "data:text/csv;charset=utf-8,";
+
+            const rows = table.querySelectorAll('tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('th, td[contenteditable="true"]');
+                const rowData = Array.from(cells).map(cell => {
+                    let text = cell.textContent.replace(/"/g, '""');
+                    if(text.includes(',') || text.includes('\n')) {
+                        text = `"${text}"`;
+                    }
+                    return text;
+                });
+                csvContent += rowData.join(",") + "\r\n";
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Dashboard_Performance_Invest.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Initialize
+        loadData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue3 Investimentos — UI Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+  --navy-900:#07111F; --navy-800:#0D1C3A; --navy-700:#132651;
+  --navy-600:#1A3168; --navy-500:#1E3D80;
+  --blue-700:#0F4AC0; --blue-600:#1456D6; --blue-500:#1B6FEF;
+  --blue-400:#4488F5; --blue-100:#D6E6FD; --blue-50:#EBF3FF;
+  --gold-600:#A8893C; --gold-500:#C9A84C; --gold-400:#D4AF6A;
+  --white:#FFFFFF; --gray-50:#F5F6F8; --gray-100:#EAECF0;
+  --gray-200:#E2E6EC; --gray-300:#C5CDD9; --gray-400:#9AA5B4;
+  --gray-500:#6B7280; --gray-600:#4B5563; --gray-900:#0D1C3A;
+  --success:#16A34A; --error:#DC2626; --warning:#D97706;
+
+  --bg-dark:var(--navy-800); --bg-light:var(--white); --bg-subtle:var(--gray-50);
+  --fg-1:var(--navy-800); --fg-2:var(--gray-600); --fg-3:var(--gray-400);
+  --fg-dark:var(--white); --fg-dark-2:rgba(255,255,255,0.70); --fg-dark-3:rgba(255,255,255,0.40);
+  --accent:var(--blue-500); --accent-h:var(--blue-600);
+  --border-l:var(--gray-200); --border-d:rgba(255,255,255,0.10);
+
+  --shadow-sm:0 1px 4px rgba(13,28,58,0.06);
+  --shadow-md:0 2px 12px rgba(13,28,58,0.09);
+  --shadow-lg:0 8px 32px rgba(13,28,58,0.12);
+  --shadow-xl:0 16px 56px rgba(13,28,58,0.18);
+
+  --r-sm:6px; --r-md:12px; --r-lg:16px; --r-xl:24px; --r-full:999px;
+
+  --f-display:'Plus Jakarta Sans',sans-serif;
+  --f-body:'DM Sans',sans-serif;
+}
+
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--f-body); background: var(--gray-50); color: var(--fg-1); }
+a { text-decoration: none; color: inherit; }
+
+/* ── Layout ─────────────────────────────────────────────────── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.section { padding: 80px 0; }
+.section-label {
+  font-family: var(--f-display); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-500);
+  margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--f-display); font-size: clamp(28px,3.5vw,42px);
+  font-weight: 700; line-height: 1.15; letter-spacing: -0.025em;
+  color: var(--fg-1); margin-bottom: 16px;
+}
+.section-title.on-dark { color: var(--fg-dark); }
+.section-body {
+  font-size: 17px; line-height: 1.7; color: var(--fg-2); max-width: 560px;
+}
+.section-body.on-dark { color: var(--fg-dark-2); }
+
+/* ── Nav ────────────────────────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 72px; padding: 0 40px;
+  background: rgba(7,17,31,0.92);
+  backdrop-filter: blur(20px) saturate(1.8);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: background 0.3s;
+}
+.nav-logo {
+  font-family: var(--f-display); font-size: 22px; font-weight: 800;
+  color: white; letter-spacing: -0.02em; cursor: pointer;
+}
+.nav-logo span { color: var(--blue-500); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-link {
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.7);
+  cursor: pointer; transition: color 0.15s; position: relative; padding-bottom: 3px;
+}
+.nav-link::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
+  background:var(--blue-500); border-radius:2px; transform:scaleX(0);
+  transition: transform 0.2s;
+}
+.nav-link:hover { color: white; }
+.nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+.nav-link.active { color: white; }
+.nav-actions { display: flex; gap: 10px; align-items: center; }
+.btn-nav-ghost {
+  font-family: var(--f-display); font-size: 14px; font-weight: 600;
+  background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: var(--r-sm); padding: 8px 18px; cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.btn-nav-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); }
+.btn-nav-cta {
+  font-family: var(--f-display); font-size: 14px; font-weight: 600;
+  background: var(--blue-500); color: white; border: none;
+  border-radius: var(--r-sm); padding: 9px 20px; cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-nav-cta:hover { background: var(--blue-600); }
+
+/* ── Hero ───────────────────────────────────────────────────── */
+.hero {
+  background: var(--navy-800);
+  min-height: 600px;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding: 80px 0;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 70% at 75% 50%, rgba(27,111,239,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(30,61,128,0.35) 0%, transparent 60%);
+}
+.hero-inner { position: relative; z-index: 1; max-width: 600px; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(27,111,239,0.15); border: 1px solid rgba(27,111,239,0.3);
+  border-radius: var(--r-full); padding: 5px 14px; margin-bottom: 28px;
+}
+.hero-eyebrow-text {
+  font-size: 12px; font-weight: 600; color: var(--blue-400);
+  letter-spacing: 0.05em;
+}
+.hero-title {
+  font-family: var(--f-display); font-size: clamp(40px,5.5vw,68px);
+  font-weight: 700; line-height: 1.08; letter-spacing: -0.03em;
+  color: white; margin-bottom: 22px;
+}
+.hero-title em { font-style: normal; color: var(--blue-400); }
+.hero-sub { font-size: 18px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 36px; }
+.hero-actions { display: flex; gap: 12px; align-items: center; }
+.btn-primary {
+  font-family: var(--f-display); font-size: 15px; font-weight: 600;
+  background: var(--blue-500); color: white; border: none;
+  border-radius: var(--r-sm); padding: 13px 28px; cursor: pointer;
+  transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+  box-shadow: 0 4px 14px rgba(27,111,239,0.35);
+}
+.btn-primary:hover { background: var(--blue-600); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(27,111,239,0.45); }
+.btn-ghost {
+  font-family: var(--f-display); font-size: 15px; font-weight: 600;
+  background: transparent; color: white;
+  border: 1.5px solid rgba(255,255,255,0.30); border-radius: var(--r-sm);
+  padding: 12px 28px; cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.06); }
+.hero-stats {
+  display: flex; gap: 40px; margin-top: 56px;
+  padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.08);
+}
+.stat-num {
+  font-family: var(--f-display); font-size: 30px; font-weight: 700;
+  color: white; line-height: 1;
+}
+.stat-unit { font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.45); }
+.stat-desc { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 5px; letter-spacing: 0.02em; }
+
+/* ── Tiers section ──────────────────────────────────────────── */
+.tiers-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 48px; }
+.tier-card {
+  border-radius: var(--r-lg); padding: 28px 22px; border: 1.5px solid transparent;
+  cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+}
+.tier-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.tier-icon { width: 44px; height: 44px; border-radius: 10px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; }
+.tier-name { font-family: var(--f-display); font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+.tier-range { font-size: 12px; margin-bottom: 12px; font-weight: 500; }
+.tier-desc { font-size: 13px; line-height: 1.55; }
+.tier-cta {
+  display: inline-block; margin-top: 20px;
+  font-family: var(--f-display); font-size: 13px; font-weight: 600;
+  padding: 8px 16px; border-radius: var(--r-sm); border: 1.5px solid;
+  cursor: pointer; transition: background 0.15s;
+}
+
+/* ── Stats section ──────────────────────────────────────────── */
+.stats-section { background: var(--navy-800); padding: 72px 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
+.stat-cell {
+  text-align: center; padding: 0 32px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.stat-cell:last-child { border-right: none; }
+.big-num {
+  font-family: var(--f-display); font-size: 48px; font-weight: 700;
+  color: white; line-height: 1; letter-spacing: -0.03em;
+}
+.big-unit { font-size: 22px; color: rgba(255,255,255,0.4); font-weight: 400; }
+.big-label { font-size: 14px; color: rgba(255,255,255,0.45); margin-top: 10px; }
+
+/* ── Services ───────────────────────────────────────────────── */
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; margin-top: 48px; }
+.service-card {
+  background: white; border-radius: var(--r-lg); padding: 28px;
+  box-shadow: var(--shadow-md); cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--gray-100);
+}
+.service-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.service-icon { width: 46px; height: 46px; background: var(--blue-50); border-radius: 10px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; }
+.service-title { font-family: var(--f-display); font-size: 16px; font-weight: 700; color: var(--fg-1); margin-bottom: 8px; }
+.service-body { font-size: 14px; color: var(--fg-2); line-height: 1.65; }
+.service-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 16px; font-size: 13px; font-weight: 600; color: var(--blue-500); cursor: pointer; }
+
+/* ── Ecosystem ──────────────────────────────────────────────── */
+.ecosystem-section { background: var(--navy-700); padding: 72px 0; }
+.ecosystem-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 48px; }
+.eco-card {
+  background: rgba(255,255,255,0.05); border-radius: var(--r-md); padding: 22px;
+  border: 1px solid rgba(255,255,255,0.08); cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.eco-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.16); }
+.eco-name { font-family: var(--f-display); font-size: 14px; font-weight: 700; color: white; margin-bottom: 6px; }
+.eco-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.55; }
+
+/* ── Offices ────────────────────────────────────────────────── */
+.offices-section { background: var(--gray-50); }
+.offices-scroll { display: flex; gap: 14px; margin-top: 40px; overflow-x: auto; padding-bottom: 8px; }
+.offices-scroll::-webkit-scrollbar { height: 4px; }
+.offices-scroll::-webkit-scrollbar-track { background: var(--gray-100); border-radius: 2px; }
+.offices-scroll::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 2px; }
+.office-card {
+  flex-shrink: 0; width: 200px; border-radius: var(--r-md);
+  overflow: hidden; background: white; box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100);
+}
+.office-img { height: 110px; background: linear-gradient(135deg, #0D1C3A, #1E3D80); }
+.office-info { padding: 14px; }
+.office-city { font-family: var(--f-display); font-size: 14px; font-weight: 700; color: var(--fg-1); margin-bottom: 3px; }
+.office-state { font-size: 12px; color: var(--fg-3); }
+
+/* ── Contact CTA ────────────────────────────────────────────── */
+.cta-section {
+  background: var(--navy-800); padding: 80px 0;
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(27,111,239,0.18), transparent 70%);
+}
+.cta-inner { position: relative; z-index: 1; max-width: 540px; margin: 0 auto; }
+.cta-title { font-family: var(--f-display); font-size: clamp(28px,4vw,44px); font-weight: 700; color: white; letter-spacing: -0.025em; margin-bottom: 16px; }
+.cta-sub { font-size: 17px; color: rgba(255,255,255,0.6); margin-bottom: 36px; line-height: 1.65; }
+.cta-actions { display: flex; justify-content: center; gap: 12px; }
+
+/* ── Footer ─────────────────────────────────────────────────── */
+footer { background: var(--navy-900); padding: 56px 0 28px; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-top { display: flex; gap: 56px; margin-bottom: 48px; }
+.footer-brand { flex: 0 0 220px; }
+.footer-logo { font-family: var(--f-display); font-size: 22px; font-weight: 800; color: white; letter-spacing: -0.02em; margin-bottom: 14px; }
+.footer-logo span { color: var(--blue-500); }
+.footer-tagline { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+.footer-cols { display: flex; gap: 40px; flex: 1; }
+.footer-col { flex: 1; }
+.footer-col-head { font-family: var(--f-display); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
+.footer-link { display: block; font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 10px; cursor: pointer; transition: color 0.15s; }
+.footer-link:hover { color: white; }
+.footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin-bottom: 24px; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; }
+.footer-legal { font-size: 11px; color: rgba(255,255,255,0.22); line-height: 1.7; max-width: 700px; }
+.footer-right-meta { text-align: right; }
+.xp-tag { font-size: 11px; color: rgba(255,255,255,0.28); }
+.xp-tag strong { color: rgba(255,255,255,0.45); }
+.socials { display: flex; gap: 8px; margin-top: 12px; justify-content: flex-end; }
+.social-btn { width: 32px; height: 32px; background: rgba(255,255,255,0.07); border-radius: 7px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s; }
+.social-btn:hover { background: rgba(255,255,255,0.13); }
+
+/* ── Form ───────────────────────────────────────────────────── */
+.contact-form { background: white; border-radius: var(--r-xl); padding: 40px; max-width: 480px; box-shadow: var(--shadow-xl); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field-group { margin-bottom: 16px; }
+.field-group.full { grid-column: 1/-1; }
+.field-label { font-size: 13px; font-weight: 500; color: var(--fg-1); margin-bottom: 6px; display: block; }
+.field-input, .field-select {
+  width: 100%; font-family: var(--f-body); font-size: 15px;
+  border: 1.5px solid var(--gray-200); border-radius: var(--r-sm);
+  padding: 10px 14px; color: var(--fg-1); background: white; outline: none;
+  transition: border-color 0.15s;
+}
+.field-input::placeholder { color: var(--gray-400); }
+.field-input:focus, .field-select:focus { border-color: var(--blue-500); }
+
+/* ── Tweaks Panel ────────────────────────────────────────────── */
+#tweaks-panel {
+  display: none;
+  position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+  background: white; border-radius: var(--r-lg); padding: 22px;
+  box-shadow: var(--shadow-xl), 0 0 0 1px var(--gray-200);
+  width: 260px;
+}
+#tweaks-panel.open { display: block; }
+.tweaks-title { font-family: var(--f-display); font-size: 13px; font-weight: 700; color: var(--fg-1); margin-bottom: 16px; }
+.tweak-row { margin-bottom: 14px; }
+.tweak-label { font-size: 11px; font-weight: 600; color: var(--fg-3); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 6px; }
+.tweak-opts { display: flex; gap: 6px; flex-wrap: wrap; }
+.tweak-btn {
+  font-family: var(--f-body); font-size: 12px; font-weight: 500;
+  border: 1.5px solid var(--gray-200); border-radius: var(--r-sm);
+  padding: 5px 10px; cursor: pointer; background: white; color: var(--fg-2);
+  transition: all 0.15s;
+}
+.tweak-btn:hover, .tweak-btn.active { background: var(--blue-50); border-color: var(--blue-500); color: var(--blue-600); }
+.tweak-swatch { width: 26px; height: 26px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: border-color 0.15s; }
+.tweak-swatch:hover, .tweak-swatch.active { border-color: var(--fg-1); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">blue<span>3</span></div>
+  <div class="nav-links">
+    <span class="nav-link active" onclick="scrollTo(0,0)">Para você</span>
+    <span class="nav-link" onclick="document.getElementById('tiers').scrollIntoView({behavior:'smooth'})">Segmentações</span>
+    <span class="nav-link" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Soluções</span>
+    <span class="nav-link" onclick="document.getElementById('ecosystem').scrollIntoView({behavior:'smooth'})">Ecossistema</span>
+    <span class="nav-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contato</span>
+  </div>
+  <div class="nav-actions">
+    <button class="btn-nav-ghost">Entrar</button>
+    <button class="btn-nav-cta">Abra sua conta</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">
+        <div style="width:6px;height:6px;border-radius:50%;background:var(--blue-400)"></div>
+        <span class="hero-eyebrow-text">Assessoria de Investimentos · Parceiro XP</span>
+      </div>
+      <h1 class="hero-title">Sua jornada tem<br>um <em>plano.</em></h1>
+      <p class="hero-sub">Somos a Blue3. Seremos o guia na sua jornada desde o primeiro investimento à liberdade financeira.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Abra sua conta</button>
+        <button class="btn-ghost">Fale conosco</button>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">+45<span class="stat-unit"> mil</span></div><div class="stat-desc">Clientes</div></div>
+        <div><div class="stat-num">+50<span class="stat-unit"> Bi</span></div><div class="stat-desc">Sob custódia</div></div>
+        <div><div class="stat-num">94<span class="stat-unit">,5</span></div><div class="stat-desc">NPS</div></div>
+        <div><div class="stat-num">16</div><div class="stat-desc">Escritórios</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="big-num">+45<span class="big-unit"> mil</span></div>
+        <div class="big-label">Clientes ativos</div>
+      </div>
+      <div class="stat-cell">
+        <div class="big-num">+50<span class="big-unit"> Bi</span></div>
+        <div class="big-label">Sob custódia</div>
+      </div>
+      <div class="stat-cell">
+        <div class="big-num">94<span class="big-unit">,5</span></div>
+        <div class="big-label">NPS — satisfação</div>
+      </div>
+      <div class="stat-cell">
+        <div class="big-num">16</div>
+        <div class="big-label">Escritórios no Brasil</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section class="section" id="tiers">
+  <div class="container">
+    <div class="section-label">Para você</div>
+    <h2 class="section-title">Conheça nossas<br>segmentações</h2>
+    <p class="section-body">Independente do seu momento, temos uma solução feita para você — do primeiro investimento ao maior patrimônio.</p>
+    <div class="tiers-grid">
+      <!-- Digital -->
+      <div class="tier-card" style="background:#EBF3FF;border-color:#D6E6FD;">
+        <div class="tier-icon" style="background:rgba(27,111,239,0.12);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 14l4-4 3 3 3-4 4 5" stroke="#1B6FEF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="tier-name" style="color:#1456D6;">Digital</div>
+        <div class="tier-range" style="color:#4488F5;">Até R$ 100 mil</div>
+        <div class="tier-desc" style="color:#4B5563;">Primeiro passo na jornada de investimentos.</div>
+        <div class="tier-cta" style="border-color:#1B6FEF;color:#1B6FEF;">Saiba mais →</div>
+      </div>
+      <!-- Exclusive -->
+      <div class="tier-card" style="background:#F0F9FF;border-color:#BAE6FD;">
+        <div class="tier-icon" style="background:rgba(14,165,233,0.12);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#0EA5E9" stroke-width="1.5"/><path d="M7 10l2 2 4-4" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="tier-name" style="color:#0369A1;">Exclusive</div>
+        <div class="tier-range" style="color:#0EA5E9;">R$ 100k – 300k</div>
+        <div class="tier-desc" style="color:#4B5563;">Assessoria personalizada para crescer.</div>
+        <div class="tier-cta" style="border-color:#0EA5E9;color:#0369A1;">Saiba mais →</div>
+      </div>
+      <!-- Signature -->
+      <div class="tier-card" style="background:#F0F4FF;border-color:#C7D7FD;">
+        <div class="tier-icon" style="background:rgba(27,111,239,0.10);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="6" height="6" rx="1.5" stroke="#1B6FEF" stroke-width="1.5"/><rect x="11" y="3" width="6" height="6" rx="1.5" stroke="#1B6FEF" stroke-width="1.5"/><rect x="3" y="11" width="6" height="6" rx="1.5" stroke="#1B6FEF" stroke-width="1.5"/><rect x="11" y="11" width="6" height="6" rx="1.5" stroke="#1B6FEF" stroke-width="1.5"/></svg>
+        </div>
+        <div class="tier-name" style="color:#1E3D80;">Signature</div>
+        <div class="tier-range" style="color:#1B6FEF;">R$ 300k – 3M</div>
+        <div class="tier-desc" style="color:#4B5563;">Planejamento completo e acesso ampliado.</div>
+        <div class="tier-cta" style="border-color:#1E3D80;color:#1E3D80;">Saiba mais →</div>
+      </div>
+      <!-- Unique -->
+      <div class="tier-card" style="background:#FFFBEB;border-color:#FDE68A;">
+        <div class="tier-icon" style="background:rgba(201,168,76,0.12);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3l2 4 5 .7-3.5 3.4.8 5L10 14l-4.3 2.1.8-5L3 7.7l5-.7L10 3z" stroke="#C9A84C" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="tier-name" style="color:#A8893C;">Unique</div>
+        <div class="tier-range" style="color:#C9A84C;">R$ 3M – 5M</div>
+        <div class="tier-desc" style="color:#4B5563;">Soluções exclusivas e relacionamento dedicado.</div>
+        <div class="tier-cta" style="border-color:#C9A84C;color:#A8893C;">Saiba mais →</div>
+      </div>
+      <!-- Private -->
+      <div class="tier-card" style="background:#0D1C3A;border-color:rgba(212,175,106,0.35);">
+        <div class="tier-icon" style="background:rgba(212,175,106,0.10);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3L17 8v9H3V8l7-5z" stroke="#D4AF6A" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="tier-name" style="color:#D4AF6A;">Private</div>
+        <div class="tier-range" style="color:rgba(212,175,106,0.7);">Acima de R$ 5M</div>
+        <div class="tier-desc" style="color:rgba(255,255,255,0.5);">O mais alto nível de serviço e exclusividade.</div>
+        <div class="tier-cta" style="border-color:rgba(212,175,106,0.4);color:#D4AF6A;">Saiba mais →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services" style="background:var(--gray-50)">
+  <div class="container">
+    <div class="section-label">Soluções Blue3</div>
+    <h2 class="section-title">O que oferecemos</h2>
+    <p class="section-body">Soluções completas para cada fase da sua vida financeira — acumular, preservar e rentabilizar seu patrimônio.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 16l5-5 4 4 5-7" stroke="#1B6FEF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="service-title">Financial Planning</div>
+        <div class="service-body">Plano personalizado para construção, proteção e perpetuação do seu patrimônio.</div>
+        <div class="service-link">Ver mais <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="#1B6FEF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#1B6FEF" stroke-width="1.5"/><path d="M11 7v4l2.5 2.5" stroke="#1B6FEF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="service-title">Gestão de Carteira</div>
+        <div class="service-body">Acompanhamento contínuo e rebalanceamento estratégico da sua carteira de investimentos.</div>
+        <div class="service-link">Ver mais <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="#1B6FEF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11h14M11 4l7 7-7 7" stroke="#1B6FEF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="service-title">Renda Fixa & Variável</div>
+        <div class="service-body">Acesso às melhores oportunidades do mercado, de CDBs e LCIs a fundos e ações.</div>
+        <div class="service-link">Ver mais <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="#1B6FEF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 4h6v6H4zM12 4h6v6h-6zM4 12h6v6H4zM12 12h6v6h-6z" stroke="#1B6FEF" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <div class="service-title">Diversificação</div>
+        <div class="service-body">Estratégias de diversificação com acesso a produtos exclusivos e fundos diferenciados.</div>
+        <div class="service-link">Ver mais <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="#1B6FEF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 4l7 4v6l-7 4-7-4V8l7-4z" stroke="#1B6FEF" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+        <div class="service-title">Previdência Privada</div>
+        <div class="service-body">Planejamento previdenciário com eficiência fiscal e foco no longo prazo.</div>
+        <div class="service-link">Ver mais <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="#1B6FEF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 3v16M5 7h4m4 0h4M5 15h4m4 0h4" stroke="#1B6FEF" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="service-title">Planejamento Sucessório</div>
+        <div class="service-body">Estruturas para proteção e transmissão eficiente do patrimônio para as próximas gerações.</div>
+        <div class="service-link">Ver mais <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="#1B6FEF" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ECOSYSTEM -->
+<section class="ecosystem-section" id="ecosystem">
+  <div class="container">
+    <div class="section-label" style="color:var(--blue-400)">Ecossistema</div>
+    <h2 class="section-title on-dark">Muito além da assessoria</h2>
+    <p class="section-body on-dark">Um ecossistema completo de empresas para atender cada necessidade financeira do cliente.</p>
+    <div class="ecosystem-grid">
+      <div class="eco-card"><div class="eco-name">Blue3 Asset</div><div class="eco-desc">Gestão de fundos de investimento próprios com estratégia e performance.</div></div>
+      <div class="eco-card"><div class="eco-name">Blue3 Capital</div><div class="eco-desc">Estruturação de operações de crédito e captação para empresas.</div></div>
+      <div class="eco-card"><div class="eco-name">Blue3 Empresas</div><div class="eco-desc">Soluções financeiras completas para o mercado corporativo.</div></div>
+      <div class="eco-card"><div class="eco-name">Blue3 Private</div><div class="eco-desc">Atendimento exclusivo para patrimônios acima de R$ 5 milhões.</div></div>
+      <div class="eco-card"><div class="eco-name">Blue3 Research</div><div class="eco-desc">Análises e relatórios de mercado com visão independente.</div></div>
+      <div class="eco-card"><div class="eco-name">Troon Capital</div><div class="eco-desc">Gestora independente focada em fundos alternativos e private equity.</div></div>
+      <div class="eco-card"><div class="eco-name">Oby Capital</div><div class="eco-desc">Investimentos em startups e venture capital.</div></div>
+      <div class="eco-card"><div class="eco-name">It's Money</div><div class="eco-desc">Educação financeira e conteúdo para todos os perfis de investidores.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFICES -->
+<section class="section offices-section" id="offices">
+  <div class="container">
+    <div class="section-label">Onde estamos</div>
+    <h2 class="section-title">16 escritórios<br>por todo o Brasil</h2>
+    <div class="offices-scroll">
+      <div class="office-card"><div class="office-img" style="background:linear-gradient(135deg,#0D1C3A,#1B6FEF)"></div><div class="office-info"><div class="office-city">Franca</div><div class="office-state">São Paulo — Matriz</div></div></div>
+      <div class="office-card"><div class="office-img" style="background:linear-gradient(135deg,#132651,#1E3D80)"></div><div class="office-info"><div class="office-city">São Paulo</div><div class="office-state">São Paulo</div></div></div>
+      <div class="office-card"><div class="office-img" style="background:linear-gradient(135deg,#07111F,#1456D6)"></div><div class="office-info"><div class="office-city">Ribeirão Preto</div><div class="office-state">São Paulo</div></div></div>
+      <div class="office-card"><div class="office-img" style="background:linear-gradient(135deg,#0D1C3A,#1E3D80)"></div><div class="office-info"><div class="office-city">Belo Horizonte</div><div class="office-state">Minas Gerais</div></div></div>
+      <div class="office-card"><div class="office-img" style="background:linear-gradient(135deg,#132651,#0F4AC0)"></div><div class="office-info"><div class="office-city">Rio de Janeiro</div><div class="office-state">Rio de Janeiro</div></div></div>
+      <div class="office-card"><div class="office-img" style="background:linear-gradient(135deg,#07111F,#1A3168)"></div><div class="office-info"><div class="office-city">Brasília</div><div class="office-state">Distrito Federal</div></div></div>
+      <div class="office-card"><div class="office-img" style="background:linear-gradient(135deg,#0D1C3A,#1B6FEF)"></div><div class="office-info"><div class="office-city">Curitiba</div><div class="office-state">Paraná</div></div></div>
+      <div class="office-card"><div class="office-img" style="background:linear-gradient(135deg,#132651,#1456D6)"></div><div class="office-info"><div class="office-city">Florianópolis</div><div class="office-state">Santa Catarina</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-title">Pronto para começar<br>sua jornada?</h2>
+      <p class="cta-sub">Fale com um de nossos assessores e monte um plano feito exclusivamente para você.</p>
+      <div class="cta-actions">
+        <button class="btn-primary" style="font-size:16px;padding:14px 32px">Abra sua conta</button>
+        <button class="btn-ghost" style="font-size:16px;padding:13px 32px">Fale conosco</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">blue<span>3</span></div>
+        <p class="footer-tagline">Assessoria de investimentos desde 2009. Parceiro XP Investimentos.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <div class="footer-col-head">Para você</div>
+          <a class="footer-link">Digital</a>
+          <a class="footer-link">Exclusive</a>
+          <a class="footer-link">Signature</a>
+          <a class="footer-link">Unique</a>
+          <a class="footer-link">Private</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-head">Blue3</div>
+          <a class="footer-link">Sobre nós</a>
+          <a class="footer-link">Assessores</a>
+          <a class="footer-link">Escritórios</a>
+          <a class="footer-link">Blog</a>
+          <a class="footer-link">Imprensa</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-head">Ecossistema</div>
+          <a class="footer-link">Blue3 Asset</a>
+          <a class="footer-link">Blue3 Capital</a>
+          <a class="footer-link">Blue3 Empresas</a>
+          <a class="footer-link">Blue3 Research</a>
+          <a class="footer-link">Troon Capital</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-head">Legal</div>
+          <a class="footer-link">Política de privacidade</a>
+          <a class="footer-link">Termos de uso</a>
+          <a class="footer-link">Ouvidoria</a>
+          <a class="footer-link">Compliance</a>
+        </div>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <p class="footer-legal">A Blue3 Investimentos é uma empresa parceira da XP Investimentos CCTVM S/A. As informações apresentadas neste site têm caráter meramente informativo e não representam oferta de valores mobiliários. Rentabilidade passada não é garantia de rentabilidade futura. Investimentos envolvem riscos. Leia o prospecto e o regulamento antes de investir. © 2025 Blue3 Investimentos. Todos os direitos reservados.</p>
+      <div class="footer-right-meta">
+        <div class="xp-tag">Parceiro <strong>XP Investimentos</strong></div>
+        <div class="socials">
+          <div class="social-btn"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="3" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/><circle cx="7" cy="7" r="2.4" stroke="rgba(255,255,255,0.5)" stroke-width="1.2"/><circle cx="10.1" cy="3.9" r="0.7" fill="rgba(255,255,255,0.5)"/></svg></div>
+          <div class="social-btn"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 11L5.5 7M12 3L8.5 7M5.5 7L8.5 7" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round"/><path d="M2 3h3l7 8h-3L2 3z" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
+          <div class="social-btn"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 4h10M5 2v2M9 2v2M2 8h10M2 4v8h10V4H2z" stroke="rgba(255,255,255,0.5)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks-panel">
+  <div class="tweaks-title">Tweaks</div>
+
+  <div class="tweak-row">
+    <div class="tweak-label">Accent color</div>
+    <div class="tweak-opts">
+      <div class="tweak-swatch active" style="background:#1B6FEF;" title="Blue" onclick="setAccent('#1B6FEF','#1456D6','0F4AC0',this)"></div>
+      <div class="tweak-swatch" style="background:#0D9488;" title="Teal" onclick="setAccent('#0D9488','#0F766E','115E59',this)"></div>
+      <div class="tweak-swatch" style="background:#7C3AED;" title="Violet" onclick="setAccent('#7C3AED','#6D28D9','5B21B6',this)"></div>
+      <div class="tweak-swatch" style="background:#C9A84C;" title="Gold" onclick="setAccent('#C9A84C','#A8893C','896E2E',this)"></div>
+    </div>
+  </div>
+
+  <div class="tweak-row">
+    <div class="tweak-label">Nav style</div>
+    <div class="tweak-opts">
+      <button class="tweak-btn active" onclick="setNavStyle('blur',this)">Blur</button>
+      <button class="tweak-btn" onclick="setNavStyle('solid',this)">Solid</button>
+    </div>
+  </div>
+
+  <div class="tweak-row">
+    <div class="tweak-label">Hero headline</div>
+    <div class="tweak-opts">
+      <button class="tweak-btn active" onclick="setHeroLine('Sua jornada tem<br>um <em>plano.</em>',this)">Jornada</button>
+      <button class="tweak-btn" onclick="setHeroLine('Invista com quem<br><em>entende você.</em>',this)">Entende</button>
+      <button class="tweak-btn" onclick="setHeroLine('Do primeiro passo à<br><em>liberdade financeira.</em>',this)">Liberdade</button>
+    </div>
+  </div>
+
+  <div class="tweak-row">
+    <div class="tweak-label">Card style</div>
+    <div class="tweak-opts">
+      <button class="tweak-btn active" onclick="setCardStyle('shadow',this)">Shadow</button>
+      <button class="tweak-btn" onclick="setCardStyle('border',this)">Border</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accentColor": "#1B6FEF",
+  "navStyle": "blur",
+  "heroLine": "jornada",
+  "cardStyle": "shadow"
+}/*EDITMODE-END*/;
+
+// Tweaks API
+window.addEventListener('message', e => {
+  if (e.data?.type === '__activate_edit_mode') document.getElementById('tweaks-panel').classList.add('open');
+  if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').classList.remove('open');
+});
+window.parent.postMessage({type:'__edit_mode_available'},'*');
+
+function setAccent(c, ch, cp, el) {
+  document.documentElement.style.setProperty('--blue-500', c);
+  document.documentElement.style.setProperty('--blue-600', ch);
+  document.documentElement.style.setProperty('--blue-700', '#'+cp);
+  document.documentElement.style.setProperty('--accent', c);
+  document.documentElement.style.setProperty('--accent-h', ch);
+  document.querySelectorAll('.tweak-swatch').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{accentColor:c}},'*');
+}
+
+function setNavStyle(style, el) {
+  const nav = document.querySelector('.nav');
+  if (style === 'solid') nav.style.background = 'var(--navy-900)';
+  else nav.style.background = 'rgba(7,17,31,0.92)';
+  document.querySelectorAll('.tweak-btn').forEach(b => b.parentNode === el.parentNode && b.classList.remove('active'));
+  el.classList.add('active');
+  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{navStyle:style}},'*');
+}
+
+function setHeroLine(html, el) {
+  document.querySelector('.hero-title').innerHTML = html;
+  document.querySelectorAll('.tweak-btn').forEach(b => b.parentNode === el.parentNode && b.classList.remove('active'));
+  el.classList.add('active');
+  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{heroLine:el.textContent}},'*');
+}
+
+function setCardStyle(style, el) {
+  document.querySelectorAll('.service-card').forEach(c => {
+    if (style === 'border') { c.style.boxShadow = 'none'; c.style.border = '1.5px solid var(--gray-200)'; }
+    else { c.style.boxShadow = ''; c.style.border = '1px solid var(--gray-100)'; }
+  });
+  document.querySelectorAll('.tweak-btn').forEach(b => b.parentNode === el.parentNode && b.classList.remove('active'));
+  el.classList.add('active');
+  window.parent.postMessage({type:'__edit_mode_set_keys', edits:{cardStyle:style}},'*');
+}
+</script>
+</body>
+</html>

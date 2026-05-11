@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moabi Tavares Guanor | Portfólio de Investimentos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #04050a; --card-bg: rgba(255,255,255,0.05); --glass-border: rgba(255,255,255,0.1);
+            --blue: #0066ff; --gold: #ffcc00; --text: #ffffff; --muted: #a1a1aa;
+            --success: #10b981; --danger: #ef4444;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+        .ticker-wrap { background:#000 !important; border-bottom:1px solid var(--glass-border); min-height:46px; }
+        .wrap { max-width:1200px; margin:0 auto; padding:2rem; }
+        header { display:flex; justify-content:space-between; align-items:center; padding:1.5rem 0; margin-bottom:3rem; }
+        .hdr-left { display:flex; align-items:center; gap:1rem; }
+        .avatar { width:48px; height:48px; background:var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; }
+        .brand .name { font-weight:700; font-size:1.05rem; display:block; }
+        .brand .role { font-size:.75rem; color:var(--muted); display:block; }
+        nav a { color:var(--muted); text-decoration:none; font-weight:500; margin-left:1.5rem; }
+        nav a:hover { color:#fff; }
+        .hero { margin-bottom:3rem; }
+        .badge { background:rgba(255,204,0,.1); color:var(--gold); display:inline-block; padding:.4rem 1rem; border-radius:100px; font-size:.75rem; font-weight:700; margin-bottom:1rem; border:1px solid rgba(255,204,0,.2); }
+        .hero h1 { font-size:clamp(2.5rem,5vw,4rem); line-height:1.05; font-weight:700; letter-spacing:-.03em; margin-bottom:1rem; }
+        .blue { color:var(--blue); } .gold { color:var(--gold); }
+        .client-info { display:flex; gap:2rem; color:var(--muted); }
+        .client-info strong { color:#fff; }
+        .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; margin-bottom:3rem; }
+        .glass { background:var(--card-bg); backdrop-filter:blur(24px); border:1px solid var(--glass-border); border-radius:24px; padding:2rem; position:relative; overflow:hidden; transition:transform .3s; }
+        .glass::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, rgba(255,255,255,.2), transparent); }
+        .glass:hover { transform:translateY(-4px); }
+        .card-label { font-size:.8rem; color:var(--muted); display:block; margin-bottom:.5rem; text-transform:uppercase; letter-spacing:.05em; }
+        .card-value { font-size:2.2rem; font-weight:700; margin-bottom:.25rem; }
+        .card-sub { font-size:.9rem; color:var(--muted); }
+        .main-grid { display:grid; grid-template-columns:1fr 380px; gap:2rem; align-items:start; }
+        @media(max-width:1000px) { .main-grid { grid-template-columns:1fr; } }
+        .tabs { display:flex; gap:.75rem; margin-bottom:1.5rem; flex-wrap:wrap; }
+        .tab-btn { background:transparent; border:1px solid var(--glass-border); color:var(--muted); padding:.6rem 1.2rem; border-radius:10px; cursor:pointer; font-family:'Inter',sans-serif; font-weight:600; font-size:.85rem; transition:all .25s; }
+        .tab-btn.active { background:var(--blue); color:#fff; border-color:var(--blue); box-shadow:0 0 20px rgba(0,102,255,.3); }
+        .tbl-header { display:grid; grid-template-columns:2fr 80px 100px 100px 110px 110px 80px; gap:.5rem; padding:.5rem 1rem; font-size:.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; border-bottom:1px solid var(--glass-border); margin-bottom:.5rem; }
+        @media(max-width:700px) { .tbl-header { display:none; } }
+        .asset { display:grid; grid-template-columns:2fr 80px 100px 100px 110px 110px 80px; gap:.5rem; align-items:center; padding:1rem; background:rgba(255,255,255,.02); border-radius:14px; border:1px solid transparent; transition:all .2s; margin-bottom:.5rem; }
+        .asset:hover { background:rgba(255,255,255,.05); border-color:var(--glass-border); }
+        .asset-icon { width:38px; height:38px; background:var(--blue); border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.65rem; flex-shrink:0; }
+        .asset-main { display:flex; align-items:center; gap:.75rem; }
+        .asset-name { font-weight:600; font-size:.95rem; }
+        .asset-exch { font-size:.75rem; color:var(--muted); }
+        .num { text-align:right; font-weight:600; font-size:.88rem; }
+        .num.muted { color:var(--muted); font-weight:400; }
+        .up { color:var(--success); } .dn { color:var(--danger); }
+        @media(max-width:700px) { .asset { grid-template-columns:1fr 1fr; } .asset-main { grid-column:1/-1; } }
+        .total-row { display:flex; justify-content:flex-end; gap:1rem; align-items:center; padding:1rem; margin-top:.5rem; border-top:1px solid var(--glass-border); }
+        .total-row strong { font-size:1.1rem; }
+        .market-card { background:var(--card-bg); backdrop-filter:blur(24px); border:1px solid var(--glass-border); border-radius:24px; padding:1.5rem; }
+        .market-card h3 { font-size:.85rem; color:var(--gold); text-transform:uppercase; letter-spacing:.1em; margin-bottom:1rem; }
+        .strategy { margin-top:3rem; }
+        .strategy h2 { font-size:1.3rem; margin-bottom:1rem; display:flex; align-items:center; gap:.5rem; }
+        .strategy-box { background:linear-gradient(135deg,rgba(59,130,246,.05),rgba(245,158,11,.05)); border-radius:24px; padding:2rem; border:1px solid var(--glass-border); }
+        .strategy-box p { color:var(--muted); font-size:1rem; margin-bottom:1rem; line-height:1.7; }
+        .strategy-box p:last-child { margin-bottom:0; }
+        footer { margin-top:4rem; text-align:center; padding-bottom:2rem; color:var(--muted); font-size:.8rem; }
+    </style>
+</head>
+<body>
+
+<div class="ticker-wrap">
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        {"symbols":[{"proName":"NASDAQ:ACWI","title":"ACWI"},{"proName":"NASDAQ:IEI","title":"IEI"},{"proName":"AMEX:BIL","title":"BIL"},{"proName":"AMEX:AGG","title":"AGG"},{"proName":"AMEX:HYG","title":"HYG"},{"proName":"AMEX:GLD","title":"GLD"},{"proName":"AMEX:LQD","title":"LQD"},{"proName":"NASDAQ:BOTZ","title":"BOTZ"},{"proName":"AMEX:IEUR","title":"IEUR"},{"proName":"AMEX:FDIS","title":"FDIS"},{"proName":"AMEX:FNCL","title":"FNCL"},{"proName":"AMEX:FXI","title":"FXI"},{"proName":"AMEX:ILF","title":"ILF"},{"proName":"AMEX:VOO","title":"VOO"},{"proName":"NYSE:EFC","title":"EFC"},{"proName":"NASDAQ:HRZN","title":"HRZN"},{"proName":"NASDAQ:MAXI","title":"MAXI"}],"showSymbolLogo":true,"colorTheme":"dark","isTransparent":false,"displayMode":"adaptive","locale":"en"}
+        </script>
+    </div>
+</div>
+
+<div class="wrap">
+    <header>
+        <div class="hdr-left">
+            <div class="avatar">JB</div>
+            <div class="brand">
+                <span class="name">Jhony Bosio</span>
+                <span class="role">Sócio · Blue3 Investimentos</span>
+            </div>
+        </div>
+        <nav>
+            <a href="#portfolio">Portfólio</a>
+            <a href="#estrategia">Estratégia</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">Sócio Blue3 · Parceiro XP Investimentos</div>
+        <h1>Portfólio <span class="blue">Global</span><br>de <span class="gold">Moabi Tavares Guanor</span></h1>
+        <div class="client-info">
+            <span><strong>Cliente:</strong> Moabi Tavares Guanor</span>
+            <span><strong>País:</strong> Austrália</span>
+        </div>
+    </section>
+
+    <section class="cards">
+        <div class="glass">
+            <span class="card-label">Patrimônio Total</span>
+            <div class="card-value" id="total-val">—</div>
+            <div class="card-sub" id="total-val-nzd" style="color:var(--blue); font-weight:600; margin-bottom:0.25rem;">—</div>
+            <div class="card-sub">Hatch + Sharesies</div>
+        </div>
+        <div class="glass">
+            <span class="card-label">Conta Hatch (Pessoal)</span>
+            <div class="card-value" id="hatch-val">—</div>
+            <div class="card-sub" id="hatch-val-nzd" style="color:var(--blue); font-weight:600; margin-bottom:0.25rem;">—</div>
+            <div class="card-sub" id="hatch-count">— ativos</div>
+        </div>
+        <div class="glass">
+            <span class="card-label">Conta Sharesies (H2Off)</span>
+            <div class="card-value" id="sharesies-val">—</div>
+            <div class="card-sub" id="sharesies-val-nzd" style="color:var(--blue); font-weight:600; margin-bottom:0.25rem;">—</div>
+            <div class="card-sub" id="sharesies-count">— ativos</div>
+        </div>
+    </section>
+
+    <section class="main-grid" id="portfolio">
+        <div>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="show('hatch')">Conta Hatch</button>
+                <button class="tab-btn" onclick="show('sharesies')">Conta Sharesies (H2Off)</button>
+            </div>
+            <div class="tbl-header">
+                <div>Ativo</div>
+                <div style="text-align:right">Qtd.</div>
+                <div style="text-align:right">Preço Médio</div>
+                <div style="text-align:right">Cotação Atual</div>
+                <div style="text-align:right">Val. (USD)</div>
+                <div style="text-align:right">Val. (NZD)</div>
+                <div style="text-align:right">Var.</div>
+            </div>
+            <div id="assets-list"></div>
+            <div class="total-row">
+                <span style="color:var(--muted);font-size:.85rem">TOTAL DA CONTA</span>
+                <strong id="tab-total">—</strong>
+                <strong id="tab-total-nzd" style="color:var(--blue); font-size:1.0rem; margin-left:1rem;">—</strong>
+            </div>
+        </div>
+        <aside>
+            <div class="market-card">
+                <h3>Market Intelligence</h3>
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                    {"colorTheme":"dark","dateRange":"12M","locale":"en","isTransparent":true,"showFloatingTooltip":false,"plotLineColorGrowing":"rgba(41,98,255,1)","plotLineColorFalling":"rgba(41,98,255,1)","gridLineColor":"rgba(240,243,250,0)","scaleFontColor":"#FFFFFF","belowLineFillColorGrowing":"rgba(41,98,255,0.12)","belowLineFillColorFalling":"rgba(41,98,255,0.12)","belowLineFillColorGrowingBottom":"rgba(41,98,255,0)","belowLineFillColorFallingBottom":"rgba(41,98,255,0)","symbolActiveColor":"rgba(41,98,255,0.12)","tabs":[{"title":"Portfólio Moabi","symbols":[{"s":"NASDAQ:ACWI","d":"MSCI ACWI"},{"s":"NASDAQ:IEI","d":"3-7yr Treasury"},{"s":"AMEX:BIL","d":"1-3mo T-Bill"},{"s":"AMEX:AGG","d":"Agg Bond"},{"s":"AMEX:HYG","d":"High Yield"},{"s":"AMEX:GLD","d":"Gold"},{"s":"AMEX:LQD","d":"Inv. Grade"},{"s":"NASDAQ:BOTZ","d":"Robotics/AI"},{"s":"AMEX:VOO","d":"S&P 500"},{"s":"NYSE:EFC","d":"EFC"},{"s":"NASDAQ:HRZN","d":"HRZN"},{"s":"NASDAQ:MAXI","d":"MAXI"}],"originalTitle":"Portfolio"}],"width":"100%","height":"520"}
+                    </script>
+                </div>
+            </div>
+        </aside>
+    </section>
+
+    <section class="strategy" id="estrategia">
+        <h2>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><path d="M17 6h6v6"/></svg>
+            Visão da Estratégia
+        </h2>
+        <div class="strategy-box">
+            <p>A carteira do Moabi está estruturada para preservação de capital e crescimento global diversificado. A conta <strong style="color:#fff">Hatch</strong> totaliza $45.422,90 em ETFs globais (ACWI, VOO) e instrumentos de renda fixa, com destaque para VOO (+6,63%) e ACWI (+3,11%).</p>
+            <p>A conta <strong style="color:#fff">Sharesies (H2Off)</strong> mantém posições em ativos de maior volatilidade (HRZN -31,40%, MAXI -47,37%). O EFC destaca-se como maior posição em valor ($11.915,97) com dividendos futuros agendados.</p>
+            <p><strong style="color:#fff">Recomendação:</strong> Avaliar redução gradual de HRZN e MAXI com realocação para ETFs diversificados, reforçando a proteção patrimonial da estratégia Blue3.</p>
+        </div>
+    </section>
+
+    <footer>&copy; 2026 Jhony Bosio · Blue3 Investimentos · Consultoria Internacional</footer>
+</div>
+
+<script>
+// Fator de conversão fixo de USD para NZD. Ajuste este valor conforme necessário.
+var USD_TO_NZD = 1.69; 
+
+var fmt = function(v) { return 'US$' + v.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}); };
+var fmtNZD = function(v) { return 'NZ$' + v.toLocaleString('en-NZ', {minimumFractionDigits:2, maximumFractionDigits:2}); };
+var pct = function(v) { return (v >= 0 ? '+' : '') + v.toFixed(2) + '%'; };
+
+var HATCH = [
+    { name:'Saldo em Conta (Cash)',      ticker:'CASH', exch:'HATCH',  qty:1,         avgPrice:1252.23, price:1252.23 },
+    { name:'MSCI ACWI ETF',              ticker:'ACWI', exch:'NASDAQ', qty:76.8914,   avgPrice:145.44, price:149.97 },
+    { name:'ICE US Treasury 3-7yr Bond', ticker:'IEI',  exch:'NASDAQ', qty:71.61,     avgPrice:120.14, price:118.66 },
+    { name:'SPDR 1-3 Month T-Bill',      ticker:'BIL',  exch:'AMEX',   qty:70.4774,   avgPrice:91.56,  price:91.58  },
+    { name:'iShares Core US Agg Bond',   ticker:'AGG',  exch:'AMEX',   qty:42.5913,   avgPrice:101.03, price:99.63  },
+    { name:'iShares iBoxx HY Corp Bond', ticker:'HYG',  exch:'AMEX',   qty:34.6712,   avgPrice:80.85,  price:80.48  },
+    { name:'SPDR Gold Shares',           ticker:'GLD',  exch:'AMEX',   qty:4.8124,    avgPrice:447.39, price:434.89 },
+    { name:'iShares iBoxx IG Corp Bond', ticker:'LQD',  exch:'AMEX',   qty:14.4495,   avgPrice:111.88, price:109.88 },
+    { name:'Global X Robotics and AI',   ticker:'BOTZ', exch:'NASDAQ', qty:27.8159,   avgPrice:38.58,  price:37.31  },
+    { name:'iShares MSCI Europe ETF',    ticker:'IEUR', exch:'AMEX',   qty:14.3693,   avgPrice:75.49,  price:74.40  },
+    { name:'Fidelity MSCI Cons. Disc',   ticker:'FDIS', exch:'AMEX',   qty:10.8231,   avgPrice:99.14,  price:102.33 },
+    { name:'Fidelity MSCI Financials',   ticker:'FNCL', exch:'AMEX',   qty:14.3693,   avgPrice:74.67,  price:74.56  },
+    { name:'iShares China Large-Cap',    ticker:'FXI',  exch:'AMEX',   qty:23.4384,   avgPrice:38.53,  price:36.97  },
+    { name:'iShares Latin America 40',   ticker:'ILF',  exch:'AMEX',   qty:25.1547,   avgPrice:35.90,  price:37.27  },
+    { name:'Vanguard S&P 500 ETF',      ticker:'VOO',  exch:'AMEX',   qty:3.2727,    avgPrice:612.03, price:652.62 }
+];
+
+var SHARESIES = [
+    { name:'Saldo em Conta (Cash NZD)',      ticker:'CASH_NZD', exch:'SHARESIES', qty:1, avgPrice: 1057.92 / USD_TO_NZD, price: 1057.92 / USD_TO_NZD },
+    { name:'Ellington Financial Inc',        ticker:'EFC',  exch:'NYSE',   qty:915.5568,  avgPrice:13.98, price:13.01 },
+    { name:'Horizon Technology Finance',     ticker:'HRZN', exch:'NASDAQ', qty:2148.4476, avgPrice:6.25,  price:4.285 },
+    { name:'Simplify Bitcoin Strategy PLUS', ticker:'MAXI', exch:'NASDAQ', qty:940.734,   avgPrice:21.18, price:11.16 }
+];
+
+function calcTotal(arr) {
+    return arr.reduce(function(s, a) { return s + a.qty * a.price; }, 0);
+}
+
+function render(arr) {
+    var list = document.getElementById('assets-list');
+    var html = '';
+    for (var i = 0; i < arr.length; i++) {
+        var a = arr[i];
+        var val = a.qty * a.price;
+        var valNZD = val * USD_TO_NZD;
+        var change = ((a.price - a.avgPrice) / a.avgPrice) * 100;
+        var cls = change >= 0 ? 'up' : 'dn';
+        var qtyStr = (a.qty % 1 === 0) ? String(a.qty) : a.qty.toFixed(4);
+        
+        // Se for saldo em conta, não exibe variação
+        var isCash = a.ticker === 'CASH' || a.ticker === 'CASH_NZD';
+        if (isCash) {
+            cls = 'muted';
+            change = 0;
+            qtyStr = '—';
+        }
+
+        html += '<div class="asset">' +
+            '<div class="asset-main">' +
+                '<div class="asset-icon">' + a.ticker.slice(0,4) + '</div>' +
+                '<div><div class="asset-name">' + a.name + '</div>' +
+                '<div class="asset-exch">' + a.ticker + ' &middot; ' + a.exch + '</div></div>' +
+            '</div>' +
+            '<div class="num muted">' + qtyStr + '</div>' +
+            '<div class="num muted">' + (isCash ? '—' : fmt(a.avgPrice).replace('US$','$')) + '</div>' +
+            '<div class="num">' + (isCash ? '—' : fmt(a.price).replace('US$','$')) + '</div>' +
+            '<div class="num">' + fmt(val) + '</div>' +
+            '<div class="num" style="color:var(--blue)">' + fmtNZD(valNZD) + '</div>' +
+            '<div class="num ' + cls + '">' + (isCash ? '—' : pct(change)) + '</div>' +
+        '</div>';
+    }
+    list.innerHTML = html;
+    
+    var totalUSD = calcTotal(arr);
+    document.getElementById('tab-total').textContent = fmt(totalUSD);
+    document.getElementById('tab-total-nzd').textContent = fmtNZD(totalUSD * USD_TO_NZD);
+}
+
+function show(tab) {
+    var btns = document.querySelectorAll('.tab-btn');
+    btns[0].classList.toggle('active', tab === 'hatch');
+    btns[1].classList.toggle('active', tab === 'sharesies');
+    render(tab === 'hatch' ? HATCH : SHARESIES);
+}
+
+var hTotal = calcTotal(HATCH);
+var sTotal = calcTotal(SHARESIES);
+
+document.getElementById('total-val').textContent = fmt(hTotal + sTotal);
+document.getElementById('total-val-nzd').textContent = fmtNZD((hTotal + sTotal) * USD_TO_NZD);
+
+document.getElementById('hatch-val').textContent = fmt(hTotal);
+document.getElementById('hatch-val-nzd').textContent = fmtNZD(hTotal * USD_TO_NZD);
+document.getElementById('hatch-count').textContent = HATCH.length + ' ativos';
+
+document.getElementById('sharesies-val').textContent = fmt(sTotal);
+document.getElementById('sharesies-val-nzd').textContent = fmtNZD(sTotal * USD_TO_NZD);
+document.getElementById('sharesies-count').textContent = SHARESIES.length + ' ativos';
+
+show('hatch');
+</script>
+</body>
+</html>

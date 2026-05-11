@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F5F6F8; padding: 20px; font-family: 'DM Sans', sans-serif; }
+  .label { font-size: 10px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: #9AA5B4; margin-bottom: 10px; margin-top: 16px; }
+  .tiers-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+  .tier-badge {
+    border-radius: 999px; padding: 5px 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .tier-card {
+    border-radius: 14px; padding: 20px 22px; width: 160px;
+    border: 1.5px solid transparent;
+  }
+  .tier-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .tier-range { font-size: 12px; margin-bottom: 10px; }
+  .tier-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+</style>
+</head>
+<body>
+  <div class="label">Tier Badges (Pill)</div>
+  <div class="tiers-row">
+    <span class="tier-badge" style="background:#EBF3FF;color:#1456D6;">Digital</span>
+    <span class="tier-badge" style="background:#E8F5E9;color:#1A6B3A;">Exclusive</span>
+    <span class="tier-badge" style="background:#E3F2FD;color:#0D47A1;">Signature</span>
+    <span class="tier-badge" style="background:#FFF8E7;color:#A8893C;">Unique</span>
+    <span class="tier-badge" style="background:#0D1C3A;color:#D4AF6A;">Private</span>
+    <span class="tier-badge" style="background:#F3E8FF;color:#7C3AED;">Blue3 Asset</span>
+  </div>
+
+  <div class="label">Tier Cards</div>
+  <div class="tiers-row" style="align-items: flex-start;">
+    <div class="tier-card" style="background:#EBF3FF;border-color:#D6E6FD;">
+      <div class="tier-name" style="color:#1456D6;">Digital</div>
+      <div class="tier-range" style="color:#4488F5;">Até R$ 100 mil</div>
+      <div style="font-size:12px;color:#6B7280;">Primeiro passo na jornada de investimentos.</div>
+    </div>
+    <div class="tier-card" style="background:#F0F9FF;border-color:#BAE6FD;">
+      <div class="tier-name" style="color:#0369A1;">Exclusive</div>
+      <div class="tier-range" style="color:#0EA5E9;">R$ 100k – 300k</div>
+      <div style="font-size:12px;color:#6B7280;">Assessoria personalizada para crescer.</div>
+    </div>
+    <div class="tier-card" style="background:#F0F4FF;border-color:#C7D7FD;">
+      <div class="tier-name" style="color:#1E3D80;">Signature</div>
+      <div class="tier-range" style="color:#1B6FEF;">R$ 300k – 3M</div>
+      <div style="font-size:12px;color:#6B7280;">Planejamento completo e acesso ampliado.</div>
+    </div>
+    <div class="tier-card" style="background:#FFFBEB;border-color:#FDE68A;">
+      <div class="tier-name" style="color:#A8893C;">Unique</div>
+      <div class="tier-range" style="color:#C9A84C;">R$ 3M – 5M</div>
+      <div style="font-size:12px;color:#6B7280;">Soluções exclusivas e relacionamento dedicado.</div>
+    </div>
+    <div class="tier-card" style="background:#0D1C3A;border-color:rgba(212,175,106,0.4);">
+      <div class="tier-name" style="color:#D4AF6A;">Private</div>
+      <div class="tier-range" style="color:rgba(212,175,106,0.7);">Acima de R$ 5M</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);">O mais alto nível de serviço e exclusividade.</div>
+    </div>
+  </div>
+
+  <div class="label">Status Badges</div>
+  <div class="tiers-row">
+    <span class="tier-badge" style="background:#DCFCE7;color:#16A34A;">Ativo</span>
+    <span class="tier-badge" style="background:#FEF9C3;color:#D97706;">Em análise</span>
+    <span class="tier-badge" style="background:#FEE2E2;color:#DC2626;">Encerrado</span>
+    <span class="tier-badge" style="background:#F3F4F6;color:#6B7280;">Pendente</span>
+  </div>
+</body>
+</html>
