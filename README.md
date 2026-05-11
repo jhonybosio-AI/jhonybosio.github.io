@@ -12,3 +12,4 @@ Repositório unificado para jhonybosio.com.
 ## Deploy
 Gerenciado pelo Vercel no projeto `jhonybosio-github-io`.
 Atualizado em: 11/05/2026 13:40
+
