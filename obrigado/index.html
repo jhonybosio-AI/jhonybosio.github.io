@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sucesso! Próximos Passos · Jhony Bosio</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --n9:#07111F; --n8:#0D1C3A; --n7:#132651; --n6:#1A3168;
+  --b5:#1B6FEF; --b4:#4488F5; --b3:#7AABF8;
+  --g5:#C9A84C; --g4:#D4AF6A; --g3:#E2C98A;
+  --w:#FFFFFF;
+  --gb:rgba(255,255,255,0.05);
+  --gborder:rgba(255,255,255,0.10);
+  --gblur:blur(24px) saturate(1.6);
+  --fd:'Plus Jakarta Sans',sans-serif;
+  --fb:'DM Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px;}
+
+/* BG */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(155deg,#09152A 0%,#07111F 55%,#040C16 100%)}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:fl 14s ease-in-out infinite}
+.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.5;
+  background:radial-gradient(circle,rgba(27,111,239,.4),transparent 70%)}
+@keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(18px,-28px) scale(1.04)}70%{transform:translate(-14px,18px) scale(.97)}}
+
+.card{max-width:540px; width: 100%; position:relative; z-index:1; padding: 60px 40px; text-align: center;}
+.icon-wrap{width: 80px; height: 80px; border-radius: 50%; background: rgba(68,136,245,0.1); border: 2px solid rgba(68,136,245,0.2); display: flex; align-items: center; justify-content: center; margin: 0 auto 32px;}
+.icon-wrap svg{width: 40px; height: 40px; color: var(--b4);}
+
+.title{font-family: var(--fd); font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.1;}
+.sub{font-size: 16px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 48px;}
+
+.steps{text-align: left; display: flex; flex-direction: column; gap: 24px; margin-bottom: 48px;}
+.step{display: flex; gap: 20px; align-items: flex-start;}
+.step-num{width: 32px; height: 32px; border-radius: 50%; background: var(--b5); color: #fff; font-family: var(--fd); font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0;}
+.step-title{font-family: var(--fd); font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px;}
+.step-desc{font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.5;}
+
+.btn-wa{display: block; width: 100%; background: #25D366; color: #000; font-family: var(--fd); font-size: 16px; font-weight: 800; text-decoration: none; padding: 18px; border-radius: 12px; transition: transform 0.2s, box-shadow 0.2s; text-transform: uppercase; letter-spacing: 0.05em;}
+.btn-wa:hover{transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.3);}
+
+.footer-link{display: block; margin-top: 24px; font-size: 13px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s;}
+.footer-link:hover{color: #fff;}
+
+</style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="orb o1"></div>
+</div>
+
+<div class="card glass">
+  <div class="icon-wrap">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+  </div>
+  
+  <h1 class="title">Tudo pronto,<br>Jhony Bosio aqui!</h1>
+  <p class="sub">Seu cadastro/pagamento foi confirmado com sucesso. Agora, siga rigorosamente os passos abaixo para não perder nada.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Entre no Grupo de WhatsApp</div>
+        <div class="step-desc">É lá que eu envio os materiais complementares, links de aula e avisos de última hora.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Verifique seu E-mail</div>
+        <div class="step-desc">Acabei de te enviar um guia de boas-vindas. Se não estiver na caixa de entrada, cheque o Spam ou Promoções.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Reserve na Agenda</div>
+        <div class="step-desc">Se você adquiriu a Mentoria, o link para agendamento da nossa sessão 1 a 1 também está no seu e-mail.</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="https://chat.whatsapp.com/GzW6pD8P7yvJ1r8pLzH7V2" class="btn-wa">Entrar no Grupo Oficial →</a>
+  
+  <a href="/" class="footer-link">Voltar para o site principal</a>
+</div>
+
+</body>
+</html>
