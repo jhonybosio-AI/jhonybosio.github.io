@@ -7,13 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --n9:#07111F; --n8:#0D1C3A; --n7:#132651; --n6:#1A3168;
-  --b5:#1B6FEF; --b4:#4488F5; --b3:#7AABF8;
+  --n9:#050505; --n8:#0A0A0A; --n7:#111111; --n6:#1A1A1A;
+  --b5:#0066FF; --b4:#1B6FEF; --b3:#4488F5;
   --g5:#C9A84C; --g4:#D4AF6A; --g3:#E2C98A;
   --w:#FFFFFF;
-  --gb:rgba(255,255,255,0.05);
-  --gborder:rgba(255,255,255,0.10);
-  --gblur:blur(24px) saturate(1.6);
+  --gb:rgba(255,255,255,0.03);
+  --gborder:rgba(255,255,255,0.08);
+  --gblur:blur(30px) saturate(1.8);
   --fd:'Plus Jakarta Sans',sans-serif;
   --fb:'DM Sans',sans-serif;
 }
@@ -39,9 +39,10 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 /* NAV */
 .nav{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
 .nbrand{display:flex;align-items:center;gap:11px;text-decoration:none}
-.nlogo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--b5),var(--n6));border:1px solid rgba(255,255,255,.15);
-  display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;font-weight:800;color:#fff}
+.nlogo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--g5),var(--g4));border:1px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;font-weight:800;color:#000}
 .nname{font-family:var(--fd);font-size:15px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.nsub{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px;letter-spacing:.15em;text-transform:uppercase}
 
 /* HERO */
 .hero{padding:60px 0 80px;text-align:center}
@@ -95,8 +96,12 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
   <nav class="nav">
     <a href="/" class="nbrand">
       <div class="nlogo">JB</div>
-      <div class="nname">Jhony Bosio</div>
+      <div>
+        <div class="nname">Jhony Bosio</div>
+        <div class="nsub">Private & Unique</div>
+      </div>
     </a>
+    <a href="/" style="font-family:var(--fd); font-size:13px; font-weight:600; color:rgba(255,255,255,.4); text-decoration:none; text-transform:uppercase; letter-spacing:0.1em">Voltar à Home</a>
   </nav>
 
   <section class="hero">
