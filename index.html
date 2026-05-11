@@ -191,22 +191,6 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
 .flink{font-size:12px;color:rgba(255,255,255,.38);cursor:pointer;text-decoration:none;transition:color .15s}
 .flink:hover{color:rgba(255,255,255,.7)}
 
-/* TWEAKS */
-#twk{display:none;position:fixed;bottom:20px;right:20px;z-index:9999;width:262px;border-radius:18px;padding:20px 18px;
-  background:rgba(10,20,40,.92);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
-  border:1px solid rgba(255,255,255,.12);box-shadow:0 16px 56px rgba(0,0,0,.55)}
-#twk.open{display:block}
-.twktitle{font-family:var(--fd);font-size:13px;font-weight:700;color:#fff;margin-bottom:16px}
-.twkrow{margin-bottom:14px}
-.twklbl{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:7px}
-.twkopts{display:flex;gap:5px;flex-wrap:wrap}
-.twkb{font-family:var(--fb);font-size:12px;font-weight:500;border:1px solid rgba(255,255,255,.14);border-radius:5px;
-  padding:5px 9px;cursor:pointer;background:rgba(255,255,255,.05);color:rgba(255,255,255,.58);transition:all .15s}
-.twkb:hover{background:rgba(255,255,255,.10);color:#fff}
-.twkb.on{background:rgba(27,111,239,.24);border-color:rgba(27,111,239,.48);color:#fff}
-.twksw{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .15s;flex-shrink:0}
-.twksw.on{border-color:#fff}
-
 /* === RESPONSIVIDADE GLOBAL === */
 @media(max-width:900px){
   .wrap{padding:0 20px!important}
@@ -265,8 +249,9 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
     <a class="nlink" href="#cta">Contato</a>
   </div>
   <button class="ncta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Falar com Jhony</button>
-</nav><div style="background:linear-gradient(90deg,rgba(0,102,255,.18),rgba(0,102,255,.08));border-bottom:1px solid rgba(0,102,255,.22);padding:.55rem 2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.8)">🚀 <strong style="color:#fff">Novo:</strong> Comunidade Protocolo 9A — metodologia de 9 ativos para transformar sua carteira &nbsp;<a href="/protocolo-9a" style="color:#4488F5;font-weight:700;text-decoration:none">Saiba mais →</a></div>
+</nav>
 
+<div style="background:linear-gradient(90deg,rgba(0,102,255,.18),rgba(0,102,255,.08));border-bottom:1px solid rgba(0,102,255,.22);padding:.55rem 2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.8)">🚀 <strong style="color:#fff">Novo:</strong> Comunidade Protocolo 9A — metodologia de 9 ativos para transformar sua carteira &nbsp;<a href="/protocolo-9a" style="color:#4488F5;font-weight:700;text-decoration:none">Saiba mais →</a></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -464,20 +449,24 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
       <h2 class="ctatitle">Pronto para o<br>próximo passo?</h2>
       <p class="ctasub">Preencha e entro em contato em até 24h para uma conversa sem compromisso.</p>
       <div class="ctaform">
-        <div class="frow">
-          <input class="fi" type="text" placeholder="Seu nome">
-          <input class="fi" type="tel" placeholder="(16) 99604-5700">
-        </div>
-        <input class="fi ff" type="email" placeholder="Seu e-mail">
-        <select class="fi ff" style="appearance:none;cursor:pointer">
-          <option value="" disabled selected>Quanto você tem para investir?</option>
-          <option>Até R$ 100 mil</option>
-          <option>R$ 100 mil – R$ 300 mil</option>
-          <option>R$ 300 mil – R$ 3 milhões</option>
-          <option>R$ 3 milhões – R$ 5 milhões</option>
-          <option>Acima de R$ 5 milhões</option>
-        </select>
-        <button class="sbtn">Quero falar com Jhony Bosio →</button>
+        <form action="https://formsubmit.co/2fa.protegido@gmail.com" method="POST">
+          <div class="frow">
+            <input class="fi" type="text" name="name" placeholder="Seu nome" required>
+            <input class="fi" type="tel" name="phone" placeholder="(16) 99604-5700" required>
+          </div>
+          <input class="fi ff" type="email" name="email" placeholder="Seu e-mail" required>
+          <select class="fi ff" name="investimento" style="appearance:none;cursor:pointer" required>
+            <option value="" disabled selected>Quanto você tem para investir?</option>
+            <option>Até R$ 100 mil</option>
+            <option>R$ 100 mil – R$ 300 mil</option>
+            <option>R$ 300 mil – R$ 3 milhões</option>
+            <option>R$ 3 milhões – R$ 5 milhões</option>
+            <option>Acima de R$ 5 milhões</option>
+          </select>
+          <input type="hidden" name="_next" value="https://www.jhonybosio.com">
+          <input type="hidden" name="_subject" value="Novo Lead: JhonyBosio.com">
+          <button class="sbtn" type="submit">Quero falar com Jhony Bosio →</button>
+        </form>
         <p class="fdiscl">Seus dados são protegidos. Nenhum spam — só uma conversa honesta sobre seu futuro financeiro.</p>
       </div>
     </div>
@@ -489,116 +478,18 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
   <div class="wrap">
     <div class="finner">
       <div class="fbrand">Jhony <span>Bosio</span></div>
-      <div class="flegal">Jhony Bosio · Assessor de Investimentos Blue3 · Parceiro XP CCTVM S/A. Conteúdo educacional. Investimentos envolvem riscos de perda de capital.</div>
-      <div class="flinks">
-        <a class="flink" href="/protocolo-9a">Protocolo 9A</a>
-        <a class="flink" href="/aula-vip">Aula VIP</a>
+      <div class="flegal">Assessor vinculado à Blue3 Investimentos, parceiro XP Investimentos CCTVM S/A. Rentabilidade passada não garante resultado futuro. Investimentos envolvem riscos.</div>
+      <nav class="flinks">
         <a class="flink" href="/moabi">Moabi</a>
         <a class="flink" href="/carteira-etfs">Carteira ETFs</a>
-        <a class="flink" href="/politicas">Privacidade</a>
-      </div>
+        <a class="flink" href="/protocolo-9a">Protocolo 9A</a>
+        <a class="flink" href="/aula-vip">Aula VIP</a>
+        <a class="flink" href="https://instagram.com/jhonybosio" target="_blank">Instagram</a>
+      </nav>
     </div>
   </div>
 </footer>
 </div>
 
-<!-- TWEAKS -->
-<div id="twk">
-  <div class="twktitle">Tweaks</div>
-  <div class="twkrow">
-    <div class="twklbl">Estilo visual</div>
-    <div class="twkopts">
-      <button class="twkb on" onclick="setStyle('dark-glass',this)">Dark Glass</button>
-      <button class="twkb" onclick="setStyle('deep-navy',this)">Deep Navy</button>
-      <button class="twkb" onclick="setStyle('gold-prem',this)">Gold Premium</button>
-    </div>
-  </div>
-  <div class="twkrow">
-    <div class="twklbl">Cor de destaque</div>
-    <div class="twkopts">
-      <div class="twksw on" style="background:#1B6FEF" onclick="setAccent('blue',this)"></div>
-      <div class="twksw" style="background:#C9A84C" onclick="setAccent('gold',this)"></div>
-      <div class="twksw" style="background:#0D9488" onclick="setAccent('teal',this)"></div>
-      <div class="twksw" style="background:#7C3AED" onclick="setAccent('violet',this)"></div>
-    </div>
-  </div>
-  <div class="twkrow">
-    <div class="twklbl">Título hero</div>
-    <div class="twkopts">
-      <button class="twkb on" onclick="setHero('plano',this)">Plano</button>
-      <button class="twkb" onclick="setHero('parceiro',this)">Parceiro</button>
-      <button class="twkb" onclick="setHero('liberdade',this)">Liberdade</button>
-    </div>
-  </div>
-  <div class="twkrow">
-    <div class="twklbl">Intensidade glass</div>
-    <div class="twkopts">
-      <button class="twkb" onclick="setBlur('light',this)">Sutil</button>
-      <button class="twkb on" onclick="setBlur('medium',this)">Médio</button>
-      <button class="twkb" onclick="setBlur('heavy',this)">Forte</button>
-    </div>
-  </div>
-</div>
-
-<script>
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "style": "deep-navy",
-  "accent": "blue",
-  "heroVariant": "plano",
-  "blurIntensity": "heavy"
-}/*EDITMODE-END*/;
-
-window.addEventListener('message',e=>{
-  if(e.data?.type==='__activate_edit_mode') document.getElementById('twk').classList.add('open');
-  if(e.data?.type==='__deactivate_edit_mode') document.getElementById('twk').classList.remove('open');
-});
-window.parent.postMessage({type:'__edit_mode_available'},'*');
-
-function setStyle(s,el){
-  const r=document.documentElement,bg=document.querySelector('.bg'),orbs=document.querySelectorAll('.orb');
-  if(s==='dark-glass'){
-    r.style.setProperty('--gb','rgba(255,255,255,0.05)');
-    r.style.setProperty('--gborder','rgba(255,255,255,0.10)');
-    bg.style.background='linear-gradient(155deg,#09152A 0%,#07111F 55%,#040C16 100%)';
-    orbs.forEach(o=>{o.style.opacity='';o.style.background=''});
-  } else if(s==='deep-navy'){
-    r.style.setProperty('--gb','rgba(13,28,58,0.65)');
-    r.style.setProperty('--gborder','rgba(27,111,239,0.18)');
-    bg.style.background='linear-gradient(155deg,#0D1C3A 0%,#07111F 100%)';
-    orbs.forEach(o=>o.style.opacity='0.25');
-  } else if(s==='gold-prem'){
-    r.style.setProperty('--gb','rgba(201,168,76,0.05)');
-    r.style.setProperty('--gborder','rgba(201,168,76,0.14)');
-    bg.style.background='linear-gradient(155deg,#0E1208 0%,#07111F 55%,#120C02 100%)';
-    orbs[0].style.background='radial-gradient(circle,rgba(201,168,76,0.38),transparent 70%)';
-    orbs[0].style.opacity='0.55';
-  }
-  document.querySelectorAll('.twkb').forEach(b=>b.parentNode===el.parentNode&&b.classList.remove('on'));
-  el.classList.add('on');
-  window.parent.postMessage({type:'__edit_mode_set_keys',edits:{style:s}},'*');
-}
-function setAccent(a,el){
-  const m={blue:['#1B6FEF','#4488F5'],gold:['#C9A84C','#D4AF6A'],teal:['#0D9488','#14B8A6'],violet:['#7C3AED','#8B5CF6']};
-  document.documentElement.style.setProperty('--b5',m[a][0]);
-  document.documentElement.style.setProperty('--b4',m[a][1]);
-  document.querySelectorAll('.twksw').forEach(s=>s.classList.remove('on'));
-  el.classList.add('on');
-  window.parent.postMessage({type:'__edit_mode_set_keys',edits:{accent:a}},'*');
-}
-function setHero(v,el){
-  const t={plano:'Seu patrimônio<br>merece um <span class="ba">plano</span><br>feito pra <span class="ga">você.</span>',parceiro:'O assessor que<br>caminha com <span class="ba">você</span><br>em cada <span class="ga">etapa.</span>',liberdade:'Transforme seu<br><span class="ba">dinheiro</span> em<br><span class="ga">liberdade.</span>'};
-  document.getElementById('htitle').innerHTML=t[v];
-  document.querySelectorAll('.twkb').forEach(b=>b.parentNode===el.parentNode&&b.classList.remove('on'));
-  el.classList.add('on');
-  window.parent.postMessage({type:'__edit_mode_set_keys',edits:{heroVariant:v}},'*');
-}
-function setBlur(i,el){
-  const m={light:'blur(6px) saturate(1.2)',medium:'blur(24px) saturate(1.6)',heavy:'blur(48px) saturate(2.0)'};
-  document.documentElement.style.setProperty('--gblur',m[i]);
-  document.querySelectorAll('.twkb').forEach(b=>b.parentNode===el.parentNode&&b.classList.remove('on'));
-  el.classList.add('on');
-  window.parent.postMessage({type:'__edit_mode_set_keys',edits:{blurIntensity:i}},'*');
-}
-</script>
 </body>
 </html>
