@@ -8,11 +8,11 @@
 <style>
 :root {
   --n9:#07111F; --n8:#0D1C3A; --n7:#132651; --n6:#1A3168;
-  --b5:#1B6FEF; --b4:#4488F5; --b3:#7AABF8;
+  --b5:#C9A84C; --b4:#D4AF6A; --b3:#E2C98A;
   --g5:#C9A84C; --g4:#D4AF6A; --g3:#E2C98A;
   --w:#FFFFFF;
-  --gb:rgba(255,255,255,0.05);
-  --gborder:rgba(255,255,255,0.10);
+  --gb:rgba(201,168,76,0.05);
+  --gborder:rgba(201,168,76,0.14);
   --gblur:blur(24px) saturate(1.6);
   --fd:'Plus Jakarta Sans',sans-serif;
   --fb:'DM Sans',sans-serif;
@@ -23,14 +23,12 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 
 /* BG */
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(155deg,#09152A 0%,#07111F 55%,#040C16 100%)}
+  background:linear-gradient(155deg,#0E1208 0%,#07111F 55%,#120C02 100%)}
 .orb{position:absolute;border-radius:50%;filter:blur(80px);animation:fl 14s ease-in-out infinite}
-.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.5;
-  background:radial-gradient(circle,rgba(27,111,239,.5),transparent 70%)}
+.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.55;
+  background:radial-gradient(circle,rgba(201,168,76,0.38),transparent 70%)}
 .o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.4;animation-delay:-6s;
   background:radial-gradient(circle,rgba(201,168,76,.28),transparent 70%)}
-.o3{width:320px;height:320px;top:42%;left:42%;opacity:.35;animation-delay:-10s;
-  background:radial-gradient(circle,rgba(27,111,239,.35),transparent 70%)}
 @keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(18px,-28px) scale(1.04)}70%{transform:translate(-14px,18px) scale(.97)}}
 
 /* LAYOUT */
@@ -176,9 +174,9 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 .fi:focus{border-color:rgba(27,111,239,.55);background:rgba(255,255,255,.10)}
 .ff{width:100%;margin-bottom:9px}
 .sbtn{width:100%;font-family:var(--fd);font-size:15px;font-weight:700;
-  background:linear-gradient(135deg,var(--b5),#1456D6);color:#fff;border:none;border-radius:7px;
-  padding:14px;cursor:pointer;margin-top:4px;box-shadow:0 4px 20px rgba(27,111,239,.4);transition:transform .15s,box-shadow .15s}
-.sbtn:hover{transform:translateY(-1px);box-shadow:0 8px 26px rgba(27,111,239,.5)}
+  background:linear-gradient(135deg,var(--g4),#A68336);color:var(--n9);border:none;border-radius:7px;
+  padding:14px;cursor:pointer;margin-top:4px;box-shadow:0 4px 20px rgba(201,168,76,.4);transition:transform .15s,box-shadow .15s}
+.sbtn:hover{transform:translateY(-1px);box-shadow:0 8px 26px rgba(201,168,76,.5)}
 .fdiscl{font-size:11px;color:rgba(255,255,255,.22);margin-top:11px;line-height:1.6;text-align:center}
 
 /* FOOTER */
@@ -190,6 +188,22 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
 .flinks{display:flex;gap:18px}
 .flink{font-size:12px;color:rgba(255,255,255,.38);cursor:pointer;text-decoration:none;transition:color .15s}
 .flink:hover{color:rgba(255,255,255,.7)}
+
+/* TWEAKS */
+#twk{display:none;position:fixed;bottom:20px;right:20px;z-index:9999;width:262px;border-radius:18px;padding:20px 18px;
+  background:rgba(10,20,40,.92);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  border:1px solid rgba(255,255,255,.12);box-shadow:0 16px 56px rgba(0,0,0,.55)}
+#twk.open{display:block}
+.twktitle{font-family:var(--fd);font-size:13px;font-weight:700;color:#fff;margin-bottom:16px}
+.twkrow{margin-bottom:14px}
+.twklbl{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:7px}
+.twkopts{display:flex;gap:5px;flex-wrap:wrap}
+.twkb{font-family:var(--fb);font-size:12px;font-weight:500;border:1px solid rgba(255,255,255,.14);border-radius:5px;
+  padding:5px 9px;cursor:pointer;background:rgba(255,255,255,.05);color:rgba(255,255,255,.58);transition:all .15s}
+.twkb:hover{background:rgba(255,255,255,.10);color:#fff}
+.twkb.on{background:rgba(27,111,239,.24);border-color:rgba(27,111,239,.48);color:#fff}
+.twksw{width:24px;height:24px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .15s;flex-shrink:0}
+.twksw.on{border-color:#fff}
 
 /* === RESPONSIVIDADE GLOBAL === */
 @media(max-width:900px){
@@ -244,14 +258,13 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
   </div>
   <div class="nlinks">
     <a class="nlink" href="#proposta">Proposta</a>
-    <a class="nlink" href="#seg">Segmentações</a>
-    <a class="nlink" href="#depo">Depoimentos</a>
+    <a class="nlink" href="/moabi">Moabi</a>
+    <a class="nlink" href="/carteira-etfs">ETFs</a>
     <a class="nlink" href="#cta">Contato</a>
   </div>
   <button class="ncta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Falar com Jhony</button>
-</nav>
+</nav><div style="background:linear-gradient(90deg,rgba(201,168,76,.18),rgba(201,168,76,.08));border-bottom:1px solid rgba(201,168,76,.22);padding:.55rem 2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.8)">🚀 <strong style="color:#fff">Novo:</strong> Comunidade Protocolo 9A — metodologia de 9 ativos para transformar sua carteira &nbsp;<a href="/protocolo-9a" style="color:var(--g4);font-weight:700;text-decoration:none">Saiba mais →</a></div>
 
-<div style="background:linear-gradient(90deg,rgba(0,102,255,.18),rgba(0,102,255,.08));border-bottom:1px solid rgba(0,102,255,.22);padding:.55rem 2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.8)">🚀 <strong style="color:#fff">Novo:</strong> Comunidade Protocolo 9A — metodologia de 9 ativos para transformar sua carteira &nbsp;<a href="/protocolo-9a" style="color:#4488F5;font-weight:700;text-decoration:none">Saiba mais →</a></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -449,24 +462,20 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
       <h2 class="ctatitle">Pronto para o<br>próximo passo?</h2>
       <p class="ctasub">Preencha e entro em contato em até 24h para uma conversa sem compromisso.</p>
       <div class="ctaform">
-        <form action="https://formsubmit.co/2fa.protegido@gmail.com" method="POST">
-          <div class="frow">
-            <input class="fi" type="text" name="name" placeholder="Seu nome" required>
-            <input class="fi" type="tel" name="phone" placeholder="(16) 99604-5700" required>
-          </div>
-          <input class="fi ff" type="email" name="email" placeholder="Seu e-mail" required>
-          <select class="fi ff" name="investimento" style="appearance:none;cursor:pointer" required>
-            <option value="" disabled selected>Quanto você tem para investir?</option>
-            <option>Até R$ 100 mil</option>
-            <option>R$ 100 mil – R$ 300 mil</option>
-            <option>R$ 300 mil – R$ 3 milhões</option>
-            <option>R$ 3 milhões – R$ 5 milhões</option>
-            <option>Acima de R$ 5 milhões</option>
-          </select>
-          <input type="hidden" name="_next" value="https://www.jhonybosio.com">
-          <input type="hidden" name="_subject" value="Novo Lead: JhonyBosio.com">
-          <button class="sbtn" type="submit">Quero falar com Jhony Bosio →</button>
-        </form>
+        <div class="frow">
+          <input class="fi" type="text" placeholder="Seu nome">
+          <input class="fi" type="tel" placeholder="(16) 99604-5700">
+        </div>
+        <input class="fi ff" type="email" placeholder="Seu e-mail">
+        <select class="fi ff" style="appearance:none;cursor:pointer">
+          <option value="" disabled selected>Quanto você tem para investir?</option>
+          <option>Até R$ 100 mil</option>
+          <option>R$ 100 mil – R$ 300 mil</option>
+          <option>R$ 300 mil – R$ 3 milhões</option>
+          <option>R$ 3 milhões – R$ 5 milhões</option>
+          <option>Acima de R$ 5 milhões</option>
+        </select>
+        <button class="sbtn">Quero falar com Jhony Bosio →</button>
         <p class="fdiscl">Seus dados são protegidos. Nenhum spam — só uma conversa honesta sobre seu futuro financeiro.</p>
       </div>
     </div>
@@ -476,20 +485,43 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
-    <div class="finner">
-      <div class="fbrand">Jhony <span>Bosio</span></div>
-      <div class="flegal">Assessor vinculado à Blue3 Investimentos, parceiro XP Investimentos CCTVM S/A. Rentabilidade passada não garante resultado futuro. Investimentos envolvem riscos.</div>
-      <nav class="flinks">
-        <a class="flink" href="/moabi">Moabi</a>
-        <a class="flink" href="/carteira-etfs">Carteira ETFs</a>
-        <a class="flink" href="/protocolo-9a">Protocolo 9A</a>
-        <a class="flink" href="/aula-vip">Aula VIP</a>
-        <a class="flink" href="https://instagram.com/jhonybosio" target="_blank">Instagram</a>
-      </nav>
+    <div class="finner" style="display:flex; justify-content:space-between; align-items:flex-start; gap:40px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,.05)">
+      <div style="flex:1">
+        <div class="fbrand" style="font-family:var(--fd); font-size:24px; font-weight:800; color:#fff; margin-bottom:16px">Jhony <span style="color:var(--g4)">Bosio</span></div>
+        <div class="flegal" style="font-size:12px; color:rgba(255,255,255,.3); line-height:1.6; max-width:400px">Assessor de Investimentos sócio da Blue3 Investimentos, parceiro XP Investimentos CCTVM S/A. O investimento em ativos financeiros envolve riscos.</div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:40px">
+        <div>
+          <div style="color:#fff; font-weight:700; font-size:14px; margin-bottom:16px">Ecosistema</div>
+          <div style="display:flex; flex-direction:column; gap:10px">
+            <a href="/moabi" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:14px">Moabi</a>
+            <a href="/carteira-etfs" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:14px">Carteira ETFs</a>
+            <a href="/protocolo-9a" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:14px">Protocolo 9A</a>
+            <a href="/aula-vip" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:14px">Aula VIP</a>
+          </div>
+        </div>
+        <div>
+          <div style="color:#fff; font-weight:700; font-size:14px; margin-bottom:16px">Social</div>
+          <div style="display:flex; flex-direction:column; gap:10px">
+            <a href="https://instagram.com/jhonybosio" target="_blank" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:14px">Instagram</a>
+            <a href="https://linkedin.com/in/jhonybosio" target="_blank" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:14px">LinkedIn</a>
+            <a href="politicas.html" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:14px">Privacidade</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top:30px; text-align:center; font-size:11px; color:rgba(255,255,255,.2)">
+      &copy; 2026 Jhony Bosio · Todos os direitos reservados.
     </div>
   </div>
 </footer>
 </div>
-
+</body>
+</html>
+));
+  el.classList.add('on');
+  window.parent.postMessage({type:'__edit_mode_set_keys',edits:{blurIntensity:i}},'*');
+}
+</script>
 </body>
 </html>
