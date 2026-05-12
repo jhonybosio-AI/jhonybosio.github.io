@@ -93,16 +93,23 @@ body{font-family:var(--fb);background:var(--bg);color:var(--w);overflow-x:hidden
   font-weight: 800;
   font-size: 17px;
   color: #fff;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo-name::before {
+  content: "|";
+  color: rgba(255,255,255,0.2);
+  font-weight: 300;
 }
 .logo-sub {
-  font-size: 9px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.4);
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  margin-top: 2px;
+  letter-spacing: 0.15em;
+  color: var(--blue);
+  font-weight: 700;
+  margin-top: 1px;
 }
 .nlinks{display:flex;gap:26px;align-items:center}
 .nlink{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);cursor:pointer;text-decoration:none;transition:color .15s}
@@ -223,6 +230,75 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
   .htitle{font-size:clamp(28px,8vw,40px)!important}
   .photo-ring{width:180px;height:180px}
 }
+/* Pop-up Aula VIP */
+.vip-popup-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .vip-popup-overlay.active { display: flex; opacity: 1; }
+  .vip-popup-content {
+    max-width: 500px;
+    width: 100%;
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transform: translateY(20px);
+    transition: transform 0.5s ease;
+  }
+  .vip-popup-overlay.active .vip-popup-content { transform: translateY(0); }
+  .vip-banner {
+    width: 100%;
+    height: 220px;
+    background: url('aula_vip_banner_1778588559460.png') center/cover no-repeat;
+    position: relative;
+  }
+  .vip-banner::after {
+    content: "";
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 60%;
+    background: linear-gradient(to top, var(--navy), transparent);
+  }
+  .vip-info { padding: 30px; text-align: center; }
+  .vip-title { font-family: var(--fd); font-size: 24px; font-weight: 800; margin-bottom: 12px; color: #fff; }
+  .vip-desc { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+  .vip-btn {
+    display: block;
+    width: 100%;
+    background: var(--blue);
+    color: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .vip-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,146,255,0.3); }
+  .vip-close {
+    position: absolute;
+    top: 15px; right: 15px;
+    width: 32px; height: 32px;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    z-index: 10;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
 </style>
 </head>
 <body>
@@ -241,7 +317,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
     <div class="logo-icon">JB</div>
     <div class="logo-text">
       <div class="logo-name">Jhony Bosio</div>
-      <div class="logo-sub">Sócio Blue3 Wealth · XP</div>
+      <div class="logo-sub">Assessor de Investimentos</div>
     </div>
   </a>
   <div class="nlinks">
@@ -455,6 +531,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
           <a href="https://linkedin.com/in/jhonybosio" target="_blank" class="flink">LinkedIn</a>
           <a href="https://wa.me/5516996045700" target="_blank" class="flink">WhatsApp</a>
           <a href="politicas/" class="flink">Privacidade</a>
+          <a href="dashboard/" class="flink" style="opacity:0.2; font-size:9px">Acesso Restrito</a>
         </div>
       </div>
     </div>
@@ -464,5 +541,34 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
   </div>
 </footer>
 </div>
+
+
+<div class="vip-popup-overlay" id="vipPopup">
+  <div class="vip-popup-content">
+    <div class="vip-close" onclick="closeVipPopup()">✕</div>
+    <div class="vip-banner"></div>
+    <div class="vip-info">
+      <h2 class="vip-title">Convite: Aula VIP</h2>
+      <p class="vip-desc">Descubra como estruturar sua liberdade financeira com estratégias globais exclusivas para clientes selecionados.</p>
+      <a href="aula-vip/" class="vip-btn">Garantir Minha Vaga</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openVipPopup() {
+    const popup = document.getElementById('vipPopup');
+    popup.classList.add('active');
+  }
+  function closeVipPopup() {
+    const popup = document.getElementById('vipPopup');
+    popup.classList.remove('active');
+  }
+
+  // Abre o pop-up após 3 segundos
+  window.addEventListener('load', () => {
+    setTimeout(openVipPopup, 3000);
+  });
+</script>
 </body>
 </html>

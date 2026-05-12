@@ -59,20 +59,9 @@ body{font-family:var(--fb);background:var(--bg);color:var(--w);overflow-x:hidden
   display: flex;
   flex-direction: column;
 }
-.logo-name {
-  font-weight: 800;
-  font-size: 16px;
-  color: #fff;
-  line-height: 1.1;
-}
-.logo-sub {
-  font-size: 9px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.4);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-top: 1px;
-}
+.logo-name { font-weight: 800; font-size: 16px; color: #fff; line-height: 1.1; display: flex; align-items: center; gap: 8px; }
+.logo-name::before { content: "|"; color: rgba(255,255,255,0.2); font-weight: 300; }
+.logo-sub { font-size: 9px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 1px; }
 .hero{min-height:calc(100vh - 80px);display:flex;align-items:center;padding:40px 0 80px}
 .hgrid{display:grid;grid-template-columns:1fr 0.8fr;gap:64px;align-items:center}
 .heyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(0,146,255,.10);border:1px solid rgba(0,146,255,.22);border-radius:999px;padding:6px 14px;margin-bottom:26px}
@@ -117,8 +106,8 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06);text-align:cent
   <a href="../" class="logo-wrap">
     <div class="logo-icon">JB</div>
     <div class="logo-text">
-      <div class="logo-name">Jhony Bosio</div>
-      <div class="logo-sub">Comunidade Protocolo 9A</div>
+        <div class="logo-name">Jhony Bosio</div>
+        <div class="logo-sub">Assessor de Investimentos</div>
     </div>
   </a>
   <a href="../" style="font-family:var(--fd); font-size:14px; font-weight:600; color:rgba(255,255,255,.6); text-decoration:none">Home</a>

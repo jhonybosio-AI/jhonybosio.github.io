@@ -34,8 +34,9 @@
     box-shadow: 0 4px 12px rgba(0, 146, 255, 0.2);
 }
 .logo-text { display: flex; flex-direction: column; }
-.logo-name { font-weight: 800; font-size: 16px; color: #fff; line-height: 1.1; }
-.logo-sub { font-size: 9px; font-weight: 500; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 1px; }
+        .logo-name { font-weight: 800; font-size: 16px; color: #fff; line-height: 1.1; display: flex; align-items: center; gap: 8px; }
+        .logo-name::before { content: "|"; color: rgba(255,255,255,0.2); font-weight: 300; }
+        .logo-sub { font-size: 9px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 1px; }
 nav a { color:rgba(255,255,255,0.5); text-decoration:none; font-weight:600; margin-left:1.5rem; transition:color .2s; font-size:.85rem; text-transform:uppercase; letter-spacing:.05em; }
         nav a:hover { color:var(--blue); }
         .hero { margin-bottom:3rem; }
@@ -160,7 +161,7 @@ td.qty{text-align:right;font-weight:800;font-size:1rem;color:var(--blue)}
             <div class="logo-icon">JB</div>
             <div class="logo-text">
                 <div class="logo-name">Jhony Bosio</div>
-                <div class="logo-sub">Sócio Blue3 Wealth</div>
+                <div class="logo-sub">Assessor de Investimentos</div>
             </div>
         </a>
         <nav>
