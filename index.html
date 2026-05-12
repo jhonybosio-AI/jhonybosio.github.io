@@ -68,8 +68,8 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 .n-line{position:absolute;height:1px;width:75%;left:12.5%;opacity:0;transition:all .5s ease-in-out;background:linear-gradient(to right,transparent,var(--c5),transparent);pointer-events:none}
 .n-top{top:0}
 .n-bottom{bottom:0}
-.btnp:hover .n-line, .btng:hover .n-line{opacity:1}
-.btnp:hover .n-bottom, .btng:hover .n-bottom{opacity:0.4}
+.btnp:hover .n-line, .btng:hover .n-line, .pcard:hover .n-line, .vcard:hover .n-line, .glass:hover .n-line{opacity:1}
+.btnp:hover .n-bottom, .btng:hover .n-bottom, .pcard:hover .n-bottom, .vcard:hover .n-bottom, .glass:hover .n-bottom{opacity:0.4}
 
 /* PHOTO */
 .photo-wrap{position:relative;display:flex;justify-content:center}
@@ -102,8 +102,8 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 
 /* PROJECTS */
 .pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
-.pcard{padding:30px;border-radius:20px;background:var(--gb);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);
-  border:1px solid var(--gborder);transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer;text-decoration:none;display:block}
+.pcard{position:relative;padding:30px;border-radius:20px;background:var(--gb);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);
+  border:1px solid var(--gborder);transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer;text-decoration:none;display:block;overflow:hidden}
 .pcard:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2);box-shadow:0 16px 48px rgba(0,0,0,.3)}
 .pcard.featured{border-color:rgba(0,209,255,.25);background:rgba(0,209,255,.04)}
 .pcard.featured:hover{border-color:rgba(0,209,255,.45);box-shadow:0 16px 48px rgba(0,209,255,.12)}
@@ -115,7 +115,7 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 
 /* VALUES */
 .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
-.vcard{padding:28px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07)}
+.vcard{position:relative;padding:28px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);overflow:hidden}
 .vicon{font-size:28px;margin-bottom:14px}
 .vtitle{font-family:var(--fd);font-size:16px;font-weight:700;color:#fff;margin-bottom:6px}
 .vtext{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6}
@@ -207,11 +207,11 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
           </a>
         </div>
       </div>
-      <div class="photo-wrap">
-        <div class="photo-ring">
-          <img src="/jhony-bosio-foto.jpg" alt="Jhony Bosio — Assessor de Investimentos">
+        <div class="photo-wrap">
+          <div class="photo-ring">
+            <img src="jhony-bosio-foto.jpg" alt="Jhony Bosio — Assessor de Investimentos">
+          </div>
         </div>
-      </div>
     </div>
   </div>
 </section>
@@ -245,7 +245,9 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
           <p>Minha missão é simples: <strong>ajudar pessoas a investir com clareza e crescer com segurança</strong>.</p>
         </div>
       </div>
-      <div class="glass" style="padding:28px">
+      <div class="glass" style="padding:28px;position:relative;overflow:hidden">
+        <span class="n-line n-top"></span>
+        <span class="n-line n-bottom"></span>
         <div style="font-family:var(--fd);font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.09em;text-transform:uppercase;margin-bottom:18px">Trajetória</div>
         <div style="display:flex;flex-direction:column;gap:14px">
           <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
@@ -279,31 +281,39 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
     <div class="pgrid">
 
       <a class="pcard featured" href="/protocolo-9a">
+        <span class="n-line n-top"></span>
         <div class="picon" style="background:rgba(0,209,255,.12)">🎯</div>
         <div class="pcard-title">Protocolo 9A</div>
         <div class="pcard-desc">Comunidade de investimento passivo com metodologia de 9 ativos globais. Uma carteira simples, barata e comprovadamente superior à maioria dos fundos ativos.</div>
         <span class="pcard-link">Explorar →</span>
+        <span class="n-line n-bottom"></span>
       </a>
 
       <a class="pcard" href="/carteira-etfs">
+        <span class="n-line n-top"></span>
         <div class="picon" style="background:rgba(27,111,239,.12)">📈</div>
         <div class="pcard-title">Carteiras ETF</div>
         <div class="pcard-desc">Simulador e portfólios globais diversificados via ETFs. Compare, analise e encontre a carteira ideal para o seu perfil e horizonte de investimento.</div>
         <span class="pcard-link">Explorar →</span>
+        <span class="n-line n-bottom"></span>
       </a>
 
       <a class="pcard" href="/mentoria">
+        <span class="n-line n-top"></span>
         <div class="picon" style="background:rgba(0,209,255,.12)">🤝</div>
         <div class="pcard-title">Mentoria Financeira</div>
         <div class="pcard-desc">Programas personalizados para cada momento da sua vida financeira — do primeiro investimento à preservação de grandes patrimônios.</div>
         <span class="pcard-link">Explorar →</span>
+        <span class="n-line n-bottom"></span>
       </a>
 
       <a class="pcard" href="/aula-vip">
+        <span class="n-line n-top"></span>
         <div class="picon" style="background:rgba(27,111,239,.12)">🎬</div>
         <div class="pcard-title">Aula VIP</div>
         <div class="pcard-desc">Masterclass exclusiva sobre investimento inteligente. Aprenda os fundamentos que a maioria dos assessores não te conta.</div>
         <span class="pcard-link">Explorar →</span>
+        <span class="n-line n-bottom"></span>
       </a>
 
     </div>
@@ -317,19 +327,25 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
     <h2 class="stitle">No que acredito</h2>
     <div class="vgrid">
       <div class="vcard">
+        <span class="n-line n-top"></span>
         <div class="vicon">🔍</div>
         <div class="vtitle">Transparência total</div>
         <div class="vtext">Sem custos ocultos, sem conflitos de interesse. Cada decisão é tomada pensando exclusivamente no seu melhor resultado.</div>
+        <span class="n-line n-bottom"></span>
       </div>
       <div class="vcard">
+        <span class="n-line n-top"></span>
         <div class="vicon">🤖</div>
         <div class="vtitle">Tecnologia a seu favor</div>
         <div class="vtext">Inteligência Artificial e automação para analisar dados, otimizar portfólios e garantir que nenhuma oportunidade passe despercebida.</div>
+        <span class="n-line n-bottom"></span>
       </div>
       <div class="vcard">
+        <span class="n-line n-top"></span>
         <div class="vicon">🤝</div>
         <div class="vtitle">Relacionamento genuíno</div>
         <div class="vtext">Atendimento próximo e personalizado. Você tem acesso direto a mim — sem call centers, sem intermediários.</div>
+        <span class="n-line n-bottom"></span>
       </div>
     </div>
   </div>
