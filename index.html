@@ -8,12 +8,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --n9:#07111F; --n8:#0D1C3A; --n7:#132651; --n6:#1A3168;
-  --b5:#0066FF; --b4:#4488F5; --b3:#7AABF8;
-  --g5:#C9A84C; --g4:#D4AF6A; --g3:#E2C98A;
+  --n9:#050C1A; --n8:#0A1B3D; --n7:#0F2651; --n6:#143168;
+  --b5:#0066FF; --b4:#00D1FF; --b3:#7AABF8;
+  --c5:#00D1FF; --c4:#00B8E6; --c3:#00A3CC; /* Substituindo Gold por Cyan */
   --w:#FFFFFF;
   --gb:rgba(255,255,255,0.05);
-  --gborder:rgba(255,255,255,0.12);
+  --gborder:rgba(255,255,255,0.10);
   --gblur:blur(24px) saturate(1.6);
   --fd:'Plus Jakarta Sans',sans-serif;
   --fb:'DM Sans',sans-serif;
@@ -23,12 +23,12 @@ html{scroll-behavior:smooth}
 body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden}
 
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(155deg,#0E1208 0%,#07111F 55%,#120C02 100%)}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:fl 14s ease-in-out infinite}
-.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.55;
-  background:radial-gradient(circle,rgba(201,168,76,0.38),transparent 70%)}
-.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.4;animation-delay:-6s;
-  background:radial-gradient(circle,rgba(201,168,76,.28),transparent 70%)}
+  background:linear-gradient(155deg,#050C1A 0%,#0A1B3D 55%,#050C1A 100%)}
+.orb{position:absolute;border-radius:50%;filter:blur(100px);animation:fl 14s ease-in-out infinite}
+.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.35;
+  background:radial-gradient(circle,rgba(0,209,255,0.3),transparent 70%)}
+.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.25;animation-delay:-6s;
+  background:radial-gradient(circle,rgba(0,102,255,.2),transparent 70%)}
 @keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(18px,-28px) scale(1.04)}70%{transform:translate(-14px,18px) scale(.97)}}
 
 .page{position:relative;z-index:1}
@@ -47,28 +47,35 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 .hero{min-height:calc(100vh - 66px);display:flex;align-items:center;padding:80px 0 56px}
 .hgrid{display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center}
 .heyebrow{display:inline-flex;align-items:center;gap:8px;
-  background:rgba(201,168,76,.10);border:1px solid rgba(201,168,76,.22);
+  background:rgba(0,209,255,.10);border:1px solid rgba(0,209,255,.22);
   border-radius:999px;padding:6px 14px;margin-bottom:26px}
-.heyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--g4)}
-.heyebrow-txt{font-size:12px;font-weight:600;color:var(--g4);letter-spacing:.05em}
+.heyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--c5)}
+.heyebrow-txt{font-size:12px;font-weight:600;color:var(--c5);letter-spacing:.05em}
 .htitle{font-family:var(--fd);font-size:clamp(40px,5.2vw,62px);font-weight:800;
   line-height:1.07;letter-spacing:-.035em;color:#fff;margin-bottom:22px}
 .hsub{font-size:17px;color:rgba(255,255,255,.58);line-height:1.72;max-width:480px;margin-bottom:36px}
 .hbtns{display:flex;gap:11px;align-items:center;flex-wrap:wrap}
-.btnp{font-family:var(--fd);font-size:15px;font-weight:700;
-  background:linear-gradient(135deg,var(--b5),#1456D6);color:#fff;border:none;border-radius:7px;
-  padding:13px 28px;cursor:pointer;box-shadow:0 4px 20px rgba(27,111,239,.4);transition:transform .15s,box-shadow .15s;text-decoration:none}
+.btnp{position:relative;font-family:var(--fd);font-size:15px;font-weight:700;
+  background:linear-gradient(135deg,var(--b5),#1456D6);color:#fff;border:none;border-radius:999px;
+  padding:13px 32px;cursor:pointer;box-shadow:0 4px 20px rgba(27,111,239,.4);transition:transform .15s,box-shadow .15s;text-decoration:none;overflow:hidden;display:inline-flex;align-items:center;justify-content:center}
 .btnp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(27,111,239,.5)}
-.btng{font-family:var(--fd);font-size:15px;font-weight:600;
-  background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:7px;
-  padding:12px 26px;cursor:pointer;backdrop-filter:blur(12px);transition:background .15s,border-color .15s;text-decoration:none}
+.btng{position:relative;font-family:var(--fd);font-size:15px;font-weight:600;
+  background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;
+  padding:12px 30px;cursor:pointer;backdrop-filter:blur(12px);transition:background .15s,border-color .15s;text-decoration:none;overflow:hidden;display:inline-flex;align-items:center;justify-content:center}
 .btng:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.35)}
+
+/* Neon Animation Layers */
+.n-line{position:absolute;height:1px;width:75%;left:12.5%;opacity:0;transition:all .5s ease-in-out;background:linear-gradient(to right,transparent,var(--c5),transparent);pointer-events:none}
+.n-top{top:0}
+.n-bottom{bottom:0}
+.btnp:hover .n-line, .btng:hover .n-line{opacity:1}
+.btnp:hover .n-bottom, .btng:hover .n-bottom{opacity:0.4}
 
 /* PHOTO */
 .photo-wrap{position:relative;display:flex;justify-content:center}
 .photo-ring{width:340px;height:340px;border-radius:50%;padding:6px;
-  background:linear-gradient(135deg,rgba(201,168,76,.4),rgba(0,102,255,.3),rgba(201,168,76,.4));
-  box-shadow:0 0 80px rgba(201,168,76,.15),0 0 40px rgba(0,102,255,.1)}
+  background:linear-gradient(135deg,rgba(0,209,255,.4),rgba(0,102,255,.3),rgba(0,209,255,.4));
+  box-shadow:0 0 80px rgba(0,209,255,.15),0 0 40px rgba(0,102,255,.1)}
 .photo-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;
   border:4px solid var(--n9)}
 
@@ -98,13 +105,13 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 .pcard{padding:30px;border-radius:20px;background:var(--gb);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);
   border:1px solid var(--gborder);transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer;text-decoration:none;display:block}
 .pcard:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2);box-shadow:0 16px 48px rgba(0,0,0,.3)}
-.pcard.featured{border-color:rgba(201,168,76,.25);background:rgba(201,168,76,.04)}
-.pcard.featured:hover{border-color:rgba(201,168,76,.45);box-shadow:0 16px 48px rgba(201,168,76,.12)}
+.pcard.featured{border-color:rgba(0,209,255,.25);background:rgba(0,209,255,.04)}
+.pcard.featured:hover{border-color:rgba(0,209,255,.45);box-shadow:0 16px 48px rgba(0,209,255,.12)}
 .picon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:22px}
 .pcard-title{font-family:var(--fd);font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
 .pcard-desc{font-size:14px;color:rgba(255,255,255,.48);line-height:1.6;margin-bottom:16px}
 .pcard-link{font-family:var(--fd);font-size:13px;font-weight:700;color:var(--b4);display:inline-flex;align-items:center;gap:6px}
-.pcard.featured .pcard-link{color:var(--g4)}
+.pcard.featured .pcard-link{color:var(--c5)}
 
 /* VALUES */
 .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
@@ -180,12 +187,24 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
           <div class="heyebrow-dot"></div>
           <div class="heyebrow-txt">Sócio Blue3 Investimentos · XP</div>
         </div>
-        <h1 class="htitle">Jhony <span style="color:var(--g4)">Bosio</span></h1>
+        <h1 class="htitle">Jhony <span style="color:var(--c5)">Bosio</span></h1>
         <p class="hsub">Assessor de investimentos, empreendedor e entusiasta de IA. Construo soluções que conectam tecnologia, finanças e pessoas — com transparência e propósito.</p>
         <div class="hbtns">
-          <a class="btnp" href="#projetos">Conheça meus projetos ↓</a>
-          <a class="btng" href="https://linkedin.com/in/jhonybosio" target="_blank">LinkedIn</a>
-          <a class="btng" href="https://instagram.com/jhonybosio" target="_blank">Instagram</a>
+          <a class="btnp" href="#projetos">
+            <span class="n-line n-top"></span>
+            Conheça meus projetos ↓
+            <span class="n-line n-bottom"></span>
+          </a>
+          <a class="btng" href="https://linkedin.com/in/jhonybosio" target="_blank">
+            <span class="n-line n-top"></span>
+            LinkedIn
+            <span class="n-line n-bottom"></span>
+          </a>
+          <a class="btng" href="https://instagram.com/jhonybosio" target="_blank">
+            <span class="n-line n-top"></span>
+            Instagram
+            <span class="n-line n-bottom"></span>
+          </a>
         </div>
       </div>
       <div class="photo-wrap">
@@ -217,7 +236,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
   <div class="wrap">
     <div class="about-grid">
       <div>
-        <div class="slabel" style="color:var(--g4)">Sobre mim</div>
+        <div class="slabel" style="color:var(--c5)">Sobre mim</div>
         <h2 class="stitle">Quem é Jhony Bosio</h2>
         <div class="about-text">
           <p>Há mais de <strong>10 anos</strong> no mercado financeiro, construí minha carreira ajudando famílias e empreendedores a tomar decisões melhores sobre seu patrimônio.</p>
@@ -230,19 +249,19 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
         <div style="font-family:var(--fd);font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.09em;text-transform:uppercase;margin-bottom:18px">Trajetória</div>
         <div style="display:flex;flex-direction:column;gap:14px">
           <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(201,168,76,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🏦</div>
+            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,209,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🏦</div>
             <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">Sócio Blue3 Investimentos</div><div style="font-size:11px;color:rgba(255,255,255,.42)">Escritório parceiro XP · Ribeirão Preto</div></div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(27,111,239,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🤖</div>
+            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,102,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🤖</div>
             <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">Assessor 3.0</div><div style="font-size:11px;color:rgba(255,255,255,.42)">IA aplicada à curadoria de portfólios</div></div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(201,168,76,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">📊</div>
+            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,209,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">📊</div>
             <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">+R$ 100M sob custódia</div><div style="font-size:11px;color:rgba(255,255,255,.42)">Gestão patrimonial de famílias e empresas</div></div>
           </div>
           <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(27,111,239,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🎓</div>
+            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,102,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🎓</div>
             <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">Educador Financeiro</div><div style="font-size:11px;color:rgba(255,255,255,.42)">Mentor e criador do Protocolo 9A</div></div>
           </div>
         </div>
@@ -260,7 +279,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
     <div class="pgrid">
 
       <a class="pcard featured" href="/protocolo-9a">
-        <div class="picon" style="background:rgba(201,168,76,.12)">🎯</div>
+        <div class="picon" style="background:rgba(0,209,255,.12)">🎯</div>
         <div class="pcard-title">Protocolo 9A</div>
         <div class="pcard-desc">Comunidade de investimento passivo com metodologia de 9 ativos globais. Uma carteira simples, barata e comprovadamente superior à maioria dos fundos ativos.</div>
         <span class="pcard-link">Explorar →</span>
@@ -274,7 +293,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
       </a>
 
       <a class="pcard" href="/mentoria">
-        <div class="picon" style="background:rgba(201,168,76,.12)">🤝</div>
+        <div class="picon" style="background:rgba(0,209,255,.12)">🤝</div>
         <div class="pcard-title">Mentoria Financeira</div>
         <div class="pcard-desc">Programas personalizados para cada momento da sua vida financeira — do primeiro investimento à preservação de grandes patrimônios.</div>
         <span class="pcard-link">Explorar →</span>
@@ -294,7 +313,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
 <!-- VALORES -->
 <section class="sec" id="valores" style="padding-top:0">
   <div class="wrap">
-    <div class="slabel" style="color:var(--g4)">Filosofia</div>
+    <div class="slabel" style="color:var(--c5)">Filosofia</div>
     <h2 class="stitle">No que acredito</h2>
     <div class="vgrid">
       <div class="vcard">
@@ -321,7 +340,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
   <div class="wrap">
     <div class="finner">
       <div style="flex:1">
-        <div class="fbrand">Jhony <span style="color:var(--g4)">Bosio</span></div>
+        <div class="fbrand">Jhony <span style="color:var(--c5)">Bosio</span></div>
         <div class="flegal">Assessor de Investimentos sócio da Blue3 Investimentos, parceiro XP Investimentos CCTVM S/A. O investimento em ativos financeiros envolve riscos.</div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:40px">
@@ -331,6 +350,11 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
           <a href="/carteira-etfs" class="flink">Carteiras ETF</a>
           <a href="/mentoria" class="flink">Mentoria</a>
           <a href="/aula-vip" class="flink">Aula VIP</a>
+        </div>
+        <div>
+          <div class="fcol-title">Institucional</div>
+          <a href="https://www.blue3investimentos.com.br/" target="_blank" class="flink">Blue3 Investimentos</a>
+          <a href="https://www.xpi.com.br/" target="_blank" class="flink">XP Investimentos</a>
         </div>
         <div>
           <div class="fcol-title">Social</div>
