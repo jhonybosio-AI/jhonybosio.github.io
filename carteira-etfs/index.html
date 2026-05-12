@@ -123,6 +123,7 @@ select.etf-select:focus{border-color:var(--blue)}
 select.etf-select option{background:#1a1a2e;color:#fff}
 td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;font-size:.85rem}
 td.qty{text-align:right;font-weight:800;font-size:1rem;color:var(--blue)}
+td.val{text-align:right;font-weight:700;font-size:.9rem;color:#fff}
 .total-row{background:rgba(0,102,255,.06)!important}
 .total-row td{font-weight:800;border-top:1px solid rgba(0,102,255,.2);padding:1rem}
 .etf-link{color:var(--blue);font-size:.7rem;font-weight:500;text-decoration:none;opacity:.7;transition:opacity .2s}
@@ -261,6 +262,7 @@ td.qty{text-align:right;font-weight:800;font-size:1rem;color:var(--blue)}
           <th>ETF</th>
           <th>Cotação (R$)</th>
           <th>Qtd Cotas</th>
+          <th style="text-align: right;">Valor Total (R$)</th>
         </tr>
       </thead>
       <tbody id="simBody"></tbody>
@@ -423,6 +425,7 @@ function render() {
       </td>
       <td class="num">${pct>0 ? formatBRL(etf.price) : '—'}</td>
       <td class="qty">${pct>0 ? qty : '—'}</td>
+      <td class="val">${pct>0 ? formatBRL(invested) : '—'}</td>
     </tr>`;
   });
 
@@ -432,6 +435,7 @@ function render() {
     <td></td>
     <td class="num" style="color:var(--blue)">TOTAL</td>
     <td class="qty" style="font-size:1.1rem">${totalQty} cotas</td>
+    <td class="val" style="font-size:1.1rem;color:var(--blue)">${formatBRL(totalInvested)}</td>
   </tr>`;
 
   tbody.innerHTML = html;
