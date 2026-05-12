@@ -8,37 +8,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --n9:#050C1A; --n8:#0A1B3D; --n7:#0F2651; --n6:#143168;
-  --b5:#0066FF; --b4:#00D1FF; --b3:#7AABF8;
-  --c5:#00D1FF; --c4:#00B8E6; --c3:#00A3CC; /* Substituindo Gold por Cyan */
-  --w:#FFFFFF;
-  --gb:rgba(255,255,255,0.05);
-  --gborder:rgba(255,255,255,0.10);
-  --gblur:blur(24px) saturate(1.6);
-  --fd:'Plus Jakarta Sans',sans-serif;
-  --fb:'DM Sans',sans-serif;
+  /* Blue3 Official Palette */
+  --navy: #000d38;        /* Blue 1 - Deep Navy */
+  --navy-light: #002060;  /* Blue 2 - Deep Blue */
+  --blue: #0092ff;        /* Blue 4 - Brand Primary */
+  --cyan-accent: #00ffff; /* Blue 5 - Subtle Accent */
+  
+  --bg: #050a1d;          /* Custom deep background based on navy */
+  --glass: rgba(255, 255, 255, 0.03);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(0, 146, 255, 0.3);
+  
+  --w: #FFFFFF;
+  --gblur: blur(20px) saturate(1.8);
+  --fd: 'Plus Jakarta Sans', sans-serif;
+  --fb: 'Plus Jakarta Sans', sans-serif; /* Unifying fonts for premium feel */
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden}
+body{font-family:var(--fb);background:var(--bg);color:var(--w);overflow-x:hidden}
 
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(155deg,#050C1A 0%,#0A1B3D 55%,#050C1A 100%)}
+  background:radial-gradient(circle at top right, var(--navy-light) 0%, var(--bg) 70%)}
 .orb{position:absolute;border-radius:50%;filter:blur(100px);animation:fl 14s ease-in-out infinite}
-.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.35;
-  background:radial-gradient(circle,rgba(0,209,255,0.3),transparent 70%)}
-.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.25;animation-delay:-6s;
-  background:radial-gradient(circle,rgba(0,102,255,.2),transparent 70%)}
+.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.25;
+  background:radial-gradient(circle,rgba(0,146,255,0.2),transparent 70%)}
+.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.15;animation-delay:-6s;
+  background:radial-gradient(circle,rgba(0,146,255,0.1),transparent 70%)}
 @keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(18px,-28px) scale(1.04)}70%{transform:translate(-14px,18px) scale(.97)}}
 
 .page{position:relative;z-index:1}
 .wrap{max-width:1100px;margin:0 auto;padding:0 40px}
-.glass{background:var(--gb);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);border:1px solid var(--gborder);border-radius:20px}
+.glass{background:var(--glass);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);border:1px solid var(--border);border-radius:20px}
 
 /* NAV */
 .nav{position:sticky;top:0;z-index:100;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;
-  background:rgba(7,17,31,.65);backdrop-filter:blur(28px) saturate(1.8);-webkit-backdrop-filter:blur(28px) saturate(1.8);
-  border-bottom:1px solid rgba(255,255,255,.07)}
+  background:rgba(5,10,29,.8);backdrop-filter:blur(28px) saturate(1.8);-webkit-backdrop-filter:blur(28px) saturate(1.8);
+  border-bottom:1px solid var(--border)}
 .nlinks{display:flex;gap:26px;align-items:center}
 .nlink{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);cursor:pointer;text-decoration:none;transition:color .15s}
 .nlink:hover{color:#fff}
@@ -47,44 +53,44 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 .hero{min-height:calc(100vh - 66px);display:flex;align-items:center;padding:80px 0 56px}
 .hgrid{display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center}
 .heyebrow{display:inline-flex;align-items:center;gap:8px;
-  background:rgba(0,209,255,.10);border:1px solid rgba(0,209,255,.22);
+  background:rgba(0,146,255,.10);border:1px solid rgba(0,146,255,.22);
   border-radius:999px;padding:6px 14px;margin-bottom:26px}
-.heyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--c5)}
-.heyebrow-txt{font-size:12px;font-weight:600;color:var(--c5);letter-spacing:.05em}
+.heyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
+.heyebrow-txt{font-size:12px;font-weight:600;color:var(--blue);letter-spacing:.05em}
 .htitle{font-family:var(--fd);font-size:clamp(40px,5.2vw,62px);font-weight:800;
   line-height:1.07;letter-spacing:-.035em;color:#fff;margin-bottom:22px}
-.hsub{font-size:17px;color:rgba(255,255,255,.58);line-height:1.72;max-width:480px;margin-bottom:36px}
+.hsub{font-size:17px;color:rgba(255,255,255,.65);line-height:1.72;max-width:480px;margin-bottom:36px}
 .hbtns{display:flex;gap:11px;align-items:center;flex-wrap:wrap}
 .btnp{position:relative;font-family:var(--fd);font-size:15px;font-weight:700;
-  background:linear-gradient(135deg,var(--b5),#1456D6);color:#fff;border:none;border-radius:999px;
-  padding:13px 32px;cursor:pointer;box-shadow:0 4px 20px rgba(27,111,239,.4);transition:transform .15s,box-shadow .15s;text-decoration:none;overflow:hidden;display:inline-flex;align-items:center;justify-content:center}
-.btnp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(27,111,239,.5)}
+  background:linear-gradient(135deg,var(--blue),#0078d4);color:#fff;border:none;border-radius:999px;
+  padding:13px 32px;cursor:pointer;box-shadow:0 4px 20px rgba(0,146,255,.3);transition:transform .15s,box-shadow .15s;text-decoration:none;overflow:hidden;display:inline-flex;align-items:center;justify-content:center}
+.btnp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,146,255,.4)}
 .btng{position:relative;font-family:var(--fd);font-size:15px;font-weight:600;
-  background:rgba(255,255,255,.06);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:999px;
+  background:rgba(255,255,255,.04);color:#fff;border:1px solid var(--border);border-radius:999px;
   padding:12px 30px;cursor:pointer;backdrop-filter:blur(12px);transition:background .15s,border-color .15s;text-decoration:none;overflow:hidden;display:inline-flex;align-items:center;justify-content:center}
-.btng:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.35)}
+.btng:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
 
 /* Neon Animation Layers */
-.n-line{position:absolute;height:1px;width:75%;left:12.5%;opacity:0;transition:all .5s ease-in-out;background:linear-gradient(to right,transparent,var(--c5),transparent);pointer-events:none}
-.n-top{top:0}
-.n-bottom{bottom:0}
-.btnp:hover .n-line, .btng:hover .n-line, .pcard:hover .n-line, .vcard:hover .n-line, .glass:hover .n-line{opacity:1}
-.btnp:hover .n-bottom, .btng:hover .n-bottom, .pcard:hover .n-bottom, .vcard:hover .n-bottom, .glass:hover .n-bottom{opacity:0.4}
+.n-line{position:absolute;height:1.5px;width:60%;left:20%;opacity:0;transition:all .6s cubic-bezier(0.16, 1, 0.3, 1);background:linear-gradient(to right,transparent,var(--blue),var(--cyan-accent),var(--blue),transparent);pointer-events:none;filter:drop-shadow(0 0 8px var(--blue))}
+.n-top{top:-0.5px}
+.n-bottom{bottom:-0.5px}
+.btnp:hover .n-line, .btng:hover .n-line, .pcard:hover .n-line, .vcard:hover .n-line, .glass:hover .n-line, .sbar:hover .n-line{opacity:0.8;width:80%;left:10%}
+.btnp:hover .n-bottom, .btng:hover .n-bottom, .pcard:hover .n-bottom, .vcard:hover .n-bottom, .glass:hover .n-bottom, .sbar:hover .n-bottom{opacity:0.4}
 
 /* PHOTO */
 .photo-wrap{position:relative;display:flex;justify-content:center}
-.photo-ring{width:340px;height:340px;border-radius:50%;padding:6px;
-  background:linear-gradient(135deg,rgba(0,209,255,.4),rgba(0,102,255,.3),rgba(0,209,255,.4));
-  box-shadow:0 0 80px rgba(0,209,255,.15),0 0 40px rgba(0,102,255,.1)}
+.photo-ring{width:340px;height:340px;border-radius:50%;padding:4px;
+  background:linear-gradient(135deg,var(--blue),var(--navy-light),var(--blue));
+  box-shadow:0 0 60px rgba(0,146,255,0.1)}
 .photo-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;
-  border:4px solid var(--n9)}
+  border:4px solid var(--bg)}
 
 /* SECTIONS */
 .sec{padding:88px 0}
-.slabel{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:11px}
+.slabel{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:11px;color:var(--blue)}
 .stitle{font-family:var(--fd);font-size:clamp(26px,3.4vw,40px);font-weight:800;
-  letter-spacing:-.03em;line-height:1.14;margin-bottom:15px}
-.sbody{font-size:17px;color:rgba(255,255,255,.52);line-height:1.72;max-width:600px}
+  letter-spacing:-.03em;line-height:1.14;margin-bottom:15px;color:var(--w)}
+.sbody{font-size:17px;color:rgba(255,255,255,.6);line-height:1.72;max-width:600px}
 
 /* STATS */
 .sbar{padding:30px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
@@ -105,13 +111,13 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 .pcard{position:relative;padding:30px;border-radius:20px;background:var(--gb);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);
   border:1px solid var(--gborder);transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer;text-decoration:none;display:block;overflow:hidden}
 .pcard:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2);box-shadow:0 16px 48px rgba(0,0,0,.3)}
-.pcard.featured{border-color:rgba(0,209,255,.25);background:rgba(0,209,255,.04)}
-.pcard.featured:hover{border-color:rgba(0,209,255,.45);box-shadow:0 16px 48px rgba(0,209,255,.12)}
+.pcard.featured{border-color:rgba(0,146,255,0.25);background:rgba(0,146,255,0.04)}
+.pcard.featured:hover{border-color:rgba(0,146,255,0.45);box-shadow:0 16px 48px rgba(0,146,255,0.12)}
 .picon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:22px}
 .pcard-title{font-family:var(--fd);font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
-.pcard-desc{font-size:14px;color:rgba(255,255,255,.48);line-height:1.6;margin-bottom:16px}
-.pcard-link{font-family:var(--fd);font-size:13px;font-weight:700;color:var(--b4);display:inline-flex;align-items:center;gap:6px}
-.pcard.featured .pcard-link{color:var(--c5)}
+.pcard-desc{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:16px}
+.pcard-link{font-family:var(--fd);font-size:13px;font-weight:700;color:var(--blue);display:inline-flex;align-items:center;gap:6px}
+.pcard.featured .pcard-link{color:var(--blue)}
 
 /* VALUES */
 .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
@@ -169,12 +175,12 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
 
 <!-- NAV -->
 <nav class="nav">
-  <div style="font-weight:800;font-size:20px;color:#fff;letter-spacing:-0.5px;font-family:var(--fd)">JHONY<span style="color:var(--b5)">BOSIO</span></div>
+  <div style="font-weight:800;font-size:20px;color:#fff;letter-spacing:-0.5px;font-family:var(--fd)">JHONY<span style="color:var(--blue)">BOSIO</span></div>
   <div class="nlinks">
     <a class="nlink" href="#sobre">Sobre</a>
     <a class="nlink" href="#projetos">Projetos</a>
     <a class="nlink" href="#valores">Filosofia</a>
-    <a class="nlink" href="https://wa.me/5516996045700" target="_blank" style="background:linear-gradient(135deg,var(--b5),#1456D6);color:#fff;padding:8px 18px;border-radius:7px;font-weight:700;font-family:var(--fd)">Falar comigo</a>
+    <a class="nlink" href="https://wa.me/5516996045700" target="_blank" style="background:linear-gradient(135deg,var(--blue),#0078d4);color:#fff;padding:8px 18px;border-radius:7px;font-weight:700;font-family:var(--fd);text-decoration:none">Falar comigo</a>
   </div>
 </nav>
 
@@ -187,7 +193,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
           <div class="heyebrow-dot"></div>
           <div class="heyebrow-txt">Sócio Blue3 Investimentos · XP</div>
         </div>
-        <h1 class="htitle">Jhony <span style="color:var(--c5)">Bosio</span></h1>
+        <h1 class="htitle">Jhony <span style="color:var(--blue)">Bosio</span></h1>
         <p class="hsub">Assessor de investimentos, empreendedor e entusiasta de IA. Construo soluções que conectam tecnologia, finanças e pessoas — com transparência e propósito.</p>
         <div class="hbtns">
           <a class="btnp" href="#projetos">
@@ -217,7 +223,8 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
 </section>
 
 <!-- STATS -->
-<div class="sbar">
+<div class="sbar" style="position:relative;overflow:hidden">
+  <span class="n-line n-top"></span>
   <div class="wrap">
     <div class="sbinner">
       <div class="si"><div class="sin">+167</div><div class="sil">Famílias atendidas</div></div>
@@ -229,6 +236,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
       <div class="si"><div class="sin">Blue3</div><div class="sil">Escritório parceiro XP</div></div>
     </div>
   </div>
+  <span class="n-line n-bottom"></span>
 </div>
 
 <!-- SOBRE -->
@@ -236,7 +244,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
   <div class="wrap">
     <div class="about-grid">
       <div>
-        <div class="slabel" style="color:var(--c5)">Sobre mim</div>
+        <div class="slabel">Sobre mim</div>
         <h2 class="stitle">Quem é Jhony Bosio</h2>
         <div class="about-text">
           <p>Há mais de <strong>10 anos</strong> no mercado financeiro, construí minha carreira ajudando famílias e empreendedores a tomar decisões melhores sobre seu patrimônio.</p>
@@ -275,7 +283,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
 <!-- PROJETOS -->
 <section class="sec" id="projetos" style="padding-top:0">
   <div class="wrap">
-    <div class="slabel" style="color:var(--b4)">Ecossistema</div>
+    <div class="slabel">Ecossistema</div>
     <h2 class="stitle">Meus Projetos</h2>
     <p class="sbody">Cada projeto nasceu de uma necessidade real dos meus clientes. Juntos, eles formam um ecossistema completo para quem quer investir melhor.</p>
     <div class="pgrid">
@@ -323,7 +331,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
 <!-- VALORES -->
 <section class="sec" id="valores" style="padding-top:0">
   <div class="wrap">
-    <div class="slabel" style="color:var(--c5)">Filosofia</div>
+    <div class="slabel">Filosofia</div>
     <h2 class="stitle">No que acredito</h2>
     <div class="vgrid">
       <div class="vcard">
@@ -356,7 +364,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
   <div class="wrap">
     <div class="finner">
       <div style="flex:1">
-        <div class="fbrand">Jhony <span style="color:var(--c5)">Bosio</span></div>
+        <div class="fbrand">Jhony <span style="color:var(--blue)">Bosio</span></div>
         <div class="flegal">Assessor de Investimentos sócio da Blue3 Investimentos, parceiro XP Investimentos CCTVM S/A. O investimento em ativos financeiros envolve riscos.</div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:40px">
