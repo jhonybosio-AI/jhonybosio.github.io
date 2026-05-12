@@ -3,238 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Performance Invest | O Modelo 70%</title>
-    <meta name="description" content="Aumente seu ROA, trabalhe remoto e fique com até 70% do que produz. O modelo definitivo para assessores independentes.">
+    <title>Recrutamento | Performance Invest</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/performanceInvest/recrutamento/style.css">
+    <style>
+        :root {
+            --navy: #000d38;
+            --navy-light: #002060;
+            --blue: #0092ff;
+            --bg: #050a1d;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --w: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--w); line-height: 1.6; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        
+        header { 
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 24px; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: var(--blue); }
+
+        .hero { padding: 100px 0; text-align: center; }
+        h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 48px; font-weight: 800; margin-bottom: 24px; }
+        h1 span { color: var(--blue); }
+        .hero p { font-size: 18px; color: rgba(255,255,255,0.6); max-width: 800px; margin: 0 auto 40px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .card { background: var(--glass); border: 1px solid var(--border); padding: 40px; border-radius: 24px; text-align: center; }
+        .icon { font-size: 40px; margin-bottom: 20px; }
+        h3 { font-size: 20px; margin-bottom: 15px; }
+        .card p { font-size: 15px; color: rgba(255,255,255,0.5); }
+
+        .cta-section { background: linear-gradient(135deg, var(--navy-light), var(--navy)); padding: 80px 40px; border-radius: 30px; text-align: center; border: 1px solid var(--border); }
+        .btn-cta { background: var(--blue); color: #fff; padding: 16px 40px; border-radius: 100px; font-weight: 700; text-decoration: none; font-size: 16px; display: inline-block; transition: all 0.3s; }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 146, 255, 0.3); }
+
+        footer { padding: 80px 0 40px; margin-top: 80px; border-top: 1px solid var(--border); }
+        .footer-bottom { text-align: center; font-size: 14px; color: rgba(255,255,255,0.4); }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 32px; }
+            .container { padding: 0 20px; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo-wrapper" style="display: flex; align-items: center; gap: 15px;">
-                <img src="/performanceInvest/recrutamento/assets/Logoatual.png" alt="Performance Invest Logo" style="height: 45px;">
-                <div class="pi-text-stack" style="display: flex; flex-direction: column; line-height: 1.1;">
-                    <span style="font-size: 1.3rem; font-weight: 500; color: #fff; letter-spacing: 0.5px;">Performance</span>
-                    <span style="font-size: 1.4rem; font-weight: 800; color: var(--accent-gold); letter-spacing: 1px; text-transform: uppercase;">Invest</span>
-                </div>
-                <div style="height: 45px; width: 1px; background-color: rgba(255,255,255,0.2);"></div>
-                <a href="https://www.xpi.com.br" target="_blank" style="display: flex; align-items: center;">
-                    <img src="/performanceInvest/recrutamento/assets/xp-logo.png" alt="XP Logo" style="height: 45px;">
-                </a>
-            </div>
-            <div class="nav-links">
-                <a href="#modelo-antigo">A Ruptura</a>
-                <a href="#ia-aplicada">IA Aplicada</a>
-                <a href="#contato" class="btn btn-primary">Quero Migrar</a>
-            </div>
-            <div class="mobile-menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-background"></div>
-        <div class="hero-content">
-            <div class="badge">O Fim do Conflito de Interesses</div>
-            <h1 class="hero-title">O escritório que paga <span class="highlight-gradient">até 70%</span> e elimina o conflito com seu cliente.</h1>
-            <p class="hero-subtitle">Trabalhe remoto, aumente seu ROA agressivamente e use Inteligência Artificial para captar clientes em escala, sem depender de indicação.</p>
-            <div class="hero-cta">
-                <a href="#contato" class="btn btn-glow">Quero migrar para o modelo 70%</a>
-            </div>
-            
-            <!-- Prova Social -->
-            <div class="social-proof glass-panel">
-                <p>"Hoje, com R$100M sob gestão, já começo o mês com a meta batida no modelo fee fixo. Assessor pressionado vende produto. Assessor livre constrói patrimônio."</p>
-                <div class="proof-author">— Lucas M., Assessor Partner</div>
-            </div>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">Performance <span>Invest</span></a>
         </div>
     </header>
 
-    <!-- A Ruptura / O Inimigo Comum -->
-    <section class="rupture" id="modelo-antigo">
-        <div class="container">
-            <h2 class="section-title">O modelo antigo <span class="highlight">morreu.</span></h2>
-            <p class="section-subtitle">Você sabe disso. Todo mês a mesma pressão, comissionamentos baixos e desalinhamento com o cliente. Veja a diferença:</p>
-            
-            <div class="comparison-table-wrapper glass-panel">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Critério</th>
-                            <th class="old-model">Escritório Tradicional</th>
-                            <th class="new-model">Performance Invest</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Remuneração (Split)</strong></td>
-                            <td class="old-model-cell">Geralmente 40% a 50%</td>
-                            <td class="new-model-cell highlight"><strong>Até 70% de Repasse</strong></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Ambiente & Metas</strong></td>
-                            <td class="old-model-cell">Metas abusivas e microgerenciamento</td>
-                            <td class="new-model-cell">100% Autonomia focada no seu resultado</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Local de Trabalho</strong></td>
-                            <td class="old-model-cell">Físico, bateria de ponto, reuniões diárias</td>
-                            <td class="new-model-cell"><strong>Squad Anywhere</strong> (Liberdade Geográfica)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Tecnologia de Prospecção</strong></td>
-                            <td class="old-model-cell">Sistemas legados, planilhas e cold call puro</td>
-                            <td class="new-model-cell">Cérebro IA automatizando captação e discursos</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Relação com o Cliente</strong></td>
-                            <td class="old-model-cell">Conflito de interesses (venda do que paga mais)</td>
-                            <td class="new-model-cell"><strong>Fee Fixo</strong> (Alinhamento perfeito)</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div class="container">
+        <section class="hero">
+            <h1>Seja sócio de um escritório <span>Referência</span></h1>
+            <p>Estamos selecionando assessores de alta performance que desejam migrar para o modelo de consultoria transparente e baseada em tecnologia.</p>
+        </section>
+
+        <div class="grid">
+            <div class="card">
+                <div class="icon">💼</div>
+                <h3>Modelo de Partnership</h3>
+                <p>Oportunidade real de se tornar sócio do escritório com base em meritocracia e resultados consistentes.</p>
             </div>
-            <div class="text-center mt-2">
-                <a href="#contato" class="btn btn-outline">Quero aumentar meu ROA agora</a>
+            <div class="card">
+                <div class="icon">🚀</div>
+                <h3>Tech Hub</h3>
+                <p>Acesso exclusivo ao nosso ecossistema de IA (Hermes Agent) para automação de relatórios e inteligência de mercado.</p>
+            </div>
+            <div class="card">
+                <div class="icon">💎</div>
+                <h3>Modelo Fee Fixo</h3>
+                <p>Liberdade total para assessorar seu cliente sem conflito de interesses, focando no que é melhor para o patrimônio.</p>
             </div>
         </div>
-    </section>
 
-    <!-- Concrete AI Impact -->
-    <section class="ai-core" id="ia-aplicada">
-        <div class="container">
-            <div class="ai-layout">
-                <div class="ai-visual">
-                    <div class="glass-orb"></div>
-                    <div class="code-snippet glass-panel">
-                        <pre><code>// Impacto Real no seu Bolso
-const ia_performance = {
-  prospeccao: "Tempo reduzido em 60%",
-  conversao: "Aumentada em 3x (Pitch Fee Fixo)",
-  roa_medio: "Subindo de 0.5% para 0.8%+"
-};
+        <section class="cta-section">
+            <h2 style="margin-bottom: 20px; font-size: 28px;">Pronto para o próximo nível?</h2>
+            <p style="margin-bottom: 40px; color: rgba(255,255,255,0.6);">Envie seu currículo ou agende um café para conhecer nosso hub de operações em Ribeirão Preto.</p>
+            <a href="https://wa.me/5516996045700" target="_blank" class="btn-cta">Falar com Jhony Bosio</a>
+        </section>
+    </div>
 
-AntiGravity.executeGrowth(ia_performance);
-> "Squad de captação operando em lucro máximo."</code></pre>
-                    </div>
-                </div>
-                <div class="ai-text">
-                    <h2 class="section-title">IA que vira <span class="highlight-gradient">Dinheiro no Bolso.</span></h2>
-                    <p>Não estamos falando de tecnologia abstrata. O nosso "Cérebro Digital" é um playbook de IA operacional focado estritamente em produtividade e aumento de receita.</p>
-                    <ul class="ai-list">
-                        <li>
-                            <span class="ai-check">💰</span>
-                            <div>
-                                <strong>Aumenta a conversão para Fee Fixo</strong>
-                                <p>Scripts automatizados provam matematicamente para o prospect o quanto ele perde em taxas ocultas no banco atual.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="ai-check">⚡</span>
-                            <div>
-                                <strong>Reduz em 60% o tempo de captação</strong>
-                                <p>A IA analisa perfis e escreve cold mails e quebras de gelo no LinkedIn hiper-personalizadas por você.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <span class="ai-check">🤖</span>
-                            <div>
-                                <strong>Raio-X de Carteira Instantâneo</strong>
-                                <p>Jogue o extrato do concorrente na nossa ferramenta e receba os "Red Flags" (fundos caros, COEs) em segundos para desarmar o cliente.</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Agressivo -->
-    <section class="contact" id="contato">
-        <div class="container">
-            <div class="contact-box glass-panel">
-                <div class="contact-info">
-                    <h2>Se você já provou que sabe captar, aqui você só precisa de <span class="highlight">Liberdade.</span></h2>
-                    <p>Pare de dividir o maior pedaço do bolo com quem não trouxe o cliente. Junte-se ao movimento que vai quebrar o mercado tradicional.</p>
-                    <ul class="benefits-list mt-2">
-                        <li>✓ Elimine as taxas ocultas</li>
-                        <li>✓ Construa relacionamento sem pressão de produtos</li>
-                        <li>✓ Vagas limitadas para os primeiros Squads</li>
-                    </ul>
-                </div>
-                <form action="https://formsubmit.co/jhonybosio@gmail.com" method="POST" class="contact-form">
-                    <!-- Configurações Ocultas do FormSubmit -->
-                    <input type="hidden" name="_subject" value="Novo Assessor Lead - Modelo 70%">
-                    <input type="hidden" name="_captcha" value="false">
-                    
-                    <div class="form-group">
-                        <label for="name">Seu Nome</label>
-                        <input type="text" id="name" name="Nome" placeholder="Como devemos chamá-lo?" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Seu E-mail</label>
-                        <input type="email" id="email" name="Email" placeholder="seu@email.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="auv">Custódia Atual Aproximada</label>
-                        <input type="text" id="auv" name="Custodia_Atual" placeholder="Ex: R$ 50 Milhões (Apenas para termos ideia)">
-                    </div>
-                    <button type="submit" class="btn btn-glow full-width">Quero migrar para o modelo 70%</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>PERFORMANCE INVEST</h4>
-                    <p>Somos uma assessoria de investimentos credenciada junto à XP Investimentos. Nosso trabalho é cuidar dos objetivos de nossos clientes.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>ENDEREÇO</h4>
-                    <p>Rua Diogo Moreira, 132 | 11º andar | Cjs. 1107 a 1110.<br>Bairro Pinheiros.<br>CEP 05423-010. São Paulo-SP.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>FALE COM A GENTE</h4>
-                    <p>Atendimento Whatsapp:<br>(11) 9 8745-7001</p>
-                    <p>E-mail:<br>atendimento@performanceinvest.com.br</p>
-                </div>
-                <div class="footer-col">
-                    <h4>MENU</h4>
-                    <ul>
-                        <li><a href="#inicio">Home</a></li>
-                        <li><a href="#modelo-antigo">A Ruptura</a></li>
-                        <li><a href="#ia-aplicada">Tecnologia (IA)</a></li>
-                        <li><a href="/">Site para Clientes</a></li>
-                        <li><a href="#contato">Fale com a gente</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-disclaimer">
-                A Performance Invest – Agente Autônomo de Investimentos Ltda, inscrita sob o CNPJ 23.630.164/0001-06 é uma empresa de Assessoria de Investimento devidamente registrada na Comissão de Valores Mobiliários na forma da Resolução CVM 178/23 ("Sociedade"), que mantém contrato de distribuição de produtos financeiros com a XP Investimentos Corretora de Câmbio, Títulos e Valores Mobiliários S.A. ("XP") e pode, por conta e ordem dos seus clientes, operar no mercado de capitais segundo a legislação vigente. Na forma da legislação da CVM, o Assessor de Investimento não pode administrar ou gerir o patrimônio de investidores. O investimento em ações é um investimento de risco e rentabilidade passada não é garantia de rentabilidade futura. Na realização de operações com derivativos existe a possibilidade de perdas superiores aos valores investidos, podendo resultar em significativas perdas patrimoniais. A Sociedade poderá exercer atividades complementares relacionadas aos mercados financeiro, securitário, de previdência e capitalização, desde que não conflitem com a atividade de assessoria de investimentos, podendo ser realizada por meio da pessoa jurídica acima descrita ou por meio de pessoa jurídica terceira. Todas as atividades são prestadas mantendo a devida segregação e em cumprimento ao quanto previsto nas regras da CVM ou de outros órgãos reguladores e autorreguladores. Para informações e dúvidas sobre produtos, contate seu assessor de investimentos. Para reclamações, contate a Ouvidoria da XP pelo telefone 0800 722 3730.
-            </div>
-
             <div class="footer-bottom">
-                <p>&copy; 2026 Performance Invest Wealth Management. Todos os direitos reservados. <a href="#">Política de Privacidade</a></p>
+                <p>&copy; 2026 Performance Invest | Blue3 | XP. Todos os direitos reservados. <a href="#">Política de Privacidade</a></p>
             </div>
         </div>
     </footer>
 
-    <script src="/performanceInvest/recrutamento/script.js"></script>
 </body>
 </html>

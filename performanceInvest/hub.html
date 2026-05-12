@@ -3,258 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hub do Assessor | Performance Invest</title>
-    <!-- Google Fonts -->
+    <title>Hub de Operações | Performance Invest</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- Custom CSS from Index (The Dark Premium Theme) -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* Hub Specific Layout Enhancements */
-        body { padding-top: 80px; }
+        :root {
+            --navy: #000d38;
+            --navy-light: #002060;
+            --blue: #0092ff;
+            --bg: #050a1d;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --w: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--w); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
         
-        .top-shortcuts {
-            padding: 2rem 0;
-            border-bottom: var(--glass-border);
-            background: rgba(0,0,0,0.2);
+        header { 
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 60px;
         }
-        .shortcut-list {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2.5rem;
-        }
-        .shortcut-item {
+
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 24px; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: var(--blue); }
+
+        .title-section { margin-bottom: 40px; }
+        h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 32px; margin-bottom: 8px; }
+        p.subtitle { color: rgba(255,255,255,0.5); font-size: 16px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        
+        .tool-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            transition: var(--transition-smooth);
+            gap: 15px;
         }
-        .shortcut-item:hover {
-            color: var(--accent-gold);
-            transform: translateY(-2px);
+
+        .tool-card:hover {
+            border-color: var(--blue);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.06);
         }
-        .shortcut-item i { width: 24px; height: 24px; }
-        
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-            margin-bottom: 2rem;
+
+        .icon { font-size: 32px; }
+        h3 { font-size: 18px; font-weight: 700; }
+        .tool-card p { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+        footer { margin-top: 80px; padding: 40px 0; border-top: 1px solid var(--border); }
+        .footer-bottom { text-align: center; font-size: 14px; color: rgba(255,255,255,0.3); }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
         }
-        .grid-card {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            transition: var(--transition-smooth);
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-        .grid-card:hover {
-            border-color: var(--accent-gold);
-            background: rgba(212, 175, 55, 0.05);
-            transform: translateY(-3px);
-            color: var(--accent-gold);
-        }
-        .grid-card i {
-            color: var(--accent-blue);
-        }
-        
-        .hub-banner {
-            margin-top: 3rem;
-            padding: 4rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hub-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(0,102,204,0.1) 0%, transparent 50%);
-            z-index: 0;
-        }
-        .hub-banner > * { position: relative; z-index: 1; }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo" style="display: flex; align-items: center; gap: 15px;">
-                <img src="/performanceInvest/recrutamento/assets/Logoatual.png" alt="Performance Invest Logo" style="height: 45px;">
-                <div class="pi-text-stack" style="display: flex; flex-direction: column; line-height: 1.1;">
-                    <span style="font-size: 1.3rem; font-weight: 500; color: #fff; letter-spacing: 0.5px;">Performance</span>
-                    <span style="font-size: 1.4rem; font-weight: 800; color: var(--accent-gold); letter-spacing: 1px; text-transform: uppercase;">Invest</span>
-                </div>
-                <div style="height: 45px; width: 1px; background-color: rgba(255,255,255,0.2);"></div>
-                <a href="https://www.xpi.com.br" target="_blank" style="display: flex; align-items: center;">
-                    <img src="/performanceInvest/recrutamento/assets/xp-logo.png" alt="XP Logo" style="height: 45px;">
-                </a>
-            </div>
-            <div class="nav-links">
-                <a href="#negocios">Negócios</a>
-                <a href="#qualidade">Qualidade</a>
-                <a href="#pessoas">Pessoas</a>
-                <a href="index.html" class="btn btn-outline">Site Institucional</a>
-            </div>
-            <div class="mobile-menu-toggle">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Top Shortcuts Bar -->
-    <header class="top-shortcuts">
-        <div class="container">
-            <div class="shortcut-list">
-                <a href="#" class="shortcut-item">
-                    <i data-lucide="bar-chart-2"></i>
-                    <span>Power BI</span>
-                </a>
-                <a href="#" class="shortcut-item">
-                    <i data-lucide="users"></i>
-                    <span>CRM Acesso</span>
-                </a>
-                <a href="https://hub.xpi.com.br/new/dashboard" target="_blank" class="shortcut-item">
-                    <i data-lucide="briefcase"></i>
-                    <span>Hub XP</span>
-                </a>
-                <a href="#" class="shortcut-item">
-                    <i data-lucide="file-text"></i>
-                    <span>Materiais</span>
-                </a>
-                <a href="https://conteudos.xpi.com.br/" target="_blank" class="shortcut-item">
-                    <i data-lucide="book-open"></i>
-                    <span>Conteúdos XP</span>
-                </a>
-            </div>
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">Performance <span>Invest</span></a>
+            <div style="font-size: 12px; color: var(--blue); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Área de Governança e Operações</div>
         </div>
     </header>
 
-    <!-- Monitor de Mercado -->
-    <section style="padding-top: 2rem; padding-bottom: 0;">
-        <div class="container">
-            <div class="glass-panel" style="padding: 1rem; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 1rem;">
-                    <h3 style="font-size: 1.1rem; color: var(--accent-gold); display: flex; align-items: center; gap: 10px;">
-                        <i data-lucide="line-chart"></i> Monitor de Mercado
-                    </h3>
-                    <div style="display: flex; gap: 10px;">
-                        <a href="https://www.notion.so/jhonybosio/Performance-Invest-354ec2e03e458041952aed8cc740a5ab?source=copy_link" target="_blank" class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.8rem;">
-                            <i data-lucide="external-link" style="width:14px; height:14px;"></i> Acessar Notion HUB
-                        </a>
-                        <a href="dashboard/index.html" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.8rem;">
-                            <i data-lucide="layout-dashboard" style="width:14px; height:14px;"></i> Gestão & KPIs
-                        </a>
-                    </div>
-                </div>
-                <!-- TradingView Widget BEGIN -->
-                <div class="tradingview-widget-container" style="height: 72px; border-radius: 8px; overflow: hidden;">
-                    <div class="tradingview-widget-container__widget"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-                    {
-                    "symbols": [
-                        { "proName": "BMFBOVESPA:IBOV", "title": "Ibovespa" },
-                        { "proName": "FX_IDC:USDBRL", "title": "USD/BRL" },
-                        { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
-                        { "proName": "BMFBOVESPA:IFIX", "title": "IFIX" },
-                        { "proName": "BMFBOVESPA:IVVB11", "title": "IVVB11" }
-                    ],
-                    "showSymbolLogo": true,
-                    "colorTheme": "dark",
-                    "isTransparent": true,
-                    "displayMode": "adaptive",
-                    "locale": "pt"
-                    }
-                    </script>
-                </div>
-                <!-- TradingView Widget END -->
-            </div>
+    <div class="container">
+        <div class="title-section">
+            <h1>Hub de Operações Internas</h1>
+            <p class="subtitle">Ferramentas de produtividade e gestão para o time Performance Invest.</p>
         </div>
-    </section>
 
-    <!-- Main Banner / Novidades -->
-    <section style="padding-top: 0; padding-bottom: 2rem;">
-        <div class="container">
-            <div class="hub-banner glass-panel">
-                <div class="badge">Área Exclusiva</div>
-                <h1 class="hero-title" style="font-size: 3rem; margin-bottom: 1rem;">Bem-vindo ao <span class="highlight-gradient">Hub do Assessor</span></h1>
-                <p class="section-subtitle" style="margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">Curadoria de materiais e links direcionados exclusivamente para facilitar o dia a dia. Tudo que você precisa, em um só lugar.</p>
-                
-                <div class="glass-panel" style="display:inline-block; padding: 2rem 3rem; background: rgba(0,102,204,0.1); border-color: rgba(0,102,204,0.3);">
-                    <div class="badge" style="margin-bottom: 1rem; background: rgba(212, 175, 55, 0.2); color: var(--accent-gold); border-color: var(--accent-gold);">R$ 10.000 de Bônus</div>
-                    <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem; color: var(--text-primary);">Indique um Assessor</h3>
-                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem; max-width: 400px; margin-left: auto; margin-right: auto;">Traga amigos para fazer parte do time <strong>AnyWhere</strong> da Performance Invest e fature alto.</p>
-                    <a href="https://www.notion.so/jhonybosio/M-dulo-Neg-cios-355ec2e03e4581ed86aac86b81c0a19c" target="_blank" class="btn btn-glow">Acessar Regras</a>
-                </div>
-            </div>
+        <div class="grid">
+            <a href="simulador-carteira.html" class="tool-card">
+                <div class="icon">📊</div>
+                <h3>Simulador de Carteira</h3>
+                <p>Simulação avançada de alocação para novos prospects e rebalanceamento.</p>
+            </a>
+            <a href="../dashboard/index.html" class="tool-card">
+                <div class="icon">🔑</div>
+                <h3>Acesso Restrito</h3>
+                <p>Dashboard privado de métricas, leads e analytics de marketing.</p>
+            </a>
+            <a href="#" class="tool-card">
+                <div class="icon">📄</div>
+                <h3>Templates Blue3/XP</h3>
+                <p>Modelos de apresentações, propostas e documentos institucionais.</p>
+            </a>
+            <a href="#" class="tool-card">
+                <div class="icon">🤖</div>
+                <h3>Hermes AI Agent</h3>
+                <p>Interface de automação para geração de relatórios mensais e parsing de PDFs.</p>
+            </a>
         </div>
-    </section>
-
-    <!-- Negócios Section -->
-    <section id="negocios" style="padding-top: 2rem; padding-bottom: 2rem;">
-        <div class="container">
-            <h2 class="section-title" style="text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">Módulo <span class="highlight">Negócios</span></h2>
-            <div class="links-grid">
-                <a href="https://www.notion.so/jhonybosio/M-dulo-Neg-cios-355ec2e03e4581ed86aac86b81c0a19c" target="_blank" class="grid-card glass-panel"><i data-lucide="pie-chart"></i> Base de Conhecimento Negócios</a>
-                <a href="https://www.notion.so/jhonybosio/M-dulo-Neg-cios-355ec2e03e4581ed86aac86b81c0a19c" target="_blank" class="grid-card glass-panel"><i data-lucide="users"></i> CRM - Manuais e Processos</a>
-                <a href="simulador/index.html" target="_blank" class="grid-card glass-panel"><i data-lucide="calculator"></i> Simulador Fee vs Commission</a>
-                <a href="simulador-carteira.html" target="_blank" class="grid-card glass-panel"><i data-lucide="layout-template"></i> Simulador de Carteira ETF</a>
-                <a href="http://127.0.0.1:3100" target="_blank" class="grid-card glass-panel" style="border-color: var(--accent-blue); background: rgba(0, 122, 255, 0.05);"><i data-lucide="bot" style="color: var(--accent-blue);"></i> Agentes AI (Paperclip)</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Qualidade Section -->
-    <section id="qualidade" style="padding-top: 2rem; padding-bottom: 2rem;">
-        <div class="container">
-            <h2 class="section-title" style="text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">Módulo <span class="highlight">Qualidade</span></h2>
-            <div class="links-grid">
-                <a href="https://www.notion.so/jhonybosio/M-dulo-Qualidade-355ec2e03e4581c39d39c213f7ef76bc" target="_blank" class="grid-card glass-panel"><i data-lucide="shield-check"></i> Compliance & Private Zone</a>
-                <a href="https://www.notion.so/jhonybosio/M-dulo-Qualidade-355ec2e03e4581c39d39c213f7ef76bc" target="_blank" class="grid-card glass-panel"><i data-lucide="file-search"></i> Políticas & Manuais</a>
-                <a href="https://www.notion.so/jhonybosio/M-dulo-Qualidade-355ec2e03e4581c39d39c213f7ef76bc" target="_blank" class="grid-card glass-panel"><i data-lucide="video"></i> Treinamentos & Qualidade</a>
-                <a href="https://hub.xpi.com.br/new/dashboard" target="_blank" class="grid-card glass-panel"><i data-lucide="layout"></i> Hub XP (Acesso Externo)</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pessoas Section -->
-    <section id="pessoas" style="padding-top: 2rem;">
-        <div class="container">
-            <h2 class="section-title" style="text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">Módulo <span class="highlight">Pessoas</span></h2>
-            <div class="links-grid">
-                <a href="https://www.notion.so/jhonybosio/M-dulo-Pessoas-355ec2e03e45819e942acdb345a5b3a1" target="_blank" class="grid-card glass-panel"><i data-lucide="heart"></i> Benefícios & Convívio</a>
-                <a href="https://www.notion.so/jhonybosio/M-dulo-Pessoas-355ec2e03e45819e942acdb345a5b3a1" target="_blank" class="grid-card glass-panel"><i data-lucide="book-open"></i> Educação & Carreira</a>
-                <a href="https://www.notion.so/jhonybosio/M-dulo-Pessoas-355ec2e03e45819e942acdb345a5b3a1" target="_blank" class="grid-card glass-panel"><i data-lucide="target"></i> Desempenho & Vagas</a>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <footer>
         <div class="container">
-            <div class="footer-grid" style="grid-template-columns: 1fr;">
-                <div class="footer-col" style="text-align: center;">
-                    <h4>PERFORMANCE INVEST</h4>
-                    <p>Hub de Assessores exclusivo. Acesso restrito a profissionais vinculados.</p>
-                </div>
-            </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Performance Invest Wealth Management. Todos os direitos reservados. Uso interno.</p>
+                <p>&copy; 2026 Performance Invest | Blue3 | XP. Todos os direitos reservados. Uso interno.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        lucide.createIcons();
-    </script>
 </body>
 </html>
