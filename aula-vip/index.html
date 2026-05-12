@@ -6,14 +6,28 @@
 <title>Lista VIP · Comunidade Protocolo 9A | Jhony Bosio</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--n9:#07111F;--n8:#0D1C3A;--b5:#1B6FEF;--b4:#4488F5;--g5:#C9A84C;--g4:#D4AF6A;--w:#FFFFFF;--gb:rgba(255,255,255,0.05);--gborder:rgba(255,255,255,0.10);--gblur:blur(24px) saturate(1.6);--fd:'Plus Jakarta Sans',sans-serif;--fb:'DM Sans',sans-serif}
+:root {
+  /* Blue3 Official Palette - Unifying with Main Site */
+  --navy: #000d38;
+  --navy-light: #002060;
+  --blue: #0092ff;
+  --cyan-accent: #00ffff;
+  --bg: #050a1d;
+  --w: #FFFFFF;
+  --gb: rgba(255, 255, 255, 0.05);
+  --gborder: rgba(255, 255, 255, 0.10);
+  --gblur: blur(24px) saturate(1.6);
+  --fd: 'Plus Jakarta Sans', sans-serif;
+  --fb: 'Plus Jakarta Sans', sans-serif;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden}
-.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(155deg,#09152A 0%,#07111F 55%,#040C16 100%)}
+body{font-family:var(--fb);background:var(--bg);color:var(--w);overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:var(--bg)}
+.bg::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--gborder) 1px, transparent 1px);background-size:40px 40px;opacity:0.2}
 .orb{position:absolute;border-radius:50%;filter:blur(80px);animation:fl 14s ease-in-out infinite}
-.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.5;background:radial-gradient(circle,rgba(201,168,76,.35),transparent 70%)}
-.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.4;animation-delay:-6s;background:radial-gradient(circle,rgba(27,111,239,.35),transparent 70%)}
+.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.3;background:radial-gradient(circle,var(--blue),transparent 70%)}
+.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.2;animation-delay:-6s;background:radial-gradient(circle,var(--navy-light),transparent 70%)}
 @keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(18px,-28px) scale(1.04)}70%{transform:translate(-14px,18px) scale(.97)}}
 .page{position:relative;z-index:1}
 .wrap{max-width:1100px;margin:0 auto;padding:0 40px}
@@ -21,29 +35,29 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 .glass-hi{background:rgba(255,255,255,.08);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);border:1px solid rgba(255,255,255,.13);border-radius:20px}
 .nav{height:66px;display:flex;align-items:center;justify-content:center;padding:0 40px;background:transparent}
 .nbrand{display:flex;align-items:center;gap:11px}
-.nlogo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--g5),var(--g4));border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;font-weight:800;color:#000}
+.nlogo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--navy-light));border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;font-weight:800;color:#fff}
 .nname{font-family:var(--fd);font-size:15px;font-weight:700;color:#fff;letter-spacing:-.01em}
 .nsub{font-size:11px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.1em;text-transform:uppercase}
 .hero{min-height:calc(100vh - 66px);display:flex;align-items:center;padding:40px 0 80px}
 .hgrid{display:grid;grid-template-columns:1fr 0.8fr;gap:64px;align-items:center}
-.heyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.10);border:1px solid rgba(201,168,76,.22);border-radius:999px;padding:6px 14px;margin-bottom:26px}
-.heyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--g4);box-shadow:0 0 10px var(--g4)}
-.heyebrow-txt{font-size:12px;font-weight:700;color:var(--g4);letter-spacing:.05em;text-transform:uppercase}
+.heyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(0,146,255,.10);border:1px solid rgba(0,146,255,.22);border-radius:999px;padding:6px 14px;margin-bottom:26px}
+.heyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);box-shadow:0 0 10px var(--blue)}
+.heyebrow-txt{font-size:12px;font-weight:700;color:var(--blue);letter-spacing:.05em;text-transform:uppercase}
 .htitle{font-family:var(--fd);font-size:clamp(36px,4.5vw,54px);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-bottom:22px}
-.htitle .ga{color:var(--g4)}
-.htitle .ba{color:var(--b4)}
-.hsub{font-size:18px;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:32px}
+.htitle .ga{color:var(--blue)}
+.htitle .ba{color:var(--blue)}
+.hsub{font-size:18px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.6;margin-bottom:32px}
 .hcheck-list{list-style:none;display:flex;flex-direction:column;gap:.75rem;margin-bottom:32px}
 .hcheck-list li{display:flex;align-items:flex-start;gap:.75rem;font-size:16px;color:rgba(255,255,255,.8)}
-.hcheck-icon{width:22px;height:22px;border-radius:6px;background:rgba(201,168,76,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--g4);font-size:.75rem;margin-top:2px}
-.optin-box{padding:36px;border-top:4px solid var(--g4)}
+.hcheck-icon{width:22px;height:22px;border-radius:6px;background:rgba(0,146,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--blue);font-size:.75rem;margin-top:2px}
+.optin-box{padding:36px;border-top:4px solid var(--blue)}
 .opt-title{font-family:var(--fd);font-size:22px;font-weight:800;color:#fff;margin-bottom:8px}
 .opt-sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:24px;line-height:1.5}
 .fi{width:100%;font-family:var(--fb);font-size:15px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:9px;padding:14px 16px;color:#fff;outline:none;transition:.2s;margin-bottom:12px}
-.fi:focus{border-color:var(--g4);background:rgba(201,168,76,.05)}
-.fi option{background:#0D1C3A;color:#fff}
-.btnp{width:100%;font-family:var(--fd);font-size:16px;font-weight:800;background:linear-gradient(135deg,var(--g5),var(--g4));color:#000;border:none;border-radius:9px;padding:16px;cursor:pointer;box-shadow:0 8px 24px rgba(201,168,76,.3);transition:.2s;text-transform:uppercase;letter-spacing:.05em}
-.btnp:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,168,76,.5)}
+.fi:focus{border-color:var(--blue);background:rgba(0,146,255,.05)}
+.fi option{background:#000d38;color:#fff}
+.btnp{width:100%;font-family:var(--fd);font-size:16px;font-weight:800;background:linear-gradient(135deg,var(--blue),#0078d4);color:#fff;border:none;border-radius:9px;padding:16px;cursor:pointer;box-shadow:0 8px 24px rgba(0,146,255,.3);transition:.2s;text-transform:uppercase;letter-spacing:.05em}
+.btnp:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,146,255,.5)}
 .secure{font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:6px}
 .sec{padding:88px 0}
 .stitle{font-family:var(--fd);font-size:clamp(24px,3.4vw,38px);font-weight:800;letter-spacing:-.03em;line-height:1.14;margin-bottom:40px;text-align:center}
@@ -52,8 +66,8 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 .pic{width:56px;height:56px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
 .ptitle{font-family:var(--fd);font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
 .ptext{font-size:15px;color:rgba(255,255,255,.5);line-height:1.6}
-.urgency{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:2rem;text-align:center;margin:0 auto;max-width:600px}
-.urgency h3{font-family:var(--fd);font-size:1.3rem;font-weight:800;margin-bottom:.5rem;color:var(--g4)}
+.urgency{background:rgba(0,146,255,.06);border:1px solid rgba(0,146,255,.2);border-radius:20px;padding:2rem;text-align:center;margin:0 auto;max-width:600px}
+.urgency h3{font-family:var(--fd);font-size:1.3rem;font-weight:800;margin-bottom:.5rem;color:var(--blue)}
 .urgency p{color:rgba(255,255,255,.6);font-size:.95rem;line-height:1.6}
 footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06);text-align:center}
 .flegal{font-size:12px;color:rgba(255,255,255,.22);max-width:600px;margin:0 auto;line-height:1.6}
@@ -72,7 +86,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06);text-align:cent
       <div class="nsub">Comunidade Protocolo 9A</div>
     </div>
   </div>
-  <a href="/" style="font-family:var(--fd); font-size:14px; font-weight:600; color:rgba(255,255,255,.6); text-decoration:none">Home</a>
+  <a href="../" style="font-family:var(--fd); font-size:14px; font-weight:600; color:rgba(255,255,255,.6); text-decoration:none">Home</a>
 </nav>
 
 <section class="hero">
@@ -97,6 +111,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06);text-align:cent
         <div class="opt-title">Quero entrar na Lista VIP</div>
         <div class="opt-sub">Preencha abaixo e receba acesso prioritário com desconto exclusivo de lançamento.</div>
         <form action="https://formspree.io/f/xreyqjey" method="POST">
+          <input type="hidden" name="_next" value="https://chat.whatsapp.com/D2alLGyFBjTDAwXyVO9Fs2">
           <input class="fi" type="text" name="first_name" placeholder="Seu Primeiro Nome" required>
           <input class="fi" type="email" name="email" placeholder="Seu melhor E-mail" required>
           <input class="fi" type="tel" name="whatsapp" placeholder="WhatsApp com DDD" required>
