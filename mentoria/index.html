@@ -7,28 +7,35 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --n9:#050505; --n8:#0A0A0A; --n7:#111111; --n6:#1A1A1A;
-  --b5:#0066FF; --b4:#1B6FEF; --b3:#4488F5;
-  --g5:#C9A84C; --g4:#D4AF6A; --g3:#E2C98A;
-  --w:#FFFFFF;
-  --gb:rgba(255,255,255,0.03);
-  --gborder:rgba(255,255,255,0.08);
-  --gblur:blur(30px) saturate(1.8);
-  --fd:'Plus Jakarta Sans',sans-serif;
-  --fb:'DM Sans',sans-serif;
+  /* Blue3 Official Palette */
+  --navy: #000d38;
+  --navy-light: #002060;
+  --blue: #0092ff;
+  --bg: #050a1d;
+  --w: #FFFFFF;
+  --gb: rgba(255, 255, 255, 0.05);
+  --gborder: rgba(255, 255, 255, 0.10);
+  --gblur: blur(24px) saturate(1.6);
+  --fd: 'Plus Jakarta Sans', sans-serif;
+  --fb: 'Plus Jakarta Sans', sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden}
-
-/* BG */
-.bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(155deg,#09152A 0%,#07111F 55%,#040C16 100%)}
+body{font-family:var(--fb);background:var(--bg);color:var(--w);overflow-x:hidden}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(var(--gborder) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:var(--bg)}
 .orb{position:absolute;border-radius:50%;filter:blur(80px);animation:fl 14s ease-in-out infinite}
-.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.5;
-  background:radial-gradient(circle,rgba(27,111,239,.5),transparent 70%)}
-.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.4;animation-delay:-6s;
-  background:radial-gradient(circle,rgba(201,168,76,.28),transparent 70%)}
+.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.3;background:radial-gradient(circle,var(--blue),transparent 70%)}
+.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.2;animation-delay:-6s;background:radial-gradient(circle,var(--navy-light),transparent 70%)}
 @keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(18px,-28px) scale(1.04)}70%{transform:translate(-14px,18px) scale(.97)}}
 
 /* LAYOUT */
@@ -38,11 +45,44 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 
 /* NAV */
 .nav{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
-.nbrand{display:flex;align-items:center;gap:11px;text-decoration:none}
-.nlogo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--g5),var(--g4));border:1px solid rgba(255,255,255,.15);
-  display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;font-weight:800;color:#000}
-.nname{font-family:var(--fd);font-size:15px;font-weight:700;color:#fff;letter-spacing:-.01em}
-.nsub{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px;letter-spacing:.15em;text-transform:uppercase}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--blue), var(--navy-light));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #fff;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 12px rgba(0, 146, 255, 0.2);
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+.logo-name {
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.1;
+}
+.logo-sub {
+  font-size: 9px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 1px;
+}
 
 /* HERO */
 .hero{padding:60px 0 80px;text-align:center}
@@ -94,14 +134,14 @@ body{font-family:var(--fb);background:var(--n9);color:var(--w);overflow-x:hidden
 
 <div class="page">
   <nav class="nav">
-    <a href="/" class="nbrand">
-      <div class="nlogo">JB</div>
-      <div>
-        <div class="nname">Jhony Bosio</div>
-        <div class="nsub">Private & Unique</div>
+    <a href="../" class="logo-wrap">
+      <div class="logo-icon">JB</div>
+      <div class="logo-text">
+        <div class="logo-name">Jhony Bosio</div>
+        <div class="logo-sub">Mentoria de Investimentos</div>
       </div>
     </a>
-    <a href="/" style="font-family:var(--fd); font-size:13px; font-weight:600; color:rgba(255,255,255,.4); text-decoration:none; text-transform:uppercase; letter-spacing:0.1em">Voltar à Home</a>
+    <a href="../" style="font-family:var(--fd); font-size:13px; font-weight:600; color:rgba(255,255,255,.4); text-decoration:none; text-transform:uppercase; letter-spacing:0.1em">Voltar à Home</a>
   </nav>
 
   <section class="hero">

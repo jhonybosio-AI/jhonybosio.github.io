@@ -8,20 +8,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030303; --card-bg: rgba(255,255,255,0.03); --glass-border: rgba(255,255,255,0.08);
-            --blue: #0066FF; --gold: #C9A84C; --text: #ffffff; --muted: rgba(255,255,255,0.4);
-            --success: #10b981; --danger: #ef4444;
+            /* Blue3 Official Palette */
+            --navy: #000d38;
+            --navy-light: #002060;
+            --blue: #0092ff;
+            --bg: #050a1d;
+            --w: #FFFFFF;
+            --gb: rgba(255, 255, 255, 0.05);
+            --gborder: rgba(255, 255, 255, 0.10);
+            --gblur: blur(24px) saturate(1.6);
+            --fd: 'Plus Jakarta Sans', sans-serif;
+            --fb: 'Plus Jakarta Sans', sans-serif;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
-        .ticker-wrap { background:#07111F !important; border-bottom:1px solid var(--glass-border); min-height:46px; }
-        .wrap { max-width:1200px; margin:0 auto; padding:2rem; }
+        body { font-family:var(--fb); background:var(--bg); color:var(--w); overflow-x:hidden; }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(var(--gborder) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .ticker-wrap { background:var(--navy) !important; border-bottom:1px solid var(--gborder); min-height:46px; }
+        .wrap { max-width:1200px; margin:0 auto; padding:2rem; position:relative; z-index:1; }
         header { display:flex; justify-content:space-between; align-items:center; padding:1.5rem 0; margin-bottom:3rem; }
-        .hdr-left { display:flex; align-items:center; gap:1rem; }
-        .avatar { width:48px; height:48px; background:linear-gradient(135deg, var(--gold), #A68336); border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#000; }
-        .brand .name { font-weight:700; font-size:1.05rem; display:block; }
-        .brand .role { font-size:.7rem; color:var(--muted); display:block; text-transform:uppercase; letter-spacing:0.05em; }
-        nav a { color:var(--muted); text-decoration:none; font-weight:500; margin-left:1.5rem; font-size:.85rem; transition:color .2s; }
+        .logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon {
+            width: 40px; height: 40px; background: linear-gradient(135deg, var(--blue), var(--navy-light));
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; color: #fff; font-size: 14px; border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 12px rgba(0, 146, 255, 0.2);
+        }
+        .logo-text { display: flex; flex-direction: column; }
+        .logo-name { font-weight: 800; font-size: 16px; color: #fff; line-height: 1.1; }
+        .logo-sub { font-size: 9px; font-weight: 500; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 1px; }
+        nav a { color:rgba(255,255,255,0.5); text-decoration:none; font-weight:600; margin-left:1.5rem; transition:color .2s; font-size:.85rem; text-transform:uppercase; letter-spacing:.05em; }
         nav a:hover { color:var(--blue); }
         .hero { margin-bottom:3rem; }
         .badge { background:rgba(255,204,0,.1); color:var(--gold); display:inline-block; padding:.4rem 1rem; border-radius:100px; font-size:.75rem; font-weight:700; margin-bottom:1rem; border:1px solid rgba(255,204,0,.2); }
@@ -78,23 +102,23 @@
 
 <div class="wrap">
     <header>
-        <div class="hdr-left">
-            <div class="avatar">JB</div>
-            <div class="brand">
-                <span class="name">Jhony Bosio</span>
-                <span class="role">Sócio · Blue3 Investimentos</span>
+        <a href="../" class="logo-wrap">
+            <div class="logo-icon">JB</div>
+            <div class="logo-text">
+                <div class="logo-name">Jhony Bosio</div>
+                <div class="logo-sub">Sócio Blue3 Wealth</div>
             </div>
-        </div>
+        </a>
         <nav>
-            <a href="/">Home</a>
-            <a href="/carteira-etfs">Carteira ETFs</a>
-            <a href="/protocolo-9a">Protocolo 9A</a>
+            <a href="../">Home</a>
+            <a href="../carteira-etfs">Carteira ETFs</a>
+            <a href="../protocolo-9a">Protocolo 9A</a>
         </nav>
     </header>
 
     <section class="hero">
-        <div class="badge" style="background:rgba(201,168,76,0.1); border-color:rgba(201,168,76,0.2)">Portfólio Exclusivo · Private & Unique</div>
-        <h1>Carteira <span class="gold">Moabi Tavares Guanor</span></h1>
+        <div class="badge">Portfólio Exclusivo · Private & Unique</div>
+        <h1>Carteira <span>Moabi Tavares Guanor</span></h1>
         <div class="client-info">
             <span><strong>Cliente:</strong> Moabi Tavares Guanor</span>
             <span><strong>País:</strong> Austrália</span>
@@ -179,10 +203,10 @@
                 <div>
                     <h4 style="font-size:.85rem; color:#fff; margin-bottom:1rem">Navegação</h4>
                     <div style="display:flex; flex-direction:column; gap:.5rem">
-                        <a href="/" style="color:var(--muted); text-decoration:none; font-size:.8rem">Home</a>
-                        <a href="/moabi" style="color:var(--muted); text-decoration:none; font-size:.8rem">Moabi</a>
-                        <a href="/carteira-etfs" style="color:var(--muted); text-decoration:none; font-size:.8rem">Carteira ETFs</a>
-                        <a href="/protocolo-9a" style="color:var(--muted); text-decoration:none; font-size:.8rem">Protocolo 9A</a>
+                        <a href="../" style="color:var(--muted); text-decoration:none; font-size:.8rem">Home</a>
+                        <a href="../moabi" style="color:var(--muted); text-decoration:none; font-size:.8rem">Moabi</a>
+                        <a href="../carteira-etfs" style="color:var(--muted); text-decoration:none; font-size:.8rem">Carteira ETFs</a>
+                        <a href="../protocolo-9a" style="color:var(--muted); text-decoration:none; font-size:.8rem">Protocolo 9A</a>
                     </div>
                 </div>
             </div>

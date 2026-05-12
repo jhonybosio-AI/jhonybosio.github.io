@@ -33,12 +33,47 @@ body{font-family:var(--fb);background:var(--bg);color:var(--w);overflow-x:hidden
 .wrap{max-width:1100px;margin:0 auto;padding:0 40px}
 .glass{background:var(--gb);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);border:1px solid var(--gborder);border-radius:20px}
 .glass-hi{background:rgba(255,255,255,.08);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);border:1px solid rgba(255,255,255,.13);border-radius:20px}
-.nav{height:66px;display:flex;align-items:center;justify-content:center;padding:0 40px;background:transparent}
-.nbrand{display:flex;align-items:center;gap:11px}
-.nlogo{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--navy-light));border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;font-weight:800;color:#fff}
-.nname{font-family:var(--fd);font-size:15px;font-weight:700;color:#fff;letter-spacing:-.01em}
-.nsub{font-size:11px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.1em;text-transform:uppercase}
-.hero{min-height:calc(100vh - 66px);display:flex;align-items:center;padding:40px 0 80px}
+/* NAV */
+.nav{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--blue), var(--navy-light));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: #fff;
+  font-size: 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 12px rgba(0, 146, 255, 0.2);
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+}
+.logo-name {
+  font-weight: 800;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.1;
+}
+.logo-sub {
+  font-size: 9px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 1px;
+}
+.hero{min-height:calc(100vh - 80px);display:flex;align-items:center;padding:40px 0 80px}
 .hgrid{display:grid;grid-template-columns:1fr 0.8fr;gap:64px;align-items:center}
 .heyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(0,146,255,.10);border:1px solid rgba(0,146,255,.22);border-radius:999px;padding:6px 14px;margin-bottom:26px}
 .heyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);box-shadow:0 0 10px var(--blue)}
@@ -78,14 +113,14 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06);text-align:cent
 <div class="bg"><div class="orb o1"></div><div class="orb o2"></div></div>
 <div class="page">
 
-<nav class="nav" style="justify-content:space-between">
-  <div class="nbrand">
-    <div class="nlogo">JB</div>
-    <div>
-      <div class="nname">Jhony Bosio</div>
-      <div class="nsub">Comunidade Protocolo 9A</div>
+<nav class="nav">
+  <a href="../" class="logo-wrap">
+    <div class="logo-icon">JB</div>
+    <div class="logo-text">
+      <div class="logo-name">Jhony Bosio</div>
+      <div class="logo-sub">Comunidade Protocolo 9A</div>
     </div>
-  </div>
+  </a>
   <a href="../" style="font-family:var(--fd); font-size:14px; font-weight:600; color:rgba(255,255,255,.6); text-decoration:none">Home</a>
 </nav>
 
@@ -176,17 +211,17 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06);text-align:cent
     <footer style="margin-top:6rem; padding:4rem 0 2rem; border-top:1px solid rgba(255,255,255,.05); text-align:left">
         <div class="wrap" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:2rem; max-width:1100px; margin:0 auto">
             <div style="max-width:300px">
-                <div style="font-weight:800; font-size:1.5rem; margin-bottom:1rem; font-family:var(--fd)">Jhony <span style="color:var(--g4)">Bosio</span></div>
+                <div style="font-weight:800; font-size:1.5rem; margin-bottom:1rem; font-family:var(--fd)">Jhony <span style="color:var(--blue)">Bosio</span></div>
                 <p style="font-size:.75rem; color:rgba(255,255,255,.3); line-height:1.6">Assessor de Investimentos Blue3 · Parceiro XP Investimentos. Gestão de patrimônio com foco em eficiência e resultados globais.</p>
             </div>
             <div style="display:flex; gap:3rem">
                 <div>
                     <h4 style="font-size:.85rem; color:#fff; margin-bottom:1rem">Navegação</h4>
                     <div style="display:flex; flex-direction:column; gap:.5rem">
-                        <a href="/" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:.8rem">Home</a>
-                        <a href="/moabi" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:.8rem">Moabi</a>
-                        <a href="/carteira-etfs" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:.8rem">Carteira ETFs</a>
-                        <a href="/protocolo-9a" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:.8rem">Protocolo 9A</a>
+                        <a href="../" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:.8rem">Home</a>
+                        <a href="../moabi" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:.8rem">Moabi</a>
+                        <a href="../carteira-etfs" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:.8rem">Carteira ETFs</a>
+                        <a href="../protocolo-9a" style="color:rgba(255,255,255,.5); text-decoration:none; font-size:.8rem">Protocolo 9A</a>
                     </div>
                 </div>
             </div>
