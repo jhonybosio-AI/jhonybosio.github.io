@@ -28,14 +28,16 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--fb);background:var(--bg);color:var(--w);overflow-x:hidden}
 
-.bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(circle at top right, var(--navy-light) 0%, var(--bg) 70%)}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:var(--bg)}
+.bg::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--border) 1px, transparent 1px);background-size:40px 40px;opacity:0.2}
 .orb{position:absolute;border-radius:50%;filter:blur(100px);animation:fl 14s ease-in-out infinite}
-.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.25;
-  background:radial-gradient(circle,rgba(0,146,255,0.2),transparent 70%)}
-.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.15;animation-delay:-6s;
-  background:radial-gradient(circle,rgba(0,146,255,0.1),transparent 70%)}
-@keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(18px,-28px) scale(1.04)}70%{transform:translate(-14px,18px) scale(.97)}}
+.o1{width:700px;height:700px;top:-200px;right:-100px;opacity:.2;
+  background:radial-gradient(circle,var(--blue),transparent 70%)}
+.o2{width:500px;height:500px;bottom:-100px;left:-100px;opacity:.15;animation-delay:-6s;
+  background:radial-gradient(circle,var(--navy-light),transparent 70%)}
+.o3{width:400px;height:400px;top:20%;left:10%;opacity:.1;animation-delay:-3s;
+  background:radial-gradient(circle,var(--blue),transparent 70%)}
+@keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(30px,-40px) scale(1.05)}70%{transform:translate(-20px,30px) scale(.95)}}
 
 .page{position:relative;z-index:1}
 .wrap{max-width:1100px;margin:0 auto;padding:0 40px}
@@ -169,6 +171,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
 <div class="bg">
   <div class="orb o1"></div>
   <div class="orb o2"></div>
+  <div class="orb o3"></div>
 </div>
 
 <div class="page">
@@ -214,6 +217,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
         </div>
       </div>
         <div class="photo-wrap">
+          <div style="position:absolute;width:120%;height:120%;background:radial-gradient(circle, var(--blue) 0%, transparent 70%);opacity:0.15;filter:blur(40px);top:-10%;left:-10%;z-index:-1"></div>
           <div class="photo-ring">
             <img src="jhony-bosio-foto.jpg" alt="Jhony Bosio — Assessor de Investimentos">
           </div>
@@ -367,7 +371,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
         <div class="fbrand">Jhony <span style="color:var(--blue)">Bosio</span></div>
         <div class="flegal">Assessor de Investimentos sócio da Blue3 Investimentos, parceiro XP Investimentos CCTVM S/A. O investimento em ativos financeiros envolve riscos.</div>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:40px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px">
         <div>
           <div class="fcol-title">Projetos</div>
           <a href="/protocolo-9a" class="flink">Protocolo 9A</a>
