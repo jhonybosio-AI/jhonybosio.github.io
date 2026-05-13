@@ -137,88 +137,92 @@ td.val{text-align:right;font-weight:700;font-size:.9rem;color:#fff}
   .sim-section{padding:0 .75rem 3rem}
   .input-amount{width:100%}.input-row{flex-direction:column;align-items:stretch}
   .profile-tabs{gap:.35rem}.profile-tab{padding:.55rem 1rem;font-size:.75rem}
-        /* Banner Aula VIP Premium */
-        .banner-vip {
-            background: linear-gradient(135deg, #000d38 0%, #001F3F 100%);
-            color: #fff;
-            text-align: center;
-            padding: 16px 20px;
-            font-family: var(--fb);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid #C5A059;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        /* Hero Banner Protocolo 9A */
+        .hero-banner-vip {
+            background: #000d38;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 40px;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
+            flex-direction: column;
+            gap: 24px;
+            position: relative;
+            overflow: hidden;
             text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: #fff;
+            transition: transform 0.3s;
         }
-        .banner-vip:hover {
-            transform: translateY(2px);
-            background: linear-gradient(135deg, #001F3F 0%, #002d5c 100%);
-        }
-        .banner-vip .content-wrap {
-            display: flex;
+        .hero-banner-vip:hover { transform: scale(1.01); }
+        .hero-banner-vip .vagas-badge {
+            display: inline-flex;
             align-items: center;
-            gap: 12px;
-        }
-        .banner-vip .badge-new {
-            background: #C5A059;
-            color: #000d38;
-            padding: 4px 10px;
-            border-radius: 6px;
+            gap: 8px;
+            background: rgba(0, 146, 255, 0.1);
+            border: 1px solid rgba(0, 146, 255, 0.3);
+            color: #0092ff;
+            padding: 6px 14px;
+            border-radius: 100px;
             font-size: 0.7rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+            width: fit-content;
         }
-        .banner-vip .main-text {
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: -0.01em;
+        .hero-banner-vip .vagas-badge::before {
+            content: ''; width: 6px; height: 6px; background: #0092ff; border-radius: 50%;
         }
-        .banner-vip .main-text strong {
-            color: #C5A059;
+        .hero-banner-vip h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.1;
             font-weight: 800;
+            max-width: 800px;
         }
-        .banner-vip .cta-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 6px 16px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 700;
+        .hero-banner-vip h2 span { color: #0092ff; }
+        .hero-banner-vip p.subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 700px;
+            line-height: 1.6;
+        }
+        .hero-banner-vip .check-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+        }
+        .hero-banner-vip .check-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .hero-banner-vip .check-item svg { color: #0092ff; flex-shrink: 0; }
+        .hero-banner-vip .cta-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .hero-banner-vip .btn-vip {
+            background: #0092ff;
             color: #fff;
-            white-space: nowrap;
-            transition: all 0.3s;
-        }
-        .banner-vip:hover .cta-btn {
-            background: #fff;
-            color: #000d38;
-            border-color: #fff;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 146, 255, 0.4);
         }
 
         @media(max-width: 768px) {
-            .banner-vip { flex-direction: column; gap: 10px; padding: 12px; }
-            .banner-vip .main-text { font-size: 0.85rem; }
+            .hero-banner-vip { padding: 24px; border-radius: 16px; }
+            .hero-banner-vip .check-list { grid-template-columns: 1fr; }
         }
 
         .ticker-wrap { background:var(--navy) !important; border-bottom:1px solid var(--gborder); min-height:46px; position: relative; z-index: 900; }
     </style>
 </head>
 <body>
-
-<a href="../aula-vip" class="banner-vip">
-    <div class="content-wrap">
-        <span class="badge-new">Acesso VIP</span>
-        <div class="main-text">Você investe, mas tem clareza? Descubra o <strong>Protocolo 9A</strong> na aula gratuita.</div>
-    </div>
-    <div class="cta-btn">Garantir Minha Vaga →</div>
-</a>
 
 <div class="ticker-wrap">
     <div class="tradingview-widget-container">
@@ -244,6 +248,23 @@ td.val{text-align:right;font-weight:700;font-size:.9rem;color:#fff}
             <a href="../aula-vip" style="color:var(--blue)">Aula VIP</a>
         </nav>
     </header>
+
+    <a href="../aula-vip" class="hero-banner-vip">
+        <div class="vagas-badge">Vagas Limitadas · Turma 2026.1</div>
+        <h2>Você investe. Mas ainda não tem <span>clareza real</span> do que realmente acontece com o seu dinheiro.</h2>
+        <p class="subtitle">Entre no grupo VIP da Comunidade Protocolo 9A — a metodologia que une 9 ativos globais para dar clareza, liquidez e eficiência à sua carteira.</p>
+        
+        <div class="check-list">
+            <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Para quem já investe mas sente que investe mal</div>
+            <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Paga 2% de taxa + 20% de performance e não vê resultado</div>
+            <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Tem ativos travados sem liquidez há anos</div>
+            <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Nunca teve eficiência tributária real</div>
+        </div>
+
+        <div class="cta-container">
+            <div class="btn-vip">Inscreva-se na Aula Gratuita →</div>
+        </div>
+    </a>
 
     <section class="hero">
         <div class="badge">Gestão Passiva · ETFs Globais · Blue3</div>
