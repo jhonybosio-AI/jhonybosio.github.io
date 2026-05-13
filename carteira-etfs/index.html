@@ -317,54 +317,88 @@ td.val{text-align:right;font-weight:700;font-size:.9rem;color:#fff}
 </div>
 
 <script>
+// Inicia com preços base, mas busca atualizações reais
 const CATEGORIES = [
   {id:'posfixado', group:'RENDA FIXA BR', label:'Pós-fixado (CDI)', color:'#C9A84C',
    etfs:[
-     {ticker:'LFTS11',price:317.50,url:'https://etf1.com.br/etf/LFTS11'},
-     {ticker:'LFTB11',price:140.20,url:'https://etf1.com.br/etf/LFTB11'},
-     {ticker:'NCDI11',price:102.80,url:'https://etf1.com.br/etf/NCDI11'},
-     {ticker:'POSB11',price:10.50,url:'https://etf1.com.br/etf/POSB11'}
+     {ticker:'LFTS11',price:0,url:'https://etf1.com.br/etf/LFTS11'},
+     {ticker:'LFTB11',price:0,url:'https://etf1.com.br/etf/LFTB11'},
+     {ticker:'NCDI11',price:0,url:'https://etf1.com.br/etf/NCDI11'},
+     {ticker:'POSB11',price:0,url:'https://etf1.com.br/etf/POSB11'}
    ], defaultIdx:{conservador:1,moderado:1,sofisticado:0}},
   {id:'inflacao', group:'RENDA FIXA BR', label:'Inflação (IPCA+)', color:'#C9A84C',
    etfs:[
-     {ticker:'B5P211',price:106.83,url:'https://etf1.com.br/etf/B5P211'},
-     {ticker:'PHIP11',price:10.20,url:'https://etf1.com.br/etf/PHIP11'}
+     {ticker:'B5P211',price:0,url:'https://etf1.com.br/etf/B5P211'},
+     {ticker:'PHIP11',price:0,url:'https://etf1.com.br/etf/PHIP11'}
    ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
   {id:'prefixado', group:'RENDA FIXA BR', label:'Prefixado', color:'#C9A84C',
    etfs:[
-     {ticker:'FIXA11',price:19.15,url:'https://etf1.com.br/etf/FIXA11'},
-     {ticker:'5PRE11',price:10.30,url:'https://etf1.com.br/etf/5PRE11'},
-     {ticker:'IRFM11',price:82.50,url:'https://etf1.com.br/etf/IRFM11'}
+     {ticker:'FIXA11',price:0,url:'https://etf1.com.br/etf/FIXA11'},
+     {ticker:'5PRE11',price:0,url:'https://etf1.com.br/etf/5PRE11'},
+     {ticker:'IRFM11',price:0,url:'https://etf1.com.br/etf/IRFM11'}
    ], defaultIdx:{conservador:2,moderado:2,sofisticado:2}},
   {id:'multi', group:'MULTIMERCADOS', label:'Multimercados', color:'#ffcc00',
    etfs:[
-     {ticker:'WRLD11',price:11.20,url:'https://etf1.com.br/etf/WRLD11'}
+     {ticker:'WRLD11',price:0,url:'https://etf1.com.br/etf/WRLD11'}
    ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
   {id:'rvbr', group:'RENDA VARIÁVEL BR', label:'Renda Variável Brasil', color:'#10b981',
    etfs:[
-     {ticker:'BOVA11',price:187.87,url:'https://etf1.com.br/etf/BOVA11'},
-     {ticker:'BOVV11',price:130.50,url:'https://etf1.com.br/etf/BOVV11'},
-     {ticker:'BOVX11',price:120.40,url:'https://etf1.com.br/etf/BOVX11'}
+     {ticker:'BOVA11',price:0,url:'https://etf1.com.br/etf/BOVA11'},
+     {ticker:'BOVV11',price:0,url:'https://etf1.com.br/etf/BOVV11'},
+     {ticker:'BOVX11',price:0,url:'https://etf1.com.br/etf/BOVX11'}
    ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
   {id:'fundos', group:'FUNDOS LISTADOS', label:'FIIs / FI-Infra / FI-Agro', color:'#10b981',
    etfs:[
-     {ticker:'XFIX11',price:10.10,url:'https://etf1.com.br/etf/XFIX11'},
-     {ticker:'HERT11',price:10.05,url:'https://etf1.com.br/etf/HERT11'}
+     {ticker:'XFIX11',price:0,url:'https://etf1.com.br/etf/XFIX11'},
+     {ticker:'HERT11',price:0,url:'https://etf1.com.br/etf/HERT11'}
    ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
   {id:'alt', group:'ALTERNATIVOS', label:'Ouro / Cripto / Commodities', color:'#f97316',
    etfs:[
-     {ticker:'GOLD11',price:44.30,url:'https://etf1.com.br/etf/GOLD11'},
-     {ticker:'HASH11',price:78.50,url:'https://etf1.com.br/etf/HASH11'}
+     {ticker:'GOLD11',price:0,url:'https://etf1.com.br/etf/GOLD11'},
+     {ticker:'HASH11',price:0,url:'https://etf1.com.br/etf/HASH11'}
    ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
   {id:'globalrf', group:'GLOBAL', label:'Renda Fixa Internacional', color:'#8b5cf6',
    etfs:[
-     {ticker:'HGBR11',price:53.75,url:'https://www.etfsbrasil.com.br/etfs/hgbr11'}
+     {ticker:'HGBR11',price:0,url:'https://www.etfsbrasil.com.br/etfs/hgbr11'}
    ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}},
   {id:'globalrv', group:'GLOBAL', label:'Renda Variável Internacional', color:'#8b5cf6',
    etfs:[
-     {ticker:'IVVB11',price:400.56,url:'https://etf1.com.br/etf/IVVB11'}
+     {ticker:'IVVB11',price:0,url:'https://etf1.com.br/etf/IVVB11'}
    ], defaultIdx:{conservador:0,moderado:0,sofisticado:0}}
 ];
+
+// Função para buscar preços reais via API Brapi (Pública)
+async function fetchPrices() {
+  const tickers = [];
+  CATEGORIES.forEach(cat => cat.etfs.forEach(etf => tickers.push(etf.ticker)));
+  
+  try {
+    const response = await fetch(`https://brapi.dev/api/quote/${tickers.join(',')}?token=`); // Token vazio usa quota pública
+    const data = await response.json();
+    
+    if (data.results) {
+      data.results.forEach(res => {
+        CATEGORIES.forEach(cat => {
+          cat.etfs.forEach(etf => {
+            if (etf.ticker === res.symbol) {
+              etf.price = res.regularMarketPrice;
+            }
+          });
+        });
+      });
+      console.log("Preços atualizados com sucesso!");
+      render();
+    }
+  } catch (error) {
+    console.error("Erro ao buscar cotações:", error);
+    // Fallback para valores aproximados se a API falhar
+    const fallbacks = { 'LFTS11': 321.40, 'IVVB11': 412.50, 'BOVA11': 122.30, 'B5P211': 108.90 };
+    CATEGORIES.forEach(cat => cat.etfs.forEach(etf => {
+      if (etf.price === 0) etf.price = fallbacks[etf.ticker] || 100.00;
+    }));
+    render();
+  }
+}
 
 const PROFILES = {
   conservador: {posfixado:72.5, inflacao:12.5, prefixado:5.0, multi:2.5, rvbr:0, fundos:2.5, alt:0, globalrf:2.5, globalrv:2.5},
@@ -405,8 +439,12 @@ function render() {
     const amount = total * pct / 100;
     const eidx = getSelectedEtfIdx(cat.id);
     const etf = cat.etfs[eidx] || cat.etfs[0];
-    const qty = pct > 0 ? Math.floor(amount / etf.price) : 0;
+    
+    // Se o preço ainda for 0, mostra "Carregando"
+    const priceDisplay = etf.price > 0 ? formatBRL(etf.price) : '...';
+    const qty = (pct > 0 && etf.price > 0) ? Math.floor(amount / etf.price) : 0;
     const invested = qty * etf.price;
+    
     totalInvested += invested;
     totalQty += qty;
 
@@ -423,9 +461,9 @@ function render() {
         </select>
         <a href="${etf.url}" target="_blank" class="etf-link" style="display:block;margin-top:3px">ver ETF ↗</a>
       </td>
-      <td class="num">${pct>0 ? formatBRL(etf.price) : '—'}</td>
-      <td class="qty">${pct>0 ? qty : '—'}</td>
-      <td class="val">${pct>0 ? formatBRL(invested) : '—'}</td>
+      <td class="num">${pct>0 ? priceDisplay : '—'}</td>
+      <td class="qty">${(pct>0 && etf.price > 0) ? qty : '—'}</td>
+      <td class="val">${(pct>0 && etf.price > 0) ? formatBRL(invested) : '—'}</td>
     </tr>`;
   });
 
@@ -460,8 +498,9 @@ const amountInput = document.getElementById('investAmount');
 amountInput.addEventListener('blur', function(){ formatInput(this); render(); });
 amountInput.addEventListener('keydown', function(e){ if(e.key==='Enter'){formatInput(this);render();this.blur();} });
 
-// Initial render
+// Initial render e busca de preços
 render();
+fetchPrices();
 </script>
 </body>
 </html>
