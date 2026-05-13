@@ -137,38 +137,74 @@ td.val{text-align:right;font-weight:700;font-size:.9rem;color:#fff}
   .sim-section{padding:0 .75rem 3rem}
   .input-amount{width:100%}.input-row{flex-direction:column;align-items:stretch}
   .profile-tabs{gap:.35rem}.profile-tab{padding:.55rem 1rem;font-size:.75rem}
-        /* Banner Aula VIP */
+        /* Banner Aula VIP Premium */
         .banner-vip {
-            background: linear-gradient(90deg, #000d38 0%, #0092ff 100%);
+            background: linear-gradient(135deg, #000d38 0%, #001F3F 100%);
             color: #fff;
             text-align: center;
-            padding: 10px;
-            font-size: 0.85rem;
-            font-weight: 700;
+            padding: 16px 20px;
+            font-family: var(--fb);
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid #C5A059;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .banner-vip:hover {
-            filter: brightness(1.1);
+            transform: translateY(2px);
+            background: linear-gradient(135deg, #001F3F 0%, #002d5c 100%);
+        }
+        .banner-vip .content-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         .banner-vip .badge-new {
-            background: #ffcc00;
-            color: #000;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.65rem;
+            background: #C5A059;
+            color: #000d38;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
         }
-        .banner-vip span {
-            border-bottom: 1px solid rgba(255,255,255,0.4);
+        .banner-vip .main-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+        .banner-vip .main-text strong {
+            color: #C5A059;
+            font-weight: 800;
+        }
+        .banner-vip .cta-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #fff;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+        .banner-vip:hover .cta-btn {
+            background: #fff;
+            color: #000d38;
+            border-color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .banner-vip { flex-direction: column; gap: 10px; padding: 12px; }
+            .banner-vip .main-text { font-size: 0.85rem; }
         }
 
         .ticker-wrap { background:var(--navy) !important; border-bottom:1px solid var(--gborder); min-height:46px; position: relative; z-index: 900; }
@@ -177,8 +213,11 @@ td.val{text-align:right;font-weight:700;font-size:.9rem;color:#fff}
 <body>
 
 <a href="../aula-vip" class="banner-vip">
-    <span class="badge-new">Aula Gratuita</span>
-    <strong>DOMINE O PROTOCOLO 9A:</strong> Como montar uma carteira global eficiente. <span>Inscreva-se Agora →</span>
+    <div class="content-wrap">
+        <span class="badge-new">Acesso VIP</span>
+        <div class="main-text">Você investe, mas tem clareza? Descubra o <strong>Protocolo 9A</strong> na aula gratuita.</div>
+    </div>
+    <div class="cta-btn">Garantir Minha Vaga →</div>
 </a>
 
 <div class="ticker-wrap">
