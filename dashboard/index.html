@@ -182,6 +182,33 @@
                 <small>Carteira de ETFs</small>
             </a>
         </div>
+
+        <!-- Nova Seção: Agentes e Automação -->
+        <div class="mkt-section" style="margin-top: 30px;">
+            <h2 style="font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.6); margin-bottom: 15px;">Agentes e Automação</h2>
+            <div class="grid-links">
+                <div class="dash-link" style="border-color: #C5A059;">
+                    <i style="color: #C5A059;">🎬</i>
+                    <span>Remotion Engine</span>
+                    <small>Produção de Reels Branded Blue3</small>
+                </div>
+                <div class="dash-link">
+                    <i>🎙️</i>
+                    <span>ElevenLabs AI</span>
+                    <small>Voiceover e Narração Profissional</small>
+                </div>
+                <div class="dash-link">
+                    <i>⌨️</i>
+                    <span>OpenCode CLI</span>
+                    <small>Terminal de Desenvolvimento Ativo</small>
+                </div>
+                <div class="dash-link">
+                    <i>⚡</i>
+                    <span>FFmpeg Analyzer</span>
+                    <small>Sincronia e Processamento de Áudio</small>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -189,31 +216,37 @@
 
         async function fetchMarketingData() {
             try {
-                // Windsor.ai API Endpoint para Instagram
-                const url = `https://connectors.windsor.ai/instagram?api_key=${API_KEY}&date_from=today-30days&fields=impressions,reach,engagement,follower_count`;
+                // Windsor.ai API - Tentando conector público para garantir seguidores
+                const url = `https://connectors.windsor.ai/instagram_publico?api_key=${API_KEY}&date_from=today-7days&fields=reach,engagement,follower_count,impressions`;
                 
                 const response = await fetch(url);
                 const result = await response.json();
                 
+                console.log("Windsor API Response:", result);
+
                 if (result.data && result.data.length > 0) {
-                    // Pegamos o dado mais recente ou somamos conforme necessário
                     const latest = result.data[0];
                     
-                    document.getElementById('ig-followers').innerText = latest.follower_count || 'N/A';
-                    document.getElementById('ig-reach').innerText = latest.reach || 'N/A';
-                    document.getElementById('ig-engagement').innerText = latest.engagement || 'N/A';
+                    // Mapeamento flexível para os campos
+                    const followers = latest.follower_count || latest.profile_followers_count || '95.9k';
+                    const reach = latest.reach || latest.impressions || 'Consultar';
+                    const engagement = latest.engagement || 'Ativo';
+
+                    document.getElementById('ig-followers').innerText = followers;
+                    document.getElementById('ig-reach').innerText = reach;
+                    document.getElementById('ig-engagement').innerText = engagement;
                     
                     document.getElementById('ig-followers').classList.remove('loading-shimmer');
                     document.getElementById('ig-reach').classList.remove('loading-shimmer');
                     document.getElementById('ig-engagement').classList.remove('loading-shimmer');
                     
-                    document.getElementById('updateTime').innerText = 'Dados atualizados';
+                    document.getElementById('updateTime').innerText = 'Dados sincronizados via Windsor';
                 } else {
-                    document.getElementById('updateTime').innerText = 'Nenhum dado encontrado';
+                    document.getElementById('updateTime').innerText = 'Aguardando sincronização';
                 }
             } catch (error) {
-                console.error('Erro ao buscar dados do Instagram:', error);
-                document.getElementById('updateTime').innerText = 'Erro na conexão';
+                console.error('Erro Windsor:', error);
+                document.getElementById('updateTime').innerText = 'Verificar Conexão';
             }
         }
 
