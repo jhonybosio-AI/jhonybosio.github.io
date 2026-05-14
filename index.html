@@ -1,574 +1,1123 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jhony Bosio — Assessor de Investimentos · Empreendedor · Entusiasta de IA</title>
-<meta name="description" content="Jhony Bosio — Assessor de investimentos sócio da Blue3 Investimentos, parceiro XP. Conheça meus projetos e minha trajetória no mercado financeiro.">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<style>
-:root {
-  /* Blue3 Official Palette */
-  --navy: #000d38;        /* Blue 1 - Deep Navy */
-  --navy-light: #002060;  /* Blue 2 - Deep Blue */
-  --blue: #0092ff;        /* Blue 4 - Brand Primary */
-  --cyan-accent: #00ffff; /* Blue 5 - Subtle Accent */
-  
-  --bg: #050a1d;          /* Custom deep background based on navy */
-  --glass: rgba(255, 255, 255, 0.03);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-active: rgba(0, 146, 255, 0.3);
-  
-  --w: #FFFFFF;
-  --gblur: blur(20px) saturate(1.8);
-  --fd: 'Plus Jakarta Sans', sans-serif;
-  --fb: 'Plus Jakarta Sans', sans-serif; /* Unifying fonts for premium feel */
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--bg);color:var(--w);overflow-x:hidden}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carteiras ETF | Jhony Bosio · Blue3 Investimentos</title>
+  <meta name="description"
+    content="Carteiras de alocação via ETFs Globais. Filosofia de gestão passiva com baixos custos, diversificação global e eficiência tributária.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Blue3 Official Palette */
+      --navy: #000d38;
+      --navy-light: #002060;
+      --blue: #0092ff;
+      --bg: #050a1d;
+      --w: #FFFFFF;
+      --gb: rgba(255, 255, 255, 0.05);
+      --gborder: rgba(255, 255, 255, 0.10);
+      --gblur: blur(24px) saturate(1.6);
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --muted: rgba(255, 255, 255, 0.4);
+      --gold: #C9A84C;
+      --card: rgba(255, 255, 255, 0.03);
+      --border: rgba(255, 255, 255, 0.08);
+      --fd: 'Plus Jakarta Sans', sans-serif;
+      --fb: 'Plus Jakarta Sans', sans-serif;
+    }
 
-.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:var(--bg)}
-.bg::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--border) 1px, transparent 1px);background-size:40px 40px;opacity:0.2}
-.orb{position:absolute;border-radius:50%;filter:blur(100px);animation:fl 14s ease-in-out infinite}
-.o1{width:700px;height:700px;top:-200px;right:-100px;opacity:.2;
-  background:radial-gradient(circle,var(--blue),transparent 70%)}
-.o2{width:500px;height:500px;bottom:-100px;left:-100px;opacity:.15;animation-delay:-6s;
-  background:radial-gradient(circle,var(--navy-light),transparent 70%)}
-.o3{width:400px;height:400px;top:20%;left:10%;opacity:.1;animation-delay:-3s;
-  background:radial-gradient(circle,var(--blue),transparent 70%)}
-@keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(30px,-40px) scale(1.05)}70%{transform:translate(-20px,30px) scale(.95)}}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.page{position:relative;z-index:1}
-.wrap{max-width:1100px;margin:0 auto;padding:0 40px}
-.glass{background:var(--glass);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);border:1px solid var(--border);border-radius:20px}
+    body {
+      font-family: var(--fb);
+      background: var(--bg);
+      color: var(--w);
+      overflow-x: hidden;
+    }
 
-/* NAV */
-.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;
-  background:rgba(5,10,29,.8);backdrop-filter:blur(28px) saturate(1.8);-webkit-backdrop-filter:blur(28px) saturate(1.8);
-  border-bottom:1px solid var(--border)}
-.logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-decoration: none;
-}
-.logo-icon {
-  width: 42px;
-  height: 42px;
-  background: linear-gradient(135deg, var(--blue), var(--navy-light));
-  border-radius: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  color: #fff;
-  font-size: 15px;
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 4px 15px rgba(0, 146, 255, 0.3);
-  position: relative;
-  overflow: hidden;
-}
-.logo-icon::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-  transform: rotate(45deg);
-  animation: shine 4s infinite;
-}
-@keyframes shine {
-  0% { transform: translateX(-100%) rotate(45deg); }
-  20%, 100% { transform: translateX(100%) rotate(45deg); }
-}
-.logo-text {
-  display: flex;
-  flex-direction: column;
-}
-.logo-name {
-  font-family: var(--fd);
-  font-weight: 800;
-  font-size: 17px;
-  color: #fff;
-  letter-spacing: -0.02em;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.logo-name::before {
-  content: "|";
-  color: rgba(255,255,255,0.2);
-  font-weight: 300;
-}
-.logo-sub {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--blue);
-  font-weight: 700;
-  margin-top: 1px;
-}
-.nlinks{display:flex;gap:26px;align-items:center}
-.nlink{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);cursor:pointer;text-decoration:none;transition:color .15s}
-.nlink:hover{color:#fff}
+    .ticker-wrap {
+      background: var(--navy) !important;
+      border-bottom: 1px solid var(--gborder);
+      min-height: 46px;
+    }
 
-/* HERO */
-.hero{min-height:calc(100vh - 66px);display:flex;align-items:center;padding:80px 0 56px}
-.hgrid{display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center}
-.heyebrow{display:inline-flex;align-items:center;gap:8px;
-  background:rgba(0,146,255,.10);border:1px solid rgba(0,146,255,.22);
-  border-radius:999px;padding:6px 14px;margin-bottom:26px}
-.heyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
-.heyebrow-txt{font-size:12px;font-weight:600;color:var(--blue);letter-spacing:.05em}
-.htitle{font-family:var(--fd);font-size:clamp(40px,5.2vw,62px);font-weight:800;
-  line-height:1.07;letter-spacing:-.035em;color:#fff;margin-bottom:22px}
-.hsub{font-size:17px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.72;max-width:480px;margin-bottom:36px;letter-spacing:0.01em}
-.hbtns{display:flex;gap:11px;align-items:center;flex-wrap:wrap}
-.btnp{position:relative;font-family:var(--fd);font-size:15px;font-weight:700;
-  background:linear-gradient(135deg,#34AF23,#289118);color:#fff;border:none;border-radius:999px;
-  padding:13px 32px;cursor:pointer;box-shadow:0 4px 20px rgba(52,175,35,0.35);transition:all .3s cubic-bezier(0.23, 1, 0.32, 1);text-decoration:none;overflow:hidden;display:inline-flex;align-items:center;justify-content:center}
-.btnp::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateX(-100%);transition:transform .5s ease}
-.btnp:hover::after{transform:translateX(100%)}
-.btnp:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 12px 32px rgba(52,175,35,0.5)}
-.btng{position:relative;font-family:var(--fd);font-size:15px;font-weight:600;
-  background:rgba(255,255,255,.04);color:#fff;border:1px solid var(--border);border-radius:999px;
-  padding:12px 30px;cursor:pointer;backdrop-filter:blur(12px);transition:all .3s cubic-bezier(0.23, 1, 0.32, 1);text-decoration:none;overflow:hidden;display:inline-flex;align-items:center;justify-content:center}
-.btng:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
 
-/* Neon Animation Layers */
-.n-line{position:absolute;height:1.5px;width:60%;left:20%;opacity:0;transition:all .6s cubic-bezier(0.16, 1, 0.3, 1);background:linear-gradient(to right,transparent,var(--blue),var(--cyan-accent),var(--blue),transparent);pointer-events:none;filter:drop-shadow(0 0 8px var(--blue))}
-.n-top{top:-0.5px}
-.n-bottom{bottom:-0.5px}
-.btnp:hover .n-line, .btng:hover .n-line, .pcard:hover .n-line, .vcard:hover .n-line, .glass:hover .n-line, .sbar:hover .n-line{opacity:0.8;width:80%;left:10%}
-.btnp:hover .n-bottom, .btng:hover .n-bottom, .pcard:hover .n-bottom, .vcard:hover .n-bottom, .glass:hover .n-bottom, .sbar:hover .n-bottom{opacity:0.4}
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      margin-bottom: 3rem;
+    }
 
-/* PHOTO */
-.photo-wrap{position:relative;display:flex;justify-content:center}
-.photo-ring{width:340px;height:340px;border-radius:50%;padding:4px;
-  background:linear-gradient(135deg,var(--blue),var(--navy-light),var(--blue));
-  box-shadow:0 0 60px rgba(0,146,255,0.1)}
-.photo-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;
-  border:4px solid var(--bg)}
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
 
-/* SECTIONS */
-.sec{padding:88px 0}
-.slabel{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:11px;color:var(--blue)}
-.stitle{font-family:var(--fd);font-size:clamp(26px,3.4vw,40px);font-weight:800;
-  letter-spacing:-.03em;line-height:1.14;margin-bottom:15px;color:var(--w)}
-.sbody{font-size:17px;color:rgba(255,255,255,.6);line-height:1.72;max-width:600px}
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--blue), var(--navy-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 146, 255, 0.2);
+    }
 
-/* STATS */
-.sbar{padding:30px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
-.sbinner{display:flex;justify-content:space-around}
-.si{text-align:center}
-.sin{font-family:var(--fd);font-size:34px;font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1}
-.siu{font-size:17px;color:rgba(255,255,255,.38)}
-.sil{font-size:12px;color:rgba(255,255,255,.38);margin-top:6px}
-.sdiv{width:1px;background:rgba(255,255,255,.07)}
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
 
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.about-text p{font-size:16px;color:rgba(255,255,255,.58);line-height:1.75;margin-bottom:16px}
-.about-text strong{color:var(--w)}
+    .logo-name {
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      line-height: 1.1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-/* PROJECTS */
-.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
-.pcard{position:relative;padding:30px;border-radius:20px;background:var(--gb);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);
-  border:1px solid var(--gborder);transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer;text-decoration:none;display:block;overflow:hidden}
-.pcard:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2);box-shadow:0 16px 48px rgba(0,0,0,.3)}
-.pcard.featured{border-color:rgba(0,146,255,0.25);background:rgba(0,146,255,0.04)}
-.pcard.featured:hover{border-color:rgba(0,146,255,0.45);box-shadow:0 16px 48px rgba(0,146,255,0.12)}
-.picon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:22px}
-.pcard-title{font-family:var(--fd);font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
-.pcard-desc{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:16px}
-.pcard-link{font-family:var(--fd);font-size:13px;font-weight:700;color:var(--blue);display:inline-flex;align-items:center;gap:6px}
-.pcard.featured .pcard-link{color:var(--blue)}
+    .logo-name::before {
+      content: "|";
+      color: rgba(255, 255, 255, 0.2);
+      font-weight: 300;
+    }
 
-/* VALUES */
-.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
-.vcard{position:relative;padding:28px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);overflow:hidden}
-.vicon{font-size:28px;margin-bottom:14px}
-.vtitle{font-family:var(--fd);font-size:16px;font-weight:700;color:#fff;margin-bottom:6px}
-.vtext{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6}
+    .logo-sub {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 1px;
+    }
 
-/* FOOTER */
-footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
-.finner{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.05)}
-.fbrand{font-family:var(--fd);font-size:24px;font-weight:800;color:#fff;margin-bottom:16px}
-.flegal{font-size:12px;color:rgba(255,255,255,.3);line-height:1.6;max-width:400px}
-.fcol-title{color:#fff;font-weight:700;font-size:14px;margin-bottom:16px}
-.flink{color:rgba(255,255,255,.5);text-decoration:none;font-size:14px;display:block;margin-bottom:10px;transition:color .15s}
-.flink:hover{color:rgba(255,255,255,.8)}
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  .wrap{padding:0 20px!important}
-  .nav{padding:0 20px!important}
-  .nlinks{display:none!important}
-  .hgrid{grid-template-columns:1fr!important}
-  .photo-wrap{order:-1;margin-bottom:20px}
-  .photo-ring{width:220px;height:220px}
-  .about-grid{grid-template-columns:1fr!important}
-  .pgrid{grid-template-columns:1fr!important}
-  .vgrid{grid-template-columns:1fr!important}
-  .sbinner{flex-wrap:wrap!important;gap:1.5rem!important;justify-content:center!important}
-  .sdiv{display:none!important}
-  .si{min-width:40%}
-  .finner{flex-direction:column!important;text-align:center!important;gap:16px!important}
-  .hero{min-height:auto!important;padding:48px 0 36px!important}
-  .sec{padding:56px 0!important}
-  .hbtns{flex-direction:column!important}
-  .btnp,.btng{width:100%!important;text-align:center!important}
-}
-@media(max-width:600px){
-  .wrap{padding:0 14px!important}
-  .nav{padding:0 14px!important;height:56px!important}
-  .sin{font-size:26px!important}
-  .htitle{font-size:clamp(28px,8vw,40px)!important}
-  .photo-ring{width:180px;height:180px}
-}
-/* Pop-up Aula VIP */
-.vip-popup-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-  .vip-popup-overlay.active { display: flex; opacity: 1; }
-  .vip-popup-content {
-    max-width: 500px;
-    width: 100%;
-    background: var(--navy);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    transform: translateY(20px);
-    transition: transform 0.5s ease;
-  }
-  .vip-popup-overlay.active .vip-popup-content { transform: translateY(0); }
-  .vip-banner {
-    width: 100%;
-    height: 220px;
-    background: url('aula_vip_banner_1778588559460.png') center/cover no-repeat;
-    position: relative;
-  }
-  .vip-banner::after {
-    content: "";
-    position: absolute;
-    bottom: 0; left: 0; width: 100%; height: 60%;
-    background: linear-gradient(to top, var(--navy), transparent);
-  }
-  .vip-info { padding: 30px; text-align: center; }
-  .vip-title { font-family: var(--fd); font-size: 24px; font-weight: 800; margin-bottom: 12px; color: #fff; }
-  .vip-desc { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
-  .vip-btn {
-    display: block;
-    width: 100%;
-    background: #34AF23;
-    color: #fff;
-    padding: 16px;
-    border-radius: 12px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-  .vip-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(52,175,35,0.4); }
-  .vip-close {
-    position: absolute;
-    top: 15px; right: 15px;
-    width: 32px; height: 32px;
-    background: rgba(0,0,0,0.5);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #fff;
-    z-index: 10;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-</style>
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    nav a:hover {
+      opacity: 1;
+    }
+
+    /* Hero */
+    .hero {
+      margin-bottom: 4rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201, 168, 76, 0.1);
+      color: var(--gold);
+      padding: 6px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(201, 168, 76, 0.2);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 800px;
+      line-height: 1.6;
+    }
+
+    /* Philosophy */
+    .philosophy {
+      margin-bottom: 3rem;
+    }
+
+    .philosophy h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .pillar {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 1.5rem;
+    }
+
+    .pillar-icon {
+      font-size: 1.6rem;
+      margin-bottom: .75rem;
+    }
+
+    .pillar h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    .pillar p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Market widget */
+    .market-section {
+      margin-bottom: 3rem;
+    }
+
+    .market-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .widget-wrap {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--gborder);
+      background: var(--gb);
+    }
+
+    .glass {
+      background: var(--card-bg);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 2rem;
+    }
+
+    /* Portfolio Cards */
+    .profile-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    @media(max-width:700px) {
+      .profile-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .profile-card {
+      border-radius: 20px;
+      padding: 1.5rem;
+      transition: transform .3s;
+      cursor: pointer;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .profile-name {
+      font-weight: 800;
+      font-size: 1.2rem;
+      margin-bottom: .5rem;
+    }
+
+    .profile-desc {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-tag {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      display: inline-block;
+    }
+
+    .risk-low {
+      background: rgba(16, 185, 129, .1);
+      color: #10b981;
+    }
+
+    .risk-med {
+      background: rgba(0, 146, 255, .1);
+      color: var(--blue);
+    }
+
+    .risk-high {
+      background: rgba(255, 204, 0, .1);
+      color: #ffcc00;
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding-bottom: 2rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: .8rem;
+    }
+
+    @media(max-width:600px) {
+      .wrap {
+        padding: 1rem;
+      }
+    }
+
+    .input-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem
+    }
+
+    .input-amount {
+      background: rgba(0, 146, 255, .08);
+      border: 2px solid var(--blue);
+      box-shadow: 0 0 20px rgba(0, 146, 255, .2);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 800;
+      font-family: var(--fb);
+      width: 320px;
+      text-align: center;
+      outline: none;
+      transition: all .3s
+    }
+
+    .input-amount:focus {
+      box-shadow: 0 0 35px rgba(201, 168, 76, .5);
+      transform: scale(1.02)
+    }
+
+    .input-group label {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      text-align: center;
+      margin-bottom: .5rem
+    }
+
+    .profile-tabs {
+      display: flex;
+      gap: .5rem;
+      justify-content: center;
+      margin-bottom: 2rem
+    }
+
+    .profile-tab {
+      padding: .65rem 1.5rem;
+      border-radius: 100px;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      transition: all .25s
+    }
+
+    .profile-tab.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(0, 102, 255, .3)
+    }
+
+    .profile-tab:hover:not(.active) {
+      background: rgba(255, 255, 255, .05);
+      color: #fff
+    }
+
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative
+    }
+
+    .table-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, .15), transparent)
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    thead th {
+      padding: .9rem 1rem;
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, .02)
+    }
+
+    tbody td {
+      padding: .75rem 1rem;
+      font-size: .85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      vertical-align: middle
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none
+    }
+
+    tbody tr:hover {
+      background: rgba(0, 102, 255, .04)
+    }
+
+    .cat-main {
+      font-weight: 700;
+      font-size: .85rem;
+      color: #fff;
+      display: block
+    }
+
+    .cat-sub {
+      font-size: .7rem;
+      color: var(--muted);
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: .2rem
+    }
+
+    .pct-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: .6rem
+    }
+
+    .pct-val {
+      font-weight: 700;
+      font-size: .85rem;
+      min-width: 48px;
+      text-align: right
+    }
+
+    .pct-bar {
+      height: 6px;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, .08);
+      flex: 1;
+      min-width: 40px;
+      max-width: 80px;
+      overflow: hidden
+    }
+
+    .pct-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--blue);
+      transition: width .4s ease
+    }
+
+    select.etf-select {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .45rem .6rem;
+      color: #fff;
+      font-size: .8rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      outline: none;
+      min-width: 90px;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23a1a1aa'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 8px center;
+      padding-right: 24px
+    }
+
+    select.etf-select:focus {
+      border-color: var(--blue)
+    }
+
+    select.etf-select option {
+      background: #1a1a2e;
+      color: #fff
+    }
+
+    td.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      font-size: .85rem
+    }
+
+    td.qty {
+      text-align: right;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--blue)
+    }
+
+    td.val {
+      text-align: right;
+      font-weight: 700;
+      font-size: .9rem;
+      color: #fff
+    }
+
+    .total-row {
+      background: rgba(0, 102, 255, .06) !important
+    }
+
+    .total-row td {
+      font-weight: 800;
+      border-top: 1px solid rgba(0, 102, 255, .2);
+      padding: 1rem
+    }
+
+    .etf-link {
+      color: var(--blue);
+      font-size: .7rem;
+      font-weight: 500;
+      text-decoration: none;
+      opacity: .7;
+      transition: opacity .2s
+    }
+
+    .etf-link:hover {
+      opacity: 1;
+      text-decoration: underline
+    }
+
+    .disclaimer-box {
+      margin-top: 2rem;
+      padding: 1.25rem;
+      background: rgba(255, 255, 255, .03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      font-size: .75rem;
+      color: var(--muted);
+      line-height: 1.7;
+      text-align: center
+    }
+
+    .disclaimer-box strong {
+      color: #fff
+    }
+
+    .legend {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .72rem;
+      color: var(--muted)
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px
+    }
+
+    @media(max-width:768px) {
+      .sim-section {
+        padding: 0 .75rem 3rem
+      }
+
+      .input-amount {
+        width: 100%
+      }
+
+      .input-row {
+        flex-direction: column;
+        align-items: stretch
+      }
+
+      .profile-tabs {
+        gap: .35rem
+      }
+
+      .profile-tab {
+        padding: .55rem 1rem;
+        font-size: .75rem
+      }
+
+      .ticker-wrap {
+        background: var(--navy) !important;
+        border-bottom: 1px solid var(--gborder);
+        min-height: 46px;
+        position: relative;
+        z-index: 900;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="bg">
-  <div class="orb o1"></div>
-  <div class="orb o2"></div>
-  <div class="orb o3"></div>
-</div>
-
-<div class="page">
-
-<!-- NAV -->
-<nav class="nav">
-  <a href="/" class="logo-wrap">
-    <div class="logo-icon">JB</div>
-    <div class="logo-text">
-      <div class="logo-name">Jhony Bosio</div>
-      <div class="logo-sub">Assessor de Investimentos</div>
-    </div>
-  </a>
-  <div class="nlinks">
-    <a class="nlink" href="#sobre">Sobre</a>
-    <a class="nlink" href="#projetos">Projetos</a>
-    <a class="nlink" href="#valores">Filosofia</a>
-
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hgrid">
-      <div>
-        <div class="heyebrow">
-          <div class="heyebrow-dot"></div>
-          <div class="heyebrow-txt">Sócio Blue3 Investimentos · XP</div>
-        </div>
-        <h1 class="htitle">Jhony <span style="color:var(--blue)">Bosio</span></h1>
-        <p class="hsub">Assessor de investimentos, empreendedor e entusiasta de IA. Construo soluções que conectam tecnologia, finanças e pessoas — com transparência e propósito.</p>
-        <div class="hbtns">
-          <a class="btnp" href="#projetos">
-            <span class="n-line n-top"></span>
-            Conheça meus projetos ↓
-            <span class="n-line n-bottom"></span>
-          </a>
-          <a class="btng" href="https://linkedin.com/in/jhonybosio" target="_blank">
-            <span class="n-line n-top"></span>
-            LinkedIn
-            <span class="n-line n-bottom"></span>
-          </a>
-          <a class="btng" href="https://instagram.com/jhonybosio" target="_blank">
-            <span class="n-line n-top"></span>
-            Instagram
-            <span class="n-line n-bottom"></span>
-          </a>
-        </div>
-      </div>
-        <div class="photo-wrap">
-          <div style="position:absolute;width:120%;height:120%;background:radial-gradient(circle, var(--blue) 0%, transparent 70%);opacity:0.15;filter:blur(40px);top:-10%;left:-10%;z-index:-1"></div>
-          <div class="photo-ring">
-            <img src="jhony-bosio-foto.jpg" alt="Jhony Bosio — Assessor de Investimentos">
-          </div>
-        </div>
+  <div class="ticker-wrap">
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+        async>
+          {
+            "symbols": [
+              { "proName": "BMFBOVESPA:IMAB11", "title": "IMAB11" },
+              { "proName": "BMFBOVESPA:FIXA11", "title": "FIXA11" },
+              { "proName": "BMFBOVESPA:B5P211", "title": "B5P211" },
+              { "proName": "BMFBOVESPA:POSB11", "title": "POSB11" },
+              { "proName": "BMFBOVESPA:BOVA11", "title": "BOVA11" },
+              { "proName": "BMFBOVESPA:BEST11", "title": "BEST11" },
+              { "proName": "BMFBOVESPA:IVVB11", "title": "IVVB11" },
+              { "proName": "BMFBOVESPA:HASH11", "title": "HASH11" }
+            ],
+            "showSymbolLogo": true,
+            "colorTheme": "dark",
+            "isTransparent": true,
+            "displayMode": "adaptive",
+            "locale": "br"
+          }
+        </script>
     </div>
   </div>
-</section>
 
-<!-- STATS -->
-<div class="sbar" style="position:relative;overflow:hidden">
-  <span class="n-line n-top"></span>
   <div class="wrap">
-    <div class="sbinner">
-      <div class="si"><div class="sin">+167</div><div class="sil">Famílias atendidas</div></div>
-      <div class="sdiv"></div>
-      <div class="si"><div class="sin">+100<span class="siu"> Mi</span></div><div class="sil">Sob custódia</div></div>
-      <div class="sdiv"></div>
-      <div class="si"><div class="sin">+10<span class="siu"> anos</span></div><div class="sil">De experiência</div></div>
-      <div class="sdiv"></div>
-      <div class="si"><div class="sin">Blue3</div><div class="sil">Escritório parceiro XP</div></div>
-    </div>
-  </div>
-  <span class="n-line n-bottom"></span>
-</div>
-
-<!-- SOBRE -->
-<section class="sec" id="sobre">
-  <div class="wrap">
-    <div class="about-grid">
-      <div>
-        <div class="slabel">Sobre mim</div>
-        <h2 class="stitle">Quem é Jhony Bosio</h2>
-        <div class="about-text">
-          <p>Há mais de <strong>10 anos</strong> no mercado financeiro, construí minha carreira ajudando famílias e empreendedores a tomar decisões melhores sobre seu patrimônio.</p>
-          <p>Sou sócio da <strong>Blue3 Investimentos</strong>, escritório credenciado à XP, onde atendo mais de 167 famílias com mais de R$ 100 milhões sob custódia — sempre com transparência e alinhamento de interesses.</p>
-          <p>Acredito que <strong>tecnologia e inteligência artificial</strong> são ferramentas poderosas para democratizar o acesso à gestão patrimonial de qualidade. Por isso, desenvolvo soluções que combinam análise de dados, automação e atendimento humano.</p>
-          <p>Minha missão é simples: <strong>ajudar pessoas a investir com clareza e crescer com segurança</strong>.</p>
+    <header>
+      <a href="/" class="logo-wrap">
+        <div class="logo-icon">JB</div>
+        <div class="logo-text">
+          <div class="logo-name">Jhony Bosio</div>
+          <div class="logo-sub">Assessor de Investimentos</div>
         </div>
-      </div>
-      <div class="glass" style="padding:28px;position:relative;overflow:hidden">
-        <span class="n-line n-top"></span>
-        <span class="n-line n-bottom"></span>
-        <div style="font-family:var(--fd);font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.09em;text-transform:uppercase;margin-bottom:18px">Trajetória</div>
-        <div style="display:flex;flex-direction:column;gap:14px">
-          <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,209,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🏦</div>
-            <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">Sócio Blue3 Investimentos</div><div style="font-size:11px;color:rgba(255,255,255,.42)">Escritório parceiro XP · Ribeirão Preto</div></div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,102,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🤖</div>
-            <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">Assessor 3.0</div><div style="font-size:11px;color:rgba(255,255,255,.42)">IA aplicada à curadoria de portfólios</div></div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,209,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">📊</div>
-            <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">+R$ 100M sob custódia</div><div style="font-size:11px;color:rgba(255,255,255,.42)">Gestão patrimonial de famílias e empresas</div></div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,102,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🎓</div>
-            <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">Educador Financeiro</div><div style="font-size:11px;color:rgba(255,255,255,.42)">Mentor e criador do Protocolo 9A</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJETOS -->
-<section class="sec" id="projetos" style="padding-top:0">
-  <div class="wrap">
-    <div class="slabel">Ecossistema</div>
-    <h2 class="stitle">Meus Projetos</h2>
-    <p class="sbody">Cada projeto nasceu de uma necessidade real dos meus clientes. Juntos, eles formam um ecossistema completo para quem quer investir melhor.</p>
-    <div class="pgrid">
-
-      <a class="pcard featured" href="protocolo-9a/">
-        <span class="n-line n-top"></span>
-        <div class="picon" style="background:rgba(0,209,255,.12)">🎯</div>
-        <div class="pcard-title">Protocolo 9A</div>
-        <div class="pcard-desc">Comunidade de investimento passivo com metodologia de 9 ativos globais. Uma carteira simples, barata e comprovadamente superior à maioria dos fundos ativos.</div>
-        <span class="pcard-link">Explorar →</span>
-        <span class="n-line n-bottom"></span>
       </a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/protocolo-9a">Protocolo 9A</a>
+        <a href="/aula-vip">Aula VIP</a>
+      </nav>
+    </header>
 
-      <a class="pcard" href="carteira-etfs/">
-        <span class="n-line n-top"></span>
-        <div class="picon" style="background:rgba(27,111,239,.12)">📈</div>
-        <div class="pcard-title">Carteiras ETF</div>
-        <div class="pcard-desc">Simulador e portfólios globais diversificados via ETFs. Compare, analise e encontre a carteira ideal para o seu perfil e horizonte de investimento.</div>
-        <span class="pcard-link">Explorar →</span>
-        <span class="n-line n-bottom"></span>
-      </a>
-
-      <a class="pcard" href="mentoria/">
-        <span class="n-line n-top"></span>
-        <div class="picon" style="background:rgba(0,209,255,.12)">🤝</div>
-        <div class="pcard-title">Mentoria Financeira</div>
-        <div class="pcard-desc">Programas personalizados para cada momento da sua vida financeira — do primeiro investimento à preservação de grandes patrimônios.</div>
-        <span class="pcard-link">Explorar →</span>
-        <span class="n-line n-bottom"></span>
-      </a>
-
-      <a class="pcard" href="aula-vip/">
-        <span class="n-line n-top"></span>
-        <div class="picon" style="background:rgba(27,111,239,.12)">🎬</div>
-        <div class="pcard-title">Aula VIP</div>
-        <div class="pcard-desc">Masterclass exclusiva sobre investimento inteligente. Aprenda os fundamentos que a maioria dos assessores não te conta.</div>
-        <span class="pcard-link">Explorar →</span>
-        <span class="n-line n-bottom"></span>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- VALORES -->
-<section class="sec" id="valores" style="padding-top:0">
-  <div class="wrap">
-    <div class="slabel">Filosofia</div>
-    <h2 class="stitle">No que acredito</h2>
-    <div class="vgrid">
-      <div class="vcard">
-        <span class="n-line n-top"></span>
-        <div class="vicon">🔍</div>
-        <div class="vtitle">Transparência total</div>
-        <div class="vtext">Sem custos ocultos, sem conflitos de interesse. Cada decisão é tomada pensando exclusivamente no seu melhor resultado.</div>
-        <span class="n-line n-bottom"></span>
+    <section class="hero">
+      <div class="badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+        Gestão Passiva · ETFs Globais · Blue3
       </div>
-      <div class="vcard">
-        <span class="n-line n-top"></span>
-        <div class="vicon">🤖</div>
-        <div class="vtitle">Tecnologia a seu favor</div>
-        <div class="vtext">Inteligência Artificial e automação para analisar dados, otimizar portfólios e garantir que nenhuma oportunidade passe despercebida.</div>
-        <span class="n-line n-bottom"></span>
-      </div>
-      <div class="vcard">
-        <span class="n-line n-top"></span>
-        <div class="vicon">🤝</div>
-        <div class="vtitle">Relacionamento genuíno</div>
-        <div class="vtext">Atendimento próximo e personalizado. Você tem acesso direto a mim — sem call centers, sem intermediários.</div>
-        <span class="n-line n-bottom"></span>
-      </div>
-    </div>
-  </div>
-</section>
+      <h1>Carteiras Inteligentes<br>via ETFs Globais</h1>
+      <p>Uma filosofia de investimento baseada em baixos custos, ampla diversificação e eficiência tributária. Menos
+        ruído de mercado, mais resultado no longo prazo.</p>
+    </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="wrap">
-    <div class="finner">
-      <div style="flex:1">
-        <div class="fbrand">Jhony <span style="color:var(--blue)">Bosio</span></div>
-        <div class="flegal">Assessor de Investimentos sócio da Blue3 Investimentos, parceiro XP Investimentos CCTVM S/A. O investimento em ativos financeiros envolve riscos.</div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px">
-        <div>
-          <div class="fcol-title">Projetos</div>
-          <a href="protocolo-9a/" class="flink">Protocolo 9A</a>
-          <a href="carteira-etfs/" class="flink">Carteiras ETF</a>
-          <a href="mentoria/" class="flink">Mentoria</a>
-          <a href="aula-vip/" class="flink">Aula VIP</a>
+    <!-- PHILOSOPHY GRID -->
+    <section class="philosophy">
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4M12 8h.01" />
+        </svg>
+        Filosofia de Gestão Passiva
+      </h2>
+      <div class="pillar-grid">
+        <div class="pillar">
+          <div class="pillar-icon">💰</div>
+          <h3>Baixo Custo</h3>
+          <p>ETFs com TER abaixo de 0,20% ao ano eliminam o principal inimigo do retorno: os custos ocultos de fundos
+            ativos.</p>
         </div>
-        <div>
-          <div class="fcol-title">Institucional</div>
-          <a href="https://www.blue3investimentos.com.br/" target="_blank" class="flink">Blue3 Investimentos</a>
-          <a href="https://www.xpi.com.br/" target="_blank" class="flink">XP Investimentos</a>
+        <div class="pillar">
+          <div class="pillar-icon">🌎</div>
+          <h3>Diversificação Global</h3>
+          <p>Exposição a mais de 50 países e 9.000 empresas com um único instrumento. O risco específico praticamente
+            desaparece.</p>
         </div>
-        <div>
-          <div class="fcol-title">Social</div>
-          <a href="https://instagram.com/jhonybosio" target="_blank" class="flink">Instagram</a>
-          <a href="https://linkedin.com/in/jhonybosio" target="_blank" class="flink">LinkedIn</a>
-          <a href="https://wa.me/5516996045700" target="_blank" class="flink">WhatsApp</a>
-          <a href="politicas/" class="flink">Privacidade</a>
-          <a href="dashboard/" class="flink" style="opacity:0.2; font-size:9px">Acesso Restrito</a>
+        <div class="pillar">
+          <div class="pillar-icon">📊</div>
+          <h3>Eficiência Tributária</h3>
+          <p>Menor giro de carteira significa menos eventos tributáveis. O imposto é postergado e o capital composto
+            cresce mais rápido.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🔄</div>
+          <h3>Rebalanceamento Disciplinado</h3>
+          <p>Revisão periódica das alocações garante que o perfil de risco se mantenha alinhado com seus objetivos ao
+            longo do tempo.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🛡️</div>
+          <h3>Proteção Patrimonial</h3>
+          <p>A combinação entre renda fixa brasileira, renda variável global e ativos reais cria uma proteção robusta
+            contra diferentes cenários.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤖</div>
+          <h3>Curadoria com IA</h3>
+          <p>Monitoramento automatizado dos principais indicadores para que você receba apenas o que importa, no momento
+            certo.</p>
         </div>
       </div>
-    </div>
-    <div style="padding-top:30px;text-align:center;font-size:11px;color:rgba(255,255,255,.2)">
-      &copy; 2026 Jhony Bosio · Todos os direitos reservados.
-    </div>
+    </section>
+
+    <!-- TRADINGVIEW MARKET OVERVIEW -->
+    <section class="market-section">
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 3v18h18" />
+          <path d="M18.7 8l-5.1 5.2-2.8-2.7L3 18" />
+        </svg>
+        Visão do Mercado
+      </h2>
+      <div class="widget-wrap">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js"
+            async>
+              {
+                "colorTheme": "dark",
+                "dateRange": "12M",
+                "showChart": true,
+                "locale": "br",
+                "width": "100%",
+                "height": 400,
+                "largeChartUrl": "",
+                "isTransparent": true,
+                "showSymbolLogo": true,
+                "showFloatingTooltip": false,
+                "plotLineColorGrowing": "rgba(0, 146, 255, 1)",
+                "plotLineColorFalling": "rgba(0, 146, 255, 1)",
+                "gridLineColor": "rgba(255, 255, 255, 0.05)",
+                "scaleFontColor": "rgba(255, 255, 255, 0.4)",
+                "belowLineFillColorGrowing": "rgba(0, 146, 255, 0.12)",
+                "belowLineFillColorFalling": "rgba(0, 146, 255, 0.12)",
+                "belowLineFillColorGrowingBottom": "rgba(0, 146, 255, 0)",
+                "belowLineFillColorFallingBottom": "rgba(0, 146, 255, 0)",
+                "symbolActiveColor": "rgba(0, 146, 255, 0.12)",
+                "tabs": [
+                  {
+                    "title": "Core ETFs",
+                    "symbols": [
+                      { "s": "BMFBOVESPA:LFTS11", "d": "Selic (Liquidez)" },
+                      { "s": "BMFBOVESPA:IMAB11", "d": "IPCA+ (Inflação)" },
+                      { "s": "BMFBOVESPA:BOVA11", "d": "Ibovespa" },
+                      { "s": "BMFBOVESPA:BEST11", "d": "ESG (Sustentabilidade)" },
+                      { "s": "BMFBOVESPA:IVVB11", "d": "S&P 500 (EUA)" },
+                      { "s": "BMFBOVESPA:HASH11", "d": "Cripto" }
+                    ]
+                  }
+                ]
+              }
+            </script>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALLOCATION TABLE -->
+    <section class="alloc-section" id="alocacao">
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <path d="M3 9h18M9 21V9" />
+        </svg>
+        Simulador de Alocação por Perfil
+      </h2>
+      <div class="input-row">
+        <div class="input-group">
+          <label>Valor para investir</label>
+          <input type="text" id="investAmount" class="input-amount" placeholder="R$ 150.000,00" value="R$ 150.000,00">
+        </div>
+      </div>
+
+      <div class="profile-tabs">
+        <button class="profile-tab active" data-profile="conservador">Conservador</button>
+        <button class="profile-tab" data-profile="moderado">Moderado</button>
+        <button class="profile-tab" data-profile="sofisticado">Sofisticado</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="simTable">
+          <thead>
+            <tr>
+              <th>Classe</th>
+              <th>Peso</th>
+              <th>ETF</th>
+              <th>Cotação (R$)</th>
+              <th>Qtd Cotas</th>
+              <th style="text-align: right;">Valor Total (R$)</th>
+            </tr>
+          </thead>
+          <tbody id="simBody"></tbody>
+        </table>
+      </div>
+
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#0066ff"></div>Renda Fixa
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#ffcc00"></div>Multimercados
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#10b981"></div>Renda Variável
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#f97316"></div>Alternativos
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#8b5cf6"></div>Global
+        </div>
+      </div>
+
+      <div class="disclaimer-box">
+        <strong>Importante:</strong> Este simulador é apenas educacional. Cotações aproximadas — consulte sua corretora
+        para valores em tempo real.
+        Não constitui recomendação de investimento. Rentabilidade passada não garante resultados futuros.<br>
+        <strong>Jhony Bosio</strong> · Assessor · Blue3 Investimentos · Parceiro XP CCTVM S/A
+      </div>
+    </section>
+
+    <section class="glass"
+      style="margin-bottom:3rem; background:linear-gradient(135deg,rgba(0,102,255,.08),rgba(255,204,0,.04));">
+      <h2 style="font-size:1.1rem; margin-bottom:1rem; display:flex; align-items:center; gap:.75rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path
+            d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.63 19.79 19.79 0 01.22 4.04 2 2 0 012.2 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.16 6.16l1.48-1.48a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+        </svg>
+        Quer uma carteira personalizada para você?
+      </h2>
+      <p style="color:var(--muted); margin-bottom:1.5rem; font-size:.95rem; max-width:540px;">Agende um Raio-X da sua
+        carteira atual. Em 1 hora, analiso custos ocultos, riscos e oportunidades de melhoria.</p>
+      <a href="https://wa.me/5516996045700" target="_blank"
+        style="display:inline-block; background:var(--blue); color:#fff; padding:.85rem 2rem; border-radius:100px; font-weight:700; font-size:.9rem; text-decoration:none; box-shadow:0 10px 20px -5px rgba(0,102,255,.4); transition:opacity .2s;"
+        onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Falar com Jhony no WhatsApp</a>
+    </section>
+
+    <footer style="margin-top:6rem; padding:4rem 0 2rem; border-top:1px solid rgba(255,255,255,.05); text-align:left">
+      <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:2rem">
+        <div style="max-width:300px">
+          <div style="font-weight:800; font-size:1.5rem; margin-bottom:1rem">Jhony <span
+              style="color:var(--blue)">Bosio</span></div>
+          <p style="font-size:.75rem; color:var(--muted); line-height:1.6">Assessor de Investimentos Blue3 · Parceiro XP
+            Investimentos. Gestão de patrimônio com foco em eficiência e resultados globais.</p>
+        </div>
+        <div style="display:flex; gap:3rem">
+          <div>
+            <h4 style="font-size:.85rem; color:#fff; margin-bottom:1rem">Navegação</h4>
+            <div style="display:flex; flex-direction:column; gap:.5rem">
+              <a href="../" style="color:var(--muted); text-decoration:none; font-size:.8rem">Home</a>
+              <a href="../protocolo-9a" style="color:var(--muted); text-decoration:none; font-size:.8rem">Protocolo
+                9A</a>
+              <a href="../aula-vip" style="color:var(--muted); text-decoration:none; font-size:.8rem">Aula VIP</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:3rem; text-align:center; font-size:.7rem; color:rgba(255,255,255,.2)">
+        &copy; 2026 Jhony Bosio · Investimentos envolvem riscos. Rentabilidade passada não garante resultados futuros.
+      </div>
+    </footer>
   </div>
-</footer>
-</div>
 
+  <script>
+    // Inicia com preços base, mas busca atualizações reais
+    const CATEGORIES = [
+      {
+        id: 'posfixado', group: 'RENDA FIXA BR', label: 'Pós-fixado (CDI)', color: '#C9A84C',
+        etfs: [
+          { ticker: 'LFTS11', price: 0, url: 'https://etf1.com.br/etf/LFTS11' },
+          { ticker: 'LFTB11', price: 0, url: 'https://etf1.com.br/etf/LFTB11' },
+          { ticker: 'NCDI11', price: 0, url: 'https://etf1.com.br/etf/NCDI11' },
+          { ticker: 'POSB11', price: 0, url: 'https://etf1.com.br/etf/POSB11' }
+        ], defaultIdx: { conservador: 1, moderado: 1, sofisticado: 0 }
+      },
+      {
+        id: 'inflacao', group: 'RENDA FIXA BR', label: 'Inflação (IPCA+)', color: '#C9A84C',
+        etfs: [
+          { ticker: 'B5P211', price: 0, url: 'https://etf1.com.br/etf/B5P211' },
+          { ticker: 'PHIP11', price: 0, url: 'https://etf1.com.br/etf/PHIP11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      },
+      {
+        id: 'prefixado', group: 'RENDA FIXA BR', label: 'Prefixado', color: '#C9A84C',
+        etfs: [
+          { ticker: 'FIXA11', price: 0, url: 'https://etf1.com.br/etf/FIXA11' },
+          { ticker: '5PRE11', price: 0, url: 'https://etf1.com.br/etf/5PRE11' },
+          { ticker: 'IRFM11', price: 0, url: 'https://etf1.com.br/etf/IRFM11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      },
+      {
+        id: 'multi', group: 'MULTIMERCADO', label: 'Global Dinâmico / Macro', color: '#ffcc00',
+        etfs: [
+          { ticker: 'WRLD11', price: 0, url: 'https://etf1.com.br/etf/WRLD11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      },
+      {
+        id: 'rvbr', group: 'RENDA VARIÁVEL BR', label: 'Ações Brasil / ESG', color: '#10b981',
+        etfs: [
+          { ticker: 'BOVA11', price: 0, url: 'https://etf1.com.br/etf/BOVA11' },
+          { ticker: 'BEST11', price: 0, url: 'https://etf1.com.br/etf/BEST11' },
+          { ticker: 'BOVV11', price: 0, url: 'https://etf1.com.br/etf/BOVV11' },
+          { ticker: 'BOVX11', price: 0, url: 'https://etf1.com.br/etf/BOVX11' }
+        ], defaultIdx: { conservador: 0, moderado: 1, sofisticado: 1 }
+      },
+      {
+        id: 'fundos', group: 'FUNDOS LISTADOS', label: 'FIIs / FI-Infra / FI-Agro', color: '#10b981',
+        etfs: [
+          { ticker: 'XFIX11', price: 0, url: 'https://etf1.com.br/etf/XFIX11' },
+          { ticker: 'HERT11', price: 0, url: 'https://etf1.com.br/etf/HERT11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      },
+      {
+        id: 'alt', group: 'ALTERNATIVOS', label: 'Ouro / Cripto / Commodities', color: '#f97316',
+        etfs: [
+          { ticker: 'GOLD11', price: 0, url: 'https://etf1.com.br/etf/GOLD11' },
+          { ticker: 'HASH11', price: 0, url: 'https://etf1.com.br/etf/HASH11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      },
+      {
+        id: 'globalrf', group: 'GLOBAL', label: 'Renda Fixa Internacional', color: '#8b5cf6',
+        etfs: [
+          { ticker: 'HGBR11', price: 0, url: 'https://www.etfsbrasil.com.br/etfs/hgbr11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      },
+      {
+        id: 'globalrv', group: 'GLOBAL', label: 'Renda Variável Internacional', color: '#8b5cf6',
+        etfs: [
+          { ticker: 'IVVB11', price: 0, url: 'https://etf1.com.br/etf/IVVB11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      }
+    ];
 
-<div class="vip-popup-overlay" id="vipPopup">
-  <div class="vip-popup-content">
-    <div class="vip-close" onclick="closeVipPopup()">✕</div>
-    <div class="vip-banner"></div>
-    <div class="vip-info">
-      <h2 class="vip-title" style="font-size: 28px; line-height: 1.1; margin-bottom: 16px;">Você investe. Mas ainda não tem <span style="color:var(--blue)">clareza real</span> do que realmente acontece com o seu dinheiro.</h2>
-      <p class="vip-desc" style="font-size: 15px; margin-bottom: 24px;">Entre no <b>grupo VIP</b> da Comunidade Protocolo 9A — a metodologia que une 9 ativos globais para dar clareza, liquidez e eficiência à sua carteira.</p>
-      <a href="aula-vip/" class="vip-btn">Quero entrar no grupo VIP</a>
-    </div>
-  </div>
-</div>
+    // Função para buscar preços reais via API Brapi
+    async function fetchPrices() {
+      const tickers = [];
+      CATEGORIES.forEach(cat => cat.etfs.forEach(etf => tickers.push(etf.ticker)));
 
-<script>
-  function openVipPopup() {
-    const popup = document.getElementById('vipPopup');
-    popup.classList.add('active');
-  }
-  function closeVipPopup() {
-    const popup = document.getElementById('vipPopup');
-    popup.classList.remove('active');
-  }
+      const fallbacks = {
+        'LFTS11': 152.69, 'LFTB11': 121.38, 'NCDI11': 108.02, 'POSB11': 102.15,
+        'B5P211': 107.46, 'PHIP11': 118.01,
+        'FIXA11': 19.08, '5PRE11': 50.38, 'IRFM11': 100.45,
+        'WRLD11': 140.36,
+        'BOVA11': 177.07, 'BEST11': 114.32, 'BOVV11': 187.32, 'BOVX11': 18.63,
+        'XFIX11': 13.64, 'HERT11': 21.93,
+        'GOLD11': 23.91, 'HASH11': 50.27,
+        'HGBR11': 53.86, 'IVVB11': 410.49
+      };
 
-  // Abre o pop-up após 3 segundos
-  window.addEventListener('load', () => {
-    setTimeout(openVipPopup, 3000);
-  });
-</script>
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userToken = urlParams.get('token') || 'tD9aPK2dMnGq5QNmEjoj6c';
+
+        const response = await fetch(`https://brapi.dev/api/quote/${tickers.join(',')}?token=${userToken}`);
+        const data = await response.json();
+
+        if (data.results && data.results.length > 0) {
+          data.results.forEach(res => {
+            CATEGORIES.forEach(cat => {
+              cat.etfs.forEach(etf => {
+                if (etf.ticker === res.symbol) {
+                  etf.price = res.regularMarketPrice;
+                }
+              });
+            });
+          });
+          console.log("Preços atualizados via API com sucesso!");
+        } else {
+          throw new Error(data.message || "Falha na API");
+        }
+      } catch (error) {
+        console.warn("API Brapi falhou. Usando fallbacks.", error);
+        CATEGORIES.forEach(cat => cat.etfs.forEach(etf => {
+          if (etf.price === 0) {
+            etf.price = fallbacks[etf.ticker] || 100.00;
+          }
+        }));
+      } finally {
+        render();
+      }
+    }
+
+    const PROFILES = {
+      conservador: { posfixado: 72.5, inflacao: 12.5, prefixado: 5.0, multi: 2.5, rvbr: 0, fundos: 2.5, alt: 0, globalrf: 2.5, globalrv: 2.5 },
+      moderado: { posfixado: 32.5, inflacao: 22.5, prefixado: 10.0, multi: 14.0, rvbr: 7.5, fundos: 4.0, alt: 3.0, globalrf: 2.5, globalrv: 4.0 },
+      sofisticado: { posfixado: 12.5, inflacao: 27.5, prefixado: 7.5, multi: 10.0, rvbr: 17.5, fundos: 9.5, alt: 7.0, globalrf: 2.5, globalrv: 6.0 }
+    };
+
+    let currentProfile = 'conservador';
+
+    function parseAmount(str) {
+      return parseFloat(str.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
+    }
+
+    function formatBRL(v) {
+      return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function formatInput(el) {
+      let v = parseAmount(el.value);
+      if (v > 0) el.value = 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function getSelectedEtfIdx(catId) {
+      const sel = document.getElementById('sel_' + catId);
+      return sel ? parseInt(sel.value) : 0;
+    }
+
+    function render() {
+      const totalValue = parseAmount(document.getElementById('investAmount').value);
+      const alloc = PROFILES[currentProfile];
+      const tbody = document.getElementById('simBody');
+      let html = '';
+      let totalInvested = 0;
+      let totalQty = 0;
+
+      CATEGORIES.forEach(cat => {
+        const pct = alloc[cat.id];
+        const amount = totalValue * pct / 100;
+        const eidx = getSelectedEtfIdx(cat.id);
+        const etf = cat.etfs[eidx] || cat.etfs[0];
+
+        const priceDisplay = etf.price > 0 ? formatBRL(etf.price) : '...';
+        const qty = (pct > 0 && etf.price > 0) ? Math.floor(amount / etf.price) : 0;
+        const invested = qty * etf.price;
+
+        totalInvested += invested;
+        totalQty += qty;
+
+        const optionsHtml = cat.etfs.map((e, i) =>
+          `<option value="${i}" ${i === eidx ? 'selected' : ''}>${e.ticker}</option>`
+        ).join('');
+
+        html += `<tr>
+          <td><div class="cat-label"><span class="cat-sub">${cat.group}</span><span class="cat-main">${cat.label}</span></div></td>
+          <td><div class="pct-bar-wrap"><span class="pct-val" style="color:${pct > 0 ? '#fff' : 'var(--muted)'}">${pct.toFixed(1)}%</span><div class="pct-bar"><div class="pct-bar-fill" style="width:${pct}%;background:${cat.color}"></div></div></div></td>
+          <td>
+            <select class="etf-select" id="sel_${cat.id}" onchange="render()">
+              ${optionsHtml}
+            </select>
+            <a href="${etf.url}" target="_blank" class="etf-link" style="display:block;margin-top:3px">ver ETF ↗</a>
+          </td>
+          <td class="num">${pct > 0 ? priceDisplay : '—'}</td>
+          <td class="qty">${(pct > 0 && etf.price > 0) ? qty : '—'}</td>
+          <td class="val">${(pct > 0 && etf.price > 0) ? formatBRL(invested) : '—'}</td>
+        </tr>`;
+      });
+
+      const remainder = totalValue - totalInvested;
+      html += `<tr class="total-row">
+        <td colspan="2" style="text-align:right;color:var(--muted);font-size:.8rem">Total investido: ${formatBRL(totalInvested)} · Troco: ${formatBRL(remainder > 0 ? remainder : 0)}</td>
+        <td></td>
+        <td class="num" style="color:var(--blue)">TOTAL</td>
+        <td class="qty" style="font-size:1.1rem">${totalQty} cotas</td>
+        <td class="val" style="font-size:1.1rem;color:var(--blue)">${formatBRL(totalInvested)}</td>
+      </tr>`;
+
+      tbody.innerHTML = html;
+    }
+
+    document.querySelectorAll('.profile-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentProfile = tab.dataset.profile;
+        CATEGORIES.forEach(cat => {
+          const sel = document.getElementById('sel_' + cat.id);
+          if (sel) sel.value = cat.defaultIdx[currentProfile];
+        });
+        render();
+      });
+    });
+
+    const amountInput = document.getElementById('investAmount');
+    amountInput.addEventListener('blur', function () { formatInput(this); render(); });
+    amountInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') { formatInput(this); render(); this.blur(); } });
+
+    render();
+    fetchPrices();
+  </script>
 </body>
+
 </html>
