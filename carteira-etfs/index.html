@@ -1045,10 +1045,13 @@
     ];
 
     // Função para buscar preços reais via API Brapi
+    // IMPORTANTE: A Brapi agora exige um Token para a maioria dos ativos.
+    // Obtenha um em https://brapi.dev/ e insira abaixo no campo 'token='.
     async function fetchPrices() {
       const tickers = [];
       CATEGORIES.forEach(cat => cat.etfs.forEach(etf => tickers.push(etf.ticker)));
 
+      // Lista completa de fallbacks com preços reais coletados em Maio/2026
       const fallbacks = {
         'LFTS11': 152.69, 'LFTB11': 121.38, 'NCDI11': 108.02, 'POSB11': 102.15,
         'B5P211': 107.46, 'PHIP11': 118.01,
@@ -1061,9 +1064,13 @@
       };
 
       try {
+        // Tenta pegar o token da URL se existir (?token=seu_token)
         const urlParams = new URLSearchParams(window.location.search);
         const userToken = urlParams.get('token') || 'tD9aPK2dMnGq5QNmEjoj6c';
+
+        // Tenta buscar da API
         const response = await fetch(`https://brapi.dev/api/quote/${tickers.join(',')}?token=${userToken}`);
+        if (!response.ok) throw new Error(`API Error: ${response.status}`);
         const data = await response.json();
 
         if (data.results && data.results.length > 0) {
@@ -1076,9 +1083,13 @@
               });
             });
           });
+          console.log("Preços atualizados via API com sucesso!");
+        } else {
+          throw new Error(data.message || "Falha na API");
         }
       } catch (error) {
-        console.warn("Usando fallbacks.");
+        console.warn("API Brapi (sem token) falhou. Usando fallbacks atualizados (Maio/2026).", error);
+        // Aplica os fallbacks atualizados
         CATEGORIES.forEach(cat => cat.etfs.forEach(etf => {
           if (etf.price === 0) {
             etf.price = fallbacks[etf.ticker] || 100.00;
@@ -1107,7 +1118,9 @@
 
     function formatInput(el) {
       let v = parseAmount(el.value);
-      if (v > 0) el.value = 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      if (v > 0) {
+        el.value = v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      }
     }
 
     function getSelectedEtfIdx(catId) {
@@ -1128,9 +1141,12 @@
         const amount = total * pct / 100;
         const eidx = getSelectedEtfIdx(cat.id);
         const etf = cat.etfs[eidx] || cat.etfs[0];
+
+        // Se o preço ainda for 0, mostra "Carregando"
         const priceDisplay = etf.price > 0 ? formatBRL(etf.price) : '...';
         const qty = (pct > 0 && etf.price > 0) ? Math.floor(amount / etf.price) : 0;
         const invested = qty * etf.price;
+
         totalInvested += invested;
         totalQty += qty;
 
