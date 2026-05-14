@@ -1078,7 +1078,7 @@
           });
         }
       } catch (error) {
-        console.warn(\"Usando fallbacks.\");
+        console.warn("Usando fallbacks.");
         CATEGORIES.forEach(cat => cat.etfs.forEach(etf => {
           if (etf.price === 0) {
             etf.price = fallbacks[etf.ticker] || 100.00;
@@ -1098,7 +1098,7 @@
     let currentProfile = 'conservador';
 
     function parseAmount(str) {
-      return parseFloat(str.replace(/[^\\d,]/g, '').replace(',', '.')) || 0;
+      return parseFloat(str.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
     }
 
     function formatBRL(v) {
@@ -1135,35 +1135,37 @@
         totalQty += qty;
 
         const optionsHtml = cat.etfs.map((e, i) =>
-          `<option value=\"\${i}\" \${i === eidx ? 'selected' : ''}>\${e.ticker}</option>`
+          `<option value="${i}" ${i === eidx ? 'selected' : ''}>${e.ticker}</option>`
         ).join('');
 
         html += `<tr>
-          <td><div class=\"cat-label\"><span class=\"cat-sub\">\${cat.group}</span><span class=\"cat-main\">\${cat.label}</span></div></td>
-          <td><div class=\"pct-bar-wrap\"><span class=\"pct-val\" style=\"color:\${pct > 0 ? '#fff' : 'var(--muted)'}\">\${pct.toFixed(1)}%</span><div class=\"pct-bar\"><div class=\"pct-bar-fill\" style=\"width:\${pct}%;background:\${cat.color}\"></div></div></div></td>
-          <td>
-            <select class=\"etf-select\" id=\"sel_\${cat.id}\" onchange=\"render()\">
-              \${optionsHtml}
-            </select>
-            <a href=\"\${etf.url}\" target=\"_blank\" class=\"etf-link\" style=\"display:block;margin-top:3px\">ver ETF ↗</a>
-          </td>
-          <td class=\"num\">\${pct > 0 ? priceDisplay : '—'}</td>
-          <td class=\"qty\">\${(pct > 0 && etf.price > 0) ? qty : '—'}</td>
-          <td class=\"val\">\${(pct > 0 && etf.price > 0) ? formatBRL(invested) : '—'}</td>
-        </tr>`;
+      <td><div class="cat-label"><span class="cat-sub">${cat.group}</span><span class="cat-main">${cat.label}</span></div></td>
+      <td><div class="pct-bar-wrap"><span class="pct-val" style="color:${pct > 0 ? '#fff' : 'var(--muted)'}">${pct.toFixed(1)}%</span><div class="pct-bar"><div class="pct-bar-fill" style="width:${pct}%;background:${cat.color}"></div></div></div></td>
+      <td>
+        <select class="etf-select" id="sel_${cat.id}" onchange="render()">
+          ${optionsHtml}
+        </select>
+        <a href="${etf.url}" target="_blank" class="etf-link" style="display:block;margin-top:3px">ver ETF ↗</a>
+      </td>
+      <td class="num">${pct > 0 ? priceDisplay : '—'}</td>
+      <td class="qty">${(pct > 0 && etf.price > 0) ? qty : '—'}</td>
+      <td class="val">${(pct > 0 && etf.price > 0) ? formatBRL(invested) : '—'}</td>
+    </tr>`;
       });
 
       const remainder = total - totalInvested;
-      html += `<tr class=\"total-row\">
-        <td colspan=\"2\" style=\"text-align:right;color:var(--muted);font-size:.8rem\">Total: \${formatBRL(totalInvested)} · Troco: \${formatBRL(remainder > 0 ? remainder : 0)}</td>
-        <td></td>
-        <td class=\"num\" style=\"color:var(--blue)\">TOTAL</td>
-        <td class=\"qty\" style=\"font-size:1.1rem\">\${totalQty} cotas</td>
-        <td class=\"val\" style=\"font-size:1.1rem;color:var(--blue)\">\${formatBRL(totalInvested)}</td>
-      </tr>`;
+      html += `<tr class="total-row">
+    <td colspan="2" style="text-align:right;color:var(--muted);font-size:.8rem">Total investido: ${formatBRL(totalInvested)} · Troco: ${formatBRL(remainder > 0 ? remainder : 0)}</td>
+    <td></td>
+    <td class="num" style="color:var(--blue)">TOTAL</td>
+    <td class="qty" style="font-size:1.1rem">${totalQty} cotas</td>
+    <td class="val" style="font-size:1.1rem;color:var(--blue)">${formatBRL(totalInvested)}</td>
+  </tr>`;
+
       tbody.innerHTML = html;
     }
 
+    // Profile tabs
     document.querySelectorAll('.profile-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
@@ -1177,12 +1179,15 @@
       });
     });
 
+    // Input formatting
     const amountInput = document.getElementById('investAmount');
     amountInput.addEventListener('blur', function () { formatInput(this); render(); });
     amountInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') { formatInput(this); render(); this.blur(); } });
 
+    // Initial render e busca de preços
     render();
     fetchPrices();
   </script>
 </body>
+
 </html>
