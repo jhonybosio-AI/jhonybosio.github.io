@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula VIP - Protocolo 9A | Jhony Bosio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;0,800;1,800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #020611;
+            --bg-navy: #0A1428;
+            --neon-cyan: #00D2FF;
+            --text-main: #FFFFFF;
+            --text-muted: #8B9BB4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top center, var(--bg-navy) 0%, var(--bg-deep) 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Efeito de brilho de fundo similar ao do PAN 2026 */
+        .glow-background {
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80vw;
+            height: 50vh;
+            background: radial-gradient(ellipse, rgba(0, 210, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            max-width: 800px;
+        }
+
+        .tag {
+            color: var(--neon-cyan);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: inline-block;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: rgba(0, 210, 255, 0.05);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-style: italic;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* O Segredo do YouTube Blindado */
+        .video-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* Proporção 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            /* Estilo Blue3 Glassmorphism */
+            background: rgba(10, 20, 40, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 210, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.2), inset 0 0 20px rgba(0, 210, 255, 0.1);
+        }
+
+        /* O iframe é esticado para esconder os controles e titulo do YT */
+        .video-wrapper iframe {
+            position: absolute;
+            top: -10%; 
+            left: -5%;
+            width: 110%;
+            height: 120%;
+            pointer-events: auto; /* Permite clicar no play, mas dificulta clicar na logo */
+        }
+
+        /* Botão para o WhatsApp (Dúvidas) */
+        .action-area {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 60px;
+        }
+
+        .btn-premium {
+            display: inline-block;
+            background: linear-gradient(90deg, #00A3FF 0%, var(--neon-cyan) 100%);
+            color: #000;
+            text-decoration: none;
+            font-weight: 800;
+            font-style: italic;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-premium:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .video-wrapper iframe {
+                top: -15%;
+                height: 130%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow-background"></div>
+    
+    <header>
+        <div class="tag">AO VIVO</div>
+        <h1>PROTOCOLO 9A</h1>
+        <p class="subtitle">Como estruturar uma carteira eficiente, blindada contra o Risco Brasil e livre de conflito de interesses.</p>
+    </header>
+
+    <div class="video-container">
+        <div class="video-wrapper">
+            <!-- O ID da sua live já foi configurado abaixo -->
+            <!-- Os parâmetros modestbranding=1 e controls=0 ajudam a limpar o player -->
+            <iframe 
+                src="https://www.youtube.com/embed/CwcfvAEOyHI?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&disablekb=1&iv_load_policy=3" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <div class="action-area">
+        <p class="subtitle" style="margin-bottom: 15px; font-size: 0.9rem;">Dúvidas ou problemas com o áudio?</p>
+        <a href="https://wa.me/5516993115079" target="_blank" class="btn-premium">Falar com a Diretoria</a>
+    </div>
+
+</body>
+</html>
