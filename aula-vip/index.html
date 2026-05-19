@@ -141,8 +141,8 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06);text-align:cent
       </div>
 
       <div class="glass optin-box">
-        <div class="opt-title">Quero entrar no Grupo VIP</div>
-        <div class="opt-sub">Preencha abaixo para entrar no grupo oficial e receber o link da aula.</div>
+        <div class="opt-title">Garantir Minha Vaga</div>
+        <div class="opt-sub">Preencha abaixo para garantir seu acesso VIP e falar com nosso concierge no WhatsApp.</div>
         <form id="vipForm">
           <input class="fi" type="text" name="first_name" placeholder="Seu Primeiro Nome" required>
           <input class="fi" type="tel" name="whatsapp" placeholder="WhatsApp com DDD" required>
@@ -153,7 +153,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06);text-align:cent
             <option value="300k-1m">R$ 300 mil a R$ 1 Milhão</option>
             <option value="acima-1m">Acima de R$ 1 Milhão</option>
           </select>
-          <button type="submit" id="submitBtn" class="btnp">ENTRAR NO GRUPO VIP AGORA 🔒</button>
+          <button type="submit" id="submitBtn" class="btnp">QUERO GARANTIR MINHA VAGA 🔒</button>
         </form>
         <div id="formMsg" style="display:none; margin-top:15px; font-size:13px; color:var(--blue); text-align:center; font-weight:600">
           Redirecionando para o WhatsApp...
@@ -168,7 +168,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06);text-align:cent
         const form = document.getElementById('vipForm');
         const btn = document.getElementById('submitBtn');
         const msg = document.getElementById('formMsg');
-        const whatsappLink = "https://chat.whatsapp.com/D2alLGyFBjTDAwXyVO9Fs2";
+        const whatsappLink = "https://wa.me/5516993115079?text=Quero%20garantir%20minha%20vaga";
 
         form.addEventListener('submit', async (e) => {
           e.preventDefault();
@@ -242,7 +242,7 @@ footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06);text-align:cent
     </div>
     <div class="urgency" style="margin-top:3rem">
       <h3>📅 Próxima Aula VIP: 19/05 (Terça-feira), às 20h00</h3>
-      <p>O link de acesso à sala será enviado exclusivamente dentro do Grupo VIP 15 minutos antes do início. Garanta sua entrada acima para não perder.</p>
+      <p>O link de acesso à sala será enviado exclusivamente pela nossa diretoria no seu WhatsApp 15 minutos antes do início. Garanta sua entrada acima para não perder.</p>
     </div>
   </div>
 </section>
