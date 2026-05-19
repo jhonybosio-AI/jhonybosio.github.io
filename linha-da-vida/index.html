@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Régua da Vida — Planejamento Patrimonial Familiar</title>
+    <!-- CSS Consistente da Identidade Visual -->
+    <link rel="stylesheet" href="../colors_and_type.css">
+    <style>
+        :root {
+            --gold: #C5A880;
+            --gold-hover: #D8BD96;
+            --blue-cyan: #00D1FF;
+            --navy-dark: #050C1A;
+            --navy-light: #0A1B3D;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --bg-glass: rgba(10, 27, 61, 0.6);
+            --bg-card-glass: rgba(255, 255, 255, 0.02);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--navy-dark);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 209, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(197, 168, 128, 0.05) 0%, transparent 40%);
+        }
+
+        /* ── Header ────────────────────────────────────────────────── */
+        header {
+            background: rgba(5, 12, 26, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--gold), var(--blue-cyan));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #000;
+            font-size: 14px;
+        }
+
+        .brand-text h1 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .brand-text p {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0;
+        }
+
+        .status-badge {
+            background: rgba(0, 209, 255, 0.1);
+            border: 1px solid rgba(0, 209, 255, 0.2);
+            color: var(--blue-cyan);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 99px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--blue-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--blue-cyan);
+        }
+
+        /* ── Main Layout ───────────────────────────────────────────── */
+        .app-container {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            flex: 1;
+            height: calc(100vh - 65px);
+            overflow: hidden;
+        }
+
+        @media (max-width: 1024px) {
+            .app-container {
+                grid-template-columns: 1fr;
+                height: auto;
+                overflow: visible;
+            }
+        }
+
+        /* ── Sidebar (Inputs Form) ─────────────────────────────────── */
+        .sidebar {
+            background: rgba(5, 12, 26, 0.4);
+            border-right: 1px solid var(--border-glass);
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        .panel-card {
+            background: var(--bg-card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .panel-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 8px;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 12px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: var(--blue-cyan);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 0 8px rgba(0, 209, 255, 0.15);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--gold), rgba(197, 168, 128, 0.8));
+            border: none;
+            color: #000;
+            font-weight: 700;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(197, 168, 128, 0.3);
+        }
+
+        /* ── Workspace (Main Content) ──────────────────────────────── */
+        .workspace {
+            padding: 32px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        /* ── Ruler Section (A Régua Móvel) ────────────────:::::::::: */
+        .ruler-container {
+            background: linear-gradient(135deg, rgba(10, 27, 61, 0.8), rgba(5, 12, 26, 0.8));
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ruler-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .ruler-title h2 {
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        .ruler-title p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .current-indicator {
+            text-align: right;
+        }
+
+        .current-year {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--gold);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(197, 168, 128, 0.3);
+        }
+
+        .current-age-text {
+            font-size: 12px;
+            color: var(--blue-cyan);
+            font-weight: 700;
+        }
+
+        /* Custom Range Slider */
+        .slider-wrapper {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-ticks {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-bottom: 8px;
+            padding: 0 10px;
+        }
+
+        .timeline-ticks span {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timeline-ticks span::after {
+            content: '';
+            width: 1px;
+            height: 6px;
+            background: rgba(255,255,255,0.15);
+            margin-top: 4px;
+        }
+
+        .timeline-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.05);
+            outline: none;
+            border: 1px solid var(--border-glass);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .timeline-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 4px solid var(--navy-dark);
+            box-shadow: 0 0 15px var(--gold);
+            cursor: grab;
+            transition: all 0.2s ease;
+        }
+
+        .timeline-slider::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.15);
+            background: var(--blue-cyan);
+            box-shadow: 0 0 20px var(--blue-cyan);
+        }
+
+        /* ── Family Grid ────────────────────────────────:::::::::::: */
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .family-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .family-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .family-card:hover {
+            border-color: rgba(0, 209, 255, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            transform: translateY(-2px);
+        }
+
+        .avatar-ring {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--border-glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.3s;
+        }
+
+        .family-card.active .avatar-ring {
+            border-color: var(--blue-cyan);
+            box-shadow: 0 0 10px rgba(0, 209, 255, 0.2);
+            background: rgba(0, 209, 255, 0.05);
+        }
+
+        .family-card.spouse.active .avatar-ring {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(197, 168, 128, 0.2);
+            background: rgba(197, 168, 128, 0.05);
+        }
+
+        .family-card h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+
+        .family-card p {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .family-age {
+            font-size: 20px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: #fff;
+        }
+
+        .family-age.active {
+            color: var(--blue-cyan);
+        }
+
+        .family-card.spouse.active .family-age {
+            color: var(--gold);
+        }
+
+        /* ── Timelines (Marcos e Metas) ────────────────────────:::::: */
+        .timeline-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .timeline-box {
+            background: rgba(10, 27, 61, 0.3);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .timeline-box h3 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timeline-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            position: relative;
+            padding-left: 16px;
+            border-left: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-glass);
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 2px solid var(--navy-dark);
+            transition: all 0.3s;
+        }
+
+        /* Active State */
+        .timeline-item.active {
+            border-color: rgba(39, 201, 63, 0.3);
+            background: rgba(39, 201, 63, 0.02);
+        }
+
+        .timeline-item.active::before {
+            background: #27C93F;
+            box-shadow: 0 0 8px #27C93F;
+        }
+
+        /* Future Active State (Selected Year Match) */
+        .timeline-item.current-focus {
+            border-color: var(--gold);
+            background: rgba(197, 168, 128, 0.06);
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(197, 168, 128, 0.1);
+        }
+
+        .timeline-item.current-focus::before {
+            background: var(--gold);
+            box-shadow: 0 0 10px var(--gold);
+            width: 9px;
+            height: 9px;
+            left: -21px;
+        }
+
+        .timeline-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .timeline-item-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .timeline-item-desc {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .timeline-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .timeline-item.active .timeline-badge {
+            background: rgba(39, 201, 63, 0.15);
+            color: #27C93F;
+            border: 1px solid rgba(39, 201, 63, 0.2);
+        }
+
+        .timeline-item.current-focus .timeline-badge {
+            background: rgba(197, 168, 128, 0.2);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+        }
+
+        /* ── GPS Financeiro Module ────────────────────────────────── */
+        .gps-module {
+            background: linear-gradient(135deg, rgba(10, 27, 61, 0.4), rgba(5, 12, 26, 0.4));
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .gps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .gps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .gps-card {
+            background: var(--bg-card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .gps-card-label {
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .gps-card-val {
+            font-size: 18px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: #fff;
+        }
+
+        .gps-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .gps-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold), var(--blue-cyan));
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* ── Compliance Footer ─────────────────────────────────────── */
+        footer {
+            background: #050C1A;
+            border-top: 1px solid var(--border-glass);
+            padding: 16px 24px;
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .footer-logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Corporativo -->
+    <header>
+        <div class="brand-area">
+            <div class="brand-logo">B3</div>
+            <div class="brand-text">
+                <h1>Régua da Vida Patrimonial</h1>
+                <p>Planejamento Financeiro Centrado em Objetivos de Vida</p>
+            </div>
+        </div>
+        <div class="status-badge">
+            <div class="status-dot"></div>
+            <span>GPS Familiar Ativo</span>
+        </div>
+    </header>
+
+    <!-- App Main Frame -->
+    <div class="app-container">
+        
+        <!-- Sidebar - Parâmetros do Planejamento -->
+        <aside class="sidebar">
+            
+            <!-- Perfil Familiar -->
+            <div class="panel-card">
+                <div class="panel-title">
+                    <span>👥 Núcleo Familiar</span>
+                </div>
+                
+                <div class="form-group">
+                    <label>Seu Nome</label>
+                    <div class="form-row">
+                        <input type="text" id="inputClientName" value="Jhony Bosio">
+                        <input type="number" id="inputClientBirth" value="1978" placeholder="Ano nasc.">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Cônjuge (Esposa/Marido)</label>
+                    <div class="form-row">
+                        <input type="text" id="inputSpouseName" value="Esposa">
+                        <input type="number" id="inputSpouseBirth" value="1979" placeholder="Ano nasc.">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Filho(a) 1</label>
+                    <div class="form-row">
+                        <input type="text" id="inputChild1Name" value="Filho 1">
+                        <input type="number" id="inputChild1Birth" value="2012" placeholder="Ano nasc.">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Filho(a) 2</label>
+                    <div class="form-row">
+                        <input type="text" id="inputChild2Name" value="Filho 2">
+                        <input type="number" id="inputChild2Birth" value="2014" placeholder="Ano nasc.">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marcos Importantes -->
+            <div class="panel-card">
+                <div class="panel-title">
+                    <span>🏆 Conquistas Passadas</span>
+                </div>
+                <div class="form-group">
+                    <div class="form-row" style="margin-bottom: 6px;">
+                        <input type="number" id="inputPastYear1" value="2000" style="padding: 6px;">
+                        <input type="text" id="inputPastName1" value="Formatura Universitária" style="padding: 6px;">
+                    </div>
+                    <div class="form-row" style="margin-bottom: 6px;">
+                        <input type="number" id="inputPastYear2" value="2008" style="padding: 6px;">
+                        <input type="text" id="inputPastName2" value="Casamento" style="padding: 6px;">
+                    </div>
+                    <div class="form-row">
+                        <input type="number" id="inputPastYear3" value="2020" style="padding: 6px;">
+                        <input type="text" id="inputPastName3" value="Transição para Blue3 XP" style="padding: 6px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metas de Futuro -->
+            <div class="panel-card">
+                <div class="panel-title">
+                    <span>🎯 Metas Futuras</span>
+                </div>
+                <div class="form-group">
+                    <div class="form-row" style="margin-bottom: 6px;">
+                        <input type="number" id="inputFutureYear1" value="2030" style="padding: 6px;" placeholder="Ano">
+                        <input type="text" id="inputFutureName1" value="Filho 1 na Faculdade" style="padding: 6px;">
+                    </div>
+                    <div class="form-row" style="margin-bottom: 6px;">
+                        <input type="number" id="inputFutureYear2" value="2032" style="padding: 6px;" placeholder="Ano">
+                        <input type="text" id="inputFutureName2" value="Filho 2 na Faculdade" style="padding: 6px;">
+                    </div>
+                    <div class="form-row" style="margin-bottom: 6px;">
+                        <input type="number" id="inputFutureYear3" value="2038" style="padding: 6px;" placeholder="Ano">
+                        <input type="text" id="inputFutureName3" value="Liberdade Financeira (R$ 5M)" style="padding: 6px;">
+                    </div>
+                    <div class="form-row">
+                        <input type="number" id="inputFutureYear4" value="2046" style="padding: 6px;" placeholder="Ano">
+                        <input type="text" id="inputFutureName4" value="Sucessão WealthMap Vault" style="padding: 6px;">
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="updateLifeRuler()" class="btn-submit">Gerar Régua da Vida</button>
+
+        </aside>
+
+        <!-- Workspace Principal -->
+        <main class="workspace">
+            
+            <!-- Régua de Controle Principal -->
+            <section class="ruler-container">
+                <div class="ruler-header">
+                    <div class="ruler-title">
+                        <h2>Sua Linha do Tempo Familiar</h2>
+                        <p>Desloque o marcador para analisar a evolução de idade e objetivos no tempo.</p>
+                    </div>
+                    <div class="current-indicator">
+                        <div class="current-year" id="labelCurrentYear">2026</div>
+                        <div class="current-age-text" id="labelClientAge">48 anos (Você)</div>
+                    </div>
+                </div>
+
+                <!-- Range Slider da Régua -->
+                <div class="slider-wrapper">
+                    <div class="timeline-ticks" id="rulerTicks">
+                        <!-- Gerado dinamicamente -->
+                    </div>
+                    <input type="range" id="lifeSlider" min="2020" max="2060" value="2026" class="timeline-slider" oninput="handleSliderChange(this.value)">
+                </div>
+            </section>
+
+            <!-- Grid de Idades Familiares -->
+            <section class="family-grid" id="familyGrid">
+                <!-- Cards Familiares Gerados Dinamicamente -->
+            </section>
+
+            <!-- Timelines Paralelas -->
+            <section class="timeline-section">
+                
+                <!-- Conquistas Passadas -->
+                <div class="timeline-box">
+                    <h3 style="color: var(--blue-cyan);">🏆 Conquistas do Passado</h3>
+                    <div class="timeline-flow" id="pastTimelineFlow">
+                        <!-- Preenchido via JS -->
+                    </div>
+                </div>
+
+                <!-- Metas Futuras -->
+                <div class="timeline-box">
+                    <h3 style="color: var(--gold);">🎯 Metas Futuras Planejadas</h3>
+                    <div class="timeline-flow" id="futureTimelineFlow">
+                        <!-- Preenchido via JS -->
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Módulo GPS Financeiro -->
+            <section class="gps-module">
+                <h3 style="font-size: 13px; font-weight:700; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; display:flex; align-items:center; gap:8px;">
+                    <span>🛰️ GPS Patrimonial Ativo - Ano Provedor</span>
+                </h3>
+                <div class="gps-grid">
+                    <div class="gps-card">
+                        <div class="gps-card-label">Patrimônio Previsto (Simulado)</div>
+                        <div class="gps-card-val" id="gpsPatrimonio">R$ 1.800.000</div>
+                        <div class="gps-progress-bar">
+                            <div class="gps-progress-fill" id="gpsProgressFill"></div>
+                        </div>
+                    </div>
+                    <div class="gps-card">
+                        <div class="gps-card-label">Rendimento Real (Consistente)</div>
+                        <div class="gps-card-val" style="color:#27C93F;">IPCA + 5.0% a.a.</div>
+                    </div>
+                    <div class="gps-card">
+                        <div class="gps-card-label">Aporte Mensal Recomendado</div>
+                        <div class="gps-card-val" id="gpsAporte" style="color:var(--gold);">R$ 4.250 / mês</div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- Compliance Footer -->
+    <footer>
+        <div class="footer-logo">Jhony Bosio | Private Advisor</div>
+        <p>
+            Informações simuladas para fins de modelagem de planejamento patrimonial de longo prazo. Em conformidade com a Resolução CVM 178/2023.<br>
+            A segurança dos dados é blindada no lado do cliente (Client-Side). Nenhuma informação de chaves ou valores é armazenada em servidores externos.
+        </p>
+    </footer>
+
+    <!-- Lógica de Funcionamento -->
+    <script>
+        // Estrutura de dados padrão
+        let config = {
+            client: { name: "Jhony Bosio", birth: 1978 },
+            spouse: { name: "Esposa", birth: 1979 },
+            children: [
+                { name: "Filho 1", birth: 2012 },
+                { name: "Filho 2", birth: 2014 }
+            ],
+            past: [
+                { year: 2000, desc: "Formatura Universitária" },
+                { year: 2008, desc: "Casamento" },
+                { year: 2020, desc: "Transição para Blue3 XP" }
+            ],
+            future: [
+                { year: 2030, desc: "Filho 1 na Faculdade" },
+                { year: 2032, desc: "Filho 2 na Faculdade" },
+                { year: 2038, desc: "Liberdade Financeira (R$ 5M)" },
+                { year: 2046, desc: "Sucessão WealthMap Vault" }
+            ]
+        };
+
+        // Inicializar aplicação
+        window.addEventListener('DOMContentLoaded', () => {
+            // Carregar do localStorage se existir
+            const saved = localStorage.getItem('jhony_life_ruler');
+            if (saved) {
+                config = JSON.parse(saved);
+                loadInputsFromConfig();
+            }
+            
+            buildTicks();
+            updateDashboard(2026);
+        });
+
+        // Preenche campos do formulário com a config ativa
+        function loadInputsFromConfig() {
+            document.getElementById('inputClientName').value = config.client.name;
+            document.getElementById('inputClientBirth').value = config.client.birth;
+            document.getElementById('inputSpouseName').value = config.spouse.name;
+            document.getElementById('inputSpouseBirth').value = config.spouse.birth;
+
+            if (config.children[0]) {
+                document.getElementById('inputChild1Name').value = config.children[0].name;
+                document.getElementById('inputChild1Birth').value = config.children[0].birth;
+            }
+            if (config.children[1]) {
+                document.getElementById('inputChild2Name').value = config.children[1].name;
+                document.getElementById('inputChild2Birth').value = config.children[1].birth;
+            }
+
+            if (config.past[0]) {
+                document.getElementById('inputPastYear1').value = config.past[0].year;
+                document.getElementById('inputPastName1').value = config.past[0].desc;
+            }
+            if (config.past[1]) {
+                document.getElementById('inputPastYear2').value = config.past[1].year;
+                document.getElementById('inputPastName2').value = config.past[1].desc;
+            }
+            if (config.past[2]) {
+                document.getElementById('inputPastYear3').value = config.past[2].year;
+                document.getElementById('inputPastName3').value = config.past[2].desc;
+            }
+
+            if (config.future[0]) {
+                document.getElementById('inputFutureYear1').value = config.future[0].year;
+                document.getElementById('inputFutureName1').value = config.future[0].desc;
+            }
+            if (config.future[1]) {
+                document.getElementById('inputFutureYear2').value = config.future[1].year;
+                document.getElementById('inputFutureName2').value = config.future[1].desc;
+            }
+            if (config.future[2]) {
+                document.getElementById('inputFutureYear3').value = config.future[2].year;
+                document.getElementById('inputFutureName3').value = config.future[2].desc;
+            }
+            if (config.future[3]) {
+                document.getElementById('inputFutureYear4').value = config.future[3].year;
+                document.getElementById('inputFutureName4').value = config.future[3].desc;
+            }
+        }
+
+        // Reconstrói a escala de ticks no topo da régua
+        function buildTicks() {
+            const ticksContainer = document.getElementById('rulerTicks');
+            ticksContainer.innerHTML = '';
+            
+            const startYear = 2020;
+            const endYear = 2060;
+            
+            for (let yr = startYear; yr <= endYear; yr += 5) {
+                const age = yr - config.client.birth;
+                const span = document.createElement('span');
+                span.innerHTML = `${yr}<br><small style="font-size:8px; opacity:0.6">${age}a</small>`;
+                ticksContainer.appendChild(span);
+            }
+        }
+
+        // Ao arrastar a régua deslizante
+        function handleSliderChange(year) {
+            updateDashboard(parseInt(year));
+        }
+
+        // Ação do Botão "Gerar Régua da Vida"
+        function updateLifeRuler() {
+            // Coletar novos inputs
+            config.client.name = document.getElementById('inputClientName').value;
+            config.client.birth = parseInt(document.getElementById('inputClientBirth').value) || 1978;
+            config.spouse.name = document.getElementById('inputSpouseName').value;
+            config.spouse.birth = parseInt(document.getElementById('inputSpouseBirth').value) || 1979;
+
+            config.children = [
+                {
+                    name: document.getElementById('inputChild1Name').value,
+                    birth: parseInt(document.getElementById('inputChild1Birth').value) || 2012
+                },
+                {
+                    name: document.getElementById('inputChild2Name').value,
+                    birth: parseInt(document.getElementById('inputChild2Birth').value) || 2014
+                }
+            ];
+
+            config.past = [
+                {
+                    year: parseInt(document.getElementById('inputPastYear1').value) || 2000,
+                    desc: document.getElementById('inputPastName1').value
+                },
+                {
+                    year: parseInt(document.getElementById('inputPastYear2').value) || 2008,
+                    desc: document.getElementById('inputPastName2').value
+                },
+                {
+                    year: parseInt(document.getElementById('inputPastYear3').value) || 2020,
+                    desc: document.getElementById('inputPastName3').value
+                }
+            ].sort((a,b) => a.year - b.year);
+
+            config.future = [
+                {
+                    year: parseInt(document.getElementById('inputFutureYear1').value) || 2030,
+                    desc: document.getElementById('inputFutureName1').value
+                },
+                {
+                    year: parseInt(document.getElementById('inputFutureYear2').value) || 2032,
+                    desc: document.getElementById('inputFutureName2').value
+                },
+                {
+                    year: parseInt(document.getElementById('inputFutureYear3').value) || 2038,
+                    desc: document.getElementById('inputFutureName3').value
+                },
+                {
+                    year: parseInt(document.getElementById('inputFutureYear4').value) || 2046,
+                    desc: document.getElementById('inputFutureName4').value
+                }
+            ].sort((a,b) => a.year - b.year);
+
+            // Salvar no LocalStorage
+            localStorage.setItem('jhony_life_ruler', JSON.stringify(config));
+            
+            // Reconstruir
+            buildTicks();
+            const currentSelectedYear = parseInt(document.getElementById('lifeSlider').value);
+            updateDashboard(currentSelectedYear);
+        }
+
+        // Renderiza tudo com base no ano selecionado
+        function updateDashboard(year) {
+            // 1. Atualizar Marcadores Superiores
+            const clientAge = year - config.client.birth;
+            document.getElementById('labelCurrentYear').innerText = year;
+            document.getElementById('labelClientAge').innerText = `${clientAge} anos (${config.client.name})`;
+
+            // 2. Atualizar Grid Familiar
+            const familyGrid = document.getElementById('familyGrid');
+            familyGrid.innerHTML = '';
+
+            // Card Cliente
+            familyGrid.appendChild(createFamilyCard(
+                "🧑‍💻", 
+                config.client.name, 
+                "Titular", 
+                clientAge, 
+                true,
+                false
+            ));
+
+            // Card Cônjuge
+            const spouseAge = year - config.spouse.birth;
+            familyGrid.appendChild(createFamilyCard(
+                "👩‍💼", 
+                config.spouse.name, 
+                "Cônjuge", 
+                spouseAge, 
+                true,
+                true
+            ));
+
+            // Cards Filhos
+            config.children.forEach((child, index) => {
+                const childAge = year - child.birth;
+                familyGrid.appendChild(createFamilyCard(
+                    index === 0 ? "👦" : "👧", 
+                    child.name, 
+                    `Filho(a) ${index + 1}`, 
+                    childAge, 
+                    childAge >= 0,
+                    false
+                ));
+            });
+
+            // 3. Atualizar Timeline de Conquistas (Passado)
+            const pastFlow = document.getElementById('pastTimelineFlow');
+            pastFlow.innerHTML = '';
+            
+            config.past.forEach(item => {
+                const isConquered = year >= item.year;
+                const isFocus = year === item.year;
+                
+                let itemClass = "timeline-item";
+                if (isConquered) itemClass += " active";
+                if (isFocus) itemClass += " current-focus";
+
+                const badgeText = isConquered ? "Concluído 🏆" : "Futuro ⏳";
+
+                pastFlow.innerHTML += `
+                    <div class="${itemClass}">
+                        <div class="timeline-info">
+                            <span class="timeline-item-title">${item.desc}</span>
+                            <span class="timeline-item-desc">${item.year} — idade ${item.year - config.client.birth} anos</span>
+                        </div>
+                        <span class="timeline-badge">${badgeText}</span>
+                    </div>
+                `;
+            });
+
+            // 4. Atualizar Timeline de Metas (Futuro)
+            const futureFlow = document.getElementById('futureTimelineFlow');
+            futureFlow.innerHTML = '';
+
+            config.future.forEach(item => {
+                const isConquered = year >= item.year;
+                const isFocus = year === item.year;
+                
+                let itemClass = "timeline-item";
+                if (isConquered) itemClass += " active";
+                if (isFocus) itemClass += " current-focus";
+
+                const badgeText = isConquered ? "Atingido 🎉" : "Planejado 🎯";
+
+                futureFlow.innerHTML += `
+                    <div class="${itemClass}">
+                        <div class="timeline-info">
+                            <span class="timeline-item-title">${item.desc}</span>
+                            <span class="timeline-item-desc">${item.year} — idade ${item.year - config.client.birth} anos</span>
+                        </div>
+                        <span class="timeline-badge">${badgeText}</span>
+                    </div>
+                `;
+            });
+
+            // 5. GPS Financeiro de Simulação
+            // Simular uma curva de acumulação saudável: R$ 500k em 2020 subindo a 5% ao ano real + aportes
+            const initialWealth = 800000;
+            const targetWealth = 5000000;
+            const yearsElapsed = year - 2020;
+            
+            // Projeção fictícia incremental simples
+            let simulatedWealth = initialWealth * Math.pow(1.05, yearsElapsed) + (yearsElapsed * 110000);
+            if (simulatedWealth > 8000000) simulatedWealth = 8000000;
+
+            const formatValue = (val) => "R$ " + Math.round(val).toLocaleString('pt-BR');
+            document.getElementById('gpsPatrimonio').innerText = formatValue(simulatedWealth);
+            
+            // Barra de Progresso Financeiro
+            const progressPercent = Math.min((simulatedWealth / targetWealth) * 100, 100);
+            document.getElementById('gpsProgressFill').style.width = `${progressPercent}%`;
+
+            // Aporte ideal recomendado recalculado dinamicamente com base no tempo restante para a independência (2038)
+            const yearsToRetirement = 2038 - year;
+            let recommendedContribution = 4250;
+            
+            if (yearsToRetirement > 0) {
+                const deficit = targetWealth - simulatedWealth;
+                if (deficit > 0) {
+                    recommendedContribution = deficit / (yearsToRetirement * 12);
+                } else {
+                    recommendedContribution = 0; // Já atingiu a liberdade!
+                }
+            } else {
+                recommendedContribution = 0; // Aposentado!
+            }
+
+            document.getElementById('gpsAporte').innerText = recommendedContribution > 0 
+                ? formatValue(recommendedContribution) + " / mês"
+                : "Independência Atingida! ✨";
+        }
+
+        // Helper para gerar o card de cada membro familiar
+        function createFamilyCard(emoji, name, role, age, wasBorn, isSpouse) {
+            const card = document.createElement('div');
+            card.className = `family-card ${isSpouse ? 'spouse' : ''} ${wasBorn ? 'active' : ''}`;
+            
+            const displayAge = wasBorn ? `${age} anos` : "Não Nascido(a)";
+
+            card.innerHTML = `
+                <div class="avatar-ring">${emoji}</div>
+                <h4>${name}</h4>
+                <p>${role}</p>
+                <div class="family-age ${wasBorn ? 'active' : ''}">${displayAge}</div>
+            `;
+            return card;
+        }
+    </script>
+</body>
+</html>
