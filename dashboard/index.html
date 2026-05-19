@@ -3,270 +3,1922 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Privado | Jhony Bosio</title>
+    <title>Master Console | Jhony Bosio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../colors_and_type.css">
     <style>
         :root {
-            --navy: #000d38;
-            --navy-light: #002060;
-            --blue: #0092ff;
-            --gborder: rgba(255, 255, 255, 0.1);
+            --navy-dark: #050C1A;
+            --navy-card: rgba(10, 27, 61, 0.4);
+            --gold: #C5A059;
+            --blue-cyan: #00D1FF;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --shadow-premium: 0 20px 40px rgba(0, 13, 56, 0.5);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            background: var(--navy);
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            height: 100vh;
+            background-color: var(--navy-dark);
+            color: #FFFFFF;
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            flex-direction: column;
         }
         .bg-grid {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(var(--blue) 0.5px, transparent 0.5px);
-            background-size: 30px 30px;
-            opacity: 0.15;
+            background-image: radial-gradient(rgba(0, 209, 255, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.25;
             z-index: -1;
+            pointer-events: none;
         }
-        .login-card {
+        .bg-glow-1 {
+            position: fixed;
+            top: -20%; left: -10%; width: 50%; height: 50%;
+            background: radial-gradient(circle, rgba(0, 71, 187, 0.2) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .bg-glow-2 {
+            position: fixed;
+            bottom: -10%; right: -10%; width: 60%; height: 60%;
+            background: radial-gradient(circle, rgba(197, 160, 89, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        header {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .logo-box {
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, var(--color-blue3-blue), var(--gold));
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800; font-size: 16px;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 4px 12px rgba(0, 71, 187, 0.3);
+        }
+        .logo-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 0.05em;
+        }
+        .status-badge {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--gborder);
-            padding: 40px;
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        .status-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        .status-pulse {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            50% { transform: scale(1.3); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.6; }
+        }
+        main {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* ── Login Lock Screen ────────────────────────────────────── */
+        .login-card {
+            background: var(--navy-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            padding: 40px 30px;
             border-radius: 24px;
             width: 100%;
             max-width: 400px;
             text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: var(--shadow-premium);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
-        .logo-icon {
-            width: 50px; height: 50px;
-            background: linear-gradient(135deg, var(--blue), var(--navy-light));
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 800; font-size: 18px;
-            margin: 0 auto 20px;
-            border: 1px solid rgba(255,255,255,0.1);
+        .login-card h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFF 60%, #E2E6EC 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
         }
-        h1 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; margin-bottom: 8px; }
-        p { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 24px; }
-        input {
+        .login-card p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-top: -10px;
+        }
+        .login-card input {
             width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--gborder);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
             padding: 14px;
             border-radius: 12px;
             color: #fff;
             text-align: center;
             font-size: 16px;
-            margin-bottom: 16px;
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            font-family: 'JetBrains Mono', monospace;
         }
-        input:focus { border-color: var(--blue); }
-        button {
+        .login-card input:focus {
+            border-color: var(--blue-cyan);
+            background: rgba(0, 209, 255, 0.03);
+            box-shadow: 0 0 15px rgba(0, 209, 255, 0.1);
+        }
+        .login-card button {
             width: 100%;
-            background: var(--blue);
-            color: #fff;
+            background: var(--gold);
+            color: #000;
             border: none;
             padding: 14px;
             border-radius: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.2);
         }
-        button:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0,146,255,0.3); }
+        .login-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(197, 160, 89, 0.4);
+        }
+
+        /* ── Dashboard Operations Console ────────────────────────── */
+        .dash-content {
+            display: none;
+            width: 100%;
+            opacity: 0;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
         
-        .dash-content { display: none; width: 100%; max-width: 800px; text-align: left; }
-        .grid-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 20px; }
-        .dash-link {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--gborder);
-            padding: 25px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: #fff;
-            transition: all 0.3s;
+        /* Sidebar Navigation */
+        .sidebar-nav {
+            background: var(--navy-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 20px 12px;
+            box-shadow: var(--shadow-premium);
+        }
+        .nav-header-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            display: block;
+            margin-bottom: 15px;
+            padding-left: 12px;
+        }
+        .nav-links {
             display: flex;
             flex-direction: column;
+            gap: 8px;
+        }
+        .nav-item {
+            width: 100%;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 16px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-align: left;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(0, 71, 187, 0.15) 0%, rgba(10, 27, 61, 0.5) 100%);
+            border-color: rgba(0, 209, 255, 0.25);
+            color: #fff;
+            box-shadow: inset 0 0 12px rgba(0, 209, 255, 0.05);
+        }
+        .nav-icon {
+            font-size: 20px;
+        }
+        .nav-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex-grow: 1;
+        }
+        .nav-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .nav-status-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .nav-status-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .nav-status-dot.active {
+            background-color: var(--blue-cyan);
+            box-shadow: 0 0 6px var(--blue-cyan);
+        }
+        .nav-status-dot.service {
+            background-color: var(--gold);
+            box-shadow: 0 0 6px var(--gold);
+        }
+        .nav-status-text {
+            font-size: 9px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .nav-item.active .nav-status-text {
+            color: var(--blue-cyan);
+        }
+        .nav-item.active[id="nav-vault"] .nav-status-text,
+        .nav-item.active[id="nav-hermes"] .nav-status-text,
+        .nav-item.active[id="nav-reels"] .nav-status-text {
+            color: var(--gold);
+        }
+
+        /* Workspace Content */
+        .workspace-area {
+            min-height: 500px;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+        .workspace-area.loading {
+            opacity: 0.3;
+        }
+        .hero {
+            margin-bottom: 40px;
+        }
+        .hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(24px, 3.5vw, 36px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #FFF 60%, #E2E6EC 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+        .hero p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 800px;
+        }
+        
+        .section-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--gold);
+            margin: 30px 0 20px;
+            display: flex;
+            align-items: center;
             gap: 10px;
         }
-        .dash-link:hover { background: rgba(255, 255, 255, 0.06); border-color: var(--blue); transform: translateY(-5px); }
-        .dash-link i { font-size: 24px; }
-        .dash-link span { font-weight: 700; font-size: 16px; }
-        .dash-link small { color: rgba(255,255,255,0.4); font-size: 11px; }
+        .section-title::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(197, 160, 89, 0.3), transparent);
+        }
 
-        /* Marketing Insights Styles */
-        .mkt-section { margin-top: 40px; }
-        .mkt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
-        .mkt-card { 
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-            border: 1px solid var(--gborder);
+        /* Pipeline Grid */
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        @media (max-width: 900px) {
+            .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 500px) {
+            .pipeline-grid { grid-template-columns: 1fr; }
+        }
+        .pipeline-card {
+            background: var(--navy-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
             padding: 20px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .pipeline-card:hover {
+            border-color: rgba(0, 209, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 13, 56, 0.4);
+        }
+        .step-num {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 20px; font-weight: 800;
+            color: rgba(255, 255, 255, 0.05);
+            line-height: 1;
+        }
+        .step-icon {
+            font-size: 22px;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        .pipeline-card h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px; font-weight: 700;
+            color: #fff; margin-bottom: 6px;
+        }
+        .pipeline-card p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+        }
+
+        /* Split Workspace layout */
+        .workspace-split {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        @media (max-width: 1050px) {
+            .workspace-split { grid-template-columns: 1fr; }
+        }
+
+        /* Terminal card */
+        .terminal-card {
+            background: #020710;
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--shadow-premium);
+            height: fit-content;
+        }
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 12px;
+        }
+        .dots {
+            display: flex; gap: 6px;
+        }
+        .dot {
+            width: 10px; height: 10px; border-radius: 50%;
+        }
+        .dot-r { background: #FF5F56; }
+        .dot-y { background: #FFBD2E; }
+        .dot-g { background: #27C93F; }
+        .terminal-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+        }
+        .terminal-body {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: #A2B6D4;
+        }
+        .terminal-line {
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .cmd-prompt { color: var(--blue-cyan); font-weight: bold; }
+        .cmd-text { color: #fff; }
+        .code-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 15px 0;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .code-box:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(0, 209, 255, 0.2);
+        }
+        .code-box pre {
+            margin: 0;
+            font-size: 12px;
+            overflow-x: auto;
+            color: #E2E6EC;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .btn-copy {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-copy:hover {
+            background: var(--blue-cyan);
+            border-color: var(--blue-cyan);
+            color: #000;
+        }
+        .doc-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        .doc-list li {
+            padding: 10px 14px;
+            border-left: 2px solid var(--gold);
+            background: rgba(197, 160, 89, 0.03);
+            margin-bottom: 8px;
+            border-radius: 0 8px 8px 0;
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Mockup area card */
+        .mockup-card {
+            background: var(--navy-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: var(--shadow-premium);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 380px;
+        }
+
+        /* Twitter slide simulator */
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            margin: 15px auto;
             border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000d38;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+        .slide-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .slide-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid var(--gold);
+            background: url('../jhony-bosio-foto.jpg') center/cover no-repeat;
+        }
+        .slide-author-name {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px; font-weight: 700; color: #fff;
+            line-height: 1.2;
+        }
+        .slide-author-handle {
+            font-size: 11px; color: rgba(255,255,255,0.5);
+        }
+        .slide-body {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(13px, 2.5vw, 17px);
+            font-weight: 500;
+            color: #E2E6EC;
+            line-height: 1.5;
+        }
+        .slide-footer-metrics {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 12px;
+            margin-top: 15px;
+            display: flex;
+            gap: 15px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+        }
+        .slider-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .btn-slide-nav {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-slide-nav:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #000;
+            transform: scale(1.05);
+        }
+        .slide-dots {
+            display: flex; gap: 8px;
+        }
+        .slide-dot {
+            width: 8px; height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .slide-dot.active {
+            background: var(--blue-cyan);
+            width: 20px;
+            border-radius: 10px;
+        }
+
+        /* Dynamic Widget Areas & Elements */
+        .profile-btn {
+            transition: all 0.2s;
+        }
+        .profile-btn.active {
+            background: var(--blue-cyan) !important;
+            border-color: var(--blue-cyan) !important;
+            color: #000 !important;
+            box-shadow: 0 0 10px rgba(0, 209, 255, 0.2);
+        }
+
+        /* Bottom Actions buttons */
+        .bottom-actions {
+            margin-top: 40px;
+            display: flex;
+            justify-content: flex-start;
+            gap: 15px;
+        }
+        @media (max-width: 500px) {
+            .bottom-actions { flex-direction: column; }
+        }
+        .btn-action-primary {
+            background: var(--gold);
+            color: #000;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.2);
+        }
+        .btn-action-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(197, 160, 89, 0.35);
+        }
+        .btn-action-secondary {
+            background: rgba(255, 255, 255, 0.03);
+            color: #fff;
+            border: 1px solid var(--border-glass);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-action-secondary:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Compliance Footer Notice */
+        .compliance-notice {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            line-height: 1.5;
             text-align: center;
         }
-        .mkt-val { font-size: 24px; font-weight: 800; color: var(--blue); display: block; margin-top: 5px; }
-        .mkt-lbl { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
-        .loading-shimmer { color: rgba(255,255,255,0.2); font-style: italic; font-size: 12px; }
     </style>
 </head>
 <body>
     <div class="bg-grid"></div>
+    <div class="bg-glow-1"></div>
+    <div class="bg-glow-2"></div>
 
-    <!-- LOGIN AREA -->
-    <div class="login-card" id="loginArea">
-        <div class="logo-icon">JB</div>
-        <h1>Área de Operações</h1>
-        <p>Acesso restrito ao proprietário.</p>
-        <input type="password" id="passInput" placeholder="Chave de Acesso">
-        <button onclick="checkPass()">Entrar no Painel</button>
-    </div>
-
-    <!-- DASHBOARD AREA -->
-    <div class="dash-content" id="dashArea">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px">
-            <div>
-                <h1 style="font-size:28px">Olá, Jhony.</h1>
-                <p style="margin-bottom:0">Seu centro de comando operacional.</p>
+    <header>
+        <a href="#" class="logo">
+            <div class="logo-box">JB</div>
+            <span class="logo-text">HUB OPERACIONAL</span>
+        </a>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="status-badge" id="statusBadge">
+                <div class="status-dot status-pulse" id="statusDot" style="background-color: var(--gold); box-shadow: 0 0 8px var(--gold);"></div>
+                <span id="statusText">Acesso Restrito</span>
             </div>
-            <button onclick="location.href='../'" style="width:auto; padding:8px 16px; background:rgba(255,255,255,0.05); border:1px solid var(--gborder); font-size: 13px;">Sair</button>
+            <button id="logoutBtn" onclick="logout()" style="display: none; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); color: #fff; padding: 6px 14px; border-radius: 99px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif;">SAIR</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- LOCK SCREEN -->
+        <div class="login-card" id="loginArea">
+            <div class="logo-box">JB</div>
+            <h1>Área de Operações</h1>
+            <p>Acesso restrito ao proprietário.</p>
+            <input type="password" id="passInput" placeholder="Chave de Acesso">
+            <button onclick="checkPass()">Entrar no Painel</button>
         </div>
 
-        <!-- Instagram Insights Section -->
-        <div class="mkt-section">
-            <div style="display:flex; justify-content:space-between; align-items:center">
-                <h2 style="font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.6)">Instagram Insights (30d)</h2>
-                <small id="updateTime" style="font-size:10px; color:rgba(255,255,255,0.2)">Atualizando...</small>
-            </div>
-            <div class="mkt-grid">
-                <div class="mkt-card">
-                    <span class="mkt-lbl">Seguidores</span>
-                    <span id="ig-followers" class="mkt-val loading-shimmer">—</span>
-                </div>
-                <div class="mkt-card">
-                    <span class="mkt-lbl">Alcance</span>
-                    <span id="ig-reach" class="mkt-val loading-shimmer">—</span>
-                </div>
-                <div class="mkt-card">
-                    <span class="mkt-lbl">Engajamento</span>
-                    <span id="ig-engagement" class="mkt-val loading-shimmer">—</span>
-                </div>
-            </div>
-        </div>
+        <!-- MAIN DASHBOARD -->
+        <div class="dash-content" id="dashArea">
+            <div class="dashboard-grid">
+                <!-- SIDEBAR MENU -->
+                <aside class="sidebar-nav">
+                    <span class="nav-header-text">Estratégias & Engines</span>
+                    <nav class="nav-links">
+                        <button class="nav-item active" onclick="switchStrategy('etfs')" id="nav-etfs">
+                            <span class="nav-icon">📈</span>
+                            <div class="nav-meta">
+                                <span class="nav-title">Simulador de ETFs</span>
+                                <div class="nav-status-container">
+                                    <span class="nav-status-dot active"></span>
+                                    <span class="nav-status-text">Ativo</span>
+                                </div>
+                            </div>
+                        </button>
+                        
+                        <button class="nav-item" onclick="switchStrategy('moabi')" id="nav-moabi">
+                            <span class="nav-icon">📊</span>
+                            <div class="nav-meta">
+                                <span class="nav-title">Moabi Portfolio</span>
+                                <div class="nav-status-container">
+                                    <span class="nav-status-dot active"></span>
+                                    <span class="nav-status-text">Ativo</span>
+                                </div>
+                            </div>
+                        </button>
+                        
+                        <button class="nav-item" onclick="switchStrategy('content')" id="nav-content">
+                            <span class="nav-icon">🐦</span>
+                            <div class="nav-meta">
+                                <span class="nav-title">AI Content Engine</span>
+                                <div class="nav-status-container">
+                                    <span class="nav-status-dot active"></span>
+                                    <span class="nav-status-text">Ativo</span>
+                                </div>
+                            </div>
+                        </button>
+                        
+                        <button class="nav-item" onclick="switchStrategy('vault')" id="nav-vault">
+                            <span class="nav-icon">🛡️</span>
+                            <div class="nav-meta">
+                                <span class="nav-title">WealthMap Vault</span>
+                                <div class="nav-status-container">
+                                    <span class="nav-status-dot service"></span>
+                                    <span class="nav-status-text">Online</span>
+                                </div>
+                            </div>
+                        </button>
+                        
+                        <button class="nav-item" onclick="switchStrategy('hermes')" id="nav-hermes">
+                            <span class="nav-icon">💬</span>
+                            <div class="nav-meta">
+                                <span class="nav-title">Hermes-9A Bot</span>
+                                <div class="nav-status-container">
+                                    <span class="nav-status-dot service"></span>
+                                    <span class="nav-status-text">Running</span>
+                                </div>
+                            </div>
+                        </button>
+                        
+                        <button class="nav-item" onclick="switchStrategy('reels')" id="nav-reels">
+                            <span class="nav-icon">🎬</span>
+                            <div class="nav-meta">
+                                <span class="nav-title">Remotion Reels</span>
+                                <div class="nav-status-container">
+                                    <span class="nav-status-dot service"></span>
+                                    <span class="nav-status-text">Pronto</span>
+                                </div>
+                            </div>
+                        </button>
 
-        <div class="grid-links">
-            <a href="../moabi/" class="dash-link">
-                <i>📊</i>
-                <span>Moabi</span>
-                <small>Gestão de Portfólio Global</small>
-            </a>
-            <a href="https://www.xpi.com.br/" target="_blank" class="dash-link">
-                <i>🛡️</i>
-                <span>Painel XP</span>
-                <small>Operações e Atendimento</small>
-            </a>
-            <a href="https://ads.google.com/" target="_blank" class="dash-link">
-                <i>🚀</i>
-                <span>Marketing</span>
-                <small>Google Ads e Leads</small>
-            </a>
-            <a href="../carteira-etfs/" class="dash-link">
-                <i>📈</i>
-                <span>Simulador</span>
-                <small>Carteira de ETFs</small>
-            </a>
-        </div>
+                        <button class="nav-item" onclick="switchStrategy('opendesign')" id="nav-opendesign">
+                            <span class="nav-icon">🎨</span>
+                            <div class="nav-meta">
+                                <span class="nav-title">Open Design</span>
+                                <div class="nav-status-container">
+                                    <span class="nav-status-dot active"></span>
+                                    <span class="nav-status-text">Blue3</span>
+                                </div>
+                            </div>
+                        </button>
+                    </nav>
+                </aside>
 
-        <!-- Nova Seção: Agentes e Automação -->
-        <div class="mkt-section" style="margin-top: 30px;">
-            <h2 style="font-size:14px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.6); margin-bottom: 15px;">Agentes e Automação</h2>
-            <div class="grid-links">
-                <div class="dash-link" style="border-color: #C5A059;">
-                    <i style="color: #C5A059;">🎬</i>
-                    <span>Remotion Engine</span>
-                    <small>Produção de Reels Branded Blue3</small>
-                </div>
-                <div class="dash-link">
-                    <i>🎙️</i>
-                    <span>ElevenLabs AI</span>
-                    <small>Voiceover e Narração Profissional</small>
-                </div>
-                <div class="dash-link">
-                    <i>⌨️</i>
-                    <span>OpenCode CLI</span>
-                    <small>Terminal de Desenvolvimento Ativo</small>
-                </div>
-                <div class="dash-link">
-                    <i>⚡</i>
-                    <span>FFmpeg Analyzer</span>
-                    <small>Sincronia e Processamento de Áudio</small>
-                </div>
+                <!-- WORKSPACE CONTENT AREA -->
+                <section class="workspace-area" id="workspaceContent">
+                    <!-- Loaded dynamically via JavaScript -->
+                </section>
             </div>
         </div>
-    </div>
+    </main>
 
     <script>
-        const API_KEY = '96c8ac0ceb613610087aa749e6dd43072659';
-
-        async function fetchMarketingData() {
-            try {
-                // Windsor.ai API - Tentando conector público para garantir seguidores
-                const url = `https://connectors.windsor.ai/instagram_publico?api_key=${API_KEY}&date_from=today-7days&fields=reach,engagement,follower_count,impressions`;
-                
-                const response = await fetch(url);
-                const result = await response.json();
-                
-                console.log("Windsor API Response:", result);
-
-                if (result.data && result.data.length > 0) {
-                    const latest = result.data[0];
-                    
-                    // Mapeamento flexível para os campos
-                    const followers = latest.follower_count || latest.profile_followers_count || '95.9k';
-                    const reach = latest.reach || latest.impressions || 'Consultar';
-                    const engagement = latest.engagement || 'Ativo';
-
-                    document.getElementById('ig-followers').innerText = followers;
-                    document.getElementById('ig-reach').innerText = reach;
-                    document.getElementById('ig-engagement').innerText = engagement;
-                    
-                    document.getElementById('ig-followers').classList.remove('loading-shimmer');
-                    document.getElementById('ig-reach').classList.remove('loading-shimmer');
-                    document.getElementById('ig-engagement').classList.remove('loading-shimmer');
-                    
-                    document.getElementById('updateTime').innerText = 'Dados sincronizados via Windsor';
-                } else {
-                    document.getElementById('updateTime').innerText = 'Aguardando sincronização';
-                }
-            } catch (error) {
-                console.error('Erro Windsor:', error);
-                document.getElementById('updateTime').innerText = 'Verificar Conexão';
+        // Strategy Data Dictionary
+        const STRATEGIES = {
+            etfs: {
+                title: "Simulador de ETFs",
+                subtitle: "Gestão e rebalanceamento tático mensal de ETFs de Renda Fixa e Renda Variável listados no Brasil com base na alocação recomendada pela XP Investimentos.",
+                badgeText: "Acesso Ativo",
+                badgeClass: "badge-active",
+                pipeline: [
+                    { num: "01", icon: "📊", title: "Análise Recomendada", desc: "Leitura automática dos pesos táticos da carteira recomendada Blue3/XP para Maio de 2026." },
+                    { num: "02", icon: "⚖️", title: "Perfilagem", desc: "Filtro de carteiras para três perfis de risco distintos: Conservador, Moderado ou Sofisticado." },
+                    { num: "03", icon: "📈", title: "Simulação de Aportes", desc: "Cálculo proporcional exato com base no capital inserido pelo assessor para rebalancear a carteira." },
+                    { num: "04", icon: "🔄", title: "Geração de Ordens", desc: "Configuração final de ordens prontas para rebalanceamento tático na mesa de operações." }
+                ],
+                terminalTitle: "MacBook Pro - Terminal ETFs",
+                command: "python3 rebalance_etf.py --profile moderado --apport 150000",
+                notes: [
+                    "<strong>LFTS11 / LFTB11:</strong> Renda Fixa pós-fixada com custódia segura e taxa de administração zerada.",
+                    "<strong>B5P211:</strong> Alocação tática em inflação curta (IMA-B 5), reduzindo volatilidade global.",
+                    "<strong>FIXA11:</strong> Renda fixa prefixada para travamento de taxas de juros de prazos intermediários."
+                ],
+                widgetHtml: `
+                    <div class="simulator-widget">
+                        <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 4px;">Simulador Rápido de Aportes (XP)</h3>
+                        <p style="font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 12px;">Calcule a divisão proporcional exata para Maio de 2026.</p>
+                        
+                        <div style="margin-bottom: 12px;">
+                            <label style="font-size: 10px; color: rgba(255,255,255,0.5); text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 4px;">Capital a Simular (R$)</label>
+                            <input type="number" id="etfApportInput" value="100000" oninput="updateEtfCalculator()" style="width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); padding:8px 12px; border-radius:10px; color:#fff; font-family:'JetBrains Mono', monospace; font-size:14px; outline:none;">
+                        </div>
+                        
+                        <div style="margin-bottom: 16px;">
+                            <label style="font-size: 10px; color: rgba(255,255,255,0.5); text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 6px;">Perfil Tático Blue3 / XP</label>
+                            <div style="display:flex; gap:6px;">
+                                <button id="btnProfile-conservador" onclick="setEtfProfile('conservador')" class="profile-btn active" style="flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); color:#fff; padding:6px 4px; border-radius:8px; font-size:10px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans';">Conservador</button>
+                                <button id="btnProfile-moderado" onclick="setEtfProfile('moderado')" class="profile-btn" style="flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); color:#fff; padding:6px 4px; border-radius:8px; font-size:10px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans';">Moderado</button>
+                                <button id="btnProfile-sofisticado" onclick="setEtfProfile('sofisticado')" class="profile-btn" style="flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); color:#fff; padding:6px 4px; border-radius:8px; font-size:10px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans';">Sofisticado</button>
+                            </div>
+                        </div>
+                        
+                        <div id="etfResultsContainer" style="display:flex; flex-direction:column; gap:8px; max-height: 180px; overflow-y: auto; padding-right:5px;">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+                `,
+                actionsHtml: `
+                    <a href="../carteira-etfs/" class="btn-action-primary">
+                        <span>Acessar Simulador Completo</span>
+                        <span>➔</span>
+                    </a>
+                    <button onclick="triggerToast('Pesos táticos de Maio de 2026 sincronizados com sucesso.')" class="btn-action-secondary">
+                        <span>Sincronizar Pesos</span>
+                    </button>
+                `
+            },
+            moabi: {
+                title: "Moabi Asset Management",
+                subtitle: "Alocação e acompanhamento patrimonial offshore exclusivo HNW. Posicionamento tático de dividendos, crescimento de capital e proteção em dólar nos EUA.",
+                badgeText: "Acesso Ativo",
+                badgeClass: "badge-active",
+                pipeline: [
+                    { num: "01", icon: "💵", title: "Remessa Offshore", desc: "Conversão cambial e custódia segura direta em corretora de investimentos nos EUA." },
+                    { num: "02", icon: "🛡️", title: "Dividend Yield", desc: "Foco robusto em geração de renda passiva recorrente em dólar com o ETF SCHD." },
+                    { num: "03", icon: "🌐", title: "Exposição Ampla", desc: "Aproveitamento de valor de large-caps globais via VOO (S&P 500) e ACWI." },
+                    { num: "04", icon: "🔒", title: "Liquidez & Hedge", desc: "Trava livre de risco de oscilação com títulos federais de curtíssimo prazo (BIL)." }
+                ],
+                terminalTitle: "MacBook Pro - Terminal Moabi",
+                command: "python3 moabi_sync.py --balance --usd-apport 12000",
+                notes: [
+                    "<strong>SCHD (40%):</strong> Investimento premium focado nas 100 maiores empresas pagadoras de dividendos dos EUA.",
+                    "<strong>VOO (30%):</strong> Replica o S&P 500 para captura de crescimento das maiores corporações americanas.",
+                    "<strong>ACWI (20%):</strong> Exposição diversificada a mercados globais de 47 países desenvolvidos e emergentes.",
+                    "<strong>BIL (10%):</strong> Caixa do portfólio remunerado pela taxa livre de risco norte-americana de curto prazo."
+                ],
+                widgetHtml: `
+                    <div class="moabi-widget">
+                        <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 4px;">Distribuição de Aporte Recente (USD $12.000)</h3>
+                        <p style="font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 15px;">Divisão proporcional aplicada após aporte de rebalanceamento internacional.</p>
+                        
+                        <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:10px;">
+                            <div>
+                                <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;">
+                                    <span style="font-weight:bold; color:var(--gold);">SCHD <span style="font-weight:normal; font-size:9px; color:rgba(255,255,255,0.4);">US Dividend</span></span>
+                                    <span style="font-weight:bold;">40% <span style="font-family:'JetBrains Mono'; color:rgba(255,255,255,0.5); font-size:9px; font-weight:normal; margin-left:5px;">$4,800.00</span></span>
+                                </div>
+                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
+                                    <div style="width:40%; height:100%; background:var(--gold); border-radius:2px;"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;">
+                                    <span style="font-weight:bold; color:var(--blue-cyan);">VOO <span style="font-weight:normal; font-size:9px; color:rgba(255,255,255,0.4);">S&P 500</span></span>
+                                    <span style="font-weight:bold;">30% <span style="font-family:'JetBrains Mono'; color:rgba(255,255,255,0.5); font-size:9px; font-weight:normal; margin-left:5px;">$3,600.00</span></span>
+                                </div>
+                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
+                                    <div style="width:30%; height:100%; background:var(--blue-cyan); border-radius:2px;"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;">
+                                    <span style="font-weight:bold; color:#fff;">ACWI <span style="font-weight:normal; font-size:9px; color:rgba(255,255,255,0.4);">Global Equity</span></span>
+                                    <span style="font-weight:bold;">20% <span style="font-family:'JetBrains Mono'; color:rgba(255,255,255,0.5); font-size:9px; font-weight:normal; margin-left:5px;">$2,400.00</span></span>
+                                </div>
+                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
+                                    <div style="width:20%; height:100%; background:#fff; border-radius:2px;"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;">
+                                    <span style="font-weight:bold; color:rgba(255,255,255,0.5);">BIL <span style="font-weight:normal; font-size:9px; color:rgba(255,255,255,0.4);">Short Treasury</span></span>
+                                    <span style="font-weight:bold;">10% <span style="font-family:'JetBrains Mono'; color:rgba(255,255,255,0.5); font-size:9px; font-weight:normal; margin-left:5px;">$1,200.00</span></span>
+                                </div>
+                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
+                                    <div style="width:10%; height:100%; background:rgba(255,255,255,0.5); border-radius:2px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                actionsHtml: `
+                    <a href="../moabi/" class="btn-action-primary">
+                        <span>Acessar Moabi Panel</span>
+                        <span>➔</span>
+                    </a>
+                    <button onclick="triggerToast('Posição global consolidada copiada para a área de transferência.')" class="btn-action-secondary">
+                        <span>Copiar Posição Consolidada</span>
+                    </button>
+                `
+            },
+            content: {
+                title: "AI Content Pipeline",
+                subtitle: "Destilação algorítmica de relatórios de investimentos e transcrições multimídia em carrosséis estéticos premium de alta retenção no estilo de tweets de X.COM.",
+                badgeText: "Interface Ativa",
+                badgeClass: "badge-active",
+                pipeline: [
+                    { num: "01", icon: "📥", title: "Captação & Transcrição", desc: "Fatiamento de áudio XP Drops ou relatórios PDF em markdown bruto estruturado." },
+                    { num: "02", icon: "🧠", title: "Destilação por DÉIA", desc: "Separação por inteligência artificial em exatamente 7 slides focados em persuasão." },
+                    { num: "03", icon: "⚙️", title: "Engine de Renderização", desc: "Processador Python sobrepondo design elegante Twitter-style na imagem de base." },
+                    { num: "04", icon: "🚀", title: "Pronto para Postagem", desc: "Exportação em alta definição em lote direto no diretório de compartilhamento." }
+                ],
+                terminalTitle: "MacBook Pro - Terminal Executivo",
+                command: "python3 tweet_slide_generator.py",
+                notes: [
+                    "<strong>Minimalismo de Corpo:</strong> Slides 2 a 7 com ocultação de dados estatísticos (likes, replies) para foco absoluto na mensagem.",
+                    "<strong>Prova Social da Capa:</strong> O slide 1 preserva todas as métricas originais para gerar atração visual instantânea.",
+                    "<strong>Alinhamento Cirúrgico:</strong> Código calibrado para centralizar nome e foto do assessor no template <code>Pagina X.COM.png</code>."
+                ],
+                widgetHtml: `
+                    <div class="carousel-preview-card" style="border:none; padding:0; background:transparent; box-shadow:none;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700;">Simulador do Carrossel (ETFs Brasil)</h3>
+                            <span id="slideCounterDisplay" style="font-family:'JetBrains Mono'; font-size:10px; color:var(--blue-cyan);">Slide 1 / 7</span>
+                        </div>
+                        
+                        <div class="slider-wrapper" style="margin-top:0; margin-bottom:12px;">
+                            <!-- Slide 1 -->
+                            <div class="slide active" id="slide-0">
+                                <div class="slide-header">
+                                    <div class="slide-avatar"></div>
+                                    <div>
+                                        <span class="slide-author-name">Jhony Bosio</span>
+                                        <div class="slide-author-handle">@jhonybosio · 1º</div>
+                                    </div>
+                                </div>
+                                <div class="slide-body" style="font-size: clamp(12px, 2.3vw, 16px); font-weight: 800; color: #FFF;">
+                                    Assisti ao Expert Drops #63 da XP Investimentos sobre ETFs de Renda Variável no Brasil e precisei trazer esse resumo para você.<br><br>
+                                    Descubra por que a inércia tributária e a falta de rebalanceamento sistemático podem estar destruindo sua rentabilidade. 🧵👇
+                                </div>
+                                <div class="slide-footer-metrics">
+                                    <span>18:00 · 18 Mai 2026</span>
+                                    <span>·</span>
+                                    <span><strong>48.2K</strong> Visualizações</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Slide 2 -->
+                            <div class="slide" id="slide-1">
+                                <div class="slide-header">
+                                    <div class="slide-avatar"></div>
+                                    <div>
+                                        <span class="slide-author-name">Jhony Bosio</span>
+                                        <div class="slide-author-handle">@jhonybosio</div>
+                                    </div>
+                                </div>
+                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px);">
+                                    1/ PIBB11 vs DIVO11: O Confronto.<br><br>
+                                    Enquanto o PIBB11 replica as 50 maiores empresas do país com a menor taxa do mercado (0,059% a.a.), o DIVO11 foca em empresas que pagam dividendos consistentes.<br><br>
+                                    Ambos servem a propósitos táticos totalmente distintos na sua carteira de investimentos.
+                                </div>
+                            </div>
+                            
+                            <!-- Slide 3 -->
+                            <div class="slide" id="slide-2">
+                                <div class="slide-header">
+                                    <div class="slide-avatar"></div>
+                                    <div>
+                                        <span class="slide-author-name">Jhony Bosio</span>
+                                        <div class="slide-author-handle">@jhonybosio</div>
+                                    </div>
+                                </div>
+                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px);">
+                                    2/ O Perigo Oculto da Tributação.<br><br>
+                                    Muitos investidores esquecem que ETFs de Renda Variável no Brasil não possuem a isenção de R$ 20 mil em vendas mensais.<br><br>
+                                    A alíquota é de 15% sobre o lucro (20% se for Day Trade). Cada movimentação tática precisa ser calculada de forma cirúrgica.
+                                </div>
+                            </div>
+                            
+                            <!-- Slide 4 -->
+                            <div class="slide" id="slide-3">
+                                <div class="slide-header">
+                                    <div class="slide-avatar"></div>
+                                    <div>
+                                        <span class="slide-author-name">Jhony Bosio</span>
+                                        <div class="slide-author-handle">@jhonybosio</div>
+                                    </div>
+                                </div>
+                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px);">
+                                    3/ O "Mito" do Rebalanceamento.<br><br>
+                                    Muitos investidores acham que rebalancear a carteira é opcional. Erro crasso.<br><br>
+                                    O rebalanceamento sistemático força você a vender ativos caros na alta e comprar ativos baratos na baixa, garantindo a consistência matemática do portfólio no longo prazo.
+                                </div>
+                            </div>
+                            
+                            <!-- Slide 5 -->
+                            <div class="slide" id="slide-4">
+                                <div class="slide-header">
+                                    <div class="slide-avatar"></div>
+                                    <div>
+                                        <span class="slide-author-name">Jhony Bosio</span>
+                                        <div class="slide-author-handle">@jhonybosio</div>
+                                    </div>
+                                </div>
+                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px);">
+                                    4/ O Custo Oculto da Inércia.<br><br>
+                                    Investidores que compram ativos e nunca mais olham a carteira estão pagando o custo invisível do desvio de alocação.<br><br>
+                                    Com o tempo, a carteira perde o perfil de risco original e você acaba exposto a oscilações desnecessárias.
+                                </div>
+                            </div>
+                            
+                            <!-- Slide 6 -->
+                            <div class="slide" id="slide-5">
+                                <div class="slide-header">
+                                    <div class="slide-avatar"></div>
+                                    <div>
+                                        <span class="slide-author-name">Jhony Bosio</span>
+                                        <div class="slide-author-handle">@jhonybosio</div>
+                                    </div>
+                                </div>
+                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px);">
+                                    5/ O Caminho da Eficiência (A Regra do Jogo).<br><br>
+                                    Seja com PIBB11 para crescimento amplo ou DIVO11 para foco em dividendos, o segredo da inteligência financeira está na disciplina operacional.<br><br>
+                                    Use as carteiras XP como bússolas, mas execute sempre com foco tático.
+                                </div>
+                            </div>
+                            
+                            <!-- Slide 7 -->
+                            <div class="slide" id="slide-6">
+                                <div class="slide-header">
+                                    <div class="slide-avatar"></div>
+                                    <div>
+                                        <span class="slide-author-name">Jhony Bosio</span>
+                                        <div class="slide-author-handle">@jhonybosio</div>
+                                    </div>
+                                </div>
+                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px); font-weight: bold; color: #FFF; text-align: center; justify-content: center;">
+                                    Quer dominar a alocação de carteiras inteligentes com eficiência tributária?<br><br>
+                                    Acesse a nossa AULA VIP e destrave a metodologia completa.<br><br>
+                                    👉 <span style="color: var(--blue-cyan)">jhonybosio.com/aula-vip</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="slider-controls">
+                            <button class="btn-slide-nav" onclick="prevSlide()">←</button>
+                            <div class="slide-dots" id="dotsContainer">
+                                <!-- Dots populated via script -->
+                            </div>
+                            <button class="btn-slide-nav" onclick="nextSlide()">→</button>
+                        </div>
+                    </div>
+                `,
+                actionsHtml: `
+                    <a href="../painel/" class="btn-action-primary">
+                        <span>Ir para Painel de Criação</span>
+                        <span>➔</span>
+                    </a>
+                    <button onclick="copyCommand()" class="btn-action-secondary">
+                        <span>Copiar Script Bash</span>
+                    </button>
+                `
+            },
+            vault: {
+                title: "WealthMap Life Vault",
+                subtitle: "Cofre e planejador patrimonial e sucessório familiar. Análise gráfica dinâmica de metas e criptografia zero-knowledge local para documentos confidenciais.",
+                badgeText: "Vault Ativo",
+                badgeClass: "badge-service",
+                pipeline: [
+                    { num: "01", icon: "🎯", title: "Metas de Vida", desc: "Mapeamento estruturado de sonhos familiares (Liberdade, educação, liquidez)." },
+                    { num: "02", icon: "📡", title: "GPS Patrimonial", desc: "Algoritmo adaptativo que calcula o gap financeiro real para a conquista da meta." },
+                    { num: "03", icon: "🔐", title: "Criptografia Local", desc: "Codificação no client-side via AES-256 para total blindagem de dados confidenciais." },
+                    { num: "04", icon: "📜", title: "Acesso Sucessório", desc: "Trilha de liberação condicional inteligente para herdeiros e contatos cadastrados." }
+                ],
+                terminalTitle: "MacBook Pro - Terminal GPS",
+                command: "python3 wealthmap_gps.py --status",
+                notes: [
+                    "<strong>Total Privacidade:</strong> O Antigravity implementa criptografia zero-knowledge: as chaves são privadas do Jhony.",
+                    "<strong>GPS de Objetivos:</strong> Algoritmo adaptativo de investimentos calibrando o aporte ideal contra a inflação IPCA.",
+                    "<strong>Segurança XP Compliance:</strong> Nenhum dado cadastral ou senha da corretora é mantido na base do sistema."
+                ],
+                widgetHtml: `
+                    <div class="vault-widget">
+                        <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 4px;">Monitor GPS de Metas & Cofre</h3>
+                        <p style="font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 12px;">Monitore gaps financeiros de objetivos e desbloqueie o cofre.</p>
+                        
+                        <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:12px; padding:10px; margin-bottom:12px; display:flex; flex-direction:column; gap:8px;">
+                            <div>
+                                <div style="display:flex; justify-content:space-between; font-size:10px; margin-bottom:3px;">
+                                    <span style="color:rgba(255,255,255,0.8); font-weight:bold;">1. Liberdade Precoce (R$ 5.0M)</span>
+                                    <span style="font-family:'JetBrains Mono'; color:var(--blue-cyan);">68.4%</span>
+                                </div>
+                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
+                                    <div style="width:68.4%; height:100%; background:var(--blue-cyan); border-radius:2px;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="display:flex; justify-content:space-between; font-size:10px; margin-bottom:3px;">
+                                    <span style="color:rgba(255,255,255,0.8); font-weight:bold;">2. Educação Global Filhos (R$ 1.5M)</span>
+                                    <span style="font-family:'JetBrains Mono'; color:var(--gold);">45.3%</span>
+                                </div>
+                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
+                                    <div style="width:45.3%; height:100%; background:var(--gold); border-radius:2px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background:rgba(10,27,61,0.6); border:1px solid var(--border-glass); border-radius:12px; padding:12px; text-align:center;" id="vaultLockArea">
+                            <div style="font-size:20px; margin-bottom:6px;">🔒</div>
+                            <h4 style="font-size:12px; font-weight:700; margin-bottom:4px;">Cofre de Documentos Sucessórios</h4>
+                            <p style="font-size:10px; color:rgba(255,255,255,0.5); margin-bottom:10px;">Insira a sua chave mestra criptográfica para decodificar os contratos.</p>
+                            <div style="display:flex; gap:6px;">
+                                <input type="password" id="vaultMasterKey" placeholder="Chave Mestra" style="flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); padding:6px 10px; border-radius:8px; color:#fff; font-size:11px; text-align:center; font-family:'JetBrains Mono'; outline:none;">
+                                <button onclick="unlockVaultMock()" style="background:var(--gold); border:none; color:#000; padding:6px 12px; border-radius:8px; font-size:10px; font-weight:bold; cursor:pointer; font-family:'Plus Jakarta Sans';">Abrir</button>
+                            </div>
+                        </div>
+                        
+                        <div style="background:rgba(39,201,63,0.05); border:1px solid #27C93F; border-radius:12px; padding:12px; display:none;" id="vaultUnlockedArea">
+                            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                                <span style="font-size:18px;">🔓</span>
+                                <span style="font-size:11px; font-weight:bold; color:#27C93F;">Cofre Desbloqueado com Sucesso</span>
+                            </div>
+                            <ul style="list-style:none; font-size:10px; display:flex; flex-direction:column; gap:5px; color:rgba(255,255,255,0.8);">
+                                <li style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:3px;">
+                                    <span>📁 Declarações IRPF (AES-256)</span>
+                                    <span style="cursor:pointer; color:var(--blue-cyan);" onclick="triggerToast('Baixando arquivo criptografado...')">Baixar</span>
+                                </li>
+                                <li style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:3px;">
+                                    <span>📁 Contratos Sociais Holding (AES-256)</span>
+                                    <span style="cursor:pointer; color:var(--blue-cyan);" onclick="triggerToast('Baixando arquivo criptografado...')">Baixar</span>
+                                </li>
+                                <li style="display:flex; justify-content:space-between; align-items:center;">
+                                    <span>📄 Diretrizes de Transição Emergencial</span>
+                                    <span style="cursor:pointer; color:var(--blue-cyan);" onclick="triggerToast('Baixando diretrizes de emergência...')">Baixar</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                `,
+                actionsHtml: `
+                    <button onclick="triggerToast('Cofre familiar em fase final de compilação de chaves.')" class="btn-action-primary">
+                        <span>Configurar Life Vault</span>
+                        <span>➔</span>
+                    </button>
+                    <button onclick="triggerToast('Nova meta patrimonial incluída no radar.')" class="btn-action-secondary">
+                        <span>Adicionar Objetivo</span>
+                    </button>
+                `
+            },
+            hermes: {
+                title: "Hermes-9A Qualifier",
+                subtitle: "Automação de WhatsApp e funil inteligente conversacional liderado pela persona Déia. Foco na triagem qualificada de leads HNW (+R$ 300 mil).",
+                badgeText: "Service Running",
+                badgeClass: "badge-service",
+                pipeline: [
+                    { num: "01", icon: "🎯", title: "Entrada de Leads", desc: "Captação automatizada de contatos interessados em mentorias de alocação." },
+                    { num: "02", icon: "💬", title: "Acolhimento IA", desc: "Primeira interação humanizada via bot em menos de 1 minuto de intervalo." },
+                    { num: "03", icon: "📊", title: "Triagem de Renda", desc: "Heurística estratégica filtrando investidores com capital de R$ 300k+." },
+                    { num: "04", icon: "🗓️", title: "Call Agendada", desc: "Sincronização imediata de leads qualificados com a agenda VIP do assessor." }
+                ],
+                terminalTitle: "Oracle Cloud VPS - Terminal de Acesso",
+                command: "ssh -i \"/Users/jhonybosio/Meu Drive/4. Projetos Digitais/04. Scripts e Automações/ssh-key-2026-04-16.key\" ubuntu@163.176.178.98",
+                notes: [
+                    "<strong>Acesso Oracle VPS:</strong> Use o comando de SSH exibido no console do terminal acima.",
+                    "<strong>Enviar Atualização Soul:</strong> <code>scp -i \"/Users/jhonybosio/Meu Drive/4. Projetos Digitais/04. Scripts e Automações/ssh-key-2026-04-16.key\" \"/Users/jhonybosio/Meu Drive/4. Projetos Digitais/01. Lançamentos/whatsapp-bot/soul.md\" ubuntu@163.176.178.98:~/whatsapp-bot/</code>",
+                    "<strong>Reiniciar o Robô:</strong> Após enviar o arquivo ou alterar código, acesse a VPS e rode <code>pm2 restart all</code>.",
+                    "<strong>Hermes Persona:</strong> Agora equipado com o cérebro persuasivo de alto ticket baseado nos frameworks SPIN Selling, Chris Voss (FBI) e Cialdini."
+                ],
+                widgetHtml: `
+                    <div class="hermes-widget">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700;">Simulação de Diálogo de Triagem</h3>
+                            <div style="background:rgba(39,201,63,0.1); border:1px solid #27C93F; color:#27C93F; font-size:8px; font-weight:bold; padding:2px 6px; border-radius:99px; text-transform:uppercase;">Bot Online</div>
+                        </div>
+                        
+                        <div style="background:#030712; border:1px solid var(--border-glass); border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:10px; max-height:180px; overflow-y:auto;">
+                            <div style="display:flex; flex-direction:column; gap:2px;">
+                                <span style="font-size:9px; color:rgba(255,255,255,0.4); margin-left:6px;">Prospect VIP (14:32)</span>
+                                <div style="background:rgba(255,255,255,0.06); padding:8px 12px; border-radius:12px 12px 12px 2px; font-size:11px; color:#fff; align-self:flex-start; max-width:90%;">
+                                    Oi Jhony, vi seu vídeo sobre ETFs XP e gostaria de saber se faz sentido para mim...
+                                </div>
+                            </div>
+                            
+                            <div style="display:flex; flex-direction:column; gap:2px; align-items:flex-end;">
+                                <span style="font-size:9px; color:rgba(255,255,255,0.4); margin-right:6px;">Déia Persona (14:33)</span>
+                                <div style="background:rgba(197,160,89,0.12); border:1px solid rgba(197,160,89,0.3); padding:8px 12px; border-radius:12px 12px 2px 12px; font-size:11px; color:#fff; align-self:flex-end; max-width:90%;">
+                                    Olá! Sou a Déia, assistente de alocação do Jhony. Com certeza faz! Para eu direcionar você, qual é a média aproximada de patrimônio para investir hoje?
+                                    <br><br>
+                                    A) Até 100k<br>
+                                    B) 100k a 300k<br>
+                                    C) Mais de 300k
+                                </div>
+                            </div>
+                            
+                            <div style="display:flex; flex-direction:column; gap:2px;">
+                                <span style="font-size:9px; color:rgba(255,255,255,0.4); margin-left:6px;">Prospect VIP (14:34)</span>
+                                <div style="background:rgba(255,255,255,0.06); padding:8px 12px; border-radius:12px 12px 12px 2px; font-size:11px; color:#fff; align-self:flex-start; max-width:90%;">
+                                    Hoje tenho cerca de R$ 450 mil disponíveis na renda fixa para rebalancear.
+                                </div>
+                            </div>
+                            
+                            <div style="display:flex; flex-direction:column; gap:2px; align-items:flex-end;">
+                                <span style="font-size:9px; color:rgba(255,255,255,0.4); margin-right:6px;">Déia Persona (14:34)</span>
+                                <div style="background:rgba(197,160,89,0.12); border:1px solid rgba(197,160,89,0.3); padding:8px 12px; border-radius:12px 12px 2px 12px; font-size:11px; color:#fff; align-self:flex-end; max-width:90%;">
+                                    Perfeito! Excelente valor. Você tem direito a um Raio-X de Carteira sem custos com o Jhony. Vou liberar nossa agenda exclusiva para você escolher o melhor dia.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                actionsHtml: `
+                    <button onclick="triggerToast('Logs em tempo real do Hermes-9A ativos no terminal.')" class="btn-action-primary">
+                        <span>Monitorar Triagens</span>
+                        <span>➔</span>
+                    </button>
+                    <button onclick="triggerToast('Reiniciando servidor de automação...')" class="btn-action-secondary">
+                        <span>Reiniciar Instância</span>
+                    </button>
+                `
+            },
+            reels: {
+                title: "Remotion Reels Engine",
+                subtitle: "Pipeline dinâmico de produção audiovisual. Executa silenciamento automático de pausas via decibéis e sobreposição de legendas estéticas.",
+                badgeText: "Engine Ativa",
+                badgeClass: "badge-service",
+                pipeline: [
+                    { num: "01", icon: "🎬", title: "Ingestão de Áudio", desc: "Upload do arquivo m4a ou mp4 bruto gravado pelo assessor de alocação." },
+                    { num: "02", icon: "✂️", title: "Detecção de Silêncio", desc: "Análise de decibéis por FFmpeg silenciando pausas e hesitações automaticamente." },
+                    { num: "03", icon: "✏️", title: "Legendas Dinâmicas", desc: "Geração de legendas branded com gradiente Blue3 e destaque de termos técnicos." },
+                    { num: "04", icon: "⚙️", title: "Compilação Remotion", desc: "Execução final via CLI gerando vídeo MP4 renderizado a 60fps pronto no Drive." }
+                ],
+                terminalTitle: "MacBook Pro - Terminal Remotion",
+                command: "python3 silence_cutter.py --video video_jhony.MP4 --out cuts.mp4",
+                notes: [
+                    "<strong>Espectro de Volume:</strong> Algoritmo preciso que realiza cortes em milissegundos sem distorcer o áudio.",
+                    "<strong>Identidade Visual:</strong> Subtitles com fonte Plus Jakarta Sans de alto contraste, utilizando o dourado Blue3.",
+                    "<strong>Render de Performance:</strong> Compilação otimizada integrando hardware local para exportação de vídeo em lote."
+                ],
+                widgetHtml: `
+                    <div class="reels-widget" style="display:flex; gap:15px; align-items:center; justify-content:center;">
+                        <!-- Phone Preview -->
+                        <div style="width:110px; height:200px; background:#000; border:3px solid #1a2e4a; border-radius:18px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.6); overflow:hidden; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                            <div style="position:absolute; top:6px; width:35px; height:6px; background:#1a2e4a; border-radius:3px; z-index:10;"></div>
+                            
+                            <!-- Simulated Video Background -->
+                            <div style="position:absolute; width:100%; height:100%; top:0; left:0; background:linear-gradient(180deg, #050c1a 0%, #000d38 50%, #050c1a 100%); z-index:1;"></div>
+                            
+                            <!-- Sound Wave Animation -->
+                            <div style="z-index:2; display:flex; gap:2px; align-items:center; height:20px; margin-bottom:15px;">
+                                <div class="wave-bar" style="width:2px; height:8px; background:var(--blue-cyan); animation: wave 0.6s ease infinite alternate; animation-play-state: paused;"></div>
+                                <div class="wave-bar" style="width:2px; height:16px; background:var(--gold); animation: wave 0.8s ease infinite alternate 0.1s; animation-play-state: paused;"></div>
+                                <div class="wave-bar" style="width:2px; height:12px; background:var(--blue-cyan); animation: wave 0.5s ease infinite alternate 0.2s; animation-play-state: paused;"></div>
+                                <div class="wave-bar" style="width:2px; height:6px; background:#fff; animation: wave 0.7s ease infinite alternate 0.3s; animation-play-state: paused;"></div>
+                            </div>
+                            
+                            <!-- Subtitle display -->
+                            <div id="phoneSubtitleDisplay" style="z-index:5; width:90%; padding:6px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:8px; text-align:center; font-family:'Plus Jakarta Sans'; font-size:8px; font-weight:800; line-height:1.3; color:#fff; min-height:36px; display:flex; align-items:center; justify-content:center;">
+                                CARTEIRAS <span style="color:var(--gold); font-weight:900; margin-left:2px;">DIVERSIFICADAS</span>
+                            </div>
+                            
+                            <button onclick="toggleReelsPlay()" style="position:absolute; bottom:10px; z-index:10; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); width:22px; height:22px; border-radius:50%; color:#fff; display:flex; align-items:center; justify-content:center; font-size:7px; cursor:pointer;" id="btnPhonePlay">▶</button>
+                        </div>
+                        
+                        <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
+                            <div style="font-family:'Plus Jakarta Sans', sans-serif; font-size:12px; font-weight:700;">Player de Legendas</div>
+                            <p style="font-size:10px; color:rgba(255,255,255,0.5); line-height:1.4;">Clique no botão acima para ver o sincronismo da fonte nos cortes rápidos do Remotion.</p>
+                            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:8px; padding:6px; font-size:9px; font-family:'JetBrains Mono';">
+                                <span style="color:#27C93F;">✔</span> Whispering: Ativo<br>
+                                <span style="color:#27C93F;">✔</span> Jump-Cuts: Concluído<br>
+                                <span style="color:#27C93F;">✔</span> Resolução: 1080x1920
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        @keyframes wave {
+                            0% { height: 4px; }
+                            100% { height: 18px; }
+                        }
+                    </style>
+                `,
+                actionsHtml: `
+                    <button onclick="triggerToast('Iniciando processador multimídia FFmpeg em background...')" class="btn-action-primary">
+                        <span>Iniciar Processador</span>
+                        <span>➔</span>
+                    </button>
+                    <button onclick="triggerToast('Legendas compiladas exportadas em formato .SRT')" class="btn-action-secondary">
+                        <span>Exportar Legendas (SRT)</span>
+                    </button>
+                `
+            },
+            opendesign: {
+                title: "Open Design Studio",
+                subtitle: "Geração e padronização visual inteligente baseada no Design System Blue3. Garante a identidade premium oficial do Jhony Bosio em todos os layouts e artes.",
+                badgeText: "Blue3 Ativo",
+                badgeClass: "badge-active",
+                pipeline: [
+                    { num: "01", icon: "🎨", title: "Mapeamento Blue3", desc: "Leitura rigorosa do arquivo de regras estéticas e padrões de fontes e cores oficiais." },
+                    { num: "02", icon: "💻", title: "Conexão de Agente", desc: "Integração via terminal com Código Claude como o cérebro autônomo de frontend." },
+                    { num: "03", icon: "💎", title: "Alta Fidelidade", desc: "Processamento e aplicação de tokens premium de glassmorphism e sombras elegantes." },
+                    { num: "04", icon: "📥", title: "Entrega no Drive", desc: "Exportação em lote de imagens e páginas otimizadas diretamente no Meu Drive." }
+                ],
+                terminalTitle: "MacBook Pro - Terminal Open Design",
+                command: 'cd "/Users/jhonybosio/Meu Drive/4. Projetos Digitais/open-design" && pnpm install && pnpm --filter @open-design/tools-dev run build && pnpm tools-dev run web',
+                notes: [
+                    "<strong>Modelo de IA (Cérebro):</strong> O modelo recomendado é o <strong>Claude 3.5 Sonnet</strong> (Anthropic), configurado no Open Design CLI como o motor principal devido ao seu raciocínio visual e de frontend de estado da arte.",
+                    "<strong>Design System Oficial:</strong> Sincronizado automaticamente entre a pasta local <code>open-design/design-systems/blue3/DESIGN.md</code> e o Meu Drive.",
+                    "<strong>Slides da Aula VIP (Protocolo 9A):</strong> A apresentação HTML premium gerada pelo Open Design foi importada com sucesso para o site de produção e está disponível nativamente em <code>dashboard/protocolo-9a-deck.html</code>.",
+                    "<strong>Instalação Inicial:</strong> Se for a primeira vez ou após atualizações, certifique-se de rodar <code>pnpm install</code> e <code>pnpm --filter @open-design/tools-dev run build</code> na pasta do projeto.",
+                    "<strong>Acesso Local:</strong> Interface web disponível em <code>http://localhost:3000</code> com o daemon orquestrador rodando em background na porta <code>49702</code> (ou <code>7457</code>).",
+                    "<strong>Sincronização Ativa:</strong> O daemon detecta alterações no DESIGN.md em tempo real e regenera as especificações da página."
+                ],
+                widgetHtml: `
+                    <div class="opendesign-widget">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700; color: #fff;">Estúdio de Visualização Blue3</h3>
+                            <div style="background:rgba(0,209,255,0.1); border:1px solid var(--blue-cyan); color:var(--blue-cyan); font-size:8px; font-weight:bold; padding:2px 6px; border-radius:99px; text-transform:uppercase;">Design System Ativo</div>
+                        </div>
+                        
+                        <!-- Toggle Controls -->
+                        <div style="display:flex; gap:6px; margin-bottom:12px;">
+                            <button id="btnOD-colors" onclick="toggleODView('colors')" class="profile-btn active" style="flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); color:#fff; padding:6px 4px; border-radius:8px; font-size:10px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans';">Design Tokens</button>
+                            <button id="btnOD-mockup" onclick="toggleODView('mockup')" class="profile-btn" style="flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); color:#fff; padding:6px 4px; border-radius:8px; font-size:10px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans';">Mockup de Post</button>
+                        </div>
+                        
+                        <!-- Panel 1: Design Tokens -->
+                        <div id="od-panel-colors" style="background:#030712; border:1px solid var(--border-glass); border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:10px;">
+                            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-bottom:4px;">Cores Oficiais do Sistema Blue3:</div>
+                            <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:8px;">
+                                <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:6px; border-radius:8px;">
+                                    <div style="width:20px; height:20px; border-radius:4px; background:#0A1B3D; border:1px solid rgba(255,255,255,0.1);"></div>
+                                    <div style="display:flex; flex-direction:column;">
+                                        <span style="font-size:9px; font-weight:bold; color:#fff;">Blue3 Navy</span>
+                                        <span style="font-size:8px; font-family:'JetBrains Mono'; color:rgba(255,255,255,0.4);">#0A1B3D</span>
+                                    </div>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:6px; border-radius:8px;">
+                                    <div style="width:20px; height:20px; border-radius:4px; background:#00D1FF; border:1px solid rgba(255,255,255,0.1);"></div>
+                                    <div style="display:flex; flex-direction:column;">
+                                        <span style="font-size:9px; font-weight:bold; color:#fff;">Blue3 Cyan</span>
+                                        <span style="font-size:8px; font-family:'JetBrains Mono'; color:rgba(255,255,255,0.4);">#00D1FF</span>
+                                    </div>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:6px; border-radius:8px;">
+                                    <div style="width:20px; height:20px; border-radius:4px; background:#0047BB; border:1px solid rgba(255,255,255,0.1);"></div>
+                                    <div style="display:flex; flex-direction:column;">
+                                        <span style="font-size:9px; font-weight:bold; color:#fff;">Blue3 Royal</span>
+                                        <span style="font-size:8px; font-family:'JetBrains Mono'; color:rgba(255,255,255,0.4);">#0047BB</span>
+                                    </div>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:6px; border-radius:8px;">
+                                    <div style="width:20px; height:20px; border-radius:4px; background:#C5A059; border:1px solid rgba(255,255,255,0.1);"></div>
+                                    <div style="display:flex; flex-direction:column;">
+                                        <span style="font-size:9px; font-weight:bold; color:#fff;">Premium Gold</span>
+                                        <span style="font-size:8px; font-family:'JetBrains Mono'; color:rgba(255,255,255,0.4);">#C5A059</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top:4px; font-size:10px; line-height:1.4; color:rgba(255,255,255,0.5); border-top:1px solid rgba(255,255,255,0.05); padding-top:8px;">
+                                <strong>Tipografia Recomendada:</strong> Plus Jakarta Sans (Headings) e DM Sans (Textos).
+                            </div>
+                        </div>
+                        
+                        <!-- Panel 2: Mockup de Post -->
+                        <div id="od-panel-mockup" style="background:#030712; border:1px solid var(--border-glass); border-radius:12px; padding:12px; display:none; flex-direction:column; gap:10px;">
+                            <div style="width:100%; aspect-ratio:1.91/1; background:linear-gradient(135deg, #050C1A 0%, #0A1B3D 100%); border:1px solid rgba(0, 209, 255, 0.15); border-radius:10px; padding:12px; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; box-shadow:0 8px 16px rgba(0,0,0,0.5);">
+                                <div style="position:absolute; top:-30%; left:-20%; width:80%; height:80%; background:radial-gradient(circle, rgba(0, 71, 187, 0.4) 0%, transparent 75%); pointer-events:none;"></div>
+                                <div style="position:absolute; bottom:-30%; right:-20%; width:80%; height:80%; background:radial-gradient(circle, rgba(197, 160, 89, 0.15) 0%, transparent 75%); pointer-events:none;"></div>
+                                
+                                <div style="display:flex; justify-content:space-between; align-items:center; z-index:2;">
+                                    <div style="display:flex; align-items:center; gap:4px;">
+                                        <div style="width:14px; height:14px; background:linear-gradient(135deg, #0047BB, #C5A059); border-radius:3px; display:flex; align-items:center; justify-content:center; font-size:6px; font-weight:900; color:#fff;">JB</div>
+                                        <span style="font-family:'Plus Jakarta Sans'; font-size:7px; font-weight:700; letter-spacing:0.05em; color:rgba(255,255,255,0.7);">JHONY BOSIO</span>
+                                    </div>
+                                    <span style="font-family:'Plus Jakarta Sans'; font-size:6px; font-weight:800; color:#C5A059; letter-spacing:0.1em; text-transform:uppercase;">Exclusivo HNW</span>
+                                </div>
+                                
+                                <div style="z-index:2; margin:6px 0;">
+                                    <span style="font-family:'Plus Jakarta Sans'; font-size:6px; font-weight:800; color:#00D1FF; letter-spacing:0.08em; text-transform:uppercase;">Design System Blue3</span>
+                                    <h4 style="font-family:'Plus Jakarta Sans'; font-size:10px; font-weight:800; line-height:1.2; color:#fff; margin-top:2px;">A Arte de Proteger Patrimônio com Alta Performance.</h4>
+                                    <p style="font-family:'DM Sans'; font-size:7px; color:rgba(255,255,255,0.6); line-height:1.3; margin-top:2px;">Combinação de consistência tática e solidez institucional no padrão Blue3.</p>
+                                </div>
+                                
+                                <div style="display:flex; justify-content:space-between; align-items:center; z-index:2; border-top:1px solid rgba(255,255,255,0.06); padding-top:4px;">
+                                    <span style="font-family:'DM Sans'; font-size:5px; color:rgba(255,255,255,0.4);">© 2026 Jhony Bosio · Planejamento Patrimonial</span>
+                                    <span style="font-family:'JetBrains Mono'; font-size:5px; color:#C5A059; font-weight:bold;">#EstratégiaBlue3</span>
+                                </div>
+                            </div>
+                            <div style="font-size:9px; color:rgba(255,255,255,0.4); text-align:center;">
+                                Visualização de renderização offline baseada no template do Open Design.
+                            </div>
+                        </div>
+                    </div>
+                `,
+                actionsHtml: `
+                    <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                        <a href="http://localhost:3000" target="_blank" class="btn-action-primary" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>Acessar Open Design</span>
+                            <span>➔</span>
+                        </a>
+                        <div style="display: flex; gap: 8px; width: 100%;">
+                            <a href="protocolo-9a-deck.html" target="_blank" class="btn-action-secondary" style="text-decoration: none; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--accent); color: #fff; background: rgba(27, 111, 239, 0.15);">
+                                <span>🎬 Slides da Aula VIP</span>
+                            </a>
+                            <button onclick="copyCommand()" class="btn-action-secondary" style="flex: 1;">
+                                <span>Copiar Comando CLI</span>
+                            </button>
+                        </div>
+                    </div>
+                `
             }
-        }
+        };
+
+        // Authentication and load logic
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('jb_authenticated') === 'true') {
+                showDashboard(false);
+            }
+        });
 
         function checkPass() {
             const pass = document.getElementById('passInput').value;
             if (pass === 'jhony2026') {
-                document.getElementById('loginArea').style.display = 'none';
-                document.getElementById('dashArea').style.display = 'block';
-                document.body.style.overflow = 'auto';
-                
-                // Dispara a busca de dados assim que logar
-                fetchMarketingData();
+                localStorage.setItem('jb_authenticated', 'true');
+                showDashboard(true);
             } else {
-                alert('Acesso negado.');
+                alert('Chave de acesso incorreta.');
             }
         }
+
+        function showDashboard(animate) {
+            const loginArea = document.getElementById('loginArea');
+            const dashArea = document.getElementById('dashArea');
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (animate) {
+                loginArea.style.transition = 'opacity 0.4s ease';
+                loginArea.style.opacity = '0';
+                setTimeout(() => {
+                    loginArea.style.display = 'none';
+                    dashArea.style.display = 'block';
+                    dashArea.style.opacity = '0';
+                    dashArea.style.transition = 'opacity 0.4s ease';
+                    setTimeout(() => {
+                        dashArea.style.opacity = '1';
+                        // Select default strategy
+                        switchStrategy('etfs');
+                    }, 50);
+                }, 400);
+            } else {
+                loginArea.style.display = 'none';
+                dashArea.style.display = 'block';
+                // Select default strategy
+                switchStrategy('etfs');
+            }
+
+            statusDot.style.backgroundColor = 'var(--blue-cyan)';
+            statusDot.style.boxShadow = '0 0 8px var(--blue-cyan)';
+            statusText.innerText = 'System Active';
+            logoutBtn.style.display = 'block';
+        }
+
+        // ── Strategy Switch Controller ────────────────────────────
+        let currentStrategyId = '';
         
-        document.getElementById('passInput').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') checkPass();
-        });
+        function switchStrategy(id) {
+            if (id === currentStrategyId) return;
+            
+            const workspace = document.getElementById('workspaceContent');
+            workspace.classList.add('loading');
+            
+            // Update sidebar buttons active states
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                if (item.id === `nav-${id}`) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+            
+            // Clean dynamic intervals if switching away
+            if (currentStrategyId === 'reels' && reelsPlaying) {
+                toggleReelsPlay();
+            }
+            
+            currentStrategyId = id;
+            const data = STRATEGIES[id];
+            
+            setTimeout(() => {
+                // Populate dynamic workspace content template
+                workspace.innerHTML = `
+                    <section class="hero">
+                        <span class="card-badge ${data.badgeClass}" style="font-size:9px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; padding:4px 10px; border-radius:99px; width:fit-content; display:block; margin-bottom:8px;">${data.badgeText}</span>
+                        <h1>${data.title}</h1>
+                        <p>${data.subtitle}</p>
+                    </section>
+
+                    <!-- Pipeline steps row -->
+                    <h2 class="section-title">Workflow de Execução</h2>
+                    <div class="pipeline-grid">
+                        ${data.pipeline.map(step => `
+                            <div class="pipeline-card">
+                                <span class="step-num">${step.num}</span>
+                                <span class="step-icon">${step.icon}</span>
+                                <h3>${step.title}</h3>
+                                <p>${step.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <!-- Split workspace -->
+                    <h2 class="section-title">Console Operacional & Mockup</h2>
+                    <div class="workspace-split">
+                        <!-- Terminal Column -->
+                        <div class="terminal-card">
+                            <div class="terminal-header">
+                                <div class="dots">
+                                    <div class="dot dot-r"></div>
+                                    <div class="dot dot-y"></div>
+                                    <div class="dot dot-g"></div>
+                                </div>
+                                <div class="terminal-title">${data.terminalTitle}</div>
+                            </div>
+                            <div class="terminal-body">
+                                <div class="terminal-line">
+                                    <span class="cmd-prompt">jhony@mac-hub:~$</span>
+                                    <span class="cmd-text">cd "Meu Drive/3. Hub de IA e Automacoes/scripts"</span>
+                                </div>
+                                <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin-bottom: 12px;"># Executar compilação local da engine</p>
+                                
+                                <div class="code-box" onclick="copyCommand()">
+                                    <span class="btn-copy" id="btnCopyText">Copiar</span>
+                                    <pre id="cmdText">${data.command}</pre>
+                                </div>
+                                
+                                <p style="color: var(--blue-cyan); font-size: 12px; margin-top: 15px; font-weight: bold;">Especificações da Engine:</p>
+                                <ul class="doc-list">
+                                    ${data.notes.map(note => `<li>${note}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Simulator Mockup Area -->
+                        <div class="mockup-card">
+                            <div id="interactiveMockupContainer">
+                                ${data.widgetHtml}
+                            </div>
+                            
+                            <div class="bottom-actions">
+                                ${data.actionsHtml}
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="compliance-notice">
+                        JB HUB · Uso restrito ao proprietário credenciado. Simulador tático auxiliar de alocação de carteiras sem gestão discricionária direta, em conformidade com as diretrizes CVM Resolução 178/2023.
+                    </footer>
+                `;
+                
+                workspace.classList.remove('loading');
+                
+                // Initialize specific strategy interactive routines
+                if (id === 'etfs') {
+                    updateEtfCalculator();
+                } else if (id === 'content') {
+                    initContentSlider();
+                } else if (id === 'opendesign') {
+                    toggleODView('colors');
+                }
+            }, 300);
+        }
+
+        // ── ETF Simulator Engine ──────────────────────────────────
+        let selectedProfile = 'conservador';
+
+        function setEtfProfile(profile) {
+            selectedProfile = profile;
+            const btns = document.querySelectorAll('.profile-btn');
+            btns.forEach(btn => {
+                if (btn.id === `btnProfile-${profile}`) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            updateEtfCalculator();
+        }
+
+        function updateEtfCalculator() {
+            const input = document.getElementById('etfApportInput');
+            if (!input) return;
+            let val = parseFloat(input.value);
+            if (isNaN(val) || val <= 0) val = 0;
+
+            const profiles = {
+                conservador: [
+                    { name: "Pós-Fixado (LFTS11/LFTB11)", pct: 72.5, color: "var(--blue-cyan)" },
+                    { name: "Inflação Curta (B5P211)", pct: 12.5, color: "var(--gold)" },
+                    { name: "Prefixado (FIXA11)", pct: 5.0, color: "#fff" },
+                    { name: "Multimercados", pct: 2.5, color: "rgba(255,255,255,0.6)" },
+                    { name: "Fundos Imobiliários", pct: 2.5, color: "rgba(255,255,255,0.4)" },
+                    { name: "Renda Fixa Global", pct: 2.5, color: "rgba(0, 209, 255, 0.4)" },
+                    { name: "Renda Variável Global", pct: 2.5, color: "rgba(197, 160, 89, 0.4)" }
+                ],
+                moderado: [
+                    { name: "Pós-Fixado (LFTS11/LFTB11)", pct: 35.5, color: "var(--blue-cyan)" },
+                    { name: "Inflação Curta (B5P211)", pct: 22.5, color: "var(--gold)" },
+                    { name: "Prefixado (FIXA11)", pct: 10.0, color: "#fff" },
+                    { name: "Multimercados", pct: 14.0, color: "rgba(255,255,255,0.6)" },
+                    { name: "Renda Variável Brasil", pct: 5.0, color: "#27C93F" },
+                    { name: "Fundos Imobiliários", pct: 4.0, color: "rgba(255,255,255,0.4)" },
+                    { name: "Alternativos", pct: 3.0, color: "#FFBD2E" },
+                    { name: "Renda Fixa Global", pct: 2.5, color: "rgba(0, 209, 255, 0.4)" },
+                    { name: "Renda Variável Global", pct: 3.5, color: "rgba(197, 160, 89, 0.4)" }
+                ],
+                sofisticado: [
+                    { name: "Pós-Fixado (LFTS11/LFTB11)", pct: 16.0, color: "var(--blue-cyan)" },
+                    { name: "Inflação Curta (B5P211)", pct: 27.5, color: "var(--gold)" },
+                    { name: "Prefixado (FIXA11)", pct: 7.5, color: "#fff" },
+                    { name: "Multimercados", pct: 10.0, color: "rgba(255,255,255,0.6)" },
+                    { name: "Renda Variável Brasil", pct: 15.0, color: "#27C93F" },
+                    { name: "Fundos Imobiliários", pct: 9.5, color: "rgba(255,255,255,0.4)" },
+                    { name: "Alternativos", pct: 7.0, color: "#FFBD2E" },
+                    { name: "Renda Fixa Global", pct: 2.5, color: "rgba(0, 209, 255, 0.4)" },
+                    { name: "Renda Variável Global", pct: 5.0, color: "rgba(197, 160, 89, 0.4)" }
+                ]
+            };
+
+            const currentAlloc = profiles[selectedProfile];
+            const container = document.getElementById('etfResultsContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            currentAlloc.forEach(asset => {
+                const assetVal = (val * (asset.pct / 100)).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                const item = document.createElement('div');
+                item.style.fontSize = '11px';
+                item.style.marginBottom = '2px';
+                item.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:2px;">
+                        <span style="font-weight:600; color:${asset.color}">${asset.name}</span>
+                        <span style="font-weight:700;">${asset.pct}% <span style="font-family:'JetBrains Mono'; color:rgba(255,255,255,0.5); font-size:9px; font-weight:normal; margin-left:4px;">${assetVal}</span></span>
+                    </div>
+                    <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
+                        <div style="width:${asset.pct}%; height:100%; background:${asset.color}; border-radius:2px; transition: width 0.4s ease;"></div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // ── X/Twitter Carrossel Slide gen ──────────────────────────
+        let contentActiveSlide = 0;
+        const contentSlidesCount = 7;
+
+        function initContentSlider() {
+            contentActiveSlide = 0;
+            const dotsContainer = document.getElementById('dotsContainer');
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            
+            for (let i = 0; i < contentSlidesCount; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('slide-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+            updateContentSlider();
+        }
+
+        function updateContentSlider() {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slide-dot');
+            const display = document.getElementById('slideCounterDisplay');
+            
+            if (slides.length === 0) return;
+            
+            if (display) {
+                display.innerText = `Slide ${contentActiveSlide + 1} / ${contentSlidesCount}`;
+            }
+            
+            slides.forEach((slide, idx) => {
+                if (idx === contentActiveSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            dots.forEach((dot, idx) => {
+                if (idx === contentActiveSlide) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        function nextSlide() {
+            contentActiveSlide = (contentActiveSlide + 1) % contentSlidesCount;
+            updateContentSlider();
+        }
+
+        function prevSlide() {
+            contentActiveSlide = (contentActiveSlide - 1 + contentSlidesCount) % contentSlidesCount;
+            updateContentSlider();
+        }
+
+        function goToSlide(idx) {
+            contentActiveSlide = idx;
+            updateContentSlider();
+        }
+
+        // ── Copy Bash Command Helper ──────────────────────────────
+        function copyCommand() {
+            const cmd = document.getElementById('cmdText').innerText;
+            navigator.clipboard.writeText(cmd).then(() => {
+                const btn = document.getElementById('btnCopyText');
+                if (btn) {
+                    btn.innerText = 'Copiado!';
+                    btn.style.background = '#27C93F';
+                    btn.style.borderColor = '#27C93F';
+                    btn.style.color = '#000';
+                    
+                    setTimeout(() => {
+                        btn.innerText = 'Copiar';
+                        btn.style.background = 'rgba(255,255,255,0.05)';
+                        btn.style.borderColor = 'rgba(255,255,255,0.1)';
+                        btn.style.color = '#fff';
+                    }, 2000);
+                }
+            });
+        }
+
+        // ── Secure Vault Mock Decryption ──────────────────────────
+        function unlockVaultMock() {
+            const key = document.getElementById('vaultMasterKey').value;
+            if (key === 'jhony2026') {
+                document.getElementById('vaultLockArea').style.display = 'none';
+                document.getElementById('vaultUnlockedArea').style.display = 'block';
+            } else {
+                alert('Chave mestra incorreta.');
+            }
+        }
+
+        // ── Remotion Reels Subtitle simulation ─────────────────────
+        let reelsPlaying = false;
+        let reelsInterval = null;
+        const reelsCaptions = [
+            "CARTEIRAS <span style='color:var(--gold); font-weight:900; margin-left:2px;'>DIVERSIFICADAS</span>,",
+            "PRÁTICAS E <span style='color:var(--blue-cyan); font-weight:900; margin-left:2px;'>ACESSÍVEIS</span>.",
+            "EU SOU A <span style='color:var(--gold); font-weight:900; margin-left:2px;'>RAQUEL SÁ</span>,",
+            "ESTATEGISTA DA <span style='color:var(--blue-cyan); font-weight:900; margin-left:2px;'>XP INVESTIMENTOS</span>."
+        ];
+        let reelsCaptionIdx = 0;
+
+        function toggleReelsPlay() {
+            const btn = document.getElementById('btnPhonePlay');
+            const display = document.getElementById('phoneSubtitleDisplay');
+            const waveBars = document.querySelectorAll('.wave-bar');
+            
+            if (!reelsPlaying) {
+                reelsPlaying = true;
+                if (btn) btn.innerText = '⏸';
+                
+                waveBars.forEach(bar => {
+                    bar.style.animationPlayState = 'running';
+                });
+                
+                reelsInterval = setInterval(() => {
+                    reelsCaptionIdx = (reelsCaptionIdx + 1) % reelsCaptions.length;
+                    if (display) display.innerHTML = reelsCaptions[reelsCaptionIdx];
+                }, 1500);
+            } else {
+                reelsPlaying = false;
+                if (btn) btn.innerText = '▶';
+                
+                waveBars.forEach(bar => {
+                    bar.style.animationPlayState = 'paused';
+                });
+                
+                clearInterval(reelsInterval);
+            }
+        }
+
+        // ── Open Design Widget Controls ───────────────────────────
+        function toggleODView(view) {
+            const btnColors = document.getElementById('btnOD-colors');
+            const btnMockup = document.getElementById('btnOD-mockup');
+            const panelColors = document.getElementById('od-panel-colors');
+            const panelMockup = document.getElementById('od-panel-mockup');
+            
+            if (!panelColors || !panelMockup) return;
+            
+            if (view === 'colors') {
+                btnColors.classList.add('active');
+                btnMockup.classList.remove('active');
+                panelColors.style.display = 'flex';
+                panelMockup.style.display = 'none';
+            } else {
+                btnColors.classList.remove('active');
+                btnMockup.classList.add('active');
+                panelColors.style.display = 'none';
+                panelMockup.style.display = 'flex';
+            }
+        }
+
+        // ── Generic Toast Helper ──────────────────────────────────
+        function triggerToast(msg) {
+            const toast = document.createElement('div');
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.right = '20px';
+            toast.style.background = 'rgba(10, 27, 61, 0.9)';
+            toast.style.backdropFilter = 'blur(10px)';
+            toast.style.border = '1px solid var(--blue-cyan)';
+            toast.style.color = '#fff';
+            toast.style.padding = '12px 24px';
+            toast.style.borderRadius = '12px';
+            toast.style.fontSize = '12px';
+            toast.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
+            toast.style.fontWeight = '600';
+            toast.style.zIndex = '9999';
+            toast.style.boxShadow = '0 10px 30px rgba(0, 209, 255, 0.2)';
+            toast.style.transition = 'all 0.3s ease';
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(10px)';
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateY(0)';
+            }, 100);
+            
+            toast.innerText = msg;
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3000);
+        }
     </script>
 </body>
 </html>

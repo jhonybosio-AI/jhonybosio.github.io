@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocolo 9A · Jhony Bosio · Blue3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Blue3 Design System Tokens */
+    --ink: #050C1A;
+    --ink-rgb: 5, 12, 26;
+    --paper: #FFFFFF;
+    --paper-rgb: 255, 255, 255;
+    --paper-tint: #f8f9fb;
+    --ink-tint: #0D1C3A;
+    
+    --accent: #1B6FEF;
+    --accent-rgb: 27, 111, 239;
+    --gold: #D4AF6A;
+    --gold-rgb: 212, 175, 106;
+
+    /* Fonts */
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+    --serif-zh: "Plus Jakarta Sans", sans-serif;
+    --serif-en: "Plus Jakarta Sans", sans-serif;
+    --sans-zh: "DM Sans", sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);color:var(--paper);font-family:var(--sans-zh);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+  canvas.bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;display:block;transition:opacity 1.2s ease}
+  canvas#bg-light{opacity:0}
+  canvas#bg-dark{opacity:1}
+  body.light-bg canvas#bg-light{opacity:1}
+  body.light-bg canvas#bg-dark{opacity:0}
+
+  #deck{position:fixed;inset:0;width:2200vw;height:100vh;display:flex;flex-wrap:nowrap;transition:transform .9s cubic-bezier(.77,0,.175,1);z-index:10;will-change:transform}
+  .slide{width:100vw;height:100vh;flex:0 0 100vw;position:relative;padding:6vh 6vw 10vh 6vw;display:flex;flex-direction:column;overflow:hidden}
+  .slide.light{color:var(--ink)}
+  .slide.dark{color:var(--paper)}
+
+  .slide::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;transition:background .7s ease}
+  .slide.light::before{background:rgba(var(--paper-rgb),.92);backdrop-filter:blur(3px)}
+  .slide.dark::before{background:rgba(var(--ink-rgb),.9);backdrop-filter:blur(3px)}
+  
+  .slide.hero.light::before{background:rgba(var(--paper-rgb),.2);backdrop-filter:none}
+  .slide.hero.dark::before{background:rgba(var(--ink-rgb),.15);backdrop-filter:none}
+  
+  .chrome{display:flex;justify-content:space-between;align-items:flex-start;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+  .chrome .sep{width:40px;height:1px;background:currentColor;opacity:.4}
+  .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.5}
+  
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;opacity:.6;margin-bottom:2.6vh}
+  .h-hero{font-family:var(--serif-en);font-weight:800;font-size:8.5vw;line-height:1;letter-spacing:-.03em}
+  .h-xl{font-family:var(--serif-en);font-weight:700;font-size:5.5vw;line-height:1.1;letter-spacing:-.02em}
+  .h-sub{font-family:var(--serif-en);font-weight:500;font-size:2.8vw;line-height:1.2;opacity:.7}
+  .h-md{font-family:var(--serif-en);font-weight:700;font-size:2.2vw;line-height:1.3}
+  .lead{font-family:var(--sans-zh);font-weight:400;font-size:1.8vw;line-height:1.5;opacity:.8}
+  .meta-row{display:flex;gap:1.2em;align-items:baseline;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.6}
+  
+  .grid-2-7-5{display:grid;grid-template-columns:7fr 5fr;gap:4vw;align-items:start}
+  .grid-2-6-6{display:grid;grid-template-columns:1fr 1fr;gap:4vw;align-items:start}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:3vw}
+  .grid-6{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:3vh 3vw}
+  .grid-9{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:2vh 2vw}
+  
+  .stat-card{padding-top:1.6vh;border-top:1px solid rgba(var(--accent-rgb),0.2);display:flex;flex-direction:column;gap:0.5vh}
+  .stat-nb{font-family:var(--serif-en);font-weight:800;font-size:4.5vw;line-height:1;color:var(--gold)}
+  .stat-label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+  .stat-note{font-family:var(--sans-zh);font-size:14px;opacity:.7;line-height:1.4}
+
+  .pipeline-section{margin-top:3vh}
+  .pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5vw}
+  .step{padding-top:1.2vh;border-top:1px solid currentColor;opacity:.8}
+  .step-nb{font-family:var(--serif-en);font-style:italic;font-weight:700;font-size:1.2vw;color:var(--gold)}
+  .step-title{font-family:var(--serif-en);font-weight:700;font-size:1.4vw;margin-bottom:0.5vh}
+  .step-desc{font-family:var(--sans-zh);font-size:12px;line-height:1.4;opacity:.7}
+
+  .callout{padding:2vh 2vw;border-left:4px solid var(--gold);background:rgba(var(--gold-rgb),0.05);font-family:var(--serif-en);font-size:1.4vw;line-height:1.5;font-style:italic}
+  .callout-src{display:block;margin-top:1vh;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.6;font-style:normal}
+
+  .frame-img{overflow:hidden;border-radius:8px;background:rgba(var(--accent-rgb),0.1);position:relative}
+  .frame-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+  .img-cap{display:block;margin-top:0.8vh;font-family:var(--mono);font-size:10px;letter-spacing:.2em;opacity:.6}
+
+  .hi{color:var(--gold);font-weight:700}
+  .tag{display:inline-block;padding:4px 12px;border:1px solid var(--accent);color:var(--accent);font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.2em}
+
+  #nav{position:fixed;left:50%;bottom:3vh;transform:translateX(-50%);z-index:30;display:flex;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,0.2);backdrop-filter:blur(8px)}
+  .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;border:0;padding:0}
+  .dot.active{background:var(--gold);width:16px;border-radius:999px}
+  
+  .ico{width:1.2em;height:1.2em;vertical-align:middle;stroke:var(--gold);stroke-width:1.5}
+</style>
+</head>
+<body class="dark-bg">
+
+<canvas id="bg-dark" class="bg"></canvas>
+<canvas id="bg-light" class="bg"></canvas>
+
+<main id="deck">
+  <!-- Slide 1: Cover -->
+  <section class="slide hero dark">
+    <div class="chrome">
+      <div>Jhony Bosio · Turma 2026.1</div>
+      <div>01 / 22</div>
+    </div>
+    <div class="frame" style="justify-content:center">
+      <div class="kicker">Aula VIP · Protocolo 9A</div>
+      <h1 class="h-hero">Protocolo <span class="hi">9A</span></h1>
+      <h2 class="h-sub">9 ativos. Um método.</h2>
+      <p class="lead" style="max-width:50vw; margin-top:4vh">
+        Como construir uma carteira passiva, global e barata — comprovadamente superior à maioria dos fundos ativos do Brasil.
+      </p>
+      <div class="meta-row" style="margin-top:6vh">
+        <span>19 de maio de 2026</span><span>·</span><span>60 a 75 minutos</span>
+      </div>
+    </div>
+    <div class="foot">
+      <div>Apresentação Exclusiva</div>
+      <div>Blue3 Design System</div>
+    </div>
+  </section>
+
+  <!-- Slide 2: Objectives -->
+  <section class="slide light">
+    <div class="chrome">
+      <div>Objetivos da Aula</div>
+      <div>02 / 22</div>
+    </div>
+    <div class="frame" style="padding-top:8vh">
+      <div class="kicker">O que você vai aprender</div>
+      <h2 class="h-xl">Nos próximos 60 minutos</h2>
+      <div class="pipeline" style="margin-top:8vh; grid-template-columns: repeat(3, 1fr)">
+        <div class="step">
+          <div class="step-nb">01</div>
+          <div class="step-title"><i data-lucide="search-check" class="ico"></i> Classificação</div>
+          <div class="step-desc">O método para classificar qualquer ativo em 3 critérios objetivos.</div>
+        </div>
+        <div class="step">
+          <div class="step-nb">02</div>
+          <div class="step-title"><i data-lucide="grid-2x2" class="ico"></i> Taxonomia</div>
+          <div class="step-desc">As 9 classes que efetivamente diversificam um portfólio.</div>
+        </div>
+        <div class="step">
+          <div class="step-nb">03</div>
+          <div class="step-title"><i data-lucide="settings" class="ico"></i> O Motor</div>
+          <div class="step-desc">O motor de alocação que profissionais usam — e suas limitações.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: About -->
+  <section class="slide dark">
+    <div class="chrome">
+      <div>Quem fala com você</div>
+      <div>03 / 22</div>
+    </div>
+    <div class="frame grid-2-7-5" style="padding-top:8vh">
+      <div style="display:flex; flex-direction:column; justify-content:space-between; height:100%">
+        <div>
+          <div class="kicker">Especialista</div>
+          <h2 class="h-xl">Jhony Bosio</h2>
+          <p class="lead" style="margin-top:2vh">Assessor de Investimentos</p>
+          <ul style="margin-top:4vh; list-style:none; display:flex; flex-direction:column; gap:2vh; font-size:1.1vw; opacity:.8">
+            <li><i data-lucide="award" class="ico"></i> <span class="hi">+10 anos</span> como assessor de investimentos</li>
+            <li><i data-lucide="globe" class="ico"></i> Especialista em alocação global</li>
+            <li><i data-lucide="shield-check" class="ico"></i> Criador da metodologia <span class="hi">Protocolo 9A</span></li>
+            <li><i data-lucide="instagram" class="ico"></i> +95 mil seguidores</li>
+          </ul>
+        </div>
+        <div class="callout">
+          "Construí o Protocolo 9A depois de identificar a mesma falha invisível: produtos demais, fatores de risco de menos."
+        </div>
+      </div>
+      <figure class="frame-img" style="height:60vh; border: 1px solid rgba(255,255,255,0.1)">
+        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--ink-tint)">
+          <span style="font-family:var(--mono); opacity:.3">IMAGE: JHONY BOSIO</span>
+        </div>
+        <figcaption class="img-cap">Jhony Bosio · Blue3</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Slide 4: Block 1 Divider -->
+  <section class="slide hero dark">
+    <div class="chrome">
+      <div>Bloco 1</div>
+      <div>04 / 22</div>
+    </div>
+    <div class="frame" style="justify-content:center">
+      <div class="kicker">O Diagnóstico</div>
+      <h1 class="h-hero">Diversificação não é número de linhas</h1>
+      <p class="lead" style="margin-top:4vh; max-width:60vw">
+        É sobre quantos fatores de risco diferentes você realmente carrega.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 5: The Illusion -->
+  <section class="slide light">
+    <div class="chrome">
+      <div>A Ilusão da Diversificação</div>
+      <div>05 / 22</div>
+    </div>
+    <div class="frame" style="padding-top:6vh">
+      <div class="kicker">Cenário Comum</div>
+      <h2 class="h-xl">5 produtos. 1 fator de risco.</h2>
+      <div class="grid-6" style="margin-top:6vh">
+        <div class="stat-card">
+          <div class="stat-label">Ativo 01</div>
+          <div class="stat-nb" style="font-size:3vw">CDB</div>
+          <div class="stat-note">Indexado ao CDI</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ativo 02</div>
+          <div class="stat-nb" style="font-size:3vw">LCI</div>
+          <div class="stat-note">Indexado ao CDI</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ativo 03</div>
+          <div class="stat-nb" style="font-size:3vw">LCA</div>
+          <div class="stat-note">Indexado ao CDI</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ativo 04</div>
+          <div class="stat-nb" style="font-size:3vw">Selic</div>
+          <div class="stat-note">Indexado ao CDI</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ativo 05</div>
+          <div class="stat-nb" style="font-size:3vw">Fundo DI</div>
+          <div class="stat-note">Indexado ao CDI</div>
+        </div>
+        <div class="stat-card" style="border-color:var(--accent); background:rgba(var(--accent-rgb),0.05)">
+          <div class="stat-label" style="color:var(--accent)">Risco Real</div>
+          <div class="stat-nb" style="font-size:3vw; color:var(--accent)">ÚNICO</div>
+          <div class="stat-note">CDI · Juros Nominais</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Block 2 Divider -->
+  <section class="slide hero light">
+    <div class="chrome">
+      <div>Bloco 2</div>
+      <div>06 / 22</div>
+    </div>
+    <div class="frame" style="justify-content:center">
+      <div class="kicker">O Framework</div>
+      <h1 class="h-hero">3 perguntas que decidem tudo</h1>
+      <p class="lead" style="margin-top:4vh; max-width:55vw">
+        As perguntas que ninguém faz antes de apertar o botão de investir.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 7: Criterion 1 -->
+  <section class="slide light">
+    <div class="chrome">
+      <div>Critério 1</div>
+      <div>07 / 22</div>
+    </div>
+    <div class="frame grid-2-6-6" style="padding-top:8vh">
+      <div style="padding:4vh; border: 1px solid rgba(0,0,0,0.1); border-radius:12px">
+        <div class="kicker">Natureza</div>
+        <h3 class="h-md" style="margin-bottom:3vh">Propriedade</h3>
+        <p class="body-zh">Participação em ativos reais. Ganho por valorização e fluxo de caixa.</p>
+        <ul style="margin-top:3vh; list-style:none; display:flex; flex-direction:column; gap:1vh; font-family:var(--mono); font-size:12px; opacity:.7">
+          <li>→ Ações (BR e Global)</li>
+          <li>→ FIIs, FI-Infra, FI-Agro</li>
+          <li>→ Ouro, Cripto, Commodities</li>
+        </ul>
+      </div>
+      <div style="padding:4vh; border: 1px solid rgba(0,0,0,0.1); border-radius:12px">
+        <div class="kicker">Natureza</div>
+        <h3 class="h-md" style="margin-bottom:3vh">Dívida</h3>
+        <p class="body-zh">Empréstimo a um emissor. Ganho por juros e variação de taxa.</p>
+        <ul style="margin-top:3vh; list-style:none; display:flex; flex-direction:column; gap:1vh; font-family:var(--mono); font-size:12px; opacity:.7">
+          <li>→ Tesouro Direto</li>
+          <li>→ CDB, LCI, LCA</li>
+          <li>→ Renda Fixa Global</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: Criterion 2 -->
+  <section class="slide dark">
+    <div class="chrome">
+      <div>Critério 2</div>
+      <div>08 / 22</div>
+    </div>
+    <div class="frame" style="padding-top:6vh">
+      <div class="kicker">Volatilidade</div>
+      <h2 class="h-xl">Risco e Retorno</h2>
+      <div class="grid-4" style="margin-top:6vh; grid-template-columns:repeat(4,1fr)">
+        <div class="stat-card">
+          <div class="stat-label">Selic</div>
+          <div class="stat-nb">0.3<span class="stat-unit">%</span></div>
+          <div class="stat-note">Vol. anualizada</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">IPCA+ Longo</div>
+          <div class="stat-nb">4.5<span class="stat-unit">%</span></div>
+          <div class="stat-note">Vol. anualizada</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Dólar (USD)</div>
+          <div class="stat-nb">14<span class="stat-unit">%</span></div>
+          <div class="stat-note">Vol. anualizada</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Ações Brasil</div>
+          <div class="stat-nb">22<span class="stat-unit">%</span></div>
+          <div class="stat-note">Vol. anualizada</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 9: Criterion 3 -->
+  <section class="slide light">
+    <div class="chrome">
+      <div>Critério 3</div>
+      <div>09 / 22</div>
+    </div>
+    <div class="frame grid-2-7-5" style="padding-top:8vh">
+      <div>
+        <div class="kicker">Regimes</div>
+        <h2 class="h-xl">Comportamento de Mercado</h2>
+        <p class="lead" style="margin-top:2vh">Como cada ativo reage a choques macroeconômicos.</p>
+        <div class="callout" style="margin-top:4vh">
+          "A diversificação que funciona é aquela que resiste a diferentes cenários, não apenas a um."
+        </div>
+      </div>
+      <div class="col" style="gap:1.5vh">
+        <div style="padding:2vh; border:1px solid rgba(0,0,0,0.1); border-radius:8px">
+          <div class="meta">Inflação ↑</div>
+          <div style="display:flex; justify-content:space-between; margin-top:1vh">
+            <span style="color:green">IPCA+, Commodities</span>
+            <span style="color:red">Pré-fixado</span>
+          </div>
+        </div>
+        <div style="padding:2vh; border:1px solid rgba(0,0,0,0.1); border-radius:8px">
+          <div class="meta">Juros ↑</div>
+          <div style="display:flex; justify-content:space-between; margin-top:1vh">
+            <span style="color:green">Pós-fixado</span>
+            <span style="color:red">Ações, FIIs</span>
+          </div>
+        </div>
+        <div style="padding:2vh; border:1px solid rgba(0,0,0,0.1); border-radius:8px">
+          <div class="meta">Dólar ↑</div>
+          <div style="display:flex; justify-content:space-between; margin-top:1vh">
+            <span style="color:green">RV Global, Ouro</span>
+            <span style="color:red">Dívida Externa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 10: Block 3 Divider -->
+  <section class="slide hero dark">
+    <div class="chrome">
+      <div>Bloco 3</div>
+      <div>10 / 22</div>
+    </div>
+    <div class="frame" style="justify-content:center">
+      <div class="kicker">A Taxonomia</div>
+      <h1 class="h-hero">Por que 9 classes?</h1>
+      <p class="lead" style="margin-top:4vh; max-width:55vw">
+        E por que não 3, nem 20. O equilíbrio entre granularidade e correlação.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 11: The 9 Classes -->
+  <section class="slide light">
+    <div class="chrome">
+      <div>As 9 Classes</div>
+      <div>11 / 22</div>
+    </div>
+    <div class="frame" style="padding-top:6vh">
+      <div class="grid-9">
+        <div class="stat-card"><div class="stat-label">01</div><div class="stat-nb" style="font-size:2.4vw">Pós-fixado</div><div class="stat-note">CDI / Selic</div></div>
+        <div class="stat-card"><div class="stat-label">02</div><div class="stat-nb" style="font-size:2.4vw">Inflação</div><div class="stat-note">IPCA+</div></div>
+        <div class="stat-card"><div class="stat-label">03</div><div class="stat-nb" style="font-size:2.4vw">Prefixado</div><div class="stat-note">Queda de juros</div></div>
+        <div class="stat-card"><div class="stat-label">04</div><div class="stat-nb" style="font-size:2.4vw">Multimercados</div><div class="stat-note">Gestão flexível</div></div>
+        <div class="stat-card"><div class="stat-label">05</div><div class="stat-nb" style="font-size:2.4vw">RV Brasil</div><div class="stat-note">Ações locais</div></div>
+        <div class="stat-card"><div class="stat-label">06</div><div class="stat-nb" style="font-size:2.4vw">Listados</div><div class="stat-note">FIIs, FI-Infra</div></div>
+        <div class="stat-card"><div class="stat-label">07</div><div class="stat-nb" style="font-size:2.4vw">Alternativos</div><div class="stat-note">Ouro, Cripto</div></div>
+        <div class="stat-card"><div class="stat-label">08</div><div class="stat-nb" style="font-size:2.4vw">RF Global</div><div class="stat-note">Dívida externa</div></div>
+        <div class="stat-card"><div class="stat-label">09</div><div class="stat-nb" style="font-size:2.4vw">RV Global</div><div class="stat-note">Ações globais</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 12: Matrix -->
+  <section class="slide light">
+    <div class="chrome">
+      <div>Matriz de Comportamento</div>
+      <div>12 / 22</div>
+    </div>
+    <div class="frame" style="padding-top:4vh">
+      <table style="width:100%; border-collapse:collapse; font-family:var(--sans-zh); font-size:1.1vw; text-align:center">
+        <thead>
+          <tr style="border-bottom:1px solid rgba(0,0,0,0.1)">
+            <th style="padding:2vh; text-align:left">CLASSE</th>
+            <th>INFL ↑</th>
+            <th>JUROS ↑</th>
+            <th>USD ↑</th>
+            <th>RECESSÃO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(0,0,0,0.05)">
+            <td style="padding:1.5vh; text-align:left; font-weight:700">RF Pós-fixado</td>
+            <td>=</td><td>+</td><td>=</td><td>+</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(0,0,0,0.05)">
+            <td style="padding:1.5vh; text-align:left; font-weight:700">RF Inflação</td>
+            <td>+</td><td>−</td><td>=</td><td>=</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(0,0,0,0.05)">
+            <td style="padding:1.5vh; text-align:left; font-weight:700">RV Brasil</td>
+            <td>=</td><td>−</td><td>−</td><td>−</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(0,0,0,0.05)">
+            <td style="padding:1.5vh; text-align:left; font-weight:700">Alternativos</td>
+            <td>+</td><td>=</td><td>+</td><td>=</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(0,0,0,0.05)">
+            <td style="padding:1.5vh; text-align:left; font-weight:700">RV Global</td>
+            <td>=</td><td>−</td><td>+</td><td>−</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="meta-row" style="margin-top:4vh">
+        <span>+ ganha</span><span>= neutro</span><span>− sofre</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 13: Block 4 Divider -->
+  <section class="slide dark">
+    <div class="chrome">
+      <div>Bloco 4</div>
+      <div>13 / 22</div>
+    </div>
+    <div class="frame grid-2-7-5" style="padding-top:10vh">
+      <div>
+        <div class="kicker">O Motor</div>
+        <h2 class="h-xl">Markowitz, 1952.</h2>
+        <p class="lead" style="margin-top:4vh">
+          "O risco do portfólio NÃO é a média dos riscos dos ativos. Ele depende da correlação entre eles."
+        </p>
+      </div>
+      <div class="col" style="gap:2vh; justify-content:center">
+        <div class="tag">Input 01: Retorno</div>
+        <div class="tag">Input 02: Volatilidade</div>
+        <div class="tag">Input 03: Correlação</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 14: Efficient Frontier -->
+  <section class="slide light">
+    <div class="chrome">
+      <div>Fronteira Eficiente</div>
+      <div>14 / 22</div>
+    </div>
+    <div class="frame grid-2-7-5" style="padding-top:8vh">
+      <div class="frame-img" style="height:50vh; background:rgba(0,0,0,0.05)">
+        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center">
+          <span style="font-family:var(--mono); opacity:.2">CHART: FRONTEIRA EFICIENTE</span>
+        </div>
+      </div>
+      <div>
+        <div class="kicker">Otimização</div>
+        <h2 class="h-md">Onde está sua carteira?</h2>
+        <p class="body-zh" style="margin-top:2vh">Portfólios ótimos entregam o maior retorno possível para cada nível de risco.</p>
+        <p class="body-zh" style="margin-top:2vh; opacity:.6">Carteiras comuns ficam abaixo da fronteira. Risco alto, retorno baixo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 15: Limitations -->
+  <section class="slide light">
+    <div class="chrome">
+      <div>Limitações do Modelo</div>
+      <div>15 / 22</div>
+    </div>
+    <div class="frame" style="padding-top:6vh">
+      <div class="grid-3">
+        <div class="stat-card">
+          <div class="stat-label">Erro 01</div>
+          <div class="h-md">Sensibilidade</div>
+          <div class="stat-note">Pequenas mudanças nos inputs mudam drasticamente os pesos.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Erro 02</div>
+          <div class="h-md">Eventos de Cauda</div>
+          <div class="stat-note">A volatilidade não captura riscos extremos de colapso.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Erro 03</div>
+          <div class="h-md">Correlação</div>
+          <div class="stat-note">Em crises, ativos que não deveriam cair, caem juntos.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 16: Summary -->
+  <section class="slide hero dark">
+    <div class="chrome">
+      <div>Em uma frase</div>
+      <div>16 / 22</div>
+    </div>
+    <div class="frame" style="justify-content:center; text-align:center">
+      <h1 class="h-xl">3 critérios. 9 classes. 1 motor.</h1>
+      <h1 class="h-hero" style="color:var(--gold); margin-top:2vh">Protocolo 9A.</h1>
+    </div>
+  </section>
+
+  <!-- Slide 17: Implementation -->
+  <section class="slide light">
+    <div class="chrome">
+      <div>Bloco 5</div>
+      <div>17 / 22</div>
+    </div>
+    <div class="frame" style="padding-top:8vh">
+      <div class="kicker">A Virada</div>
+      <h2 class="h-xl">Teoria não muda extrato.</h2>
+      <div class="pipeline" style="margin-top:6vh; grid-template-columns: repeat(3, 1fr)">
+        <div class="step">
+          <div class="step-nb">01</div>
+          <div class="step-title"><i data-lucide="refresh-cw" class="ico"></i> Inputs</div>
+          <div class="step-desc">Retorno, volatilidade e correlação revisados periodicamente.</div>
+        </div>
+        <div class="step">
+          <div class="step-nb">02</div>
+          <div class="step-title"><i data-lucide="cpu" class="ico"></i> Motor</div>
+          <div class="step-desc">Otimizador com bandas mín/máx calibrado para PF.</div>
+        </div>
+        <div class="step">
+          <div class="step-nb">03</div>
+          <div class="step-title"><i data-lucide="calendar" class="ico"></i> Processo</div>
+          <div class="step-desc">Cadência fixa que não depende de você lembrar.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 18: Community -->
+  <section class="slide hero light">
+    <div class="chrome">
+      <div>Apresentando</div>
+      <div>18 / 22</div>
+    </div>
+    <div class="frame" style="justify-content:center">
+      <div class="kicker">Turma 2026.1</div>
+      <h1 class="h-hero">Comunidade <span class="hi">9A</span></h1>
+      <h2 class="h-sub">Uma carteira passiva, global e barata.</h2>
+    </div>
+  </section>
+
+  <!-- Slide 19: Deliverables -->
+  <section class="slide light">
+    <div class="chrome">
+      <div>O que você recebe</div>
+      <div>19 / 22</div>
+    </div>
+    <div class="frame" style="padding-top:6vh">
+      <div class="grid-6">
+        <div class="stat-card"><div class="h-md">12 Encontros</div><div class="stat-note">Quinzenais ao vivo para revisão do método.</div></div>
+        <div class="stat-card"><div class="h-md">Módulos Gravados</div><div class="stat-note">Método completo para assistir no seu ritmo.</div></div>
+        <div class="stat-card"><div class="h-md">Alertas</div><div class="stat-note">Avisos de rebalanceamento da carteira ideal.</div></div>
+        <div class="stat-card"><div class="h-md">WhatsApp</div><div class="stat-note">Grupo exclusivo com a equipe Jhony Bosio.</div></div>
+        <div class="stat-card"><div class="h-md">Tributação</div><div class="stat-note">Como pagar menos IR legalmente.</div></div>
+        <div class="stat-card"><div class="h-md">Planilha 9A</div><div class="stat-note">Ferramenta pessoal de alocação.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 20: Pricing -->
+  <section class="slide hero dark">
+    <div class="chrome">
+      <div>Investimento</div>
+      <div>20 / 22</div>
+    </div>
+    <div class="frame" style="justify-content:center; text-align:center">
+      <div class="kicker">Lançamento Semente</div>
+      <div class="meta" style="text-decoration:line-through; margin-bottom:2vh">De R$ 2.197</div>
+      <h1 class="h-hero" style="font-size:10vw">12x R$ 149,75</h1>
+      <h2 class="h-sub" style="margin-top:2vh">ou R$ 1.497 à vista</h2>
+      <div class="meta-row" style="justify-content:center; margin-top:6vh">
+        <span>Garantia de 15 dias</span><span>·</span><span>Vagas Limitadas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 21: ICP -->
+  <section class="slide light">
+    <div class="chrome">
+      <div>Para quem é</div>
+      <div>21 / 22</div>
+    </div>
+    <div class="frame grid-2-6-6" style="padding-top:8vh">
+      <div>
+        <div class="tag" style="background:rgba(0,128,0,0.1); border-color:green; color:green">É para você</div>
+        <ul style="margin-top:3vh; list-style:none; display:flex; flex-direction:column; gap:1.5vh; font-size:1.1vw; opacity:.8">
+          <li>✓ Já investe, mas sem método claro</li>
+          <li>✓ Tem a partir de R$ 5 mil</li>
+          <li>✓ Quer carteira global e barata</li>
+          <li>✓ Pode dedicar 2h por mês</li>
+        </ul>
+      </div>
+      <div>
+        <div class="tag" style="background:rgba(255,0,0,0.1); border-color:red; color:red">Não é para você</div>
+        <ul style="margin-top:3vh; list-style:none; display:flex; flex-direction:column; gap:1.5vh; font-size:1.1vw; opacity:.6">
+          <li>✕ Busca dicas de day trade</li>
+          <li>✕ Quer rentabilidade garantida</li>
+          <li>✕ Não quer abrir planilha</li>
+          <li>✕ Procura método milagroso</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 22: CTA -->
+  <section class="slide hero dark">
+    <div class="chrome">
+      <div>Última Chamada</div>
+      <div>22 / 22</div>
+    </div>
+    <div class="frame" style="justify-content:center; text-align:center">
+      <h2 class="h-sub">Sua carteira ainda é uma coleção?</h2>
+      <h1 class="h-hero" style="margin-top:2vh">Ou já virou <span class="hi">método?</span></h1>
+      <div style="margin-top:8vh">
+        <a href="#" style="padding:2.5vh 5vw; background:var(--accent); color:white; text-decoration:none; border-radius:8px; font-family:var(--serif-en); font-weight:800; font-size:2vw">ENTRAR NO PROTOCOLO 9A →</a>
+      </div>
+      <div class="meta" style="margin-top:6vh">Carrinho fecha domingo, 24/05/2026, às 20h.</div>
+    </div>
+  </section>
+</main>
+
+<div id="nav"></div>
+<div id="hint">Navegue com as setas ou scroll</div>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+/* =============== SLIDE HANDLER =============== */
+const deck = document.getElementById('deck');
+const slides = Array.from(document.querySelectorAll('.slide'));
+const nav = document.getElementById('nav');
+const total = slides.length;
+let idx = 0;
+let lock = false;
+
+deck.style.width = (total * 100) + 'vw';
+
+slides.forEach((s, i) => {
+  const b = document.createElement('button');
+  b.className = 'dot'; b.dataset.i = i;
+  b.onclick = () => go(i);
+  nav.appendChild(b);
+});
+
+function go(n) {
+  if (lock) return;
+  idx = Math.max(0, Math.min(total - 1, n));
+  deck.style.transform = `translateX(${-idx * 100}vw)`;
+  slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+  nav.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  
+  const el = slides[idx];
+  const isLight = el.classList.contains('light');
+  document.body.classList.toggle('light-bg', isLight);
+  
+  lock = true; setTimeout(() => lock = false, 700);
+}
+
+addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') go(idx + 1);
+  if (e.key === 'ArrowLeft') go(idx - 1);
+});
+
+addEventListener('wheel', e => {
+  if (Math.abs(e.deltaY) > 50) go(idx + (e.deltaY > 0 ? 1 : -1));
+}, { passive: true });
+
+go(0);
+lucide.createIcons();
+
+/* =============== WEBGL BACKGROUND =============== */
+function setupWebGL(id, color) {
+  const canvas = document.getElementById(id);
+  const gl = canvas.getContext('webgl');
+  if (!gl) return;
+  
+  const vs = `attribute vec2 p; void main(){gl_Position=vec4(p,0,1);}`;
+  const fs = `
+    precision highp float;
+    uniform float t;
+    uniform vec2 r;
+    uniform vec3 c;
+    void main(){
+      vec2 uv = gl_FragCoord.xy / r;
+      float noise = sin(uv.x * 12.0 + t) * sin(uv.y * 12.0 + t) * 0.05;
+      gl_FragColor = vec4(c + noise, 1.0);
+    }
+  `;
+  
+  const program = gl.createProgram();
+  const vShader = gl.createShader(gl.VERTEX_SHADER);
+  gl.shaderSource(vShader, vs); gl.compileShader(vShader);
+  const fShader = gl.createShader(gl.FRAGMENT_SHADER);
+  gl.shaderSource(fShader, fs); gl.compileShader(fShader);
+  gl.attachShader(program, vShader); gl.attachShader(program, fShader);
+  gl.linkProgram(program); gl.useProgram(program);
+  
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const pLoc = gl.getAttribLocation(program, 'p');
+  gl.enableVertexAttribArray(pLoc);
+  gl.vertexAttribPointer(pLoc, 2, gl.FLOAT, false, 0, 0);
+  
+  const tLoc = gl.getUniformLocation(program, 't');
+  const rLoc = gl.getUniformLocation(program, 'r');
+  const cLoc = gl.getUniformLocation(program, 'c');
+  
+  function render(now) {
+    canvas.width = innerWidth; canvas.height = innerHeight;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.uniform1f(tLoc, now * 0.001);
+    gl.uniform2f(rLoc, canvas.width, canvas.height);
+    gl.uniform3fv(cLoc, color);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(render);
+  }
+  requestAnimationFrame(render);
+}
+
+setupWebGL('bg-dark', [0.02, 0.047, 0.102]);
+setupWebGL('bg-light', [0.97, 0.98, 0.98]);
+</script>
+</body>
+</html>
