@@ -1,583 +1,1642 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jhony Bosio — Assessor de Investimentos · Empreendedor · Entusiasta de IA</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CFM91R0EDP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CFM91R0EDP');
-</script>
-<meta name="description" content="Jhony Bosio — Assessor de investimentos sócio da Blue3 Investimentos, parceiro XP. Conheça meus projetos e minha trajetória no mercado financeiro.">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<style>
-:root {
-  /* Blue3 Official Palette */
-  --navy: #000d38;        /* Blue 1 - Deep Navy */
-  --navy-light: #002060;  /* Blue 2 - Deep Blue */
-  --blue: #0092ff;        /* Blue 4 - Brand Primary */
-  --cyan-accent: #00ffff; /* Blue 5 - Subtle Accent */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jhony Bosio — Private Advisor | Transparência Patrimonial & Alocação Fiduciária</title>
   
-  --bg: #050a1d;          /* Custom deep background based on navy */
-  --glass: rgba(255, 255, 255, 0.03);
-  --border: rgba(255, 255, 255, 0.08);
-  --border-active: rgba(0, 146, 255, 0.3);
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFM91R0EDP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CFM91R0EDP');
+  </script>
+
+  <meta name="description" content="Jhony Bosio — Assessor de investimentos sócio da Blue3 Investimentos, parceiro XP. Especialista em alocação fiduciária, Fee-Based e eficiência de ETFs globais (Protocolo 9A).">
   
-  --w: #FFFFFF;
-  --gblur: blur(20px) saturate(1.8);
-  --fd: 'Plus Jakarta Sans', sans-serif;
-  --fb: 'Plus Jakarta Sans', sans-serif; /* Unifying fonts for premium feel */
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--bg);color:var(--w);overflow-x:hidden}
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Estética de Luxo HNW (High Net Worth) */
+      --bg-dark: #030816;          /* Azul escuro profundo (fundo principal) */
+      --bg-dark-accent: #071126;   /* Azul escuro para seções e cards */
+      --gold-primary: #D4AF37;     /* Dourado imperial principal */
+      --gold-hover: #F3E5AB;       /* Dourado claro para hover */
+      --gold-metallic: linear-gradient(135deg, #c5a880 0%, #D4AF6A 50%, #A8893C 100%);
+      
+      --blue-primary: #1B6FEF;     /* Azul oficial XP / Blue3 */
+      --blue-hover: #1456D6;       /* Azul XP escuro */
+      
+      --glass-bg: rgba(255, 255, 255, 0.02);
+      --glass-border: rgba(255, 255, 255, 0.06);
+      --glass-border-gold: rgba(212, 175, 106, 0.15);
+      --glass-blur: blur(24px) saturate(1.8);
+      
+      --w: #FFFFFF;
+      --text-muted: rgba(255, 255, 255, 0.70);
+      --text-dimmed: rgba(255, 255, 255, 0.45);
+      
+      --font-title: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      
+      --r-sm: 6px;
+      --r-md: 12px;
+      --r-lg: 20px;
+      --r-xl: 32px;
+      --r-full: 999px;
+      
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+      --shadow-gold: 0 8px 30px rgba(212, 175, 106, 0.15);
+    }
 
-.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:var(--bg)}
-.bg::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--border) 1px, transparent 1px);background-size:40px 40px;opacity:0.2}
-.orb{position:absolute;border-radius:50%;filter:blur(100px);animation:fl 14s ease-in-out infinite}
-.o1{width:700px;height:700px;top:-200px;right:-100px;opacity:.2;
-  background:radial-gradient(circle,var(--blue),transparent 70%)}
-.o2{width:500px;height:500px;bottom:-100px;left:-100px;opacity:.15;animation-delay:-6s;
-  background:radial-gradient(circle,var(--navy-light),transparent 70%)}
-.o3{width:400px;height:400px;top:20%;left:10%;opacity:.1;animation-delay:-3s;
-  background:radial-gradient(circle,var(--blue),transparent 70%)}
-@keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(30px,-40px) scale(1.05)}70%{transform:translate(-20px,30px) scale(.95)}}
+    /* Reset & Geral */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-dark);
+      color: var(--w);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.page{position:relative;z-index:1}
-.wrap{max-width:1100px;margin:0 auto;padding:0 40px}
-.glass{background:var(--glass);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);border:1px solid var(--border);border-radius:20px}
+    /* Background Dinâmico & Efeitos Visuais */
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background: var(--bg-dark);
+    }
+    .bg-canvas::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 50px 50px;
+      opacity: 0.3;
+    }
+    .g-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.15;
+    }
+    .g-glow-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--blue-primary) 0%, transparent 70%);
+      top: -200px;
+      right: -100px;
+    }
+    .g-glow-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--gold-primary) 0%, transparent 70%);
+      bottom: 20%;
+      left: -150px;
+    }
+    .g-glow-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--blue-primary) 0%, transparent 70%);
+      bottom: -100px;
+      right: 10%;
+    }
 
-/* NAV */
-.nav{position:sticky;top:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;
-  background:rgba(5,10,29,.8);backdrop-filter:blur(28px) saturate(1.8);-webkit-backdrop-filter:blur(28px) saturate(1.8);
-  border-bottom:1px solid var(--border)}
-.logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-decoration: none;
-}
-.logo-icon {
-  width: 42px;
-  height: 42px;
-  background: linear-gradient(135deg, var(--blue), var(--navy-light));
-  border-radius: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  color: #fff;
-  font-size: 15px;
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 4px 15px rgba(0, 146, 255, 0.3);
-  position: relative;
-  overflow: hidden;
-}
-.logo-icon::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-  transform: rotate(45deg);
-  animation: shine 4s infinite;
-}
-@keyframes shine {
-  0% { transform: translateX(-100%) rotate(45deg); }
-  20%, 100% { transform: translateX(100%) rotate(45deg); }
-}
-.logo-text {
-  display: flex;
-  flex-direction: column;
-}
-.logo-name {
-  font-family: var(--fd);
-  font-weight: 800;
-  font-size: 17px;
-  color: #fff;
-  letter-spacing: -0.02em;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.logo-name::before {
-  content: "|";
-  color: rgba(255,255,255,0.2);
-  font-weight: 300;
-}
-.logo-sub {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--blue);
-  font-weight: 700;
-  margin-top: 1px;
-}
-.nlinks{display:flex;gap:26px;align-items:center}
-.nlink{font-size:13px;font-weight:500;color:rgba(255,255,255,.6);cursor:pointer;text-decoration:none;transition:color .15s}
-.nlink:hover{color:#fff}
+    /* Layout & Estrutura */
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .section {
+      padding: 100px 0;
+      position: relative;
+    }
+    .section-header {
+      margin-bottom: 56px;
+      max-width: 680px;
+    }
+    .sec-label {
+      font-family: var(--font-title);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sec-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+    }
+    .sec-title {
+      font-family: var(--font-title);
+      font-size: clamp(32px, 4.5vw, 46px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--w);
+      margin-bottom: 20px;
+    }
+    .sec-title span {
+      background: var(--gold-metallic);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .sec-desc {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
 
-/* HERO */
-.hero{min-height:calc(100vh - 66px);display:flex;align-items:center;padding:80px 0 56px}
-.hgrid{display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center}
-.heyebrow{display:inline-flex;align-items:center;gap:8px;
-  background:rgba(0,146,255,.10);border:1px solid rgba(0,146,255,.22);
-  border-radius:999px;padding:6px 14px;margin-bottom:26px}
-.heyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--blue)}
-.heyebrow-txt{font-size:12px;font-weight:600;color:var(--blue);letter-spacing:.05em}
-.htitle{font-family:var(--fd);font-size:clamp(40px,5.2vw,62px);font-weight:800;
-  line-height:1.07;letter-spacing:-.035em;color:#fff;margin-bottom:22px}
-.hsub{font-size:17px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.72;max-width:480px;margin-bottom:36px;letter-spacing:0.01em}
-.hbtns{display:flex;gap:11px;align-items:center;flex-wrap:wrap}
-.btnp{position:relative;font-family:var(--fd);font-size:15px;font-weight:700;
-  background:linear-gradient(135deg,#34AF23,#289118);color:#fff;border:none;border-radius:999px;
-  padding:13px 32px;cursor:pointer;box-shadow:0 4px 20px rgba(52,175,35,0.35);transition:all .3s cubic-bezier(0.23, 1, 0.32, 1);text-decoration:none;overflow:hidden;display:inline-flex;align-items:center;justify-content:center}
-.btnp::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateX(-100%);transition:transform .5s ease}
-.btnp:hover::after{transform:translateX(100%)}
-.btnp:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 12px 32px rgba(52,175,35,0.5)}
-.btng{position:relative;font-family:var(--fd);font-size:15px;font-weight:600;
-  background:rgba(255,255,255,.04);color:#fff;border:1px solid var(--border);border-radius:999px;
-  padding:12px 30px;cursor:pointer;backdrop-filter:blur(12px);transition:all .3s cubic-bezier(0.23, 1, 0.32, 1);text-decoration:none;overflow:hidden;display:inline-flex;align-items:center;justify-content:center}
-.btng:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3);transform:translateY(-2px)}
+    /* Header / Nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(3, 8, 22, 0.85);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-bottom: 1px solid var(--glass-border);
+      transition: all 0.3s ease;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-img {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+    .logo-meta {
+      display: flex;
+      flex-direction: column;
+    }
+    .logo-title {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--w);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .logo-sub {
+      font-family: var(--font-title);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--gold-primary);
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .nav-link {
+      font-family: var(--font-title);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .nav-link:hover {
+      color: var(--gold-primary);
+    }
+    .nav-btn {
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 24px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--w);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-full);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover {
+      background: var(--w);
+      color: var(--bg-dark);
+      border-color: var(--w);
+      transform: translateY(-1px);
+    }
 
-/* Neon Animation Layers */
-.n-line{position:absolute;height:1.5px;width:60%;left:20%;opacity:0;transition:all .6s cubic-bezier(0.16, 1, 0.3, 1);background:linear-gradient(to right,transparent,var(--blue),var(--cyan-accent),var(--blue),transparent);pointer-events:none;filter:drop-shadow(0 0 8px var(--blue))}
-.n-top{top:-0.5px}
-.n-bottom{bottom:-0.5px}
-.btnp:hover .n-line, .btng:hover .n-line, .pcard:hover .n-line, .vcard:hover .n-line, .glass:hover .n-line, .sbar:hover .n-line{opacity:0.8;width:80%;left:10%}
-.btnp:hover .n-bottom, .btng:hover .n-bottom, .pcard:hover .n-bottom, .vcard:hover .n-bottom, .glass:hover .n-bottom, .sbar:hover .n-bottom{opacity:0.4}
+    /* Hero Section */
+    .hero {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(212, 175, 106, 0.08);
+      border: 1px solid var(--glass-border-gold);
+      border-radius: var(--r-full);
+      padding: 6px 16px;
+      margin-bottom: 28px;
+    }
+    .hero-eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-primary);
+      box-shadow: 0 0 10px var(--gold-primary);
+    }
+    .hero-eyebrow-txt {
+      font-family: var(--font-title);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold-primary);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(38px, 5.5vw, 60px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--w);
+      margin-bottom: 24px;
+    }
+    .hero-title span {
+      background: var(--gold-metallic);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .hero-desc strong {
+      color: var(--w);
+    }
+    .btn-wrap {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn-gold {
+      position: relative;
+      font-family: var(--font-title);
+      font-size: 15px;
+      font-weight: 700;
+      background: var(--gold-metallic);
+      color: var(--bg-dark);
+      border: none;
+      border-radius: var(--r-full);
+      padding: 16px 36px;
+      cursor: pointer;
+      box-shadow: var(--shadow-gold);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      overflow: hidden;
+    }
+    .btn-gold::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .btn-gold:hover::after {
+      transform: translateX(100%);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(212, 175, 106, 0.3);
+    }
+    .btn-ghost {
+      font-family: var(--font-title);
+      font-size: 15px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--w);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-full);
+      padding: 15px 34px;
+      cursor: pointer;
+      backdrop-filter: var(--glass-blur);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
 
-/* PHOTO */
-.photo-wrap{position:relative;display:flex;justify-content:center}
-.photo-ring{width:340px;height:340px;border-radius:50%;padding:4px;
-  background:linear-gradient(135deg,var(--blue),var(--navy-light),var(--blue));
-  box-shadow:0 0 60px rgba(0,146,255,0.1)}
-.photo-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;
-  border:4px solid var(--bg)}
+    /* Cards e Elementos Visuais da Hero */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-glow-back {
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(27, 111, 239, 0.12) 0%, transparent 70%);
+      filter: blur(40px);
+      z-index: -1;
+    }
+    .hero-glass-panel {
+      width: 100%;
+      max-width: 440px;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-xl);
+      padding: 36px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glass-panel::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 20%;
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    }
+    .panel-header {
+      border-bottom: 1px solid var(--glass-border);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+    }
+    .panel-tag {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .panel-title {
+      font-family: var(--font-title);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--w);
+    }
+    .panel-items {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .panel-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: var(--r-md);
+      transition: all 0.2s ease;
+    }
+    .panel-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(212, 175, 106, 0.15);
+    }
+    .panel-item-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--r-sm);
+      background: rgba(212, 175, 106, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--gold-primary);
+      border: 1px solid rgba(212, 175, 106, 0.15);
+    }
+    .panel-item-text {
+      flex: 1;
+    }
+    .panel-item-title {
+      font-family: var(--font-title);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--w);
+    }
+    .panel-item-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
 
-/* SECTIONS */
-.sec{padding:88px 0}
-.slabel{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:11px;color:var(--blue)}
-.stitle{font-family:var(--fd);font-size:clamp(26px,3.4vw,40px);font-weight:800;
-  letter-spacing:-.03em;line-height:1.14;margin-bottom:15px;color:var(--w)}
-.sbody{font-size:17px;color:rgba(255,255,255,.6);line-height:1.72;max-width:600px}
+    /* Seção de Números / Stats */
+    .stats-strip {
+      background: var(--bg-dark-accent);
+      border-y: 1px solid var(--glass-border);
+      padding: 60px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-strip::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .stat-card {
+      text-align: center;
+      position: relative;
+    }
+    .stat-card:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 15%;
+      right: 0;
+      width: 1px;
+      height: 70%;
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .stat-num {
+      font-family: var(--font-title);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--w);
+      letter-spacing: -0.02em;
+    }
+    .stat-num span {
+      color: var(--gold-primary);
+    }
+    .stat-label {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-dimmed);
+      margin-top: 8px;
+    }
 
-/* STATS */
-.sbar{padding:30px 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
-.sbinner{display:flex;justify-content:space-around}
-.si{text-align:center}
-.sin{font-family:var(--fd);font-size:34px;font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1}
-.siu{font-size:17px;color:rgba(255,255,255,.38)}
-.sil{font-size:12px;color:rgba(255,255,255,.38);margin-top:6px}
-.sdiv{width:1px;background:rgba(255,255,255,.07)}
+    /* Seção Protocolo 9A */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 32px;
+    }
+    .feature-item {
+      display: flex;
+      gap: 16px;
+    }
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(212, 175, 106, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-primary);
+      font-weight: 700;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      border: 1px solid rgba(212, 175, 106, 0.2);
+    }
+    .feature-text h3 {
+      font-family: var(--font-title);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--w);
+      margin-bottom: 6px;
+    }
+    .feature-text p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
 
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
-.about-text p{font-size:16px;color:rgba(255,255,255,.58);line-height:1.75;margin-bottom:16px}
-.about-text strong{color:var(--w)}
+    /* Planilha Interativa Preview */
+    .sheet-preview {
+      background: rgba(7, 17, 38, 0.6);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid rgba(212, 175, 106, 0.15);
+      border-radius: var(--r-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-lg), var(--shadow-gold);
+      position: relative;
+    }
+    .sheet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    .sheet-title-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sheet-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #16A34A;
+      box-shadow: 0 0 8px #16A34A;
+    }
+    .sheet-title-txt {
+      font-family: var(--font-title);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--w);
+      letter-spacing: -0.01em;
+    }
+    .sheet-badge {
+      font-family: var(--font-title);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      background: rgba(212, 175, 106, 0.1);
+      border: 1px solid rgba(212, 175, 106, 0.2);
+      border-radius: var(--r-sm);
+      padding: 4px 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sheet-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .sheet-table th {
+      font-family: var(--font-title);
+      font-weight: 600;
+      color: var(--text-dimmed);
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sheet-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+    }
+    .sheet-table tr:hover td {
+      color: var(--w);
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .sheet-class {
+      font-weight: 600;
+      color: var(--w);
+    }
+    .sheet-alloc {
+      font-family: var(--font-title);
+      font-weight: 700;
+      color: var(--gold-primary);
+    }
+    .sheet-btn-trigger {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .sheet-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border);
+      color: var(--w);
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 12px;
+      border-radius: var(--r-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .sheet-btn:hover {
+      background: rgba(212, 175, 106, 0.08);
+      border-color: rgba(212, 175, 106, 0.3);
+      color: var(--gold-primary);
+    }
 
-/* PROJECTS */
-.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
-.pcard{position:relative;padding:30px;border-radius:20px;background:var(--gb);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);
-  border:1px solid var(--gborder);transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer;text-decoration:none;display:block;overflow:hidden}
-.pcard:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2);box-shadow:0 16px 48px rgba(0,0,0,.3)}
-.pcard.featured{border-color:rgba(0,146,255,0.25);background:rgba(0,146,255,0.04)}
-.pcard.featured:hover{border-color:rgba(0,146,255,0.45);box-shadow:0 16px 48px rgba(0,146,255,0.12)}
-.picon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:22px}
-.pcard-title{font-family:var(--fd);font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
-.pcard-desc{font-size:14px;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:16px}
-.pcard-link{font-family:var(--fd);font-size:13px;font-weight:700;color:var(--blue);display:inline-flex;align-items:center;gap:6px}
-.pcard.featured .pcard-link{color:var(--blue)}
+    /* Seção Compliance 3 Modelos */
+    .models-section {
+      background: #050d22;
+      position: relative;
+    }
+    .models-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    }
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .model-card {
+      background: var(--bg-dark-accent);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-lg);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .model-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      transition: background 0.3s ease;
+    }
+    .model-card.featured::before {
+      background: var(--gold-metallic);
+    }
+    .model-card.featured {
+      border-color: rgba(212, 175, 106, 0.25);
+      box-shadow: var(--shadow-sm);
+    }
+    .model-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: var(--shadow-lg);
+    }
+    .model-card.featured:hover {
+      border-color: rgba(212, 175, 106, 0.4);
+      box-shadow: 0 16px 40px rgba(212, 175, 106, 0.15);
+    }
+    .model-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--r-md);
+      background: rgba(255, 255, 255, 0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .model-card.featured .model-icon {
+      background: rgba(212, 175, 106, 0.1);
+      color: var(--gold-primary);
+      border-color: rgba(212, 175, 106, 0.2);
+    }
+    .model-title {
+      font-family: var(--font-title);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--w);
+      margin-bottom: 8px;
+    }
+    .model-subtitle {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+    .model-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      flex: 1;
+    }
+    .model-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 24px;
+    }
+    .model-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .model-point-check {
+      color: var(--gold-primary);
+      font-weight: 700;
+    }
 
-/* VALUES */
-.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
-.vcard{position:relative;padding:28px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);overflow:hidden}
-.vicon{font-size:28px;margin-bottom:14px}
-.vtitle{font-family:var(--fd);font-size:16px;font-weight:700;color:#fff;margin-bottom:6px}
-.vtext{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6}
+    /* Seção Perfil / Quem É */
+    .bio-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .bio-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .bio-img-frame {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      border-radius: var(--r-xl);
+      padding: 6px;
+      background: var(--gold-metallic);
+      box-shadow: var(--shadow-lg);
+    }
+    .bio-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      border-radius: calc(var(--r-xl) - 4px);
+      border: 4px solid var(--bg-dark);
+    }
+    .bio-floating-card {
+      position: absolute;
+      bottom: -24px;
+      right: -16px;
+      background: rgba(7, 17, 38, 0.85);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid rgba(212, 175, 106, 0.2);
+      border-radius: var(--r-md);
+      padding: 16px 24px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+    }
+    .bio-floating-title {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .bio-floating-val {
+      font-family: var(--font-title);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--w);
+      margin-top: 2px;
+    }
+    .bio-text p {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .bio-text strong {
+      color: var(--w);
+    }
+    .bio-meta-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--glass-border);
+    }
+    .bio-meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .bio-meta-label {
+      font-size: 12px;
+      color: var(--text-dimmed);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .bio-meta-val {
+      font-family: var(--font-title);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--w);
+      margin-top: 4px;
+    }
 
-/* FOOTER */
-footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.06)}
-.finner{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.05)}
-.fbrand{font-family:var(--fd);font-size:24px;font-weight:800;color:#fff;margin-bottom:16px}
-.flegal{font-size:12px;color:rgba(255,255,255,.3);line-height:1.6;max-width:400px}
-.fcol-title{color:#fff;font-weight:700;font-size:14px;margin-bottom:16px}
-.flink{color:rgba(255,255,255,.5);text-decoration:none;font-size:14px;display:block;margin-bottom:10px;transition:color .15s}
-.flink:hover{color:rgba(255,255,255,.8)}
+    /* FAQ Section */
+    .faq-section {
+      background: #040919;
+      position: relative;
+    }
+    .faq-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    }
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .faq-item {
+      background: var(--bg-dark-accent);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .faq-item:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+    .faq-question {
+      padding: 24px 32px;
+      font-family: var(--font-title);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--w);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq-question::after {
+      content: "+";
+      font-size: 20px;
+      color: var(--gold-primary);
+      font-weight: 400;
+      transition: transform 0.2s ease;
+    }
+    .faq-item.active .faq-question::after {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .faq-answer-inner {
+      padding: 0 32px 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 16px;
+    }
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  .wrap{padding:0 20px!important}
-  .nav{padding:0 20px!important}
-  .nlinks{display:none!important}
-  .hgrid{grid-template-columns:1fr!important}
-  .photo-wrap{order:-1;margin-bottom:20px}
-  .photo-ring{width:220px;height:220px}
-  .about-grid{grid-template-columns:1fr!important}
-  .pgrid{grid-template-columns:1fr!important}
-  .vgrid{grid-template-columns:1fr!important}
-  .sbinner{flex-wrap:wrap!important;gap:1.5rem!important;justify-content:center!important}
-  .sdiv{display:none!important}
-  .si{min-width:40%}
-  .finner{flex-direction:column!important;text-align:center!important;gap:16px!important}
-  .hero{min-height:auto!important;padding:48px 0 36px!important}
-  .sec{padding:56px 0!important}
-  .hbtns{flex-direction:column!important}
-  .btnp,.btng{width:100%!important;text-align:center!important}
-}
-@media(max-width:600px){
-  .wrap{padding:0 14px!important}
-  .nav{padding:0 14px!important;height:56px!important}
-  .sin{font-size:26px!important}
-  .htitle{font-size:clamp(28px,8vw,40px)!important}
-  .photo-ring{width:180px;height:180px}
-}
-/* Pop-up Aula VIP */
-.vip-popup-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(8px);
-    z-index: 1000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-  .vip-popup-overlay.active { display: flex; opacity: 1; }
-  .vip-popup-content {
-    max-width: 500px;
-    width: 100%;
-    background: var(--navy);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    transform: translateY(20px);
-    transition: transform 0.5s ease;
-  }
-  .vip-popup-overlay.active .vip-popup-content { transform: translateY(0); }
-  .vip-banner {
-    width: 100%;
-    height: 220px;
-    background: url('aula_vip_banner_1778588559460.png') center/cover no-repeat;
-    position: relative;
-  }
-  .vip-banner::after {
-    content: "";
-    position: absolute;
-    bottom: 0; left: 0; width: 100%; height: 60%;
-    background: linear-gradient(to top, var(--navy), transparent);
-  }
-  .vip-info { padding: 30px; text-align: center; }
-  .vip-title { font-family: var(--fd); font-size: 24px; font-weight: 800; margin-bottom: 12px; color: #fff; }
-  .vip-desc { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
-  .vip-btn {
-    display: block;
-    width: 100%;
-    background: #34AF23;
-    color: #fff;
-    padding: 16px;
-    border-radius: 12px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-  .vip-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(52,175,35,0.4); }
-  .vip-close {
-    position: absolute;
-    top: 15px; right: 15px;
-    width: 32px; height: 32px;
-    background: rgba(0,0,0,0.5);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #fff;
-    z-index: 10;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-</style>
+    /* Final CTA Callout */
+    .final-callout {
+      background: linear-gradient(135deg, #050d22 0%, #030816 100%);
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-callout::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(212, 175, 106, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .final-box {
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.01);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid rgba(212, 175, 106, 0.15);
+      border-radius: var(--r-xl);
+      padding: 64px 40px;
+      box-shadow: var(--shadow-lg), var(--shadow-gold);
+      position: relative;
+    }
+    .final-box::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 10%;
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+    }
+    .final-title {
+      font-family: var(--font-title);
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--w);
+      margin-bottom: 16px;
+    }
+    .final-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      line-height: 1.65;
+    }
+
+    /* Footer */
+    footer {
+      background: #020612;
+      padding: 80px 0 40px;
+      border-top: 1px solid var(--glass-border);
+      font-size: 13px;
+      color: var(--text-dimmed);
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 64px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      flex: 1 1 320px;
+    }
+    .footer-desc {
+      line-height: 1.6;
+      margin-top: 16px;
+      max-width: 420px;
+    }
+    .footer-links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-col-head {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--w);
+      margin-bottom: 16px;
+    }
+    .footer-link {
+      display: block;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      transition: color 0.15s ease;
+    }
+    .footer-link:hover {
+      color: var(--gold-primary);
+    }
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 32px;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .footer-legal {
+      line-height: 1.7;
+      max-width: 780px;
+      font-size: 11px;
+    }
+    .footer-meta {
+      text-align: right;
+    }
+    .xp-partner {
+      font-size: 11px;
+      color: var(--text-dimmed);
+    }
+    .xp-partner strong {
+      color: var(--w);
+    }
+
+    /* Responsividade */
+    @media(max-width: 992px) {
+      .container {
+        padding: 0 24px;
+      }
+      .nav {
+        padding: 0 24px;
+      }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+      }
+      .hero-eyebrow {
+        justify-content: center;
+      }
+      .btn-wrap {
+        justify-content: center;
+      }
+      .hero-visual {
+        order: -1;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      .stat-card:nth-child(2)::after {
+        display: none;
+      }
+      .grid-2col {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .models-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .bio-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .bio-visual {
+        order: -1;
+      }
+      .footer-top {
+        flex-direction: column;
+        gap: 40px;
+      }
+      .footer-meta {
+        text-align: left;
+      }
+    }
+
+    @media(max-width: 600px) {
+      .container {
+        padding: 0 16px;
+      }
+      .nav {
+        padding: 0 16px;
+        height: 72px;
+      }
+      .logo-img {
+        height: 32px;
+      }
+      .logo-title {
+        font-size: 15px;
+      }
+      .logo-sub {
+        font-size: 9px;
+      }
+      .nav-links, .nav-btn {
+        display: none;
+      }
+      .section {
+        padding: 64px 0;
+      }
+      .hero {
+        padding: 40px 0;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .stat-card::after {
+        display: none !important;
+      }
+      .sheet-preview {
+        padding: 16px;
+      }
+      .sheet-table th, .sheet-table td {
+        padding: 8px 6px;
+        font-size: 11px;
+      }
+      .model-card {
+        padding: 32px 24px;
+      }
+      .final-box {
+        padding: 40px 20px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="bg">
-  <div class="orb o1"></div>
-  <div class="orb o2"></div>
-  <div class="orb o3"></div>
-</div>
-
-<div class="page">
-
-<!-- NAV -->
-<nav class="nav">
-  <a href="/" class="logo-wrap">
-    <div class="logo-icon">JB</div>
-    <div class="logo-text">
-      <div class="logo-name">Jhony Bosio</div>
-      <div class="logo-sub">Assessor de Investimentos</div>
-    </div>
-  </a>
-  <div class="nlinks">
-    <a class="nlink" href="#sobre">Sobre</a>
-    <a class="nlink" href="#projetos">Projetos</a>
-    <a class="nlink" href="#valores">Filosofia</a>
-
+  <!-- Background Estático e Efeitos de Brilho -->
+  <div class="bg-canvas">
+    <div class="g-glow g-glow-1"></div>
+    <div class="g-glow g-glow-2"></div>
+    <div class="g-glow g-glow-3"></div>
   </div>
-</nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hgrid">
-      <div>
-        <div class="heyebrow">
-          <div class="heyebrow-dot"></div>
-          <div class="heyebrow-txt">Sócio Blue3 Investimentos · XP</div>
+  <div class="page-wrap">
+
+    <!-- Navegação (Header) -->
+    <nav class="nav">
+      <a href="/" class="logo-wrap">
+        <img src="logo-prime.png" alt="Logo Jhony Bosio Co." class="logo-img">
+        <div class="logo-meta">
+          <span class="logo-title">Jhony Bosio</span>
+          <span class="logo-sub">Private Advisor</span>
         </div>
-        <h1 class="htitle">Jhony <span style="color:var(--blue)">Bosio</span></h1>
-        <p class="hsub">Assessor de investimentos, empreendedor e entusiasta de IA. Construo soluções que conectam tecnologia, finanças e pessoas — com transparência e propósito.</p>
-        <div class="hbtns">
-          <a class="btnp" href="#projetos">
-            <span class="n-line n-top"></span>
-            Conheça meus projetos ↓
-            <span class="n-line n-bottom"></span>
+      </a>
+      <div class="nav-links">
+        <a href="#sobre" class="nav-link">Sobre</a>
+        <a href="#protocolo" class="nav-link">Protocolo 9A</a>
+        <a href="#modelos" class="nav-link">3 Modelos XP</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </div>
+      <a href="https://wa.me/5516996045700?text=Olá%20Jhony,%20gostaria%20de%20receber%20o%20acesso%20gratuito%20ao%20Protocolo%209A%20e%20à%20Planilha%20de%20Rebalanceamento%20de%20ETFs." target="_blank" class="nav-btn">Contato Direct</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-eyebrow">
+              <div class="hero-eyebrow-dot"></div>
+              <span class="hero-eyebrow-txt">Sócio Blue3 Investimentos · XP</span>
+            </div>
+            <h1 class="hero-title">A era do alinhamento <span>fiduciário</span> e da clareza patrimonial.</h1>
+            <p class="hero-desc">Esqueça conflitos de interesse na sua carteira. Tenha acesso completo à metodologia <strong>Protocolo 9A</strong> e garanta a planilha de rebalanceamento profissional focada em <strong>eficiência tributária de ETFs globais</strong> para blindar e rentabilizar seu capital.</p>
+            
+            <div class="btn-wrap">
+              <a href="https://wa.me/5516996045700?text=Olá%20Jhony,%20gostaria%20de%20receber%20o%20acesso%20gratuito%20ao%20Protocolo%209A%20e%20à%20Planilha%20de%20Rebalanceamento%20de%20ETFs." target="_blank" class="btn-gold">
+                Receber Protocolo 9A & Planilha
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-left: 2px;"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="#modelos" class="btn-ghost">Conhecer Regimes XP</a>
+            </div>
+          </div>
+          
+          <div class="hero-visual">
+            <div class="hero-glow-back"></div>
+            <div class="hero-glass-panel">
+              <div class="panel-header">
+                <div class="panel-tag">Wealth Engineering</div>
+                <div class="panel-title">Funil de Alta Renda</div>
+              </div>
+              <div class="panel-items">
+                <div class="panel-item">
+                  <div class="panel-item-icon">🎯</div>
+                  <div class="panel-item-text">
+                    <div class="panel-item-title">Protocolo 9A</div>
+                    <div class="panel-item-desc">Tese robusta com 9 classes de ativos globais.</div>
+                  </div>
+                </div>
+                <div class="panel-item">
+                  <div class="panel-item-icon">📈</div>
+                  <div class="panel-item-text">
+                    <div class="panel-item-title">Eficiência de ETFs</div>
+                    <div class="panel-item-desc">Custos até 80% menores que fundos tradicionais.</div>
+                  </div>
+                </div>
+                <div class="panel-item">
+                  <div class="panel-item-icon">🛡️</div>
+                  <div class="panel-item-text">
+                    <div class="panel-item-title">Compliance Transparente</div>
+                    <div class="panel-item-desc">Controle absoluto sobre taxas e comissões.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Strip -->
+    <section class="stats-strip">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-num">+100<span>M</span></div>
+            <div class="stat-label">Sob custódia ativa</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">+167</div>
+            <div class="stat-label">Famílias atendidas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">+10</div>
+            <div class="stat-label">Anos de experiência</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">Blue3</div>
+            <div class="stat-label">Escritório parceiro XP</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Protocolo 9A e Planilha -->
+    <section class="section" id="protocolo">
+      <div class="container">
+        <div class="grid-2col">
+          <div>
+            <div class="sec-label">Wealth Management</div>
+            <h2 class="sec-title">Como o <span>Protocolo 9A</span> revoluciona seus investimentos</h2>
+            <p class="sec-desc">A maioria dos assessores tradicionais indica fundos caros e complexos. O Protocolo 9A segue o caminho oposto: aloca seu capital de forma direta nas <strong>9 classes de ativos globais essenciais</strong> através de ETFs de altíssima liquidez, baixo custo operacional e transparência fiscal absoluta.</p>
+            
+            <div class="features-list">
+              <div class="feature-item">
+                <div class="feature-icon">1</div>
+                <div class="feature-text">
+                  <h3>Alocação Global Inteligente</h3>
+                  <p>Diversificação em ações nacionais e globais, REITs, Renda Fixa local e soberana, inflação e commodities através de um ecossistema simples e extremamente seguro.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">2</div>
+                <div class="feature-text">
+                  <h3>Transparência de Custos (Eficiência)</h3>
+                  <p>Enquanto fundos ativos cobram taxa de administração de 2% e performance de 20%, ETFs possuem custos anuais irrisórios de até 0,07%, deixando o rendimento no seu bolso.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">3</div>
+                <div class="feature-text">
+                  <h3>Planilha de Rebalanceamento Automatizada</h3>
+                  <p>Tenha acesso exclusivo à nossa ferramenta matemática que calcula exatamente o quanto aportar ou retirar de cada classe para manter seu risco sob controle.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <!-- Simulação Planilha Realista -->
+            <div class="sheet-preview">
+              <div class="sheet-header">
+                <div class="sheet-title-meta">
+                  <div class="sheet-dot"></div>
+                  <span class="sheet-title-txt">Planilha de Rebalanceamento 9A</span>
+                </div>
+                <span class="sheet-badge">Premium v2.4</span>
+              </div>
+              
+              <table class="sheet-table">
+                <thead>
+                  <tr>
+                    <th>Ativo / Classe</th>
+                    <th>Peso Ideal</th>
+                    <th>Peso Atual</th>
+                    <th>Ação Recomendada</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="sheet-class">Ações Brasil (IBOV)</td>
+                    <td class="sheet-alloc">15%</td>
+                    <td>17.2%</td>
+                    <td style="color: #EF4444; font-weight: 500;">Excedente (Aguardar)</td>
+                  </tr>
+                  <tr>
+                    <td class="sheet-class">Ações EUA (S&P 500)</td>
+                    <td class="sheet-alloc">20%</td>
+                    <td>16.8%</td>
+                    <td style="color: #10B981; font-weight: 600;">Comprar R$ 6.400,00</td>
+                  </tr>
+                  <tr>
+                    <td class="sheet-class">Renda Fixa Inflação (IMAB)</td>
+                    <td class="sheet-alloc">15%</td>
+                    <td>15.1%</td>
+                    <td style="color: rgba(255,255,255,0.4)">Manter Alocação</td>
+                  </tr>
+                  <tr>
+                    <td class="sheet-class">FIIs e Imóveis Globais</td>
+                    <td class="sheet-alloc">10%</td>
+                    <td>8.5%</td>
+                    <td style="color: #10B981; font-weight: 600;">Comprar R$ 3.000,00</td>
+                  </tr>
+                  <tr>
+                    <td class="sheet-class">Commodities (Ouro/Macro)</td>
+                    <td class="sheet-alloc">10%</td>
+                    <td>10.2%</td>
+                    <td style="color: rgba(255,255,255,0.4)">Manter Alocação</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <div class="sheet-btn-trigger">
+                <a href="https://wa.me/5516996045700?text=Olá%20Jhony,%20gostaria%20de%20receber%20o%20acesso%20gratuito%20ao%20Protocolo%209A%20e%20à%20Planilha%20de%20Rebalanceamento%20de%20ETFs." target="_blank" class="sheet-btn">
+                  <span>Baixar Planilha & Protocolo 9A Grátis</span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Compliance: 3 Modelos XP -->
+    <section class="section models-section" id="modelos">
+      <div class="container">
+        <div class="section-header" style="margin: 0 auto 56px; text-align: center;">
+          <div class="sec-label" style="justify-content: center;">Transparência Regulatória</div>
+          <h2 class="sec-title">Os 3 Modelos Oficiais de <span>Remuneração XP</span></h2>
+          <p class="sec-desc">Para garantir total conformidade com as regras da CVM e da XP Investimentos, oferecemos liberdade de escolha absoluta. Apresentamos as três formas técnicas de remuneração. O investidor decide a melhor modalidade para sua estratégia.</p>
+        </div>
+        
+        <div class="models-grid">
+          <!-- Fee Fixo -->
+          <div class="model-card featured">
+            <div class="model-icon">💎</div>
+            <h3 class="model-title">Fee Fixo (Fee-Based)</h3>
+            <span class="model-subtitle">Alinhamento Fiduciário</span>
+            <p class="model-desc">O cliente paga um percentual anualizado transparente e fixo sobre o volume total da carteira (ex: de 0.70% a 1.20% a.a.). Qualquer comissão embutida em produtos é devolvida 100% como cashback na conta do investidor.</p>
+            <ul class="model-points">
+              <li class="model-point"><span class="model-point-check">✓</span> Isenção total de conflito de interesses</li>
+              <li class="model-point"><span class="model-point-check">✓</span> Cashback integral de taxas de distribuição</li>
+              <li class="model-point"><span class="model-point-check">✓</span> Indicado para alocação global de longo prazo</li>
+            </ul>
+          </div>
+          
+          <!-- Comissionado -->
+          <div class="model-card">
+            <div class="model-icon">⚖️</div>
+            <h3 class="model-title">Comissionado</h3>
+            <span class="model-subtitle">Distribuição Tradicional</span>
+            <p class="model-desc">O cliente não paga taxa direta sobre a custódia. O assessor é remunerado através de comissões pontuais embutidas na distribuição dos ativos de forma clara e tabelada em extratos de transparência XP.</p>
+            <ul class="model-points">
+              <li class="model-point"><span class="model-point-check">✓</span> Sem taxa de gestão recorrente sobre o patrimônio</li>
+              <li class="model-point"><span class="model-point-check">✓</span> Ideal para estratégias de baixíssimo giro</li>
+              <li class="model-point"><span class="model-point-check">✓</span> Altamente eficiente para Renda Fixa de longo prazo</li>
+            </ul>
+          </div>
+          
+          <!-- Consultoria Flat-Fee -->
+          <div class="model-card">
+            <div class="model-icon">👔</div>
+            <h3 class="model-title">Consultoria Independente</h3>
+            <span class="model-subtitle">Flat-Fee / Planejamento</span>
+            <p class="model-desc">Cobrança baseada em honorários fixados em contrato (mensais, anuais ou por projeto avulso). Perfeito para planejamentos patrimoniais complexos, blindagem civil ou governança sucessória familiar.</p>
+            <ul class="model-points">
+              <li class="model-point"><span class="model-point-check">✓</span> Planejamento sucessório e holding familiar</li>
+              <li class="model-point"><span class="model-point-check">✓</span> Honorários fixos definidos de forma independente</li>
+              <li class="model-point"><span class="model-point-check">✓</span> Foco exclusivo em Wealth Engineering avulso</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Quem é Jhony Bosio -->
+    <section class="section" id="sobre">
+      <div class="container">
+        <div class="bio-grid">
+          <div class="bio-visual">
+            <div class="bio-img-frame">
+              <img src="jhony-bosio-foto.jpg" alt="Jhony Bosio" class="bio-img">
+            </div>
+            <div class="bio-floating-card">
+              <span class="bio-floating-title">Custódia Assistida</span>
+              <span class="bio-floating-val">+R$ 100 Milhões</span>
+            </div>
+          </div>
+          
+          <div class="bio-text">
+            <div class="sec-label">Private Advisor</div>
+            <h2 class="sec-title">Mais de 10 anos de compromisso com a <span>excelência</span></h2>
+            <p>Sou sócio da <strong>Blue3 Investimentos</strong>, um dos maiores e mais premiados escritórios credenciados à <strong>XP Investimentos</strong> no Brasil. Minha carreira é dedicada a ajudar famílias de alta renda e empreendedores na estruturação de planos sólidos de alocação de ativos e eficiência tributária.</p>
+            <p>Acredito que o futuro do mercado de capitais é fiduciário. Minha missão é afastar os conflitos de interesse da tomada de decisão dos meus clientes, combinando curadoria analítica humana e o poder da tecnologia e inteligência artificial para otimização contínua de portfólios globais.</p>
+            
+            <div class="bio-meta-row">
+              <div class="bio-meta-item">
+                <span class="bio-meta-label">Escritório</span>
+                <span class="bio-meta-val">Blue3 Investimentos XP</span>
+              </div>
+              <div class="bio-meta-item">
+                <span class="bio-meta-label">Tese Central</span>
+                <span class="bio-meta-val">Protocolo 9A & ETFs Globais</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section" id="faq">
+      <div class="container">
+        <div class="section-header" style="margin: 0 auto 56px; text-align: center;">
+          <div class="sec-label" style="justify-content: center;">FAQ</div>
+          <h2 class="sec-title">Dúvidas <span>Frequentes</span></h2>
+          <p class="sec-desc">Confira as respostas para as principais dúvidas sobre nossa governança, custos operacionais e a metodologia de alocação patrimonial global.</p>
+        </div>
+        
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-question">Como recebo o acesso ao Protocolo 9A e à Planilha?</div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Ao clicar no botão principal de acesso, você será direcionado ao nosso atendimento exclusivo do Hermes via WhatsApp. Após uma breve identificação das suas metas financeiras, você receberá a planilha premium de rebalanceamento de ETFs e o guia em PDF do Protocolo 9A inteiramente grátis.
+              </div>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">Onde meu patrimônio fica custodiado?</div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Toda a custódia, processamento e liquidação das operações são feitos diretamente na sua conta da XP Investimentos CCTVM S/A, uma das maiores instituições financeiras da América Latina. Nós atuamos na assessoria, curadoria e otimização dos investimentos, sem acesso direto para retiradas ou movimentações externas.
+              </div>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">Qual a diferença real entre o modelo Fee Fixo e Comissionado?</div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                No modelo de Fee Fixo (Fee-Based), todas as remunerações e rebates embutidos em produtos (como fundos, COEs ou títulos de renda fixa) retornam para você na forma de cashback, e você paga apenas um fee percentual fixo sobre a custódia. No modelo Comissionado, você não paga uma taxa de custódia recorrente, mas o assessor é remunerado através das margens de distribuição de cada ativo selecionado.
+              </div>
+            </div>
+          </div>
+          
+          <div class="faq-item">
+            <div class="faq-question">Eu preciso pagar algo para ter a planilha de ETFs?</div>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Não. A planilha de rebalanceamento profissional do Protocolo 9A é um material educativo e prático oferecido de forma 100% gratuita para investidores qualificados como forma de demonstrar a excelência técnica da nossa modelagem fiduciária de portfólios.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final Callout CTA -->
+    <section class="final-callout">
+      <div class="container">
+        <div class="final-box">
+          <h2 class="final-title">Pronto para blindar seu patrimônio com transparência?</h2>
+          <p class="final-desc">Descubra a metodologia global que une eficiência de custos, diversificação real e transparência absoluta sob a custódia e robustez da XP Investimentos.</p>
+          <a href="https://wa.me/5516996045700?text=Olá%20Jhony,%20gostaria%20de%20receber%20o%20acesso%20gratuito%20ao%20Protocolo%209A%20e%20à%20Planilha%20de%20Rebalanceamento%20de%20ETFs." target="_blank" class="btn-gold">
+            Baixar Material & Falar com Hermes
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-left: 2px;"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a class="btng" href="https://linkedin.com/in/jhonybosio" target="_blank">
-            <span class="n-line n-top"></span>
-            LinkedIn
-            <span class="n-line n-bottom"></span>
-          </a>
-          <a class="btng" href="https://instagram.com/jhonybosio" target="_blank">
-            <span class="n-line n-top"></span>
-            Instagram
-            <span class="n-line n-bottom"></span>
-          </a>
         </div>
       </div>
-        <div class="photo-wrap">
-          <div style="position:absolute;width:120%;height:120%;background:radial-gradient(circle, var(--blue) 0%, transparent 70%);opacity:0.15;filter:blur(40px);top:-10%;left:-10%;z-index:-1"></div>
-          <div class="photo-ring">
-            <img src="jhony-bosio-foto.jpg" alt="Jhony Bosio — Assessor de Investimentos">
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a href="/" class="logo-wrap">
+              <img src="logo-prime.png" alt="Logo Jhony Bosio Co." class="logo-img">
+              <div class="logo-meta">
+                <span class="logo-title" style="color:#fff">Jhony Bosio</span>
+                <span class="logo-sub">Private Advisor</span>
+              </div>
+            </a>
+            <p class="footer-desc">Assessoria de investimentos e alocação de patrimônio fiduciário em parceria com a Blue3 Investimentos e a XP Investimentos.</p>
+          </div>
+          
+          <div class="footer-links-grid">
+            <div>
+              <span class="footer-col-head">Links Úteis</span>
+              <a href="#sobre" class="footer-link">Sobre mim</a>
+              <a href="#protocolo" class="footer-link">Protocolo 9A</a>
+              <a href="#modelos" class="footer-link">Os 3 Modelos XP</a>
+            </div>
+            <div>
+              <span class="footer-col-head">Parceiros</span>
+              <a href="https://www.blue3investimentos.com.br/" target="_blank" class="footer-link">Blue3 Investimentos</a>
+              <a href="https://www.xpi.com.br/" target="_blank" class="footer-link">XP Investimentos</a>
+              <a href="hub/" class="footer-link" style="opacity:0.25; font-size:10px; margin-top:20px;">Acesso Restrito</a>
+            </div>
           </div>
         </div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<div class="sbar" style="position:relative;overflow:hidden">
-  <span class="n-line n-top"></span>
-  <div class="wrap">
-    <div class="sbinner">
-      <div class="si"><div class="sin">+167</div><div class="sil">Famílias atendidas</div></div>
-      <div class="sdiv"></div>
-      <div class="si"><div class="sin">+100<span class="siu"> Mi</span></div><div class="sil">Sob custódia</div></div>
-      <div class="sdiv"></div>
-      <div class="si"><div class="sin">+10<span class="siu"> anos</span></div><div class="sil">De experiência</div></div>
-      <div class="sdiv"></div>
-      <div class="si"><div class="sin">Blue3</div><div class="sil">Escritório parceiro XP</div></div>
-    </div>
-  </div>
-  <span class="n-line n-bottom"></span>
-</div>
-
-<!-- SOBRE -->
-<section class="sec" id="sobre">
-  <div class="wrap">
-    <div class="about-grid">
-      <div>
-        <div class="slabel">Sobre mim</div>
-        <h2 class="stitle">Quem é Jhony Bosio</h2>
-        <div class="about-text">
-          <p>Há mais de <strong>10 anos</strong> no mercado financeiro, construí minha carreira ajudando famílias e empreendedores a tomar decisões melhores sobre seu patrimônio.</p>
-          <p>Sou sócio da <strong>Blue3 Investimentos</strong>, escritório credenciado à XP, onde atendo mais de 167 famílias com mais de R$ 100 milhões sob custódia — sempre com transparência e alinhamento de interesses.</p>
-          <p>Acredito que <strong>tecnologia e inteligência artificial</strong> são ferramentas poderosas para democratizar o acesso à gestão patrimonial de qualidade. Por isso, desenvolvo soluções que combinam análise de dados, automação e atendimento humano.</p>
-          <p>Minha missão é simples: <strong>ajudar pessoas a investir com clareza e crescer com segurança</strong>.</p>
-        </div>
-      </div>
-      <div class="glass" style="padding:28px;position:relative;overflow:hidden">
-        <span class="n-line n-top"></span>
-        <span class="n-line n-bottom"></span>
-        <div style="font-family:var(--fd);font-size:12px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.09em;text-transform:uppercase;margin-bottom:18px">Trajetória</div>
-        <div style="display:flex;flex-direction:column;gap:14px">
-          <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,209,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🏦</div>
-            <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">Sócio Blue3 Investimentos</div><div style="font-size:11px;color:rgba(255,255,255,.42)">Escritório parceiro XP · Ribeirão Preto</div></div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,102,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🤖</div>
-            <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">Assessor 3.0</div><div style="font-size:11px;color:rgba(255,255,255,.42)">IA aplicada à curadoria de portfólios</div></div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,209,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">📊</div>
-            <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">+R$ 100M sob custódia</div><div style="font-size:11px;color:rgba(255,255,255,.42)">Gestão patrimonial de famílias e empresas</div></div>
-          </div>
-          <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
-            <div style="width:40px;height:40px;border-radius:10px;background:rgba(0,102,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">🎓</div>
-            <div><div style="font-family:var(--fd);font-size:14px;font-weight:700;color:#fff">Educador Financeiro</div><div style="font-size:11px;color:rgba(255,255,255,.42)">Mentor e criador do Protocolo 9A</div></div>
+        
+        <hr class="footer-divider">
+        
+        <div class="footer-bottom">
+          <p class="footer-legal">
+            Jhony Bosio é Assessor de Investimentos sócio da Blue3 Investimentos, escritório credenciado à XP Investimentos CCTVM S/A. Na forma da legislação da CVM, o Assessor de Investimentos atua na distribuição e mediação de produtos financeiros em conformidade com as regras estabelecidas (Regra CVM 178/2023). O investimento em ativos financeiros e de mercado de capitais envolve riscos e perdas patrimoniais. Resultados passados não são garantia de rentabilidade futura. A tomada de decisão de investimento cabe exclusivamente ao cliente, sob sua total responsabilidade e avaliação do perfil de risco (suitability).
+          </p>
+          
+          <div class="footer-meta">
+            <div class="xp-partner">Escritório credenciado <strong>XP Investimentos</strong></div>
+            <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.25)">
+              &copy; 2026 Jhony Bosio Co. Todos os direitos reservados.
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </footer>
+
   </div>
-</section>
 
-<!-- PROJETOS -->
-<section class="sec" id="projetos" style="padding-top:0">
-  <div class="wrap">
-    <div class="slabel">Ecossistema</div>
-    <h2 class="stitle">Meus Projetos</h2>
-    <p class="sbody">Cada projeto nasceu de uma necessidade real dos meus clientes. Juntos, eles formam um ecossistema completo para quem quer investir melhor.</p>
-    <div class="pgrid">
-
-      <a class="pcard featured" href="protocolo-9a/">
-        <span class="n-line n-top"></span>
-        <div class="picon" style="background:rgba(0,209,255,.12)">🎯</div>
-        <div class="pcard-title">Protocolo 9A</div>
-        <div class="pcard-desc">Comunidade de investimento passivo com methodology de 9 ativos globais. Uma carteira simples, barata e comprovadamente superior à maioria dos fundos ativos.</div>
-        <span class="pcard-link">Explorar →</span>
-        <span class="n-line n-bottom"></span>
-      </a>
-
-      <a class="pcard" href="carteira-etfs/">
-        <span class="n-line n-top"></span>
-        <div class="picon" style="background:rgba(27,111,239,.12)">📈</div>
-        <div class="pcard-title">Carteiras ETF</div>
-        <div class="pcard-desc">Simulador e portfólios globais diversificados via ETFs. Compare, analise e encontre a carteira ideal para o seu perfil e horizonte de investimento.</div>
-        <span class="pcard-link">Explorar →</span>
-        <span class="n-line n-bottom"></span>
-      </a>
-
-      <a class="pcard" href="mentoria/">
-        <span class="n-line n-top"></span>
-        <div class="picon" style="background:rgba(0,209,255,.12)">🤝</div>
-        <div class="pcard-title">Mentoria Financeira</div>
-        <div class="pcard-desc">Programas personalizados para cada momento da sua vida financeira — do primeiro investimento à preservação de grandes patrimônios.</div>
-        <span class="pcard-link">Explorar →</span>
-        <span class="n-line n-bottom"></span>
-      </a>
-
-      <a class="pcard" href="aula-vip/">
-        <span class="n-line n-top"></span>
-        <div class="picon" style="background:rgba(27,111,239,.12)">🎬</div>
-        <div class="pcard-title">Aula VIP</div>
-        <div class="pcard-desc">Masterclass exclusiva sobre investimento inteligente. Aprenda os fundamentos que a maioria dos assessores não te conta.</div>
-        <span class="pcard-link">Explorar →</span>
-        <span class="n-line n-bottom"></span>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- VALORES -->
-<section class="sec" id="valores" style="padding-top:0">
-  <div class="wrap">
-    <div class="slabel">Filosofia</div>
-    <h2 class="stitle">No que acredito</h2>
-    <div class="vgrid">
-      <div class="vcard">
-        <span class="n-line n-top"></span>
-        <div class="vicon">🔍</div>
-        <div class="vtitle">Transparência total</div>
-        <div class="vtext">Sem custos ocultos, sem conflitos de interesse. Cada decisão é tomada pensando exclusivamente no seu melhor resultado.</div>
-        <span class="n-line n-bottom"></span>
-      </div>
-      <div class="vcard">
-        <span class="n-line n-top"></span>
-        <div class="vicon">🤖</div>
-        <div class="vtitle">Tecnologia a seu favor</div>
-        <div class="vtext">Inteligência Artificial e automação para analisar dados, otimizar portfólios e garantir que nenhuma oportunidade passe despercebida.</div>
-        <span class="n-line n-bottom"></span>
-      </div>
-      <div class="vcard">
-        <span class="n-line n-top"></span>
-        <div class="vicon">🤝</div>
-        <div class="vtitle">Relacionamento genuíno</div>
-        <div class="vtext">Atendimento próximo e personalizado. Você tem acesso direto a mim — sem call centers, sem intermediários.</div>
-        <span class="n-line n-bottom"></span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="wrap">
-    <div class="finner">
-      <div style="flex:1">
-        <div class="fbrand">Jhony <span style="color:var(--blue)">Bosio</span></div>
-        <div class="flegal">Assessor de Investimentos sócio da Blue3 Investimentos, parceiro XP Investimentos CCTVM S/A. O investimento em ativos financeiros envolve riscos.</div>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px">
-        <div>
-          <div class="fcol-title">Projetos</div>
-          <a href="protocolo-9a/" class="flink">Protocolo 9A</a>
-          <a href="carteira-etfs/" class="flink">Carteiras ETF</a>
-          <a href="mentoria/" class="flink">Mentoria</a>
-          <a href="aula-vip/" class="flink">Aula VIP</a>
-        </div>
-        <div>
-          <div class="fcol-title">Institucional</div>
-          <a href="https://www.blue3investimentos.com.br/" target="_blank" class="flink">Blue3 Investimentos</a>
-          <a href="https://www.xpi.com.br/" target="_blank" class="flink">XP Investimentos</a>
-        </div>
-        <div>
-          <div class="fcol-title">Social</div>
-          <a href="https://instagram.com/jhonybosio" target="_blank" class="flink">Instagram</a>
-          <a href="https://linkedin.com/in/jhonybosio" target="_blank" class="flink">LinkedIn</a>
-          <a href="https://wa.me/5516996045700" target="_blank" class="flink">WhatsApp</a>
-          <a href="politicas/" class="flink">Privacidade</a>
-          <a href="hub/" class="flink" style="opacity:0.2; font-size:9px">Acesso Restrito</a>
-        </div>
-      </div>
-    </div>
-    <div style="padding-top:30px;text-align:center;font-size:11px;color:rgba(255,255,255,.2)">
-      &copy; 2026 Jhony Bosio · Todos os direitos reservados.
-    </div>
-  </div>
-</footer>
-</div>
-
-
-<div class="vip-popup-overlay" id="vipPopup">
-  <div class="vip-popup-content">
-    <div class="vip-close" onclick="closeVipPopup()">✕</div>
-    <div class="vip-banner"></div>
-    <div class="vip-info">
-      <h2 class="vip-title" style="font-size: 28px; line-height: 1.1; margin-bottom: 16px;">Você investe. Mas ainda não tem <span style="color:var(--blue)">clareza real</span> do que realmente acontece com o seu dinheiro.</h2>
-      <p class="vip-desc" style="font-size: 15px; margin-bottom: 24px;">Entre no <b>grupo VIP</b> da Comunidade Protocolo 9A — a metodologia que une 9 ativos globais para dar clareza, liquidez e eficiência à sua carteira.</p>
-      <a href="aula-vip/" class="vip-btn">Quero entrar no grupo VIP</a>
-    </div>
-  </div>
-</div>
-
-<script>
-  function openVipPopup() {
-    const popup = document.getElementById('vipPopup');
-    popup.classList.add('active');
-  }
-  function closeVipPopup() {
-    const popup = document.getElementById('vipPopup');
-    popup.classList.remove('active');
-  }
-
-  // Abre o pop-up após 3 segundos
-  window.addEventListener('load', () => {
-    setTimeout(openVipPopup, 3000);
-  });
-</script>
+  <script>
+    // Script interativo simples para o FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(item => {
+      item.addEventListener('click', event => {
+        const parent = item.parentElement;
+        const answer = parent.querySelector('.faq-answer');
+        
+        if (parent.classList.contains('active')) {
+          parent.classList.remove('active');
+          answer.style.maxHeight = '0px';
+        } else {
+          // Fecha os outros
+          document.querySelectorAll('.faq-item').forEach(child => {
+            child.classList.remove('active');
+            child.querySelector('.faq-answer').style.maxHeight = '0px';
+          });
+          
+          parent.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
