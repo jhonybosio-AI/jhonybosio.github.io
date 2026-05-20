@@ -1203,6 +1203,279 @@
         padding: 40px 20px;
       }
     }
+
+    /* Nova Seção: Wealth Academy */
+    .academy-section {
+      background: #030816;
+      position: relative;
+    }
+    .academy-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glass-border), transparent);
+    }
+    .academy-trilha {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .academy-card {
+      background: var(--bg-dark-accent);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-lg);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .academy-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: transparent;
+      transition: background 0.3s ease;
+    }
+    .academy-card.disponible::before {
+      background: var(--gold-metallic);
+    }
+    .academy-card.disponible {
+      border-color: rgba(212, 175, 106, 0.25);
+    }
+    .academy-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: var(--shadow-lg);
+    }
+    .academy-card.disponible:hover {
+      border-color: rgba(212, 175, 106, 0.4);
+      box-shadow: 0 16px 40px rgba(212, 175, 106, 0.15);
+    }
+    .academy-badge {
+      font-family: var(--font-title);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: var(--r-sm);
+      padding: 4px 10px;
+      align-self: flex-start;
+      margin-bottom: 24px;
+    }
+    .status-disponivel {
+      color: #10B981;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .status-bloqueado {
+      color: var(--text-dimmed);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .academy-mod {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .academy-class-title {
+      font-family: var(--font-title);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--w);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .academy-class-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .academy-btn-play {
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--gold-metallic);
+      color: var(--bg-dark);
+      border: none;
+      border-radius: var(--r-md);
+      padding: 12px 24px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      transition: all 0.2s ease;
+    }
+    .academy-btn-play:hover {
+      box-shadow: 0 8px 20px rgba(212, 175, 106, 0.25);
+      transform: translateY(-1px);
+    }
+    .academy-btn-locked {
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-muted);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-md);
+      padding: 12px 24px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      transition: all 0.2s ease;
+    }
+    .academy-btn-locked:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--w);
+    }
+
+    /* Modal Estilizado de Luxo */
+    .academy-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(3, 8, 22, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 24px;
+    }
+    .academy-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .academy-modal-content {
+      background: var(--bg-dark-accent);
+      border: 1px solid var(--glass-border-gold);
+      border-radius: var(--r-xl);
+      max-width: 760px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-lg), var(--shadow-gold);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 48px;
+    }
+    .academy-modal.active .academy-modal-content {
+      transform: translateY(0);
+    }
+    .academy-modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .academy-modal-close:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--w);
+      transform: rotate(90deg);
+    }
+    .modal-class-mod {
+      font-family: var(--font-title);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .modal-class-title {
+      font-family: var(--font-title);
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 800;
+      color: var(--w);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    .modal-text {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+    .modal-text p {
+      margin-bottom: 20px;
+    }
+    .modal-text strong {
+      color: var(--w);
+    }
+    .modal-highlight-box {
+      background: rgba(212, 175, 106, 0.04);
+      border-left: 3px solid var(--gold-primary);
+      padding: 20px;
+      border-radius: 0 var(--r-md) var(--r-md) 0;
+      margin: 28px 0;
+    }
+    .modal-highlight-box p {
+      margin-bottom: 0;
+      font-style: italic;
+      color: var(--w);
+    }
+    .modal-btn-wrap {
+      margin-top: 36px;
+      border-top: 1px solid var(--glass-border);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .modal-btn-txt {
+      font-size: 14px;
+      color: var(--text-dimmed);
+      max-width: 320px;
+      line-height: 1.5;
+    }
+
+    @media(max-width: 768px) {
+      .academy-trilha {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .academy-modal-content {
+        padding: 32px 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1228,10 +1501,11 @@
       <div class="nav-links">
         <a href="#sobre" class="nav-link">Sobre</a>
         <a href="#protocolo" class="nav-link">Protocolo 9A</a>
+        <a href="#academia" class="nav-link">Wealth Academy</a>
         <a href="#modelos" class="nav-link">3 Modelos XP</a>
         <a href="#faq" class="nav-link">FAQ</a>
       </div>
-      <a href="https://wa.me/5516996045700?text=Olá%20Jhony,%20gostaria%20de%20receber%20o%20acesso%20gratuito%20ao%20Protocolo%209A%20e%20à%20Planilha%20de%20Rebalanceamento%20de%20ETFs." target="_blank" class="nav-btn">Contato Direct</a>
+      <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20de%20investimentos%20com%20o%20Jhony." target="_blank" class="nav-btn">Agendar com Hermes</a>
     </nav>
 
     <!-- Hero Section -->
@@ -1244,11 +1518,11 @@
               <span class="hero-eyebrow-txt">Sócio Blue3 Investimentos · XP</span>
             </div>
             <h1 class="hero-title">A era do alinhamento <span>fiduciário</span> e da clareza patrimonial.</h1>
-            <p class="hero-desc">Esqueça conflitos de interesse na sua carteira. Tenha acesso completo à metodologia <strong>Protocolo 9A</strong> e garanta a planilha de rebalanceamento profissional focada em <strong>eficiência tributária de ETFs globais</strong> para blindar e rentabilizar seu capital.</p>
+            <p class="hero-desc">Esqueça conflitos de interesse na sua carteira. Tenha acesso completo à metodologia <strong>Protocolo 9A</strong>, aos treinamentos exclusivos da <strong>Wealth Academy</strong> e ao nosso <strong>Simulador Inteligente de ETFs Globais</strong> para rentabilizar seu capital.</p>
             
             <div class="btn-wrap">
-              <a href="https://wa.me/5516996045700?text=Olá%20Jhony,%20gostaria%20de%20receber%20o%20acesso%20gratuito%20ao%20Protocolo%209A%20e%20à%20Planilha%20de%20Rebalanceamento%20de%20ETFs." target="_blank" class="btn-gold">
-                Receber Protocolo 9A & Planilha
+              <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20gostaria%20de%20receber%20o%20acesso%20gratuito%20ao%20Protocolo%209A%20e%20ao%20Simulador%20Inteligente%20de%20ETFs." target="_blank" class="btn-gold">
+                Acessar Wealth Academy & Simulador
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-left: 2px;"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
               <a href="#modelos" class="btn-ghost">Conhecer Regimes XP</a>
@@ -1342,22 +1616,22 @@
               <div class="feature-item">
                 <div class="feature-icon">3</div>
                 <div class="feature-text">
-                  <h3>Planilha de Rebalanceamento Automatizada</h3>
-                  <p>Tenha acesso exclusivo à nossa ferramenta matemática que calcula exatamente o quanto aportar ou retirar de cada classe para manter seu risco sob controle.</p>
+                  <h3>Simulador Inteligente de ETFs</h3>
+                  <p>Substituímos planilhas estáticas por um simulador web interativo que calcula instantaneamente o rebalanceamento da sua carteira baseado nas cotações em tempo real.</p>
                 </div>
               </div>
             </div>
           </div>
           
           <div>
-            <!-- Simulação Planilha Realista -->
+            <!-- Simulação Simulador Realista -->
             <div class="sheet-preview">
               <div class="sheet-header">
                 <div class="sheet-title-meta">
                   <div class="sheet-dot"></div>
-                  <span class="sheet-title-txt">Planilha de Rebalanceamento 9A</span>
+                  <span class="sheet-title-txt">Simulador Inteligente de ETFs</span>
                 </div>
-                <span class="sheet-badge">Premium v2.4</span>
+                <span class="sheet-badge">Wealth Engine v3.0</span>
               </div>
               
               <table class="sheet-table">
@@ -1404,8 +1678,8 @@
               </table>
               
               <div class="sheet-btn-trigger">
-                <a href="https://wa.me/5516996045700?text=Olá%20Jhony,%20gostaria%20de%20receber%20o%20acesso%20gratuito%20ao%20Protocolo%209A%20e%20à%20Planilha%20de%20Rebalanceamento%20de%20ETFs." target="_blank" class="sheet-btn">
-                  <span>Baixar Planilha & Protocolo 9A Grátis</span>
+                <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20gostaria%20de%20ativar%20meu%20acesso%20gratuito%20ao%20Simulador%20Inteligente%20de%20ETFs." target="_blank" class="sheet-btn">
+                  <span>Ativar Acesso ao Simulador de ETFs Globais</span>
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
               </div>
@@ -1467,6 +1741,116 @@
       </div>
     </section>
 
+    <!-- Seção Wealth Academy -->
+    <section class="section academy-section" id="academia">
+      <div class="container">
+        <div class="section-header" style="margin: 0 auto 56px; text-align: center;">
+          <div class="sec-label" style="justify-content: center;">Conteúdo Educativo Gratuito</div>
+          <h2 class="sec-title">Wealth Academy — <span>Protocolo 9A</span></h2>
+          <p class="sec-desc">Acesse nossa trilha de formação premium de forma gratuita. Aprenda a filosofia dos maiores investidores fiduciários do mundo, mapeie as 9 classes globais e domine o uso de ferramentas de simulação.</p>
+        </div>
+
+        <div class="academy-trilha">
+          
+          <!-- Módulo 1 -->
+          <div class="academy-card disponible">
+            <div class="academy-badge status-disponivel">Aula 1 · Liberada</div>
+            <div class="academy-card-content">
+              <span class="academy-mod">Módulo 1: Filosofia Fiduciária</span>
+              <h3 class="academy-class-title">O Fim do Conflito de Interesses</h3>
+              <p class="academy-class-desc">Descubra as diferenças críticas entre o regime de distribuição tradicional (comissão) e o alinhamento fiduciário (fee-based e ETFs) que protege o investidor.</p>
+              <button class="academy-btn-play" onclick="openClassModal()">
+                <span class="btn-play-icon">▶</span> Assistir Aula Grátis
+              </button>
+            </div>
+          </div>
+
+          <!-- Módulo 2 -->
+          <div class="academy-card locked">
+            <div class="academy-badge status-bloqueado">Aula 2 · Bloqueada</div>
+            <div class="academy-card-content">
+              <span class="academy-mod">Módulo 2: Engenharia de Portfólio</span>
+              <h3 class="academy-class-title">O Mapeamento das 9 Classes Globais</h3>
+              <p class="academy-class-desc">Como estruturar uma carteira ultra-diversificada e resiliente a crises usando a melhor seleção de ETFs globais sob o Protocolo 9A.</p>
+              <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20assisti%20%C3%A0%20Aula%201%20e%20gostaria%20de%20liberar%20o%20acesso%20gratuito%20%C3%A0%20Aula%202%20do%20Protocolo%209A." target="_blank" class="academy-btn-locked">
+                <span class="btn-lock-icon">🔒</span> Liberar com Hermes Grátis
+              </a>
+            </div>
+          </div>
+
+          <!-- Módulo 3 -->
+          <div class="academy-card locked">
+            <div class="academy-badge status-bloqueado">Aula 3 · Bloqueada</div>
+            <div class="academy-card-content">
+              <span class="academy-mod">Módulo 3: Ferramental Prático</span>
+              <h3 class="academy-class-title">O Simulador de ETFs na Prática</h3>
+              <p class="academy-class-desc">Aprenda a operar o Simulador Inteligente de Rebalanceamento e configure sua carteira ideal com clareza matemática e eficiência tributária.</p>
+              <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20conclu%C3%AD%20a%20introdu%C3%A7%C3%A3o%20e%20gostaria%20de%20ativar%20meu%20acesso%20gratuito%20ao%20Simulador%20e%20liberar%20a%20Aula%203." target="_blank" class="academy-btn-locked">
+                <span class="btn-lock-icon">🔒</span> Liberar com Hermes Grátis
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Mentoria Individual Wealth Design -->
+    <section class="section" id="mentoria" style="background: #050d22; position: relative;">
+      <div class="container">
+        <div class="grid-2col">
+          <div>
+            <div class="sec-label">Mentoria Individual Exclusiva</div>
+            <h2 class="sec-title">Wealth Design — <span>Implementação Estratégica</span></h2>
+            <p class="sec-desc">Para investidores qualificados que buscam uma transição segura do modelo de distribuição tradicional conflitado para a clareza e alta eficiência fiscal dos ETFs globais.</p>
+            <p class="sec-desc" style="margin-top: 16px;">O programa de Mentoria Individual é focado na engenharia patrimonial de ponta a ponta. Você receberá o acompanhamento direto do Jhony Bosio para redesenhar sua carteira sob o Protocolo 9A, maximizar cashbacks operacionais e ter absoluto controle sobre as taxas do seu ecossistema financeiro.</p>
+            
+            <div class="features-list">
+              <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div class="feature-text">
+                  <h3>Diagnóstico Patrimonial Técnico</h3>
+                  <p>Mapeamento completo de spreads em Renda Fixa e comissões ocultas na sua carteira atual para identificar ineficiências imediatas.</p>
+                </div>
+              </div>
+              <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div class="feature-text">
+                  <h3>Wealth Engineering Customizada</h3>
+                  <p>Modelagem sob medida do Protocolo 9A adaptada ao seu perfil tributário, governança sucessória familiar e projetos de vida.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <!-- Box de Admissão Seletiva -->
+            <div class="sheet-preview" style="border-color: rgba(212, 175, 106, 0.3); background: rgba(7, 17, 38, 0.85);">
+              <div class="sheet-header">
+                <div class="sheet-title-meta">
+                  <div class="sheet-dot" style="background: var(--gold-primary); box-shadow: 0 0 8px var(--gold-primary);"></div>
+                  <span class="sheet-title-txt" style="color: var(--gold-primary);">Admissão Seletiva HNW</span>
+                </div>
+                <span class="sheet-badge">Vagas Limitadas</span>
+              </div>
+              
+              <div style="margin-bottom: 24px;">
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">Para preservar o nível de excelência e a dedicação exclusiva, a admissão no programa ocorre estritamente por meio de **avaliação diagnóstica de suitability**.</p>
+                <p style="font-size: 13px; color: var(--text-dimmed); line-height: 1.5;">O processo de triagem inicial e agendamento de reuniões é coordenado pelo nosso assistente inteligente <strong>Hermes</strong>.</p>
+              </div>
+              
+              <div class="sheet-btn-trigger" style="margin-top: 0;">
+                <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20gostaria%20de%20aplicar%20para%20a%20Mentoria%20Individual%20Wealth%20Design%20com%20o%20Jhony." target="_blank" class="btn-gold" style="width: 100%; border-radius: var(--r-md); padding: 14px; border: none;">
+                  <span>Submeter Aplicação via Hermes</span>
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="margin-left: 4px;"><path d="M7 2v10M3 8l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Seção Quem é Jhony Bosio -->
     <section class="section" id="sobre">
       <div class="container">
@@ -1513,10 +1897,10 @@
         
         <div class="faq-list">
           <div class="faq-item">
-            <div class="faq-question">Como recebo o acesso ao Protocolo 9A e à Planilha?</div>
+            <div class="faq-question">Como recebo o acesso ao Protocolo 9A e ao Simulador?</div>
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                Ao clicar no botão principal de acesso, você será direcionado ao nosso atendimento exclusivo do Hermes via WhatsApp. Após uma breve identificação das suas metas financeiras, você receberá a planilha premium de rebalanceamento de ETFs e o guia em PDF do Protocolo 9A inteiramente grátis.
+                Ao iniciar sua jornada pelo botão de acesso principal ou pela Wealth Academy, você será direcionado ao atendimento inteligente do Hermes no WhatsApp. A primeira aula é de livre acesso imediato na nossa plataforma educacional. Após a triagem e o registro gratuito com o Hermes, você receberá o link de acesso ao Simulador Inteligente de ETFs e a liberação das aulas práticas subsequentes.
               </div>
             </div>
           </div>
@@ -1540,10 +1924,10 @@
           </div>
           
           <div class="faq-item">
-            <div class="faq-question">Eu preciso pagar algo para ter a planilha de ETFs?</div>
+            <div class="faq-question">Eu preciso pagar algo para acessar a Wealth Academy ou o Simulador?</div>
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                Não. A planilha de rebalanceamento profissional do Protocolo 9A é um material educativo e prático oferecido de forma 100% gratuita para investidores qualificados como forma de demonstrar a excelência técnica da nossa modelagem fiduciária de portfólios.
+                Não. A Wealth Academy e o Simulador Inteligente de ETFs do Protocolo 9A são materiais de valor educacional e operacional oferecidos de forma 100% gratuita para investidores qualificados. Nosso objetivo é demonstrar na prática a superioridade e a eficiência da modelagem fiduciária antes de qualquer contratação.
               </div>
             </div>
           </div>
@@ -1556,9 +1940,9 @@
       <div class="container">
         <div class="final-box">
           <h2 class="final-title">Pronto para blindar seu patrimônio com transparência?</h2>
-          <p class="final-desc">Descubra a metodologia global que une eficiência de custos, diversificação real e transparência absoluta sob a custódia e robustez da XP Investimentos.</p>
-          <a href="https://wa.me/5516996045700?text=Olá%20Jhony,%20gostaria%20de%20receber%20o%20acesso%20gratuito%20ao%20Protocolo%209A%20e%20à%20Planilha%20de%20Rebalanceamento%20de%20ETFs." target="_blank" class="btn-gold">
-            Baixar Material & Falar com Hermes
+          <p class="final-desc">Descubra a metodologia global que une eficiência de custos, diversificação real e transparência absoluta sob a robustez e segurança da XP Investimentos.</p>
+          <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20gostaria%20de%20iniciar%20minha%20triagem%20gratuita%20para%20o%20Protocolo%209A%20e%20o%20Simulador%20de%20ETFs." target="_blank" class="btn-gold">
+            Iniciar Triagem com Hermes
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-left: 2px;"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
@@ -1585,7 +1969,8 @@
               <span class="footer-col-head">Links Úteis</span>
               <a href="#sobre" class="footer-link">Sobre mim</a>
               <a href="#protocolo" class="footer-link">Protocolo 9A</a>
-              <a href="#modelos" class="footer-link">Os 3 Modelos XP</a>
+              <a href="#academia" class="footer-link">Wealth Academy</a>
+              <a href="#mentoria" class="footer-link">Mentoria Individual</a>
             </div>
             <div>
               <span class="footer-col-head">Parceiros</span>
@@ -1615,6 +2000,49 @@
 
   </div>
 
+  <!-- Modal da Wealth Academy (Aula 1.1) -->
+  <div class="academy-modal" id="classModal">
+    <div class="academy-modal-content">
+      <button class="academy-modal-close" onclick="closeClassModal()">&times;</button>
+      <span class="modal-class-mod">Módulo 1: Filosofia Fiduciária</span>
+      <h2 class="modal-class-title">Aula 1.1: O Fim do Conflito de Interesses</h2>
+      
+      <div class="modal-text">
+        <p>Seja muito bem-vindo à <strong>Wealth Academy</strong>. O objetivo desta trilha educacional rápida é dar a você clareza absoluta sobre como proteger o seu patrimônio de ineficiências fiscais e conflitos de interesse comerciais.</p>
+        
+        <p>A grande maioria dos investidores no Brasil, mesmo sem saber, está exposta a portfólios desalinhados. Isso acontece porque o mercado financeiro tradicional foi estruturado sob o modelo de <strong>remuneração comissionada</strong>.</p>
+        
+        <h3 style="color:#fff; margin: 24px 0 12px; font-family: var(--font-title); font-size: 18px; font-weight: 700;">O Problema da Comissão Oculta</h3>
+        <p>Quando você investe através de uma agência bancária ou de uma distribuidora tradicional, o profissional que o atende é remunerado por comissões pontuais sobre cada produto distribuído. Produtos complexos e com custos mais elevados (como COEs estruturados, títulos de crédito privado de baixa liquidez com spreads elevados ou fundos ativos de taxas abusivas) geram as maiores comissões. Isso cria uma barreira invisível para o sucesso da sua carteira.</p>
+        
+        <div class="modal-highlight-box">
+          <p>"É difícil fazer um homem entender alguma coisa quando o salário dele depende de ele não entender essa coisa." — Upton Sinclair. Esta frase resume o risco de conflito de interesses na distribuição tradicional.</p>
+        </div>
+        
+        <h3 style="color:#fff; margin: 24px 0 12px; font-family: var(--font-title); font-size: 18px; font-weight: 700;">O Padrão Fiduciário: Alinhamento Real</h3>
+        <p>Sob o regime de <strong>Fee Fixo (Fee-Based)</strong>, esse conflito é totalmente eliminado. O investidor acorda uma taxa única e transparente ao ano para a administração e curadoria de sua carteira (ex: de 0.70% a 1.20% ao ano sobre a custódia). Qualquer tipo de taxa de distribuição ou comissão embutida nos produtos selecionados retorna 100% para você na forma de <strong>cashback direto na conta de investimentos</strong>.</p>
+        
+        <p>Neste regime, o assessor não tem nenhum incentive financeiro para indicar um produto em detrimento de outro. A única meta dele é fazer o seu patrimônio crescer, pois seu ganho está atrelado diretamente à evolução da sua carteira.</p>
+        
+        <h3 style="color:#fff; margin: 24px 0 12px; font-family: var(--font-title); font-size: 18px; font-weight: 700;">Eficiência Extrema com ETFs Globais</h3>
+        <p>Para estruturar uma alocação fiduciária limpa e econômica, o melhor caminho são os <strong>ETFs (Exchange Traded Funds)</strong>. Ao contrário dos fundos tradicionais que corroem seu retorno cobrando taxas de administração de 2,00% ao ano e taxas de performance de 20%, os ETFs são negociados em bolsa, replicam índices globais e cobram taxas anuais de até <strong>0,03%</strong>.</p>
+        
+        <p>Eles oferecem liquidez diária imediata, altíssima diversificação em milhares de empresas mundiais e eficiência tributária incomparável de 15% apenas na venda do lucro.</p>
+        
+        <p>O <strong>Protocolo 9A</strong> consolida esse ecossistema, recomendando uma carteira enxuta de 9 ativos (com um ETF de baixo custo para cada classe global), garantindo clareza e controle absoluto sobre sua engenharia patrimonial.</p>
+      </div>
+      
+      <div class="modal-btn-wrap">
+        <div class="modal-btn-txt">
+          Conclua seu aprendizado prático. Acesse a Aula 2 de mapeamento de classes e ative seu Simulador de ETFs gratuito com o Hermes.
+        </div>
+        <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20conclui%20a%20Aula%201%20e%20gostaria%20de%20liberar%20gratuitamente%20a%20Aula%202%20do%20Protocolo%209A%20e%20ativar%20o%20Simulador." target="_blank" class="btn-gold" style="padding: 12px 28px; font-size: 14px; border: none;">
+          Liberar Aula 2 & Simulador Grátis
+        </a>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Script interativo simples para o FAQ Accordion
     document.querySelectorAll('.faq-question').forEach(item => {
@@ -1636,6 +2064,26 @@
           answer.style.maxHeight = answer.scrollHeight + 'px';
         }
       });
+    });
+
+    // Funções do Modal da Wealth Academy (Aula 1.1)
+    function openClassModal() {
+      const modal = document.getElementById('classModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeClassModal() {
+      const modal = document.getElementById('classModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    // Fechar ao clicar fora do conteúdo
+    document.getElementById('classModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeClassModal();
+      }
     });
   </script>
 </body>
