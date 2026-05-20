@@ -1509,36 +1509,38 @@
                 if (mockData) {
                     state = JSON.parse(JSON.stringify(mockData));
                 } else {
-                // Conta genérica padrão premium caso não mapeada, mas usa o nome real salvo no login
-                const realName = sessionStorage.getItem('client_logged_name') || `Cliente XP ${currentActiveAccount}`;
-                state = {
-                    name: realName,
-                    patrXP: 1500000,
-                    patrOutros: 500000,
-                    family: [
-                        { id: "f1", name: realName, birth: 1978, role: "Titular", emoji: "🧔", primary: true },
-                        { id: "f2", name: "Cônjuge", birth: 1980, role: "Cônjuge", emoji: "👩", primary: false },
-                        { id: "f3", name: "Filho 1", birth: 2012, role: "Filho(a)", emoji: "👦", primary: false }
-                    ],
-                    past: [
-                        { id: "p1", year: 2005, desc: "Formatura e Início de Carreira" },
-                        { id: "p2", year: 2010, desc: "Casamento" }
-                    ],
-                    future: [
-                        { id: "u1", year: 2030, desc: "Filho na Faculdade" },
-                        { id: "u2", year: 2038, desc: "Liberdade Financeira (Independência)" }
-                    ]
-                };
+                    // Conta genérica padrão premium caso não mapeada, mas usa o nome real salvo no login
+                    const realName = sessionStorage.getItem('client_logged_name') || `Cliente XP ${currentActiveAccount}`;
+                    state = {
+                        name: realName,
+                        patrXP: 1500000,
+                        patrOutros: 500000,
+                        family: [
+                            { id: "f1", name: realName, birth: 1978, role: "Titular", emoji: "🧔", primary: true },
+                            { id: "f2", name: "Cônjuge", birth: 1980, role: "Cônjuge", emoji: "👩", primary: false },
+                            { id: "f3", name: "Filho 1", birth: 2012, role: "Filho(a)", emoji: "👦", primary: false }
+                        ],
+                        past: [
+                            { id: "p1", year: 2005, desc: "Formatura e Início de Carreira" },
+                            { id: "p2", year: 2010, desc: "Casamento" }
+                        ],
+                        future: [
+                            { id: "u1", year: 2030, desc: "Filho na Faculdade" },
+                            { id: "u2", year: 2038, desc: "Liberdade Financeira (Independência)" }
+                        ]
+                    };
+                }
             }
 
+            // ── Inicialização sempre executa, independente da fonte dos dados ──
             // Exibir nome no Header
             document.getElementById('headerClientName').innerText = state.name || `XP ${currentActiveAccount}`;
             document.getElementById('modalActiveAccount').innerText = currentActiveAccount;
             document.getElementById('labelCloudSyncStatus').innerText = `Sincronizado: ${currentActiveAccount}`;
 
             // Preencher inputs de patrimônio com formatação de moeda
-            document.getElementById('inputPatrXP').value = formatMoney(state.patrXP);
-            document.getElementById('inputPatrOutros').value = formatMoney(state.patrOutros);
+            document.getElementById('inputPatrXP').value = formatMoney(state.patrXP || 0);
+            document.getElementById('inputPatrOutros').value = formatMoney(state.patrOutros || 0);
 
             calculateSumPatr();
             renderSidebarInputs();
