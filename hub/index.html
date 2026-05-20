@@ -817,7 +817,18 @@
                             </div>
                         </button>
                     </nav>
-                  const STRATEGIES = {
+                </aside>
+
+                <!-- WORKSPACE CONTENT -->
+                <div class="workspace-area" id="workspaceContent">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const STRATEGIES = {
             blue3: {
                 title: "Assessoria Blue3",
                 subtitle: "Alocação e gestão patrimonial de alto padrão. Alinhamento estratégico de investimentos junto à XP Investimentos/Blue3 (Brasil) e Mentoria Offshore.",
@@ -1246,6 +1257,11 @@
             } else {
                 alert('Chave de acesso incorreta.');
             }
+        }
+
+        function logout() {
+            localStorage.removeItem('jb_authenticated');
+            window.location.reload();
         }
 
         function showDashboard(animate) {
