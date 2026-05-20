@@ -1,0 +1,200 @@
+    }
+
+    .profile-risk {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      padding: .3rem .8rem;
+      border-radius: 100px;
+      display: inline-block;
+    }
+
+    .risk-low {
+      background: rgba(16, 185, 129, .1);
+      color: #10b981;
+    }
+
+    .risk-med {
+      background: rgba(0, 146, 255, .1);
+      color: var(--blue);
+    }
+
+    .risk-high {
+      background: rgba(255, 204, 0, .1);
+      color: #ffcc00;
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding-bottom: 2rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: .8rem;
+    }
+
+    @media(max-width:600px) {
+      .wrap {
+        padding: 1rem;
+      }
+    }
+
+    .input-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem
+    }
+
+    .input-amount {
+      background: rgba(0, 146, 255, .08);
+      border: 2px solid var(--blue);
+      box-shadow: 0 0 20px rgba(0, 146, 255, .2);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 800;
+      font-family: var(--fb);
+      width: 320px;
+      text-align: center;
+      outline: none;
+      transition: all .3s
+    }
+
+    .input-amount:focus {
+      box-shadow: 0 0 35px rgba(201, 168, 76, .5);
+      transform: scale(1.02)
+    }
+
+    .input-group label {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      text-align: center;
+      margin-bottom: .5rem
+    }
+
+    .profile-tabs {
+      display: flex;
+      gap: .5rem;
+      justify-content: center;
+      margin-bottom: 2rem
+    }
+
+    .profile-tab {
+      padding: .65rem 1.5rem;
+      border-radius: 100px;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      transition: all .25s
+    }
+
+    .profile-tab.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(0, 102, 255, .3)
+    }
+
+    .profile-tab:hover:not(.active) {
+      background: rgba(255, 255, 255, .05);
+      color: #fff
+    }
+
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative
+    }
+
+    .table-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, .15), transparent)
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    thead th {
+      padding: .9rem 1rem;
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, .02)
+    }
+
+    tbody td {
+      padding: .75rem 1rem;
+      font-size: .85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      vertical-align: middle
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none
+    }
+
+    tbody tr:hover {
+      background: rgba(0, 102, 255, .04)
+    }
+
+    .cat-main {
+      font-weight: 700;
+      font-size: .85rem;
+      color: #fff;
+      display: block
+    }
+
+    .cat-sub {
+      font-size: .7rem;
+      color: var(--muted);
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: .2rem
+    }
+
+    .pct-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: .6rem
+    }
+
+    .pct-val {
+      font-weight: 700;
+      font-size: .85rem;
+      min-width: 48px;
+      text-align: right
+    }
+
+    .pct-bar {
+      height: 6px;
+      border-radius: 3px;

@@ -1,0 +1,48 @@
+          ${optionsHtml}
+        </select>
+        <a href="${etf.url}" target="_blank" class="etf-link" style="display:block;margin-top:3px">ver ETF ↗</a>
+      </td>
+      <td class="num">${pct > 0 ? priceDisplay : '—'}</td>
+      <td class="qty">${(pct > 0 && etf.price > 0) ? qty : '—'}</td>
+      <td class="val">${(pct > 0 && etf.price > 0) ? formatBRL(invested) : '—'}</td>
+    </tr>`;
+      });
+
+      const remainder = total - totalInvested;
+      html += `<tr class="total-row">
+    <td colspan="2" style="text-align:right;color:var(--muted);font-size:.8rem">Total investido: ${formatBRL(totalInvested)} · Troco: ${formatBRL(remainder > 0 ? remainder : 0)}</td>
+    <td></td>
+    <td class="num" style="color:var(--blue)">TOTAL</td>
+    <td class="qty" style="font-size:1.1rem">${totalQty} cotas</td>
+    <td class="val" style="font-size:1.1rem;color:var(--blue)">${formatBRL(totalInvested)}</td>
+  </tr>`;
+
+      tbody.innerHTML = html;
+    }
+
+    // Profile tabs
+    document.querySelectorAll('.profile-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentProfile = tab.dataset.profile;
+        CATEGORIES.forEach(cat => {
+          const sel = document.getElementById('sel_' + cat.id);
+          if (sel) sel.value = cat.defaultIdx[currentProfile];
+        });
+        render();
+      });
+    });
+
+    // Input formatting
+    const amountInput = document.getElementById('investAmount');
+    amountInput.addEventListener('blur', function () { formatInput(this); render(); });
+    amountInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') { formatInput(this); render(); this.blur(); } });
+
+    // Initial render e busca de preços
+    render();
+    fetchPrices();
+  </script>
+</body>
+
+</html>

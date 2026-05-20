@@ -1,0 +1,50 @@
+    }
+
+    .profile-risk {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      padding: .3rem .8rem;
+      border-radius: 100px;
+      display: inline-block;
+    }
+
+    .risk-low {
+      background: rgba(16, 185, 129, .1);
+      color: #10b981;
+    }
+
+    .risk-med {
+      background: rgba(0, 146, 255, .1);
+      color: var(--blue);
+    }
+
+    .risk-high {
+      background: rgba(255, 204, 0, .1);
+      color: #ffcc00;
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding-bottom: 2rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: .8rem;
+    }
+
+    @media(max-width:600px) {
+      .wrap {
+        padding: 1rem;
+      }
+    }
+
+    .input-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem
+    }
+

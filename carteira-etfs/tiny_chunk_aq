@@ -1,0 +1,50 @@
+        Filosofia de Gestão Passiva
+      </h2>
+      <div class="pillar-grid">
+        <div class="pillar">
+          <div class="pillar-icon">💰</div>
+          <h3>Baixo Custo</h3>
+          <p>ETFs com TER abaixo de 0,20% ao ano eliminam o principal inimigo do retorno: os custos ocultos de fundos
+            ativos.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🌍</div>
+          <h3>Diversificação Global</h3>
+          <p>Exposição a mais de 50 países e 9.000 empresas com um único instrumento. O risco específico praticamente
+            desaparece.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📊</div>
+          <h3>Eficiência Tributária</h3>
+          <p>Menor giro de carteira significa menos eventos tributáveis. O imposto é postergado e o capital composto
+            cresce mais rápido.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🔄</div>
+          <h3>Rebalanceamento Disciplinado</h3>
+          <p>Revisão periódica das alocações garante que o perfil de risco se mantenha alinhado com seus objetivos ao
+            longo do tempo.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🛡️</div>
+          <h3>Proteção Patrimonial</h3>
+          <p>A combinação entre renda fixa brasileira, renda variável global e ativos reais cria uma proteção robusta
+            contra diferentes cenários.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🤖</div>
+          <h3>Curadoria com IA</h3>
+          <p>Monitoramento automatizado dos principais indicadores para que você receba apenas o que importa, no momento
+            certo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKET OVERVIEW -->
+    <section class="market-section">
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+          <path d="M17 6h6v6" />
+        </svg>
+        Mercados em Tempo Real

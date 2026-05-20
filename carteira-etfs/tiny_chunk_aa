@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carteiras ETF | Jhony Bosio · Blue3 Investimentos</title>
+  <meta name="description"
+    content="Carteiras de alocação via ETFs Globais. Filosofia de gestão passiva com baixos custos, diversificação global e eficiência tributária.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Blue3 Official Palette */
+      --navy: #000d38;
+      --navy-light: #002060;
+      --blue: #0092ff;
+      --bg: #050a1d;
+      --w: #FFFFFF;
+      --gb: rgba(255, 255, 255, 0.05);
+      --gborder: rgba(255, 255, 255, 0.10);
+      --gblur: blur(24px) saturate(1.6);
+      --fd: 'Plus Jakarta Sans', sans-serif;
+      --fb: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--fb);
+      background: var(--bg);
+      color: var(--w);
+      overflow-x: hidden;
+    }
+
+    .ticker-wrap {
+      background: var(--navy) !important;
+      border-bottom: 1px solid var(--gborder);
+      min-height: 46px;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }

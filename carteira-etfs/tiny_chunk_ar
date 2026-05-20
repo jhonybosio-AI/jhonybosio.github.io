@@ -1,0 +1,50 @@
+      </h2>
+      <div class="widget-wrap">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <script type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+              { "colorTheme": "dark", "dateRange": "12M", "locale": "pt", "isTransparent": true, "showFloatingTooltip": false, "plotLineColorGrowing": "rgba(0,102,255,1)", "plotLineColorFalling": "rgba(0,102,255,1)", "gridLineColor": "rgba(240,243,250,0)", "scaleFontColor": "#FFFFFF", "belowLineFillColorGrowing": "rgba(0,102,255,0.12)", "belowLineFillColorFalling": "rgba(0,102,255,0.12)", "belowLineFillColorGrowingBottom": "rgba(0,102,255,0)", "belowLineFillColorFallingBottom": "rgba(0,102,255,0)", "symbolActiveColor": "rgba(0,102,255,0.12)", "tabs": [{ "title": "Renda Fixa BR", "symbols": [{ "s": "BMFBOVESPA:IMAB11", "d": "IMA-B 5+" }, { "s": "BMFBOVESPA:B5P211", "d": "IMA-B 5" }, { "s": "BMFBOVESPA:FIXA11", "d": "Prefixado" }, { "s": "BMFBOVESPA:POSB11", "d": "Pós-fixado" }, { "s": "BMFBOVESPA:XFIX11", "d": "XFIX11" }], "originalTitle": "Bonds" }, { "title": "Renda Variável", "symbols": [{ "s": "BMFBOVESPA:BOVA11", "d": "Ibovespa" }, { "s": "BMFBOVESPA:BEST11", "d": "BEST11 (ESG)" }, { "s": "BMFBOVESPA:IVVB11", "d": "S&P 500 BR" }, { "s": "NASDAQ:ACWI", "d": "Global" }, { "s": "AMEX:VOO", "d": "VOO" }], "originalTitle": "Stocks" }, { "title": "Alternativos", "symbols": [{ "s": "BMFBOVESPA:GOLD11", "d": "Ouro BR" }, { "s": "AMEX:GLD", "d": "Gold US" }, { "s": "BMFBOVESPA:HASH11", "d": "Cripto" }], "originalTitle": "Alternatives" }], "width": "100%", "height": "480" }
+            </script>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALLOCATION TABLE -->
+    <section class="alloc-section" id="alocacao">
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <path d="M3 9h18M9 21V9" />
+        </svg>
+        Simulador de Alocação por Perfil
+      </h2>
+      <div class="input-row">
+        <div class="input-group">
+          <label>Valor para investir</label>
+          <input type="text" id="investAmount" class="input-amount" placeholder="R$ 150.000,00" value="R$ 150.000,00">
+        </div>
+      </div>
+
+      <div class="profile-tabs">
+        <button class="profile-tab active" data-profile="conservador">Conservador</button>
+        <button class="profile-tab" data-profile="moderado">Moderado</button>
+        <button class="profile-tab" data-profile="sofisticado">Sofisticado</button>
+      </div>
+
+      <div class="table-wrap">
+        <table id="simTable">
+          <thead>
+            <tr>
+              <th>Classe</th>
+              <th>Peso</th>
+              <th>ETF</th>
+              <th>Cotação (R$)</th>
+              <th>Qtd Cotas</th>
+              <th style="text-align: right;">Valor Total (R$)</th>
+            </tr>
+          </thead>
+          <tbody id="simBody"></tbody>
+        </table>
+      </div>
+

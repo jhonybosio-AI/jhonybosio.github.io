@@ -1,0 +1,50 @@
+
+    function parseAmount(str) {
+      return parseFloat(str.replace(/[^\d,]/g, '').replace(',', '.')) || 0;
+    }
+
+    function formatBRL(v) {
+      return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function formatInput(el) {
+      let v = parseAmount(el.value);
+      if (v > 0) el.value = 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function getSelectedEtfIdx(catId) {
+      const sel = document.getElementById('sel_' + catId);
+      return sel ? parseInt(sel.value) : 0;
+    }
+
+    function render() {
+      const total = parseAmount(document.getElementById('investAmount').value);
+      const alloc = PROFILES[currentProfile];
+      const tbody = document.getElementById('simBody');
+      let html = '';
+      let totalInvested = 0;
+      let totalQty = 0;
+
+      CATEGORIES.forEach(cat => {
+        const pct = alloc[cat.id];
+        const amount = total * pct / 100;
+        const eidx = getSelectedEtfIdx(cat.id);
+        const etf = cat.etfs[eidx] || cat.etfs[0];
+
+        // Se o preço ainda for 0, mostra "Carregando"
+        const priceDisplay = etf.price > 0 ? formatBRL(etf.price) : '...';
+        const qty = (pct > 0 && etf.price > 0) ? Math.floor(amount / etf.price) : 0;
+        const invested = qty * etf.price;
+
+        totalInvested += invested;
+        totalQty += qty;
+
+        const optionsHtml = cat.etfs.map((e, i) =>
+          `<option value="${i}" ${i === eidx ? 'selected' : ''}>${e.ticker}</option>`
+        ).join('');
+
+        html += `<tr>
+      <td><div class="cat-label"><span class="cat-sub">${cat.group}</span><span class="cat-main">${cat.label}</span></div></td>
+      <td><div class="pct-bar-wrap"><span class="pct-val" style="color:${pct > 0 ? '#fff' : 'var(--muted)'}">${pct.toFixed(1)}%</span><div class="pct-bar"><div class="pct-bar-fill" style="width:${pct}%;background:${cat.color}"></div></div></div></td>
+      <td>
+        <select class="etf-select" id="sel_${cat.id}" onchange="render()">

@@ -1,0 +1,50 @@
+      color: #fff
+    }
+
+    .legend {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      flex-wrap: wrap
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .72rem;
+      color: var(--muted)
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px
+    }
+
+    @media(max-width:768px) {
+      .sim-section {
+        padding: 0 .75rem 3rem
+      }
+
+      .input-amount {
+        width: 100%
+      }
+
+      .input-row {
+        flex-direction: column;
+        align-items: stretch
+      }
+
+      .profile-tabs {
+        gap: .35rem
+      }
+
+      .profile-tab {
+        padding: .55rem 1rem;
+        font-size: .75rem
+      }
+
+      .ticker-wrap {
+        background: var(--navy) !important;

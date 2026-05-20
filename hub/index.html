@@ -73,11 +73,9 @@
         }
         .logo-box {
             width: 44px; height: 44px;
-            background: linear-gradient(135deg, var(--color-blue3-blue), var(--gold));
+            background: url('logo-2.png') no-repeat center center;
+            background-size: cover;
             border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 800; font-size: 16px;
             border: 1px solid rgba(255,255,255,0.15);
             box-shadow: 0 4px 12px rgba(0, 71, 187, 0.3);
         }
@@ -724,8 +722,8 @@
 
     <header>
         <a href="#" class="logo">
-            <div class="logo-box">JB</div>
-            <span class="logo-text">HUB OPERACIONAL</span>
+            <div class="logo-box"></div>
+            <span class="logo-text">JHONY BOSIO CO.</span>
         </a>
         <div style="display: flex; align-items: center; gap: 15px;">
             <div class="status-badge" id="statusBadge">
@@ -739,7 +737,7 @@
     <main>
         <!-- LOCK SCREEN -->
         <div class="login-card" id="loginArea">
-            <div class="logo-box">JB</div>
+            <div class="logo-box" style="margin: 0 auto 20px auto; width: 64px; height: 64px; border-radius: 16px;"></div>
             <h1>Área de Operações</h1>
             <p>Acesso restrito ao proprietário.</p>
             <input type="password" id="passInput" placeholder="Chave de Acesso">
@@ -751,12 +749,12 @@
             <div class="dashboard-grid">
                 <!-- SIDEBAR MENU -->
                 <aside class="sidebar-nav">
-                    <span class="nav-header-text">Estratégias & Engines</span>
+                    <span class="nav-header-text">Áreas Estratégicas</span>
                     <nav class="nav-links">
-                        <button class="nav-item active" onclick="switchStrategy('etfs')" id="nav-etfs">
+                        <button class="nav-item active" onclick="switchStrategy('blue3')" id="nav-blue3">
                             <span class="nav-icon">📈</span>
                             <div class="nav-meta">
-                                <span class="nav-title">Simulador de ETFs</span>
+                                <span class="nav-title">Assessoria Blue3</span>
                                 <div class="nav-status-container">
                                     <span class="nav-status-dot active"></span>
                                     <span class="nav-status-text">Ativo</span>
@@ -764,32 +762,32 @@
                             </div>
                         </button>
                         
-                        <button class="nav-item" onclick="switchStrategy('moabi')" id="nav-moabi">
-                            <span class="nav-icon">📊</span>
+                        <button class="nav-item" onclick="switchStrategy('consultoria')" id="nav-consultoria">
+                            <span class="nav-icon">👥</span>
                             <div class="nav-meta">
-                                <span class="nav-title">Moabi Portfolio</span>
+                                <span class="nav-title">Consultoria & Mentoria</span>
                                 <div class="nav-status-container">
                                     <span class="nav-status-dot active"></span>
-                                    <span class="nav-status-text">Ativo</span>
+                                    <span class="nav-status-text">Planejado</span>
                                 </div>
                             </div>
                         </button>
                         
-                        <button class="nav-item" onclick="switchStrategy('content')" id="nav-content">
-                            <span class="nav-icon">🐦</span>
+                        <button class="nav-item" onclick="switchStrategy('marketing')" id="nav-marketing">
+                            <span class="nav-icon">🤖</span>
                             <div class="nav-meta">
-                                <span class="nav-title">AI Content Engine</span>
+                                <span class="nav-title">Marketing Engine</span>
                                 <div class="nav-status-container">
                                     <span class="nav-status-dot active"></span>
-                                    <span class="nav-status-text">Ativo</span>
+                                    <span class="nav-status-text">timesmkt3</span>
                                 </div>
                             </div>
                         </button>
                         
-                        <button class="nav-item" onclick="switchStrategy('vault')" id="nav-vault">
-                            <span class="nav-icon">🛡️</span>
+                        <button class="nav-item" onclick="switchStrategy('vendas')" id="nav-vendas">
+                            <span class="nav-icon">📞</span>
                             <div class="nav-meta">
-                                <span class="nav-title">WealthMap Vault</span>
+                                <span class="nav-title">Vendas & Conversão</span>
                                 <div class="nav-status-container">
                                     <span class="nav-status-dot service"></span>
                                     <span class="nav-status-text">Online</span>
@@ -797,69 +795,46 @@
                             </div>
                         </button>
                         
-                        <button class="nav-item" onclick="switchStrategy('hermes')" id="nav-hermes">
-                            <span class="nav-icon">💬</span>
+                        <button class="nav-item" onclick="switchStrategy('produtos')" id="nav-produtos">
+                            <span class="nav-icon">📚</span>
                             <div class="nav-meta">
-                                <span class="nav-title">Hermes-9A Bot</span>
+                                <span class="nav-title">Produtos & Educação</span>
                                 <div class="nav-status-container">
                                     <span class="nav-status-dot service"></span>
-                                    <span class="nav-status-text">Running</span>
+                                    <span class="nav-status-text">Vault Ok</span>
                                 </div>
                             </div>
                         </button>
                         
-                        <button class="nav-item" onclick="switchStrategy('reels')" id="nav-reels">
-                            <span class="nav-icon">🎬</span>
+                        <button class="nav-item" onclick="switchStrategy('processos')" id="nav-processos">
+                            <span class="nav-icon">⚙️</span>
                             <div class="nav-meta">
-                                <span class="nav-title">Remotion Reels</span>
-                                <div class="nav-status-container">
-                                    <span class="nav-status-dot service"></span>
-                                    <span class="nav-status-text">Pronto</span>
-                                </div>
-                            </div>
-                        </button>
-
-                        <button class="nav-item" onclick="switchStrategy('opendesign')" id="nav-opendesign">
-                            <span class="nav-icon">🎨</span>
-                            <div class="nav-meta">
-                                <span class="nav-title">Open Design</span>
+                                <span class="nav-title">Processos & SOPs</span>
                                 <div class="nav-status-container">
                                     <span class="nav-status-dot active"></span>
-                                    <span class="nav-status-text">Blue3</span>
+                                    <span class="nav-status-text">Ativo</span>
                                 </div>
                             </div>
                         </button>
                     </nav>
-                </aside>
-
-                <!-- WORKSPACE CONTENT AREA -->
-                <section class="workspace-area" id="workspaceContent">
-                    <!-- Loaded dynamically via JavaScript -->
-                </section>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        // Strategy Data Dictionary
-        const STRATEGIES = {
-            etfs: {
-                title: "Simulador de ETFs",
-                subtitle: "Gestão e rebalanceamento tático mensal de ETFs de Renda Fixa e Renda Variável listados no Brasil com base na alocação recomendada pela XP Investimentos.",
-                badgeText: "Acesso Ativo",
+                  const STRATEGIES = {
+            blue3: {
+                title: "Assessoria Blue3",
+                subtitle: "Alocação e gestão patrimonial de alto padrão. Alinhamento estratégico de investimentos junto à XP Investimentos/Blue3 (Brasil) e Mentoria Offshore.",
+                badgeText: "Core Business",
                 badgeClass: "badge-active",
                 pipeline: [
-                    { num: "01", icon: "📊", title: "Análise Recomendada", desc: "Leitura automática dos pesos táticos da carteira recomendada Blue3/XP para Maio de 2026." },
-                    { num: "02", icon: "⚖️", title: "Perfilagem", desc: "Filtro de carteiras para três perfis de risco distintos: Conservador, Moderado ou Sofisticado." },
-                    { num: "03", icon: "📈", title: "Simulação de Aportes", desc: "Cálculo proporcional exato com base no capital inserido pelo assessor para rebalancear a carteira." },
-                    { num: "04", icon: "🔄", title: "Geração de Ordens", desc: "Configuração final de ordens prontas para rebalanceamento tático na mesa de operações." }
+                    { num: "01", icon: "📊", title: "Análise de Perfil", desc: "Coleta do perfil tático e objetivos financeiros de longo prazo." },
+                    { num: "02", icon: "⚖️", title: "Pesos Táticos XP", desc: "Mapeamento das carteiras recomendadas Blue3/XP para o mês corrente." },
+                    { num: "03", icon: "🌐", title: "Mentoria Offshore", desc: "Cálculo da alocação internacional estruturada em dólar (SCHD, VOO, ACWI, BIL)." },
+                    { num: "04", icon: "🔄", title: "Rebalanceamento", desc: "Geração de ordens integradas e envio automático para a mesa de operações." }
                 ],
-                terminalTitle: "MacBook Pro - Terminal ETFs",
-                command: "python3 rebalance_etf.py --profile moderado --apport 150000",
+                terminalTitle: "MacBook Pro - Terminal Core Blue3",
+                command: "python3 rebalance_blue3.py --apport 250000 --offshore 15000",
                 notes: [
                     "<strong>LFTS11 / LFTB11:</strong> Renda Fixa pós-fixada com custódia segura e taxa de administração zerada.",
-                    "<strong>B5P211:</strong> Alocação tática em inflação curta (IMA-B 5), reduzindo volatilidade global.",
-                    "<strong>FIXA11:</strong> Renda fixa prefixada para travamento de taxas de juros de prazos intermediários."
+                    "<strong>SCHD / VOO:</strong> Alocação offshore internacional premium com foco em dividendos e crescimento de capital.",
+                    "<strong>CVM Resolução 178/2023:</strong> Atuação em estrita conformidade regulatória sem gestão discricionária direta."
                 ],
                 widgetHtml: `
                     <div class="simulator-widget">
@@ -886,119 +861,107 @@
                     </div>
                 `,
                 actionsHtml: `
-                    <a href="../carteira-etfs/" class="btn-action-primary">
-                        <span>Acessar Simulador Completo</span>
-                        <span>➔</span>
-                    </a>
-                    <button onclick="triggerToast('Pesos táticos de Maio de 2026 sincronizados com sucesso.')" class="btn-action-secondary">
-                        <span>Sincronizar Pesos</span>
-                    </button>
+                    <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                        <a href="../carteira-etfs/" class="btn-action-primary" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>Acessar Simulador Completo</span>
+                            <span>➔</span>
+                        </a>
+                        <div style="display: flex; gap: 8px; width: 100%;">
+                            <a href="../mentoriaoffshore/" class="btn-action-secondary" style="text-decoration: none; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                <span>🌐 Mentoria Offshore</span>
+                            </a>
+                            <button onclick="triggerToast('Pesos táticos de Maio de 2026 sincronizados com sucesso.')" class="btn-action-secondary" style="flex: 1;">
+                                <span>Sincronizar Pesos</span>
+                            </button>
+                        </div>
+                    </div>
                 `
             },
-            moabi: {
-                title: "Moabi Asset Management",
-                subtitle: "Alocação e acompanhamento patrimonial offshore exclusivo HNW. Posicionamento tático de dividendos, crescimento de capital e proteção em dólar nos EUA.",
-                badgeText: "Acesso Ativo",
-                badgeClass: "badge-active",
+            consultoria: {
+                title: "Consultoria & Mentoria",
+                subtitle: "Planejamento financeiro avulso (flat-fee) para não-assessorados e programa de Mentoria B2B para desenvolvimento de assessores de investimentos parceiros.",
+                badgeText: "Serviços VIP",
+                badgeClass: "badge-service",
                 pipeline: [
-                    { num: "01", icon: "💵", title: "Remessa Offshore", desc: "Conversão cambial e custódia segura direta em corretora de investimentos nos EUA." },
-                    { num: "02", icon: "🛡️", title: "Dividend Yield", desc: "Foco robusto em geração de renda passiva recorrente em dólar com o ETF SCHD." },
-                    { num: "03", icon: "🌐", title: "Exposição Ampla", desc: "Aproveitamento de valor de large-caps globais via VOO (S&P 500) e ACWI." },
-                    { num: "04", icon: "🔒", title: "Liquidez & Hedge", desc: "Trava livre de risco de oscilação com títulos federais de curtíssimo prazo (BIL)." }
+                    { num: "01", icon: "🤝", title: "Filtro Inicial", desc: "Diagnóstico inicial de patrimônio líquido, metas tributárias e sucessórias." },
+                    { num: "02", icon: "📐", title: "Modelo de Cobrança", desc: "Definição do modelo de honorários: Flat-Fee anual vs Mentoria B2B." },
+                    { num: "03", icon: "📜", title: "Apresentação", desc: "Entrega do escopo de Planejamento Patrimonial e cronograma de entregas." },
+                    { num: "04", icon: "🚀", title: "Mentoria Elite", desc: "Onboarding no hub de aceleração comercial e assessoria continuada." }
                 ],
-                terminalTitle: "MacBook Pro - Terminal Moabi",
-                command: "python3 moabi_sync.py --balance --usd-apport 12000",
+                terminalTitle: "Jhony's Office - Consultoria CRM",
+                command: "python3 consulting_onboard.py --model flat-fee --client \"Lead HNW\"",
                 notes: [
-                    "<strong>SCHD (40%):</strong> Investimento premium focado nas 100 maiores empresas pagadoras de dividendos dos EUA.",
-                    "<strong>VOO (30%):</strong> Replica o S&P 500 para captura de crescimento das maiores corporações americanas.",
-                    "<strong>ACWI (20%):</strong> Exposição diversificada a mercados globais de 47 países desenvolvidos e emergentes.",
-                    "<strong>BIL (10%):</strong> Caixa do portfólio remunerado pela taxa livre de risco norte-americana de curto prazo."
+                    "<strong>Planejamento Patrimonial Flat-Fee:</strong> Independência e alinhamento total de interesses com cobrança anual transparente.",
+                    "<strong>Mentoria Comercial B2B:</strong> Métodos provados para assessores escalarem carteiras de R$ 10M para R$ 100M+ AUM.",
+                    "<strong>Modelagem Tributária:</strong> Planejamento prévio focado em holdings familiares e otimização offshore."
                 ],
                 widgetHtml: `
-                    <div class="moabi-widget">
-                        <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 4px;">Distribuição de Aporte Recente (USD $12.000)</h3>
-                        <p style="font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 15px;">Divisão proporcional aplicada após aporte de rebalanceamento internacional.</p>
+                    <div class="simulator-widget">
+                        <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 4px;">Simulador de Honorários & Mentoria</h3>
+                        <p style="font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 12px;">Calcule o fee sugerido de alocação ou o escopo de mentoria B2B.</p>
                         
-                        <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:10px;">
-                            <div>
-                                <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;">
-                                    <span style="font-weight:bold; color:var(--gold);">SCHD <span style="font-weight:normal; font-size:9px; color:rgba(255,255,255,0.4);">US Dividend</span></span>
-                                    <span style="font-weight:bold;">40% <span style="font-family:'JetBrains Mono'; color:rgba(255,255,255,0.5); font-size:9px; font-weight:normal; margin-left:5px;">$4,800.00</span></span>
-                                </div>
-                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
-                                    <div style="width:40%; height:100%; background:var(--gold); border-radius:2px;"></div>
-                                </div>
+                        <div style="margin-bottom: 12px;">
+                            <label style="font-size: 10px; color: rgba(255,255,255,0.5); text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 4px;">Patrimônio Líquido do Cliente (R$)</label>
+                            <input type="number" id="consultingWealthInput" value="1500000" oninput="calculateConsultingFee()" style="width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); padding:8px 12px; border-radius:10px; color:#fff; font-family:'JetBrains Mono', monospace; font-size:14px; outline:none;">
+                        </div>
+                        
+                        <div style="margin-bottom: 16px;">
+                            <label style="font-size: 10px; color: rgba(255,255,255,0.5); text-transform: uppercase; font-weight: bold; display: block; margin-bottom: 6px;">Serviço Estratégico</label>
+                            <div style="display:flex; gap:6px;">
+                                <button id="btnConsulting-anual" onclick="setConsultingModel('anual')" class="profile-btn consulting-btn active" style="flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); color:#fff; padding:6px 4px; border-radius:8px; font-size:10px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans';">Planejamento Anual</button>
+                                <button id="btnConsulting-mentoria" onclick="setConsultingModel('mentoria')" class="profile-btn consulting-btn" style="flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); color:#fff; padding:6px 4px; border-radius:8px; font-size:10px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans';">Mentoria B2B</button>
                             </div>
-                            
-                            <div>
-                                <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;">
-                                    <span style="font-weight:bold; color:var(--blue-cyan);">VOO <span style="font-weight:normal; font-size:9px; color:rgba(255,255,255,0.4);">S&P 500</span></span>
-                                    <span style="font-weight:bold;">30% <span style="font-family:'JetBrains Mono'; color:rgba(255,255,255,0.5); font-size:9px; font-weight:normal; margin-left:5px;">$3,600.00</span></span>
-                                </div>
-                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
-                                    <div style="width:30%; height:100%; background:var(--blue-cyan); border-radius:2px;"></div>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;">
-                                    <span style="font-weight:bold; color:#fff;">ACWI <span style="font-weight:normal; font-size:9px; color:rgba(255,255,255,0.4);">Global Equity</span></span>
-                                    <span style="font-weight:bold;">20% <span style="font-family:'JetBrains Mono'; color:rgba(255,255,255,0.5); font-size:9px; font-weight:normal; margin-left:5px;">$2,400.00</span></span>
-                                </div>
-                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
-                                    <div style="width:20%; height:100%; background:#fff; border-radius:2px;"></div>
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <div style="display:flex; justify-content:space-between; font-size:11px; margin-bottom:4px;">
-                                    <span style="font-weight:bold; color:rgba(255,255,255,0.5);">BIL <span style="font-weight:normal; font-size:9px; color:rgba(255,255,255,0.4);">Short Treasury</span></span>
-                                    <span style="font-weight:bold;">10% <span style="font-family:'JetBrains Mono'; color:rgba(255,255,255,0.5); font-size:9px; font-weight:normal; margin-left:5px;">$1,200.00</span></span>
-                                </div>
-                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
-                                    <div style="width:10%; height:100%; background:rgba(255,255,255,0.5); border-radius:2px;"></div>
-                                </div>
-                            </div>
+                        </div>
+                        
+                        <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:12px; padding:12px; text-align:center;">
+                            <div id="consultingFeeValue" style="font-family:'JetBrains Mono', monospace; font-size: 20px; font-weight: 700; color: var(--gold); margin-bottom: 4px;">R$ 7.500,00</div>
+                            <div id="consultingFeeDesc" style="font-size:9px; color:rgba(255,255,255,0.4); line-height:1.3;">Honorário Anual Sugerido (Proporcional Flat-fee cobrado em 4x)</div>
                         </div>
                     </div>
                 `,
                 actionsHtml: `
-                    <a href="../moabi/" class="btn-action-primary">
-                        <span>Acessar Moabi Panel</span>
-                        <span>➔</span>
-                    </a>
-                    <button onclick="triggerToast('Posição global consolidada copiada para a área de transferência.')" class="btn-action-secondary">
-                        <span>Copiar Posição Consolidada</span>
-                    </button>
+                    <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                        <button onclick="triggerToast('Termo de Proposta de Consultoria gerado em PDF.')" class="btn-action-primary" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>Gerar Termo de Proposta</span>
+                            <span>➔</span>
+                        </button>
+                        <div style="display: flex; gap: 8px; width: 100%;">
+                            <button onclick="triggerToast('Link VIP do Calendly enviado por e-mail.')" class="btn-action-secondary" style="flex: 1;">
+                                <span>🗓️ Enviar Calendly VIP</span>
+                            </button>
+                            <button onclick="triggerToast('Onboarding de novo cliente inicializado no CRM.')" class="btn-action-secondary" style="flex: 1;">
+                                <span>Iniciar Onboarding</span>
+                            </button>
+                        </div>
+                    </div>
                 `
             },
-            content: {
-                title: "AI Content Pipeline",
-                subtitle: "Destilação algorítmica de relatórios de investimentos e transcrições multimídia em carrosséis estéticos premium de alta retenção no estilo de tweets de X.COM.",
-                badgeText: "Interface Ativa",
+            marketing: {
+                title: "Marketing Engine (timesmkt3)",
+                subtitle: "A engine de atração inteligente da Jhony Bosio Co. Representa o ecossistema <strong>timesmkt3</strong> integrado de pesquisa de mercado por IA, copywriting e edição de vídeo autônoma.",
+                badgeText: "timesmkt3",
                 badgeClass: "badge-active",
                 pipeline: [
-                    { num: "01", icon: "📥", title: "Captação & Transcrição", desc: "Fatiamento de áudio XP Drops ou relatórios PDF em markdown bruto estruturado." },
-                    { num: "02", icon: "🧠", title: "Destilação por DÉIA", desc: "Separação por inteligência artificial em exatamente 7 slides focados em persuasão." },
-                    { num: "03", icon: "⚙️", title: "Engine de Renderização", desc: "Processador Python sobrepondo design elegante Twitter-style na imagem de base." },
-                    { num: "04", icon: "🚀", title: "Pronto para Postagem", desc: "Exportação em alta definição em lote direto no diretório de compartilhamento." }
+                    { num: "01", icon: "🔍", title: "Tavily Deep Search", desc: "Pesquisa autônoma e relatórios de mercado integrados via API Tavily." },
+                    { num: "02", icon: "🧠", title: "Destilação por IA", desc: "Criação de scripts e carrosséis com LLM de baixo custo via OpenRouter." },
+                    { num: "03", icon: "🎬", title: "Remotion Reels", desc: "Corte automático de silêncio e geração de legendas com fonte branded." },
+                    { num: "04", icon: "🚀", title: "Carrossel X.com", desc: "Geração de slides elegantes para LinkedIn e X em formato de alto engajamento." }
                 ],
-                terminalTitle: "MacBook Pro - Terminal Executivo",
-                command: "python3 tweet_slide_generator.py",
+                terminalTitle: "MacBook Pro - Terminal timesmkt3",
+                command: "python3 -m timesmkt3.engine --source \"XP Drops\" --channels X,LinkedIn",
                 notes: [
-                    "<strong>Minimalismo de Corpo:</strong> Slides 2 a 7 com ocultação de dados estatísticos (likes, replies) para foco absoluto na mensagem.",
-                    "<strong>Prova Social da Capa:</strong> O slide 1 preserva todas as métricas originais para gerar atração visual instantânea.",
-                    "<strong>Alinhamento Cirúrgico:</strong> Código calibrado para centralizar nome e foto do assessor no template <code>Pagina X.COM.png</code>."
+                    "<strong>Tavily Research:</strong> 1.000 buscas gratuitas/mês para geração de relatórios ultra precisos.",
+                    "<strong>Remotion Audiovisual:</strong> Automação completa de cortes por decibéis e aplicação de estilos estéticos locais.",
+                    "<strong>timesmkt3 Integration:</strong> Centraliza a autoridade de marca do Jhony com custo de infraestrutura inferior a $1/mês."
                 ],
                 widgetHtml: `
                     <div class="carousel-preview-card" style="border:none; padding:0; background:transparent; box-shadow:none;">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                            <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700;">Simulador do Carrossel (ETFs Brasil)</h3>
+                            <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700;">Simulador do Carrossel (timesmkt3 Output)</h3>
                             <span id="slideCounterDisplay" style="font-family:'JetBrains Mono'; font-size:10px; color:var(--blue-cyan);">Slide 1 / 7</span>
                         </div>
                         
                         <div class="slider-wrapper" style="margin-top:0; margin-bottom:12px;">
-                            <!-- Slide 1 -->
                             <div class="slide active" id="slide-0">
                                 <div class="slide-header">
                                     <div class="slide-avatar"></div>
@@ -1011,233 +974,71 @@
                                     Assisti ao Expert Drops #63 da XP Investimentos sobre ETFs de Renda Variável no Brasil e precisei trazer esse resumo para você.<br><br>
                                     Descubra por que a inércia tributária e a falta de rebalanceamento sistemático podem estar destruindo sua rentabilidade. 🧵👇
                                 </div>
-                                <div class="slide-footer-metrics">
-                                    <span>18:00 · 18 Mai 2026</span>
-                                    <span>·</span>
-                                    <span><strong>48.2K</strong> Visualizações</span>
-                                </div>
-                            </div>
-                            
-                            <!-- Slide 2 -->
-                            <div class="slide" id="slide-1">
-                                <div class="slide-header">
-                                    <div class="slide-avatar"></div>
-                                    <div>
-                                        <span class="slide-author-name">Jhony Bosio</span>
-                                        <div class="slide-author-handle">@jhonybosio</div>
-                                    </div>
-                                </div>
-                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px);">
-                                    1/ PIBB11 vs DIVO11: O Confronto.<br><br>
-                                    Enquanto o PIBB11 replica as 50 maiores empresas do país com a menor taxa do mercado (0,059% a.a.), o DIVO11 foca em empresas que pagam dividendos consistentes.<br><br>
-                                    Ambos servem a propósitos táticos totalmente distintos na sua carteira de investimentos.
-                                </div>
-                            </div>
-                            
-                            <!-- Slide 3 -->
-                            <div class="slide" id="slide-2">
-                                <div class="slide-header">
-                                    <div class="slide-avatar"></div>
-                                    <div>
-                                        <span class="slide-author-name">Jhony Bosio</span>
-                                        <div class="slide-author-handle">@jhonybosio</div>
-                                    </div>
-                                </div>
-                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px);">
-                                    2/ O Perigo Oculto da Tributação.<br><br>
-                                    Muitos investidores esquecem que ETFs de Renda Variável no Brasil não possuem a isenção de R$ 20 mil em vendas mensais.<br><br>
-                                    A alíquota é de 15% sobre o lucro (20% se for Day Trade). Cada movimentação tática precisa ser calculada de forma cirúrgica.
-                                </div>
-                            </div>
-                            
-                            <!-- Slide 4 -->
-                            <div class="slide" id="slide-3">
-                                <div class="slide-header">
-                                    <div class="slide-avatar"></div>
-                                    <div>
-                                        <span class="slide-author-name">Jhony Bosio</span>
-                                        <div class="slide-author-handle">@jhonybosio</div>
-                                    </div>
-                                </div>
-                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px);">
-                                    3/ O "Mito" do Rebalanceamento.<br><br>
-                                    Muitos investidores acham que rebalancear a carteira é opcional. Erro crasso.<br><br>
-                                    O rebalanceamento sistemático força você a vender ativos caros na alta e comprar ativos baratos na baixa, garantindo a consistência matemática do portfólio no longo prazo.
-                                </div>
-                            </div>
-                            
-                            <!-- Slide 5 -->
-                            <div class="slide" id="slide-4">
-                                <div class="slide-header">
-                                    <div class="slide-avatar"></div>
-                                    <div>
-                                        <span class="slide-author-name">Jhony Bosio</span>
-                                        <div class="slide-author-handle">@jhonybosio</div>
-                                    </div>
-                                </div>
-                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px);">
-                                    4/ O Custo Oculto da Inércia.<br><br>
-                                    Investidores que compram ativos e nunca mais olham a carteira estão pagando o custo invisível do desvio de alocação.<br><br>
-                                    Com o tempo, a carteira perde o perfil de risco original e você acaba exposto a oscilações desnecessárias.
-                                </div>
-                            </div>
-                            
-                            <!-- Slide 6 -->
-                            <div class="slide" id="slide-5">
-                                <div class="slide-header">
-                                    <div class="slide-avatar"></div>
-                                    <div>
-                                        <span class="slide-author-name">Jhony Bosio</span>
-                                        <div class="slide-author-handle">@jhonybosio</div>
-                                    </div>
-                                </div>
-                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px);">
-                                    5/ O Caminho da Eficiência (A Regra do Jogo).<br><br>
-                                    Seja com PIBB11 para crescimento amplo ou DIVO11 para foco em dividendos, o segredo da inteligência financeira está na disciplina operacional.<br><br>
-                                    Use as carteiras XP como bússolas, mas execute sempre com foco tático.
-                                </div>
-                            </div>
-                            
-                            <!-- Slide 7 -->
-                            <div class="slide" id="slide-6">
-                                <div class="slide-header">
-                                    <div class="slide-avatar"></div>
-                                    <div>
-                                        <span class="slide-author-name">Jhony Bosio</span>
-                                        <div class="slide-author-handle">@jhonybosio</div>
-                                    </div>
-                                </div>
-                                <div class="slide-body" style="font-size: clamp(12px, 2.2vw, 15px); font-weight: bold; color: #FFF; text-align: center; justify-content: center;">
-                                    Quer dominar a alocação de carteiras inteligentes com eficiência tributária?<br><br>
-                                    Acesse a nossa AULA VIP e destrave a metodologia completa.<br><br>
-                                    👉 <span style="color: var(--blue-cyan)">jhonybosio.com/aula-vip</span>
-                                </div>
                             </div>
                         </div>
                         
                         <div class="slider-controls">
                             <button class="btn-slide-nav" onclick="prevSlide()">←</button>
-                            <div class="slide-dots" id="dotsContainer">
-                                <!-- Dots populated via script -->
-                            </div>
+                            <div class="slide-dots" id="dotsContainer"></div>
                             <button class="btn-slide-nav" onclick="nextSlide()">→</button>
                         </div>
-                    </div>
-                `,
-                actionsHtml: `
-                    <a href="../painel/" class="btn-action-primary">
-                        <span>Ir para Painel de Criação</span>
-                        <span>➔</span>
-                    </a>
-                    <button onclick="copyCommand()" class="btn-action-secondary">
-                        <span>Copiar Script Bash</span>
-                    </button>
-                `
-            },
-            vault: {
-                title: "WealthMap Life Vault",
-                subtitle: "Cofre e planejador patrimonial e sucessório familiar. Análise gráfica dinâmica de metas e criptografia zero-knowledge local para documentos confidenciais.",
-                badgeText: "Vault Ativo",
-                badgeClass: "badge-service",
-                pipeline: [
-                    { num: "01", icon: "🎯", title: "Metas de Vida", desc: "Mapeamento estruturado de sonhos familiares (Liberdade, educação, liquidez)." },
-                    { num: "02", icon: "📡", title: "GPS Patrimonial", desc: "Algoritmo adaptativo que calcula o gap financeiro real para a conquista da meta." },
-                    { num: "03", icon: "🔐", title: "Criptografia Local", desc: "Codificação no client-side via AES-256 para total blindagem de dados confidenciais." },
-                    { num: "04", icon: "📜", title: "Acesso Sucessório", desc: "Trilha de liberação condicional inteligente para herdeiros e contatos cadastrados." }
-                ],
-                terminalTitle: "MacBook Pro - Terminal GPS",
-                command: "python3 wealthmap_gps.py --status",
-                notes: [
-                    "<strong>Total Privacidade:</strong> O Antigravity implementa criptografia zero-knowledge: as chaves são privadas do Jhony.",
-                    "<strong>GPS de Objetivos:</strong> Algoritmo adaptativo de investimentos calibrando o aporte ideal contra a inflação IPCA.",
-                    "<strong>Segurança XP Compliance:</strong> Nenhum dado cadastral ou senha da corretora é mantido na base do sistema."
-                ],
-                widgetHtml: `
-                    <div class="vault-widget">
-                        <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 4px;">Monitor GPS de Metas & Cofre</h3>
-                        <p style="font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 12px;">Monitore gaps financeiros de objetivos e desbloqueie o cofre.</p>
                         
-                        <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:12px; padding:10px; margin-bottom:12px; display:flex; flex-direction:column; gap:8px;">
-                            <div>
-                                <div style="display:flex; justify-content:space-between; font-size:10px; margin-bottom:3px;">
-                                    <span style="color:rgba(255,255,255,0.8); font-weight:bold;">1. Liberdade Precoce (R$ 5.0M)</span>
-                                    <span style="font-family:'JetBrains Mono'; color:var(--blue-cyan);">68.4%</span>
+                        <div style="margin-top: 15px; border-top: 1px solid var(--border-glass); padding-top: 10px; display:flex; gap:10px; align-items:center; justify-content:center;">
+                            <div style="width:75px; height:120px; background:#000; border:2px solid #1a2e4a; border-radius:12px; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                                <div style="position:absolute; width:100%; height:100%; top:0; left:0; background:linear-gradient(180deg, #050c1a 0%, #000d38 50%, #050c1a 100%); z-index:1;"></div>
+                                <div style="z-index:2; display:flex; gap:1.5px; align-items:center; height:12px; margin-bottom:8px;">
+                                    <div class="wave-bar" style="width:1.5px; height:4px; background:var(--blue-cyan); animation: wave 0.6s ease infinite alternate; animation-play-state: paused;"></div>
+                                    <div class="wave-bar" style="width:1.5px; height:10px; background:var(--gold); animation: wave 0.8s ease infinite alternate 0.1s; animation-play-state: paused;"></div>
+                                    <div class="wave-bar" style="width:1.5px; height:8px; background:var(--blue-cyan); animation: wave 0.5s ease infinite alternate 0.2s; animation-play-state: paused;"></div>
+                                    <div class="wave-bar" style="width:1.5px; height:4px; background:#fff; animation: wave 0.7s ease infinite alternate 0.3s; animation-play-state: paused;"></div>
                                 </div>
-                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
-                                    <div style="width:68.4%; height:100%; background:var(--blue-cyan); border-radius:2px;"></div>
+                                <div id="phoneSubtitleDisplay" style="z-index:5; width:90%; padding:3px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:4px; text-align:center; font-family:'Plus Jakarta Sans'; font-size:5px; font-weight:800; line-height:1.3; color:#fff; min-height:22px; display:flex; align-items:center; justify-content:center;">
+                                    CARTEIRAS <span style="color:var(--gold); font-weight:900; margin-left:1px;">DIVERSIFICADAS</span>
                                 </div>
+                                <button onclick="toggleReelsPlay()" style="position:absolute; bottom:5px; z-index:10; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); width:14px; height:14px; border-radius:50%; color:#fff; display:flex; align-items:center; justify-content:center; font-size:5px; cursor:pointer;" id="btnPhonePlay">▶</button>
                             </div>
-                            <div>
-                                <div style="display:flex; justify-content:space-between; font-size:10px; margin-bottom:3px;">
-                                    <span style="color:rgba(255,255,255,0.8); font-weight:bold;">2. Educação Global Filhos (R$ 1.5M)</span>
-                                    <span style="font-family:'JetBrains Mono'; color:var(--gold);">45.3%</span>
-                                </div>
-                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;">
-                                    <div style="width:45.3%; height:100%; background:var(--gold); border-radius:2px;"></div>
-                                </div>
+                            
+                            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                                <div style="font-family:'Plus Jakarta Sans', sans-serif; font-size:11px; font-weight:700;">Remotion Reels Engine</div>
+                                <p style="font-size:9px; color:rgba(255,255,255,0.5); line-height:1.3;">Engine integrada para legendagem e cortes inteligentes baseada na CLI de Remotion.</p>
                             </div>
-                        </div>
-                        
-                        <div style="background:rgba(10,27,61,0.6); border:1px solid var(--border-glass); border-radius:12px; padding:12px; text-align:center;" id="vaultLockArea">
-                            <div style="font-size:20px; margin-bottom:6px;">🔒</div>
-                            <h4 style="font-size:12px; font-weight:700; margin-bottom:4px;">Cofre de Documentos Sucessórios</h4>
-                            <p style="font-size:10px; color:rgba(255,255,255,0.5); margin-bottom:10px;">Insira a sua chave mestra criptográfica para decodificar os contratos.</p>
-                            <div style="display:flex; gap:6px;">
-                                <input type="password" id="vaultMasterKey" placeholder="Chave Mestra" style="flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--border-glass); padding:6px 10px; border-radius:8px; color:#fff; font-size:11px; text-align:center; font-family:'JetBrains Mono'; outline:none;">
-                                <button onclick="unlockVaultMock()" style="background:var(--gold); border:none; color:#000; padding:6px 12px; border-radius:8px; font-size:10px; font-weight:bold; cursor:pointer; font-family:'Plus Jakarta Sans';">Abrir</button>
-                            </div>
-                        </div>
-                        
-                        <div style="background:rgba(39,201,63,0.05); border:1px solid #27C93F; border-radius:12px; padding:12px; display:none;" id="vaultUnlockedArea">
-                            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
-                                <span style="font-size:18px;">🔓</span>
-                                <span style="font-size:11px; font-weight:bold; color:#27C93F;">Cofre Desbloqueado com Sucesso</span>
-                            </div>
-                            <ul style="list-style:none; font-size:10px; display:flex; flex-direction:column; gap:5px; color:rgba(255,255,255,0.8);">
-                                <li style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:3px;">
-                                    <span>📁 Declarações IRPF (AES-256)</span>
-                                    <span style="cursor:pointer; color:var(--blue-cyan);" onclick="triggerToast('Baixando arquivo criptografado...')">Baixar</span>
-                                </li>
-                                <li style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:3px;">
-                                    <span>📁 Contratos Sociais Holding (AES-256)</span>
-                                    <span style="cursor:pointer; color:var(--blue-cyan);" onclick="triggerToast('Baixando arquivo criptografado...')">Baixar</span>
-                                </li>
-                                <li style="display:flex; justify-content:space-between; align-items:center;">
-                                    <span>📄 Diretrizes de Transição Emergencial</span>
-                                    <span style="cursor:pointer; color:var(--blue-cyan);" onclick="triggerToast('Baixando diretrizes de emergência...')">Baixar</span>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 `,
                 actionsHtml: `
-                    <a href="../regua-da-vida/index.html" class="btn-action-primary" style="text-decoration: none;">
-                        <span>Configurar Life Vault</span>
-                        <span>➔</span>
-                    </a>
-                    <a href="../regua-da-vida/index.html" class="btn-action-secondary" style="text-decoration: none;">
-                        <span>Acessar Régua da Vida</span>
-                    </a>
+                    <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                        <button onclick="triggerToast('Iniciando pipeline de pesquisa de mercado Tavily...')" class="btn-action-primary" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>Pesquisar & Destilar com timesmkt3</span>
+                            <span>➔</span>
+                        </button>
+                        <div style="display: flex; gap: 8px; width: 100%;">
+                            <button onclick="triggerToast('Abrindo editor Remotion no localhost...')" class="btn-action-secondary" style="flex: 1;">
+                                <span>🎬 Abrir Remotion</span>
+                            </button>
+                            <button onclick="copyCommand()" class="btn-action-secondary" style="flex: 1;">
+                                <span>Copiar Script Bash</span>
+                            </button>
+                        </div>
+                    </div>
                 `
             },
-            hermes: {
-                title: "Hermes-9A Qualifier",
-                subtitle: "Automação de WhatsApp e funil inteligente conversacional liderado pela persona Déia. Foco na triagem qualificada de leads HNW (+R$ 300 mil).",
-                badgeText: "Service Running",
-                badgeClass: "badge-service",
+            vendas: {
+                title: "Vendas & Conversão",
+                subtitle: "O funil comercial inteligente da holding. Liderado pelo bot conversacional <strong>Hermes-9A Qualifier</strong> que atua no WhatsApp com a persona humana Déia.",
+                badgeText: "Conversão VIP",
+                badgeClass: "badge-active",
                 pipeline: [
-                    { num: "01", icon: "🎯", title: "Entrada de Leads", desc: "Captação automatizada de contatos interessados em mentorias de alocação." },
-                    { num: "02", icon: "💬", title: "Acolhimento IA", desc: "Primeira interação humanizada via bot em menos de 1 minuto de intervalo." },
-                    { num: "03", icon: "📊", title: "Triagem de Renda", desc: "Heurística estratégica filtrando investidores com capital de R$ 300k+." },
-                    { num: "04", icon: "🗓️", title: "Call Agendada", desc: "Sincronização imediata de leads qualificados com a agenda VIP do assessor." }
+                    { num: "01", icon: "📥", title: "Entrada Direct", desc: "Captação de leads orgânicos vindos do YouTube e X.com." },
+                    { num: "02", icon: "💬", title: "Abordagem Déia", desc: "Contato instantâneo personalizado via WhatsApp de alta conversão." },
+                    { num: "03", icon: "🎯", title: "Qualificação HNW", desc: "Heurística de triagem baseada em patrimônio livre acima de R$ 300k." },
+                    { num: "04", icon: "🗓️", title: "Agenda VIP", desc: "Redirecionamento automático de leads qualificados para reunião estratégica com o Jhony." }
                 ],
-                terminalTitle: "Oracle Cloud VPS - Terminal de Acesso",
-                command: "ssh -i \"/Users/jhonybosio/Meu Drive/4. Projetos Digitais/04. Scripts e Automações/ssh-key-2026-04-16.key\" ubuntu@163.176.178.98",
+                terminalTitle: "Oracle Cloud VPS - Terminal Hermes",
+                command: "ssh -i \"~/.ssh/jhony_vps.key\" ubuntu@oracle-hermes-prod",
                 notes: [
-                    "<strong>Acesso Oracle VPS:</strong> Use o comando de SSH exibido no console do terminal acima.",
-                    "<strong>Enviar Atualização Soul:</strong> <code>scp -i \"/Users/jhonybosio/Meu Drive/4. Projetos Digitais/04. Scripts e Automações/ssh-key-2026-04-16.key\" \"/Users/jhonybosio/Meu Drive/4. Projetos Digitais/01. Lançamentos/whatsapp-bot/soul.md\" ubuntu@163.176.178.98:~/whatsapp-bot/</code>",
-                    "<strong>Reiniciar o Robô:</strong> Após enviar o arquivo ou alterar código, acesse a VPS e rode <code>pm2 restart all</code>.",
-                    "<strong>Hermes Persona:</strong> Agora equipado com o cérebro persuasivo de alto ticket baseado nos frameworks SPIN Selling, Chris Voss (FBI) e Cialdini."
+                    "<strong>Persona Déia:</strong> Linguagem empática, persuasiva e técnica baseada no SPIN Selling e Chris Voss.",
+                    "<strong>Webhook Integrado:</strong> Notificações instantâneas enviadas ao Telegram do Jhony a cada qualificação HNW.",
+                    "<strong>VPS Estável:</strong> Hospedagem zero-downtime com monitoramento e reinicialização automáticos via PM2."
                 ],
                 widgetHtml: `
                     <div class="hermes-widget">
@@ -1264,149 +1065,96 @@
                                     C) Mais de 300k
                                 </div>
                             </div>
-                            
-                            <div style="display:flex; flex-direction:column; gap:2px;">
-                                <span style="font-size:9px; color:rgba(255,255,255,0.4); margin-left:6px;">Prospect VIP (14:34)</span>
-                                <div style="background:rgba(255,255,255,0.06); padding:8px 12px; border-radius:12px 12px 12px 2px; font-size:11px; color:#fff; align-self:flex-start; max-width:90%;">
-                                    Hoje tenho cerca de R$ 450 mil disponíveis na renda fixa para rebalancear.
-                                </div>
-                            </div>
-                            
-                            <div style="display:flex; flex-direction:column; gap:2px; align-items:flex-end;">
-                                <span style="font-size:9px; color:rgba(255,255,255,0.4); margin-right:6px;">Déia Persona (14:34)</span>
-                                <div style="background:rgba(197,160,89,0.12); border:1px solid rgba(197,160,89,0.3); padding:8px 12px; border-radius:12px 12px 2px 12px; font-size:11px; color:#fff; align-self:flex-end; max-width:90%;">
-                                    Perfeito! Excelente valor. Você tem direito a um Raio-X de Carteira sem custos com o Jhony. Vou liberar nossa agenda exclusiva para você escolher o melhor dia.
-                                </div>
-                            </div>
                         </div>
                     </div>
                 `,
                 actionsHtml: `
-                    <button onclick="triggerToast('Logs em tempo real do Hermes-9A ativos no terminal.')" class="btn-action-primary">
-                        <span>Monitorar Triagens</span>
-                        <span>➔</span>
-                    </button>
-                    <button onclick="triggerToast('Reiniciando servidor de automação...')" class="btn-action-secondary">
-                        <span>Reiniciar Instância</span>
-                    </button>
+                    <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                        <button onclick="triggerToast('Logs em tempo real do Hermes-9A ativos no terminal.')" class="btn-action-primary" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>Monitorar Triagens em Tempo Real</span>
+                            <span>➔</span>
+                        </button>
+                        <div style="display: flex; gap: 8px; width: 100%;">
+                            <button onclick="triggerToast('Reiniciando servidor de automação...')" class="btn-action-secondary" style="flex: 1;">
+                                <span>🔄 Reiniciar Instância VPS</span>
+                            </button>
+                            <button onclick="triggerToast('Sincronizando novas chaves de SSH com a Oracle Cloud...')" class="btn-action-secondary" style="flex: 1;">
+                                <span>🔑 Sincronizar Chaves SSH</span>
+                            </button>
+                        </div>
+                    </div>
                 `
             },
-            reels: {
-                title: "Remotion Reels Engine",
-                subtitle: "Pipeline dinâmico de produção audiovisual. Executa silenciamento automático de pausas via decibéis e sobreposição de legendas estéticas.",
-                badgeText: "Engine Ativa",
+            produtos: {
+                title: "Produtos & Educação",
+                subtitle: "Portfólio de infoprodutos de alto valor e o cofre de segurança familiar <strong>WealthMap Life Vault</strong> criptografado localmente no client-side.",
+                badgeText: "Educação & Blindagem",
                 badgeClass: "badge-service",
                 pipeline: [
-                    { num: "01", icon: "🎬", title: "Ingestão de Áudio", desc: "Upload do arquivo m4a ou mp4 bruto gravado pelo assessor de alocação." },
-                    { num: "02", icon: "✂️", title: "Detecção de Silêncio", desc: "Análise de decibéis por FFmpeg silenciando pausas e hesitações automaticamente." },
-                    { num: "03", icon: "✏️", title: "Legendas Dinâmicas", desc: "Geração de legendas branded com gradiente Blue3 e destaque de termos técnicos." },
-                    { num: "04", icon: "⚙️", title: "Compilação Remotion", desc: "Execução final via CLI gerando vídeo MP4 renderizado a 60fps pronto no Drive." }
+                    { num: "01", icon: "🎓", title: "Curso de ETFs", desc: "Infoproduto de alocação tática e inteligência tributária para investidores." },
+                    { num: "02", icon: "📦", title: "WealthMap Vault", desc: "Criação do cofre de dados confidenciais blindados no navegador." },
+                    { num: "03", icon: "🔐", title: "AES-256 Local", desc: "Criptografia ponta a ponta sem tráfego de senhas no servidor." },
+                    { num: "04", icon: "📜", title: "Sucessão Familiar", desc: "Diretrizes organizadas de herança digital e alocação offshore protegida." }
                 ],
-                terminalTitle: "MacBook Pro - Terminal Remotion",
-                command: "python3 silence_cutter.py --video video_jhony.MP4 --out cuts.mp4",
+                terminalTitle: "MacBook Pro - Terminal de Criptografia",
+                command: "python3 wealthmap_vault.py --encrypt --family-vault",
                 notes: [
-                    "<strong>Espectro de Volume:</strong> Algoritmo preciso que realiza cortes em milissegundos sem distorcer o áudio.",
-                    "<strong>Identidade Visual:</strong> Subtitles com fonte Plus Jakarta Sans de alto contraste, utilizando o dourado Blue3.",
-                    "<strong>Render de Performance:</strong> Compilação otimizada integrando hardware local para exportação de vídeo em lote."
+                    "<strong>Zero-Knowledge Trust:</strong> Nenhuma senha ou chave mestra é transmitida ou salva no servidor externo.",
+                    "<strong>Cursos Integrados:</strong> Acompanhamento de métricas de engajamento dos alunos do método de ETFs.",
+                    "<strong>Blindagem de Arquivos:</strong> Proteção de testamentos, chaves privadas cripto e senhas patrimoniais."
                 ],
                 widgetHtml: `
-                    <div class="reels-widget" style="display:flex; gap:15px; align-items:center; justify-content:center;">
-                        <!-- Phone Preview -->
-                        <div style="width:110px; height:200px; background:#000; border:3px solid #1a2e4a; border-radius:18px; position:relative; box-shadow:0 8px 20px rgba(0,0,0,0.6); overflow:hidden; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-                            <div style="position:absolute; top:6px; width:35px; height:6px; background:#1a2e4a; border-radius:3px; z-index:10;"></div>
-                            
-                            <!-- Simulated Video Background -->
-                            <div style="position:absolute; width:100%; height:100%; top:0; left:0; background:linear-gradient(180deg, #050c1a 0%, #000d38 50%, #050c1a 100%); z-index:1;"></div>
-                            
-                            <!-- Sound Wave Animation -->
-                            <div style="z-index:2; display:flex; gap:2px; align-items:center; height:20px; margin-bottom:15px;">
-                                <div class="wave-bar" style="width:2px; height:8px; background:var(--blue-cyan); animation: wave 0.6s ease infinite alternate; animation-play-state: paused;"></div>
-                                <div class="wave-bar" style="width:2px; height:16px; background:var(--gold); animation: wave 0.8s ease infinite alternate 0.1s; animation-play-state: paused;"></div>
-                                <div class="wave-bar" style="width:2px; height:12px; background:var(--blue-cyan); animation: wave 0.5s ease infinite alternate 0.2s; animation-play-state: paused;"></div>
-                                <div class="wave-bar" style="width:2px; height:6px; background:#fff; animation: wave 0.7s ease infinite alternate 0.3s; animation-play-state: paused;"></div>
-                            </div>
-                            
-                            <!-- Subtitle display -->
-                            <div id="phoneSubtitleDisplay" style="z-index:5; width:90%; padding:6px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:8px; text-align:center; font-family:'Plus Jakarta Sans'; font-size:8px; font-weight:800; line-height:1.3; color:#fff; min-height:36px; display:flex; align-items:center; justify-content:center;">
-                                CARTEIRAS <span style="color:var(--gold); font-weight:900; margin-left:2px;">DIVERSIFICADAS</span>
-                            </div>
-                            
-                            <button onclick="toggleReelsPlay()" style="position:absolute; bottom:10px; z-index:10; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); width:22px; height:22px; border-radius:50%; color:#fff; display:flex; align-items:center; justify-content:center; font-size:7px; cursor:pointer;" id="btnPhonePlay">▶</button>
-                        </div>
-                        
-                        <div style="flex:1; display:flex; flex-direction:column; gap:6px;">
-                            <div style="font-family:'Plus Jakarta Sans', sans-serif; font-size:12px; font-weight:700;">Player de Legendas</div>
-                            <p style="font-size:10px; color:rgba(255,255,255,0.5); line-height:1.4;">Clique no botão acima para ver o sincronismo da fonte nos cortes rápidos do Remotion.</p>
-                            <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:8px; padding:6px; font-size:9px; font-family:'JetBrains Mono';">
-                                <span style="color:#27C93F;">✔</span> Whispering: Ativo<br>
-                                <span style="color:#27C93F;">✔</span> Jump-Cuts: Concluído<br>
-                                <span style="color:#27C93F;">✔</span> Resolução: 1080x1920
+                    <div class="vault-widget">
+                        <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 4px;">Monitor GPS de Metas & Cofre</h3>
+                        <p style="font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 12px;">Monitore gaps financeiros de objetivos e desbloqueie o cofre.</p>
+                        <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); border-radius:12px; padding:10px; margin-bottom:12px; display:flex; flex-direction:column; gap:8px;">
+                            <div>
+                                <div style="display:flex; justify-content:space-between; font-size:10px; margin-bottom:3px;">
+                                    <span style="color:rgba(255,255,255,0.8); font-weight:bold;">1. Liberdade Precoce</span>
+                                    <span style="font-family:'JetBrains Mono'; color:var(--blue-cyan);">68.4%</span>
+                                </div>
+                                <div style="width:100%; height:4px; background:rgba(255,255,255,0.05); border-radius:2px;"><div style="width:68.4%; height:100%; background:var(--blue-cyan); border-radius:2px;"></div></div>
                             </div>
                         </div>
                     </div>
-                    <style>
-                        @keyframes wave {
-                            0% { height: 4px; }
-                            100% { height: 18px; }
-                        }
-                    </style>
                 `,
                 actionsHtml: `
-                    <button onclick="triggerToast('Iniciando processador multimídia FFmpeg em background...')" class="btn-action-primary">
-                        <span>Iniciar Processador</span>
-                        <span>➔</span>
-                    </button>
-                    <button onclick="triggerToast('Legendas compiladas exportadas em formato .SRT')" class="btn-action-secondary">
-                        <span>Exportar Legendas (SRT)</span>
-                    </button>
+                    <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                        <a href="../regua-da-vida/index.html" class="btn-action-primary" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>Configurar Life Vault</span>
+                            <span>➔</span>
+                        </a>
+                        <div style="display: flex; gap: 8px; width: 100%;">
+                            <a href="../regua-da-vida/index.html" class="btn-action-secondary" style="text-decoration: none; flex: 1; display: flex; align-items: center; justify-content: center;">
+                                <span>📏 Régua da Vida</span>
+                            </a>
+                            <button onclick="triggerToast('Painel de Alunos Hotmart sincronizado.')" class="btn-action-secondary" style="flex: 1;">
+                                <span>🎓 Painel de Alunos</span>
+                            </button>
+                        </div>
+                    </div>
                 `
             },
-            opendesign: {
-                title: "Open Design Studio",
-                subtitle: "Geração e padronização visual inteligente baseada no Design System Blue3. Garante a identidade premium oficial do Jhony Bosio em todos os layouts e artes.",
-                badgeText: "Blue3 Ativo",
+            processos: {
+                title: "Processos & SOPs",
+                subtitle: "A espinha dorsal operacional da Jhony Bosio Co. Manuais de procedimento operacional padrão (SOPs), rotinas diárias e o <strong>Open Design Studio</strong>.",
+                badgeText: "Governança",
                 badgeClass: "badge-active",
                 pipeline: [
-                    { num: "01", icon: "🎨", title: "Mapeamento Blue3", desc: "Leitura rigorosa do arquivo de regras estéticas e padrões de fontes e cores oficiais." },
-                    { num: "02", icon: "💻", title: "Conexão de Agente", desc: "Integração via terminal com Código Claude como o cérebro autônomo de frontend." },
-                    { num: "03", icon: "💎", title: "Alta Fidelidade", desc: "Processamento e aplicação de tokens premium de glassmorphism e sombras elegantes." },
-                    { num: "04", icon: "📥", title: "Entrega no Drive", desc: "Exportação em lote de imagens e páginas otimizadas diretamente no Meu Drive." }
+                    { num: "01", icon: "⚙️", title: "CVM Res. 178", desc: "Manutenção estrita das diretrizes regulatórias e compliance para assessores." },
+                    { num: "02", icon: "📋", title: "SOP Onboarding", desc: "Procedimento operacional padrão para integração rápida de novos assessorados." },
+                    { num: "03", icon: "🕒", title: "Rotina Diária", desc: "Checklist diário de abertura de mercado, verificação de fluxos e relatórios." },
+                    { num: "04", icon: "🎨", title: "Open Design ds", desc: "Garantia de consistência e refinamento visual de marca com design tokens." }
                 ],
-                terminalTitle: "MacBook Pro - Terminal Open Design",
-                command: 'cd "/Users/jhonybosio/Meu Drive/4. Projetos Digitais/open-design" && pnpm install && pnpm --filter @open-design/tools-dev run build && pnpm tools-dev run web',
+                terminalTitle: "MacBook Pro - Terminal Processos & DS",
+                command: "python3 -m opendesign.studio --build-tokens",
                 notes: [
-                    "<strong>Modelo de IA (Cérebro):</strong> O modelo recomendado é o <strong>Claude 3.5 Sonnet</strong> (Anthropic), configurado no Open Design CLI como o motor principal devido ao seu raciocínio visual e de frontend de estado da arte.",
-                    "<strong>Design System Oficial:</strong> Sincronizado automaticamente entre a pasta local <code>open-design/design-systems/blue3/DESIGN.md</code> e o Meu Drive.",
-                    "<strong>Slides da Aula VIP (Protocolo 9A):</strong> A apresentação HTML premium gerada pelo Open Design foi importada com sucesso para o site de produção e está disponível nativamente em <code>dashboard/protocolo-9a-deck.html</code>.",
-                    "<strong>Instalação Inicial:</strong> Se for a primeira vez ou após atualizações, certifique-se de rodar <code>pnpm install</code> e <code>pnpm --filter @open-design/tools-dev run build</code> na pasta do projeto.",
-                    "<strong>Acesso Local:</strong> Interface web disponível em <code>http://localhost:3000</code> com o daemon orquestrador rodando em background na porta <code>49702</code> (ou <code>7457</code>).",
-                    "<strong>Sincronização Ativa:</strong> O daemon detecta alterações no DESIGN.md em tempo real e regenera as especificações da página."
+                    "<strong>Onboarding Sistematizado:</strong> Fluxo estruturado garantindo zero atrito no envio de documentos para a Blue3.",
+                    "<strong>Compliance CVM 178:</strong> Regras claras sobre atuação transparente do assessor sem promessas irrealistas.",
+                    "<strong>Design System Tokens:</strong> Cores e tipografias oficiais da Jhony Bosio Co. automatizadas via código."
                 ],
                 widgetHtml: `
                     <div class="opendesign-widget">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                            <h3 style="font-family:'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700; color: #fff;">Estúdio de Visualização Blue3</h3>
-                            <div style="background:rgba(0,209,255,0.1); border:1px solid var(--blue-cyan); color:var(--blue-cyan); font-size:8px; font-weight:bold; padding:2px 6px; border-radius:99px; text-transform:uppercase;">Design System Ativo</div>
-                        </div>
-                        
-                        <!-- Toggle Controls -->
-                        <div style="display:flex; gap:6px; margin-bottom:12px;">
-                            <button id="btnOD-colors" onclick="toggleODView('colors')" class="profile-btn active" style="flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); color:#fff; padding:6px 4px; border-radius:8px; font-size:10px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans';">Design Tokens</button>
-                            <button id="btnOD-mockup" onclick="toggleODView('mockup')" class="profile-btn" style="flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); color:#fff; padding:6px 4px; border-radius:8px; font-size:10px; font-weight:700; cursor:pointer; font-family:'Plus Jakarta Sans';">Mockup de Post</button>
-                        </div>
-                        
-                        <!-- Panel 1: Design Tokens -->
-                        <div id="od-panel-colors" style="background:#030712; border:1px solid var(--border-glass); border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:10px;">
-                            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-bottom:4px;">Cores Oficiais do Sistema Blue3:</div>
-                            <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:8px;">
-                                <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:6px; border-radius:8px;">
-                                    <div style="width:20px; height:20px; border-radius:4px; background:#0A1B3D; border:1px solid rgba(255,255,255,0.1);"></div>
-                                    <div style="display:flex; flex-direction:column;">
-                                        <span style="font-size:9px; font-weight:bold; color:#fff;">Blue3 Navy</span>
-                                        <span style="font-size:8px; font-family:'JetBrains Mono'; color:rgba(255,255,255,0.4);">#0A1B3D</span>
-                                    </div>
-                                </div>
-                                <div style="display:flex; align-items:center; gap:8px; background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:6px; border-radius:8px;">
                                     <div style="width:20px; height:20px; border-radius:4px; background:#00D1FF; border:1px solid rgba(255,255,255,0.1);"></div>
                                     <div style="display:flex; flex-direction:column;">
                                         <span style="font-size:9px; font-weight:bold; color:#fff;">Blue3 Cyan</span>
@@ -1518,14 +1266,14 @@
                     setTimeout(() => {
                         dashArea.style.opacity = '1';
                         // Select default strategy
-                        switchStrategy('etfs');
+                        switchStrategy('blue3');
                     }, 50);
                 }, 400);
             } else {
                 loginArea.style.display = 'none';
                 dashArea.style.display = 'block';
                 // Select default strategy
-                switchStrategy('etfs');
+                switchStrategy('blue3');
             }
 
             statusDot.style.backgroundColor = 'var(--blue-cyan)';
@@ -1554,7 +1302,7 @@
             });
             
             // Clean dynamic intervals if switching away
-            if (currentStrategyId === 'reels' && reelsPlaying) {
+            if (currentStrategyId === 'marketing' && reelsPlaying) {
                 toggleReelsPlay();
             }
             
@@ -1569,7 +1317,7 @@
                         <h1>${data.title}</h1>
                         <p>${data.subtitle}</p>
                     </section>
-
+ 
                     <!-- Pipeline steps row -->
                     <h2 class="section-title">Workflow de Execução</h2>
                     <div class="pipeline-grid">
@@ -1582,7 +1330,7 @@
                             </div>
                         `).join('')}
                     </div>
-
+ 
                     <!-- Split workspace -->
                     <h2 class="section-title">Console Operacional & Mockup</h2>
                     <div class="workspace-split">
@@ -1614,7 +1362,7 @@
                                 </ul>
                             </div>
                         </div>
-
+ 
                         <!-- Interactive Simulator Mockup Area -->
                         <div class="mockup-card">
                             <div id="interactiveMockupContainer">
@@ -1626,7 +1374,7 @@
                             </div>
                         </div>
                     </div>
-
+ 
                     <footer class="compliance-notice">
                         JB HUB · Uso restrito ao proprietário credenciado. Simulador tático auxiliar de alocação de carteiras sem gestão discricionária direta, em conformidade com as diretrizes CVM Resolução 178/2023.
                     </footer>
@@ -1635,11 +1383,13 @@
                 workspace.classList.remove('loading');
                 
                 // Initialize specific strategy interactive routines
-                if (id === 'etfs') {
+                if (id === 'blue3') {
                     updateEtfCalculator();
-                } else if (id === 'content') {
+                } else if (id === 'consultoria') {
+                    calculateConsultingFee();
+                } else if (id === 'marketing') {
                     initContentSlider();
-                } else if (id === 'opendesign') {
+                } else if (id === 'processos') {
                     toggleODView('colors');
                 }
             }, 300);
@@ -1722,6 +1472,45 @@
                 `;
                 container.appendChild(item);
             });
+        }
+
+        // ── Consulting & Mentoria Fee Simulator ────────────────────
+        let selectedConsultingModel = 'anual';
+
+        function setConsultingModel(model) {
+            selectedConsultingModel = model;
+            const btns = document.querySelectorAll('.consulting-btn');
+            btns.forEach(btn => {
+                if (btn.id === `btnConsulting-${model}`) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            calculateConsultingFee();
+        }
+
+        function calculateConsultingFee() {
+            const input = document.getElementById('consultingWealthInput');
+            const displayValue = document.getElementById('consultingFeeValue');
+            const displayDesc = document.getElementById('consultingFeeDesc');
+            
+            if (!input || !displayValue || !displayDesc) return;
+            
+            let val = parseFloat(input.value);
+            if (isNaN(val) || val <= 0) val = 0;
+            
+            if (selectedConsultingModel === 'anual') {
+                let fee = val * 0.005;
+                if (fee < 5000) fee = 5000;
+                if (fee > 30000) fee = 30000;
+                
+                displayValue.innerText = fee.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
+                displayDesc.innerText = 'Honorário Anual Sugerido (Proporcional Flat-fee cobrado em 4x)';
+            } else {
+                displayValue.innerText = 'R$ 8.900,00';
+                displayDesc.innerText = 'Valor do Programa VIP de 3 Meses (Mentorias semanais individuais + SOPs)';
+            }
         }
 
         // ── X/Twitter Carrossel Slide gen ──────────────────────────

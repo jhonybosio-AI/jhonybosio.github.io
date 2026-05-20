@@ -1,0 +1,50 @@
+        <div style="display:flex; gap:3rem">
+          <div>
+            <h4 style="font-size:.85rem; color:#fff; margin-bottom:1rem">Navegação</h4>
+            <div style="display:flex; flex-direction:column; gap:.5rem">
+              <a href="../" style="color:var(--muted); text-decoration:none; font-size:.8rem">Home</a>
+              <a href="../protocolo-9a" style="color:var(--muted); text-decoration:none; font-size:.8rem">Protocolo
+                9A</a>
+              <a href="../aula-vip" style="color:var(--muted); text-decoration:none; font-size:.8rem">Aula VIP</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:3rem; text-align:center; font-size:.7rem; color:rgba(255,255,255,.2)">
+        &copy; 2026 Jhony Bosio · Investimentos envolvem riscos. Rentabilidade passada não garante resultados futuros.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Inicia com preços base, mas busca atualizações reais
+    const CATEGORIES = [
+      {
+        id: 'posfixado', group: 'RENDA FIXA BR', label: 'Pós-fixado (CDI)', color: '#C9A84C',
+        etfs: [
+          { ticker: 'LFTS11', price: 0, url: 'https://etf1.com.br/etf/LFTS11' },
+          { ticker: 'LFTB11', price: 0, url: 'https://etf1.com.br/etf/LFTB11' },
+          { ticker: 'NCDI11', price: 0, url: 'https://etf1.com.br/etf/NCDI11' },
+          { ticker: 'POSB11', price: 0, url: 'https://etf1.com.br/etf/POSB11' }
+        ], defaultIdx: { conservador: 1, moderado: 1, sofisticado: 0 }
+      },
+      {
+        id: 'inflacao', group: 'RENDA FIXA BR', label: 'Inflação (IPCA+)', color: '#C9A84C',
+        etfs: [
+          { ticker: 'B5P211', price: 0, url: 'https://etf1.com.br/etf/B5P211' },
+          { ticker: 'PHIP11', price: 0, url: 'https://etf1.com.br/etf/PHIP11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      },
+      {
+        id: 'prefixado', group: 'RENDA FIXA BR', label: 'Prefixado', color: '#C9A84C',
+        etfs: [
+          { ticker: 'FIXA11', price: 0, url: 'https://etf1.com.br/etf/FIXA11' },
+          { ticker: '5PRE11', price: 0, url: 'https://etf1.com.br/etf/5PRE11' },
+          { ticker: 'IRFM11', price: 0, url: 'https://etf1.com.br/etf/IRFM11' }
+        ], defaultIdx: { conservador: 2, moderado: 2, sofisticado: 2 }
+      },
+      {
+        id: 'multi', group: 'MULTIMERCADOS', label: 'Multimercados', color: '#ffcc00',
+        etfs: [
+          { ticker: 'WRLD11', price: 0, url: 'https://etf1.com.br/etf/WRLD11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }

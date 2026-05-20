@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carteiras ETF | Jhony Bosio · Blue3 Investimentos</title>
+  <meta name="description"
+    content="Carteiras de alocação via ETFs Globais. Filosofia de gestão passiva com baixos custos, diversificação global e eficiência tributária.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Blue3 Official Palette */
+      --navy: #000d38;
+      --navy-light: #002060;
+      --blue: #0092ff;
+      --bg: #050a1d;
+      --w: #FFFFFF;
+      --gb: rgba(255, 255, 255, 0.05);
+      --gborder: rgba(255, 255, 255, 0.10);
+      --gblur: blur(24px) saturate(1.6);
+      --fd: 'Plus Jakarta Sans', sans-serif;
+      --fb: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--fb);
+      background: var(--bg);
+      color: var(--w);
+      overflow-x: hidden;
+    }
+
+    .ticker-wrap {
+      background: var(--navy) !important;
+      border-bottom: 1px solid var(--gborder);
+      min-height: 46px;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      margin-bottom: 3rem;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--blue), var(--navy-light));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 146, 255, 0.2);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-name {
+      font-weight: 800;
+      font-size: 16px;
+      color: #fff;
+      line-height: 1.1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-name::before {
+      content: "|";
+      color: rgba(255, 255, 255, 0.2);
+      font-weight: 300;
+    }
+
+    .logo-sub {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 1px;
+    }
+
+    nav a {
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 1.5rem;
+      transition: color .2s;
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      margin-bottom: 3rem;
+    }
+
+    .badge {
+      background: rgba(201, 168, 76, .1);
+      color: var(--blue);
+      display: inline-block;
+      padding: .4rem 1rem;
+      border-radius: 100px;
+      font-size: .75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(201, 168, 76, .2);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: -.03em;
+      margin-bottom: 1rem;
+    }
+
+    .blue {
+      color: var(--blue);
+    }
+
+    .gold {
+      color: var(--gold);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    .glass {
+      background: var(--card-bg);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s;
+    }
+
+    .glass::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, .2), transparent);
+    }
+
+    .glass:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Philosophy */
+    .philosophy {
+      margin-bottom: 3rem;
+    }
+
+    .philosophy h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .pillar {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 1.5rem;
+    }
+
+    .pillar-icon {
+      font-size: 1.6rem;
+      margin-bottom: .75rem;
+    }
+
+    .pillar h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    .pillar p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Market widget */
+    .market-section {
+      margin-bottom: 3rem;
+    }
+
+    .market-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .widget-wrap {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--gborder);
+    }
+
+    /* Allocation table */
+    .alloc-section {
+      margin-bottom: 3rem;
+    }
+
+    .alloc-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .profile-tabs {
+      display: flex;
+      gap: .75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid var(--gborder);
+      color: rgba(255, 255, 255, 0.4);
+      padding: .6rem 1.4rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: var(--fb);
+      font-weight: 600;
+      font-size: .85rem;
+      transition: all .25s;
+    }
+
+    .tab-btn.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+      box-shadow: 0 0 20px rgba(0, 146, 255, .3);
+    }
+
+    .alloc-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .alloc-table thead tr {
+      border-bottom: 1px solid var(--gborder);
+    }
+
+    .alloc-table th {
+      padding: .75rem 1rem;
+      text-align: left;
+      font-size: .72rem;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      font-weight: 600;
+    }
+
+    .alloc-table th:not(:first-child) {
+      text-align: center;
+    }
+
+    .alloc-table tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      transition: background .2s;
+    }
+
+    .alloc-table tbody tr:hover {
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .alloc-table td {
+      padding: .9rem 1rem;
+      font-size: .9rem;
+    }
+
+    .alloc-table td:not(:first-child) {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .cat-label {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .sub-label {
+      font-size: .8rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .alloc-bar-wrap {
+      height: 6px;
+      background: rgba(255, 255, 255, .07);
+      border-radius: 99px;
+      margin-top: 4px;
+    }
+
+    .alloc-bar {
+      height: 6px;
+      border-radius: 99px;
+      background: var(--blue);
+      transition: width .6s ease;
+    }
+
+    .highlight-col {
+      background: rgba(0, 146, 255, .05);
+    }
+
+    /* Profile cards */
+    .profile-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    @media(max-width:700px) {
+      .profile-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .profile-card {
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid var(--gborder);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .profile-card.active-card {
+      border-color: var(--blue);
+      background: rgba(0, 146, 255, 0.07);
+    }
+
+    .profile-name {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: .4rem;
+    }
+
+    .profile-desc {
+      font-size: .82rem;
+      color: rgba(255, 255, 255, 0.4);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .profile-risk {
+      font-size: .75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      padding: .3rem .8rem;
+      border-radius: 100px;
+      display: inline-block;
+    }
+
+    .risk-low {
+      background: rgba(16, 185, 129, .1);
+      color: #10b981;
+    }
+
+    .risk-med {
+      background: rgba(0, 146, 255, .1);
+      color: var(--blue);
+    }
+
+    .risk-high {
+      background: rgba(255, 204, 0, .1);
+      color: #ffcc00;
+    }
+
+    footer {
+      margin-top: 4rem;
+      text-align: center;
+      padding-bottom: 2rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: .8rem;
+    }
+
+    @media(max-width:600px) {
+      .wrap {
+        padding: 1rem;
+      }
+    }
+
+    .input-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem
+    }
+
+    .input-amount {
+      background: rgba(0, 146, 255, .08);
+      border: 2px solid var(--blue);
+      box-shadow: 0 0 20px rgba(0, 146, 255, .2);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 800;
+      font-family: var(--fb);
+      width: 320px;
+      text-align: center;
+      outline: none;
+      transition: all .3s
+    }
+
+    .input-amount:focus {
+      box-shadow: 0 0 35px rgba(201, 168, 76, .5);
+      transform: scale(1.02)
+    }
+
+    .input-group label {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      text-align: center;
+      margin-bottom: .5rem
+    }
+
+    .profile-tabs {
+      display: flex;
+      gap: .5rem;
+      justify-content: center;
+      margin-bottom: 2rem
+    }
+
+    .profile-tab {
+      padding: .65rem 1.5rem;
+      border-radius: 100px;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;

@@ -1,0 +1,50 @@
+      },
+      {
+        id: 'rvbr', group: 'RENDA VARIÁVEL BR', label: 'Renda Variável Brasil', color: '#10b981',
+        etfs: [
+          { ticker: 'BOVA11', price: 0, url: 'https://etf1.com.br/etf/BOVA11' },
+          { ticker: 'BEST11', price: 0, url: 'https://etf1.com.br/etf/BEST11' },
+          { ticker: 'BOVV11', price: 0, url: 'https://etf1.com.br/etf/BOVV11' },
+          { ticker: 'BOVX11', price: 0, url: 'https://etf1.com.br/etf/BOVX11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      },
+      {
+        id: 'fundos', group: 'FUNDOS LISTADOS', label: 'FIIs / FI-Infra / FI-Agro', color: '#10b981',
+        etfs: [
+          { ticker: 'XFIX11', price: 0, url: 'https://etf1.com.br/etf/XFIX11' },
+          { ticker: 'HERT11', price: 0, url: 'https://etf1.com.br/etf/HERT11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      },
+      {
+        id: 'alt', group: 'ALTERNATIVOS', label: 'Ouro / Cripto / Commodities', color: '#f97316',
+        etfs: [
+          { ticker: 'GOLD11', price: 0, url: 'https://etf1.com.br/etf/GOLD11' },
+          { ticker: 'HASH11', price: 0, url: 'https://etf1.com.br/etf/HASH11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      },
+      {
+        id: 'globalrf', group: 'GLOBAL', label: 'Renda Fixa Internacional', color: '#8b5cf6',
+        etfs: [
+          { ticker: 'HGBR11', price: 0, url: 'https://www.etfsbrasil.com.br/etfs/hgbr11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      },
+      {
+        id: 'globalrv', group: 'GLOBAL', label: 'Renda Variável Internacional', color: '#8b5cf6',
+        etfs: [
+          { ticker: 'IVVB11', price: 0, url: 'https://etf1.com.br/etf/IVVB11' }
+        ], defaultIdx: { conservador: 0, moderado: 0, sofisticado: 0 }
+      }
+    ];
+
+    // Função para buscar preços reais via API Brapi
+    // IMPORTANTE: A Brapi agora exige um Token para a maioria dos ativos.
+    // Obtenha um em https://brapi.dev/ e insira abaixo no campo 'token='.
+    async function fetchPrices() {
+      const tickers = [];
+      CATEGORIES.forEach(cat => cat.etfs.forEach(etf => tickers.push(etf.ticker)));
+
+      // Lista completa de fallbacks com preços reais coletados em Maio/2026
+      const fallbacks = {
+        'LFTS11': 152.69, 'LFTB11': 121.38, 'NCDI11': 108.02, 'POSB11': 102.15,
+        'B5P211': 107.46, 'PHIP11': 118.01,
+        'FIXA11': 19.08, '5PRE11': 50.38, 'IRFM11': 100.45,

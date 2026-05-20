@@ -1,0 +1,200 @@
+      gap: .75rem;
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .pillar {
+      background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 1.5rem;
+    }
+
+    .pillar-icon {
+      font-size: 1.6rem;
+      margin-bottom: .75rem;
+    }
+
+    .pillar h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    .pillar p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Market widget */
+    .market-section {
+      margin-bottom: 3rem;
+    }
+
+    .market-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .widget-wrap {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--gborder);
+    }
+
+    /* Allocation table */
+    .alloc-section {
+      margin-bottom: 3rem;
+    }
+
+    .alloc-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .profile-tabs {
+      display: flex;
+      gap: .75rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: 1px solid var(--gborder);
+      color: rgba(255, 255, 255, 0.4);
+      padding: .6rem 1.4rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: var(--fb);
+      font-weight: 600;
+      font-size: .85rem;
+      transition: all .25s;
+    }
+
+    .tab-btn.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+      box-shadow: 0 0 20px rgba(0, 146, 255, .3);
+    }
+
+    .alloc-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .alloc-table thead tr {
+      border-bottom: 1px solid var(--gborder);
+    }
+
+    .alloc-table th {
+      padding: .75rem 1rem;
+      text-align: left;
+      font-size: .72rem;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      font-weight: 600;
+    }
+
+    .alloc-table th:not(:first-child) {
+      text-align: center;
+    }
+
+    .alloc-table tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      transition: background .2s;
+    }
+
+    .alloc-table tbody tr:hover {
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .alloc-table td {
+      padding: .9rem 1rem;
+      font-size: .9rem;
+    }
+
+    .alloc-table td:not(:first-child) {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .cat-label {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .sub-label {
+      font-size: .8rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .alloc-bar-wrap {
+      height: 6px;
+      background: rgba(255, 255, 255, .07);
+      border-radius: 99px;
+      margin-top: 4px;
+    }
+
+    .alloc-bar {
+      height: 6px;
+      border-radius: 99px;
+      background: var(--blue);
+      transition: width .6s ease;
+    }
+
+    .highlight-col {
+      background: rgba(0, 146, 255, .05);
+    }
+
+    /* Profile cards */
+    .profile-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    @media(max-width:700px) {
+      .profile-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .profile-card {
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 1px solid var(--gborder);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .profile-card.active-card {
+      border-color: var(--blue);
+      background: rgba(0, 146, 255, 0.07);
+    }
+
+    .profile-name {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: .4rem;
+    }
+
+    .profile-desc {
+      font-size: .82rem;
+      color: rgba(255, 255, 255, 0.4);
+      line-height: 1.6;
+      margin-bottom: 1rem;

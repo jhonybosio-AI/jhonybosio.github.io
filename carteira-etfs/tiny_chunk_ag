@@ -1,0 +1,50 @@
+    }
+
+    .alloc-table th {
+      padding: .75rem 1rem;
+      text-align: left;
+      font-size: .72rem;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      font-weight: 600;
+    }
+
+    .alloc-table th:not(:first-child) {
+      text-align: center;
+    }
+
+    .alloc-table tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      transition: background .2s;
+    }
+
+    .alloc-table tbody tr:hover {
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .alloc-table td {
+      padding: .9rem 1rem;
+      font-size: .9rem;
+    }
+
+    .alloc-table td:not(:first-child) {
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .cat-label {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .sub-label {
+      font-size: .8rem;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .alloc-bar-wrap {
+      height: 6px;
+      background: rgba(255, 255, 255, .07);
+      border-radius: 99px;
+      margin-top: 4px;

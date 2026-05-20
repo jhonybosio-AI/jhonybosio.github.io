@@ -1,0 +1,50 @@
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem
+    }
+
+    .input-amount {
+      background: rgba(0, 146, 255, .08);
+      border: 2px solid var(--blue);
+      box-shadow: 0 0 20px rgba(0, 146, 255, .2);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 800;
+      font-family: var(--fb);
+      width: 320px;
+      text-align: center;
+      outline: none;
+      transition: all .3s
+    }
+
+    .input-amount:focus {
+      box-shadow: 0 0 35px rgba(201, 168, 76, .5);
+      transform: scale(1.02)
+    }
+
+    .input-group label {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      text-align: center;
+      margin-bottom: .5rem
+    }
+
+    .profile-tabs {
+      display: flex;
+      gap: .5rem;
+      justify-content: center;
+      margin-bottom: 2rem
+    }
+
+    .profile-tab {
+      padding: .65rem 1.5rem;
+      border-radius: 100px;
+      font-size: .82rem;
+      font-weight: 700;
+      cursor: pointer;

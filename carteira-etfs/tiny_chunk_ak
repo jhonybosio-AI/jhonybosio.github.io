@@ -1,0 +1,50 @@
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      transition: all .25s
+    }
+
+    .profile-tab.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(0, 102, 255, .3)
+    }
+
+    .profile-tab:hover:not(.active) {
+      background: rgba(255, 255, 255, .05);
+      color: #fff
+    }
+
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative
+    }
+
+    .table-wrap::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, .15), transparent)
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    thead th {
+      padding: .9rem 1rem;
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      text-align: left;
+      border-bottom: 1px solid var(--border);

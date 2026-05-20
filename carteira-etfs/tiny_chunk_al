@@ -1,0 +1,50 @@
+      background: rgba(255, 255, 255, .02)
+    }
+
+    tbody td {
+      padding: .75rem 1rem;
+      font-size: .85rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      vertical-align: middle
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none
+    }
+
+    tbody tr:hover {
+      background: rgba(0, 102, 255, .04)
+    }
+
+    .cat-main {
+      font-weight: 700;
+      font-size: .85rem;
+      color: #fff;
+      display: block
+    }
+
+    .cat-sub {
+      font-size: .7rem;
+      color: var(--muted);
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: .2rem
+    }
+
+    .pct-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: .6rem
+    }
+
+    .pct-val {
+      font-weight: 700;
+      font-size: .85rem;
+      min-width: 48px;
+      text-align: right
+    }
+
+    .pct-bar {
+      height: 6px;
+      border-radius: 3px;

@@ -1,0 +1,50 @@
+    }
+
+    .logo-sub {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 1px;
+    }
+
+    nav a {
+      color: rgba(255, 255, 255, 0.5);
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 1.5rem;
+      transition: color .2s;
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    nav a:hover {
+      color: var(--blue);
+    }
+
+    .hero {
+      margin-bottom: 3rem;
+    }
+
+    .badge {
+      background: rgba(201, 168, 76, .1);
+      color: var(--blue);
+      display: inline-block;
+      padding: .4rem 1rem;
+      border-radius: 100px;
+      font-size: .75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(201, 168, 76, .2);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: -.03em;
+      margin-bottom: 1rem;
+    }
+
