@@ -18,6 +18,7 @@
             --bg-card-glass: rgba(255, 255, 255, 0.02);
             --success: #27C93F;
             --danger: #FF453A;
+            --purple: #9B5DE5;
         }
 
         * {
@@ -371,7 +372,7 @@
         /* Custom Range Slider */
         .slider-wrapper {
             position: relative;
-            padding: 20px 0;
+            padding: 20px 0 12px;
         }
 
         .timeline-ticks {
@@ -399,6 +400,12 @@
             margin-top: 4px;
         }
 
+        /* Track com eventos marcados */
+        .slider-track-container {
+            position: relative;
+            width: 100%;
+        }
+
         .timeline-slider {
             -webkit-appearance: none;
             width: 100%;
@@ -409,25 +416,92 @@
             border: 1px solid var(--border-glass);
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
+            z-index: 2;
         }
 
         .timeline-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             background: var(--gold);
-            border: 4px solid var(--navy-dark);
-            box-shadow: 0 0 15px var(--gold);
+            border: 3px solid var(--navy-dark);
+            box-shadow: 0 0 20px rgba(197, 168, 128, 0.6), 0 0 40px rgba(197, 168, 128, 0.2);
             cursor: grab;
             transition: all 0.2s ease;
         }
 
         .timeline-slider::-webkit-slider-thumb:active {
             cursor: grabbing;
-            transform: scale(1.15);
+            transform: scale(1.2);
             background: var(--blue-cyan);
-            box-shadow: 0 0 20px var(--blue-cyan);
+            box-shadow: 0 0 20px var(--blue-cyan), 0 0 40px rgba(0, 209, 255, 0.3);
+        }
+
+        /* Eventos marcados no track */
+        .slider-events {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .event-pin {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--navy-dark);
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 3;
+            pointer-events: all;
+        }
+
+        .event-pin.past-pin {
+            background: var(--success);
+            box-shadow: 0 0 8px rgba(39, 201, 63, 0.6);
+        }
+
+        .event-pin.future-pin {
+            background: var(--blue-cyan);
+            box-shadow: 0 0 8px rgba(0, 209, 255, 0.6);
+        }
+
+        .event-pin.now-pin {
+            background: var(--gold);
+            box-shadow: 0 0 12px rgba(197, 168, 128, 0.8);
+            width: 12px;
+            height: 12px;
+        }
+
+        .event-pin-tooltip {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(5, 12, 26, 0.95);
+            border: 1px solid var(--border-glass);
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 9px;
+            color: #fff;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+
+        .event-pin:hover .event-pin-tooltip {
+            opacity: 1;
         }
 
         /* ── Family Grid ────────────────────────────────:::::::::::: */
@@ -682,6 +756,110 @@
             border: 1px solid var(--gold);
         }
 
+        /* ── Momento Atual Panel ─────────────────────────────────── */
+        .momento-panel {
+            background: linear-gradient(135deg, rgba(197, 168, 128, 0.06), rgba(0, 209, 255, 0.03));
+            border: 1px solid rgba(197, 168, 128, 0.25);
+            border-radius: 16px;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .momento-panel::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(197, 168, 128, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .momento-year-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 40px;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(197, 168, 128, 0.4);
+            line-height: 1;
+            min-width: 100px;
+        }
+
+        .momento-divider {
+            width: 1px;
+            height: 50px;
+            background: var(--border-glass);
+        }
+
+        .momento-info {
+            flex: 1;
+        }
+
+        .momento-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .momento-subtitle {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .momento-progress-area {
+            text-align: right;
+            min-width: 120px;
+        }
+
+        .momento-progress-label {
+            font-size: 9px;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .progress-ring-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-track {
+            fill: none;
+            stroke: rgba(255,255,255,0.05);
+            stroke-width: 4;
+        }
+
+        .progress-ring-fill {
+            fill: none;
+            stroke: url(#progressGradient);
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 138.23;
+            stroke-dashoffset: 138.23;
+            transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .progress-ring-pct {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
         /* ── GPS Financeiro Module ────────────────────────────────── */
         .gps-module {
             background: linear-gradient(135deg, rgba(10, 27, 61, 0.4), rgba(5, 12, 26, 0.4));
@@ -690,11 +868,17 @@
             padding: 20px;
         }
 
+        .gps-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
         .gps-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 16px;
-            margin-top: 12px;
         }
 
         @media (max-width: 768px) {
@@ -740,7 +924,78 @@
             background: linear-gradient(90deg, var(--gold), var(--blue-cyan));
             border-radius: 3px;
             width: 0%;
-            transition: width 0.5s ease;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Aporte editável */
+        .aporte-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .aporte-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(197, 168, 128, 0.4);
+            color: var(--gold);
+            font-size: 16px;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            width: 100%;
+            outline: none;
+            padding: 2px 0;
+            transition: border-color 0.2s;
+        }
+
+        .aporte-input:focus {
+            border-color: var(--gold);
+        }
+
+        .aporte-suffix {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            white-space: nowrap;
+        }
+
+        /* Mini gráfico patrimonial */
+        .chart-wrapper {
+            margin-top: 16px;
+            position: relative;
+        }
+
+        .chart-label {
+            font-size: 9px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        #patrimonioChart {
+            width: 100%;
+            height: 80px;
+            display: block;
+        }
+
+        .chart-year-markers {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 8px;
+            color: rgba(255,255,255,0.25);
+            margin-top: 4px;
+        }
+
+        /* ── Family Card Glow Titular ─────────────────────────────── */
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 12px rgba(197, 168, 128, 0.25); }
+            50% { box-shadow: 0 0 24px rgba(197, 168, 128, 0.45); }
+        }
+
+        .family-card.primary.active {
+            animation: glowPulse 2.5s ease-in-out infinite;
         }
 
         /* ── Notificação Toaster Premium ───────────────────────────── */
@@ -764,6 +1019,27 @@
         @keyframes slideUp {
             from { transform: translateY(20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Auto-save indicator */
+        .autosave-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 9px;
+            color: var(--success);
+            opacity: 0;
+            transition: opacity 0.4s;
+            font-weight: 700;
+        }
+        .autosave-badge.show {
+            opacity: 1;
+        }
+        .autosave-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--success);
         }
 
         /* ── Modais Criptográficos (Supabase) ───────────────────────── */
@@ -970,6 +1246,9 @@
                 </div>
             </div>
 
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-top: 10px;">
+                <span class="autosave-badge" id="autosaveBadge"><span class="autosave-dot"></span> Salvo</span>
+            </div>
             <button onclick="updateLifeRuler(true)" class="btn-submit">Gerar & Salvar Régua</button>
 
         </aside>
@@ -995,7 +1274,10 @@
                     <div class="timeline-ticks" id="rulerTicks">
                         <!-- Gerado dinamicamente -->
                     </div>
-                    <input type="range" id="lifeSlider" min="2000" max="2100" value="2026" class="timeline-slider" oninput="handleSliderChange(this.value)">
+                    <div class="slider-track-container">
+                        <input type="range" id="lifeSlider" min="2000" max="2100" value="2026" class="timeline-slider" oninput="handleSliderChange(this.value)">
+                        <div class="slider-events" id="sliderEvents"></div>
+                    </div>
                 </div>
             </section>
 
@@ -1031,14 +1313,42 @@
 
             </section>
 
+            <!-- Momento Atual Panel -->
+            <section class="momento-panel" id="momentoPanel">
+                <div class="momento-year-badge" id="momentoYear">2026</div>
+                <div class="momento-divider"></div>
+                <div class="momento-info">
+                    <div class="momento-title" id="momentoTitle">Sua posição atual na linha do tempo</div>
+                    <div class="momento-subtitle" id="momentoSubtitle">Arraste a régua para explorar o futuro</div>
+                </div>
+                <div class="momento-progress-area">
+                    <div class="momento-progress-label">Rumo à liberdade</div>
+                    <div class="progress-ring-container">
+                        <svg width="52" height="52" class="progress-ring" viewBox="0 0 52 52">
+                            <defs>
+                                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="var(--gold)"/>
+                                    <stop offset="100%" stop-color="var(--blue-cyan)"/>
+                                </linearGradient>
+                            </defs>
+                            <circle class="progress-ring-track" cx="26" cy="26" r="22"/>
+                            <circle class="progress-ring-fill" id="progressRingFill" cx="26" cy="26" r="22"/>
+                        </svg>
+                        <div class="progress-ring-pct" id="progressRingPct">0%</div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Módulo GPS Financeiro -->
             <section class="gps-module">
-                <h3 style="font-size: 13px; font-weight:700; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; display:flex; align-items:center; gap:8px;">
-                    <span>🛰️ GPS Patrimonial Ativo - Projeção</span>
-                </h3>
+                <div class="gps-header">
+                    <h3 style="font-size: 13px; font-weight:700; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; display:flex; align-items:center; gap:8px;">
+                        <span>🛰️ GPS Patrimonial Ativo</span>
+                    </h3>
+                </div>
                 <div class="gps-grid">
                     <div class="gps-card">
-                        <div class="gps-card-label">Patrimônio Previsto (Simulado)</div>
+                        <div class="gps-card-label">Patrimônio Projetado</div>
                         <div class="gps-card-val" id="gpsPatrimonio">R$ 0,00</div>
                         <div class="gps-progress-bar">
                             <div class="gps-progress-fill" id="gpsProgressFill"></div>
@@ -1049,9 +1359,18 @@
                         <div class="gps-card-val" style="color:#27C93F;">IPCA + 5.5% a.a.</div>
                     </div>
                     <div class="gps-card">
-                        <div class="gps-card-label">Aporte Mensal Estimado</div>
-                        <div class="gps-card-val" id="gpsAporte" style="color:var(--gold);">R$ 0,00 / mês</div>
+                        <div class="gps-card-label">Aporte Mensal</div>
+                        <div class="aporte-input-wrapper">
+                            <input type="text" class="aporte-input" id="aporteInput" placeholder="R$ 5.000" oninput="handleAporteInput(this)" onchange="handleAporteInput(this)">
+                            <span class="aporte-suffix">/ mês</span>
+                        </div>
                     </div>
+                </div>
+                <!-- Mini Gráfico Patrimonial -->
+                <div class="chart-wrapper">
+                    <div class="chart-label">Evolução Patrimonial Projetada</div>
+                    <svg id="patrimonioChart" xmlns="http://www.w3.org/2000/svg"></svg>
+                    <div class="chart-year-markers" id="chartYearMarkers"></div>
                 </div>
             </section>
 
@@ -1151,6 +1470,10 @@
             future: []
         };
 
+        // Aporte mensal global editável
+        let aporteAtual = 5000;
+        let autoSaveTimer = null;
+
         let currentActiveAccount = "";
 
         // Inicializar aplicação & Verificar Login
@@ -1220,6 +1543,11 @@
             calculateSumPatr();
             renderSidebarInputs();
             buildTicks();
+            buildSliderEvents();
+
+            // Inicializar input de aporte
+            document.getElementById('aporteInput').value = formatMoney(aporteAtual);
+
             updateDashboard(2026);
         });
 
@@ -1255,7 +1583,68 @@
             
             const total = xp + outros;
             document.getElementById('labelTotalPatr').innerText = formatMoney(total);
+            scheduleAutoSave();
             updateLifeRuler();
+        }
+
+        // Auto-save com debounce de 1.5s
+        function scheduleAutoSave() {
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(() => {
+                localStorage.setItem(`ruler_data_${currentActiveAccount}`, JSON.stringify(state));
+                const badge = document.getElementById('autosaveBadge');
+                badge.classList.add('show');
+                setTimeout(() => badge.classList.remove('show'), 2000);
+            }, 1500);
+        }
+
+        // Handler do campo de aporte editável
+        function handleAporteInput(input) {
+            const raw = parseMoney(input.value);
+            if (!isNaN(raw) && raw >= 0) {
+                aporteAtual = raw;
+                const currentYear = parseInt(document.getElementById('lifeSlider').value);
+                updateDashboard(currentYear);
+            }
+        }
+
+        // Constrói os marcadores de eventos no track do slider
+        function buildSliderEvents() {
+            const container = document.getElementById('sliderEvents');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const minYear = 2000;
+            const maxYear = 2100;
+            const range = maxYear - minYear;
+
+            // Marca o ano atual (2026)
+            const nowYear = new Date().getFullYear();
+            addEventPin(container, nowYear, minYear, range, 'now-pin', `Hoje (${nowYear})`, nowYear);
+
+            // Marca conquistas passadas
+            state.past.forEach(item => {
+                addEventPin(container, item.year, minYear, range, 'past-pin', item.desc, item.year);
+            });
+
+            // Marca metas futuras
+            state.future.forEach(item => {
+                addEventPin(container, item.year, minYear, range, 'future-pin', item.desc, item.year);
+            });
+        }
+
+        function addEventPin(container, year, minYear, range, cls, label, targetYear) {
+            if (year < minYear || year > 2100) return;
+            const pct = ((year - minYear) / range) * 100;
+            const pin = document.createElement('div');
+            pin.className = `event-pin ${cls}`;
+            pin.style.left = `${pct}%`;
+            pin.innerHTML = `<span class="event-pin-tooltip">${year} · ${label}</span>`;
+            pin.onclick = () => {
+                document.getElementById('lifeSlider').value = targetYear;
+                handleSliderChange(targetYear);
+            };
+            container.appendChild(pin);
         }
 
         // Renderiza todos os inputs na barra lateral dinamicamente
@@ -1359,7 +1748,9 @@
                 primary: false
             });
             renderSidebarInputs();
+            buildSliderEvents();
             updateDashboard(parseInt(document.getElementById('lifeSlider').value));
+            scheduleAutoSave();
             showToast("Novo familiar adicionado no núcleo familiar!");
         }
 
@@ -1371,7 +1762,9 @@
                 desc: "Nova Conquista"
             });
             renderSidebarInputs();
+            buildSliderEvents();
             updateDashboard(parseInt(document.getElementById('lifeSlider').value));
+            scheduleAutoSave();
             showToast("Nova conquista adicionada à linha do tempo!");
         }
 
@@ -1383,7 +1776,9 @@
                 desc: "Nova Meta de Futuro"
             });
             renderSidebarInputs();
+            buildSliderEvents();
             updateDashboard(parseInt(document.getElementById('lifeSlider').value));
+            scheduleAutoSave();
             showToast("Nova meta futura adicionada!");
         }
 
@@ -1442,6 +1837,7 @@
             localStorage.setItem(`ruler_data_${currentActiveAccount}`, JSON.stringify(state));
             
             buildTicks();
+            buildSliderEvents();
             const currentSelectedYear = parseInt(document.getElementById('lifeSlider').value);
             updateDashboard(currentSelectedYear);
 
@@ -1539,17 +1935,20 @@
             // 4. GPS Financeiro de Simulação
             const totalPatr = state.patrXP + state.patrOutros;
             const targetWealth = 5000000;
+            const aporteAnual = aporteAtual * 12;
+            const taxaReal = 0.055;
             const yearsElapsed = year - 2026;
             
-            // Projeção real (juros compostos de 5.5% real a.a. + aporte simulado de R$ 5.000 mensais)
+            // Projeção com juros compostos + aporte mensal definido pelo usuário
             let simulatedWealth = totalPatr;
             if (yearsElapsed > 0) {
-                simulatedWealth = totalPatr * Math.pow(1.055, yearsElapsed) + (60000 * ((Math.pow(1.055, yearsElapsed) - 1) / 0.055));
+                simulatedWealth = totalPatr * Math.pow(1 + taxaReal, yearsElapsed)
+                    + aporteAnual * ((Math.pow(1 + taxaReal, yearsElapsed) - 1) / taxaReal);
             } else if (yearsElapsed < 0) {
-                simulatedWealth = totalPatr * Math.pow(0.945, Math.abs(yearsElapsed));
+                simulatedWealth = totalPatr * Math.pow(1 - taxaReal, Math.abs(yearsElapsed));
             }
 
-            if (simulatedWealth > 100000000) simulatedWealth = 100000000;
+            if (simulatedWealth > 200000000) simulatedWealth = 200000000;
 
             document.getElementById('gpsPatrimonio').innerText = formatMoney(simulatedWealth);
             
@@ -1557,24 +1956,51 @@
             const progressPercent = Math.min((simulatedWealth / targetWealth) * 100, 100);
             document.getElementById('gpsProgressFill').style.width = `${progressPercent}%`;
 
-            // Aporte ideal recomendado baseado no ano selecionado
-            const yearsToRetirement = 2038 - year;
-            let recommendedContribution = 5000;
-            
-            if (yearsToRetirement > 0) {
-                const deficit = targetWealth - simulatedWealth;
-                if (deficit > 0) {
-                    recommendedContribution = deficit / (yearsToRetirement * 12);
+            // ── Anel de Progresso (Momento Panel) ───────────────────────
+            const circumference = 2 * Math.PI * 22; // r=22 => 138.23
+            const dashOffset = circumference - (progressPercent / 100) * circumference;
+            const ringFill = document.getElementById('progressRingFill');
+            const pctLabel = document.getElementById('progressRingPct');
+            if (ringFill) {
+                ringFill.style.strokeDashoffset = dashOffset;
+                ringFill.style.strokeDasharray = circumference;
+            }
+            if (pctLabel) pctLabel.innerText = Math.round(progressPercent) + '%';
+
+            // ── Painel Momento Atual ─────────────────────────────────────
+            const momentoYear = document.getElementById('momentoYear');
+            const momentoTitle = document.getElementById('momentoTitle');
+            const momentoSubtitle = document.getElementById('momentoSubtitle');
+            const nowYear = new Date().getFullYear();
+
+            if (momentoYear) momentoYear.innerText = year;
+            if (momentoTitle) {
+                if (year === nowYear) {
+                    momentoTitle.innerText = '📍 Você está aqui — ' + nowYear;
+                } else if (year < nowYear) {
+                    momentoTitle.innerText = `⏪ ${nowYear - year} anos atrás`;
                 } else {
-                    recommendedContribution = 0;
+                    const diff = year - nowYear;
+                    momentoTitle.innerText = `⏩ Daqui a ${diff} ano${diff > 1 ? 's' : ''}`;
                 }
-            } else {
-                recommendedContribution = 0;
+            }
+            if (momentoSubtitle) {
+                // Evento mais próximo deste ano
+                const allEvents = [
+                    ...state.past.map(p => ({year: p.year, desc: p.desc, tipo: 'past'})),
+                    ...state.future.map(f => ({year: f.year, desc: f.desc, tipo: 'future'}))
+                ].sort((a,b) => Math.abs(a.year - year) - Math.abs(b.year - year));
+
+                if (allEvents.length > 0 && Math.abs(allEvents[0].year - year) <= 3) {
+                    const icon = allEvents[0].tipo === 'past' ? '🏆' : '🎯';
+                    momentoSubtitle.innerText = `${icon} ${allEvents[0].desc} (${allEvents[0].year})`;
+                } else {
+                    momentoSubtitle.innerText = clientAge >= 0 ? `${titular ? titular.name : 'Titular'} com ${clientAge} anos` : 'Período pré-nascimento';
+                }
             }
 
-            document.getElementById('gpsAporte').innerText = recommendedContribution > 0 
-                ? formatMoney(recommendedContribution) + " / mês"
-                : "Independência Atingida! ✨";
+            // ── Mini Gráfico SVG Patrimonial ─────────────────────────────
+            renderPatrimonioChart(totalPatr, aporteAnual, taxaReal, year);
         }
 
         // Helper para gerar o card de cada membro familiar
@@ -1591,6 +2017,79 @@
                 <div class="family-age ${wasBorn ? 'active' : ''}">${displayAge}</div>
             `;
             return card;
+        }
+
+        // ── Mini Gráfico SVG ─────────────────────────────────────────
+        function renderPatrimonioChart(basePatr, aporteAnual, taxa, currentYear) {
+            const svg = document.getElementById('patrimonioChart');
+            if (!svg) return;
+
+            const startYear = 2026;
+            const endYear = Math.max(2060, currentYear + 5);
+            const years = [];
+            const values = [];
+
+            for (let y = startYear; y <= endYear; y += 2) {
+                const elapsed = y - startYear;
+                let val = basePatr * Math.pow(1 + taxa, elapsed)
+                    + aporteAnual * ((Math.pow(1 + taxa, elapsed) - 1) / taxa);
+                if (val > 200000000) val = 200000000;
+                years.push(y);
+                values.push(val);
+            }
+
+            const w = svg.parentElement.clientWidth || 500;
+            const h = 80;
+            const padLeft = 0, padRight = 0, padTop = 8, padBottom = 0;
+            const innerW = w - padLeft - padRight;
+            const innerH = h - padTop - padBottom;
+
+            const maxVal = Math.max(...values, 1);
+            const minVal = Math.min(...values);
+
+            const pts = values.map((v, i) => {
+                const x = padLeft + (i / (values.length - 1)) * innerW;
+                const y2 = padTop + innerH - ((v - minVal) / (maxVal - minVal)) * innerH;
+                return `${x},${y2}`;
+            });
+
+            // Área preenchida (gradiente)
+            const areaPath = `M${pts[0]} ` + pts.slice(1).map(p => `L${p}`).join(' ')
+                + ` L${padLeft + innerW},${h} L${padLeft},${h} Z`;
+
+            // Linha da projeção
+            const linePath = `M${pts[0]} ` + pts.slice(1).map(p => `L${p}`).join(' ');
+
+            // Posição do ano atual no gráfico
+            const currentIdx = years.findIndex(y => y >= currentYear);
+            const ciX = currentIdx >= 0 ? (padLeft + (currentIdx / (values.length - 1)) * innerW) : null;
+            const ciY = currentIdx >= 0 ? parseFloat(pts[currentIdx].split(',')[1]) : null;
+
+            svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+            svg.setAttribute('preserveAspectRatio', 'none');
+
+            svg.innerHTML = `
+                <defs>
+                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#C5A880" stop-opacity="0.3"/>
+                        <stop offset="100%" stop-color="#C5A880" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+                <path d="${areaPath}" fill="url(#chartGrad)"/>
+                <path d="${linePath}" fill="none" stroke="#C5A880" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                ${ciX !== null ? `
+                    <line x1="${ciX}" y1="${padTop}" x2="${ciX}" y2="${h}" stroke="rgba(0,209,255,0.5)" stroke-width="1" stroke-dasharray="3,3"/>
+                    <circle cx="${ciX}" cy="${ciY}" r="4" fill="#00D1FF" stroke="#050C1A" stroke-width="2"/>
+                ` : ''}
+            `;
+
+            // Marcadores de ano abaixo do gráfico
+            const markersEl = document.getElementById('chartYearMarkers');
+            if (markersEl) {
+                const step = Math.ceil(years.length / 5);
+                const markers = years.filter((_, i) => i % step === 0 || i === years.length - 1);
+                markersEl.innerHTML = markers.map(y => `<span>${y}</span>`).join('');
+            }
         }
 
         // ── Toaster Toast Feedback ──────────────────────────────────
