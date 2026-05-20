@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<script>
+  (function() {
+    var PASS = "jb@9A2026";
+    var stored = sessionStorage.getItem("hub_auth");
+    if (stored !== PASS) {
+      var input = window.prompt("🔐 Área restrita — Jhony Bosio\n\nDigite a senha de acesso:");
+      if (input !== PASS) {
+        document.write('<style>body{margin:0;background:#030816;display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:rgba(255,255,255,0.5);font-size:14px;}</style><body>Acesso negado. <a href="/" style="color:#D4AF37;margin-left:8px;">Voltar ao site</a></body>');
+        document.close();
+        throw new Error("Acesso negado");
+      }
+      sessionStorage.setItem("hub_auth", PASS);
+    }
+  })();
+</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Master Console | Jhony Bosio</title>

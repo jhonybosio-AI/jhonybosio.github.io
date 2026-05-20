@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wealth Academy — Protocolo 9A | Jhony Bosio</title>
+  <meta name="description" content="Curso gratuito sobre filosofia fiduciária, ETFs globais e engenharia de portfólio. Aprenda o Protocolo 9A com Jhony Bosio.">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030816;
+      --bg-card: #071126;
+      --bg-sidebar: #040d1e;
+      --gold: #D4AF37;
+      --gold-light: #F3E5AB;
+      --gold-grad: linear-gradient(135deg, #c5a880 0%, #D4AF6A 50%, #A8893C 100%);
+      --blue: #1B6FEF;
+      --green: #22C55E;
+      --green-dark: #16A34A;
+      --glass: rgba(255,255,255,0.02);
+      --border: rgba(255,255,255,0.06);
+      --border-gold: rgba(212,175,106,0.18);
+      --w: #FFFFFF;
+      --muted: rgba(255,255,255,0.65);
+      --dimmed: rgba(255,255,255,0.35);
+      --font-title: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --r-sm: 6px; --r-md: 12px; --r-lg: 20px; --r-xl: 28px; --r-full: 999px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--w);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── LAYOUT PRINCIPAL ── */
+    .app-layout {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      grid-template-rows: auto 1fr;
+      min-height: 100vh;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      grid-column: 1 / -1;
+      height: 64px;
+      background: rgba(3,8,22,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .topbar-logo {
+      height: 30px;
+    }
+    .topbar-texts { display: flex; flex-direction: column; }
+    .topbar-title {
+      font-family: var(--font-title);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--w);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .topbar-sub {
+      font-family: var(--font-title);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-top: 2px;
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .topbar-badge {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green);
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: var(--r-full);
+      padding: 5px 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .topbar-cta {
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--green);
+      color: #fff;
+      border-radius: var(--r-full);
+      padding: 9px 22px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .topbar-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--w);
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border);
+      padding: 32px 0;
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.08) transparent;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+    .sidebar-progress {
+      margin: 0 20px 28px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 16px;
+    }
+    .progress-label {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--dimmed);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .progress-bar-wrap {
+      background: rgba(255,255,255,0.05);
+      border-radius: var(--r-full);
+      height: 6px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: var(--r-full);
+      background: linear-gradient(90deg, var(--green), #4ade80);
+      width: 33%;
+      transition: width 0.6s ease;
+    }
+    .progress-text {
+      font-family: var(--font-title);
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .progress-text strong { color: var(--green); }
+
+    .sidebar-module {
+      margin-bottom: 8px;
+    }
+    .module-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .module-header:hover { background: rgba(255,255,255,0.03); }
+    .module-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+    .mod-unlocked .module-icon { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.2); }
+    .mod-locked .module-icon { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+    .module-info { flex: 1; min-width: 0; }
+    .module-num {
+      font-family: var(--font-title);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--dimmed);
+    }
+    .module-name {
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--w);
+      line-height: 1.3;
+    }
+    .mod-locked .module-name { color: var(--dimmed); }
+    .module-status {
+      font-size: 12px;
+    }
+
+    .lesson-list {
+      padding: 0 0 8px 0;
+      display: none;
+    }
+    .lesson-list.open { display: block; }
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px 8px 58px;
+      cursor: pointer;
+      transition: all 0.15s;
+      border-radius: 0;
+      font-family: var(--font-title);
+      font-size: 13px;
+      color: var(--muted);
+      border-left: 2px solid transparent;
+      margin-left: 20px;
+    }
+    .lesson-item:hover { color: var(--w); background: rgba(255,255,255,0.03); }
+    .lesson-item.active {
+      color: var(--gold);
+      border-left-color: var(--gold);
+      background: rgba(212,175,106,0.05);
+    }
+    .lesson-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 9px;
+    }
+    .lesson-item.done .lesson-check {
+      background: var(--green);
+      border-color: var(--green);
+    }
+    .lesson-item.active .lesson-check {
+      border-color: var(--gold);
+    }
+
+    .sidebar-lock-cta {
+      margin: 4px 20px 4px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 14px 16px;
+    }
+    .lock-cta-text {
+      font-size: 12px;
+      color: var(--dimmed);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .lock-cta-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: var(--r-sm);
+      padding: 9px 12px;
+      font-family: var(--font-title);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green);
+      transition: all 0.2s;
+    }
+    .lock-cta-btn:hover { background: rgba(34,197,94,0.15); }
+
+    /* ── CONTEÚDO PRINCIPAL ── */
+    .main-content {
+      padding: 48px 64px 80px;
+      max-width: 860px;
+    }
+
+    .lesson-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-title);
+      font-size: 12px;
+      color: var(--dimmed);
+      margin-bottom: 32px;
+    }
+    .breadcrumb-sep { opacity: 0.4; }
+    .breadcrumb-cur { color: var(--gold); font-weight: 600; }
+
+    .lesson-header {
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .lesson-module-tag {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lesson-module-tag::before {
+      content: "";
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .lesson-title {
+      font-family: var(--font-title);
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 800;
+      color: var(--w);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .lesson-title span {
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .lesson-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .lesson-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ── BODY DO CONTEÚDO ── */
+    .lesson-body { font-size: 16px; color: var(--muted); line-height: 1.8; }
+    .lesson-body h2 {
+      font-family: var(--font-title);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--w);
+      letter-spacing: -0.02em;
+      margin: 40px 0 16px;
+      line-height: 1.3;
+    }
+    .lesson-body h3 {
+      font-family: var(--font-title);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--w);
+      margin: 28px 0 12px;
+    }
+    .lesson-body p { margin-bottom: 20px; }
+    .lesson-body strong { color: var(--w); font-weight: 600; }
+    .lesson-body em { color: var(--gold-light); }
+
+    .callout {
+      background: rgba(212,175,106,0.05);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--r-md) var(--r-md) 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+    .callout p { margin-bottom: 0; color: var(--w); font-style: italic; line-height: 1.7; }
+    .callout-author {
+      font-family: var(--font-title);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-top: 10px;
+      font-style: normal;
+    }
+
+    .callout-blue {
+      background: rgba(27,111,239,0.06);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--r-md) var(--r-md) 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+    .callout-blue p { margin-bottom: 0; color: var(--w); }
+
+    .callout-green {
+      background: rgba(34,197,94,0.06);
+      border-left: 3px solid var(--green);
+      border-radius: 0 var(--r-md) var(--r-md) 0;
+      padding: 20px 24px;
+      margin: 28px 0;
+    }
+    .callout-green p { margin-bottom: 0; }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      font-size: 14px;
+    }
+    .comparison-table th {
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      color: var(--dimmed);
+    }
+    .comparison-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted);
+      vertical-align: top;
+    }
+    .comparison-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .comparison-table .col-bad { color: #f87171; }
+    .comparison-table .col-good { color: #4ade80; font-weight: 600; }
+    .comparison-table .col-head { font-weight: 700; color: var(--w); }
+
+    .key-points {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .key-point-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+    .key-point-card:hover { border-color: rgba(255,255,255,0.12); }
+    .kp-icon { font-size: 20px; margin-bottom: 10px; }
+    .kp-title { font-family: var(--font-title); font-size: 14px; font-weight: 700; color: var(--w); margin-bottom: 6px; }
+    .kp-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    .stat-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .stat-mini {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-mini-num {
+      font-family: var(--font-title);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--w);
+      letter-spacing: -0.02em;
+    }
+    .stat-mini-num .accent { color: var(--gold); }
+    .stat-mini-label { font-size: 12px; color: var(--dimmed); margin-top: 4px; }
+
+    /* ── NAV AULAS ── */
+    .lesson-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .lesson-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      background: var(--glass);
+      color: var(--muted);
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lesson-nav-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--w); background: rgba(255,255,255,0.04); }
+    .lesson-nav-btn.next-green {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .lesson-nav-btn.next-green:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(34,197,94,0.35); }
+
+    /* ── LESSON VIEWS (navegação JS) ── */
+    .lesson-view { display: none; }
+    .lesson-view.active { display: block; }
+
+    /* ── LOCKED OVERLAY ── */
+    .locked-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 40px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .locked-icon {
+      font-size: 48px;
+      margin-bottom: 24px;
+      opacity: 0.6;
+    }
+    .locked-title {
+      font-family: var(--font-title);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--w);
+      margin-bottom: 12px;
+    }
+    .locked-desc { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+    .locked-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: #fff;
+      font-family: var(--font-title);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: var(--r-full);
+      box-shadow: 0 8px 32px rgba(34,197,94,0.35);
+      transition: all 0.25s;
+    }
+    .locked-btn:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(34,197,94,0.45); }
+    .locked-note { font-size: 13px; color: var(--dimmed); margin-top: 16px; }
+
+    /* ── RESPONSIVO ── */
+    @media(max-width: 900px) {
+      .app-layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: fixed;
+        left: -300px;
+        top: 0;
+        height: 100vh;
+        width: 290px;
+        z-index: 200;
+        transition: left 0.3s ease;
+        padding-top: 80px;
+      }
+      .sidebar.open { left: 0; box-shadow: 4px 0 40px rgba(0,0,0,0.5); }
+      .menu-toggle { display: flex; }
+      .main-content { padding: 32px 20px 80px; max-width: 100%; }
+      .topbar-badge { display: none; }
+      .key-points { grid-template-columns: 1fr; }
+      .stat-cards { grid-template-columns: repeat(2, 1fr); }
+      .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        z-index: 199;
+        backdrop-filter: blur(4px);
+      }
+      .sidebar-overlay.active { display: block; }
+    }
+    @media(max-width: 480px) {
+      .stat-cards { grid-template-columns: 1fr; }
+      .comparison-table { font-size: 12px; }
+      .comparison-table th, .comparison-table td { padding: 10px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      <img src="../logo-prime.png" alt="Jhony Bosio" class="topbar-logo">
+      <div class="topbar-texts">
+        <span class="topbar-title">Wealth Academy</span>
+        <span class="topbar-sub">by Jhony Bosio · Private Advisor</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-badge">100% Gratuito</span>
+      <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20estou%20na%20Wealth%20Academy%20e%20gostaria%20de%20liberar%20todos%20os%20m%C3%B3dulos." target="_blank" class="topbar-cta">Liberar Todos os Módulos →</a>
+    </div>
+  </header>
+
+  <!-- Overlay mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+      <div class="sidebar-progress">
+        <div class="progress-label">Seu progresso</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+        <div class="progress-text"><strong id="progressText">1 de 3</strong> módulos desbloqueados</div>
+      </div>
+
+      <!-- Módulo 1 -->
+      <div class="sidebar-module mod-unlocked" id="mod1-wrap">
+        <div class="module-header" onclick="toggleModule('mod1-lessons')">
+          <div class="module-icon">✅</div>
+          <div class="module-info">
+            <div class="module-num">Módulo 1</div>
+            <div class="module-name">Filosofia Fiduciária</div>
+          </div>
+          <span class="module-status" id="mod1-arrow">▾</span>
+        </div>
+        <div class="lesson-list open" id="mod1-lessons">
+          <div class="lesson-item active done" onclick="showLesson('l1-1')" id="nav-l1-1">
+            <div class="lesson-check">✓</div>
+            1.1 O Fim do Conflito de Interesses
+          </div>
+          <div class="lesson-item" onclick="showLesson('l1-2')" id="nav-l1-2">
+            <div class="lesson-check"></div>
+            1.2 Como Seu Banco Te Custa 2% ao Ano
+          </div>
+          <div class="lesson-item" onclick="showLesson('l1-3')" id="nav-l1-3">
+            <div class="lesson-check"></div>
+            1.3 ETFs: A Revolução Silenciosa
+          </div>
+        </div>
+      </div>
+
+      <!-- Módulo 2 -->
+      <div class="sidebar-module mod-locked">
+        <div class="module-header" onclick="openLockPrompt('mod2')">
+          <div class="module-icon">🔒</div>
+          <div class="module-info">
+            <div class="module-num">Módulo 2</div>
+            <div class="module-name">Engenharia de Portfólio</div>
+          </div>
+          <span class="module-status">▸</span>
+        </div>
+        <div class="sidebar-lock-cta">
+          <p class="lock-cta-text">Libere gratuitamente com o Hermes e acesse o mapeamento das 9 Classes Globais.</p>
+          <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20conclu%C3%AD%20o%20M%C3%B3dulo%201%20da%20Wealth%20Academy%20e%20gostaria%20de%20liberar%20o%20M%C3%B3dulo%202." target="_blank" class="lock-cta-btn">
+            🔓 Liberar Grátis com Hermes
+          </a>
+        </div>
+      </div>
+
+      <!-- Módulo 3 -->
+      <div class="sidebar-module mod-locked">
+        <div class="module-header" onclick="openLockPrompt('mod3')">
+          <div class="module-icon">🔒</div>
+          <div class="module-info">
+            <div class="module-num">Módulo 3</div>
+            <div class="module-name">Ferramental Prático</div>
+          </div>
+          <span class="module-status">▸</span>
+        </div>
+        <div class="sidebar-lock-cta">
+          <p class="lock-cta-text">Ative seu acesso ao Simulador Inteligente de ETFs e à Aula Prática.</p>
+          <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20conclu%C3%AD%20o%20M%C3%B3dulo%201%20e%20gostaria%20de%20ativar%20meu%20acesso%20ao%20Simulador%20de%20ETFs%20e%20liberar%20o%20M%C3%B3dulo%203." target="_blank" class="lock-cta-btn">
+            🔓 Ativar Simulador + Módulo 3
+          </a>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content">
+
+      <!-- ══════════════════ LIÇÃO 1.1 ══════════════════ -->
+      <div class="lesson-view active" id="l1-1">
+        <div class="lesson-breadcrumb">
+          <span>Wealth Academy</span>
+          <span class="breadcrumb-sep">›</span>
+          <span>Módulo 1: Filosofia Fiduciária</span>
+          <span class="breadcrumb-sep">›</span>
+          <span class="breadcrumb-cur">Aula 1.1</span>
+        </div>
+
+        <div class="lesson-header">
+          <div class="lesson-module-tag">Módulo 1 · Filosofia Fiduciária</div>
+          <h1 class="lesson-title">O Fim do <span>Conflito de Interesses</span></h1>
+          <div class="lesson-meta">
+            <span class="lesson-meta-item">📖 Leitura — 8 min</span>
+            <span class="lesson-meta-item">🎯 Fundacional</span>
+            <span class="lesson-meta-item" style="color:var(--green);">✓ Livre acesso</span>
+          </div>
+        </div>
+
+        <div class="lesson-body">
+          <p>Seja muito bem-vindo à <strong>Wealth Academy</strong>. Nos próximos minutos, vou te dar clareza sobre um problema que afeta a maioria dos investidores brasileiros — inclusive aqueles com patrimônio significativo — sem que eles sequer percebam.</p>
+
+          <p>Esse problema tem um nome técnico: <em>conflito de interesses estrutural</em>. E ele está embutido no modelo de negócios da distribuição financeira tradicional.</p>
+
+          <h2>O Mercado Foi Construído Contra Você</h2>
+
+          <p>Vamos começar com uma pergunta simples: <strong>quando você entra em uma agência bancária ou fala com um gerente de investimentos, de quem é o interesse que ele representa?</strong></p>
+
+          <p>A resposta honesta é: o do banco. Não o seu.</p>
+
+          <p>Isso não é má-fé individual — é um problema estrutural. O gerente ou assessor tradicional é remunerado por <strong>comissões de distribuição</strong> embutidas nos produtos que ele recomenda. Quanto mais caro e complexo o produto, maior a comissão. Um fundo de ações com taxa de administração de 2% ao ano e taxa de performance de 20% gera muito mais receita para a instituição do que um ETF com custo de 0,10% ao ano.</p>
+
+          <div class="callout">
+            <p>"É difícil fazer um homem entender alguma coisa quando o salário dele depende de ele <em>não</em> entender essa coisa."</p>
+            <div class="callout-author">— Upton Sinclair</div>
+          </div>
+
+          <p>Esse é o núcleo do problema. O sistema de incentivos do mercado financeiro tradicional <strong>não está alinhado com os seus resultados</strong>. Está alinhado com a receita da instituição distribuidora.</p>
+
+          <h2>O Que Isso Significa na Prática</h2>
+
+          <p>Imagine que você tem R$ 500.000 investidos. No modelo comissionado tradicional:</p>
+
+          <div class="stat-cards">
+            <div class="stat-mini">
+              <div class="stat-mini-num"><span class="accent">2,5%</span></div>
+              <div class="stat-mini-label">Custo médio anual em fundos ativos + taxas ocultas</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-num"><span class="accent">R$12.500</span></div>
+              <div class="stat-mini-label">Valor retirado do seu patrimônio por ano automaticamente</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-num"><span class="accent">R$125k</span></div>
+              <div class="stat-mini-label">Custo total em 10 anos antes de qualquer rendimento</div>
+            </div>
+          </div>
+
+          <p>Esses números são conservadores. A maioria das carteiras carregadas de CDBs de banco, fundos de crédito privado e COEs estruturados paga entre 3% e 4% ao ano em custos e spreads combinados.</p>
+
+          <h2>O Padrão Fiduciário: A Alternativa</h2>
+
+          <p>O conceito fiduciário (<em>fiduciary</em>, em inglês) define a obrigação legal e ética de um profissional de agir <strong>exclusivamente no melhor interesse do cliente</strong>, não da instituição que o remunera.</p>
+
+          <p>No modelo <strong>Fee Fixo (Fee-Based)</strong>, esse conflito é eliminado estruturalmente:</p>
+
+          <div class="key-points">
+            <div class="key-point-card">
+              <div class="kp-icon">💼</div>
+              <div class="kp-title">Fee Transparente</div>
+              <div class="kp-text">Você paga um percentual fixo e acordado sobre a custódia (ex: 0,80% ao ano). Sem surpresas.</div>
+            </div>
+            <div class="key-point-card">
+              <div class="kp-icon">💰</div>
+              <div class="kp-title">Cashback Integral</div>
+              <div class="kp-text">Qualquer comissão embutida nos produtos retorna 100% para você na forma de cashback direto.</div>
+            </div>
+            <div class="key-point-card">
+              <div class="kp-icon">🎯</div>
+              <div class="kp-title">Alinhamento Real</div>
+              <div class="kp-text">O assessor só cresce se seu patrimônio cresce. Incentivos 100% alinhados.</div>
+            </div>
+            <div class="key-point-card">
+              <div class="kp-icon">📊</div>
+              <div class="kp-title">Curadoria Livre</div>
+              <div class="kp-text">Sem pressão para recomendar produtos de maior margem. A seleção é técnica e independente.</div>
+            </div>
+          </div>
+
+          <div class="callout-green">
+            <p><strong>Resultado prático:</strong> com R$ 500.000 em fee fixo de 0,80% ao ano (R$ 4.000/ano), você economiza entre R$ 8.500 e R$ 16.000 por ano em comparação com o custo médio do modelo comissionado. Em 10 anos, isso equivale a mais de R$ 150.000 que ficam no seu patrimônio — sem contar os juros compostos sobre esse valor.</p>
+          </div>
+
+          <h2>A Transparência Como Diferencial</h2>
+
+          <p>A XP Investimentos é uma das únicas instituições no Brasil que oferece os <strong>três modelos de remuneração</strong> de forma transparente e regulamentada: o modelo comissionado tradicional, o Fee Fixo (Fee-Based) e a consultoria independente (flat-fee). Isso está em conformidade com a <strong>Resolução CVM 178/2023</strong>.</p>
+
+          <p>Na Blue3 Investimentos, escritório parceiro XP, operamos predominantemente no regime de Fee Fixo para clientes que buscam esse nível de transparência e alinhamento. O modelo comissionado ainda está disponível para quem prefere essa estrutura — e nosso compromisso é deixar a escolha 100% consciente e informada.</p>
+
+          <div class="callout-blue">
+            <p><strong>Nota importante:</strong> O modelo comissionado não é errado — é uma escolha legítima e regulamentada. O que defendemos é que essa escolha seja <em>consciente</em>, com plena compreensão dos custos e incentivos envolvidos.</p>
+          </div>
+
+          <h2>Resumo da Aula 1.1</h2>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Aspecto</th>
+                <th>Modelo Comissionado</th>
+                <th>Fee Fixo (Fiduciário)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-head">Remuneração</td>
+                <td class="col-bad">Comissão por produto distribuído</td>
+                <td class="col-good">Fee % fixo sobre custódia</td>
+              </tr>
+              <tr>
+                <td class="col-head">Conflito de interesse</td>
+                <td class="col-bad">Estrutural e inevitável</td>
+                <td class="col-good">Eliminado</td>
+              </tr>
+              <tr>
+                <td class="col-head">Cashback de taxas</td>
+                <td class="col-bad">Não — fica na instituição</td>
+                <td class="col-good">100% retorna ao cliente</td>
+              </tr>
+              <tr>
+                <td class="col-head">Transparência de custos</td>
+                <td class="col-bad">Opaca (embutida nos produtos)</td>
+                <td class="col-good">Total — linha a linha</td>
+              </tr>
+              <tr>
+                <td class="col-head">Incentivo do assessor</td>
+                <td class="col-bad">Maximizar distribuição</td>
+                <td class="col-good">Maximizar seu patrimônio</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="lesson-nav">
+          <a href="../" class="lesson-nav-btn">← Voltar ao Site</a>
+          <button class="lesson-nav-btn next-green" onclick="showLesson('l1-2')">
+            Próxima Aula: Como Seu Banco Te Custa 2% →
+          </button>
+        </div>
+      </div>
+
+      <!-- ══════════════════ LIÇÃO 1.2 ══════════════════ -->
+      <div class="lesson-view" id="l1-2">
+        <div class="lesson-breadcrumb">
+          <span>Wealth Academy</span>
+          <span class="breadcrumb-sep">›</span>
+          <span>Módulo 1: Filosofia Fiduciária</span>
+          <span class="breadcrumb-sep">›</span>
+          <span class="breadcrumb-cur">Aula 1.2</span>
+        </div>
+
+        <div class="lesson-header">
+          <div class="lesson-module-tag">Módulo 1 · Filosofia Fiduciária</div>
+          <h1 class="lesson-title">Como Seu Banco Te <span>Custa 2% ao Ano</span> Sem Você Ver</h1>
+          <div class="lesson-meta">
+            <span class="lesson-meta-item">📖 Leitura — 7 min</span>
+            <span class="lesson-meta-item">💡 Prático</span>
+            <span class="lesson-meta-item" style="color:var(--green);">✓ Livre acesso</span>
+          </div>
+        </div>
+
+        <div class="lesson-body">
+          <p>Na aula anterior, entendemos o problema estrutural do conflito de interesses. Agora vamos quantificar com precisão o impacto financeiro real que isso tem na sua carteira — e onde exatamente esse custo se esconde.</p>
+
+          <h2>As 4 Camadas de Custo Oculto</h2>
+
+          <h3>1. Taxa de Administração dos Fundos</h3>
+          <p>A maioria dos fundos ativos vendidos em banco cobra entre <strong>1,5% e 3% ao ano</strong> de taxa de administração, descontada diariamente da cota. Você nunca vê esse desconto — ele está embutido no valor da cota que aparece no extrato.</p>
+
+          <div class="callout">
+            <p>Um fundo com taxa de administração de 2% ao ano que rende bruto 12% ao ano entrega ao investidor apenas 10%. Mas o IPCA + CDI de 12% com um ETF de 0,1% ao ano entregaria 11,9%. A diferença parece pequena, mas em 20 anos em R$ 500k ela vale <strong>mais de R$ 400.000</strong>.</p>
+          </div>
+
+          <h3>2. Taxa de Performance</h3>
+          <p>Muitos fundos cobram 20% sobre o que superar o benchmark (geralmente CDI ou IBOVESPA). O problema: em anos bons, você paga muito; em anos ruins, você absorve 100% do prejuízo sem devolução.</p>
+
+          <h3>3. Spreads em Renda Fixa</h3>
+          <p>Títulos privados (CDBs, CRIs, CRAs, debentures) são vendidos com <strong>spread embutido</strong>. O banco compra o papel a uma taxa X e te revende a X menos 0,5% ou 1% ao ano. Esse diferencial vai para a instituição — e você nunca vê essa margem no extrato.</p>
+
+          <h3>4. Rebates de Distribuição</h3>
+          <p>Fundos externos pagam "taxas de distribuição" (rebates) às plataformas que os vendem. Esse valor, que pode chegar a 50% da taxa de administração, fica com a corretora — e cria o incentivo para recomendar fundos com maior taxa.</p>
+
+          <div class="stat-cards">
+            <div class="stat-mini">
+              <div class="stat-mini-num"><span class="accent">1,5%</span></div>
+              <div class="stat-mini-label">Custo médio em taxa de administração de fundos brasileiros</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-num"><span class="accent">+0,8%</span></div>
+              <div class="stat-mini-label">Spreads médios em CDBs e crédito privado bancário</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-num"><span class="accent">2,3%</span></div>
+              <div class="stat-mini-label">Custo total médio anual invisível ao investidor</div>
+            </div>
+          </div>
+
+          <h2>O Efeito dos Juros Compostos Invertido</h2>
+
+          <p>Os juros compostos são o oitavo milagre do mundo — quando trabalham <em>para</em> você. O problema é que 2,3% ao ano trabalhando <em>contra</em> você por décadas é devastador:</p>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Cenário</th>
+                <th>R$ 500k inicial</th>
+                <th>Após 10 anos</th>
+                <th>Após 20 anos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-head">Rendimento bruto 12% a.a.</td>
+                <td>R$ 500.000</td>
+                <td class="col-good">R$ 1.552.924</td>
+                <td class="col-good">R$ 4.823.589</td>
+              </tr>
+              <tr>
+                <td class="col-head">Menos 2,3% de custos = 9,7% líq.</td>
+                <td>R$ 500.000</td>
+                <td class="col-bad">R$ 1.257.789</td>
+                <td class="col-bad">R$ 3.164.078</td>
+              </tr>
+              <tr>
+                <td class="col-head">Diferença (custo real dos 2,3%)</td>
+                <td>—</td>
+                <td class="col-bad">- R$ 295.135</td>
+                <td class="col-bad">- R$ 1.659.511</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout-green">
+            <p><strong>Conclusão:</strong> R$ 1,6 milhão perdido em 20 anos não por investir errado — mas simplesmente por pagar 2,3% ao ano a mais em custos que a maioria dos investidores nem sabe que está pagando.</p>
+          </div>
+
+          <h2>A Solução Estrutural: ETFs + Fee Transparente</h2>
+
+          <p>O Protocolo 9A resolve essas 4 camadas de custo de uma só vez:</p>
+
+          <div class="key-points">
+            <div class="key-point-card">
+              <div class="kp-icon">📉</div>
+              <div class="kp-title">ETFs = Custo 0,03% a 0,20%/ano</div>
+              <div class="kp-text">Sem taxa de administração abusiva, sem taxa de performance, sem rebate de distribuição.</div>
+            </div>
+            <div class="key-point-card">
+              <div class="kp-icon">🔍</div>
+              <div class="kp-title">Spread Zero em Renda Fixa</div>
+              <div class="kp-text">No Fee-Based, a remuneração vem do fee fixo — sem incentivo para incluir produtos de maior spread.</div>
+            </div>
+            <div class="key-point-card">
+              <div class="kp-icon">💸</div>
+              <div class="kp-title">Cashback dos Rebates</div>
+              <div class="kp-text">Qualquer rebate recebido na distribuição retorna integralmente ao cliente no extrato de cashback.</div>
+            </div>
+            <div class="key-point-card">
+              <div class="kp-icon">📋</div>
+              <div class="kp-title">Fee Único e Visível</div>
+              <div class="kp-text">Um único percentual sobre a custódia, claro, negociado, sem surpresas mensais.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="lesson-nav-btn" onclick="showLesson('l1-1')">← Aula 1.1</button>
+          <button class="lesson-nav-btn next-green" onclick="showLesson('l1-3')">
+            Próxima: ETFs — A Revolução Silenciosa →
+          </button>
+        </div>
+      </div>
+
+      <!-- ══════════════════ LIÇÃO 1.3 ══════════════════ -->
+      <div class="lesson-view" id="l1-3">
+        <div class="lesson-breadcrumb">
+          <span>Wealth Academy</span>
+          <span class="breadcrumb-sep">›</span>
+          <span>Módulo 1: Filosofia Fiduciária</span>
+          <span class="breadcrumb-sep">›</span>
+          <span class="breadcrumb-cur">Aula 1.3</span>
+        </div>
+
+        <div class="lesson-header">
+          <div class="lesson-module-tag">Módulo 1 · Filosofia Fiduciária</div>
+          <h1 class="lesson-title">ETFs: <span>A Revolução Silenciosa</span> dos Investimentos</h1>
+          <div class="lesson-meta">
+            <span class="lesson-meta-item">📖 Leitura — 9 min</span>
+            <span class="lesson-meta-item">🚀 Transformador</span>
+            <span class="lesson-meta-item" style="color:var(--green);">✓ Livre acesso</span>
+          </div>
+        </div>
+
+        <div class="lesson-body">
+          <p>Se a aula 1.1 te mostrou <em>por que</em> o modelo tradicional falha, e a 1.2 te mostrou <em>quanto</em> ele custa, esta aula te mostra a <strong>solução prática</strong> que está redefinindo a gestão de patrimônio global.</p>
+
+          <h2>O Que São ETFs, Exatamente?</h2>
+
+          <p>ETF significa <em>Exchange Traded Fund</em> — fundo negociado em bolsa. Mas a definição técnica não captura a revolução que eles representam. A melhor forma de entender é pela comparação:</p>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Característica</th>
+                <th>Fundo Ativo Tradicional</th>
+                <th>ETF de Índice</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-head">Objetivo</td>
+                <td>Superar o índice (raramente consegue)</td>
+                <td class="col-good">Replicar o índice com precisão</td>
+              </tr>
+              <tr>
+                <td class="col-head">Taxa de administração</td>
+                <td class="col-bad">1,5% a 3% ao ano</td>
+                <td class="col-good">0,03% a 0,20% ao ano</td>
+              </tr>
+              <tr>
+                <td class="col-head">Liquidez</td>
+                <td class="col-bad">D+30 a D+60 (meses)</td>
+                <td class="col-good">D+2 (dias úteis, como ações)</td>
+              </tr>
+              <tr>
+                <td class="col-head">Transparência</td>
+                <td class="col-bad">Carteira divulgada mensalmente</td>
+                <td class="col-good">Composição pública em tempo real</td>
+              </tr>
+              <tr>
+                <td class="col-head">Tributação</td>
+                <td class="col-bad">Come-cotas semestrais</td>
+                <td class="col-good">15% apenas na venda com lucro</td>
+              </tr>
+              <tr>
+                <td class="col-head">Diversificação</td>
+                <td>Concentrado (20 a 50 ativos)</td>
+                <td class="col-good">Ampla (centenas a milhares de ativos)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2>A Evidência Científica Por Trás dos ETFs</h2>
+
+          <p>A superioridade dos ETFs passivos sobre fundos ativos não é opinião — é uma das conclusões mais robustas da ciência econômica moderna.</p>
+
+          <div class="callout">
+            <p>"A maioria dos gestores de fundos não supera consistentemente um índice simples de baixo custo ao longo de 15 anos. A melhor estratégia para a maioria dos investidores é um portfólio de baixo custo, diversificado e de longo prazo."</p>
+            <div class="callout-author">— William Sharpe, Nobel de Economia 1990</div>
+          </div>
+
+          <p>O relatório SPIVA (S&P Indices Versus Active) confirma: <strong>mais de 90% dos fundos ativos</strong> são superados pelo índice passivo correspondente em períodos de 15 anos.</p>
+
+          <div class="stat-cards">
+            <div class="stat-mini">
+              <div class="stat-mini-num"><span class="accent">92%</span></div>
+              <div class="stat-mini-label">dos fundos ativos perdem para o índice em 15 anos (SPIVA 2024)</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-num"><span class="accent">$11 tri</span></div>
+              <div class="stat-mini-label">em ativos globais geridos em ETFs passivos (Blackrock, 2024)</div>
+            </div>
+            <div class="stat-mini">
+              <div class="stat-mini-num"><span class="accent">0,03%</span></div>
+              <div class="stat-mini-label">custo anual do VOO (S&P 500 ETF) — o maior do mundo</div>
+            </div>
+          </div>
+
+          <h2>Os ETFs do Protocolo 9A</h2>
+
+          <p>O Protocolo 9A seleciona um ETF de referência para cada uma das 9 Classes de Ativos Globais, formando uma carteira enxuta, ultra-diversificada e de altíssima eficiência fiscal:</p>
+
+          <div class="key-points">
+            <div class="key-point-card">
+              <div class="kp-icon">🇧🇷</div>
+              <div class="kp-title">Ações Brasil</div>
+              <div class="kp-text">ETFs listados na B3 que replicam o IBOVESPA ou índices de small caps nacionais.</div>
+            </div>
+            <div class="key-point-card">
+              <div class="kp-icon">🌎</div>
+              <div class="kp-title">Ações Globais (EUA/Mundo)</div>
+              <div class="kp-text">ETFs que replicam S&P 500, Nasdaq, MSCI World — acesso a milhares de empresas globais.</div>
+            </div>
+            <div class="key-point-card">
+              <div class="kp-icon">🏠</div>
+              <div class="kp-title">Imóveis (FIIs + REITs)</div>
+              <div class="kp-text">Renda imobiliária nacional e global com liquidez diária — sem burocracia de escritura.</div>
+            </div>
+            <div class="key-point-card">
+              <div class="kp-icon">📈</div>
+              <div class="kp-title">Renda Fixa Inflação</div>
+              <div class="kp-text">ETFs de IMAB para proteção contra inflação de longo prazo com eficiência tributária superior.</div>
+            </div>
+            <div class="key-point-card">
+              <div class="kp-icon">💵</div>
+              <div class="kp-title">Renda Fixa Pré-fixada</div>
+              <div class="kp-text">ETFs de IRF-M para capturar ciclos de queda de juros com gestão passiva e eficiente.</div>
+            </div>
+            <div class="key-point-card">
+              <div class="kp-icon">🥇</div>
+              <div class="kp-title">Commodities (Ouro)</div>
+              <div class="kp-text">ETFs de ouro em BRL para proteção cambial e descorrelação em crises sistêmicas.</div>
+            </div>
+          </div>
+
+          <div class="callout-green">
+            <p><strong>No Módulo 2</strong> (disponível ao liberar com o Hermes), você aprende como escolher o ETF ideal para cada classe, como definir os pesos ideais para o seu perfil, e como montar uma carteira completa sob o Protocolo 9A.</p>
+          </div>
+
+          <h2>Por Que Isso Muda Tudo Para Você</h2>
+
+          <p>A combinação de <strong>ETFs de baixo custo + fee transparente + rebalanceamento disciplinado</strong> é a mesma estratégia usada pelos maiores fundos de endowment do mundo (Harvard, Yale, Stanford) e pelos maiores family offices globais.</p>
+
+          <p>A diferença é que, até recentemente, essa estratégia estava acessível apenas para quem tinha decenas de milhões. Com a evolução do mercado de capitais brasileiro e as plataformas XP, ela está disponível para qualquer investidor qualificado — com carteiras a partir de R$ 300.000.</p>
+
+          <p>O Protocolo 9A é a sistematização dessa estratégia para a realidade tributária, cambial e de mercado do investidor brasileiro de alta renda.</p>
+        </div>
+
+        <div class="lesson-nav">
+          <button class="lesson-nav-btn" onclick="showLesson('l1-2')">← Aula 1.2</button>
+          <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20conclui%20o%20M%C3%B3dulo%201%20da%20Wealth%20Academy%20e%20gostaria%20de%20liberar%20o%20M%C3%B3dulo%202%20e%20o%20Simulador%20de%20ETFs%20gratuitamente." target="_blank" class="lesson-nav-btn next-green">
+            🔓 Liberar Módulo 2 com Hermes →
+          </a>
+        </div>
+      </div>
+
+      <!-- ══════════════════ LOCKED (M2 e M3) ══════════════════ -->
+      <div class="lesson-view" id="locked-mod2">
+        <div class="locked-section">
+          <div class="locked-icon">🔒</div>
+          <h2 class="locked-title">Módulo 2: Bloqueado</h2>
+          <p class="locked-desc">O Mapeamento das 9 Classes Globais e a construção da carteira sob o Protocolo 9A estão disponíveis gratuitamente. Ative seu acesso pelo Hermes agora.</p>
+          <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20conclui%20o%20M%C3%B3dulo%201%20da%20Wealth%20Academy%20e%20gostaria%20de%20liberar%20o%20M%C3%B3dulo%202%20gratuitamente." target="_blank" class="locked-btn">
+            🔓 Liberar Módulo 2 Gratuitamente
+          </a>
+          <p class="locked-note">Processo leva menos de 2 minutos via WhatsApp</p>
+        </div>
+      </div>
+
+      <div class="lesson-view" id="locked-mod3">
+        <div class="locked-section">
+          <div class="locked-icon">🛠️</div>
+          <h2 class="locked-title">Módulo 3: Ferramental Prático</h2>
+          <p class="locked-desc">Aprenda a usar o Simulador Inteligente de ETFs e a fazer o rebalanceamento da sua carteira. Ative seu acesso e receba o link do Simulador via Hermes.</p>
+          <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20gostaria%20de%20ativar%20meu%20acesso%20ao%20Simulador%20de%20ETFs%20e%20liberar%20o%20M%C3%B3dulo%203%20da%20Wealth%20Academy." target="_blank" class="locked-btn">
+            🔓 Liberar Simulador + Módulo 3
+          </a>
+          <p class="locked-note">Você receberá o link do Simulador direto no WhatsApp</p>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script>
+    // ── NAVEGAÇÃO DE LIÇÕES ──
+    function showLesson(lessonId) {
+      document.querySelectorAll('.lesson-view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.lesson-item').forEach(i => i.classList.remove('active'));
+      const view = document.getElementById(lessonId);
+      if (view) { view.classList.add('active'); view.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      const navItem = document.getElementById('nav-' + lessonId);
+      if (navItem) { navItem.classList.add('active'); navItem.classList.add('done'); }
+    }
+
+    function openLockPrompt(modId) {
+      showLesson('locked-' + modId);
+    }
+
+    // ── TOGGLE MÓDULOS ──
+    function toggleModule(listId) {
+      const list = document.getElementById(listId);
+      if (list) list.classList.toggle('open');
+    }
+
+    // ── MENU MOBILE ──
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+
+    menuToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+    });
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+    });
+  </script>
+</body>
+</html>

@@ -386,6 +386,68 @@
       transform: translateY(-1px);
     }
 
+    /* Botão Verde WhatsApp — Alta Conversão */
+    .btn-green {
+      position: relative;
+      font-family: var(--font-title);
+      font-size: 16px;
+      font-weight: 700;
+      background: #22C55E;
+      color: #fff;
+      border: none;
+      border-radius: var(--r-full);
+      padding: 18px 40px;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(34, 197, 94, 0.40);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      overflow: hidden;
+      letter-spacing: -0.01em;
+    }
+    .btn-green::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+    .btn-green:hover::after {
+      transform: translateX(100%);
+    }
+    .btn-green:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 48px rgba(34, 197, 94, 0.50);
+      background: #16A34A;
+    }
+    .btn-green-academy {
+      font-family: var(--font-title);
+      font-size: 14px;
+      font-weight: 700;
+      background: #22C55E;
+      color: #fff;
+      border: none;
+      border-radius: var(--r-md);
+      padding: 13px 24px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.30);
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .btn-green-academy:hover {
+      background: #16A34A;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(34, 197, 94, 0.40);
+    }
+
     /* Cards e Elementos Visuais da Hero */
     .hero-visual {
       position: relative;
@@ -1162,13 +1224,13 @@
       }
       .nav {
         padding: 0 16px;
-        height: 72px;
+        height: 68px;
       }
       .logo-img {
-        height: 32px;
+        height: 30px;
       }
       .logo-title {
-        font-size: 15px;
+        font-size: 14px;
       }
       .logo-sub {
         font-size: 9px;
@@ -1177,30 +1239,92 @@
         display: none;
       }
       .section {
-        padding: 64px 0;
+        padding: 56px 0;
       }
       .hero {
-        padding: 40px 0;
+        padding: 32px 0;
+      }
+      .hero-title {
+        font-size: clamp(28px, 8.5vw, 42px);
+      }
+      .hero-desc {
+        font-size: 16px;
+      }
+      .btn-wrap {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .btn-green, .btn-gold {
+        width: 100%;
+        padding: 16px 24px;
+        font-size: 15px;
+        justify-content: center;
+      }
+      .btn-ghost {
+        width: 100%;
+        justify-content: center;
+      }
+      .hero-glass-panel {
+        max-width: 100%;
+        padding: 24px 20px;
       }
       .stats-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .stat-num {
+        font-size: 28px;
       }
       .stat-card::after {
         display: none !important;
       }
       .sheet-preview {
         padding: 16px;
+        overflow-x: auto;
+      }
+      .sheet-table {
+        min-width: 480px;
       }
       .sheet-table th, .sheet-table td {
         padding: 8px 6px;
         font-size: 11px;
       }
       .model-card {
-        padding: 32px 24px;
+        padding: 28px 20px;
       }
       .final-box {
         padding: 40px 20px;
+      }
+      .final-title {
+        font-size: 24px;
+      }
+      .sec-title {
+        font-size: 28px;
+      }
+      .bio-img-frame {
+        max-width: 280px;
+      }
+      .bio-floating-card {
+        right: 0;
+        bottom: -16px;
+      }
+      .academy-card {
+        padding: 24px 20px;
+      }
+      .faq-question {
+        padding: 20px 20px;
+        font-size: 14px;
+      }
+      .faq-answer-inner {
+        padding: 0 20px 20px;
+      }
+      .modal-btn-wrap {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .modal-btn-txt {
+        max-width: 100%;
+        text-align: center;
       }
     }
 
@@ -1310,8 +1434,8 @@
       font-family: var(--font-title);
       font-size: 13px;
       font-weight: 700;
-      background: var(--gold-metallic);
-      color: var(--bg-dark);
+      background: #22C55E;
+      color: #fff;
       border: none;
       border-radius: var(--r-md);
       padding: 12px 24px;
@@ -1321,10 +1445,13 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.28);
+      text-decoration: none;
     }
     .academy-btn-play:hover {
-      box-shadow: 0 8px 20px rgba(212, 175, 106, 0.25);
+      background: #16A34A;
+      box-shadow: 0 10px 28px rgba(34, 197, 94, 0.40);
       transform: translateY(-1px);
     }
     .academy-btn-locked {
@@ -1521,9 +1648,9 @@
             <p class="hero-desc">Esqueça conflitos de interesse na sua carteira. Tenha acesso completo à metodologia <strong>Protocolo 9A</strong>, aos treinamentos exclusivos da <strong>Wealth Academy</strong> e ao nosso <strong>Simulador Inteligente de ETFs Globais</strong> para rentabilizar seu capital.</p>
             
             <div class="btn-wrap">
-              <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20gostaria%20de%20receber%20o%20acesso%20gratuito%20ao%20Protocolo%209A%20e%20ao%20Simulador%20Inteligente%20de%20ETFs." target="_blank" class="btn-gold">
-                Acessar Wealth Academy & Simulador
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-left: 2px;"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <a href="/academia/" target="_blank" class="btn-green">
+                📖 Começar Agora — É Gratuito
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </a>
               <a href="#modelos" class="btn-ghost">Conhecer Regimes XP</a>
             </div>
@@ -1754,14 +1881,14 @@
           
           <!-- Módulo 1 -->
           <div class="academy-card disponible">
-            <div class="academy-badge status-disponivel">Aula 1 · Liberada</div>
+            <div class="academy-badge status-disponivel">Módulo 1 · Livre Acesso</div>
             <div class="academy-card-content">
               <span class="academy-mod">Módulo 1: Filosofia Fiduciária</span>
               <h3 class="academy-class-title">O Fim do Conflito de Interesses</h3>
               <p class="academy-class-desc">Descubra as diferenças críticas entre o regime de distribuição tradicional (comissão) e o alinhamento fiduciário (fee-based e ETFs) que protege o investidor.</p>
-              <button class="academy-btn-play" onclick="openClassModal()">
-                <span class="btn-play-icon">▶</span> Assistir Aula Grátis
-              </button>
+              <a href="/academia/" target="_blank" class="academy-btn-play">
+                📖 Começar Curso Grátis
+              </a>
             </div>
           </div>
 
@@ -1941,9 +2068,9 @@
         <div class="final-box">
           <h2 class="final-title">Pronto para blindar seu patrimônio com transparência?</h2>
           <p class="final-desc">Descubra a metodologia global que une eficiência de custos, diversificação real e transparência absoluta sob a robustez e segurança da XP Investimentos.</p>
-          <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20gostaria%20de%20iniciar%20minha%20triagem%20gratuita%20para%20o%20Protocolo%209A%20e%20o%20Simulador%20de%20ETFs." target="_blank" class="btn-gold">
-            Iniciar Triagem com Hermes
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-left: 2px;"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <a href="https://wa.me/5516993115079?text=Ol%C3%A1%20Hermes%2C%20gostaria%20de%20iniciar%20minha%20triagem%20gratuita%20para%20o%20Protocolo%209A%20e%20o%20Simulador%20de%20ETFs." target="_blank" class="btn-green">
+            Iniciar Triagem Gratuita com Hermes
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
       </div>
@@ -1976,7 +2103,6 @@
               <span class="footer-col-head">Parceiros</span>
               <a href="https://www.blue3investimentos.com.br/" target="_blank" class="footer-link">Blue3 Investimentos</a>
               <a href="https://www.xpi.com.br/" target="_blank" class="footer-link">XP Investimentos</a>
-              <a href="hub/" class="footer-link" style="opacity:0.25; font-size:10px; margin-top:20px;">Acesso Restrito</a>
             </div>
           </div>
         </div>
