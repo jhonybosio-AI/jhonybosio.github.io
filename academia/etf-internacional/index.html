@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mercado Internacional e Dolarização via ETFs — Wealth Academy</title>
+  <meta name="description" content="Curso avançado sobre ETFs internacionais, estratégia de dolarização de patrimônio e montagem de carteira global.">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #030816;
+      --bg-card: #071126;
+      --bg-sidebar: #040d1e;
+      --gold: #D4AF37;
+      --gold-light: #F3E5AB;
+      --gold-grad: linear-gradient(135deg, #c5a880 0%, #D4AF6A 50%, #A8893C 100%);
+      --blue: #1B6FEF;
+      --green: #22C55E;
+      --green-dark: #16A34A;
+      --glass: rgba(255,255,255,0.02);
+      --border: rgba(255,255,255,0.06);
+      --border-gold: rgba(212,175,106,0.18);
+      --w: #FFFFFF;
+      --muted: rgba(255,255,255,0.65);
+      --dimmed: rgba(255,255,255,0.35);
+      --font-title: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --r-sm: 6px; --r-md: 12px; --r-lg: 20px; --r-xl: 28px; --r-full: 999px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {font-family: var(--font-body); background: var(--bg); color: var(--w); overflow-x: hidden; line-height: 1.6;}
+    a {text-decoration: none; color: inherit;}
+    .app-layout {display: grid; grid-template-columns: 300px 1fr; min-height: 100vh;}
+    .topbar {grid-column: 1 / -1; height: 64px; background: rgba(3,8,22,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 28px; position: sticky; top: 0; z-index: 100;}
+    .topbar-brand {display: flex; align-items: center; gap: 14px;}
+    .topbar-logo {height: 30px;}
+    .topbar-texts {display: flex; flex-direction: column;}
+    .topbar-title {font-family: var(--font-title); font-size: 15px; font-weight: 800; color: var(--w); letter-spacing: -0.02em;}
+    .topbar-sub {font-family: var(--font-title); font-size: 10px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2px;}
+    .topbar-right {display: flex; align-items: center; gap: 16px;}
+    .topbar-badge {font-family: var(--font-title); font-size: 11px; font-weight: 700; color: var(--green); background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); border-radius: var(--r-full); padding: 5px 14px; text-transform: uppercase;}
+    .topbar-cta {font-family: var(--font-title); font-size: 13px; font-weight: 700; background: var(--green); color: #fff; border-radius: var(--r-full); padding: 9px 22px; transition: all 0.2s ease; white-space: nowrap;}
+    .topbar-cta:hover {background: var(--green-dark); transform: translateY(-1px);}
+    .menu-toggle {display: none; background: none; border: none; color: var(--w); font-size: 22px; cursor: pointer;}
+    .sidebar {background: var(--bg-sidebar); border-right: 1px solid var(--border); padding: 32px 0; position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent;}
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+    .sidebar-progress {margin: 0 20px 28px; background: var(--glass); border: 1px solid var(--border); border-radius: var(--r-md); padding: 16px;}
+    .progress-label {font-family: var(--font-title); font-size: 11px; font-weight: 700; color: var(--dimmed); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;}
+    .progress-bar-wrap {background: rgba(255,255,255,0.05); border-radius: var(--r-full); height: 6px; overflow: hidden; margin-bottom: 8px;}
+    .progress-bar-fill {height: 100%; border-radius: var(--r-full); background: linear-gradient(90deg, var(--green), #4ade80); width: 0%; transition: width 0.6s ease;}
+    .progress-text {font-family: var(--font-title); font-size: 11px; color: var(--muted);} 
+    .sidebar-module {margin-bottom: 8px;}
+    .module-header {display: flex; align-items: center; gap: 10px; padding: 10px 20px; cursor: pointer; transition: background 0.15s;}
+    .module-header:hover {background: rgba(255,255,255,0.03);}
+    .module-icon {width: 28px; height: 28px; border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0;}
+    .mod-unlocked .module-icon {background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.2);}
+    .mod-locked .module-icon {background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);}
+    .module-info {flex: 1; min-width: 0;}
+    .module-num {font-family: var(--font-title); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dimmed);}
+    .module-name {font-family: var(--font-title); font-size: 13px; font-weight: 700; color: var(--w); line-height: 1.3;}
+    .mod-locked .module-name {color: var(--dimmed);}
+    .module-status {font-size: 12px;}
+    .lesson-list {padding: 0 0 8px 0; display: none;}
+    .lesson-list.open {display: block;}
+    .lesson-item {display: flex; align-items: center; gap: 10px; padding: 8px 20px 8px 58px; cursor: pointer; transition: all 0.15s; font-family: var(--font-title); font-size: 13px; color: var(--muted); border-left: 2px solid transparent; margin-left: 20px;}
+    .lesson-item:hover {color: var(--w); background: rgba(255,255,255,0.03);}
+    .lesson-item.active {color: var(--gold); border-left-color: var(--gold); background: rgba(212,175,106,0.05);}
+    .lesson-check {width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 9px;}
+    .lesson-item.done .lesson-check {background: var(--green); border-color: var(--green);}
+    .lesson-item.active .lesson-check {border-color: var(--gold);}
+    .sidebar-lock-cta {margin: 4px 20px 4px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px 16px;}
+    .lock-cta-text {font-size: 12px; color: var(--dimmed); margin-bottom: 10px; line-height: 1.5;}
+    .lock-cta-btn {display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); border-radius: var(--r-sm); padding: 9px 12px; font-family: var(--font-title); font-size: 12px; font-weight: 700; color: var(--green); transition: all 0.2s;}
+    .lock-cta-btn:hover {background: rgba(34,197,94,0.15);}
+    .main-content {padding: 48px 64px 80px; max-width: 860px;}
+    .lesson-breadcrumb {display: flex; align-items: center; gap: 8px; font-family: var(--font-title); font-size: 12px; color: var(--dimmed); margin-bottom: 32px;}
+    .breadcrumb-sep {opacity: 0.4;}
+    .breadcrumb-cur {color: var(--gold); font-weight: 600;}
+    .lesson-header {margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--border);}
+    .lesson-module-tag {font-family: var(--font-title); font-size: 11px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+    .lesson-module-tag::before {content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gold);}
+    .lesson-title {font-family: var(--font-title); font-size: clamp(26px, 3.5vw, 38px); font-weight: 800; color: var(--w); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px;}
+    .lesson-title span {background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+    .lesson-meta {display: flex; align-items: center; gap: 20px; flex-wrap: wrap;}
+    .lesson-meta-item {display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted);}
+    .lesson-body {font-size: 16px; color: var(--muted); line-height: 1.8;}
+    .lesson-body h2 {font-family: var(--font-title); font-size: 22px; font-weight: 800; color: var(--w); letter-spacing: -0.02em; margin: 40px 0 16px; line-height: 1.3;}
+    .lesson-body h3 {font-family: var(--font-title); font-size: 17px; font-weight: 700; color: var(--w); margin: 28px 0 12px;}
+    .lesson-body p {margin-bottom: 20px;}
+    .callout {background: rgba(212,175,106,0.05); border-left: 3px solid var(--gold); border-radius: 0 var(--r-md) var(--r-md) 0; padding: 20px 24px; margin: 28px 0;}
+    .callout p {margin-bottom: 0; color: var(--w); font-style: italic; line-height: 1.7;}
+    .comparison-table {width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 14px;}
+    .comparison-table th {font-family: var(--font-title); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); color: var(--dimmed);}
+    .comparison-table td {padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--muted); vertical-align: top;}
+    .key-points {display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 28px 0;}
+    .key-point-card {background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; transition: border-color 0.2s;}
+    .key-point-card:hover {border-color: rgba(255,255,255,0.12);}
+    .kp-icon {font-size: 20px; margin-bottom: 10px;}
+    .kp-title {font-family: var(--font-title); font-size: 14px; font-weight: 700; color: var(--w); margin-bottom: 6px;}
+    .kp-text {font-size: 13px; color: var(--muted); line-height: 1.6;}
+    .stat-cards {display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0;}
+    .stat-mini {background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; text-align: center;}
+    .stat-mini-num {font-family: var(--font-title); font-size: 28px; font-weight: 800; color: var(--w); letter-spacing: -0.02em;}
+    .stat-mini-label {font-size: 12px; color: var(--dimmed); margin-top: 4px;}
+    @media(max-width: 900px) {
+      .app-layout {grid-template-columns: 1fr;}
+      .sidebar {position: fixed; left: -300px; top: 0; height: 100vh; width: 290px; z-index: 200; transition: left 0.3s ease; padding-top: 80px;}
+      .sidebar.open {left: 0; box-shadow: 4px 0 40px rgba(0,0,0,0.5);}
+      .menu-toggle {display: flex;}
+      .main-content {padding: 32px 20px 80px; max-width: 100%;}
+      .topbar-badge {display: none;}
+      .key-points {grid-template-columns: 1fr;}
+      .stat-cards {grid-template-columns: repeat(2, 1fr);}
+    }
+    @media(max-width: 480px) {
+      .stat-cards {grid-template-columns: 1fr;}
+      .comparison-table {font-size: 12px;}
+      .comparison-table th, .comparison-table td {padding: 10px 10px;}
+    }
+  </style>
+</head>
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      <img src="../logo-prime.png" alt="Jhony Bosio" class="topbar-logo">
+      <div class="topbar-texts">
+        <span class="topbar-title">Mercado Internacional e Dolarização via ETFs</span>
+        <span class="topbar-sub">Wealth Academy — Jhony Bosio</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <a href="../" class="topbar-cta">Voltar à Academia →</a>
+      <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20liberar%20todos%20os%20módulos%20do%20curso%20ETF%20Internacional%20e%20Dolarização" target="_blank" class="topbar-cta">Liberar Todos os Módulos →</a>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-progress">
+        <div class="progress-label">Seu progresso</div>
+        <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+        <div class="progress-text"><strong id="progressText">0</strong> módulos desbloqueados</div>
+      </div>
+      <!-- Módulo 1 (desbloqueado) -->
+      <div class="sidebar-module mod-unlocked" id="mod1-wrap">
+        <div class="module-header" onclick="toggleModule('mod1-lessons')">
+          <div class="module-icon">✅</div>
+          <div class="module-info">
+            <div class="module-num">Módulo 1</div>
+            <div class="module-name">O Argumento para Dolarizar</div>
+          </div>
+          <span class="module-status" id="mod1-arrow">▾</span>
+        </div>
+        <div class="lesson-list open" id="mod1-lessons">
+          <div class="lesson-item active" onclick="showLesson('l1-1')" id="nav-l1-1"><div class="lesson-check">✓</div>1.1 Por que manter 100% do patrimônio no Brasil é um risco estrutural</div>
+          <div class="lesson-item" onclick="showLesson('l1-2')" id="nav-l1-2"><div class="lesson-check"></div>1.2 Como ETFs americanos funcionam para brasileiros (BDRs vs Conta Internacional)</div>
+          <div class="lesson-item" onclick="showLesson('l1-3')" id="nav-l1-3"><div class="lesson-check"></div>1.3 O impacto do câmbio no seu patrimônio real</div>
+        </div>
+      </div>
+      <!-- Módulo 2 (bloqueado) -->
+      <div class="sidebar-module mod-locked" id="mod2-wrap">
+        <div class="module-header" onclick="openLockPrompt('mod2')">
+          <div class="module-icon">🔒</div>
+          <div class="module-info">
+            <div class="module-num">Módulo 2</div>
+            <div class="module-name">As 9 Classes de ETFs Globais</div>
+          </div>
+          <span class="module-status">▸</span>
+        </div>
+        <div class="sidebar-lock-cta">
+          <p class="lock-cta-text">Libere gratuitamente com o Hermes e acesse as 9 classes de ETFs.</p>
+          <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20quero%20liberar%20o%20Módulo%202%20da%20Wealth%20Academy%20ETF" target="_blank" class="lock-cta-btn">🔓 Liberar Grátis com Hermes</a>
+        </div>
+      </div>
+      <!-- Módulo 3 (bloqueado) -->
+      <div class="sidebar-module mod-locked" id="mod3-wrap">
+        <div class="module-header" onclick="openLockPrompt('mod3')">
+          <div class="module-icon">🔒</div>
+          <div class="module-info">
+            <div class="module-num">Módulo 3</div>
+            <div class="module-name">Montando Sua Carteira Internacional</div>
+          </div>
+          <span class="module-status">▸</span>
+        </div>
+        <div class="sidebar-lock-cta">
+          <p class="lock-cta-text">Ative seu acesso ao simulador de ETFs e à aula prática.</p>
+          <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20quero%20acessar%20o%20Módulo%203%20da%20Wealth%20Academy%20ETF" target="_blank" class="lock-cta-btn">🔓 Ativar Simulador + Módulo 3</a>
+        </div>
+      </div>
+    </aside>
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="mainContent">
+      <!-- Lesson 1.1 -->
+      <div class="lesson-view active" id="l1-1">
+        <div class="lesson-breadcrumb"><span>Mercado Internacional e Dolarização via ETFs</span> <span class="breadcrumb-sep">›</span> <span>Módulo 1</span> <span class="breadcrumb-sep">›</span> <span class="breadcrumb-cur">Aula 1.1</span></div>
+        <div class="lesson-header">
+          <div class="lesson-module-tag">Módulo 1 · O Argumento para Dolarizar</div>
+          <h1 class="lesson-title">Por que manter <span>100% do patrimônio no Brasil</span> é um risco estrutural</h1>
+          <div class="lesson-meta">
+            <span class="lesson-meta-item">📖 Leitura — 8 min</span>
+            <span class="lesson-meta-item">🎯 Livre acesso</span>
+          </div>
+        </div>
+        <div class="lesson-body">
+          <p>Conteúdo detalhado explicando o risco estrutural de concentração patrimonial no Brasil, incluindo fatores macroeconômicos, risco cambial e volatilidade política.</p>
+          <h2>Exposição ao Risco Cambial</h2>
+          <p>Explanação sobre como a variação do real frente ao dólar impacta investimentos em renda fixa e variável.</p>
+          <div class="callout">
+            <p>"Diversificar internacionalmente reduz a exposição ao risco soberano brasileiro."</p>
+          </div>
+          <h3>Benefícios da Dolarização Parcial</h3>
+          <p>Apresentação de cenários de proteção de poder de compra.</p>
+          <div class="stat-cards">
+            <div class="stat-mini"><div class="stat-mini-num"><span class="accent">+4%</span></div><div class="stat-mini-label">Retorno histórico médio anual em ETFs globais</div></div>
+            <div class="stat-mini"><div class="stat-mini-num"><span class="accent">R$ 1,2M</span></div><div class="stat-mini-label">Patrimônio protegido em cenário hipotético</div></div>
+            <div class="stat-mini"><div class="stat-mini-num"><span class="accent">3x</span></div><div class="stat-mini-label">Redução de volatilidade comparada ao mercado brasileiro</div></div>
+          </div>
+          <div class="key-points">
+            <div class="key-point-card"><div class="kp-icon">💡</div><div class="kp-title">Diversificação</div><div class="kp-text">Alocar parte do patrimônio em ativos denominados em dólares diminui a correlação com riscos locais.</div></div>
+            <div class="key-point-card"><div class="kp-icon">⚖️</div><div class="kp-title">Proteção contra inflação</div><div class="kp-text">Moeda forte preserva poder de compra em períodos de alta inflação doméstica.</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Lesson 1.2 -->
+      <div class="lesson-view" id="l1-2">
+        <div class="lesson-breadcrumb"><span>Mercado Internacional e Dolarização via ETFs</span> <span class="breadcrumb-sep">›</span> <span>Módulo 1</span> <span class="breadcrumb-sep">›</span> <span class="breadcrumb-cur">Aula 1.2</span></div>
+        <div class="lesson-header">
+          <div class="lesson-module-tag">Módulo 1 · O Argumento para Dolarizar</div>
+          <h1 class="lesson-title">Como ETFs americanos funcionam para brasileiros (BDRs vs Conta Internacional)</h1>
+          <div class="lesson-meta"><span class="lesson-meta-item">📖 Leitura — 7 min</span><span class="lesson-meta-item">🎯 Livre acesso</span></div>
+        </div>
+        <div class="lesson-body">
+          <p>Explicação das diferenças entre BDRs e contas internacionais, custos, custódia e tributação.</p>
+          <h2>BDRs: Vantagens e Limitações</h2>
+          <p>Detalhes sobre liquidez, impostos e exposição.</p>
+          <h2>Conta Internacional: Acesso Direto</h2>
+          <p>Processo de abertura, corretoras recomendadas (XP, Avenue, Passfolio) e custos operacionais.</p>
+          <div class="comparison-table">
+            <tr><th class="col-head">Aspecto</th><th class="col-head">BDR</th><th class="col-head">Conta Internacional</th></tr>
+            <tr><td>Custódia</td><td class="col-good">Brasil</td><td class="col-good">EUA / UE</td></tr>
+            <tr><td>Taxa de corretagem</td><td class="col-bad">R$ 5</td><td class="col-good">$ 0,5</td></tr>
+            <tr><td>Imposto de renda</td><td class="col-good">15% + IOF</td><td class="col-good">15% + IOF (câmbio)</td></tr>
+          </table>
+          <div class="key-points">
+            <div class="key-point-card"><div class="kp-icon">📊</div><div class="kp-title">Liquidez</div><div class="kp-text">BDRs negociam na B3 com horários brasileiros.</div></div>
+            <div class="key-point-card"><div class="kp-icon">🌎</div><div class="kp-title">Diversificação Global</div><div class="kp-text">Conta internacional permite investir em ETFs de diferentes regiões.</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Lesson 1.3 -->
+      <div class="lesson-view" id="l1-3">
+        <div class="lesson-breadcrumb"><span>Mercado Internacional e Dolarização via ETFs</span> <span class="breadcrumb-sep">›</span> <span>Módulo 1</span> <span class="breadcrumb-sep">›</span> <span class="breadcrumb-cur">Aula 1.3</span></div>
+        <div class="lesson-header">
+          <div class="lesson-module-tag">Módulo 1 · O Argumento para Dolarizar</div>
+          <h1 class="lesson-title">O impacto do câmbio no seu patrimônio real</h1>
+          <div class="lesson-meta"><span class="lesson-meta-item">📖 Leitura — 6 min</span><span class="lesson-meta-item">🎯 Livre acesso</span></div>
+        </div>
+        <div class="lesson-body">
+          <p>Análise de cenários de depreciação do real, cálculo de perdas e estratégias de hedge.</p>
+          <h2>Exemplo Prático</h2>
+          <p>Simulação de um portfólio de R$ 500k com 30% em ativos internacionais.</p>
+          <div class="stat-mini"><div class="stat-mini-num"><span class="accent">-12%</span></div><div class="stat-mini-label">Perda potencial em cenário de forte desvalorização do real</div></div>
+          <div class="callout-blue"><p>"Proteja seu patrimônio diversificando em moedas fortes."</p></div>
+          <div class="key-points">
+            <div class="key-point-card"><div class="kp-icon">🛡️</div><div class="kp-title">Hedge Cambial</div><div class="kp-text">Uso de ETFs de ouro e dólar como proteção.</div></div>
+            <div class="key-point-card"><div class="kp-icon">📈</div><div class="kp-title">Performance Adjustada</div><div class="kp-text">Como o retorno real muda com a variação cambial.</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Placeholder for Module 2 & 3 content (locked) -->
+    </main>
+  </div>
+  <script>
+    function toggleModule(id) {
+      const list = document.getElementById(id);
+      const arrow = document.getElementById('mod1-arrow');
+      if (list.classList.contains('open')) {list.classList.remove('open'); arrow.textContent='▸';} else {list.classList.add('open'); arrow.textContent='▾';}
+    }
+    function showLesson(id) {
+      document.querySelectorAll('.lesson-view').forEach(v=>v.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('.lesson-item').forEach(i=>i.classList.remove('active'));
+      const navId = 'nav-' + id;
+      const nav = document.getElementById(navId);
+      if (nav) nav.classList.add('active');
+    }
+    function openLockPrompt(mod) {
+      alert('Para desbloquear este módulo, entre em contato via WhatsApp com o número 5516981523120.');
+    }
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    overlay.id = 'sidebarOverlay';
+    document.body.appendChild(overlay);
+    menuToggle.addEventListener('click',()=>{sidebar.classList.toggle('open'); overlay.classList.toggle('active');});
+    overlay.addEventListener('click',()=>{sidebar.classList.remove('open'); overlay.classList.remove('active');});
+  </script>
+</body>
+</html>
