@@ -1355,10 +1355,18 @@
                 if (id === 'instagram') {
                     // Render premium full-screen Iframe for Instagram Content Creator
                     workspace.innerHTML = `
-                        <section class="hero">
-                            <span class="card-badge badge-active" style="font-size:9px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; padding:4px 10px; border-radius:99px; width:fit-content; display:block; margin-bottom:8px;">Branded Content</span>
-                            <h1>Instagram Content Creator</h1>
-                            <p>Criação e edição inteligente de posts e carrosséis com estética de alto padrão e copys de conversão da marca Jhony Bosio.</p>
+                        <section class="hero" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap;">
+                            <div style="flex: 1; min-width: 300px;">
+                                <span class="card-badge badge-active" style="font-size:9px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; padding:4px 10px; border-radius:99px; width:fit-content; display:block; margin-bottom:8px;">Branded Content</span>
+                                <h1>Instagram Content Creator</h1>
+                                <p style="margin: 0;">Criação e edição inteligente de posts e carrosséis com estética de alto padrão e copys de conversão da marca Jhony Bosio.</p>
+                            </div>
+                            <div style="margin-bottom: 4px;">
+                                <a href="../instagram/index.html" target="_blank" class="btn-action-primary" style="display: inline-flex; align-items: center; gap: 8px; background: var(--blue-cyan); color: #030816; box-shadow: 0 4px 15px rgba(0, 209, 255, 0.25); text-decoration: none; padding: 12px 24px; border-radius: 12px; font-weight: 700; font-size: 13px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(0, 209, 255, 0.45)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(0, 209, 255, 0.25)';">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: -1px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                                    Abrir em Tela Cheia (Nova Aba)
+                                </a>
+                            </div>
                         </section>
                         
                         <div class="instagram-frame-container" style="width: 100%; height: calc(100vh - 220px); background: #030816; border: 1px solid var(--border-glass); border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-premium);">
