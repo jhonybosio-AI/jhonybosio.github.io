@@ -965,16 +965,16 @@
 
       <!-- Seletor de Trilhas Premium (Design System Blue3) -->
       <div class="trail-selector" style="margin: 0 20px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: rgba(255,255,255,0.03); padding: 4px; border-radius: var(--r-md); border: 1px solid var(--border);">
-        <button id="btn-trail-1" class="trail-btn active" onclick="switchTrail(1)" style="font-family: var(--space-grotesk); font-size: 11px; font-weight: 700; border: none; padding: 10px 8px; border-radius: var(--r-sm); cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); background: var(--gold-grad); color: #030816; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 4px;">
+        <button id="btn-trail-1" class="trail-btn" onclick="switchTrail(1)" style="font-family: var(--space-grotesk); font-size: 11px; font-weight: 700; border: none; padding: 10px 8px; border-radius: var(--r-sm); cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); background: transparent; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 4px;">
           📊 Alocação Global
         </button>
-        <button id="btn-trail-2" class="trail-btn" onclick="switchTrail(2)" style="font-family: var(--space-grotesk); font-size: 11px; font-weight: 700; border: none; padding: 10px 8px; border-radius: var(--r-sm); cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); background: transparent; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 4px;">
+        <button id="btn-trail-2" class="trail-btn active" onclick="switchTrail(2)" style="font-family: var(--space-grotesk); font-size: 11px; font-weight: 700; border: none; padding: 10px 8px; border-radius: var(--r-sm); cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); background: var(--gold-grad); color: #030816; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 4px;">
           🛡️ Blindagem 2026
         </button>
       </div>
 
-      <!-- CONTAINER TRILHA 1 -->
-      <div id="trail-1-modules">
+      <!-- CONTAINER TRILHA 1 (Oculto por padrão) -->
+      <div id="trail-1-modules" style="display: none;">
         <!-- Módulo 1 -->
         <div class="sidebar-module mod-unlocked" id="mod1-wrap">
           <div class="module-header" onclick="toggleModule('mod1-lessons')">
@@ -986,7 +986,7 @@
             <span class="module-status" id="mod1-arrow">▾</span>
           </div>
           <div class="lesson-list open" id="mod1-lessons">
-            <div class="lesson-item active done" onclick="showLesson('l1-1')" id="nav-l1-1">
+            <div class="lesson-item done" onclick="showLesson('l1-1')" id="nav-l1-1">
               <div class="lesson-check">✓</div>
               1.1 O Fim do Conflito de Interesses
             </div>
@@ -1058,8 +1058,8 @@
         </div>
       </div>
 
-      <!-- CONTAINER TRILHA 2 (Oculto por padrão) -->
-      <div id="trail-2-modules" style="display: none;">
+      <!-- CONTAINER TRILHA 2 -->
+      <div id="trail-2-modules" style="display: block;">
         <!-- Módulo 1 - Trilha 2 -->
         <div class="sidebar-module mod-unlocked" id="t2-mod1-wrap">
           <div class="module-header" onclick="toggleModule('t2-mod1-lessons')">
@@ -1071,7 +1071,7 @@
             <span class="module-status" id="t2-mod1-arrow">▾</span>
           </div>
           <div class="lesson-list open" id="t2-mod1-lessons">
-            <div class="lesson-item" onclick="showLesson('l-b-1-1')" id="nav-l-b-1-1">
+            <div class="lesson-item active" onclick="showLesson('l-b-1-1')" id="nav-l-b-1-1">
               <div class="lesson-check"></div>
               1.1 O Fim do Valor Contábil
             </div>
@@ -1157,7 +1157,7 @@
     <main class="main-content">
 
       <!-- ══════════════════ LIÇÃO 1.1 ══════════════════ -->
-      <div class="lesson-view active" id="l1-1">
+      <div class="lesson-view" id="l1-1">
         <div class="lesson-breadcrumb">
           <span>Wealth Academy</span>
           <span class="breadcrumb-sep">›</span>
@@ -1850,7 +1850,7 @@
 
   <script src="./aulas_blindagem.js"></script>
   <script>
-    let activeTrail = 1;
+    let activeTrail = 2;
 
     // ── NAVEGAÇÃO DE LIÇÕES ──
     function showLesson(lessonId) {
@@ -1921,7 +1921,7 @@
     // ── ALTERNÂNCIA DE TRILHAS (DESIGN SYSTEM BLUE3) ──
     function switchTrail(trailNum) {
       activeTrail = trailNum;
-      localStorage.setItem('wealth_academy_active_trail', trailNum);
+      localStorage.setItem('wealth_academy_active_trail_v2', trailNum);
       
       const btn1 = document.getElementById('btn-trail-1');
       const btn2 = document.getElementById('btn-trail-2');
@@ -2115,9 +2115,11 @@
     // Inicialização ao carregar a página
     document.addEventListener('DOMContentLoaded', () => {
       // Carregar trilha ativa salva
-      const savedTrail = localStorage.getItem('wealth_academy_active_trail');
+      const savedTrail = localStorage.getItem('wealth_academy_active_trail_v2');
       if (savedTrail) {
         activeTrail = parseInt(savedTrail, 10);
+      } else {
+        activeTrail = 2; // Default for new visitors / new session
       }
       
       checkUnlockParameters();
