@@ -1,189 +1,495 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Raio-X Educativo · Jhony Bosio</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<style>
-:root {
-  /* Blue3 Official Palette */
-  --navy: #000d38;
-  --navy-light: #002060;
-  --blue: #0092ff;
-  --bg: #050a1d;
-  --w: #FFFFFF;
-  --gb: rgba(255, 255, 255, 0.05);
-  --gborder: rgba(255, 255, 255, 0.10);
-  --gblur: blur(24px) saturate(1.6);
-  --fd: 'Plus Jakarta Sans', sans-serif;
-  --fb: 'Plus Jakarta Sans', sans-serif;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--fb);background:var(--bg);color:var(--w);overflow-x:hidden}
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(var(--gborder) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.2;
-  pointer-events: none;
-  z-index: 0;
-}
-.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:var(--bg)}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:fl 14s ease-in-out infinite}
-.o1{width:580px;height:580px;top:-120px;right:-60px;opacity:.3;background:radial-gradient(circle,var(--blue),transparent 70%)}
-.o2{width:480px;height:480px;bottom:5%;left:-100px;opacity:.2;animation-delay:-6s;background:radial-gradient(circle,var(--navy-light),transparent 70%)}
-@keyframes fl{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(18px,-28px) scale(1.04)}70%{transform:translate(-14px,18px) scale(.97)}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raio-X Educativo · Jhony Bosio · Private Advisor</title>
+    
+    <!-- Fontes Oficiais do Design System -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. ESTILOS GERAIS & DESIGN SYSTEM (BLUE3)
+           ========================================================================== */
+        
+        :root {
+            --primary: oklch(0.68 0.23 255);    /* Azul elétrico vibrante (#0a84ff) */
+            --accent: oklch(0.82 0.15 90);      /* Ouro requintado (#d4af37) */
+            --bg: oklch(0.12 0.015 255);        /* Preto azulado profundo (#0C0D12) */
+            --text: oklch(0.98 0.005 255);      /* Branco suave (#F8FAFC) */
+            --border: rgba(255, 255, 255, 0.08); /* Bordas finas translúcidas */
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-tech: 'Inter', sans-serif;
+        }
 
-/* LAYOUT */
-.page{position:relative;z-index:1}
-.wrap{max-width:900px;margin:0 auto;padding:0 40px}
-.glass{background:var(--gb);backdrop-filter:var(--gblur);-webkit-backdrop-filter:var(--gblur);border:1px solid var(--gborder);border-radius:24px}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-/* NAV */
-.nav{height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
-.logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-}
-.logo-icon {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, var(--blue), var(--navy-light));
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  color: #fff;
-  font-size: 14px;
-  border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: 0 4px 12px rgba(0, 146, 255, 0.2);
-}
-.logo-text {
-  display: flex;
-  flex-direction: column;
-}
-.logo-name { font-weight: 800; font-size: 16px; color: #fff; line-height: 1.1; display: flex; align-items: center; gap: 8px; }
-.logo-name::before { content: "|"; color: rgba(255,255,255,0.2); font-weight: 300; }
-.logo-sub { font-size: 9px; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 1px; }
+        html {
+            scroll-behavior: smooth;
+        }
 
-/* HERO */
-.hero{padding:60px 0 80px;text-align:center}
-.heyebrow{display:inline-flex;align-items:center;gap:8px;
-  background:rgba(27,111,239,.10);border:1px solid rgba(27,111,239,.22);
-  border-radius:999px;padding:6px 14px;margin-bottom:26px}
-.heyebrow-txt{font-size:12px;font-weight:700;color:var(--b4);letter-spacing:.05em;text-transform:uppercase}
-.htitle{font-family:var(--fd);font-size:clamp(36px,5vw,56px);font-weight:800;
-  line-height:1.1;letter-spacing:-.03em;color:#fff;margin-bottom:22px}
-.htitle span{background:linear-gradient(135deg,var(--b4),var(--b3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hsub{font-size:18px;color:rgba(255,255,255,.58);line-height:1.6;max-width:600px;margin:0 auto 40px}
+        body {
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-/* CHECKOUT CARD */
-.ccard{max-width:500px;margin:0 auto;padding:48px 40px;text-align:center;position:relative;overflow:hidden}
-.ccard::before{content:'';position:absolute;top:-100px;right:-100px;width:250px;height:250px;
-  background:radial-gradient(circle,rgba(27,111,239,.15),transparent 70%);pointer-events:none}
-.ctitle{font-family:var(--fd);font-size:24px;font-weight:800;color:#fff;margin-bottom:8px}
-.cdesc{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:32px;line-height:1.5}
-.cprice{display:flex;justify-content:center;align-items:baseline;gap:4px;margin-bottom:32px}
-.cpur{font-size:18px;color:rgba(255,255,255,.4);font-weight:600}
-.cpval{font-family:var(--fd);font-size:64px;font-weight:800;color:#fff;letter-spacing:-.04em}
-.cpdec{font-size:24px;color:rgba(255,255,255,.4);font-weight:600}
+        /* Grid de Fundo */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-.cfeats{text-align:left;display:flex;flex-direction:column;gap:16px;margin-bottom:40px}
-.cfeat{display:flex;gap:12px;align-items:flex-start}
-.cic{width:20px;height:20px;color:var(--b4);flex-shrink:0}
-.ctxt{font-size:15px;color:rgba(255,255,255,.7);line-height:1.4}
-.ctxt b{color:#fff}
+        .bg-glows {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-.btn-buy{display:block;width:100%;font-family:var(--fd);font-size:16px;font-weight:800;
-  background:#34AF23;color:#fff;border:none;border-radius:12px;
-  padding:18px;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s;text-align:center}
-.btn-buy:hover{transform:translateY(-2px);background:#289118;box-shadow:0 10px 20px rgba(52,175,35,0.4)}
-.csafe{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;
-  font-size:10px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em}
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: floatGlow 15s ease-in-out infinite;
+        }
 
-/* FOOTER */
-.fdiscl{padding:60px 0 40px;text-align:center;max-width:600px;margin:0 auto}
-.fdtxt{font-size:11px;color:rgba(255,255,255,.25);line-height:1.6;text-transform:uppercase;letter-spacing:.05em}
+        .o1 {
+            width: 500px;
+            height: 500px;
+            top: -100px;
+            right: -50px;
+            opacity: 0.25;
+            background: radial-gradient(circle, var(--primary), transparent 70%);
+        }
 
-</style>
+        .o2 {
+            width: 450px;
+            height: 450px;
+            bottom: 10%;
+            left: -100px;
+            opacity: 0.15;
+            animation-delay: -5s;
+            background: radial-gradient(circle, var(--accent), transparent 70%);
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            45% { transform: translate(25px, -35px) scale(1.05); }
+            75% { transform: translate(-15px, 20px) scale(0.95); }
+        }
+
+        /* LAYOUT */
+        .page {
+            position: relative;
+            z-index: 1;
+        }
+
+        .wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* NAV */
+        .nav {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            padding: 0 40px;
+            background: rgba(12, 13, 18, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--primary);
+            color: #0c0d12;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 16px;
+            box-shadow: 0 0 25px rgba(10, 132, 255, 0.4);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--text);
+            line-height: 1.1;
+        }
+
+        .logo-sub {
+            font-family: var(--font-tech);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 2px;
+        }
+
+        .nav-back {
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: color 0.2s ease;
+        }
+
+        .nav-back:hover {
+            color: var(--accent);
+        }
+
+        /* HERO */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .heyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(10, 132, 255, 0.08);
+            border: 1px solid rgba(10, 132, 255, 0.2);
+            border-radius: 999px;
+            padding: 8px 16px;
+            margin-bottom: 25px;
+        }
+
+        .heyebrow-txt {
+            font-family: var(--font-tech);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .htitle {
+            font-family: var(--font-display);
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin-bottom: 24px;
+            text-shadow: 0 0 30px rgba(10, 132, 255, 0.15);
+        }
+
+        .htitle span {
+            background: linear-gradient(135deg, var(--accent), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hsub {
+            font-family: var(--font-body);
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            max-width: 680px;
+            margin: 0 auto 50px;
+        }
+
+        /* CHECKOUT CARD */
+        .ccard {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 50px 45px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .ccard::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08), transparent 70%);
+            pointer-events: none;
+        }
+
+        .ctitle {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+        }
+
+        .cdesc {
+            font-family: var(--font-body);
+            font-size: 14.5px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 35px;
+            line-height: 1.5;
+        }
+
+        .cprice {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 4px;
+            margin-bottom: 35px;
+        }
+
+        .cpur {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .cpval {
+            font-family: var(--font-display);
+            font-size: 68px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.03em;
+            line-height: 1;
+        }
+
+        .cpdec {
+            font-family: var(--font-display);
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 700;
+        }
+
+        .cfeats {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 45px;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 30px 0;
+        }
+
+        .cfeat {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .cic {
+            width: 20px;
+            height: 20px;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .ctxt {
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.4;
+        }
+
+        .ctxt b {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .btn-buy {
+            display: block;
+            width: 100%;
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), #ffe680);
+            color: #0c0d12;
+            border: none;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-buy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.45);
+        }
+
+        .csafe {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-family: var(--font-tech);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.35);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* FOOTER */
+        .fdiscl {
+            padding: 80px 0 60px;
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto;
+            border-top: 1px solid var(--border);
+        }
+
+        .fdtxt {
+            font-family: var(--font-tech);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            line-height: 1.7;
+            letter-spacing: 0.04em;
+        }
+    </style>
 </head>
 <body>
 
-<div class="bg">
-  <div class="orb o1"></div>
-  <div class="orb o2"></div>
+<div class="bg-glows">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
 </div>
 
 <div class="page">
-  <nav class="nav">
-    <a href="../" class="logo-wrap">
-      <div class="logo-icon">JB</div>
-      <div class="logo-text">
-        <div class="logo-name">Jhony Bosio</div>
-        <div class="logo-sub">Assessor de Investimentos</div>
-      </div>
-    </a>
-    <a href="../" style="font-family:var(--fd); font-size:13px; font-weight:600; color:rgba(255,255,255,.4); text-decoration:none; text-transform:uppercase; letter-spacing:0.1em">Voltar à Home</a>
-  </nav>
+    <nav class="nav">
+        <a href="../" class="logo-wrap">
+            <div class="logo-icon">JB</div>
+            <div class="logo-text">
+                <span class="logo-name">Jhony Bosio</span>
+                <span class="logo-sub">Private Advisor</span>
+            </div>
+        </a>
+        <a href="../academia/" class="nav-back">Voltar à Academy</a>
+    </nav>
 
-  <section class="hero">
-    <div class="wrap">
-      <div class="heyebrow">
-        <span class="heyebrow-txt">Diagnóstico & Mentoria Unificada</span>
-      </div>
-      <h1 class="htitle">Raio-X Educativo da<br><span>Sua Carteira.</span></h1>
-      <p class="hsub">Uma imersão de 1 hora para analisar sua carteira sob a ótica do Alinhamento Fiduciário e Eficiência Global. Clareza total para quem tem R$ 200k+ investidos.</p>
+    <section class="hero">
+        <div class="wrap">
+            <div class="heyebrow">
+                <span class="heyebrow-txt">Diagnóstico & Alinhamento Fiduciário</span>
+            </div>
+            
+            <h1 class="htitle">Raio-X Educativo da<br><span>Sua Carteira Atual.</span></h1>
+            
+            <p class="hsub">
+                Uma imersão conceitual e estratégica de 1 hora comigo para auditar as comissões implícitas, taxas ocultas e conflitos de interesse que drenam o rendimento do seu patrimônio. Clareza total e estruturação global exclusiva para investidores com R$ 200 mil ou mais.
+            </p>
 
-      <div class="ccard glass">
-        <h2 class="ctitle">Raio-X Educativo</h2>
-        <p class="cdesc">Análise técnica de riscos e custos ocultos. Plano de ação por escrito e 7 dias de suporte institucional via WhatsApp.</p>
-        
-        <div class="cprice">
-          <span class="cpur">R$</span>
-          <span class="cpval">497</span>
-          <span class="cpdec">,00</span>
+            <div class="ccard glass">
+                <h2 class="ctitle">Sessão Estratégica Individual</h2>
+                <p class="cdesc">Auditoria completa de custos de distribuição tradicional + plano de transição conceitual fiduciária por escrito + 7 dias de canal direto via WhatsApp.</p>
+                
+                <div class="cprice">
+                    <span class="cpur">R$</span>
+                    <span class="cpval">497</span>
+                    <span class="cpdec">,00</span>
+                </div>
+
+                <div class="cfeats">
+                    <div class="cfeat">
+                        <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span class="ctxt"><b>Diagnóstico ao vivo</b> de 60 minutos individual via Zoom</span>
+                    </div>
+                    <div class="cfeat">
+                        <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span class="ctxt">Auditoria conceitual detalhada de <b>taxas e spreads ocultos</b></span>
+                    </div>
+                    <div class="cfeat">
+                        <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span class="ctxt">Adequação técnica de alocação de risco (<b>Protocolo 9A</b>)</span>
+                    </div>
+                    <div class="cfeat">
+                        <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span class="ctxt">Direcionamento de <b>Transição Cambial e Eficiência Tributária</b></span>
+                    </div>
+                </div>
+
+                <!-- Botão de Venda Direta com Link de Pagamento Stripe -->
+                <a href="https://buy.stripe.com/cNi5kF5Mqeg1cT71f04ko05" class="btn-buy">Garantir Meu Raio-X Agora</a>
+                
+                <div class="csafe">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    Processamento Fiduciário Seguro via Stripe
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="cfeats">
-          <div class="cfeat">
-            <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-            <span class="ctxt"><b>Diagnóstico educacional</b> ao vivo via Zoom</span>
-          </div>
-          <div class="cfeat">
-            <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-            <span class="ctxt">Análise profunda de <b>alocação de ativos</b></span>
-          </div>
-          <div class="cfeat">
-            <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-            <span class="ctxt">Identificação de <b>conflitos de interesse</b></span>
-          </div>
-          <div class="cfeat">
-            <svg class="cic" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
-            <span class="ctxt">Plano de <b>Eficiência Tributária</b></span>
-          </div>
+    <footer class="fdiscl">
+        <div class="wrap">
+            <p class="fdtxt">
+                O Raio-X possui caráter estritamente analítico e educacional sobre estruturas de taxas e alocação acadêmica global. Nenhuma informação contida nesta sessão ou material configura recomendação de valores mobiliários específicos de compra ou venda, em estrita conformidade com as diretrizes da Resolução CVM 179.
+            </p>
         </div>
-
-        <a href="https://buy.stripe.com/cNi5kF5Mqeg1cT71f04ko05" class="btn-buy">Garantir Meu Raio-X Agora</a>
-        <div class="csafe">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Ambiente Seguro via Stripe
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer class="fdiscl">
-    <div class="wrap">
-      <p class="fdtxt">Diagnóstico estritamente educacional sobre estruturas de carteira. Nenhuma informação contida aqui configura recomendação de valores mobiliários, conforme Resolução CVM 179.</p>
-    </div>
-  </footer>
+    </footer>
 </div>
 
 </body>

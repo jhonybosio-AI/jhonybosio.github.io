@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Oficial — Bússola de Transição XP</title>
+    
+    <!-- Fontes Oficiais do Design System -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. ESTILOS GERAIS & DESIGN SYSTEM (WEB VIEW)
+           ========================================================================== */
+        
+        :root {
+            --primary: oklch(0.68 0.23 255);    /* Azul elétrico vibrante */
+            --accent: oklch(0.82 0.15 90);      /* Ouro requintado */
+            --bg: oklch(0.12 0.015 255);        /* Preto azulado profundo (#0C0D12) */
+            --text: oklch(0.98 0.005 255);      /* Branco suave (#F8FAFC) */
+            --border: rgba(255, 255, 255, 0.08); /* Bordas translúcidas */
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-tech: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-top: 70px;
+        }
+
+        /* Barra de Ferramentas Web (Oculta na Impressão) */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(12, 13, 18, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            z-index: 1000;
+        }
+
+        .toolbar .brand {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toolbar .brand span.badge {
+            background: var(--accent);
+            color: #0c0d12;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .toolbar .actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #0c0d12;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text);
+        }
+
+        /* Container do Guia */
+        .book-container {
+            max-width: 840px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Página Estilizada */
+        .page {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 60px 80px;
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        /* ── CAPA DO GUIA ── */
+        .page-cover {
+            height: 900px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.06) 0%, transparent 70%), var(--bg);
+            border: 2px solid var(--accent);
+            padding: 80px;
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cover-logo-box {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--accent);
+            color: #0c0d12;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .cover-header-text {
+            font-family: var(--font-tech);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.20em;
+            text-transform: uppercase;
+        }
+
+        .cover-body {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .cover-category {
+            font-family: var(--font-tech);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.20em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .cover-title {
+            font-family: var(--font-display);
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            margin-bottom: 25px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .cover-subtitle {
+            font-family: var(--font-body);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 600px;
+        }
+
+        .cover-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .author-info .name {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .author-info .role {
+            font-family: var(--font-tech);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .cover-version {
+            font-family: var(--font-tech);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: right;
+        }
+
+        /* ── CONTEÚDO ── */
+        .chapter-header {
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        .chapter-num {
+            font-family: var(--font-tech);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .chapter-title {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        p {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        p strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* Fórmulas Destacadas */
+        .formula-box {
+            background: rgba(10, 132, 255, 0.03);
+            border: 1px solid rgba(10, 132, 255, 0.15);
+            border-radius: 12px;
+            padding: 24px 30px;
+            margin: 25px 0;
+        }
+
+        .formula-box .formula-title {
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+
+        .formula-box .formula-math {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+            margin-bottom: 10px;
+        }
+
+        .formula-box .formula-desc {
+            font-family: var(--font-tech);
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
+        }
+
+        /* Alerta de Perigo Fiduciário */
+        .fiduciary-alert {
+            background: rgba(212, 175, 55, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 35px 0;
+        }
+
+        .fiduciary-alert h4 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fiduciary-alert p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 0;
+        }
+
+        /* Listas Conceituais */
+        .concept-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .concept-list li {
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.01);
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .concept-list li .concept-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .concept-list li .concept-num {
+            font-family: var(--font-tech);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .concept-list li .concept-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .concept-list li p {
+            font-size: 14.5px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 0;
+        }
+
+        /* Tabelas Conceituais */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-family: var(--font-body);
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid var(--border);
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 14.5px;
+        }
+
+        .data-table th {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text);
+            font-family: var(--font-display);
+            font-weight: 700;
+        }
+
+        .data-table tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .data-table .highlight-col {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Rodapé */
+        .page-footer {
+            margin-top: 60px;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-tech);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .page-footer .brand-signature {
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        /* ==========================================================================
+           2. ESTILOS DE IMPRESSÃO (MEDIA PRINT)
+           ========================================================================== */
+        
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 20mm 15mm 20mm 15mm;
+            }
+
+            :root {
+                --bg: #ffffff;
+                --text: #0b0c10;
+                --border: #e2e8f0;
+                --primary: #0056b3;
+                --accent: #b58900;
+            }
+
+            body {
+                background-color: #ffffff;
+                color: #0b0c10;
+                padding-top: 0;
+            }
+
+            .toolbar, .btn, .web-only {
+                display: none !important;
+            }
+
+            .book-container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page {
+                background: #ffffff !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                padding: 0 0 10mm 0 !important;
+                margin-bottom: 0 !important;
+                page-break-after: always;
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .page-cover {
+                height: 250mm !important;
+                border: 2px solid #b58900 !important;
+                padding: 30mm 20mm !important;
+                background: #ffffff !important;
+                page-break-after: always;
+            }
+
+            .cover-logo-box {
+                background: #b58900 !important;
+                color: #ffffff !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+                box-shadow: none !important;
+            }
+
+            .cover-title {
+                color: #0b0c10 !important;
+                text-shadow: none !important;
+                font-size: 44px !important;
+            }
+
+            .cover-subtitle {
+                color: #4a5568 !important;
+            }
+
+            .author-info .name, .author-info .role {
+                color: #0b0c10 !important;
+            }
+
+            p {
+                color: #2d3748 !important;
+                font-size: 15px !important;
+            }
+
+            p strong {
+                color: #000000 !important;
+            }
+
+            .chapter-title {
+                color: #0b0c10 !important;
+            }
+
+            .formula-box {
+                background: #f7fafc !important;
+                border: 1px solid #cbd5e0 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .formula-box .formula-math {
+                color: #000000 !important;
+            }
+
+            .formula-box .formula-desc {
+                color: #4a5568 !important;
+            }
+
+            .fiduciary-alert {
+                background: #fffaf0 !important;
+                border: 1px solid #feebc8 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .fiduciary-alert p {
+                color: #744210 !important;
+            }
+
+            .concept-list li {
+                background: #ffffff !important;
+                border: 1px solid #e2e8f0 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .concept-list li .concept-title {
+                color: #0b0c10 !important;
+            }
+
+            .concept-list li p {
+                color: #4a5568 !important;
+            }
+
+            .data-table th {
+                background: #edf2f7 !important;
+                color: #0b0c10 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .data-table td {
+                color: #2d3748 !important;
+            }
+
+            .page-footer {
+                color: #a0aec0 !important;
+                border-top: 1px solid #e2e8f0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE FERRAMENTAS (APENAS WEB) -->
+    <div class="toolbar">
+        <div class="brand">
+            <span>Bússola de Transição</span>
+            <span class="badge">Guia Fiduciário</span>
+        </div>
+        <div class="actions">
+            <a href="../index.html" class="btn btn-secondary">
+                ← Voltar à Academy
+            </a>
+            <button onclick="window.print()" class="btn btn-primary">
+                🖨️ Salvar como PDF / Imprimir
+            </button>
+        </div>
+    </div>
+
+    <div class="book-container">
+
+        <!-- ==========================================
+             PÁGINA 1: CAPA DO GUIA
+             ========================================== -->
+        <div class="page page-cover">
+            <div class="cover-header">
+                <div class="cover-logo-box">XP</div>
+                <div class="cover-header-text">Wealth Academy</div>
+            </div>
+            
+            <div class="cover-body">
+                <span class="cover-category">Manual Metodológico</span>
+                <h1 class="cover-title">Bússola de Transição</h1>
+                <p class="cover-subtitle">
+                    A engenharia conceitual definitiva para auditar custos invisíveis de distribuição, readequar alocação global e realizar o rebalanceamento fiduciário do seu patrimônio.
+                </p>
+            </div>
+            
+            <div class="cover-footer">
+                <div class="author-info">
+                    <div class="name">Jhony Bosio</div>
+                    <div class="role">Private Advisor</div>
+                </div>
+                <div class="cover-version">
+                    Manual Metodológico 2026<br>
+                    Exclusivo para Membros Wealth Academy
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 2: INTRODUÇÃO & RAIO-X
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Etapa 1</span>
+                <h2 class="chapter-title">O Raio-X de Custos Ocultos da Carteira</h2>
+            </div>
+            
+            <p>
+                Antes de iniciar a transição para a eficiência fiduciária global, o investidor precisa encarar a realidade matemática do seu portfólio atual. A maioria das carteiras alocadas em bancos de varejo ou corretoras tradicionais carrega **taxas abusivas implícitas**, disfarçadas sob o pretexto de "isenção de custódia" ou recomendadas sob forte conflito de interesse.
+            </p>
+            
+            <p>
+                Para realizar a auditoria conceitual da sua carteira, você deve levantar cada produto de investimento e identificar as 3 camadas de custos:
+            </p>
+
+            <ul class="concept-list" style="margin: 20px 0;">
+                <li style="padding: 15px 20px; margin-bottom: 10px;">
+                    <strong>1. Taxas de Administração & Performance de Fundos Ativos:</strong> Anote a taxa de administração contratual (geralmente entre 1,5% e 2,5% a.a.) e some a taxa de performance (geralmente 20% do que excede o CDI/Ibovespa) capturada historicamente.
+                </li>
+                <li style="padding: 15px 20px; margin-bottom: 10px;">
+                    <strong>2. Spread de Intermediação de Renda Fixa Privada:</strong> CDBs, CRIs, CRAs e debêntures distribuídas por corretoras tradicionais vêm com taxas rebaixadas em relação à emissão original. Esse "spread de mesa" chega a comprometer de 0,50% a 1,50% do valor do ativo no momento da compra.
+                </li>
+                <li style="padding: 15px 20px; margin-bottom: 10px;">
+                    <strong>3. Atrito Cambial:</strong> Plataformas de câmbio de varejo aplicam spreads sobre o dólar comercial que chegam a 2,0% nas remessas e repatriações de recursos.
+                </li>
+            </ul>
+
+            <div class="formula-box">
+                <div class="formula-title">Matemática do Custo Invisível Anual</div>
+                <div class="formula-math">Custo R$ = ALoc &times; (TxAdm + Spread) + PerfR$</div>
+                <div class="formula-desc">
+                    Onde **ALoc** é o valor alocado no produto, **TxAdm** é a taxa de administração em percentual decimal, **Spread** é o spread estimado de intermediação e **PerfR$** é o valor pago em taxa de performance ao ano.
+                </div>
+            </div>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span>Página 2</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 3: ESTRUTURA CONCEITUAL DO 9A
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Etapa 2</span>
+                <h2 class="chapter-title">Mapeamento Conceitual das 9 Classes Globais</h2>
+            </div>
+            
+            <p>
+                Com a clareza sobre o dreno de rentabilidade da carteira tradicional, o investidor está pronto para projetar o seu novo portfólio com **blindagem fiduciária e máxima eficiência de taxas**.
+            </p>
+            
+            <p>
+                O **Protocolo 9A** baseia-se em dividir a riqueza total de forma inteligente em 9 grandes classes conceituais de ativos globais que apresentam baixa correlação entre si. Ao diversificar nessas dimensões, mitigamos o risco sistêmico da economia brasileira e posicionamos a carteira na fronteira eficiente de retorno:
+            </p>
+
+            <ul class="concept-list">
+                <li>
+                    <div class="concept-header">
+                        <span class="concept-title">Renda Variável Global Desenvolvida</span>
+                        <span class="concept-num">Classe 1</span>
+                    </div>
+                    <p>Exposição conceitual direta ao crescimento das maiores corporações globais, capturando a produtividade do maior polo de inovação mundial (EUA).</p>
+                </li>
+                <li>
+                    <div class="concept-header">
+                        <span class="concept-title">Renda Fixa Inflação Doméstica</span>
+                        <span class="concept-num">Classe 2</span>
+                    </div>
+                    <p>Proteção cirúrgica do poder de compra local, indexado aos índices de inflação nacionais de longo prazo para blindagem contra desvalorização monetária.</p>
+                </li>
+                <li>
+                    <div class="concept-header">
+                        <span class="concept-title">Renda Variável Doméstica</span>
+                        <span class="concept-num">Classe 3</span>
+                    </div>
+                    <p>Participação direta na volatilidade produtiva das empresas brasileiras listadas em bolsa, aproveitando gatilhos domésticos de juros.</p>
+                </li>
+            </ul>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span>Página 3</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 4: CLASSES 4 A 9 DO PROTOCOLO 9A
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Etapa 2 (Cont.)</span>
+                <h2 class="chapter-title">As Próximas Classes de Diversificação Pura</h2>
+            </div>
+            
+            <ul class="concept-list">
+                <li>
+                    <div class="concept-header">
+                        <span class="concept-title">Renda Fixa Pré-fixada</span>
+                        <span class="concept-num">Classe 4</span>
+                    </div>
+                    <p>Travar rendimentos nominais em momentos estratégicos de taxas elevadas, gerando forte ganho patrimonial no ciclo de corte de juros.</p>
+                </li>
+                <li>
+                    <div class="concept-header">
+                        <span class="concept-title">Ativos Reais e Infraestrutura</span>
+                        <span class="concept-num">Classe 5</span>
+                    </div>
+                    <p>Exposição física ou securitizada a imóveis, ativos de infraestrutura ou geração de fluxo de caixa tangível descorrelacionado das finanças puras.</p>
+                </li>
+                <li>
+                    <div class="concept-header">
+                        <span class="concept-title">Renda Variável Emergente Global</span>
+                        <span class="concept-num">Classe 6</span>
+                    </div>
+                    <p>Capturar a expansão demográfica e a velocidade de crescimento de países em desenvolvimento e potências tecnológicas asiáticas.</p>
+                </li>
+                <li>
+                    <div class="concept-header">
+                        <span class="concept-title">Commodities e Metais Preciosos</span>
+                        <span class="concept-num">Classe 7</span>
+                    </div>
+                    <p>Ativos escassos com valor intrínseco que agem como porto seguro financeiro durante choques geopolíticos e inflação internacional.</p>
+                </li>
+                <li>
+                    <div class="concept-header">
+                        <span class="concept-title">Renda Fixa Liquidez Diária</span>
+                        <span class="concept-num">Classe 8</span>
+                    </div>
+                    <p>Estabilização diária do patrimônio por meio de indexadores interbancários (CDI) sem volatilidade patrimonial.</p>
+                </li>
+                <li>
+                    <div class="concept-header">
+                        <span class="concept-title">Caixa & Reserva Fiduciária</span>
+                        <span class="concept-num">Classe 9</span>
+                    </div>
+                    <p>Reserva tática de liquidez imediata para permitir rebalanceamentos eficientes e resgates pontuais sem comprometer a carteira.</p>
+                </li>
+            </ul>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span>Página 4</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 5: A MATEMÁTICA DO REBALANCEAMENTO
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Etapa 3</span>
+                <h2 class="chapter-title">A Engenharia de Rebalanceamento Periódico</h2>
+            </div>
+            
+            <p>
+                O rebalanceamento é o coração pulsante do Protocolo 9A. Ele impede que as forças de mercado modifiquem o seu perfil original de risco. Quando uma classe de ativo valoriza muito, ela passa a ocupar um percentual maior da carteira do que o planejado originalmente, aumentando o seu risco.
+            </p>
+            
+            <p>
+                Para recalcular o rebalanceamento de forma científica, siga a seguinte estrutura teórica:
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Parâmetro</th>
+                        <th>Como Obter ou Definir</th>
+                        <th>Significado Prático</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Patrimônio Total</strong></td>
+                        <td>Soma de todos os saldos da carteira atual</td>
+                        <td>A base 100% de cálculo da alocação</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alocação Alvo %</strong></td>
+                        <td>Definido pelo Advisor com base no perfil de risco</td>
+                        <td>O percentual estratégico planejado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Valor Alvo R$</strong></td>
+                        <td>Patrimônio Total &times; Alocação Alvo %</td>
+                        <td>Quanto você *deveria* ter em cada classe</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alocação Atual %</strong></td>
+                        <td>Valor Atual da Classe R$ / Patrimônio Total</td>
+                        <td>A realidade física do portfólio no momento</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Desvio %</strong></td>
+                        <td>Alocação Atual % &minus; Alocação Alvo %</td>
+                        <td>O desvio em relação ao plano de longo prazo</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="formula-box">
+                <div class="formula-title">Cálculo do Ajuste Financeiro de Transição</div>
+                <div class="formula-math">Ajuste R$ = Valor Alvo R$ - Valor Atual R$</div>
+                <div class="formula-desc">
+                    Se o **Ajuste** for positivo (**+ R$**), a classe está subalocada: a ação necessária é **COMPRAR**. Se for negativo (**- R$**), a classe está sobrealocada: a ação necessária é **VENDER** para reequilibrar o portfólio.
+                </div>
+            </div>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span>Página 5</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 6: AVISO FIDUCIÁRIO E ENCERRAMENTO
+             ========================================== -->
+        <div class="page" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 800px;">
+            <div>
+                <div class="chapter-header">
+                    <span class="chapter-num">Conclusão</span>
+                    <h2 class="chapter-title">A Complexidade Operacional da Execução</h2>
+                </div>
+                
+                <p>
+                    A matemática por trás do cálculo da Bússola de Transição é elegante e direta. No entanto, o verdadeiro desafio da transição reside na sua **execução operacional**. 
+                </p>
+                
+                <p>
+                    Para aplicar este guia com segurança na prática, o investidor enfrenta decisões complexas:
+                </p>
+
+                <ul class="concept-list" style="margin: 20px 0;">
+                    <li style="padding: 15px 20px; margin-bottom: 10px;">
+                        <strong>Decisões Cambiais:</strong> Qual a melhor estrutura de câmbio comercial para minimizar o spread de atrito? Como gerenciar o imposto de IOF e reter os fluxos cambiais mais vantajosos?
+                    </li>
+                    <li style="padding: 15px 20px; margin-bottom: 10px;">
+                        <strong>Planejamento Tributário:</strong> Como mitigar o recolhimento de ganho de capital na transição de ativos nacionais para internacionais? Como estruturar herança e sucessão global (uso de trusts e offshores) de forma legal?
+                    </li>
+                    <li style="padding: 15px 20px; margin-bottom: 10px;">
+                        <strong>Auditoria de Corretagem e Custódia:</strong> Como garantir que as compras de ativos de Renda Fixa e Variável na transição física ocorram sem spreads ocultos na corretora?
+                    </li>
+                </ul>
+            </div>
+
+            <div class="fiduciary-alert" style="margin: 20px 0;">
+                <h4>⚠️ ATENÇÃO E EXECUÇÃO ESPECIALIZADA</h4>
+                <p>
+                    Pequenos desvios na transição operacional cambial, na tributação ou na escolha técnica do ativo correto em bolsa podem apagar toda a economia gerada pela eliminação das taxas de administração dos bancos. Não faça a transição física sem uma auditoria e o acompanhamento de um profissional com compromisso fiduciário estrito.
+                </p>
+            </div>
+
+            <div style="border-left: 2px solid var(--accent); padding-left: 20px; margin-top: 20px;">
+                <p style="font-family: var(--font-display); font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 3px;">
+                    Proteja a sua riqueza de forma científica.
+                </p>
+                <p style="font-size: 14px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0;">
+                    Jhony Bosio · Private Advisor
+                </p>
+            </div>
+
+            <div class="page-footer" style="margin-top: 40px;">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span>Página 6</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
