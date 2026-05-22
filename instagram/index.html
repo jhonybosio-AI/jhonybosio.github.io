@@ -44,6 +44,23 @@
       padding: 0;
     }
 
+    /* Scrollbars customizadas de alta fidelidade visual (Premium) */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(3, 8, 22, 0.95);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(10, 132, 255, 0.2);
+      border-radius: 99px;
+      transition: all 0.2s ease;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(10, 132, 255, 0.4);
+    }
+
     body {
       background: #030816;
       color: var(--text);
@@ -1460,25 +1477,26 @@
   <!-- TEMPLATE DE SLIDE PADRÃO (MOLDE OCULTO PARA SER CLONADO PELO JS) -->
   <template id="slide-template">
     <div class="slide-scale-container format-feed">
+      
+      <!-- CONTROLES FLUTUANTES NO EDITOR -->
+      <div class="slide-controls">
+        <select class="slide-control-select" onchange="changeSlideLayoutFromEl(this)">
+          <option value="capa">Capa</option>
+          <option value="texto" selected>Didático Texto</option>
+          <option value="pilares">Didático Pilares</option>
+          <option value="pergunta">Didático Pergunta & CTA</option>
+          <option value="cta">CTA Final</option>
+          <option value="xcom">Estilo X.com (Tweet)</option>
+        </select>
+        <button class="btn-slide-control" style="font-weight: bold; min-width: 26px;" title="Aumentar Fonte" onmousedown="event.preventDefault(); alterarTamanhoFonte('aumentar')">A+</button>
+        <button class="btn-slide-control" style="font-weight: bold; min-width: 26px;" title="Diminuir Fonte" onmousedown="event.preventDefault(); alterarTamanhoFonte('diminuir')">A-</button>
+        <button class="btn-slide-control" onclick="moverSlideFromEl(this, 'up')">⬆️</button>
+        <button class="btn-slide-control" onclick="moverSlideFromEl(this, 'down')">⬇️</button>
+        <button class="btn-slide-control btn-delete" onclick="deletarSlideFromEl(this)">❌</button>
+        <button class="btn-slide-control" style="background: rgba(10, 132, 255, 0.1); border-color: var(--primary);" onclick="baixarSlideFromEl(this)">📸 Salvar</button>
+      </div>
+
       <div class="slide-wrapper layout-texto">
-        
-        <!-- CONTROLES FLUTUANTES NO EDITOR -->
-        <div class="slide-controls">
-          <select class="slide-control-select" onchange="changeSlideLayoutFromEl(this)">
-            <option value="capa">Capa</option>
-            <option value="texto" selected>Didático Texto</option>
-            <option value="pilares">Didático Pilares</option>
-            <option value="pergunta">Didático Pergunta & CTA</option>
-            <option value="cta">CTA Final</option>
-            <option value="xcom">Estilo X.com (Tweet)</option>
-          </select>
-          <button class="btn-slide-control" style="font-weight: bold; min-width: 26px;" title="Aumentar Fonte" onmousedown="event.preventDefault(); alterarTamanhoFonte('aumentar')">A+</button>
-          <button class="btn-slide-control" style="font-weight: bold; min-width: 26px;" title="Diminuir Fonte" onmousedown="event.preventDefault(); alterarTamanhoFonte('diminuir')">A-</button>
-          <button class="btn-slide-control" onclick="moverSlideFromEl(this, 'up')">⬆️</button>
-          <button class="btn-slide-control" onclick="moverSlideFromEl(this, 'down')">⬇️</button>
-          <button class="btn-slide-control btn-delete" onclick="deletarSlideFromEl(this)">❌</button>
-          <button class="btn-slide-control" style="background: rgba(10, 132, 255, 0.1); border-color: var(--primary);" onclick="baixarSlideFromEl(this)">📸 Salvar</button>
-        </div>
         
         <!-- CABEÇALHO OFICIAL (Slides Didáticos/CTAs) -->
         <div class="slide-header">
@@ -1964,9 +1982,12 @@
 
     // ── PONTES DE INTERAÇÃO DO DOM PARA OS CONTROLES ──
     function changeSlideLayoutFromEl(selectEl) {
-      const wrapper = selectEl.closest('.slide-wrapper');
-      if (wrapper) {
-        changeSlideLayout(wrapper.id, selectEl.value);
+      const container = selectEl.closest('.slide-scale-container');
+      if (container) {
+        const wrapper = container.querySelector('.slide-wrapper');
+        if (wrapper) {
+          changeSlideLayout(wrapper.id, selectEl.value);
+        }
       }
     }
 
@@ -1985,11 +2006,14 @@
     }
 
     function baixarSlideFromEl(btnEl) {
-      const wrapper = btnEl.closest('.slide-wrapper');
-      if (wrapper) {
-        const badge = wrapper.querySelector('.slide-footer-badge');
-        const num = badge ? badge.textContent.replace('/', '_') : 'Slide';
-        baixarSlide(wrapper.id, num);
+      const container = btnEl.closest('.slide-scale-container');
+      if (container) {
+        const wrapper = container.querySelector('.slide-wrapper');
+        if (wrapper) {
+          const badge = wrapper.querySelector('.slide-footer-badge');
+          const num = badge ? badge.textContent.replace('/', '_') : 'Slide';
+          baixarSlide(wrapper.id, num);
+        }
       }
     }
 
@@ -2024,7 +2048,9 @@
           const link = document.createElement('a');
           link.download = `Carrossel_JB_${nameSuffix}.png`;
           link.href = canvas.toDataURL('image/png');
+          document.body.appendChild(link);
           link.click();
+          document.body.removeChild(link);
         }).catch(err => {
           slide.classList.remove('generating-png');
           console.error("Erro ao exportar o slide individual: ", err);
@@ -2127,7 +2153,9 @@
             const link = document.createElement('a');
             link.download = `Carrossel_Jhony_Bosio_${currentFormat === 'feed' ? 'Feed' : 'Reels'}.zip`;
             link.href = URL.createObjectURL(content);
+            document.body.appendChild(link);
             link.click();
+            document.body.removeChild(link);
             
           }).catch(zipErr => {
             console.error("Erro ao compactar arquivos ZIP: ", zipErr);
