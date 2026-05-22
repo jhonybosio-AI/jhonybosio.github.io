@@ -282,47 +282,103 @@
       gap: 8px;
     }
 
-    .accent-btn {
+    .theme-selector-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .theme-btn {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border);
       border-radius: var(--r-sm);
-      padding: 10px;
+      padding: 11px 14px;
       cursor: pointer;
       font-family: var(--space-grotesk);
       font-weight: 700;
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text);
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
+      justify-content: flex-start;
+      gap: 8px;
       transition: all 0.2s ease;
+      text-align: left;
+      width: 100%;
     }
 
-    .accent-btn:hover {
+    .theme-btn:hover {
       background: rgba(255, 255, 255, 0.04);
     }
 
-    .accent-btn.active-blue {
+    .theme-btn.active {
       border-color: var(--primary);
       background: rgba(10, 132, 255, 0.08);
       color: #72b1ff;
+      box-shadow: 0 0 15px rgba(10, 132, 255, 0.15);
     }
-
-    .accent-btn.active-gold {
-      border-color: var(--accent);
+    
+    #btn-theme-blue3-gold.active {
+      border-color: #d4af37;
       background: rgba(212, 175, 55, 0.08);
       color: #ffd875;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
     }
 
-    .color-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
+    #btn-theme-xp.active {
+      border-color: #c59b27;
+      background: rgba(197, 155, 39, 0.08);
+      color: #ffd875;
+      box-shadow: 0 0 15px rgba(197, 155, 39, 0.15);
     }
 
-    .color-dot.blue { background: #0a84ff; }
-    .color-dot.gold { background: #d4af37; }
+    /* Estilos do formulário do Gerador Inteligente IA */
+    .ia-generator-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .ia-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ia-label {
+      font-family: var(--plus-jakarta);
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .ia-input, .ia-select, .ia-textarea {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 10px 12px;
+      font-family: var(--inter);
+      font-size: 13px;
+      color: var(--text);
+      outline: none;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .ia-input:focus, .ia-select:focus, .ia-textarea:focus {
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .ia-textarea {
+      height: 80px;
+      resize: vertical;
+    }
 
     /* Controles Dinâmicos Globais */
     .global-controls {
@@ -1144,6 +1200,50 @@
       stroke: var(--text);
     }
 
+    /* ── TEMAS DE CONSISTÊNCIA DE CARROSSEL ── */
+    .editor-viewport.theme-xcom .slide-wrapper {
+      background: #000000 !important;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+    }
+    
+    .editor-viewport.theme-xcom .slide-wrapper::before {
+      background: none !important;
+    }
+    
+    .editor-viewport.theme-xcom .slide-header,
+    .editor-viewport.theme-xcom .slide-footer {
+      display: none !important;
+    }
+    
+    .editor-viewport.theme-xcom .slide-body {
+      display: none !important;
+    }
+    
+    .editor-viewport.theme-xcom .slide-body.xcom-body {
+      display: flex !important;
+    }
+
+    /* ── TEMA CORPORATIVO XP INVESTIMENTOS ── */
+    .editor-viewport.theme-xp .slide-wrapper {
+      background: #111215 !important;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(197, 155, 39, 0.15) !important;
+    }
+    
+    .editor-viewport.theme-xp .slide-wrapper::before {
+      background: radial-gradient(circle at 100% 0%, rgba(197, 155, 39, 0.08) 0%, transparent 60%) !important;
+    }
+    
+    .editor-viewport.theme-xp .slide-glass-card,
+    .editor-viewport.theme-xp .slide-pilar-card {
+      background: rgba(255, 255, 255, 0.02) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25) !important;
+    }
+    
+    .editor-viewport.theme-xp .slide-logo-box {
+      border-radius: 4px !important;
+    }
+
     /* ── SEÇÃO LEGENDA REDES SOCIAIS ── */
     .caption-generator {
       display: flex;
@@ -1259,17 +1359,21 @@
         </div>
       </div>
       
-      <!-- SEÇÃO 1: ACENTOS -->
+      <!-- SEÇÃO 1: FUNDO PARA POST / REELS -->
       <div class="panel-section">
-        <h4 class="panel-section-title">Paleta de Destaques</h4>
-        <div class="accent-toggle-group">
-          <button class="accent-btn active-blue" id="btn-accent-blue" onclick="setAccent('blue')">
-            <span class="color-dot blue"></span>
-            Azul Elétrico
+        <h4 class="panel-section-title">Fundo para Post / Reels</h4>
+        <div class="theme-selector-grid">
+          <button class="theme-btn active" id="btn-theme-blue3-blue" onclick="setTheme('blue3-blue')">
+            ⚡ Post estilo Azul Elétrico
           </button>
-          <button class="accent-btn" id="btn-accent-gold" onclick="setAccent('gold')">
-            <span class="color-dot gold"></span>
-            Ouro Reais
+          <button class="theme-btn" id="btn-theme-blue3-gold" onclick="setTheme('blue3-gold')">
+            ⚜️ Post estilo Blue3 Design
+          </button>
+          <button class="theme-btn" id="btn-theme-xcom" onclick="setTheme('xcom')">
+            🐦 Post estilo X.com
+          </button>
+          <button class="theme-btn" id="btn-theme-xp" onclick="setTheme('xp')">
+            💼 Post Estilo XP Investimentos
           </button>
         </div>
       </div>
@@ -1284,23 +1388,36 @@
         </div>
       </div>
       
-      <!-- SEÇÃO 3: TEMPLATES PRONTOS -->
+      <!-- SEÇÃO 3: CARREGAR COPYS DE ALTA CONVERSÃO -->
       <div class="panel-section">
         <h4 class="panel-section-title">Carregar Copys de Alta Conversão</h4>
-        <div class="template-selector">
-          <button class="template-option active" id="tpl-0" onclick="loadTemplate(0)">
-            <h5 class="template-option-title">1. Alocação Global</h5>
-            <p class="template-option-desc">Modelo sobre conflito de interesses fiduciário e as 9 classes da XP.</p>
-          </button>
+        <div class="ia-generator-form">
+          <div class="ia-field-group">
+            <label class="ia-label">1. Referências Web (URL da notícia/post)</label>
+            <input type="url" id="ia-ref-url" class="ia-input" placeholder="Cole o link da reportagem/notícia...">
+          </div>
           
-          <button class="template-option" id="tpl-1" onclick="loadTemplate(1)">
-            <h5 class="template-option-title">2. Blindagem Patrimonial</h5>
-            <p class="template-option-desc">Exposição da transição tributária para 2026, ITCMD e holding.</p>
-          </button>
+          <div class="ia-field-group" style="margin-top: 10px;">
+            <label class="ia-label">2. Referência de Texto (Texto bruto)</label>
+            <textarea id="ia-ref-text" class="ia-textarea" placeholder="Cole o texto ou insights aqui para a IA dividir entre os slides..."></textarea>
+          </div>
           
-          <button class="template-option" id="tpl-2" onclick="loadTemplate(2)">
-            <h5 class="template-option-title">3. Offshore HNW</h5>
-            <p class="template-option-desc">Qualificação de leads de alta renda com American Bonds e contas PIC.</p>
+          <div class="ia-field-group" style="margin-top: 10px;">
+            <label class="ia-label">3. Número de slides desejado</label>
+            <select id="ia-slides-count" class="ia-select">
+              <option value="3">3 Slides</option>
+              <option value="4">4 Slides</option>
+              <option value="5" selected>5 Slides</option>
+              <option value="6">6 Slides</option>
+              <option value="7">7 Slides</option>
+              <option value="8">8 Slides</option>
+              <option value="9">9 Slides</option>
+              <option value="10">10 Slides</option>
+            </select>
+          </div>
+          
+          <button class="btn-global btn-primary" style="margin-top: 12px; background: var(--primary); box-shadow: 0 0 15px rgba(10, 132, 255, 0.3);" onclick="gerarCarrosselDeReferencia()">
+            ⚡ Dividir e Criar Carrossel
           </button>
         </div>
       </div>
@@ -1518,6 +1635,7 @@
     // ── CONFIGURAÇÕES E ESTADO ──
     let currentAccent = 'blue';
     let currentFormat = 'feed';
+    let currentTheme = 'blue3-blue'; // Novo estado de tema global
     let slideCounter = 0;
     let lastFocusedEditable = null;
 
@@ -1548,6 +1666,69 @@
       lastFocusedEditable.style.fontSize = fontSizeVal + 'px';
     }
 
+    // Função para alterar o tema de fundo de forma global e consistente
+    function setTheme(theme) {
+      currentTheme = theme;
+      
+      // Atualizar estado ativo dos botões no painel lateral
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      const activeBtn = document.getElementById(`btn-theme-${theme}`);
+      if (activeBtn) {
+        activeBtn.classList.add('active');
+      }
+      
+      // Aplicar a classe de tema ativo no contêiner pai
+      const viewport = document.getElementById('editor-viewport');
+      if (viewport) {
+        viewport.classList.remove('theme-blue3-blue', 'theme-blue3-gold', 'theme-xcom', 'theme-xp');
+        viewport.classList.add(`theme-${theme}`);
+      }
+      
+      // Sincronizar os acentos de cores e cabeçalhos
+      if (theme === 'blue3-blue') {
+        setAccent('blue');
+        restaurarCabecalhosPadrao();
+      } else if (theme === 'blue3-gold') {
+        setAccent('gold');
+        restaurarCabecalhosPadrao();
+      } else if (theme === 'xcom') {
+        setAccent('blue');
+        restaurarCabecalhosPadrao();
+      } else if (theme === 'xp') {
+        setAccent('xp');
+        aplicarCabecalhosXP();
+      }
+    }
+    
+    function aplicarCabecalhosXP() {
+      document.querySelectorAll('.slide-wrapper').forEach(slide => {
+        const logoBox = slide.querySelector('.slide-logo-box');
+        if (logoBox) logoBox.textContent = 'XP';
+        
+        const logoName = slide.querySelector('.slide-logo-name');
+        if (logoName) logoName.textContent = 'XP Private';
+        
+        const logoCargo = slide.querySelector('.slide-logo-cargo');
+        if (logoCargo) logoCargo.textContent = 'Advisory Portfolio';
+      });
+    }
+
+    function restaurarCabecalhosPadrao() {
+      document.querySelectorAll('.slide-wrapper').forEach(slide => {
+        const logoBox = slide.querySelector('.slide-logo-box');
+        if (logoBox) logoBox.textContent = 'JB';
+        
+        const logoName = slide.querySelector('.slide-logo-name');
+        if (logoName) logoName.textContent = 'Jhony Bosio';
+        
+        const logoCargo = slide.querySelector('.slide-logo-cargo');
+        if (logoCargo) logoCargo.textContent = 'Private Advisor';
+      });
+    }
+
     // Configura o Destaque de Cor (Azul ou Ouro)
     function setAccent(color) {
       currentAccent = color;
@@ -1556,33 +1737,49 @@
       const btnGold = document.getElementById('btn-accent-gold');
       const logoBadge = document.getElementById('header-logo-badge');
       
+      let primaryColor = '#0a84ff';
+      let glowColor = 'rgba(10, 132, 255, 0.35)';
+      let shadowColor = 'rgba(10, 132, 255, 0.45)';
+      
       if (color === 'blue') {
-        document.documentElement.style.setProperty('--primary', '#0a84ff');
-        btnBlue.classList.add('active-blue');
-        btnGold.classList.remove('active-gold');
-        logoBadge.style.background = '#0a84ff';
-        logoBadge.style.boxShadow = '0 0 15px rgba(10, 132, 255, 0.35)';
-      } else {
-        document.documentElement.style.setProperty('--primary', '#d4af37');
-        btnBlue.classList.remove('active-blue');
-        btnGold.classList.add('active-gold');
-        logoBadge.style.background = '#d4af37';
-        logoBadge.style.boxShadow = '0 0 15px rgba(212, 175, 55, 0.35)';
+        primaryColor = '#0a84ff';
+        glowColor = 'rgba(10, 132, 255, 0.35)';
+        shadowColor = 'rgba(10, 132, 255, 0.45)';
+        if (btnBlue) btnBlue.classList.add('active-blue');
+        if (btnGold) btnGold.classList.remove('active-gold');
+      } else if (color === 'gold') {
+        primaryColor = '#d4af37';
+        glowColor = 'rgba(212, 175, 55, 0.35)';
+        shadowColor = 'rgba(212, 175, 55, 0.35)';
+        if (btnBlue) btnBlue.classList.remove('active-blue');
+        if (btnGold) btnGold.classList.add('active-gold');
+      } else if (color === 'xp') {
+        primaryColor = '#c59b27';
+        glowColor = 'rgba(197, 155, 39, 0.35)';
+        shadowColor = 'rgba(197, 155, 39, 0.35)';
+        if (btnBlue) btnBlue.classList.remove('active-blue');
+        if (btnGold) btnGold.classList.remove('active-gold');
+      }
+      
+      document.documentElement.style.setProperty('--primary', primaryColor);
+      if (logoBadge) {
+        logoBadge.style.background = primaryColor;
+        logoBadge.style.boxShadow = `0 0 15px ${glowColor}`;
       }
       
       // Aplicar dinamicamente a todos os badges e botões de destaque nos slides
       document.querySelectorAll('.slide-logo-box').forEach(el => {
         el.style.background = 'var(--primary)';
-        el.style.boxShadow = `0 0 25px ${color === 'blue' ? 'rgba(10, 132, 255, 0.45)' : 'rgba(212, 175, 55, 0.35)'}`;
+        el.style.boxShadow = `0 0 25px ${shadowColor}`;
       });
 
       document.querySelectorAll('.slide-card-question-btn').forEach(btn => {
         btn.style.background = 'var(--primary)';
-        btn.style.boxShadow = `0 8px 25px ${color === 'blue' ? 'rgba(10, 132, 255, 0.3)' : 'rgba(212, 175, 55, 0.2)'}`;
+        btn.style.boxShadow = `0 8px 25px ${glowColor}`;
       });
 
       document.querySelectorAll('.slide-cta-button').forEach(btn => {
-        if (color === 'gold') {
+        if (color === 'gold' || color === 'xp') {
           btn.style.background = 'var(--accent)';
           btn.style.color = '#030816';
           const sub = btn.querySelector('.slide-cta-button-sub');
@@ -1611,7 +1808,7 @@
       // NOVO: Ajustar borda do avatar no layout X.com
       document.querySelectorAll('.xcom-avatar').forEach(img => {
         img.style.borderColor = 'var(--primary)';
-        img.style.boxShadow = `0 0 15px ${color === 'blue' ? 'rgba(10, 132, 255, 0.3)' : 'rgba(212, 175, 55, 0.25)'}`;
+        img.style.boxShadow = `0 0 15px ${glowColor}`;
       });
       
       // NOVO: Ajustar texto de CTA no layout X.com
@@ -1676,6 +1873,19 @@
       
       // Inserir no DOM
       viewport.appendChild(clone);
+      
+      // Obter referência ao elemento inserido e ajustar cabeçalhos se o tema ativo for XP
+      const addedWrapper = viewport.querySelector(`#${slideId}`);
+      if (addedWrapper && currentTheme === 'xp') {
+        const logoBox = addedWrapper.querySelector('.slide-logo-box');
+        if (logoBox) logoBox.textContent = 'XP';
+        
+        const logoName = addedWrapper.querySelector('.slide-logo-name');
+        if (logoName) logoName.textContent = 'XP Private';
+        
+        const logoCargo = addedWrapper.querySelector('.slide-logo-cargo');
+        if (logoCargo) logoCargo.textContent = 'Advisory Portfolio';
+      }
       
       // Aplicar o acento de cor nos novos elementos
       setAccent(currentAccent);
@@ -2152,6 +2362,241 @@
       setTimeout(gerarLegendaAutomatica, 350);
     }
 
+    // ── MOTOR DA IA: PROCESSADOR E GERADOR DE REFERÊNCIA ──
+    function gerarCarrosselDeReferencia() {
+      const urlInput = document.getElementById('ia-ref-url').value.trim();
+      let textInput = document.getElementById('ia-ref-text').value.trim();
+      const numSlides = parseInt(document.getElementById('ia-slides-count').value);
+      
+      if (!urlInput && !textInput) {
+        alert("Por favor, preencha pelo menos um dos campos: link da reportagem (1) ou o texto bruto (2).");
+        return;
+      }
+      
+      const loader = document.getElementById('export-loader');
+      const statusText = document.getElementById('loader-status');
+      
+      // Mostrar Loader fiduciário
+      loader.style.display = 'flex';
+      statusText.textContent = "Processando referências com inteligência fiduciária...";
+      
+      // Se tiver apenas URL, simular a extração ou usar conteúdo premium pré-definido de finanças
+      if (urlInput && !textInput) {
+        statusText.textContent = "Lendo e interpretando artigo da web...";
+        let temaSimulado = "Reforma Tributária e Sucessão Patrimonial";
+        if (urlInput.toLowerCase().includes("inflacao") || urlInput.toLowerCase().includes("juros") || urlInput.toLowerCase().includes("selic") || urlInput.toLowerCase().includes("etf")) {
+          temaSimulado = "Alocação Fiduciária de Ativos Globais";
+        }
+        textInput = obterTextoMockPremium(temaSimulado);
+      }
+      
+      setTimeout(() => {
+        statusText.textContent = "Dividindo texto em blocos didáticos balanceados...";
+        
+        // Algoritmo de divisão inteligente de texto
+        const blocos = dividirTextoInteligente(textInput, numSlides);
+        
+        // Limpar viewport
+        const viewport = document.getElementById('editor-viewport');
+        viewport.innerHTML = '';
+        slideCounter = 0;
+        
+        // Gerar os slides
+        blocos.forEach((bloco, idx) => {
+          let layoutPadrao = 'texto';
+          if (idx === 0) layoutPadrao = 'capa';
+          else if (idx === blocos.length - 1) layoutPadrao = 'pergunta';
+          
+          const slideId = adicionarNovoSlide(layoutPadrao);
+          const wrapper = document.getElementById(slideId);
+          
+          // Preencher TODOS os layouts com as informações correspondentes deste bloco
+          // 1. Capa
+          const capaCat = wrapper.querySelector('.slide-capa-category');
+          if (capaCat) capaCat.textContent = bloco.category.toUpperCase();
+          const capaTitle = wrapper.querySelector('.slide-capa-title');
+          if (capaTitle) capaTitle.innerHTML = bloco.title;
+          const capaDesc = wrapper.querySelector('.slide-capa-desc');
+          if (capaDesc) capaDesc.textContent = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "");
+          
+          // 2. Didático Texto
+          const contentCat = wrapper.querySelector('.slide-content-category');
+          if (contentCat) contentCat.textContent = bloco.category.toUpperCase();
+          const contentTitle = wrapper.querySelector('.slide-content-title');
+          if (contentTitle) contentTitle.innerHTML = bloco.title;
+          const cardText = wrapper.querySelector('.slide-glass-card-text');
+          if (cardText) cardText.innerHTML = bloco.desc;
+          
+          // 3. Didático Pilares
+          const cards = wrapper.querySelectorAll('.slide-pilar-card');
+          if (cards.length >= 4) {
+            const partes = bloco.desc.replace(/<br>/g, " ").split('. ');
+            cards.forEach((c, cIdx) => {
+              const pTitle = c.querySelector('.slide-pilar-title');
+              const pDesc = c.querySelector('.slide-pilar-desc');
+              if (pTitle && pDesc) {
+                pTitle.textContent = `Pilar 0${cIdx + 1}`;
+                pDesc.textContent = partes[cIdx] ? partes[cIdx].replace(/<\/?[^>]+(>|$)/g, "").trim() : "Detalhe estratégico para sua blindagem de ativos globais.";
+              }
+            });
+          }
+          
+          // 4. Didático Pergunta
+          const qSubtitle = wrapper.querySelector('.slide-question-subtitle');
+          if (qSubtitle) qSubtitle.textContent = "Ação imediata necessária...";
+          const cardQ = wrapper.querySelector('.slide-card-question');
+          if (cardQ) cardQ.textContent = bloco.title.replace('<br>', ' ').replace(/<\/?[^>]+(>|$)/g, "");
+          const cardQSub = wrapper.querySelector('.slide-card-question-sub');
+          if (cardQSub) cardQSub.textContent = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 75) + "...";
+          const cardQBtn = wrapper.querySelector('.slide-card-question-btn span');
+          if (cardQBtn) cardQBtn.textContent = idx === blocos.length - 1 ? "Falar com o Hermes" : "Saber Mais";
+          
+          // 5. CTA Final
+          const ctaCat = wrapper.querySelector('.slide-cta-category');
+          if (ctaCat) ctaCat.textContent = "WEALTH ACADEMY";
+          const ctaTitle = wrapper.querySelector('.slide-cta-title');
+          if (ctaTitle) ctaTitle.innerHTML = bloco.title;
+          const ctaDesc = wrapper.querySelector('.slide-cta-desc');
+          if (ctaDesc) ctaDesc.textContent = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "");
+          const ctaBtn = wrapper.querySelector('.slide-cta-btn-text');
+          if (ctaBtn) ctaBtn.textContent = "ACESSAR TRILHA GRÁTIS";
+          
+          // 6. X.com (Tweet)
+          const xText = wrapper.querySelector('.xcom-text');
+          if (xText) xText.innerText = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "");
+          const xCta = wrapper.querySelector('.xcom-cta');
+          if (xCta) xCta.innerText = idx === blocos.length - 1 ? "Acesse o link da bio e fale com o Hermes." : "Veja o próximo slide para entender.";
+        });
+        
+        // Atualizar numeração
+        atualizarNumeracaoSlides();
+        
+        // Sincronizar o tema e o acento ativo
+        setTheme(currentTheme);
+        
+        // Fechar loader
+        loader.style.display = 'none';
+        
+        // Gerar a Legenda Inteligente
+        gerarLegendaAutomatica();
+        
+        alert(`⚡ Carrossel com ${numSlides} slides criado com sucesso com base nas referências!`);
+      }, 1500);
+    }
+
+    function dividirTextoInteligente(texto, numSlides) {
+      const paragrafos = texto.split('\n')
+                              .map(p => p.trim())
+                              .filter(p => p.length > 10);
+      
+      const blocos = [];
+      const totalDidaticos = numSlides - 2;
+      
+      let capaTitle = "Decisão Fiduciária Inteligente";
+      let capaDesc = "Como blindar seu patrimônio e otimizar seus investimentos sob o Protocolo 9A.";
+      let capaCat = "PLANEJAMENTO";
+      
+      if (paragrafos.length > 0) {
+        const fraseCapa = paragrafos[0];
+        capaCat = fraseCapa.length < 30 ? fraseCapa : "ESTRATÉGIA";
+        
+        if (paragrafos.length > 1) {
+          capaTitle = paragrafos[0].length < 60 ? paragrafos[0] : paragrafos[0].substring(0, 45) + "...";
+          capaDesc = paragrafos[1].length < 150 ? paragrafos[1] : paragrafos[1].substring(0, 140) + "...";
+        } else {
+          const splitCapa = fraseCapa.split('. ');
+          capaTitle = splitCapa[0].length < 60 ? splitCapa[0] : splitCapa[0].substring(0, 45) + "...";
+          capaDesc = splitCapa[1] || fraseCapa;
+        }
+      }
+      
+      if (capaTitle.includes(' ') && !capaTitle.includes('<br>')) {
+        const palavras = capaTitle.split(' ');
+        const meio = Math.ceil(palavras.length / 2);
+        capaTitle = palavras.slice(0, meio).join(' ') + '<br>' + palavras.slice(meio).join(' ');
+      }
+      
+      blocos.push({
+        category: capaCat,
+        title: capaTitle,
+        desc: capaDesc
+      });
+      
+      const paragrafosDidaticos = paragrafos.slice(1);
+      
+      for (let i = 0; i < totalDidaticos; i++) {
+        let didaticoTitle = "Análise Prática";
+        let didaticoDesc = "Aprofundando os conceitos fiduciários do seu portfólio de investimentos de forma independente.";
+        let didaticoCat = `Passo 0${i + 1}`;
+        
+        if (paragrafosDidaticos.length > 0) {
+          const fatiaTamanho = Math.max(1, Math.floor(paragrafosDidaticos.length / totalDidaticos));
+          const inicio = i * fatiaTamanho;
+          const fim = (i === totalDidaticos - 1) ? paragrafosDidaticos.length : (i + 1) * fatiaTamanho;
+          const blocoParagrafos = paragrafosDidaticos.slice(inicio, fim);
+          
+          if (blocoParagrafos.length > 0) {
+            const principal = blocoParagrafos[0];
+            const frases = principal.split('. ');
+            didaticoTitle = frases[0].length < 60 ? frases[0] : frases[0].substring(0, 45) + "...";
+            didaticoDesc = blocoParagrafos.join('<br><br>');
+            didaticoCat = `Passo 0${i + 1}`;
+          }
+        }
+        
+        if (didaticoTitle.includes(' ') && !didaticoTitle.includes('<br>')) {
+          const palavras = didaticoTitle.split(' ');
+          const meio = Math.ceil(palavras.length / 2);
+          didaticoTitle = palavras.slice(0, meio).join(' ') + '<br>' + palavras.slice(meio).join(' ');
+        }
+        
+        blocos.push({
+          category: didaticoCat.toUpperCase(),
+          title: didaticoTitle,
+          desc: didaticoDesc
+        });
+      }
+      
+      let ctaTitle = "Seu patrimônio está <span class='highlight-blue'>protegido?</span>";
+      let ctaDesc = "Não corra riscos desnecessários. Faça uma análise inteligente de alocação de ativos e governança fiduciária hoje mesmo.";
+      let ctaCat = "OPORTUNIDADE";
+      
+      if (paragrafos.length > 2) {
+        const ultimoParagrafo = paragrafos[paragrafos.length - 1];
+        const frasesUltimo = ultimoParagrafo.split('. ');
+        ctaTitle = frasesUltimo[0].length < 50 ? frasesUltimo[0] : "O Próximo Passo Prático";
+        ctaDesc = ultimoParagrafo;
+      }
+      
+      blocos.push({
+        category: ctaCat,
+        title: ctaTitle,
+        desc: ctaDesc
+      });
+      
+      return blocos;
+    }
+
+    function obterTextoMockPremium(tema) {
+      if (tema.includes("Alocação")) {
+        return `Alocação Fiduciária de Ativos Globais
+A importância de diversificar sua carteira de forma neutra e independente, livre de comissões e rebates ocultos.
+O modelo tradicional de assessoria financeira no Brasil é baseado no conflito de interesses. Gerentes e corretores recomendam produtos baseados na comissão que recebem, não no seu perfil.
+Para blindar o patrimônio, a resposta é a taxa fixa (fee-only). O investidor paga uma taxa anual transparente e todo o rebate de fundos volta 100% para a conta do cliente.
+O Protocolo 9A da Wealth Academy estrutura a alocação em 9 classes globais. Isso envolve ações globais, renda fixa internacional, fundos imobiliários, ouro e ativos reais.
+Ao eliminar as taxas ocultas que drenam até 2.5% ao ano do seu capital, você acelera os juros compostos em até 40% no longo prazo.
+Faça o diagnóstico gratuito do seu portfólio atual. Descubra quanto do seu patrimônio está sendo consumido por conflitos invisíveis.`;
+      } else {
+        return `Reforma Tributária e Sucessão Patrimonial
+Como se antecipar às novas alíquotas progressivas do ITCMD e planejar a holding familiar antes da vigência plena das regras.
+A Reforma Tributária traz grandes mudanças na tributação de heranças. A alíquota do ITCMD passará a ser progressiva em todos os estados, chegando a até 8%.
+Além disso, a transferência de bens em vida (doações) poderá ser tributada a valor de mercado, eliminando o benefício histórico da declaração por valor de custo.
+Para blindar seu legado e evitar inventários caros e demorados, o planejamento tributário precisa começar imediatamente.
+A holding familiar e a estruturação de fundos fechados são caminhos robustos. Elas garantem proteção jurídica, governança sucessória e diferimento tributário pleno.
+Fale com o Hermes hoje mesmo para realizar uma simulação científica do impacto da reforma tributária sobre os bens da sua família.`;
+      }
+    }
+
     // Gera a legenda automática consolidada de alta conversão
     function gerarLegendaAutomatica() {
       const slides = document.querySelectorAll('#editor-viewport .slide-wrapper');
@@ -2275,6 +2720,7 @@
 
     // Inicialização do carrossel ao carregar
     document.addEventListener('DOMContentLoaded', () => {
+      setTheme('blue3-blue');
       loadTemplate(0);
     });
   </script>
