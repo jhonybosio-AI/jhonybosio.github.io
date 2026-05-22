@@ -12,6 +12,9 @@
   
   <!-- html2canvas para Exportação Científica -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <!-- JSZip para Compactação Científica em ZIP das Imagens -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
   <style>
     /* ── SYSTEM DESIGN BLUE3 CORE ── */
@@ -30,6 +33,9 @@
       --r-lg: 14px;
       --r-md: 12px;
       --r-sm: 8px;
+      
+      --slide-scale-feed: 0.55;
+      --slide-scale-reels: 0.40;
     }
 
     * {
@@ -45,7 +51,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     /* ── HEADER DA FERRAMENTA ── */
@@ -53,13 +59,13 @@
       background: rgba(3, 8, 22, 0.85);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      padding: 16px 40px;
+      padding: 14px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: sticky;
-      top: 0;
+      position: relative;
       z-index: 100;
+      height: 69px;
     }
 
     .tool-logo-group {
@@ -81,19 +87,26 @@
       justify-content: center;
       border-radius: var(--r-sm);
       box-shadow: 0 0 15px rgba(10, 132, 255, 0.35);
+      transition: all 0.3s ease;
+    }
+
+    .tool-logo-text-group {
+      display: flex;
+      flex-direction: column;
     }
 
     .tool-logo-text {
       font-family: var(--space-grotesk);
       font-weight: 700;
-      font-size: 20px;
+      font-size: 18px;
       letter-spacing: -0.02em;
+      line-height: 1.2;
     }
 
     .tool-logo-sub {
       color: rgba(255, 255, 255, 0.45);
       font-family: var(--inter);
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -102,13 +115,14 @@
     .tool-header-actions {
       display: flex;
       gap: 16px;
+      align-items: center;
     }
 
     .btn-header {
       font-family: var(--space-grotesk);
       font-weight: 700;
-      font-size: 14px;
-      padding: 10px 20px;
+      font-size: 13px;
+      padding: 8px 16px;
       border-radius: var(--r-sm);
       cursor: pointer;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -149,34 +163,89 @@
     .control-panel {
       background: rgba(3, 8, 22, 0.95);
       border-right: 1px solid var(--border);
-      padding: 32px 24px;
+      padding: 24px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 24px;
+    }
+
+    .panel-section {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 20px;
+    }
+
+    .panel-section:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
     }
 
     .panel-section-title {
       font-family: var(--space-grotesk);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: rgba(255, 255, 255, 0.4);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
+    }
+
+    /* Seletor de Formato (Feed vs Reels) */
+    .format-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .format-btn {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 10px;
+      cursor: pointer;
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .format-btn:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .format-btn.active {
+      border-color: var(--primary);
+      background: rgba(10, 132, 255, 0.08);
+      color: #72b1ff;
+    }
+
+    .format-btn span.resolution {
+      font-family: var(--inter);
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 400;
+    }
+
+    .format-btn.active span.resolution {
+      color: rgba(114, 177, 255, 0.7);
     }
 
     .template-selector {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
     }
 
     .template-option {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border);
       border-radius: var(--r-md);
-      padding: 16px;
+      padding: 12px;
       cursor: pointer;
       text-align: left;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -195,38 +264,38 @@
 
     .template-option-title {
       font-family: var(--space-grotesk);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .template-option-desc {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.55);
-      line-height: 1.4;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.3;
     }
 
     .accent-toggle-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 8px;
     }
 
     .accent-btn {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border);
       border-radius: var(--r-sm);
-      padding: 12px;
+      padding: 10px;
       cursor: pointer;
       font-family: var(--space-grotesk);
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       transition: all 0.2s ease;
     }
 
@@ -247,39 +316,70 @@
     }
 
     .color-dot {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
     }
 
-    .color-dot.blue { background: var(--primary); }
-    .color-dot.gold { background: var(--accent); }
+    .color-dot.blue { background: oklch(0.68 0.23 255); }
+    .color-dot.gold { background: oklch(0.82 0.15 90); }
+
+    /* Controles Dinâmicos Globais */
+    .global-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .btn-global {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 10px;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-global:hover {
+      background: var(--primary);
+      color: #030816;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(10, 132, 255, 0.3);
+    }
 
     .help-box {
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.01);
       border: 1px solid var(--border);
       border-radius: var(--r-md);
-      padding: 16px;
+      padding: 12px 16px;
     }
 
     .help-title {
       font-family: var(--space-grotesk);
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 700;
       color: var(--accent);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
 
     .help-list {
       list-style-type: none;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.6);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      line-height: 1.5;
+      gap: 6px;
+      line-height: 1.4;
     }
 
     /* ── ÁREA DE EDIÇÃO DOS SLIDES (DIREITA) ── */
@@ -292,31 +392,54 @@
       align-items: center;
       gap: 60px;
       scroll-behavior: smooth;
+      height: calc(100vh - 69px);
     }
 
-    /* ── ESTRUTURA DO SLIDE (REDUZIDO PARA A TELA, EXPORTA EM 1080×1350) ── */
+    /* ── ESTRUTURA DO SLIDE E ZOOM REATIVO ── */
     .slide-scale-container {
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Dimensões padrão para o contêiner de escala (Feed: 1080x1350) */
+    .slide-scale-container.format-feed {
       width: 594px; /* 1080 * 0.55 */
       height: 742.5px; /* 1350 * 0.55 */
-      position: relative;
+    }
+
+    /* Dimensões Reels no contêiner de escala (Reels: 1080x1920) */
+    .slide-scale-container.format-reels {
+      width: 432px; /* 1080 * 0.40 */
+      height: 768px; /* 1920 * 0.40 */
     }
 
     .slide-wrapper {
       width: 1080px;
-      height: 1350px;
       background: var(--bg);
       position: absolute;
       top: 0;
       left: 0;
-      transform: scale(0.55);
       transform-origin: top left;
       overflow: hidden;
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border);
       box-sizing: border-box;
-      padding: 70px;
+      padding: 70px 70px 60px 70px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      z-index: 10;
+    }
+
+    /* Aplicações de Zoom por classe */
+    .slide-scale-container.format-feed .slide-wrapper {
+      height: 1350px;
+      transform: scale(var(--slide-scale-feed));
+    }
+
+    .slide-scale-container.format-reels .slide-wrapper {
+      height: 1920px;
+      transform: scale(var(--slide-scale-reels));
+      padding: 100px 70px 90px 70px; /* Mais respiro no Reels */
     }
 
     /* Efeitos de vinheta e glow no slide */
@@ -329,7 +452,7 @@
       z-index: 1;
     }
 
-    /* ── HEADER DO SLIDE (Slides 2-4) ── */
+    /* ── HEADER DO SLIDE ── */
     .slide-header {
       display: flex;
       justify-content: space-between;
@@ -337,6 +460,7 @@
       position: relative;
       z-index: 10;
       height: 50px;
+      transition: all 0.3s ease;
     }
 
     .slide-logo-group {
@@ -388,7 +512,7 @@
     /* ── CONTEÚDO DO SLIDE ── */
     .slide-body {
       flex: 1;
-      display: flex;
+      display: none; /* Controlado dinamicamente pelas classes ativas */
       flex-direction: column;
       justify-content: center;
       position: relative;
@@ -396,7 +520,20 @@
       margin: 30px 0;
     }
 
-    /* ── ESTILOS ESPECÍFICOS DE SLIDES ── */
+    .slide-wrapper.layout-capa .slide-body.capa-body { display: flex; }
+    .slide-wrapper.layout-texto .slide-body.texto-body { display: flex; }
+    .slide-wrapper.layout-pilares .slide-body.pilares-body { display: flex; }
+    .slide-wrapper.layout-pergunta .slide-body.pergunta-body { display: flex; }
+    .slide-wrapper.layout-cta .slide-body.cta-body { display: flex; }
+
+    /* Oculta Header no layout Capa */
+    .slide-wrapper.layout-capa .slide-header {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* ── ESTILOS DOS LAYOUTS ESPECÍFICOS ── */
     
     /* 1. SLIDE CAPA */
     .slide-body.capa-body {
@@ -434,8 +571,8 @@
       max-width: 850px;
     }
 
-    /* 2. SLIDE DIDÁTICO / CONTEÚDO */
-    .slide-body.content-body {
+    /* 2. CARD DIDÁTICO / TEXTO */
+    .slide-body.texto-body {
       justify-content: flex-start;
       padding-top: 40px;
     }
@@ -461,7 +598,6 @@
       margin-bottom: 40px;
     }
 
-    /* Card didático em glassmorphic */
     .slide-glass-card {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border);
@@ -484,7 +620,22 @@
       color: #ffffff;
     }
 
-    /* Card de pilares 2x2 para o slide 3 do Protocolo 9A */
+    .highlight-blue {
+      color: var(--primary);
+      text-shadow: 0 0 20px rgba(10, 132, 255, 0.45);
+    }
+    
+    .highlight-gold {
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+    }
+
+    /* 3. CARD PILARES 2x2 */
+    .slide-body.pilares-body {
+      justify-content: flex-start;
+      padding-top: 40px;
+    }
+
     .slide-pilares-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -525,7 +676,66 @@
       color: rgba(255, 255, 255, 0.6);
     }
 
-    /* 3. SLIDE CTA FINAL */
+    /* 4. LAYOUT PERGUNTA & CONVERSÃO (NOVO DO PRINT!) */
+    .slide-body.pergunta-body {
+      justify-content: flex-start;
+      padding-top: 20px;
+    }
+    
+    .slide-question-subtitle {
+      font-family: var(--plus-jakarta);
+      font-size: 24px;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: -30px;
+      margin-bottom: 35px;
+    }
+    
+    .slide-glass-card.question-card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      padding: 50px 40px;
+      margin-top: 10px;
+    }
+    
+    .slide-card-question {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 36px;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    
+    .slide-card-question-sub {
+      font-family: var(--plus-jakarta);
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: -6px;
+    }
+    
+    .slide-card-question-btn {
+      background: var(--primary);
+      color: #ffffff;
+      font-family: var(--space-grotesk);
+      font-weight: 800;
+      font-size: 20px;
+      padding: 16px 36px;
+      border: none;
+      border-radius: var(--r-sm);
+      box-shadow: 0 8px 25px rgba(10, 132, 255, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.2s ease;
+    }
+
+    /* 5. SLIDE CTA FINAL */
     .slide-body.cta-body {
       align-items: center;
       text-align: center;
@@ -605,6 +815,7 @@
       height: 40px;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       padding-top: 24px;
+      transition: all 0.3s ease;
     }
 
     .slide-footer-link {
@@ -621,14 +832,33 @@
       color: var(--text);
     }
 
-    /* ── CONTROLES DO SLIDE NO EDITOR ── */
+    /* ── CONTROLES DO SLIDE NO EDITOR (MUITO PREMIUM) ── */
     .slide-controls {
       position: absolute;
-      top: -24px;
+      top: -30px;
       right: 0;
       display: flex;
-      gap: 12px;
+      gap: 6px;
       z-index: 50;
+    }
+
+    .slide-control-select {
+      background: rgba(3, 8, 22, 0.9);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .slide-control-select:hover {
+      border-color: var(--primary);
+      box-shadow: 0 0 8px rgba(10, 132, 255, 0.2);
     }
 
     .btn-slide-control {
@@ -637,21 +867,26 @@
       color: var(--text);
       font-family: var(--space-grotesk);
       font-weight: 700;
-      font-size: 12px;
-      padding: 6px 14px;
+      font-size: 11px;
+      padding: 4px 10px;
       border-radius: var(--r-sm);
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+      gap: 4px;
       transition: all 0.2s ease;
     }
 
     .btn-slide-control:hover {
-      background: var(--primary);
-      color: #030816;
-      border-color: var(--primary);
-      box-shadow: 0 0 10px rgba(10, 132, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-slide-control.btn-delete:hover {
+      background: #c82333;
+      color: white;
+      border-color: #bd2130;
     }
 
     /* ── CONFIGURAÇÕES EDITÁVEIS ── */
@@ -681,15 +916,81 @@
       transform: none !important;
       box-shadow: none !important;
       border: none !important;
+      position: relative !important;
+      top: 0 !important;
+      left: 0 !important;
+    }
+
+    /* ── LOADER DE EXPORTAÇÃO PREMIUM ── */
+    .export-loader {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(3, 8, 22, 0.92);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .loader-content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      max-width: 400px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+    }
+
+    .spinner {
+      width: 56px;
+      height: 56px;
+      border: 4px solid rgba(10, 132, 255, 0.1);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      box-shadow: 0 0 20px rgba(10, 132, 255, 0.2);
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loader-title {
+      font-family: var(--space-grotesk);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .loader-status {
+      font-family: var(--plus-jakarta);
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
 
+  <!-- LOADER DE EXPORTAÇÃO -->
+  <div id="export-loader" class="export-loader" style="display: none;">
+    <div class="loader-content">
+      <div class="spinner"></div>
+      <h3 class="loader-title">Gerando Carrossel Premium</h3>
+      <p id="loader-status" class="loader-status">Iniciando renderização científica dos slides...</p>
+    </div>
+  </div>
+
   <!-- HEADER DA FERRAMENTA -->
   <header class="tool-header">
     <div class="tool-logo-group">
-      <div class="tool-logo-badge">JB</div>
+      <div class="tool-logo-badge" id="header-logo-badge">JB</div>
       <div class="tool-logo-text-group">
         <span class="tool-logo-text">Jhony Bosio</span>
         <span class="tool-logo-sub">Instagram Content Generator</span>
@@ -697,7 +998,7 @@
     </div>
     <div class="tool-header-actions">
       <button class="btn-header btn-primary-action" onclick="baixarTodosSlides()">
-        📥 Baixar Todos (PNG)
+        📥 Baixar Todos em ZIP (PNG)
       </button>
     </div>
   </header>
@@ -705,11 +1006,26 @@
   <!-- LAYOUT PRINCIPAL -->
   <div class="tool-container">
     
-    <!-- PAINEL DE CONTROLE -->
+    <!-- PAINEL DE CONTROLE (ESQUERDA) -->
     <aside class="control-panel">
       
+      <!-- SEÇÃO 0: FORMATO DO POST -->
+      <div class="panel-section">
+        <h4 class="panel-section-title">Formato do Post</h4>
+        <div class="format-selector">
+          <button class="format-btn active" id="btn-format-feed" onclick="setFormato('feed')">
+            🖼️ Feed Retrato
+            <span class="resolution">1080 × 1350 px (4:5)</span>
+          </button>
+          <button class="format-btn" id="btn-format-reels" onclick="setFormato('reels')">
+            📱 Stories / Reels
+            <span class="resolution">1080 × 1920 px (9:16)</span>
+          </button>
+        </div>
+      </div>
+      
       <!-- SEÇÃO 1: ACENTOS -->
-      <div>
+      <div class="panel-section">
         <h4 class="panel-section-title">Paleta de Destaques</h4>
         <div class="accent-toggle-group">
           <button class="accent-btn active-blue" id="btn-accent-blue" onclick="setAccent('blue')">
@@ -723,448 +1039,746 @@
         </div>
       </div>
       
-      <!-- SEÇÃO 2: TEMPLATES -->
-      <div>
-        <h4 class="panel-section-title">Templates de Alta Conversão</h4>
-        <div class="template-selector">
-          <button class="template-option active" id="tpl-0" onclick="loadTemplate(0)">
-            <h5 class="template-option-title">1. Alocação Global</h5>
-            <p class="template-option-desc">Ideal para apresentar o conflito de interesses de bancos e apresentar o Protocolo 9A de ETFs.</p>
-          </button>
-          
-          <button class="template-option" id="tpl-1" onclick="loadTemplate(1)">
-            <h5 class="template-option-title">2. Blindagem Patrimonial</h5>
-            <p class="template-option-desc">Perfeito para expor o cerco tributário do ITCMD e holdings na transição para 2026.</p>
-          </button>
-          
-          <button class="template-option" id="tpl-2" onclick="loadTemplate(2)">
-            <h5 class="template-option-title">3. Offshore HNW</h5>
-            <p class="template-option-desc">Sofisticado, qualifica leads de altíssima renda sobre estruturação de capital e American Bonds.</p>
+      <!-- SEÇÃO 2: CONTROLES DE SLIDES -->
+      <div class="panel-section">
+        <h4 class="panel-section-title">Gerenciar Carrossel</h4>
+        <div class="global-controls">
+          <button class="btn-global" onclick="adicionarNovoSlide()">
+            ➕ Adicionar Novo Slide
           </button>
         </div>
       </div>
       
-      <!-- SEÇÃO 3: AJUDA -->
+      <!-- SEÇÃO 3: TEMPLATES PRONTOS -->
+      <div class="panel-section">
+        <h4 class="panel-section-title">Carregar Copys de Alta Conversão</h4>
+        <div class="template-selector">
+          <button class="template-option active" id="tpl-0" onclick="loadTemplate(0)">
+            <h5 class="template-option-title">1. Alocação Global</h5>
+            <p class="template-option-desc">Modelo sobre conflito de interesses fiduciário e as 9 classes da XP.</p>
+          </button>
+          
+          <button class="template-option" id="tpl-1" onclick="loadTemplate(1)">
+            <h5 class="template-option-title">2. Blindagem Patrimonial</h5>
+            <p class="template-option-desc">Exposição da transição tributária para 2026, ITCMD e holding.</p>
+          </button>
+          
+          <button class="template-option" id="tpl-2" onclick="loadTemplate(2)">
+            <h5 class="template-option-title">3. Offshore HNW</h5>
+            <p class="template-option-desc">Qualificação de leads de alta renda com American Bonds e contas PIC.</p>
+          </button>
+        </div>
+      </div>
+      
+      <!-- SEÇÃO 4: AJUDA -->
       <div class="help-box">
         <h4 class="help-title">💡 Dicas do Construtor</h4>
         <ul class="help-list">
           <li>✨ <strong>Edição Direta:</strong> Clique em qualquer texto do slide no centro e altere à vontade.</li>
-          <li>🎯 <strong>Assinatura Fiel:</strong> A assinatura "Jhony Bosio" está travada para consistência total da grife.</li>
-          <li>📸 <strong>Exportação Pixel-Perfect:</strong> Ao clicar em baixar, o PNG é gerado no formato exato de 1080×1350px.</li>
+          <li>🎯 <strong>Design Fiel:</strong> Use os seletores flutuantes em cada slide para mudar o layout instantaneamente.</li>
+          <li>⚡ <strong>ZIP Inteligente:</strong> Ao baixar tudo, as imagens são salvas de uma vez sem travar seu navegador.</li>
         </ul>
       </div>
       
     </aside>
 
-    <!-- VIEWPORT DE EDIÇÃO -->
+    <!-- VIEWPORT DE EDIÇÃO (DIREITA) -->
     <main class="editor-viewport" id="editor-viewport">
-      
-      <!-- SLIDE 1: CAPA -->
-      <div class="slide-scale-container" id="scale-s1">
-        <div class="slide-wrapper" id="slide-s1">
-          <div class="slide-controls">
-            <button class="btn-slide-control" onclick="baixarSlide('slide-s1', '01_Capa')">📸 Baixar Capa</button>
-          </div>
-          
-          <!-- Capa NÃO possui header, conforme Design System -->
-          <div></div> 
-
-          <div class="slide-body capa-body">
-            <span class="slide-capa-category" contenteditable="true" id="s1-category">ALOCAÇÃO ESTRATÉGICA</span>
-            <h1 class="slide-capa-title" contenteditable="true" id="s1-title">O Fim do Conflito<br>de Interesses</h1>
-            <p class="slide-capa-desc" contenteditable="true" id="s1-desc">Descubra a engenharia fiduciária por trás do Protocolo 9A para blindar sua carteira.</p>
-          </div>
-
-          <div class="slide-footer">
-            <span class="slide-footer-link" contenteditable="true" id="s1-footer-link">jhonybosio.com</span>
-            <span class="slide-footer-badge" id="s1-badge">01/04</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 2: CONTEÚDO A -->
-      <div class="slide-scale-container" id="scale-s2">
-        <div class="slide-wrapper" id="slide-s2">
-          <div class="slide-controls">
-            <button class="btn-slide-control" onclick="baixarSlide('slide-s2', '02_A_Dor')">📸 Baixar Slide 2</button>
-          </div>
-          
-          <div class="slide-header">
-            <div class="slide-logo-group">
-              <div class="slide-logo-box" id="logo-box-s2">JB</div>
-              <div class="slide-logo-text-group">
-                <span class="slide-logo-name">Jhony Bosio</span>
-                <span class="slide-logo-cargo">Private Advisor</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide-body content-body">
-            <span class="slide-content-category" contenteditable="true" id="s2-category">O DIAGNÓSTICO</span>
-            <h2 class="slide-content-title" contenteditable="true" id="s2-title">Taxas Ocultas no Seu Banco</h2>
-            <div class="slide-glass-card">
-              <p class="slide-glass-card-text" contenteditable="true" id="s2-desc">
-                A maioria dos investidores de alta renda no Brasil está presa no <strong>modelo de distribuição tradicional</strong>. Você paga até <strong>2.5% ao ano</strong> em comissões embutidas em fundos e COEs conflitados.
-              </p>
-            </div>
-          </div>
-
-          <div class="slide-footer">
-            <span class="slide-footer-link" contenteditable="true" id="s2-footer-link">jhonybosio.com</span>
-            <span class="slide-footer-badge" id="s2-badge">02/04</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 3: CONTEÚDO B -->
-      <div class="slide-scale-container" id="scale-s3">
-        <div class="slide-wrapper" id="slide-s3">
-          <div class="slide-controls">
-            <button class="btn-slide-control" onclick="baixarSlide('slide-s3', '03_A_Solucao')">📸 Baixar Slide 3</button>
-          </div>
-          
-          <div class="slide-header">
-            <div class="slide-logo-group">
-              <div class="slide-logo-box" id="logo-box-s3">JB</div>
-              <div class="slide-logo-text-group">
-                <span class="slide-logo-name">Jhony Bosio</span>
-                <span class="slide-logo-cargo">Private Advisor</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide-body content-body">
-            <span class="slide-content-category" contenteditable="true" id="s3-category">A SOLUÇÃO</span>
-            <h2 class="slide-content-title" contenteditable="true" id="s3-title">As 9 Classes Globais da XP</h2>
-            
-            <div class="slide-pilares-grid" id="s3-pilares-grid">
-              <!-- Pilar 1 -->
-              <div class="slide-pilar-card">
-                <div class="slide-pilar-title-wrapper">
-                  <span class="slide-pilar-icon">🌐</span>
-                  <span class="slide-pilar-title" contenteditable="true" id="s3-p1-title">Alocação Estruturada</span>
-                </div>
-                <p class="slide-pilar-desc" contenteditable="true" id="s3-p1-desc">Distribuição precisa em 9 classes espelhando o relatório oficial da XP Investimentos.</p>
-              </div>
-              <!-- Pilar 2 -->
-              <div class="slide-pilar-card">
-                <div class="slide-pilar-title-wrapper">
-                  <span class="slide-pilar-icon">📉</span>
-                  <span class="slide-pilar-title" contenteditable="true" id="s3-p2-title">ETFs de Baixo Custo</span>
-                </div>
-                <p class="slide-pilar-desc" contenteditable="true" id="s3-p2-desc">Eliminação de taxas de administração abusivas com veículos de altíssima liquidez.</p>
-              </div>
-              <!-- Pilar 3 -->
-              <div class="slide-pilar-card">
-                <div class="slide-pilar-title-wrapper">
-                  <span class="slide-pilar-icon">🛡️</span>
-                  <span class="slide-pilar-title" contenteditable="true" id="s3-p3-title">Alinhamento Fiduciário</span>
-                </div>
-                <p class="slide-pilar-desc" contenteditable="true" id="s3-p3-desc">Remuneração fee-based transparente, revertendo 100% de rebates em benefício do cliente.</p>
-              </div>
-              <!-- Pilar 4 -->
-              <div class="slide-pilar-card">
-                <div class="slide-pilar-title-wrapper">
-                  <span class="slide-pilar-icon">⚖️</span>
-                  <span class="slide-pilar-title" contenteditable="true" id="s3-p4-title">Rebalanceamento Mecânico</span>
-                </div>
-                <p class="slide-pilar-desc" contenteditable="true" id="s3-p4-desc">Ajuste de portfólio matemático, vendendo o que subiu e comprando o que está barato.</p>
-              </div>
-            </div>
-            
-            <!-- Suporte a card alternativo simples para outros templates -->
-            <div class="slide-glass-card" id="s3-alternative-card" style="display: none;">
-              <p class="slide-glass-card-text" contenteditable="true" id="s3-alternative-desc"></p>
-            </div>
-          </div>
-
-          <div class="slide-footer">
-            <span class="slide-footer-link" contenteditable="true" id="s3-footer-link">jhonybosio.com</span>
-            <span class="slide-footer-badge" id="s3-badge">03/04</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- SLIDE 4: CTA FINAL -->
-      <div class="slide-scale-container" id="scale-s4">
-        <div class="slide-wrapper" id="slide-s4">
-          <div class="slide-controls">
-            <button class="btn-slide-control" onclick="baixarSlide('slide-s4', '04_Cta_Final')">📸 Baixar CTA</button>
-          </div>
-          
-          <div class="slide-header">
-            <div class="slide-logo-group">
-              <div class="slide-logo-box" id="logo-box-s4">JB</div>
-              <div class="slide-logo-text-group">
-                <span class="slide-logo-name">Jhony Bosio</span>
-                <span class="slide-logo-cargo">Private Advisor</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide-body cta-body">
-            <span class="slide-cta-icon" id="s4-icon">🏛️</span>
-            <span class="slide-cta-category" contenteditable="true" id="s4-category">WEALTH ACADEMY</span>
-            <h2 class="slide-cta-title" contenteditable="true" id="s4-title">Acesse Gratuitamente no Site</h2>
-            <p class="slide-cta-desc" contenteditable="true" id="s4-desc">Utilize nosso simulador científico de ETFs de forma 100% gratuita em nosso portal. Aprenda a montar sua carteira sob o Protocolo 9A.</p>
-            <button class="slide-cta-button" id="s4-button-el">
-              <span id="s4-btn-text" contenteditable="true">COMEÇAR CURSO GRÁTIS</span>
-              <span class="slide-cta-button-sub" id="s4-btn-sub" contenteditable="true">jhonybosio.com ➔</span>
-            </button>
-          </div>
-
-          <div class="slide-footer">
-            <span class="slide-footer-link" contenteditable="true" id="s4-footer-link">jhonybosio.com</span>
-            <span class="slide-footer-badge" id="s4-badge">04/04</span>
-          </div>
-        </div>
-      </div>
-
+      <!-- Os slides serão injetados dinamicamente via JS -->
     </main>
 
   </div>
 
+  <!-- TEMPLATE DE SLIDE PADRÃO (MOLDE OCULTO PARA SER CLONADO PELO JS) -->
+  <template id="slide-template">
+    <div class="slide-scale-container format-feed">
+      <div class="slide-wrapper layout-texto">
+        
+        <!-- CONTROLES FLUTUANTES NO EDITOR -->
+        <div class="slide-controls">
+          <select class="slide-control-select" onchange="changeSlideLayoutFromEl(this)">
+            <option value="capa">Capa</option>
+            <option value="texto" selected>Didático Texto</option>
+            <option value="pilares">Didático Pilares</option>
+            <option value="pergunta">Didático Pergunta & CTA</option>
+            <option value="cta">CTA Final</option>
+          </select>
+          <button class="btn-slide-control" onclick="moverSlideFromEl(this, 'up')">⬆️</button>
+          <button class="btn-slide-control" onclick="moverSlideFromEl(this, 'down')">⬇️</button>
+          <button class="btn-slide-control btn-delete" onclick="deletarSlideFromEl(this)">❌</button>
+          <button class="btn-slide-control" style="background: rgba(10, 132, 255, 0.1); border-color: var(--primary);" onclick="baixarSlideFromEl(this)">📸 Salvar</button>
+        </div>
+        
+        <!-- CABEÇALHO OFICIAL (Slides Didáticos/CTAs) -->
+        <div class="slide-header">
+          <div class="slide-logo-group">
+            <div class="slide-logo-box">JB</div>
+            <div class="slide-logo-text-group">
+              <span class="slide-logo-name">Jhony Bosio</span>
+              <span class="slide-logo-cargo">Private Advisor</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. BODY: CAPA CLÁSSICA -->
+        <div class="slide-body capa-body">
+          <span class="slide-capa-category" contenteditable="true">ALOCAÇÃO ESTRATÉGICA</span>
+          <h1 class="slide-capa-title" contenteditable="true">O Fim do Conflito<br>de Interesses</h1>
+          <p class="slide-capa-desc" contenteditable="true">Descubra a engenharia fiduciária por trás do Protocolo 9A para blindar sua carteira.</p>
+        </div>
+
+        <!-- 2. BODY: CARD DIDÁTICO TEXTO -->
+        <div class="slide-body texto-body">
+          <span class="slide-content-category" contenteditable="true">O DIAGNÓSTICO</span>
+          <h2 class="slide-content-title" contenteditable="true">Taxas Ocultas no Seu Banco</h2>
+          <div class="slide-glass-card">
+            <p class="slide-glass-card-text" contenteditable="true">
+              A maioria dos investidores de alta renda no Brasil está presa no <strong>modelo de distribuição tradicional</strong>. Você paga até <strong>2.5% ao ano</strong> em comissões embutidas em fundos e COEs conflitados.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3. BODY: GRID DE PILARES 2x2 -->
+        <div class="slide-body pilares-body">
+          <span class="slide-content-category" contenteditable="true">A SOLUÇÃO</span>
+          <h2 class="slide-content-title" contenteditable="true">As 9 Classes Globais da XP</h2>
+          <div class="slide-pilares-grid">
+            <!-- Pilar 1 -->
+            <div class="slide-pilar-card">
+              <div class="slide-pilar-title-wrapper">
+                <span class="slide-pilar-icon" contenteditable="true">🌐</span>
+                <span class="slide-pilar-title" contenteditable="true">Alocação Global</span>
+              </div>
+              <p class="slide-pilar-desc" contenteditable="true">Distribuição precisa em 9 classes fiduciárias em vez do modelo conflitante.</p>
+            </div>
+            <!-- Pilar 2 -->
+            <div class="slide-pilar-card">
+              <div class="slide-pilar-title-wrapper">
+                <span class="slide-pilar-icon" contenteditable="true">📉</span>
+                <span class="slide-pilar-title" contenteditable="true">ETFs de Baixo Custo</span>
+              </div>
+              <p class="slide-pilar-desc" contenteditable="true">Eliminação de taxas abusivas com veículos de altíssima liquidez.</p>
+            </div>
+            <!-- Pilar 3 -->
+            <div class="slide-pilar-card">
+              <div class="slide-pilar-title-wrapper">
+                <span class="slide-pilar-icon" contenteditable="true">🛡️</span>
+                <span class="slide-pilar-title" contenteditable="true">Proteção Tributária</span>
+              </div>
+              <p class="slide-pilar-desc" contenteditable="true">Isenções de ganho de capital e retenção inteligente de lucros no exterior.</p>
+            </div>
+            <!-- Pilar 4 -->
+            <div class="slide-pilar-card">
+              <div class="slide-pilar-title-wrapper">
+                <span class="slide-pilar-icon" contenteditable="true">⚖️</span>
+                <span class="slide-pilar-title" contenteditable="true">Rebalanceamento</span>
+              </div>
+              <p class="slide-pilar-desc" contenteditable="true">Ajuste mecânico matemático de portfólio para capturar as distorções.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. BODY: NOVO LAYOUT PERGUNTA & CONVERSÃO (PRINT!) -->
+        <div class="slide-body pergunta-body">
+          <span class="slide-content-category" contenteditable="true">OPORTUNIDADE</span>
+          <h2 class="slide-content-title" contenteditable="true">O sistema segue <span class="highlight-blue">funcional.</span></h2>
+          <p class="slide-question-subtitle" contenteditable="true">Entenda o que se tem no radar...</p>
+          
+          <div class="slide-glass-card question-card">
+            <h3 class="slide-card-question" contenteditable="true">Quer revisar sua carteira com calma?</h3>
+            <p class="slide-card-question-sub" contenteditable="true">Conheça o Hermes, sem compromisso fiduciário.</p>
+            <button class="slide-card-question-btn">
+              <span contenteditable="true">Falar com o Hermes</span> ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. BODY: CTA FINAL -->
+        <div class="slide-body cta-body">
+          <span class="slide-cta-icon" contenteditable="true">🏛️</span>
+          <span class="slide-cta-category" contenteditable="true">WEALTH ACADEMY</span>
+          <h2 class="slide-cta-title" contenteditable="true">Acesse Gratuitamente no Site</h2>
+          <p class="slide-cta-desc" contenteditable="true">Utilize nosso simulador científico de ETFs de forma 100% gratuita em nosso portal. Aprenda a montar sua carteira sob o Protocolo 9A.</p>
+          <button class="slide-cta-button">
+            <span class="slide-cta-btn-text" contenteditable="true">COMEÇAR CURSO GRÁTIS</span>
+            <span class="slide-cta-button-sub" contenteditable="true">jhonybosio.com ➔</span>
+          </button>
+        </div>
+
+        <!-- RODAPÉ DO SLIDE (Mapeado e numerado automaticamente) -->
+        <div class="slide-footer">
+          <span class="slide-footer-link" contenteditable="true">jhonybosio.com</span>
+          <span class="slide-footer-badge">01/04</span>
+        </div>
+
+      </div>
+    </div>
+  </template>
+
   <script>
-    // ── CONFIGURAÇÕES DOS TEMPLATES ──
-    const templates = [
-      // Template 0: Alocação Global
-      {
-        accent: 'blue',
-        slides: {
-          s1: {
-            category: 'ALOCAÇÃO ESTRATÉGICA',
-            title: 'O Fim do Conflito<br>de Interesses',
-            desc: 'Descubra a engenharia fiduciária por trás do Protocolo 9A para blindar sua carteira.'
-          },
-          s2: {
-            category: 'O DIAGNÓSTICO',
-            title: 'Taxas Ocultas no Seu Banco',
-            desc: 'A maioria dos investidores de alta renda no Brasil está presa no <strong>modelo de distribuição tradicional</strong>. Você paga até <strong>2.5% ao ano</strong> em comissões embutidas em fundos e COEs conflitados.'
-          },
-          s3: {
-            showGrid: true,
-            category: 'A SOLUÇÃO',
-            title: 'As 9 Classes Globais da XP',
-            p1: { title: 'Alocação Estruturada', desc: 'Distribuição precisa em 9 classes espelhando o relatório oficial da XP Investimentos.' },
-            p2: { title: 'ETFs de Baixo Custo', desc: 'Eliminação de taxas de administração abusivas com veículos de altíssima liquidez.' },
-            p3: { title: 'Alinhamento Fiduciário', desc: 'Remuneração fee-based transparente, revertendo 100% de rebates em benefício do cliente.' },
-            p4: { title: 'Rebalanceamento Mecânico', desc: 'Ajuste de portfólio matemático, vendendo o que subiu e comprando o que está barato.' }
-          },
-          s4: {
-            icon: '🏛️',
-            category: 'WEALTH ACADEMY',
-            title: 'Acesse Gratuitamente no Site',
-            desc: 'Utilize nosso simulador científico de ETFs de forma 100% gratuita em nosso portal. Aprenda a montar sua carteira sob o Protocolo 9A.',
-            btnText: 'COMEÇAR CURSO GRÁTIS',
-            btnSub: 'jhonybosio.com ➔'
-          }
-        }
-      },
-      // Template 1: Blindagem Patrimonial 2026
-      {
-        accent: 'gold',
-        slides: {
-          s1: {
-            category: 'BLINDAGEM PATRIMONIAL',
-            title: 'O Cerco Fiscal<br>de 2026',
-            desc: 'Como a Reforma Tributária afeta heranças, holdings e a tributação de doações a valor de mercado.'
-          },
-          s2: {
-            category: 'O IMPACTO',
-            title: 'Holding Familiar a Valor Real',
-            desc: 'O cerco se fechou. A cobrança do ITCMD agora exige avaliação a <strong>valor de mercado</strong> dos bens e alíquotas progressivas de até <strong>16%</strong> na maioria dos estados brasileiros.'
-          },
-          s3: {
-            showGrid: false,
-            category: 'A ESTRATÉGIA',
-            title: 'A Transição Patrimonial 2026',
-            alternativeDesc: 'É hora de estruturar sua holding sob a nova regra de transição tributária ou utilizar <strong>doações planejadas a valor de custo</strong> de forma legal antes da vigência plena das alíquotas progressivas.'
-          },
-          s4: {
-            icon: '🛡️',
-            category: 'WEALTH ACADEMY',
-            title: 'Aulas da Trilha 2 Liberadas',
-            desc: 'Toda a engenharia de proteção tributária e governança sucessória está explicada em detalhes na Trilha 2 do nosso portal.',
-            btnText: 'ACESSAR TRILHA GRÁTIS',
-            btnSub: 'jhonybosio.com ➔'
-          }
-        }
-      },
-      // Template 2: Offshore HNW
-      {
-        accent: 'blue',
-        slides: {
-          s1: {
-            category: 'INTERNACIONALIZAÇÃO',
-            title: 'O Segredo de<br>Contas Offshore',
-            desc: 'O que o seu banco oculta sobre a diversificação geográfica e a eficiência tributária internacional.'
-          },
-          s2: {
-            category: 'A DOR',
-            title: 'Risco Cambial & Concentração',
-            desc: 'Manter 100% da sua liquidez sob jurisdição brasileira e em reais é um <strong>risco sistêmico</strong>. Investidores de alta renda protegem seu poder de compra em moedas fortes e ativos globais.'
-          },
-          s3: {
-            showGrid: false,
-            category: 'A ESTRATÉGIA',
-            title: 'Bonds Globais & Contas PIC',
-            alternativeDesc: 'Utilize estruturas exclusivas (como as <strong>contas PIC ou Trusts</strong>) para reter lucros no exterior e investir diretamente em <strong>American Bonds</strong>, blindando sua liquidez de forma jurídica.'
-          },
-          s4: {
-            icon: '🔒',
-            category: 'SOLICITAR ACESSO',
-            title: 'Acesso Premium (Privado)',
-            desc: 'A Trilha 3 (Offshore & Alta Renda) possui acesso restrito e qualificado. Fale com Hermes no WhatsApp e inicie sua qualificação fiduciária imediata.',
-            btnText: 'FALAR COM HERMES NO WHATSAPP',
-            btnSub: 'LIBERAR TRILHA 3 ➔'
-          }
-        }
-      }
-    ];
-
-    // Estado da ferramenta
+    // ── CONFIGURAÇÕES E ESTADO ──
     let currentAccent = 'blue';
+    let currentFormat = 'feed';
+    let slideCounter = 0;
 
-    // Configura o destaque de cor (Azul ou Ouro)
+    // Configura o Destaque de Cor (Azul ou Ouro)
     function setAccent(color) {
       currentAccent = color;
       
       const btnBlue = document.getElementById('btn-accent-blue');
       const btnGold = document.getElementById('btn-accent-gold');
+      const logoBadge = document.getElementById('header-logo-badge');
       
       if (color === 'blue') {
         document.documentElement.style.setProperty('--primary', 'oklch(0.68 0.23 255)');
         btnBlue.classList.add('active-blue');
         btnGold.classList.remove('active-gold');
+        logoBadge.style.background = 'oklch(0.68 0.23 255)';
+        logoBadge.style.boxShadow = '0 0 15px rgba(10, 132, 255, 0.35)';
       } else {
         document.documentElement.style.setProperty('--primary', 'oklch(0.82 0.15 90)');
         btnBlue.classList.remove('active-blue');
         btnGold.classList.add('active-gold');
+        logoBadge.style.background = 'oklch(0.82 0.15 90)';
+        logoBadge.style.boxShadow = '0 0 15px rgba(212, 175, 55, 0.35)';
       }
       
-      // Aplicar dinamicamente nos badges de logo das capas dos slides
+      // Aplicar dinamicamente a todos os badges e botões de destaque nos slides
       document.querySelectorAll('.slide-logo-box').forEach(el => {
         el.style.background = 'var(--primary)';
         el.style.boxShadow = `0 0 25px ${color === 'blue' ? 'rgba(10, 132, 255, 0.45)' : 'rgba(212, 175, 55, 0.35)'}`;
       });
-    }
 
-    // Carrega um template de copy
-    function loadTemplate(index) {
-      const data = templates[index];
-      
-      // Ajustar destaques de classe
-      document.querySelectorAll('.template-option').forEach((el, idx) => {
-        if (idx === index) el.classList.add('active');
-        else el.classList.remove('active');
+      document.querySelectorAll('.slide-card-question-btn').forEach(btn => {
+        btn.style.background = 'var(--primary)';
+        btn.style.boxShadow = `0 8px 25px ${color === 'blue' ? 'rgba(10, 132, 255, 0.3)' : 'rgba(212, 175, 55, 0.2)'}`;
       });
 
-      // Configurar cor padrão do template
-      setAccent(data.accent);
-
-      // Slide 1 (Capa)
-      document.getElementById('s1-category').textContent = data.slides.s1.category;
-      document.getElementById('s1-title').innerHTML = data.slides.s1.title;
-      document.getElementById('s1-desc').textContent = data.slides.s1.desc;
-
-      // Slide 2
-      document.getElementById('s2-category').textContent = data.slides.s2.category;
-      document.getElementById('s2-title').textContent = data.slides.s2.title;
-      document.getElementById('s2-desc').innerHTML = data.slides.s2.desc;
-
-      // Slide 3 (Pode ser Grid de Pilares ou Card de Texto)
-      document.getElementById('s3-category').textContent = data.slides.s3.category;
-      document.getElementById('s3-title').textContent = data.slides.s3.title;
+      document.querySelectorAll('.slide-cta-button').forEach(btn => {
+        if (color === 'gold') {
+          btn.style.background = 'var(--accent)';
+          btn.style.color = '#030816';
+          const sub = btn.querySelector('.slide-cta-button-sub');
+          if (sub) sub.style.color = 'rgba(3, 8, 22, 0.6)';
+        } else {
+          btn.style.background = 'var(--primary)';
+          btn.style.color = '#ffffff';
+          const sub = btn.querySelector('.slide-cta-button-sub');
+          if (sub) sub.style.color = 'rgba(255, 255, 255, 0.7)';
+        }
+      });
       
-      const grid = document.getElementById('s3-pilares-grid');
-      const altCard = document.getElementById('s3-alternative-card');
+      // Atualizar destaques de texto (highlights)
+      document.querySelectorAll('.highlight-blue, .highlight-gold').forEach(hl => {
+        if (color === 'blue') {
+          hl.className = 'highlight-blue';
+          hl.style.color = 'var(--primary)';
+          hl.style.textShadow = '0 0 20px rgba(10, 132, 255, 0.45)';
+        } else {
+          hl.className = 'highlight-gold';
+          hl.style.color = 'var(--accent)';
+          hl.style.textShadow = '0 0 20px rgba(212, 175, 55, 0.35)';
+        }
+      });
+    }
+
+    // Configura o Formato do Post (Feed ou Reels)
+    function setFormato(format) {
+      currentFormat = format;
       
-      if (data.slides.s3.showGrid) {
-        grid.style.display = 'grid';
-        altCard.style.display = 'none';
-        
-        document.getElementById('s3-p1-title').textContent = data.slides.s3.p1.title;
-        document.getElementById('s3-p1-desc').textContent = data.slides.s3.p1.desc;
-        document.getElementById('s3-p2-title').textContent = data.slides.s3.p2.title;
-        document.getElementById('s3-p2-desc').textContent = data.slides.s3.p2.desc;
-        document.getElementById('s3-p3-title').textContent = data.slides.s3.p3.title;
-        document.getElementById('s3-p3-desc').textContent = data.slides.s3.p3.desc;
-        document.getElementById('s3-p4-title').textContent = data.slides.s3.p4.title;
-        document.getElementById('s3-p4-desc').textContent = data.slides.s3.p4.desc;
+      const btnFeed = document.getElementById('btn-format-feed');
+      const btnReels = document.getElementById('btn-format-reels');
+      
+      if (format === 'feed') {
+        btnFeed.classList.add('active');
+        btnReels.classList.remove('active');
       } else {
-        grid.style.display = 'none';
-        altCard.style.display = 'block';
-        document.getElementById('s3-alternative-desc').innerHTML = data.slides.s3.alternativeDesc;
+        btnFeed.classList.remove('active');
+        btnReels.classList.add('active');
       }
-
-      // Slide 4 (CTA Final)
-      document.getElementById('s4-icon').textContent = data.slides.s4.icon;
-      document.getElementById('s4-category').textContent = data.slides.s4.category;
-      document.getElementById('s4-title').textContent = data.slides.s4.title;
-      document.getElementById('s4-desc').textContent = data.slides.s4.desc;
-      document.getElementById('s4-btn-text').textContent = data.slides.s4.btnText;
-      document.getElementById('s4-btn-sub').textContent = data.slides.s4.btnSub;
       
-      // Ajuste de cores dos botões de CTA finais
-      const ctaBtn = document.getElementById('s4-button-el');
-      if (data.accent === 'gold') {
-        ctaBtn.style.background = 'var(--accent)';
-        ctaBtn.style.color = '#030816';
-        document.getElementById('s4-btn-sub').style.color = 'rgba(3, 8, 22, 0.6)';
+      // Atualizar contêineres no DOM
+      const containers = document.querySelectorAll('.slide-scale-container');
+      containers.forEach(container => {
+        if (format === 'feed') {
+          container.className = 'slide-scale-container format-feed';
+        } else {
+          container.className = 'slide-scale-container format-reels';
+        }
+      });
+    }
+
+    // Função para Adicionar Novo Slide
+    function adicionarNovoSlide(layout = 'texto') {
+      slideCounter++;
+      
+      const viewport = document.getElementById('editor-viewport');
+      const temp = document.getElementById('slide-template');
+      const clone = temp.content.cloneNode(true);
+      
+      // Configurar IDs e classes
+      const container = clone.querySelector('.slide-scale-container');
+      const wrapper = clone.querySelector('.slide-wrapper');
+      
+      const slideId = `slide-s${slideCounter}`;
+      wrapper.id = slideId;
+      container.id = `scale-s${slideCounter}`;
+      
+      // Configurar o formato ativo
+      if (currentFormat === 'feed') {
+        container.className = 'slide-scale-container format-feed';
       } else {
-        ctaBtn.style.background = 'var(--primary)';
-        ctaBtn.style.color = '#ffffff';
-        document.getElementById('s4-btn-sub').style.color = 'rgba(255, 255, 255, 0.7)';
+        container.className = 'slide-scale-container format-reels';
+      }
+      
+      // Configurar o layout ativo no wrapper e no select
+      wrapper.className = `slide-wrapper layout-${layout}`;
+      const select = clone.querySelector('.slide-control-select');
+      select.value = layout;
+      
+      // Inserir no DOM
+      viewport.appendChild(clone);
+      
+      // Aplicar o acento de cor nos novos elementos
+      setAccent(currentAccent);
+      
+      // Atualizar a numeração dos slides
+      atualizarNumeracaoSlides();
+      
+      return slideId;
+    }
+
+    // Deletar um slide específico
+    function deletarSlide(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      
+      // Garantir que sempre haja pelo menos um slide
+      const total = document.querySelectorAll('.slide-scale-container').length;
+      if (total <= 1) {
+        alert("O carrossel precisa ter pelo menos 1 slide.");
+        return;
+      }
+      
+      if (confirm("Deseja realmente remover este slide? Todos os textos editados nele serão perdidos.")) {
+        container.remove();
+        atualizarNumeracaoSlides();
       }
     }
 
-    // Exportação Científica com html2canvas
+    // Mover slide na ordem (up ou down)
+    function moverSlide(containerId, direction) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      
+      const parent = container.parentNode;
+      if (direction === 'up') {
+        const prev = container.previousElementSibling;
+        if (prev) {
+          parent.insertBefore(container, prev);
+        }
+      } else {
+        const next = container.nextElementSibling;
+        if (next) {
+          parent.insertBefore(next, container);
+        }
+      }
+      
+      atualizarNumeracaoSlides();
+    }
+
+    // Alterar o layout de um slide específico
+    function changeSlideLayout(wrapperId, newLayout) {
+      const wrapper = document.getElementById(wrapperId);
+      if (!wrapper) return;
+      
+      // Substituir a classe de layout mantendo o resto das classes
+      wrapper.className = `slide-wrapper layout-${newLayout}`;
+      
+      // Forçar atualização do acento de cor do novo layout
+      setAccent(currentAccent);
+    }
+
+    // Atualiza a numeração do rodapé de todos os slides de forma automatizada
+    function atualizarNumeracaoSlides() {
+      const containers = document.querySelectorAll('.slide-scale-container');
+      const total = containers.length;
+      
+      containers.forEach((container, index) => {
+        const badge = container.querySelector('.slide-footer-badge');
+        if (badge) {
+          const num = String(index + 1).padStart(2, '0');
+          const tot = String(total).padStart(2, '0');
+          badge.textContent = `${num}/${tot}`;
+        }
+      });
+    }
+
+    // ── PONTES DE INTERAÇÃO DO DOM PARA OS CONTROLES ──
+    function changeSlideLayoutFromEl(selectEl) {
+      const wrapper = selectEl.closest('.slide-wrapper');
+      if (wrapper) {
+        changeSlideLayout(wrapper.id, selectEl.value);
+      }
+    }
+
+    function moverSlideFromEl(btnEl, direction) {
+      const container = btnEl.closest('.slide-scale-container');
+      if (container) {
+        moverSlide(container.id, direction);
+      }
+    }
+
+    function deletarSlideFromEl(btnEl) {
+      const container = btnEl.closest('.slide-scale-container');
+      if (container) {
+        deletarSlide(container.id);
+      }
+    }
+
+    function baixarSlideFromEl(btnEl) {
+      const wrapper = btnEl.closest('.slide-wrapper');
+      if (wrapper) {
+        const badge = wrapper.querySelector('.slide-footer-badge');
+        const num = badge ? badge.textContent.replace('/', '_') : 'Slide';
+        baixarSlide(wrapper.id, num);
+      }
+    }
+
+    // ── EXPORTAÇÃO CIENTÍFICA INDIVIDUAL E EM ZIP ──
+    
+    // Exporta e faz download de um único slide individual
     function baixarSlide(slideId, nameSuffix) {
       const slide = document.getElementById(slideId);
       if (!slide) return;
       
-      // Adicionar classe geradora temporária para tirar os controles e resetar o transform de escala
       slide.classList.add('generating-png');
       
-      // Renderizar o elemento com html2canvas de alta qualidade fiduciária
+      const width = 1080;
+      const height = currentFormat === 'feed' ? 1350 : 1920;
+      
       html2canvas(slide, {
-        width: 1080,
-        height: 1350,
-        scale: 2, // Garante nitidez máxima na exportação
+        width: width,
+        height: height,
+        scale: 2, // Garante nitidez fiduciária impecável
         backgroundColor: '#030816',
         logging: false,
         useCORS: true
       }).then(canvas => {
-        // Remover classe geradora para voltar ao estado normal de edição com zoom reduzido
         slide.classList.remove('generating-png');
         
-        // Criar link e simular download instantâneo
         const link = document.createElement('a');
         link.download = `Carrossel_JB_${nameSuffix}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
       }).catch(err => {
         slide.classList.remove('generating-png');
-        console.error("Erro ao exportar o slide: ", err);
+        console.error("Erro ao exportar o slide individual: ", err);
+        alert("Erro ao exportar o slide. Verifique o console.");
       });
     }
 
-    // Baixa todos os slides da tela de forma automática de uma vez
+    // Baixa todos os slides agregados em um único arquivo ZIP (À prova de bloqueios de navegador!)
     function baixarTodosSlides() {
-      const slidesToDownload = [
-        { id: 'slide-s1', suffix: '01_Capa' },
-        { id: 'slide-s2', suffix: '02_A_Dor' },
-        { id: 'slide-s3', suffix: '03_A_Solucao' },
-        { id: 'slide-s4', suffix: '04_Cta_Final' }
-      ];
+      const loader = document.getElementById('export-loader');
+      const statusText = document.getElementById('loader-status');
+      
+      const wrappers = document.querySelectorAll('.slide-wrapper');
+      const total = wrappers.length;
+      
+      if (total === 0) {
+        alert("Não há slides para exportar.");
+        return;
+      }
+      
+      // Mostrar Loader Premium
+      loader.style.display = 'flex';
+      statusText.textContent = `Preparando exportação de ${total} slides...`;
+      
+      const zip = new JSZip();
+      let index = 0;
+      
+      function renderizarProximoSlide() {
+        if (index < total) {
+          const wrapper = wrappers[index];
+          const slideNum = index + 1;
+          
+          statusText.textContent = `Renderizando slide científico ${slideNum} de ${total} (Qualidade Máxima)...`;
+          
+          // Adicionar classe temporária para tirar os botões do editor e resetar zoom
+          wrapper.classList.add('generating-png');
+          
+          const width = 1080;
+          const height = currentFormat === 'feed' ? 1350 : 1920;
+          
+          html2canvas(wrapper, {
+            width: width,
+            height: height,
+            scale: 2,
+            backgroundColor: '#030816',
+            logging: false,
+            useCORS: true
+          }).then(canvas => {
+            wrapper.classList.remove('generating-png');
+            
+            // Converter canvas em Blob de alta fidelidade
+            canvas.toBlob(blob => {
+              // Nome padronizado para as imagens internas
+              const badge = wrapper.querySelector('.slide-footer-badge');
+              let fileName = `slide_${slideNum}_conteudo.png`;
+              
+              if (slideNum === 1) fileName = `slide_1_capa.png`;
+              else if (slideNum === total) fileName = `slide_${slideNum}_cta.png`;
+              
+              zip.file(fileName, blob);
+              
+              index++;
+              // Processa o próximo slide sequencialmente
+              setTimeout(renderizarProximoSlide, 200);
+            }, 'image/png');
+            
+          }).catch(err => {
+            wrapper.classList.remove('generating-png');
+            console.error("Erro na geração em lote do slide: ", err);
+            loader.style.display = 'none';
+            alert(`Falha ao renderizar o slide ${slideNum}. Operação abortada.`);
+          });
+          
+        } else {
+          // Todos os slides renderizados! Gerar o arquivo compactado ZIP
+          statusText.textContent = "Agregando arquivos e compactando pacote ZIP...";
+          
+          zip.generateAsync({ type: "blob" }).then(content => {
+            // Esconder o loader
+            loader.style.display = 'none';
+            
+            // Iniciar o download do arquivo ZIP único fiduciário
+            const link = document.createElement('a');
+            link.download = `Carrossel_Jhony_Bosio_${currentFormat === 'feed' ? 'Feed' : 'Reels'}.zip`;
+            link.href = URL.createObjectURL(content);
+            link.click();
+            
+          }).catch(zipErr => {
+            console.error("Erro ao compactar arquivos ZIP: ", zipErr);
+            loader.style.display = 'none';
+            alert("Erro ao compactar carrossel. Verifique o console.");
+          });
+        }
+      }
+      
+      // Iniciar fila recursiva de renderização
+      setTimeout(renderizarProximoSlide, 500);
+    }
 
-      let delay = 0;
-      slidesToDownload.forEach(item => {
-        setTimeout(() => {
-          baixarSlide(item.id, item.suffix);
-        }, delay);
-        delay += 1000; // Delay de 1 segundo entre downloads para evitar sobreposição ou bloqueio de downloads em lote pelo browser
+    // ── COPYS DO DESIGN SYSTEM & TEMPLATES OFICIAIS ──
+    const templates = [
+      // Template 0: Alocação Global
+      {
+        accent: 'blue',
+        slides: [
+          {
+            layout: 'capa',
+            category: 'ALOCAÇÃO ESTRATÉGICA',
+            title: 'O Fim do Conflito<br>de Interesses',
+            desc: 'Descubra a engenharia fiduciária por trás do Protocolo 9A para blindar sua carteira de investimentos global.'
+          },
+          {
+            layout: 'texto',
+            category: 'O DIAGNÓSTICO',
+            title: 'Taxas Ocultas no Seu Banco',
+            desc: 'A maioria dos investidores de alta renda no Brasil está presa no <strong>modelo de distribuição tradicional</strong>. Você paga até <strong>2.5% ao ano</strong> em comissões embutidas em fundos e COEs conflitados.'
+          },
+          {
+            layout: 'pilares',
+            category: 'A SOLUÇÃO',
+            title: 'As 9 Classes Globais da XP',
+            // O HTML de pilares lê os valores diretamente, mas no template estruturado atualizamos os textos se necessário
+            p1_title: 'Alocação Global', p1_desc: 'Distribuição precisa em 9 classes baseada nas carteiras oficiais recomendadas da XP.',
+            p2_title: 'ETFs de Baixo Custo', p2_desc: 'Eliminação de taxas administrativas abusivas com veículos de altíssima liquidez.',
+            p3_title: 'Proteção Tributária', p3_desc: 'Estruturação inteligente com isenções e retenção legal de lucros no exterior.',
+            p4_title: 'Rebalanceamento', p4_desc: 'Ajuste mecânico matemático de carteira para capturar assimetrias de mercado.'
+          },
+          {
+            layout: 'pergunta',
+            category: 'OPORTUNIDADE',
+            title: 'O sistema segue <span class="highlight-blue">funcional.</span>',
+            subtitle: 'Entenda o que se tem no radar...',
+            cardQuestion: 'Quer revisar sua carteira com calma?',
+            cardSub: 'Conheça o Hermes, sem compromisso de assessoria tradicional.',
+            btnText: 'Falar com o Hermes'
+          },
+          {
+            layout: 'cta',
+            category: 'WEALTH ACADEMY',
+            title: 'Acesse Gratuitamente no Site',
+            desc: 'Utilize nosso simulador científico de ETFs de forma 100% gratuita em nosso portal. Aprenda a montar sua carteira sob o Protocolo 9A.',
+            btnText: 'COMEÇAR CURSO GRÁTIS',
+            btnSub: 'jhonybosio.com ➔'
+          }
+        ]
+      },
+      // Template 1: Blindagem Patrimonial
+      {
+        accent: 'gold',
+        slides: [
+          {
+            layout: 'capa',
+            category: 'BLINDAGEM PATRIMONIAL',
+            title: 'O Cerco Fiscal<br>de 2026',
+            desc: 'Como a Reforma Tributária afeta heranças, holdings familiares e a tributação de doações em vida a valor de mercado.'
+          },
+          {
+            layout: 'texto',
+            category: 'O IMPACTO',
+            title: 'Holding Familiar a Valor Real',
+            desc: 'O cerco se fechou. A cobrança do ITCMD agora exige avaliação a <strong>valor de mercado</strong> dos bens e alíquotas progressivas de até <strong>16%</strong> na maioria dos estados brasileiros.'
+          },
+          {
+            layout: 'texto',
+            category: 'A ESTRATÉGIA',
+            title: 'Transição Patrimonial Segura',
+            desc: 'É hora de estruturar sua holding sob a nova regra de transição tributária ou utilizar <strong>doações planejadas a valor de custo</strong> de forma legal antes da vigência plena das alíquotas progressivas.'
+          },
+          {
+            layout: 'pergunta',
+            category: 'PREVENÇÃO',
+            title: 'Seu patrimônio está <span class="highlight-gold">vulnerável?</span>',
+            subtitle: 'O tempo de reação está acabando...',
+            cardQuestion: 'Quer blindar seus bens familiares?',
+            cardSub: 'Faça um diagnóstico de transição tributária com o Hermes.',
+            btnText: 'Falar com o Hermes'
+          },
+          {
+            layout: 'cta',
+            category: 'WEALTH ACADEMY',
+            title: 'Aulas da Trilha 2 Liberadas',
+            desc: 'Toda a engenharia de proteção tributária e governança sucessória está explicada em detalhes na Trilha 2 do nosso portal.',
+            btnText: 'ACESSAR TRILHA GRÁTIS',
+            btnSub: 'jhonybosio.com ➔'
+          }
+        ]
+      },
+      // Template 2: Offshore HNW
+      {
+        accent: 'blue',
+        slides: [
+          {
+            layout: 'INTERNACIONALIZAÇÃO',
+            category: 'ESTRUTURAS OFFSHORE',
+            title: 'O Segredo de<br>Contas Offshore',
+            desc: 'O que o seu banco tradicional oculta sobre a diversificação geográfica e a eficiência tributária internacional para investidores qualificados.'
+          },
+          {
+            layout: 'texto',
+            category: 'A DOR',
+            title: 'Risco Cambial & Concentração',
+            desc: 'Manter 100% da sua liquidez sob jurisdição brasileira e em reais é um <strong>risco sistêmico</strong>. Investidores de alta renda protegem seu poder de compra em moedas fortes e ativos globais.'
+          },
+          {
+            layout: 'pilares',
+            category: 'A MODELAGEM',
+            title: 'Bonds Globais & Contas PIC',
+            p1_title: 'Jurisdição Forte', p1_desc: 'Custódia em bancos de primeira linha nos Estados Unidos e Suíça.',
+            p2_title: 'Contas PIC / Trusts', p2_desc: 'Retenção legal de lucros no exterior e diferimento tributário pleno.',
+            p3_title: 'American Bonds', p3_desc: 'Renda fixa americana de baixo custo e alta segurança fiduciária.',
+            p4_title: 'Planejamento', p4_desc: 'Estruturação internacional visando o planejamento sucessório internacional.'
+          },
+          {
+            layout: 'pergunta',
+            category: 'INTERNACIONAL',
+            title: 'Sua liquidez está <span class="highlight-blue">protegida?</span>',
+            subtitle: 'Reduza a exposição a riscos locais...',
+            cardQuestion: 'Quer abrir sua conta global?',
+            cardSub: 'Inicie sua qualificação internacional de ativos com o Hermes.',
+            btnText: 'Falar com o Hermes'
+          },
+          {
+            layout: 'cta',
+            category: 'ACESSO PREMIUM',
+            title: 'Trilha 3 (Offshore) Exclusiva',
+            desc: 'A Trilha de Investimento e Estruturação Offshore possui acesso restrito e qualificado. Fale com Hermes no WhatsApp e inicie sua qualificação fiduciária imediata.',
+            btnText: 'LIBERAR NO WHATSAPP',
+            btnSub: 'ACESSAR TRILHA 3 ➔'
+          }
+        ]
+      }
+    ];
+
+    // Carrega um template completo de copy limpando o DOM e inserindo os slides corretos
+    function loadTemplate(index) {
+      const data = templates[index];
+      
+      // Ajustar destaques de classe no painel lateral
+      document.querySelectorAll('.template-option').forEach((el, idx) => {
+        if (idx === index) el.classList.add('active');
+        else el.classList.remove('active');
       });
+
+      // Limpar viewport de edição
+      const viewport = document.getElementById('editor-viewport');
+      viewport.innerHTML = '';
+      slideCounter = 0;
+
+      // Configurar cor padrão do template
+      setAccent(data.accent);
+
+      // Injetar os slides do template
+      data.slides.forEach((slideData, idx) => {
+        const slideId = adicionarNovoSlide(slideData.layout);
+        const wrapper = document.getElementById(slideId);
+        
+        // Mapear dados para as divs correspondentes
+        if (slideData.layout === 'capa') {
+          wrapper.querySelector('.slide-capa-category').textContent = slideData.category;
+          wrapper.querySelector('.slide-capa-title').innerHTML = slideData.title;
+          wrapper.querySelector('.slide-capa-desc').textContent = slideData.desc;
+        } 
+        else if (slideData.layout === 'texto') {
+          wrapper.querySelector('.slide-content-category').textContent = slideData.category;
+          wrapper.querySelector('.slide-content-title').innerHTML = slideData.title;
+          wrapper.querySelector('.slide-glass-card-text').innerHTML = slideData.desc;
+        }
+        else if (slideData.layout === 'pilares') {
+          wrapper.querySelector('.slide-content-category').textContent = slideData.category;
+          wrapper.querySelector('.slide-content-title').innerHTML = slideData.title;
+          
+          const cards = wrapper.querySelectorAll('.slide-pilar-card');
+          if (cards.length >= 4) {
+            cards[0].querySelector('.slide-pilar-title').textContent = slideData.p1_title;
+            cards[0].querySelector('.slide-pilar-desc').textContent = slideData.p1_desc;
+            
+            cards[1].querySelector('.slide-pilar-title').textContent = slideData.p2_title;
+            cards[1].querySelector('.slide-pilar-desc').textContent = slideData.p2_desc;
+            
+            cards[2].querySelector('.slide-pilar-title').textContent = slideData.p3_title;
+            cards[2].querySelector('.slide-pilar-desc').textContent = slideData.p3_desc;
+            
+            cards[3].querySelector('.slide-pilar-title').textContent = slideData.p4_title;
+            cards[3].querySelector('.slide-pilar-desc').textContent = slideData.p4_desc;
+          }
+        }
+        else if (slideData.layout === 'pergunta') {
+          wrapper.querySelector('.slide-content-category').textContent = slideData.category;
+          wrapper.querySelector('.slide-content-title').innerHTML = slideData.title;
+          wrapper.querySelector('.slide-question-subtitle').textContent = slideData.subtitle;
+          wrapper.querySelector('.slide-card-question').textContent = slideData.cardQuestion;
+          wrapper.querySelector('.slide-card-question-sub').textContent = slideData.cardSub;
+          wrapper.querySelector('.slide-card-question-btn span').textContent = slideData.btnText;
+        }
+        else if (slideData.layout === 'cta') {
+          wrapper.querySelector('.slide-cta-category').textContent = slideData.category;
+          wrapper.querySelector('.slide-cta-title').innerHTML = slideData.title;
+          wrapper.querySelector('.slide-cta-desc').textContent = slideData.desc;
+          wrapper.querySelector('.slide-cta-btn-text').textContent = slideData.btnText;
+          wrapper.querySelector('.slide-cta-button-sub').textContent = slideData.btnSub;
+        }
+      });
+
+      // Garantir numeração certa no carregamento
+      atualizarNumeracaoSlides();
+      
+      // Aplicar acento
+      setAccent(data.accent);
     }
 
     // Inicialização do carrossel ao carregar
