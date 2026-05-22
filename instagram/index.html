@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- html2canvas-pro para Suporte Avançado de CSS Moderno e Cores -->
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@1.5.8/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@1.5.8/dist/html2canvas-pro.min.js"></script>
   
   <!-- JSZip para Compactação Científica em ZIP das Imagens -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -399,6 +399,8 @@
     .slide-scale-container {
       position: relative;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      display: block;
     }
 
     /* Dimensões padrão para o contêiner de escala (Feed: 1080x1350) */
@@ -1452,30 +1454,41 @@
       const slide = document.getElementById(slideId);
       if (!slide) return;
       
+      if (typeof html2canvas === 'undefined') {
+        alert("Erro: A biblioteca de geração de imagens (html2canvas-pro) não foi carregada corretamente. Por favor, aguarde alguns segundos ou recarregue a página.");
+        return;
+      }
+      
       slide.classList.add('generating-png');
       
       const width = 1080;
       const height = currentFormat === 'feed' ? 1350 : 1920;
       
-      html2canvas(slide, {
-        width: width,
-        height: height,
-        scale: 2, // Garante nitidez fiduciária impecável
-        backgroundColor: '#030816',
-        logging: false,
-        useCORS: true
-      }).then(canvas => {
+      try {
+        html2canvas(slide, {
+          width: width,
+          height: height,
+          scale: 2, // Garante nitidez fiduciária impecável
+          backgroundColor: '#030816',
+          logging: false,
+          useCORS: true
+        }).then(canvas => {
+          slide.classList.remove('generating-png');
+          
+          const link = document.createElement('a');
+          link.download = `Carrossel_JB_${nameSuffix}.png`;
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+        }).catch(err => {
+          slide.classList.remove('generating-png');
+          console.error("Erro ao exportar o slide individual: ", err);
+          alert(`Erro ao exportar o slide. Detalhes: ${err.message || err}`);
+        });
+      } catch (err) {
         slide.classList.remove('generating-png');
-        
-        const link = document.createElement('a');
-        link.download = `Carrossel_JB_${nameSuffix}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      }).catch(err => {
-        slide.classList.remove('generating-png');
-        console.error("Erro ao exportar o slide individual: ", err);
-        alert(`Erro ao exportar o slide. Detalhes: ${err.message || err}`);
-      });
+        console.error("Erro síncrono ao gerar o slide: ", err);
+        alert(`Erro crítico ao gerar a imagem do slide. Detalhes: ${err.message || err}`);
+      }
     }
 
     // Baixa todos os slides agregados em um único arquivo ZIP (À prova de bloqueios de navegador!)
@@ -1488,6 +1501,11 @@
       
       if (total === 0) {
         alert("Não há slides para exportar.");
+        return;
+      }
+      
+      if (typeof html2canvas === 'undefined') {
+        alert("Erro: A biblioteca de geração de imagens (html2canvas-pro) não foi carregada corretamente. Por favor, aguarde alguns segundos ou recarregue a página.");
         return;
       }
       
@@ -1511,38 +1529,45 @@
           const width = 1080;
           const height = currentFormat === 'feed' ? 1350 : 1920;
           
-          html2canvas(wrapper, {
-            width: width,
-            height: height,
-            scale: 2,
-            backgroundColor: '#030816',
-            logging: false,
-            useCORS: true
-          }).then(canvas => {
+          try {
+            html2canvas(wrapper, {
+              width: width,
+              height: height,
+              scale: 2,
+              backgroundColor: '#030816',
+              logging: false,
+              useCORS: true
+            }).then(canvas => {
+              wrapper.classList.remove('generating-png');
+              
+              // Converter canvas em Blob de alta fidelidade
+              canvas.toBlob(blob => {
+                // Nome padronizado para as imagens internas
+                const badge = wrapper.querySelector('.slide-footer-badge');
+                let fileName = `slide_${slideNum}_conteudo.png`;
+                
+                if (slideNum === 1) fileName = `slide_1_capa.png`;
+                else if (slideNum === total) fileName = `slide_${slideNum}_cta.png`;
+                
+                zip.file(fileName, blob);
+                
+                index++;
+                // Processa o próximo slide sequencialmente
+                setTimeout(renderizarProximoSlide, 200);
+              }, 'image/png');
+              
+            }).catch(err => {
+              wrapper.classList.remove('generating-png');
+              console.error("Erro na geração em lote do slide: ", err);
+              loader.style.display = 'none';
+              alert(`Falha ao renderizar o slide ${slideNum}. Operação abortada. Detalhes: ${err.message || err}`);
+            });
+          } catch (err) {
             wrapper.classList.remove('generating-png');
-            
-            // Converter canvas em Blob de alta fidelidade
-            canvas.toBlob(blob => {
-              // Nome padronizado para as imagens internas
-              const badge = wrapper.querySelector('.slide-footer-badge');
-              let fileName = `slide_${slideNum}_conteudo.png`;
-              
-              if (slideNum === 1) fileName = `slide_1_capa.png`;
-              else if (slideNum === total) fileName = `slide_${slideNum}_cta.png`;
-              
-              zip.file(fileName, blob);
-              
-              index++;
-              // Processa o próximo slide sequencialmente
-              setTimeout(renderizarProximoSlide, 200);
-            }, 'image/png');
-            
-          }).catch(err => {
-            wrapper.classList.remove('generating-png');
-            console.error("Erro na geração em lote do slide: ", err);
+            console.error("Erro síncrono na geração em lote: ", err);
             loader.style.display = 'none';
-            alert(`Falha ao renderizar o slide ${slideNum}. Operação abortada. Detalhes: ${err.message || err}`);
-          });
+            alert(`Erro crítico ao renderizar o slide ${slideNum}. Operação abortada. Detalhes: ${err.message || err}`);
+          }
           
         } else {
           // Todos os slides renderizados! Gerar o arquivo compactado ZIP
@@ -1663,7 +1688,7 @@
         accent: 'blue',
         slides: [
           {
-            layout: 'INTERNACIONALIZAÇÃO',
+            layout: 'capa',
             category: 'ESTRUTURAS OFFSHORE',
             title: 'O Segredo de<br>Contas Offshore',
             desc: 'O que o seu banco tradicional oculta sobre a diversificação geográfica e a eficiência tributária internacional para investidores qualificados.'
