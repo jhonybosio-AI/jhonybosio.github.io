@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linha da Vida — Portal Exclusivo de Planejamento Patrimonial</title>
     <!-- CSS Consistente da Identidade Visual -->
-    <link rel="stylesheet" href="../colors_and_type.css">
+    <link rel="stylesheet" href="colors_and_type.css">
+    <!-- Supabase JS Client SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         :root {
             --gold: #C5A880;
@@ -147,6 +149,30 @@
             background: rgba(255, 255, 255, 0.1);
             border-color: rgba(255, 255, 255, 0.2);
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-whatsapp {
+            background: rgba(39, 201, 63, 0.12);
+            border: 1px solid rgba(39, 201, 63, 0.25);
+            color: #27C93F;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+        }
+
+        .btn-whatsapp:hover {
+            background: rgba(39, 201, 63, 0.22);
+            border-color: rgba(39, 201, 63, 0.4);
+            box-shadow: 0 0 12px rgba(39, 201, 63, 0.15);
+            transform: translateY(-1px);
         }
 
         /* ── Main Layout ───────────────────────────────────────────── */
@@ -1245,6 +1271,8 @@
                 <span id="labelCloudSyncStatus">Supabase Nuvem</span>
             </button>
 
+
+
             <!-- Voltar ao Hub -->
             <a href="../dashboard/" class="btn-hub" style="margin-right: 8px;">Voltar ao Hub</a>
 
@@ -1497,6 +1525,22 @@
 
     <!-- Lógica de Funcionamento -->
     <script>
+        // ── Configuração Segura e Real do Supabase ───────────────────
+        // Insira a URL e a Anon Key do seu projeto Supabase abaixo para ativar a persistência real na nuvem.
+        // Se deixadas em branco, a aplicação continuará operando com o localStorage e o banco simulado local.
+        const SUPABASE_URL = ""; 
+        const SUPABASE_ANON_KEY = ""; 
+        let supabaseClient = null;
+
+        if (SUPABASE_URL && SUPABASE_ANON_KEY) {
+            try {
+                supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                console.log("⚡ Supabase Real: Inicializado com sucesso!");
+            } catch (err) {
+                console.error("❌ Erro ao inicializar o Supabase Real:", err);
+            }
+        }
+
         // Banco de Dados fictício simulado no Supabase para demonstração multi-cliente
         const databaseMock = {
             "847291-3": {
@@ -1558,7 +1602,98 @@
         let currentActiveAccount = "";
 
         // Inicializar aplicação & Verificar Login
-        window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', async () => {
+            // LER QUERY PARAMS PARA AUTO-LOGIN E CARREGAMENTO DINÂMICO
+            const urlParams = new URLSearchParams(window.location.search);
+            const paramXp = urlParams.get('xp');
+            const paramNome = urlParams.get('nome') || urlParams.get('name');
+            const paramPatrXP = urlParams.get('patrXP') || urlParams.get('patr');
+            const paramPatrOutros = urlParams.get('patrOutros') || urlParams.get('outros');
+
+            if (paramXp) {
+                // Realiza auto-login silencioso
+                sessionStorage.setItem('client_logged_xp', paramXp);
+                if (paramNome) {
+                    sessionStorage.setItem('client_logged_name', paramNome);
+                }
+                
+                const xpVal = parseFloat(paramPatrXP);
+                const outrosVal = parseFloat(paramPatrOutros);
+                const normAccount = paramXp.replace(/[-\s]/g, '');
+                
+                let stateObj = null;
+
+                // Tenta carregar do Supabase Real se configurado
+                if (supabaseClient) {
+                    try {
+                        const { data, error } = await supabaseClient
+                            .from('reguas_vida')
+                            .select('*')
+                            .eq('conta_xp', normAccount)
+                            .single();
+                        
+                        if (data && !error) {
+                            stateObj = typeof data.dados_planejamento === 'string' 
+                                ? JSON.parse(data.dados_planejamento) 
+                                : data.dados_planejamento;
+                            console.log("⚡ Supabase Real: Dados carregados com sucesso para " + normAccount);
+                        } else if (error && error.code !== 'PGRST116') {
+                            console.warn("⚠️ Aviso ao buscar dados no Supabase:", error.message);
+                        }
+                    } catch (err) {
+                        console.error("❌ Erro ao se conectar ao Supabase Real:", err);
+                    }
+                }
+
+                if (!stateObj) {
+                    // Fallback para localStorage
+                    let clientData = localStorage.getItem(`ruler_data_${paramXp}`) || localStorage.getItem(`ruler_data_${normAccount}`);
+                    stateObj = clientData ? JSON.parse(clientData) : null;
+                }
+                
+                if (!stateObj) {
+                    let mockData = databaseMock[paramXp] || databaseMock[normAccount];
+                    if (!mockData) {
+                        for (const key in databaseMock) {
+                            if (key.replace(/[-\s]/g, '') === normAccount) {
+                                mockData = databaseMock[key];
+                                break;
+                            }
+                        }
+                    }
+                    if (mockData) {
+                        stateObj = JSON.parse(JSON.stringify(mockData));
+                    } else {
+                        const realName = paramNome || `Cliente XP ${paramXp}`;
+                        stateObj = {
+                            name: realName,
+                            patrXP: !isNaN(xpVal) ? xpVal : 1500000,
+                            patrOutros: !isNaN(outrosVal) ? outrosVal : 500000,
+                            family: [
+                                { id: "f1", name: realName, birth: 1978, role: "Titular", emoji: "🧔", primary: true },
+                                { id: "f2", name: "Cônjuge", birth: 1980, role: "Cônjuge", emoji: "👩", primary: false },
+                                { id: "f3", name: "Filho 1", birth: 2012, role: "Filho(a)", emoji: "👦", primary: false }
+                            ],
+                            past: [
+                                { id: "p1", year: 2005, desc: "Formatura e Início de Carreira" },
+                                { id: "p2", year: 2010, desc: "Casamento" }
+                            ],
+                            future: [
+                                { id: "u1", year: 2030, desc: "Filho na Faculdade" },
+                                { id: "u2", year: 2038, desc: "Liberdade Financeira (Independência)" }
+                            ]
+                        };
+                    }
+                }
+                
+                // Sobreescreve os patrimônios se foram fornecidos na URL
+                if (!isNaN(xpVal)) stateObj.patrXP = xpVal;
+                if (!isNaN(outrosVal)) stateObj.patrOutros = outrosVal;
+                
+                state = stateObj;
+                localStorage.setItem(`ruler_data_${paramXp}`, JSON.stringify(state));
+            }
+
             const loggedAccount = sessionStorage.getItem('client_logged_xp');
             
             if (!loggedAccount) {
@@ -1569,47 +1704,73 @@
 
             currentActiveAccount = loggedAccount;
             
-            // Carregar dados específicos da conta conectada com suporte a hifens normalizados
-            const normAccount = currentActiveAccount.replace(/[-\s]/g, '');
-            let clientData = localStorage.getItem(`ruler_data_${currentActiveAccount}`) || localStorage.getItem(`ruler_data_${normAccount}`);
-            
-            if (clientData) {
-                state = JSON.parse(clientData);
-            } else {
-                // Procurar no databaseMock por correspondência direta ou normalizada
-                let mockData = databaseMock[currentActiveAccount] || databaseMock[normAccount];
-                if (!mockData) {
-                    for (const key in databaseMock) {
-                        if (key.replace(/[-\s]/g, '') === normAccount) {
-                            mockData = databaseMock[key];
-                            break;
+            // Se já processou o paramXp acima, não há necessidade de ler novamente
+            if (!paramXp) {
+                const normAccount = currentActiveAccount.replace(/[-\s]/g, '');
+                let stateObj = null;
+
+                // Tenta carregar do Supabase Real se configurado
+                if (supabaseClient) {
+                    try {
+                        const { data, error } = await supabaseClient
+                            .from('reguas_vida')
+                            .select('*')
+                            .eq('conta_xp', normAccount)
+                            .single();
+                        
+                        if (data && !error) {
+                            stateObj = typeof data.dados_planejamento === 'string' 
+                                ? JSON.parse(data.dados_planejamento) 
+                                : data.dados_planejamento;
+                            console.log("⚡ Supabase Real: Dados de sessão carregados para " + normAccount);
                         }
+                    } catch (err) {
+                        console.error("❌ Erro ao buscar dados de sessão no Supabase Real:", err);
                     }
                 }
-                
-                if (mockData) {
-                    state = JSON.parse(JSON.stringify(mockData));
+
+                if (stateObj) {
+                    state = stateObj;
                 } else {
-                    // Conta genérica padrão premium caso não mapeada, mas usa o nome real salvo no login
-                    const realName = sessionStorage.getItem('client_logged_name') || `Cliente XP ${currentActiveAccount}`;
-                    state = {
-                        name: realName,
-                        patrXP: 1500000,
-                        patrOutros: 500000,
-                        family: [
-                            { id: "f1", name: realName, birth: 1978, role: "Titular", emoji: "🧔", primary: true },
-                            { id: "f2", name: "Cônjuge", birth: 1980, role: "Cônjuge", emoji: "👩", primary: false },
-                            { id: "f3", name: "Filho 1", birth: 2012, role: "Filho(a)", emoji: "👦", primary: false }
-                        ],
-                        past: [
-                            { id: "p1", year: 2005, desc: "Formatura e Início de Carreira" },
-                            { id: "p2", year: 2010, desc: "Casamento" }
-                        ],
-                        future: [
-                            { id: "u1", year: 2030, desc: "Filho na Faculdade" },
-                            { id: "u2", year: 2038, desc: "Liberdade Financeira (Independência)" }
-                        ]
-                    };
+                    let clientData = localStorage.getItem(`ruler_data_${currentActiveAccount}`) || localStorage.getItem(`ruler_data_${normAccount}`);
+                    
+                    if (clientData) {
+                        state = JSON.parse(clientData);
+                    } else {
+                        let mockData = databaseMock[currentActiveAccount] || databaseMock[normAccount];
+                        if (!mockData) {
+                            for (const key in databaseMock) {
+                                if (key.replace(/[-\s]/g, '') === normAccount) {
+                                    mockData = databaseMock[key];
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        if (mockData) {
+                            state = JSON.parse(JSON.stringify(mockData));
+                        } else {
+                            const realName = sessionStorage.getItem('client_logged_name') || `Cliente XP ${currentActiveAccount}`;
+                            state = {
+                                name: realName,
+                                patrXP: 1500000,
+                                patrOutros: 500000,
+                                family: [
+                                    { id: "f1", name: realName, birth: 1978, role: "Titular", emoji: "🧔", primary: true },
+                                    { id: "f2", name: "Cônjuge", birth: 1980, role: "Cônjuge", emoji: "👩", primary: false },
+                                    { id: "f3", name: "Filho 1", birth: 2012, role: "Filho(a)", emoji: "👦", primary: false }
+                                ],
+                                past: [
+                                    { id: "p1", year: 2005, desc: "Formatura e Início de Carreira" },
+                                    { id: "p2", year: 2010, desc: "Casamento" }
+                                ],
+                                future: [
+                                    { id: "u1", year: 2030, desc: "Filho na Faculdade" },
+                                    { id: "u2", year: 2038, desc: "Liberdade Financeira (Independência)" }
+                                ]
+                            };
+                        }
+                    }
                 }
             }
 
@@ -1942,13 +2103,38 @@
         }
 
         // Ação do Botão "Gerar & Salvar Linha"
-        function updateLifeRuler(showFeedback = false) {
+        async function updateLifeRuler(showFeedback = false) {
             // Organizar arrays por ordem cronológica
             state.past.sort((a,b) => a.year - b.year);
             state.future.sort((a,b) => a.year - b.year);
 
             // Sincronizar localmente no cliente
             localStorage.setItem(`ruler_data_${currentActiveAccount}`, JSON.stringify(state));
+            
+            // Sincronizar no Supabase Real se configurado
+            if (supabaseClient && currentActiveAccount) {
+                const normAccount = currentActiveAccount.replace(/[-\s]/g, '');
+                try {
+                    const { error } = await supabaseClient
+                        .from('reguas_vida')
+                        .upsert({
+                            conta_xp: normAccount,
+                            nome_cliente: state.name || `Cliente XP ${currentActiveAccount}`,
+                            patrimonio_xp: state.patrXP || 0,
+                            patrimonio_outros: state.patrOutros || 0,
+                            dados_planejamento: state,
+                            updated_at: new Date().toISOString()
+                        }, { onConflict: 'conta_xp' });
+                    
+                    if (error) {
+                        console.error("❌ Erro ao salvar no Supabase Real:", error.message);
+                    } else {
+                        console.log("⚡ Supabase Real: Dados persistidos com sucesso para " + normAccount);
+                    }
+                } catch (err) {
+                    console.error("❌ Erro na conexão com o Supabase Real:", err);
+                }
+            }
             
             buildTicks();
             buildSliderEvents();
@@ -2268,6 +2454,98 @@
         function handleLogout() {
             sessionStorage.removeItem('client_logged_xp');
             window.location.href = "login.html";
+        }
+
+        // ── Relatório Inteligente para o WhatsApp ─────────────────────
+        function copyToWhatsApp() {
+            try {
+                const year = parseInt(document.getElementById('lifeSlider').value);
+                const nowYear = new Date().getFullYear();
+                const diffYears = year - nowYear;
+                
+                let tempoTexto = "";
+                if (diffYears === 0) {
+                    tempoTexto = "Hoje (Ano Atual)";
+                } else if (diffYears < 0) {
+                    tempoTexto = `${Math.abs(diffYears)} anos atrás`;
+                } else {
+                    tempoTexto = `Daqui a ${diffYears} ano${diffYears > 1 ? 's' : ''}`;
+                }
+
+                const titular = state.family.find(f => f.primary);
+                const clientAge = titular ? (year - titular.birth) : (year - 1978);
+                const name = state.name || `XP ${currentActiveAccount}`;
+                const totalSimulated = document.getElementById('gpsPatrimonio').innerText;
+                const progressPct = document.getElementById('progressRingPct') ? document.getElementById('progressRingPct').innerText : '0%';
+                const perfil = state.perfilRentabilidade || 'MODERADO';
+                const aporte = formatMoney(aporteAtual);
+
+                // Montar o núcleo familiar e as idades correspondentes ao ano selecionado
+                let familyText = "";
+                state.family.forEach(member => {
+                    const age = year - member.birth;
+                    const displayAge = age >= 0 && age <= 100 ? `${age} anos` : "Não Nascido(a)";
+                    familyText += `• ${member.emoji || '👤'} *${member.name}* (${member.role}): ${displayAge}\n`;
+                });
+
+                // Encontrar a meta ou conquista mais próxima desse ano
+                let metaFocoText = "Nenhuma meta mapeada para este ano.";
+                const allEvents = [
+                    ...state.past.map(p => ({year: p.year, desc: p.desc, tipo: 'conquista'})),
+                    ...state.future.map(f => ({year: f.year, desc: f.desc, tipo: 'meta'}))
+                ];
+                
+                // Evento exato do ano
+                const eventDoAno = allEvents.find(e => e.year === year);
+                if (eventDoAno) {
+                    metaFocoText = `${eventDoAno.tipo === 'conquista' ? '🏆 Conquista:' : '🎯 Meta:'} ${eventDoAno.desc}`;
+                } else {
+                    // Pega o mais próximo em até 3 anos
+                    allEvents.sort((a,b) => Math.abs(a.year - year) - Math.abs(b.year - year));
+                    if (allEvents.length > 0 && Math.abs(allEvents[0].year - year) <= 3) {
+                        metaFocoText = `${allEvents[0].tipo === 'conquista' ? '🏆 Conquista Próxima:' : '🎯 Meta Próxima:'} ${allEvents[0].desc} (${allEvents[0].year})`;
+                    }
+                }
+
+                // URL dinâmica para auto-login do cliente
+                const hostUrl = window.location.origin + window.location.pathname;
+                const queryLink = `${hostUrl}?xp=${currentActiveAccount}&nome=${encodeURIComponent(name)}&patrXP=${state.patrXP}&patrOutros=${state.patrOutros}`;
+
+                const mensagem = 
+`*Linha da Vida Patrimonial — WealthMap Private* 📈
+_Planejamento Financeiro Centrado em Objetivos de Vida_
+
+👤 *Cliente:* ${name}
+🔑 *Conta:* ${currentActiveAccount}
+🎯 *Ano Selecionado:* ${year} (${tempoTexto})
+
+-----------------------------------------
+📊 *SITUAÇÃO PATRIMONIAL PROJETADA*
+🏦 *Patrimônio Consolidado:* ${totalSimulated}
+🎯 *Rumo à Liberdade:* ${progressPct} do Objetivo
+💡 *Rentabilidade:* ${perfil} (IPCA+${perfil === 'CONSERVADOR' ? '3%' : perfil === 'ARROJADO' ? '5%' : '4%'} a.a.)
+📈 *Aporte Mensal:* ${aporte}
+
+-----------------------------------------
+👥 *NÚCLEO FAMILIAR EM ${year}*
+${familyText}
+-----------------------------------------
+🎯 *META / FOCO DO PERÍODO*
+• ${metaFocoText}
+
+-----------------------------------------
+⚡ *Acesse a simulação completa online:*
+🔗 ${queryLink}`;
+
+                navigator.clipboard.writeText(mensagem).then(() => {
+                    showToast("Relatório formatado do WhatsApp copiado com sucesso! 💬");
+                }).catch(err => {
+                    alert("Erro ao copiar mensagem para a área de transferência: " + err);
+                });
+            } catch (e) {
+                console.error(e);
+                alert("Erro ao formatar mensagem do WhatsApp: " + e.message);
+            }
         }
     </script>
 </body>

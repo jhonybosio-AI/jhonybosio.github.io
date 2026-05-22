@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebook Oficial — Estratégia Global: Dominando ETFs</title>
+    
+    <!-- Fontes Oficiais do Design System -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. ESTILOS GERAIS & DESIGN SYSTEM (WEB VIEW)
+           ========================================================================== */
+        
+        :root {
+            --primary: oklch(0.68 0.23 255);    /* Azul elétrico vibrante */
+            --accent: oklch(0.82 0.15 90);      /* Ouro requintado */
+            --bg: oklch(0.12 0.015 255);        /* Preto azulado profundo (#0C0D12) */
+            --text: oklch(0.98 0.005 255);      /* Branco suave (#F8FAFC) */
+            --border: rgba(255, 255, 255, 0.08); /* Bordas translúcidas */
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-tech: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-top: 70px; /* Espaço para a barra de ferramentas fixa */
+        }
+
+        /* Barra de Ferramentas Web (Oculta na Impressão) */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(12, 13, 18, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            z-index: 1000;
+        }
+
+        .toolbar .brand {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toolbar .brand span.badge {
+            background: var(--primary);
+            color: #0c0d12;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .toolbar .actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #0c0d12;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text);
+        }
+
+        /* Container do Livro */
+        .book-container {
+            max-width: 840px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Cada "Página" do Ebook */
+        .page {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 60px 80px;
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        /* ── CAPA ── */
+        .page-cover {
+            height: 1000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: radial-gradient(circle at 50% 30%, rgba(10, 132, 255, 0.08) 0%, transparent 70%), var(--bg);
+            border: 2px solid var(--accent);
+            padding: 80px;
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cover-logo-box {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--primary);
+            color: #0c0d12;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            box-shadow: 0 0 20px rgba(10, 132, 255, 0.4);
+        }
+
+        .cover-header-text {
+            font-family: var(--font-tech);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.20em;
+            text-transform: uppercase;
+        }
+
+        .cover-body {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .cover-category {
+            font-family: var(--font-tech);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.20em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .cover-title {
+            font-family: var(--font-display);
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            margin-bottom: 25px;
+            text-shadow: 0 0 30px rgba(10, 132, 255, 0.2);
+        }
+
+        .cover-subtitle {
+            font-family: var(--font-body);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 600px;
+        }
+
+        .cover-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .author-info .name {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .author-info .role {
+            font-family: var(--font-tech);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .cover-version {
+            font-family: var(--font-tech);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: right;
+        }
+
+        /* ── CONTEÚDO DAS PÁGINAS ── */
+        .chapter-header {
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        .chapter-num {
+            font-family: var(--font-tech);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .chapter-title {
+            font-family: var(--font-display);
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        p {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        p strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* Destaques / Blockquotes */
+        .highlight-box {
+            background: rgba(10, 132, 255, 0.03);
+            border-left: 4px solid var(--primary);
+            padding: 24px 30px;
+            border-radius: 0 12px 12px 0;
+            margin: 30px 0;
+        }
+
+        .highlight-box p {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0;
+            font-size: 17px;
+        }
+
+        /* Alerta Fiduciário */
+        .fiduciary-alert {
+            background: rgba(212, 175, 55, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .fiduciary-alert h4 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fiduciary-alert p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 0;
+        }
+
+        /* Listas Estilizadas */
+        .custom-list {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .custom-list li {
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .custom-list li::before {
+            content: "➔";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .custom-list li strong {
+            color: #ffffff;
+        }
+
+        /* Tabelas no Ebook */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-family: var(--font-body);
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid var(--border);
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        .data-table th {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text);
+            font-family: var(--font-display);
+            font-weight: 700;
+        }
+
+        .data-table tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .data-table .highlight-col {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Rodapé de Página */
+        .page-footer {
+            margin-top: 60px;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-tech);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .page-footer .brand-signature {
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        /* ==========================================================================
+           2. ESTILOS DE IMPRESSÃO (MEDIA PRINT)
+           ========================================================================== */
+        
+        @media print {
+            /* Configuração da Página Física */
+            @page {
+                size: A4 portrait;
+                margin: 20mm 15mm 20mm 15mm;
+            }
+
+            /* Reseta as variáveis para impressão limpa (Fundo Branco, Texto Escuro) */
+            :root {
+                --bg: #ffffff;
+                --text: #0b0c10;
+                --border: #e2e8f0;
+                --primary: #0056b3; /* Azul escuro legível */
+                --accent: #b58900;  /* Ouro fosco elegante */
+            }
+
+            body {
+                background-color: #ffffff;
+                color: #0b0c10;
+                padding-top: 0;
+            }
+
+            /* Ocultar elementos da Web */
+            .toolbar, .btn, .web-only {
+                display: none !important;
+            }
+
+            /* Container e Páginas */
+            .book-container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page {
+                background: #ffffff !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                padding: 0 0 10mm 0 !important;
+                margin-bottom: 0 !important;
+                page-break-after: always;
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            /* Estilo específico para Capa Impressa */
+            .page-cover {
+                height: 250mm !important;
+                border: 2px solid #b58900 !important;
+                padding: 30mm 20mm !important;
+                background: #ffffff !important;
+                page-break-after: always;
+            }
+
+            .cover-logo-box {
+                background: #0056b3 !important;
+                color: #ffffff !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+                box-shadow: none !important;
+            }
+
+            .cover-title {
+                color: #0b0c10 !important;
+                text-shadow: none !important;
+                font-size: 48px !important;
+            }
+
+            .cover-subtitle {
+                color: #4a5568 !important;
+            }
+
+            .author-info .name, .author-info .role {
+                color: #0b0c10 !important;
+            }
+
+            /* Conteúdo Escrito */
+            p {
+                color: #2d3748 !important;
+                font-size: 15px !important;
+            }
+
+            p strong {
+                color: #000000 !important;
+            }
+
+            .chapter-title {
+                color: #0b0c10 !important;
+            }
+
+            .highlight-box {
+                background: #f7fafc !important;
+                border-left: 4px solid #0056b3 !important;
+                border-top: 1px solid #e2e8f0;
+                border-right: 1px solid #e2e8f0;
+                border-bottom: 1px solid #e2e8f0;
+                border-radius: 0 8px 8px 0;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .highlight-box p {
+                color: #1a202c !important;
+            }
+
+            .fiduciary-alert {
+                background: #fffaf0 !important;
+                border: 1px solid #feebc8 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .fiduciary-alert p {
+                color: #744210 !important;
+            }
+
+            .custom-list li {
+                color: #2d3748 !important;
+            }
+
+            .custom-list li strong {
+                color: #000000 !important;
+            }
+
+            .data-table th {
+                background: #edf2f7 !important;
+                color: #0b0c10 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .data-table td {
+                color: #2d3748 !important;
+            }
+
+            .page-footer {
+                color: #a0aec0 !important;
+                border-top: 1px solid #e2e8f0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE FERRAMENTAS (APENAS WEB) -->
+    <div class="toolbar">
+        <div class="brand">
+            <span>Wealth Academy</span>
+            <span class="badge">Ebook Oficial</span>
+        </div>
+        <div class="actions">
+            <a href="../index.html" class="btn btn-secondary">
+                ← Voltar à Academy
+            </a>
+            <button onclick="window.print()" class="btn btn-primary">
+                🖨️ Salvar como PDF / Imprimir
+            </button>
+        </div>
+    </div>
+
+    <div class="book-container">
+
+        <!-- ==========================================
+             PÁGINA 1: CAPA
+             ========================================== -->
+        <div class="page page-cover">
+            <div class="cover-header">
+                <div class="cover-logo-box">JB</div>
+                <div class="cover-header-text">Wealth Academy</div>
+            </div>
+            
+            <div class="cover-body">
+                <span class="cover-category">Estratégia Global</span>
+                <h1 class="cover-title">Dominando ETFs</h1>
+                <p class="cover-subtitle">
+                    O guia definitivo de engenharia fiduciária para blindar seu patrimônio de taxas abusivas e maximizar o retorno real através da alocação passiva global.
+                </p>
+            </div>
+            
+            <div class="cover-footer">
+                <div class="author-info">
+                    <div class="name">Jhony Bosio</div>
+                    <div class="role">Private Advisor</div>
+                </div>
+                <div class="cover-version">
+                    Edição Oficial 2026<br>
+                    Exclusivo para Membros Wealth Academy
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 2: SUMÁRIO
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Introdução</span>
+                <h2 class="chapter-title">Estrutura de Estudo</h2>
+            </div>
+            
+            <p>
+                Este material foi projetado metodologicamente para atuar como o pilar teórico da sua liberdade financeira. O mercado tradicional lucra com a sua ignorância; o nosso objetivo aqui é municiar você com a mais pura evidência científica e matemática de investimentos.
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Capítulo</th>
+                        <th>Título Temático</th>
+                        <th style="width: 25%; text-align: right;">Pilar do Método</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="highlight-col">Cap. 1</td>
+                        <td><strong>Filosofia Fiduciária</strong>: O Fim do Conflito de Interesses</td>
+                        <td style="text-align: right;">Alinhamento Total</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-col">Cap. 2</td>
+                        <td><strong>Como Seu Banco Te Custa 2% ao Ano</strong>: Custos Ocultos</td>
+                        <td style="text-align: right;">Eficiência Cambial</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-col">Cap. 3</td>
+                        <td><strong>ETFs — A Revolução Silenciosa</strong>: Gestão Passiva vs. Ativa</td>
+                        <td style="text-align: right;">Evidência Científica</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-col">Cap. 4</td>
+                        <td><strong>O Protocolo 9A na Prática</strong>: Alocação Global e Rebalanceamento</td>
+                        <td style="text-align: right;">Execução Técnica</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <p>
+                    "Investir com inteligência não é sobre prever o futuro ou tentar adivinhar a próxima ação que vai subir. É sobre controle de custos, alocação diversificada global e consistência fiduciária."
+                </p>
+            </div>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span>Página 2</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 3: CAPÍTULO 1
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Capítulo 1</span>
+                <h2 class="chapter-title">Filosofia Fiduciária: O Fim do Conflito de Interesses</h2>
+            </div>
+            
+            <p>
+                No ecossistema financeiro tradicional, existe uma assimetria gritante. Quando você entra na agência de um grande banco de varejo ou entra em contato com um assessor de corretora tradicional, você não está lidando com um consultor neutro. Você está lidando com um <strong>vendedor comissionado</strong>.
+            </p>
+            
+            <p>
+                O modelo de remuneração de distribuição de investimentos no Brasil é estruturado por meio de <strong>rebates</strong>. Isso significa que quanto mais caro for o produto (fundos de investimento com altas taxas de administração, debêntures estruturadas com spreads generosos, ou produtos de COE absurdamente ineficientes), maior é a comissão que o assessor ou o banco recebe de volta da própria plataforma.
+            </p>
+            
+            <p>
+                Este modelo gera um conflito de interesses insustentável. O profissional é incentivado a empurrar produtos de baixa qualidade para engordar sua própria remuneração, em detrimento do retorno do seu patrimônio.
+            </p>
+
+            <div class="highlight-box">
+                <p>
+                    O dever fiduciário é o compromisso inegociável de colocar os interesses do cliente acima de qualquer outro. No modelo fiduciário puro (flat-fee), o cliente paga uma taxa transparente sobre o patrimônio total gerido. Não há rebates, não há spreads escondidos e não há conflito. Se o seu patrimônio cresce, o assessor cresce com você. Se cai, a receita do assessor também diminui.
+                </p>
+            </div>
+
+            <p>
+                Ao adotar uma filosofia de investimentos baseada em **ETFs de baixo custo**, quebramos o ciclo vicioso de comissão. Como os ETFs são negociados diretamente em bolsa e possuem taxas de administração ínfimas, nenhuma corretora ou gerente de banco consegue embutir comissões nestes ativos. É por isso que você quase nunca ouve o seu banco tradicional sugerir que você compre ETFs de baixo custo: **simplesmente porque eles não ganham comissão com isso**.
+            </p>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span>Página 3</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 4: CAPÍTULO 2
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Capítulo 2</span>
+                <h2 class="chapter-title">Como Seu Banco Te Custa 2% ao Ano: A Anatomia dos Custos Ocultos</h2>
+            </div>
+            
+            <p>
+                A maioria dos investidores acredita que o custo da sua carteira é apenas a taxa de custódia que a corretora zerou. Esta é a maior ilusão do mercado. O custo do seu portfólio está diluído em quatro camadas de custos invisíveis que drenam seu retorno em silêncio:
+            </p>
+
+            <ul class="custom-list">
+                <li>
+                    <strong>Taxas de Administração Abusivas:</strong> Fundos multimercado e fundos de ações ativos cobram comumente taxas de 2,0% ao ano sobre o patrimônio. Isso significa que, mesmo que o fundo renda zero ou tenha prejuízo, o gestor embolsa 2% do seu capital investido todos os anos.
+                </li>
+                <li>
+                    <strong>Taxas de Performance Punitivas:</strong> Além da taxa de administração, os fundos ativos capturam 20% de todo o ganho que exceder um benchmark de fácil superação (como o CDI para renda fixa ou Ibovespa para renda variável). Você assume 100% do risco de perda, mas o gestor captura 20% do seu lucro.
+                </li>
+                <li>
+                    <strong>Spreads Cambiais e Estruturados:</strong> Ao investir no exterior por plataformas convencionais, você é taxado com spreads que chegam a 1,5% a 2,0% na remessa e no retorno do câmbio. Da mesma forma, títulos de Renda Fixa privada (CDBs, CRIs, CRAs) comprados em corretoras tradicionais chegam até você com taxas rebaixadas porque o spread de intermediação ficou com a mesa de operações.
+                </li>
+                <li>
+                    <strong>Ineficiência Tributária:</strong> O giro excessivo das carteiras administradas por fundos ativos aciona o recolhimento semestral de imposto (come-cotas) e de ganho de capital desnecessário, prejudicando o efeito cumulativo dos juros compostos no longo prazo.
+                </li>
+            </ul>
+
+            <div class="fiduciary-alert">
+                <h4>⚠️ O Efeito Devastador dos Custos Ocultos</h4>
+                <p>
+                    Um investidor que possui R$ 1.000.000 aplicados a um rendimento bruto de 10% a.a., exposto a custos totais de 2,0% ao ano, terá acumulado cerca de R$ 4,6 milhões após 20 anos. O mesmo investidor, estruturado em uma carteira de ETFs globais com custo de 0,20% a.a., acumulará mais de R$ 6,1 milhões. <strong>Mais de R$ 1.500.000 foram perdidos unicamente em taxas de intermediação e comissões ocultas.</strong>
+                </p>
+            </div>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span>Página 4</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 5: CAPÍTULO 3
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Capítulo 3</span>
+                <h2 class="chapter-title">ETFs — A Revolução Silenciosa da Gestão Passiva</h2>
+            </div>
+            
+            <p>
+                Durante décadas, a indústria vendeu a ideia de que gestores talentosos eram capazes de analisar relatórios de empresas, ler gráficos de preços e bater o mercado de forma consistente, justificando a cobrança das altas taxas de administração. No entanto, a ciência acadêmica provou o contrário.
+            </p>
+            
+            <p>
+                Os estudos de **Eugene Fama** (vencedor do Prêmio Nobel de Economia de 2013 pela Hipótese dos Mercados Eficientes) e os relatórios anuais **SPIVA** (S&P Active vs. Passive Scorecard) apontam um dado incontestável: **no longo prazo (10 anos ou mais), mais de 90% dos gestores ativos de fundos profissionais perdem para seus respectivos índices de referência após deduzidas as taxas de administração**.
+            </p>
+
+            <div class="highlight-box">
+                <p>
+                    A gestão ativa falha sistematicamente por uma razão matemática simples descrita por William Sharpe no estudo "The Arithmetic of Active Management": na média, o retorno antes das taxas da gestão ativa deve ser igual ao retorno da gestão passiva. Contudo, após computar as altas taxas cobradas pelos gestores ativos, o investidor ativo inevitavelmente perde para o investidor passivo de baixo custo.
+                </p>
+            </div>
+
+            <p>
+                Os **ETFs (Exchange Traded Funds)** nasceram para resolver esta ineficiência. Em vez de pagar um gestor caro para tentar "adivinhar" quais ações subirão, o ETF simplesmente replica de forma computacional o índice de referência como um todo. As taxas de administração despencam de 2,0% a.a. para níveis entre **0,03% e 0,20% a.a.** no Brasil e nos EUA.
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Fundos de Gestão Ativa</th>
+                        <th>ETFs Fiduciários (Gestão Passiva)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Taxa de Adm. Média</strong></td>
+                        <td>1,50% a 2,50% ao ano</td>
+                        <td class="highlight-col">0,03% a 0,20% ao ano</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Taxa de Performance</strong></td>
+                        <td>Normalmente 20% sobre o benchmark</td>
+                        <td class="highlight-col">Isento (Inexistente)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transparência</strong></td>
+                        <td>Carteiras abertas com meses de atraso</td>
+                        <td class="highlight-col">Divulgação diária das posições</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Liquidez de Resgate</strong></td>
+                        <td>D+30 ou D+60 dias (travado)</td>
+                        <td class="highlight-col">D+2 dias úteis (negociado em bolsa)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span>Página 5</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 6: CAPÍTULO 4
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Capítulo 4</span>
+                <h2 class="chapter-title">O Protocolo 9A na Prática: Alocação Global e Rebalanceamento</h2>
+            </div>
+            
+            <p>
+                Para traduzir a eficiência dos ETFs em proteção de patrimônio real, desenvolvemos o **Protocolo 9A**. Ele consiste em estruturar a riqueza total do investidor através de 9 classes fundamentais de ativos globais descorrelacionados, mitigando o risco sistêmico do Brasil e otimizando a fronteira eficiente de portfólio.
+            </p>
+
+            <ul class="custom-list">
+                <li><strong>Classe 1 (Ações Internacionais - EUA):</strong> Exposição direta à maior economia mundial (ex: IVVB11 / WRLD11).</li>
+                <li><strong>Classe 2 (Renda Fixa Inflação - IPCA+):</strong> Proteção do poder de compra real doméstico (ex: IMAB11 / B5P211).</li>
+                <li><strong>Classe 3 (Ações Brasil):</strong> Acesso à volatilidade controlada do mercado de ações nacional (ex: BOVA11).</li>
+                <li><strong>Classe 4 (Renda Fixa Pré-fixada):</strong> Travar ganhos nominais para cenários de queda de juros (ex: IRFM11).</li>
+                <li><strong>Classe 5 (Ativos Reais / Imóveis):</strong> Renda e proteção com infraestrutura e imóveis reais (ex: XFIX11).</li>
+                <li><strong>Classe 6 (Ações Emergentes Globais):</strong> Capturar o crescimento de economias em expansão (ex: XINA11).</li>
+                <li><strong>Classe 7 (Commodities / Ouro):</strong> Proteção contra a inflação global e crises geopolíticas (ex: GOLD11).</li>
+                <li><strong>Classe 8 (Renda Fixa Pós-fixada - CDI):</strong> Estabilidade diária de liquidez (ex: LFTS11).</li>
+                <li><strong>Classe 9 (Caixa / Liquidez):</strong> Caixa imediato para oportunidades e emergências (ex: Tesouro Selic).</li>
+            </ul>
+
+            <div class="fiduciary-alert">
+                <h4>🎯 A Regra de Ouro do Rebalanceamento Fiduciário</h4>
+                <p>
+                    Com o tempo, o movimento natural dos mercados fará com que algumas classes valorizem mais que as outras, alterando a sua estrutura de risco original. O rebalanceamento consiste em vender pequenas parcelas das classes que subiram e comprar as classes que caíram. Isso força o investidor a fazer o que todos tentam, mas falham por questões emocionais: **vender na alta e comprar na baixa** de forma mecânica, científica e fria.
+                </p>
+            </div>
+
+            <p>
+                Utilize a **Planilha de Transição Bússola XP** que criamos para mapear seus desvios de alocação de forma exata e calcular a quantidade precisa em reais de cada ETF que você deve comprar ou vender para se enquadrar perfeitamente no Protocolo 9A.
+            </p>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span>Página 6</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 7: ENCERRAMENTO
+             ========================================== -->
+        <div class="page" style="display: flex; flex-direction: column; justify-content: space-between; min-height: 800px;">
+            <div class="chapter-header">
+                <span class="chapter-num">Conclusão</span>
+                <h2 class="chapter-title">O Próximo Passo do Seu Patrimônio</h2>
+            </div>
+            
+            <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
+                <p>
+                    Agora você possui em suas mãos o conhecimento operacional que os bancos tentaram lhe esconder. O próximo passo exige precisão cirúrgica de execução. A transição cambial, a calibração de spreads cambiais e fiscais, e a compra programada de ETFs exigem atenção e técnica.
+                </p>
+                <p>
+                    Se o seu patrimônio já ultrapassa os **R$ 300.000**, fazer essa transição sozinho pode gerar atritos tributários e custos que anulam os benefícios imediatos dos ETFs. Conte com a minha assessoria fiduciária exclusiva para auditar sua carteira atual e pilotar sua transição com tranquilidade e exatidão técnica.
+                </p>
+                
+                <div style="margin-top: 40px; border-left: 2px solid var(--accent); padding-left: 20px;">
+                    <p style="font-family: var(--font-display); font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 5px;">
+                        Liberte seu portfólio.
+                    </p>
+                    <p style="font-size: 15px; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0;">
+                        Jhony Bosio
+                    </p>
+                </div>
+            </div>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span>Página 7</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
