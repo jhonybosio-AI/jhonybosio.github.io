@@ -976,6 +976,239 @@
       color: rgba(255, 255, 255, 0.6);
       line-height: 1.5;
     }
+
+    /* ── NOVO LAYOUT ESTILO X.COM (TWEET) ── */
+    .slide-wrapper.layout-xcom {
+      background: #000000 !important;
+      padding: 90px 70px 70px 70px !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .slide-wrapper.layout-xcom::before {
+      background: none !important;
+    }
+
+    .slide-wrapper.layout-xcom .slide-header,
+    .slide-wrapper.layout-xcom .slide-footer {
+      display: none !important;
+    }
+
+    .slide-body.xcom-body {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+      flex: 1;
+    }
+
+    .slide-wrapper.layout-xcom .slide-body.xcom-body {
+      display: flex;
+    }
+
+    .xcom-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    .xcom-profile-group {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .xcom-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 15px rgba(10, 132, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .xcom-user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .xcom-name-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .xcom-name {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 26px;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .xcom-verified-icon {
+      flex-shrink: 0;
+    }
+
+    .xcom-handle {
+      font-family: var(--inter);
+      font-size: 18px;
+      color: #71767b;
+      font-weight: 400;
+    }
+
+    .xcom-logo {
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
+
+    .xcom-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px 0;
+    }
+
+    .xcom-text {
+      font-family: var(--inter);
+      font-weight: 500;
+      font-size: 38px;
+      line-height: 1.5;
+      color: #e7e9ea;
+      word-wrap: break-word;
+      text-align: left;
+    }
+
+    .xcom-cta {
+      font-family: var(--inter);
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 1.4;
+      color: var(--primary);
+      text-align: left;
+      transition: all 0.3s ease;
+    }
+
+    .xcom-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .xcom-disclaimer-wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .xcom-disclaimer {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 30px;
+      padding: 10px 24px;
+      font-family: var(--plus-jakarta);
+      font-style: italic;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+      max-width: 80%;
+    }
+
+    .xcom-arrow-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .xcom-arrow {
+      stroke: var(--text);
+    }
+
+    /* ── SEÇÃO LEGENDA REDES SOCIAIS ── */
+    .caption-generator {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .caption-textarea {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: var(--r-md);
+      padding: 12px;
+      font-family: var(--inter);
+      font-size: 12px;
+      width: 100%;
+      height: 160px;
+      resize: vertical;
+      line-height: 1.4;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .caption-textarea:focus {
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .caption-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn-caption {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 11px;
+      padding: 8px;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-caption:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-caption.btn-primary-caption {
+      background: var(--primary);
+      color: #030816;
+      border-color: var(--primary);
+    }
+
+    .btn-caption.btn-primary-caption:hover {
+      box-shadow: 0 0 10px rgba(10, 132, 255, 0.25);
+    }
   </style>
 </head>
 <body>
@@ -1072,7 +1305,23 @@
         </div>
       </div>
       
-      <!-- SEÇÃO 4: AJUDA -->
+      <!-- SEÇÃO 4: LEGENDA INTELIGENTE -->
+      <div class="panel-section">
+        <h4 class="panel-section-title">Legenda Inteligente</h4>
+        <div class="caption-generator">
+          <textarea id="caption-text" class="caption-textarea" placeholder="Clique em '⚡ Gerar Legenda' para compilar automaticamente os textos do carrossel em uma copy de conversão..."></textarea>
+          <div class="caption-buttons">
+            <button class="btn-caption btn-primary-caption" onclick="gerarLegendaAutomatica()">
+              ⚡ Gerar Legenda
+            </button>
+            <button class="btn-caption" id="btn-copy-caption" onclick="copiarLegenda()">
+              📋 Copiar Copy
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- SEÇÃO 5: AJUDA -->
       <div class="help-box">
         <h4 class="help-title">💡 Dicas do Construtor</h4>
         <ul class="help-list">
@@ -1104,7 +1353,10 @@
             <option value="pilares">Didático Pilares</option>
             <option value="pergunta">Didático Pergunta & CTA</option>
             <option value="cta">CTA Final</option>
+            <option value="xcom">Estilo X.com (Tweet)</option>
           </select>
+          <button class="btn-slide-control" style="font-weight: bold; min-width: 26px;" title="Aumentar Fonte" onmousedown="event.preventDefault(); alterarTamanhoFonte('aumentar')">A+</button>
+          <button class="btn-slide-control" style="font-weight: bold; min-width: 26px;" title="Diminuir Fonte" onmousedown="event.preventDefault(); alterarTamanhoFonte('diminuir')">A-</button>
           <button class="btn-slide-control" onclick="moverSlideFromEl(this, 'up')">⬆️</button>
           <button class="btn-slide-control" onclick="moverSlideFromEl(this, 'down')">⬇️</button>
           <button class="btn-slide-control btn-delete" onclick="deletarSlideFromEl(this)">❌</button>
@@ -1207,6 +1459,51 @@
           </button>
         </div>
 
+        <!-- 6. BODY: LAYOUT TWEET X.COM -->
+        <div class="slide-body xcom-body">
+          <div class="xcom-header">
+            <div class="xcom-profile-group">
+              <img class="xcom-avatar" src="../jhony-bosio-foto.jpg" alt="Jhony Bosio">
+              <div class="xcom-user-info">
+                <div class="xcom-name-wrapper">
+                  <span class="xcom-name" contenteditable="true">jhonybosio</span>
+                  <svg class="xcom-verified-icon" viewBox="0 0 24 24" width="22" height="22">
+                    <path fill="#1d9bf0" d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.99-3.818-3.99-.48 0-.94.1-1.348.27C14.825 2.515 13.512 1.5 12 1.5s-2.825 1.015-3.422 2.28c-.407-.17-.867-.27-1.348-.27-2.108 0-3.818 1.78-3.818 3.99 0 .495.084.965.238 1.4-1.273.65-2.148 2.02-2.148 3.6 0 1.58.875 2.95 2.148 3.6-.154.435-.238.905-.238 1.4 0 2.21 1.71 3.99 3.818 3.99.48 0 .94-.1 1.348-.27.597 1.265 1.91 2.28 3.422 2.28s2.825-1.015 3.422-2.28c.407.17.867.27 1.348.27 2.108 0 3.818-1.78 3.818-3.99 0-.495-.084-.965-.238-1.4 1.273-.65 2.148-2.02 2.148-3.6zm-12.72 3.298l-3.32-3.32 1.414-1.414 1.906 1.906 4.706-4.706 1.414 1.414-6.12 6.12z"/>
+                  </svg>
+                </div>
+                <span class="xcom-handle" contenteditable="true">@jhonybosio</span>
+              </div>
+            </div>
+            <svg class="xcom-logo" viewBox="0 0 24 24" width="36" height="36" fill="#ffffff">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </div>
+          
+          <div class="xcom-content">
+            <p class="xcom-text" contenteditable="true">
+              Você passou a vida construindo. Mas um divórcio do seu filho pode entregar metade disso para um ex-cônjuge.
+            </p>
+            <p class="xcom-cta" contenteditable="true">
+              Saiba como blindar o seu legado.
+            </p>
+          </div>
+          
+          <div class="xcom-footer">
+            <div class="xcom-disclaimer-wrapper">
+              <div class="xcom-disclaimer" contenteditable="true">
+                Isso não é uma recomendação de investimento. Apenas conteúdo educacional.
+              </div>
+            </div>
+            
+            <div class="xcom-arrow-wrapper">
+              <svg class="xcom-arrow" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </div>
+          </div>
+        </div>
+
         <!-- RODAPÉ DO SLIDE (Mapeado e numerado automaticamente) -->
         <div class="slide-footer">
           <span class="slide-footer-link" contenteditable="true">jhonybosio.com</span>
@@ -1222,6 +1519,34 @@
     let currentAccent = 'blue';
     let currentFormat = 'feed';
     let slideCounter = 0;
+    let lastFocusedEditable = null;
+
+    // Monitorar o elemento contenteditable focado no momento
+    document.addEventListener('focusin', (e) => {
+      if (e.target.hasAttribute('contenteditable')) {
+        lastFocusedEditable = e.target;
+      }
+    });
+
+    // Função de Ajuste Fino de Fonte Dinâmico (A+ e A-)
+    function alterarTamanhoFonte(direcao) {
+      if (!lastFocusedEditable) {
+        alert("Por favor, clique primeiro em algum texto do slide para selecioná-lo antes de ajustar o tamanho.");
+        return;
+      }
+      
+      const estilo = window.getComputedStyle(lastFocusedEditable);
+      let fontSizeVal = parseFloat(estilo.fontSize);
+      if (isNaN(fontSizeVal)) fontSizeVal = 24; // fallback de segurança
+      
+      if (direcao === 'aumentar') {
+        fontSizeVal = Math.min(100, fontSizeVal + 2);
+      } else {
+        fontSizeVal = Math.max(12, fontSizeVal - 2);
+      }
+      
+      lastFocusedEditable.style.fontSize = fontSizeVal + 'px';
+    }
 
     // Configura o Destaque de Cor (Azul ou Ouro)
     function setAccent(color) {
@@ -1281,6 +1606,17 @@
           hl.style.color = 'var(--accent)';
           hl.style.textShadow = '0 0 20px rgba(212, 175, 55, 0.35)';
         }
+      });
+
+      // NOVO: Ajustar borda do avatar no layout X.com
+      document.querySelectorAll('.xcom-avatar').forEach(img => {
+        img.style.borderColor = 'var(--primary)';
+        img.style.boxShadow = `0 0 15px ${color === 'blue' ? 'rgba(10, 132, 255, 0.3)' : 'rgba(212, 175, 55, 0.25)'}`;
+      });
+      
+      // NOVO: Ajustar texto de CTA no layout X.com
+      document.querySelectorAll('.xcom-cta').forEach(cta => {
+        cta.style.color = 'var(--primary)';
       });
     }
 
@@ -1653,10 +1989,10 @@
             desc: 'Como a Reforma Tributária afeta heranças, holdings familiares e a tributação de doações em vida a valor de mercado.'
           },
           {
-            layout: 'texto',
-            category: 'O IMPACTO',
-            title: 'Holding Familiar a Valor Real',
-            desc: 'O cerco se fechou. A cobrança do ITCMD agora exige avaliação a <strong>valor de mercado</strong> dos bens e alíquotas progressivas de até <strong>16%</strong> na maioria dos estados brasileiros.'
+            layout: 'xcom',
+            text: 'Você passou a vida construindo. Mas um divórcio do seu filho pode entregar metade disso para um ex-cônjuge.',
+            cta: 'Saiba como blindar o seu legado.',
+            disclaimer: 'Isso não é uma recomendação de investimento. Apenas conteúdo educacional.'
           },
           {
             layout: 'texto',
@@ -1694,10 +2030,10 @@
             desc: 'O que o seu banco tradicional oculta sobre a diversificação geográfica e a eficiência tributária internacional para investidores qualificados.'
           },
           {
-            layout: 'texto',
-            category: 'A DOR',
-            title: 'Risco Cambial & Concentração',
-            desc: 'Manter 100% da sua liquidez sob jurisdição brasileira e em reais é um <strong>risco sistêmico</strong>. Investidores de alta renda protegem seu poder de compra em moedas fortes e ativos globais.'
+            layout: 'xcom',
+            text: '31 dias, 30 ETFs para você aprender a montar uma carteira de investimentos sólida, dolarizada e de baixo custo.',
+            cta: 'Acesse o link da bio e fale com minha assistente Déia.',
+            disclaimer: 'Isso não é uma recomendação de investimento. Apenas conteúdo educacional.'
           },
           {
             layout: 'pilares',
@@ -1797,6 +2133,13 @@
           wrapper.querySelector('.slide-cta-btn-text').textContent = slideData.btnText;
           wrapper.querySelector('.slide-cta-button-sub').textContent = slideData.btnSub;
         }
+        else if (slideData.layout === 'xcom') {
+          wrapper.querySelector('.xcom-text').innerText = slideData.text;
+          wrapper.querySelector('.xcom-cta').innerText = slideData.cta;
+          if (slideData.disclaimer) {
+            wrapper.querySelector('.xcom-disclaimer').innerText = slideData.disclaimer;
+          }
+        }
       });
 
       // Garantir numeração certa no carregamento
@@ -1804,6 +2147,130 @@
       
       // Aplicar acento
       setAccent(data.accent);
+
+      // Gerar legenda automática inicial
+      setTimeout(gerarLegendaAutomatica, 350);
+    }
+
+    // Gera a legenda automática consolidada de alta conversão
+    function gerarLegendaAutomatica() {
+      const slides = document.querySelectorAll('#editor-viewport .slide-wrapper');
+      if (slides.length === 0) {
+        alert("Adicione alguns slides primeiro para gerar a legenda.");
+        return;
+      }
+      
+      let legenda = "";
+      let ctaTexto = "";
+      
+      slides.forEach((slide, index) => {
+        const num = index + 1;
+        const layout = Array.from(slide.classList).find(c => c.startsWith('layout-')).replace('layout-', '');
+        
+        if (layout === 'capa') {
+          const cat = slide.querySelector('.slide-capa-category')?.textContent.trim() || "";
+          const title = slide.querySelector('.slide-capa-title')?.innerText.replace(/\n/g, ' ').trim() || "";
+          const desc = slide.querySelector('.slide-capa-desc')?.textContent.trim() || "";
+          
+          legenda += `📌 ${cat ? `[${cat}] ` : ''}${title.toUpperCase()}\n\n`;
+          if (desc) legenda += `${desc}\n\n`;
+          legenda += `👇 Arrasta para o lado para entender a fundo!\n\n`;
+          legenda += `───\n\n`;
+        } 
+        else if (layout === 'texto') {
+          const title = slide.querySelector('.slide-content-title')?.innerText.replace(/\n/g, ' ').trim() || "";
+          const text = slide.querySelector('.slide-glass-card-text')?.innerText.trim() || "";
+          
+          legenda += `📖 ${title}\n`;
+          if (text) legenda += `↳ ${text}\n\n`;
+        }
+        else if (layout === 'pilares') {
+          const title = slide.querySelector('.slide-content-title')?.innerText.replace(/\n/g, ' ').trim() || "";
+          legenda += `🛠️ ${title}\n`;
+          
+          const cards = slide.querySelectorAll('.slide-pilar-card');
+          cards.forEach(card => {
+            const pTitle = card.querySelector('.slide-pilar-title')?.textContent.trim() || "";
+            const pDesc = card.querySelector('.slide-pilar-desc')?.textContent.trim() || "";
+            if (pTitle) {
+              legenda += `• ${pTitle}: ${pDesc}\n`;
+            }
+          });
+          legenda += `\n`;
+        }
+        else if (layout === 'pergunta') {
+          const title = slide.querySelector('.slide-content-title')?.innerText.replace(/\n/g, ' ').trim() || "";
+          const question = slide.querySelector('.slide-card-question')?.textContent.trim() || "";
+          const sub = slide.querySelector('.slide-card-question-sub')?.textContent.trim() || "";
+          
+          legenda += `❓ ${title}\n`;
+          if (question) legenda += `↳ ${question} (${sub})\n\n`;
+        }
+        else if (layout === 'cta') {
+          const title = slide.querySelector('.slide-cta-title')?.innerText.replace(/\n/g, ' ').trim() || "";
+          const desc = slide.querySelector('.slide-cta-desc')?.textContent.trim() || "";
+          const btn = slide.querySelector('.slide-cta-btn-text')?.textContent.trim() || "";
+          
+          legenda += `🏛️ ${title}\n`;
+          if (desc) legenda += `${desc}\n\n`;
+          if (btn) ctaTexto = `👉 Ação: ${btn} no portal jhonybosio.com`;
+        }
+        else if (layout === 'xcom') {
+          const text = slide.querySelector('.xcom-text')?.innerText.trim() || "";
+          const cta = slide.querySelector('.xcom-cta')?.innerText.trim() || "";
+          
+          legenda += `💬 PENSAMENTO DO DIA:\n`;
+          legenda += `"${text}"\n`;
+          if (cta) legenda += `↳ ${cta}\n\n`;
+        }
+      });
+      
+      // Rodapé da Legenda
+      legenda += `───\n\n`;
+      if (ctaTexto) {
+        legenda += `${ctaTexto}\n\n`;
+      } else {
+        legenda += `👉 Acesse jhonybosio.com e conheça nossa Wealth Academy (Link na Bio!)\n\n`;
+      }
+      
+      legenda += `Utilize nosso simulador científico de ETFs de forma 100% gratuita. Aprenda a montar sua carteira sob o Protocolo 9A de forma independente e fiduciária.\n\n`;
+      legenda += `#alocacaodeativos #wealthmanagement #investimentos #wealthacademy #protocolo9a #jhonybosio #holdingfamiliar #offshore #wealthadvisor`;
+      
+      const textarea = document.getElementById('caption-text');
+      textarea.value = legenda;
+    }
+    
+    // Copia a legenda para a área de transferência com feedback visual fiduciário premium
+    function copiarLegenda() {
+      const textarea = document.getElementById('caption-text');
+      if (!textarea.value.trim()) {
+        alert("Por favor, gere a legenda primeiro antes de copiar.");
+        return;
+      }
+      
+      textarea.select();
+      textarea.setSelectionRange(0, 99999);
+      
+      try {
+        navigator.clipboard.writeText(textarea.value).then(() => {
+          const btn = document.getElementById('btn-copy-caption');
+          const originalText = btn.innerHTML;
+          btn.innerHTML = "✅ Copiado!";
+          btn.style.background = "rgba(40, 167, 69, 0.2)";
+          btn.style.borderColor = "#28a745";
+          btn.style.color = "#28a745";
+          
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = "";
+            btn.style.borderColor = "";
+            btn.style.color = "";
+          }, 2000);
+        });
+      } catch (err) {
+        document.execCommand('copy');
+        alert("Legenda copiada com sucesso!");
+      }
     }
 
     // Inicialização do carrossel ao carregar
