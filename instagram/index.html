@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
-  <!-- html2canvas para Exportação Científica -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- html2canvas-pro para Suporte Avançado de CSS Moderno e Cores -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas-pro@1.5.8/dist/html2canvas.min.js"></script>
   
   <!-- JSZip para Compactação Científica em ZIP das Imagens -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
@@ -19,10 +19,10 @@
   <style>
     /* ── SYSTEM DESIGN BLUE3 CORE ── */
     :root {
-      --primary: oklch(0.68 0.23 255);       /* Azul elétrico vibrante */
-      --accent: oklch(0.82 0.15 90);         /* Ouro fiduciário */
-      --bg: oklch(0.12 0.015 255);           /* Preto azulado profundo */
-      --text: oklch(0.98 0.005 255);         /* Branco suave */
+      --primary: #0a84ff;       /* Azul elétrico vibrante */
+      --accent: #d4af37;         /* Ouro fiduciário */
+      --bg: #030816;           /* Preto azulado profundo */
+      --text: #f8f9fa;         /* Branco suave */
       --border: rgba(255, 255, 255, 0.08);   /* Bordas finas translúcidas */
       --card-bg: rgba(255, 255, 255, 0.02);  /* Base glassmorphism */
       
@@ -321,8 +321,8 @@
       border-radius: 50%;
     }
 
-    .color-dot.blue { background: oklch(0.68 0.23 255); }
-    .color-dot.gold { background: oklch(0.82 0.15 90); }
+    .color-dot.blue { background: #0a84ff; }
+    .color-dot.gold { background: #d4af37; }
 
     /* Controles Dinâmicos Globais */
     .global-controls {
@@ -1230,16 +1230,16 @@
       const logoBadge = document.getElementById('header-logo-badge');
       
       if (color === 'blue') {
-        document.documentElement.style.setProperty('--primary', 'oklch(0.68 0.23 255)');
+        document.documentElement.style.setProperty('--primary', '#0a84ff');
         btnBlue.classList.add('active-blue');
         btnGold.classList.remove('active-gold');
-        logoBadge.style.background = 'oklch(0.68 0.23 255)';
+        logoBadge.style.background = '#0a84ff';
         logoBadge.style.boxShadow = '0 0 15px rgba(10, 132, 255, 0.35)';
       } else {
-        document.documentElement.style.setProperty('--primary', 'oklch(0.82 0.15 90)');
+        document.documentElement.style.setProperty('--primary', '#d4af37');
         btnBlue.classList.remove('active-blue');
         btnGold.classList.add('active-gold');
-        logoBadge.style.background = 'oklch(0.82 0.15 90)';
+        logoBadge.style.background = '#d4af37';
         logoBadge.style.boxShadow = '0 0 15px rgba(212, 175, 55, 0.35)';
       }
       
@@ -1474,7 +1474,7 @@
       }).catch(err => {
         slide.classList.remove('generating-png');
         console.error("Erro ao exportar o slide individual: ", err);
-        alert("Erro ao exportar o slide. Verifique o console.");
+        alert(`Erro ao exportar o slide. Detalhes: ${err.message || err}`);
       });
     }
 
@@ -1541,7 +1541,7 @@
             wrapper.classList.remove('generating-png');
             console.error("Erro na geração em lote do slide: ", err);
             loader.style.display = 'none';
-            alert(`Falha ao renderizar o slide ${slideNum}. Operação abortada.`);
+            alert(`Falha ao renderizar o slide ${slideNum}. Operação abortada. Detalhes: ${err.message || err}`);
           });
           
         } else {
