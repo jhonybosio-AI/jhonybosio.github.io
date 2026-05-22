@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebook Oficial — Blindagem Patrimonial 2026: Vencendo a Reforma Tributária</title>
+    
+    <!-- Fontes Oficiais do Design System -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. ESTILOS GERAIS & DESIGN SYSTEM (WEB VIEW)
+           ========================================================================== */
+        
+        :root {
+            --primary: oklch(0.68 0.23 255);    /* Azul elétrico vibrante */
+            --accent: oklch(0.82 0.15 90);      /* Ouro requintado */
+            --bg: oklch(0.12 0.015 255);        /* Preto azulado profundo (#0C0D12) */
+            --text: oklch(0.98 0.005 255);      /* Branco suave (#F8FAFC) */
+            --border: rgba(255, 255, 255, 0.08); /* Bordas translúcidas */
+            
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-tech: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-top: 70px; /* Espaço para a barra de ferramentas fixa */
+        }
+
+        /* Barra de Ferramentas Web (Oculta na Impressão) */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(12, 13, 18, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            z-index: 1000;
+        }
+
+        .toolbar .brand {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toolbar .brand span.badge {
+            background: var(--primary);
+            color: #0c0d12;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .toolbar .actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #0c0d12;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text);
+        }
+
+        /* Container do Livro */
+        .book-container {
+            max-width: 840px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Cada "Página" do Ebook */
+        .page {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 60px 80px;
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        /* ── CAPA ── */
+        .page-cover {
+            height: 1000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: radial-gradient(circle at 50% 30%, rgba(27, 111, 239, 0.08) 0%, transparent 70%), var(--bg);
+            border: 2px solid var(--accent);
+            padding: 80px;
+        }
+
+        .cover-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cover-logo-box {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--primary);
+            color: #0c0d12;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            box-shadow: 0 0 20px rgba(10, 132, 255, 0.4);
+        }
+
+        .cover-header-text {
+            font-family: var(--font-tech);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.20em;
+            text-transform: uppercase;
+        }
+
+        .cover-body {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        .cover-category {
+            font-family: var(--font-tech);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.20em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .cover-title {
+            font-family: var(--font-display);
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            margin-bottom: 25px;
+            text-shadow: 0 0 30px rgba(10, 132, 255, 0.2);
+        }
+
+        .cover-subtitle {
+            font-family: var(--font-body);
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 620px;
+        }
+
+        .cover-footer {
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .author-info .name {
+            font-family: var(--font-display);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .author-info .role {
+            font-family: var(--font-tech);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .cover-version {
+            font-family: var(--font-tech);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: right;
+        }
+
+        /* ── CONTEÚDO DAS PÁGINAS ── */
+        .chapter-header {
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        .chapter-num {
+            font-family: var(--font-tech);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .chapter-title {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        p {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        p strong {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* Destaques / Blockquotes */
+        .highlight-box {
+            background: rgba(10, 132, 255, 0.03);
+            border-left: 4px solid var(--primary);
+            padding: 24px 30px;
+            border-radius: 0 12px 12px 0;
+            margin: 30px 0;
+        }
+
+        .highlight-box p {
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0;
+            font-size: 16px;
+        }
+
+        /* Alerta Fiduciário */
+        .fiduciary-alert {
+            background: rgba(212, 175, 55, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .fiduciary-alert h4 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fiduciary-alert p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 0;
+        }
+
+        /* Listas Estilizadas */
+        .custom-list {
+            list-style: none;
+            margin: 25px 0;
+        }
+
+        .custom-list li {
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .custom-list li::before {
+            content: "➔";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .custom-list li strong {
+            color: #ffffff;
+        }
+
+        /* Tabelas no Ebook */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-family: var(--font-body);
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid var(--border);
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        .data-table th {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text);
+            font-family: var(--font-display);
+            font-weight: 700;
+        }
+
+        .data-table tr:nth-child(even) td {
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .data-table .highlight-col {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Rodapé de Página */
+        .page-footer {
+            margin-top: 60px;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-tech);
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.35);
+        }
+
+        .page-footer .brand-signature {
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        /* CTA de Mentoria no Final */
+        .ebook-cta-card {
+            background: linear-gradient(135deg, rgba(212, 175, 106, 0.08) 0%, rgba(7, 17, 38, 0.8) 100%);
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+        }
+        
+        .ebook-cta-title {
+            font-family: var(--font-display);
+            font-size: 26px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+        }
+        
+        .ebook-cta-desc {
+            font-family: var(--font-body);
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 600px;
+            margin: 0 auto 28px;
+            line-height: 1.6;
+        }
+        
+        .ebook-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: #0c0d12;
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 800;
+            padding: 16px 40px;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: all 0.25s;
+            box-shadow: 0 8px 25px rgba(212, 175, 106, 0.3);
+        }
+        
+        .ebook-cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(212, 175, 106, 0.5);
+            background: #ffffff;
+        }
+
+        /* ==========================================================================
+           2. ESTILOS DE IMPRESSÃO (MEDIA PRINT)
+           ========================================================================== */
+        
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 20mm 15mm 20mm 15mm;
+            }
+
+            :root {
+                --bg: #ffffff;
+                --text: #0b0c10;
+                --border: #e2e8f0;
+                --primary: #0056b3; 
+                --accent: #b58900;  
+            }
+
+            body {
+                background-color: #ffffff;
+                color: #0b0c10;
+                padding-top: 0;
+            }
+
+            .toolbar, .btn, .web-only {
+                display: none !important;
+            }
+
+            .book-container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .page {
+                background: #ffffff !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                padding: 0 0 10mm 0 !important;
+                margin-bottom: 0 !important;
+                page-break-after: always;
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .page-cover {
+                height: 250mm !important;
+                border: 2px solid #b58900 !important;
+                padding: 30mm 20mm !important;
+                background: #ffffff !important;
+                page-break-after: always;
+            }
+
+            .cover-logo-box {
+                background: #0056b3 !important;
+                color: #ffffff !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+                box-shadow: none !important;
+            }
+
+            .cover-title {
+                color: #0b0c10 !important;
+                text-shadow: none !important;
+                font-size: 44px !important;
+            }
+
+            .cover-subtitle {
+                color: #4a5568 !important;
+            }
+
+            .author-info .name, .author-info .role {
+                color: #0b0c10 !important;
+            }
+
+            p {
+                color: #2d3748 !important;
+                font-size: 15px !important;
+            }
+
+            p strong {
+                color: #000000 !important;
+            }
+
+            .chapter-title {
+                color: #0b0c10 !important;
+            }
+
+            .highlight-box {
+                background: #f7fafc !important;
+                border-left: 4px solid #0056b3 !important;
+                border-top: 1px solid #e2e8f0;
+                border-right: 1px solid #e2e8f0;
+                border-bottom: 1px solid #e2e8f0;
+                border-radius: 0 8px 8px 0;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .highlight-box p {
+                color: #1a202c !important;
+            }
+
+            .fiduciary-alert {
+                background: #fffaf0 !important;
+                border: 1px solid #feebc8 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .fiduciary-alert p {
+                color: #744210 !important;
+            }
+
+            .custom-list li {
+                color: #2d3748 !important;
+            }
+
+            .custom-list li strong {
+                color: #000000 !important;
+            }
+
+            .data-table th {
+                background: #edf2f7 !important;
+                color: #0b0c10 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .data-table td {
+                color: #2d3748 !important;
+            }
+
+            .page-footer {
+                color: #a0aec0 !important;
+                border-top: 1px solid #e2e8f0 !important;
+            }
+
+            .ebook-cta-card {
+                background: #ffffff !important;
+                border: 2px solid #b58900 !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+            
+            .ebook-cta-title {
+                color: #0b0c10 !important;
+            }
+            
+            .ebook-cta-desc {
+                color: #2d3748 !important;
+            }
+            
+            .ebook-cta-btn {
+                background: #b58900 !important;
+                color: #ffffff !important;
+                border: 1px solid #b58900 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE FERRAMENTAS (APENAS WEB) -->
+    <div class="toolbar">
+        <div class="brand">
+            <span>Wealth Academy</span>
+            <span class="badge">Ebook Premium</span>
+        </div>
+        <div class="actions">
+            <a href="../index.html" class="btn btn-secondary">
+                ← Voltar à Academy
+            </a>
+            <button onclick="window.print()" class="btn btn-primary">
+                🖨️ Salvar como PDF / Imprimir
+            </button>
+        </div>
+    </div>
+
+    <div class="book-container">
+
+        <!-- ==========================================
+             PÁGINA 1: CAPA
+             ========================================== -->
+        <div class="page page-cover">
+            <div class="cover-header">
+                <div class="cover-logo-box">JB</div>
+                <div class="cover-header-text">Wealth Academy</div>
+            </div>
+            
+            <div class="cover-body">
+                <span class="cover-category">Blindagem Patrimonial 2026</span>
+                <h1 class="cover-title">Blindagem & Sucessão</h1>
+                <p class="cover-subtitle">
+                    O manual fiduciário definitivo de governança familiar, blindagem tributária e sobrevivência patrimonial sob as regras da Lei 227/2026 e do IRPF-M.
+                </p>
+            </div>
+            
+            <div class="cover-footer">
+                <div class="author-info">
+                    <div class="name">Jhony Bosio</div>
+                    <div class="role">Private Advisor</div>
+                </div>
+                <div class="cover-version">
+                    Edição Especial de Transição 2026<br>
+                    Exclusivo para Membros Wealth Academy
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 2: SUMÁRIO
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Introdução</span>
+                <h2 class="chapter-title">Roteiro de Sobrevivência Fiscal</h2>
+            </div>
+            
+            <p>
+                A aprovação e sanção da <strong>Lei Complementar 227/2026 (antiga PLC 108/2024)</strong> e a instituição do **IRPF-M** representam o maior cerco ao patrimônio privado da história recente do Brasil. O modelo tradicional de holdings patrimoniais de prateleira e estruturas familiares improvisadas não apenas perdeu a eficácia, como virou um imenso gerador de passivos.
+            </p>
+            <p>
+                Este e-book não traz fórmulas mágicas ou planejamentos agressivos. Pelo contrário: ele destrincha os conceitos matemáticos e legais reais da reforma para que você entenda exatamente onde o fisco vai atacar o seu patrimônio.
+            </p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Capítulo</th>
+                        <th>Tema Estratégico</th>
+                        <th style="width: 25%; text-align: right;">Foco Conceitual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="highlight-col">Cap. 1</td>
+                        <td><strong>Holdings a Valor de Mercado</strong>: O fim do custo de aquisição histórico</td>
+                        <td style="text-align: right;">Base do ITCMD</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-col">Cap. 2</td>
+                        <td><strong>O Cerco do IRPF-M</strong>: Imposto de Renda Mínimo e dividendos</td>
+                        <td style="text-align: right;">Alíquota de 0% a 10%</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-col">Cap. 3</td>
+                        <td><strong>Lucro Presumido & Médicos</strong>: Glosas fiscais e o novo teto de R$ 5mi</td>
+                        <td style="text-align: right;">Risco Corporativo</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight-col">Cap. 4</td>
+                        <td><strong>O Ano Limite de Ouro</strong>: A janela de oportunidade de 2026</td>
+                        <td style="text-align: right;">Anterioridade Anual</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span class="page-number">Pág. 2</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 3: CAPÍTULO 1
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Capítulo 1</span>
+                <h2 class="chapter-title">O Cerco ao ITCMD: Holdings a Valor de Mercado</h2>
+            </div>
+            
+            <p>
+                Historicamente, a transferência de cotas de holdings familiares ocorria pelo <strong>valor contábil histórico</strong> (geralmente o valor declarado na DIRPF do patriarca, muito abaixo do valor real). Isso permitia doar milhões em patrimônio imobiliário pagando ITCMD sobre uma base de cálculo artificialmente baixa.
+            </p>
+            <p>
+                A **Lei 227/2026** sepultou essa prática de forma definitiva. A partir de agora, as doações ou heranças de participações societárias de holdings patrimoniais e empresas operacionais serão tributadas obrigatoriamente pelo **valor real de mercado dos ativos**, devendo o valuation considerar a geração de caixa e o fundo de comércio, sempre que este for superior ao Patrimônio Líquido contábil.
+            </p>
+
+            <div class="highlight-box">
+                <p>
+                    "A holding imobiliária tradicional, que servia apenas como repositório de imóveis declarados pelo valor de custo de trinta anos atrás, perdeu seu principal benefício fiscal de transição sucessória imediata."
+                </p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>Regra Antiga</th>
+                        <th class="highlight-col">Nova Regra (Lei 227/2026)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Base de Cálculo</strong></td>
+                        <td>Valor Patrimonial / Custo Contábil</td>
+                        <td class="highlight-col">Valor de Mercado (Geração de Caixa + Fundo de Comércio)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alíquota</strong></td>
+                        <td>Geralmente fixa por Estado (ex: 4% em SP)</td>
+                        <td class="highlight-col">Obrigatoriamente progressiva (teto de até 8%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Extinção de Usufruto</strong></td>
+                        <td>Gerava bitributação em vários Estados</td>
+                        <td class="highlight-col">Isenção definitiva de ITCMD regulamentada</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bens no Exterior</strong></td>
+                        <td>Não tributados por falta de lei (Tema 825/STF)</td>
+                        <td class="highlight-col">Tributação destravada e devida no Estado do herdeiro</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                Além disso, as brechas territoriais foram fechadas. Acabou a chamada "escolha do local de inventário". O imposto sobre herança de bens móveis será devido no Estado de domicílio do falecido, e no caso de transmissões do exterior (doador ou bens fora do país), o ITCMD caberá ao Estado onde residir o herdeiro no Brasil.
+            </p>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span class="page-number">Pág. 3</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 4: CAPÍTULO 2
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Capítulo 2</span>
+                <h2 class="chapter-title">O Novo IRPF-M: O Imposto de Renda Mínimo</h2>
+            </div>
+            
+            <p>
+                O **IRPF-M (Imposto de Renda Mínimo)** foi desenhado para tributar rendas globais mais elevadas. Ele estabelece uma alíquota progressiva que varia de **0% a 10%** sobre toda a renda recebida pela pessoa física no ano civil que superar a marca de **R$ 600 mil**, atingindo o teto de 10% para somatórios superiores a R$ 1,2 milhão.
+            </p>
+            <p>
+                A grande maldade reside na base de cálculo. O IRPF-M incidirá sobre praticamente **toda a renda**, incluindo rendimentos de tributação exclusiva e, de forma avassaladora, **lucros e dividendos distribuídos a partir de 2026** (com exceção apenas de dividendos decorrentes de lucros acumulados antes de 2026 cuja deliberação formal de distribuição tenha sido aprovada em ata até **31/01/2026**).
+            </p>
+
+            <div class="fiduciary-alert">
+                <h4>⚠️ O Cálculo do Pedágio Progressivo</h4>
+                <p>
+                    A lógica de aumento da alíquota é geométrica: <strong>a cada R$ 60.000 de renda adicional acima do piso de R$ 600.000, a alíquota de IRPF-M sobe 1%</strong>, escalando rapidamente até o teto de 10%. Estão excluídos da base apenas heranças em adiantamento de legítima, ganhos na venda de imóveis próprios, aposentadoria por moléstia grave e rendimentos de títulos isentos estruturados (CRI, CRA, LCI, LCA, Debêntures Incentivadas, e fundos imobiliários/FIAGRO com mais de 100 cotistas).
+                </p>
+            </div>
+
+            <p>
+                Essa mudança obriga os empresários e investidores de alto padrão a calcularem milimetricamente seus fluxos de retirada de pró-labore, juros sobre capital próprio (JCP) e distribuições de dividendos, sob o risco de entregarem até 10% adicionais do faturamento líquido de suas holdings e empresas diretamente ao caixa do governo.
+            </p>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span class="page-number">Pág. 4</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 5: CAPÍTULO 3
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Capítulo 3</span>
+                <h2 class="chapter-title">O Cerco Corporativo: Lucro Presumido & Médicos</h2>
+            </div>
+            
+            <p>
+                Se a pessoa física está cercada, as empresas sofreram ataques cirúrgicos nas bases operacionais mais comuns. A primeira grande alteração atinge as empresas sob o regime de **Lucro Presumido**.
+            </p>
+            <p>
+                A partir de 2026, as empresas que acumularem faturamento superior a **R$ 5 milhões por ano** sofrerão um **acréscimo obrigatório de 10% nas suas bases de presunção**. Por exemplo: para prestadoras de serviços intelectuais (como advogados e clínicas), a base de presunção padrão de 32% saltará para **35,2%** sobre o faturamento excedente. 
+            </p>
+            <p>
+                A apuração ocorre de forma cumulativa trimestre a trimestre: uma vez ultrapassado o teto no ano civil, todas as receitas dos trimestres subsequentes sofrem o acréscimo automaticamente, encarecendo o IRPJ e a CSLL finais.
+            </p>
+
+            <div class="highlight-box">
+                <p>
+                    "Se a margem real de lucro da sua prestadora de serviços for inferior a 35,2%, o regime de Lucro Presumido passa a ser matematicamente um gerador de prejuízo em comparação com o Lucro Real."
+                </p>
+            </div>
+
+            <h3>A Glosa de Dividendos para Médicos e Profissionais</h3>
+            <p>
+                Historicamente, clínicas médicas e sociedades profissionais distribuíam lucros de forma desproporcional à participação societária como forma de recompensar o trabalho técnico dos sócios atuantes, sem incidência de INSS e IRRF (27,5%).
+            </p>
+            <p>
+                O cerco da Receita Federal a essa prática atingiu seu ápice. A distribuição desproporcional sem **rigor formal absoluto** tem sido massivamente glosada e reclassificada como pró-labore disfarçado. Para afastar a cobrança retroativa de 27,5% de IRRF + 20% de INSS patronal, a holding ou sociedade médica precisa cumprir cumulativamente:
+            </p>
+            
+            <ul class="custom-list">
+                <li><strong>Cláusula Contratual Clara:</strong> Previsão expressa e técnica de distribuição desproporcional no Contrato Social arquivado.</li>
+                <li><strong>Demonstrações Contábeis Mensais:</strong> Balancetes contábeis mensais assinados que comprovem a existência física e contábil de lucro a ser distribuído no período exato.</li>
+                <li><strong>Atas de Deliberação Formal:</strong> Ata assinada pelos sócios justificando os critérios técnicos e aprovando a distribuição desproporcional.</li>
+            </ul>
+
+            <div class="page-footer">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span class="page-number">Pág. 5</span>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             PÁGINA 6: CAPÍTULO 4
+             ========================================== -->
+        <div class="page">
+            <div class="chapter-header">
+                <span class="chapter-num">Capítulo 4</span>
+                <h2 class="chapter-title">A Janela de Ouro de 2026: O Roteiro de Ação</h2>
+            </div>
+            
+            <p>
+                Apesar de todo o cenário de aperto fiscal, a Constituição Federal de 1988 garante ao contribuinte uma proteção fundamental: os **Princípios Constitucionais da Anterioridade Anual e Nonagesimal**.
+            </p>
+            <p>
+                Por ser uma Lei Complementar aprovada e sancionada recentemente, as regras gerais da **Lei 227/2026** e os novos aumentos de alíquotas do ITCMD estaduais **não podem entrar em vigor de forma imediata**. As assembleias legislativas de cada um dos 26 Estados e do Distrito Federal precisarão primeiro criar e votar suas leis locais ao longo de 2026.
+            </p>
+            <p>
+                O resultado prático é que <strong>as novas alíquotas progressivas de até 8% e a cobrança sobre o valor real de mercado das holdings só entrarão em vigor, de fato, em 2027</strong>.
+            </p>
+
+            <div class="fiduciary-alert">
+                <h4>🏛️ O Ano da Ação Fiduciária</h4>
+                <p>
+                    <strong>2026 é o ano definitivo de ouro para o Planejamento Sucessório.</strong> Qualquer estrutura de governança, doação com reserva de usufruto, ou reorganização patrimonial societária implementada e consolidada até 31 de dezembro de 2026 estará legalmente blindada sob as alíquotas e bases de cálculo antigas e muito mais baratas. Cruzar os braços em 2026 é aceitar voluntariamente o encarecimento de mais de 100% no custo de transmissão da sua herança familiar.
+                </p>
+            </div>
+
+            <p>
+                O papel do investidor de alta renda neste momento não é assinar contratos de prateleira ou buscar milagres tributários. O segredo está em auditar individualmente seu portfólio, verificar contratos sociais, calcular bases tributárias e planejar a liquidez sucessória por meio de instrumentos complementares legítimos e blindados de ITCMD, como fundos exclusivos, previdências regressivas e seguros estruturados.
+            </p>
+
+            <!-- CARD DE CTA FINAL -->
+            <div class="ebook-cta-card">
+                <div class="ebook-cta-title">Sessão Estratégica Individual (Raio-X de Carteira & Sucessão)</div>
+                <p class="ebook-cta-desc">
+                    O Planejamento Sucessório e a blindagem contra a Reforma Tributária são processos estritamente individuais. Não existem soluções de prateleira seguras. Agende uma consultoria privativa de 1 hora via Zoom diretamente com o Private Advisor Jhony Bosio por R$ 497,00 para auditar seus riscos e desenhar sua estratégia de sobrevivência.
+                </p>
+                <a href="https://www.jhonybosio.com/mentoria" target="_blank" class="ebook-cta-btn">
+                    🏛️ Agendar Meu Raio-X Individual (R$ 497)
+                </a>
+            </div>
+
+            <div class="page-footer" style="margin-top: 40px;">
+                <span class="brand-signature">Jhony Bosio</span>
+                <span class="page-number">Pág. 6</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

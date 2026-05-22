@@ -963,84 +963,190 @@
         <div class="progress-text"><strong id="progressText">1 de 3</strong> módulos desbloqueados</div>
       </div>
 
-      <!-- Módulo 1 -->
-      <div class="sidebar-module mod-unlocked" id="mod1-wrap">
-        <div class="module-header" onclick="toggleModule('mod1-lessons')">
-          <div class="module-icon">✅</div>
-          <div class="module-info">
-            <div class="module-num">Módulo 1</div>
-            <div class="module-name">Filosofia Fiduciária</div>
+      <!-- Seletor de Trilhas Premium (Design System Blue3) -->
+      <div class="trail-selector" style="margin: 0 20px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: rgba(255,255,255,0.03); padding: 4px; border-radius: var(--r-md); border: 1px solid var(--border);">
+        <button id="btn-trail-1" class="trail-btn active" onclick="switchTrail(1)" style="font-family: var(--space-grotesk); font-size: 11px; font-weight: 700; border: none; padding: 10px 8px; border-radius: var(--r-sm); cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); background: var(--gold-grad); color: #030816; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 4px;">
+          📊 Alocação Global
+        </button>
+        <button id="btn-trail-2" class="trail-btn" onclick="switchTrail(2)" style="font-family: var(--space-grotesk); font-size: 11px; font-weight: 700; border: none; padding: 10px 8px; border-radius: var(--r-sm); cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); background: transparent; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 4px;">
+          🛡️ Blindagem 2026
+        </button>
+      </div>
+
+      <!-- CONTAINER TRILHA 1 -->
+      <div id="trail-1-modules">
+        <!-- Módulo 1 -->
+        <div class="sidebar-module mod-unlocked" id="mod1-wrap">
+          <div class="module-header" onclick="toggleModule('mod1-lessons')">
+            <div class="module-icon">✅</div>
+            <div class="module-info">
+              <div class="module-num">Módulo 1</div>
+              <div class="module-name">Filosofia Fiduciária</div>
+            </div>
+            <span class="module-status" id="mod1-arrow">▾</span>
           </div>
-          <span class="module-status" id="mod1-arrow">▾</span>
+          <div class="lesson-list open" id="mod1-lessons">
+            <div class="lesson-item active done" onclick="showLesson('l1-1')" id="nav-l1-1">
+              <div class="lesson-check">✓</div>
+              1.1 O Fim do Conflito de Interesses
+            </div>
+            <div class="lesson-item" onclick="showLesson('l1-2')" id="nav-l1-2">
+              <div class="lesson-check"></div>
+              1.2 Como Seu Banco Te Custa 2% ao Ano
+            </div>
+            <div class="lesson-item" onclick="showLesson('l1-3')" id="nav-l1-3">
+              <div class="lesson-check"></div>
+              1.3 ETFs: A Revolução Silenciosa
+            </div>
+          </div>
         </div>
-        <div class="lesson-list open" id="mod1-lessons">
-          <div class="lesson-item active done" onclick="showLesson('l1-1')" id="nav-l1-1">
-            <div class="lesson-check">✓</div>
-            1.1 O Fim do Conflito de Interesses
+
+        <!-- Módulo 2 -->
+        <div class="sidebar-module mod-locked" id="mod2-wrap">
+          <div class="module-header" onclick="toggleModuleOrPrompt('mod2')">
+            <div class="module-icon" id="mod2-icon">🔒</div>
+            <div class="module-info">
+              <div class="module-num">Módulo 2</div>
+              <div class="module-name">Engenharia de Portfólio</div>
+            </div>
+            <span class="module-status" id="mod2-arrow">▸</span>
           </div>
-          <div class="lesson-item" onclick="showLesson('l1-2')" id="nav-l1-2">
-            <div class="lesson-check"></div>
-            1.2 Como Seu Banco Te Custa 2% ao Ano
+          <div class="sidebar-lock-cta" id="mod2-lock-cta">
+            <p class="lock-cta-text">Libere gratuitamente o Acesso Completo e o Simulador com o Hermes.</p>
+            <a href="https://wa.me/5516981523120?text=Ol%C3%A1%20Hermes%2C%20estou%20na%20Wealth%20Academy%20e%20gostaria%20de%20liberar%20o%20Acesso%20Completo%20e%20o%20Simulador%20de%20ETFs." target="_blank" class="lock-cta-btn">
+              🔓 Liberar Acesso Completo com Hermes
+            </a>
           </div>
-          <div class="lesson-item" onclick="showLesson('l1-3')" id="nav-l1-3">
-            <div class="lesson-check"></div>
-            1.3 ETFs: A Revolução Silenciosa
+          <div class="lesson-list" id="mod2-lessons">
+            <div class="lesson-item" onclick="showLesson('l2-1')" id="nav-l2-1">
+              <div class="lesson-check"></div>
+              2.1 Central de Downloads
+            </div>
+            <div class="lesson-item" onclick="showLesson('l2-2')" id="nav-l2-2">
+              <div class="lesson-check"></div>
+              2.2 Mentoria Wealth & Freedom
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo 3 -->
+        <div class="sidebar-module mod-locked" id="mod3-wrap">
+          <div class="module-header" onclick="toggleModuleOrPrompt('mod3')">
+            <div class="module-icon" id="mod3-icon">🔒</div>
+            <div class="module-info">
+              <div class="module-num">Módulo 3</div>
+              <div class="module-name">Ferramental Prático</div>
+            </div>
+            <span class="module-status" id="mod3-arrow">▸</span>
+          </div>
+          <div class="sidebar-lock-cta" id="mod3-lock-cta">
+            <p class="lock-cta-text">Libere gratuitamente o Acesso Completo e o Simulador com o Hermes.</p>
+            <a href="https://wa.me/5516981523120?text=Ol%C3%A1%20Hermes%2C%20estou%20na%20Wealth%20Academy%20e%20gostaria%20de%20liberar%20o%20Acesso%20Completo%20e%20o%20Simulador%20de%20ETFs." target="_blank" class="lock-cta-btn">
+              🔓 Liberar Acesso Completo com Hermes
+            </a>
+          </div>
+          <div class="lesson-list" id="mod3-lessons">
+            <div class="lesson-item" onclick="showLesson('l3-1')" id="nav-l3-1">
+              <div class="lesson-check"></div>
+              3.1 Simulador Inteligente de ETFs
+            </div>
+            <div class="lesson-item" onclick="showLesson('l3-2')" id="nav-l3-2">
+              <div class="lesson-check"></div>
+              3.2 Checklist de Execução
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Módulo 2 -->
-      <div class="sidebar-module mod-locked" id="mod2-wrap">
-        <div class="module-header" onclick="toggleModuleOrPrompt('mod2')">
-          <div class="module-icon" id="mod2-icon">🔒</div>
-          <div class="module-info">
-            <div class="module-num">Módulo 2</div>
-            <div class="module-name">Engenharia de Portfólio</div>
+      <!-- CONTAINER TRILHA 2 (Oculto por padrão) -->
+      <div id="trail-2-modules" style="display: none;">
+        <!-- Módulo 1 - Trilha 2 -->
+        <div class="sidebar-module mod-unlocked" id="t2-mod1-wrap">
+          <div class="module-header" onclick="toggleModule('t2-mod1-lessons')">
+            <div class="module-icon">✅</div>
+            <div class="module-info">
+              <div class="module-num">Módulo 1</div>
+              <div class="module-name">O Cerco da Reforma</div>
+            </div>
+            <span class="module-status" id="t2-mod1-arrow">▾</span>
           </div>
-          <span class="module-status" id="mod2-arrow">▸</span>
-        </div>
-        <div class="sidebar-lock-cta" id="mod2-lock-cta">
-          <p class="lock-cta-text">Libere gratuitamente o Acesso Completo e o Simulador com o Hermes.</p>
-          <a href="https://wa.me/5516981523120?text=Ol%C3%A1%20Hermes%2C%20estou%20na%20Wealth%20Academy%20e%20gostaria%20de%20liberar%20o%20Acesso%20Completo%20e%20o%20Simulador%20de%20ETFs." target="_blank" class="lock-cta-btn">
-            🔓 Liberar Acesso Completo com Hermes
-          </a>
-        </div>
-        <div class="lesson-list" id="mod2-lessons">
-          <div class="lesson-item" onclick="showLesson('l2-1')" id="nav-l2-1">
-            <div class="lesson-check"></div>
-            2.1 Central de Downloads
-          </div>
-          <div class="lesson-item" onclick="showLesson('l2-2')" id="nav-l2-2">
-            <div class="lesson-check"></div>
-            2.2 Mentoria Wealth & Freedom
+          <div class="lesson-list open" id="t2-mod1-lessons">
+            <div class="lesson-item" onclick="showLesson('l-b-1-1')" id="nav-l-b-1-1">
+              <div class="lesson-check"></div>
+              1.1 O Fim do Valor Contábil
+            </div>
+            <div class="lesson-item" onclick="showLesson('l-b-1-2')" id="nav-l-b-1-2">
+              <div class="lesson-check"></div>
+              1.2 A Progressividade do ITCMD
+            </div>
+            <div class="lesson-item" onclick="showLesson('l-b-1-3')" id="nav-l-b-1-3">
+              <div class="lesson-check"></div>
+              1.3 Doador e Bens no Exterior
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Módulo 3 -->
-      <div class="sidebar-module mod-locked" id="mod3-wrap">
-        <div class="module-header" onclick="toggleModuleOrPrompt('mod3')">
-          <div class="module-icon" id="mod3-icon">🔒</div>
-          <div class="module-info">
-            <div class="module-num">Módulo 3</div>
-            <div class="module-name">Ferramental Prático</div>
+        <!-- Módulo 2 - Trilha 2 -->
+        <div class="sidebar-module mod-locked" id="t2-mod2-wrap">
+          <div class="module-header" onclick="toggleModuleOrPromptT2('mod2')">
+            <div class="module-icon" id="t2-mod2-icon">🔒</div>
+            <div class="module-info">
+              <div class="module-num">Módulo 2</div>
+              <div class="module-name">O Novo IRPF-M</div>
+            </div>
+            <span class="module-status" id="t2-mod2-arrow">▸</span>
           </div>
-          <span class="module-status" id="mod3-arrow">▸</span>
-        </div>
-        <div class="sidebar-lock-cta" id="mod3-lock-cta">
-          <p class="lock-cta-text">Libere gratuitamente o Acesso Completo e o Simulador com o Hermes.</p>
-          <a href="https://wa.me/5516981523120?text=Ol%C3%A1%20Hermes%2C%20estou%20na%20Wealth%20Academy%20e%20gostaria%20de%20liberar%20o%20Acesso%20Completo%20e%20o%20Simulador%20de%20ETFs." target="_blank" class="lock-cta-btn">
-            🔓 Liberar Acesso Completo com Hermes
-          </a>
-        </div>
-        <div class="lesson-list" id="mod3-lessons">
-          <div class="lesson-item" onclick="showLesson('l3-1')" id="nav-l3-1">
-            <div class="lesson-check"></div>
-            3.1 Simulador Inteligente de ETFs
+          <div class="sidebar-lock-cta" id="t2-mod2-lock-cta">
+            <p class="lock-cta-text">Libere gratuitamente o Acesso Completo de Blindagem com o Hermes.</p>
+            <a href="https://wa.me/5516981523120?text=Ol%C3%A1%20Hermes%2C%20estou%20na%20Wealth%20Academy%20e%20gostaria%20de%20liberar%20o%20Acesso%20Completo%20ao%20Curso%20de%20Blindagem%20Patrimonial%202026." target="_blank" class="lock-cta-btn">
+              🔓 Liberar Acesso com Hermes
+            </a>
           </div>
-          <div class="lesson-item" onclick="showLesson('l3-2')" id="nav-l3-2">
-            <div class="lesson-check"></div>
-            3.2 Checklist de Execução
+          <div class="lesson-list" id="t2-mod2-lessons">
+            <div class="lesson-item" onclick="showLesson('l-b-2-1')" id="nav-l-b-2-1">
+              <div class="lesson-check"></div>
+              2.1 O Novo IRPF-M
+            </div>
+            <div class="lesson-item" onclick="showLesson('l-b-2-2')" id="nav-l-b-2-2">
+              <div class="lesson-check"></div>
+              2.2 Seguro e Previdência
+            </div>
+            <div class="lesson-item" onclick="showLesson('l-b-2-3')" id="nav-l-b-2-3">
+              <div class="lesson-check"></div>
+              2.3 Rebalanceamento e Usufruto
+            </div>
+          </div>
+        </div>
+
+        <!-- Módulo 3 - Trilha 2 -->
+        <div class="sidebar-module mod-locked" id="t2-mod3-wrap">
+          <div class="module-header" onclick="toggleModuleOrPromptT2('mod3')">
+            <div class="module-icon" id="t2-mod3-icon">🔒</div>
+            <div class="module-info">
+              <div class="module-num">Módulo 3</div>
+              <div class="module-name">Impacto Corporativo</div>
+            </div>
+            <span class="module-status" id="t2-mod3-arrow">▸</span>
+          </div>
+          <div class="sidebar-lock-cta" id="t2-mod3-lock-cta">
+            <p class="lock-cta-text">Libere gratuitamente o Acesso Completo de Blindagem com o Hermes.</p>
+            <a href="https://wa.me/5516981523120?text=Ol%C3%A1%20Hermes%2C%20estou%20na%20Wealth%20Academy%20e%20gostaria%20de%20liberar%20o%20Acesso%20Completo%20ao%20Curso%20de%20Blindagem%20Patrimonial%202026." target="_blank" class="lock-cta-btn">
+              🔓 Liberar Acesso com Hermes
+            </a>
+          </div>
+          <div class="lesson-list" id="t2-mod3-lessons">
+            <div class="lesson-item" onclick="showLesson('l-b-3-1')" id="nav-l-b-3-1">
+              <div class="lesson-check"></div>
+              3.1 O Novo Lucro Presumido
+            </div>
+            <div class="lesson-item" onclick="showLesson('l-b-3-2')" id="nav-l-b-3-2">
+              <div class="lesson-check"></div>
+              3.2 Sociedades Médicas
+            </div>
+            <div class="lesson-item" onclick="showLesson('l-b-3-3')" id="nav-l-b-3-3">
+              <div class="lesson-check"></div>
+              3.3 Checklist Sucessório 2026
+            </div>
           </div>
         </div>
       </div>
@@ -1742,7 +1848,10 @@
     </div>
   </div>
 
+  <script src="./aulas_blindagem.js"></script>
   <script>
+    let activeTrail = 1;
+
     // ── NAVEGAÇÃO DE LIÇÕES ──
     function showLesson(lessonId) {
       document.querySelectorAll('.lesson-view').forEach(v => v.classList.remove('active'));
@@ -1779,6 +1888,7 @@
       if (list) list.classList.toggle('open');
     }
 
+    // Trilha 1
     function toggleModuleOrPrompt(modId) {
       const isUnlocked = localStorage.getItem('wealth_academy_' + modId + '_unlocked') === 'true';
       if (isUnlocked) {
@@ -1793,12 +1903,73 @@
       }
     }
 
+    // Trilha 2
+    function toggleModuleOrPromptT2(modId) {
+      const isUnlocked = localStorage.getItem('wealth_academy_t2_' + modId + '_unlocked') === 'true';
+      if (isUnlocked) {
+        toggleModule('t2-' + modId + '-lessons');
+        const arrow = document.getElementById('t2-' + modId + '-arrow');
+        const list = document.getElementById('t2-' + modId + '-lessons');
+        if (arrow && list) {
+          arrow.textContent = list.classList.contains('open') ? '▾' : '▸';
+        }
+      } else {
+        showLesson('locked-t2-' + modId);
+      }
+    }
+
+    // ── ALTERNÂNCIA DE TRILHAS (DESIGN SYSTEM BLUE3) ──
+    function switchTrail(trailNum) {
+      activeTrail = trailNum;
+      localStorage.setItem('wealth_academy_active_trail', trailNum);
+      
+      const btn1 = document.getElementById('btn-trail-1');
+      const btn2 = document.getElementById('btn-trail-2');
+      const t1Modules = document.getElementById('trail-1-modules');
+      const t2Modules = document.getElementById('trail-2-modules');
+      
+      if (trailNum === 1) {
+        if (btn1) {
+          btn1.classList.add('active');
+          btn1.style.background = 'var(--gold-grad)';
+          btn1.style.color = '#030816';
+        }
+        if (btn2) {
+          btn2.classList.remove('active');
+          btn2.style.background = 'transparent';
+          btn2.style.color = 'var(--muted)';
+        }
+        if (t1Modules) t1Modules.style.display = 'block';
+        if (t2Modules) t2Modules.style.display = 'none';
+        
+        showLesson('l1-1');
+      } else {
+        if (btn1) {
+          btn1.classList.remove('active');
+          btn1.style.background = 'transparent';
+          btn1.style.color = 'var(--muted)';
+        }
+        if (btn2) {
+          btn2.classList.add('active');
+          btn2.style.background = 'var(--gold-grad)';
+          btn2.style.color = '#030816';
+        }
+        if (t1Modules) t1Modules.style.display = 'none';
+        if (t2Modules) t2Modules.style.display = 'block';
+        
+        showLesson('l-b-1-1');
+      }
+      
+      renderUnlockedState();
+    }
+
     // ── LÓGICA DE DESBLOQUEIO INTELIGENTE & LOCALSTORAGE ──
     function checkUnlockParameters() {
       const urlParams = new URLSearchParams(window.location.search);
       const liberar = urlParams.get('liberar');
       let unlockedSomething = false;
 
+      // Trilha 1
       if (liberar === '2' || liberar === 'tudo') {
         if (localStorage.getItem('wealth_academy_mod2_unlocked') !== 'true') {
           localStorage.setItem('wealth_academy_mod2_unlocked', 'true');
@@ -1812,6 +1983,20 @@
         }
       }
 
+      // Trilha 2
+      if (liberar === 't2_2' || liberar === 't2_tudo' || liberar === 'tudo') {
+        if (localStorage.getItem('wealth_academy_t2_mod2_unlocked') !== 'true') {
+          localStorage.setItem('wealth_academy_t2_mod2_unlocked', 'true');
+          unlockedSomething = true;
+        }
+      }
+      if (liberar === 't2_3' || liberar === 't2_tudo' || liberar === 'tudo') {
+        if (localStorage.getItem('wealth_academy_t2_mod3_unlocked') !== 'true') {
+          localStorage.setItem('wealth_academy_t2_mod3_unlocked', 'true');
+          unlockedSomething = true;
+        }
+      }
+
       if (unlockedSomething) {
         showToastUnlock(liberar);
         // Limpar parâmetros da URL de forma limpa e transparente
@@ -1821,12 +2006,11 @@
     }
 
     function renderUnlockedState() {
+      // ── RENDER TRILHA 1 ──
       const isM2Unlocked = localStorage.getItem('wealth_academy_mod2_unlocked') === 'true';
       const isM3Unlocked = localStorage.getItem('wealth_academy_mod3_unlocked') === 'true';
+      let t1UnlockedCount = 1;
 
-      let unlockedCount = 1;
-
-      // Renderizar Módulo 2
       const mod2Wrap = document.getElementById('mod2-wrap');
       const mod2Icon = document.getElementById('mod2-icon');
       const mod2LockCta = document.getElementById('mod2-lock-cta');
@@ -1839,10 +2023,9 @@
         if (mod2LockCta) mod2LockCta.style.display = 'none';
         if (mod2Lessons) mod2Lessons.classList.add('open');
         if (mod2Arrow) mod2Arrow.textContent = '▾';
-        unlockedCount++;
+        t1UnlockedCount++;
       }
 
-      // Renderizar Módulo 3
       const mod3Wrap = document.getElementById('mod3-wrap');
       const mod3Icon = document.getElementById('mod3-icon');
       const mod3LockCta = document.getElementById('mod3-lock-cta');
@@ -1855,16 +2038,52 @@
         if (mod3LockCta) mod3LockCta.style.display = 'none';
         if (mod3Lessons) mod3Lessons.classList.add('open');
         if (mod3Arrow) mod3Arrow.textContent = '▾';
-        unlockedCount++;
+        t1UnlockedCount++;
       }
 
-      // Atualizar Progresso
+      // ── RENDER TRILHA 2 ──
+      const isT2M2Unlocked = localStorage.getItem('wealth_academy_t2_mod2_unlocked') === 'true';
+      const isT2M3Unlocked = localStorage.getItem('wealth_academy_t2_mod3_unlocked') === 'true';
+      let t2UnlockedCount = 1;
+
+      const t2Mod2Wrap = document.getElementById('t2-mod2-wrap');
+      const t2Mod2Icon = document.getElementById('t2-mod2-icon');
+      const t2Mod2LockCta = document.getElementById('t2-mod2-lock-cta');
+      const t2Mod2Arrow = document.getElementById('t2-mod2-arrow');
+      const t2Mod2Lessons = document.getElementById('t2-mod2-lessons');
+      if (t2Mod2Wrap && isT2M2Unlocked) {
+        t2Mod2Wrap.classList.remove('mod-locked');
+        t2Mod2Wrap.classList.add('mod-unlocked');
+        if (t2Mod2Icon) t2Mod2Icon.textContent = '✅';
+        if (t2Mod2LockCta) t2Mod2LockCta.style.display = 'none';
+        if (t2Mod2Lessons) t2Mod2Lessons.classList.add('open');
+        if (t2Mod2Arrow) t2Mod2Arrow.textContent = '▾';
+        t2UnlockedCount++;
+      }
+
+      const t2Mod3Wrap = document.getElementById('t2-mod3-wrap');
+      const t2Mod3Icon = document.getElementById('t2-mod3-icon');
+      const t2Mod3LockCta = document.getElementById('t2-mod3-lock-cta');
+      const t2Mod3Arrow = document.getElementById('t2-mod3-arrow');
+      const t2Mod3Lessons = document.getElementById('t2-mod3-lessons');
+      if (t2Mod3Wrap && isT2M3Unlocked) {
+        t2Mod3Wrap.classList.remove('mod-locked');
+        t2Mod3Wrap.classList.add('mod-unlocked');
+        if (t2Mod3Icon) t2Mod3Icon.textContent = '✅';
+        if (t2Mod3LockCta) t2Mod3LockCta.style.display = 'none';
+        if (t2Mod3Lessons) t2Mod3Lessons.classList.add('open');
+        if (t2Mod3Arrow) t2Mod3Arrow.textContent = '▾';
+        t2UnlockedCount++;
+      }
+
+      // ── ATUALIZAR PROGRESSO COM BASE NA TRILHA ATIVA ──
       const progressBar = document.getElementById('progressBar');
       const progressText = document.getElementById('progressText');
       if (progressBar && progressText) {
-        const percent = (unlockedCount / 3) * 100;
+        const currentCount = activeTrail === 1 ? t1UnlockedCount : t2UnlockedCount;
+        const percent = (currentCount / 3) * 100;
         progressBar.style.width = percent + '%';
-        progressText.innerHTML = `<strong>${unlockedCount} de 3</strong>`;
+        progressText.innerHTML = `<strong>${currentCount} de 3</strong>`;
       }
     }
 
@@ -1876,8 +2095,14 @@
           toastDesc.textContent = 'Módulo 2 (Engenharia de Portfólio) desbloqueado com sucesso!';
         } else if (type === '3') {
           toastDesc.textContent = 'Módulo 3 (Ferramental Prático) desbloqueado com sucesso!';
+        } else if (type === 't2_2') {
+          toastDesc.textContent = 'Módulo 2 (O Novo IRPF-M) da Trilha de Blindagem desbloqueado!';
+        } else if (type === 't2_3') {
+          toastDesc.textContent = 'Módulo 3 (Impacto Corporativo) da Trilha de Blindagem desbloqueado!';
+        } else if (type === 't2_tudo') {
+          toastDesc.textContent = 'Todos os módulos da Trilha de Blindagem foram desbloqueados!';
         } else {
-          toastDesc.textContent = 'Todos os módulos foram desbloqueados com sucesso!';
+          toastDesc.textContent = 'Todos os módulos de todas as trilhas foram desbloqueados!';
         }
         
         toast.classList.add('show');
@@ -1889,8 +2114,56 @@
 
     // Inicialização ao carregar a página
     document.addEventListener('DOMContentLoaded', () => {
+      // Carregar trilha ativa salva
+      const savedTrail = localStorage.getItem('wealth_academy_active_trail');
+      if (savedTrail) {
+        activeTrail = parseInt(savedTrail, 10);
+      }
+      
       checkUnlockParameters();
+      
+      // Aplicar estado inicial de visibilidade das trilhas
+      const t1Modules = document.getElementById('trail-1-modules');
+      const t2Modules = document.getElementById('trail-2-modules');
+      const btn1 = document.getElementById('btn-trail-1');
+      const btn2 = document.getElementById('btn-trail-2');
+      
+      if (activeTrail === 1) {
+        if (t1Modules) t1Modules.style.display = 'block';
+        if (t2Modules) t2Modules.style.display = 'none';
+        if (btn1) {
+          btn1.classList.add('active');
+          btn1.style.background = 'var(--gold-grad)';
+          btn1.style.color = '#030816';
+        }
+        if (btn2) {
+          btn2.classList.remove('active');
+          btn2.style.background = 'transparent';
+          btn2.style.color = 'var(--muted)';
+        }
+      } else {
+        if (t1Modules) t1Modules.style.display = 'none';
+        if (t2Modules) t2Modules.style.display = 'block';
+        if (btn1) {
+          btn1.classList.remove('active');
+          btn1.style.background = 'transparent';
+          btn1.style.color = 'var(--muted)';
+        }
+        if (btn2) {
+          btn2.classList.add('active');
+          btn2.style.background = 'var(--gold-grad)';
+          btn2.style.color = '#030816';
+        }
+      }
+
       renderUnlockedState();
+      
+      // Mostrar a lição inicial correspondente
+      if (activeTrail === 1) {
+        showLesson('l1-1');
+      } else {
+        showLesson('l-b-1-1');
+      }
     });
 
     // ── MENU MOBILE ──
