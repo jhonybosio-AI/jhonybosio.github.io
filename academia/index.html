@@ -2114,9 +2114,15 @@
 
     // Inicialização ao carregar a página
     document.addEventListener('DOMContentLoaded', () => {
-      // Carregar trilha ativa salva
+      // Carregar trilha ativa salva ou parâmetro da URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const queryTrail = urlParams.get('trilha');
       const savedTrail = localStorage.getItem('wealth_academy_active_trail_v2');
-      if (savedTrail) {
+      
+      if (queryTrail === '1' || queryTrail === '2') {
+        activeTrail = parseInt(queryTrail, 10);
+        localStorage.setItem('wealth_academy_active_trail_v2', activeTrail);
+      } else if (savedTrail) {
         activeTrail = parseInt(savedTrail, 10);
       } else {
         activeTrail = 2; // Default for new visitors / new session

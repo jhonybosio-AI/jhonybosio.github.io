@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram Slide Generator — Jhony Bosio</title>
+  
+  <!-- Fontes Oficiais do Design System -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- html2canvas para Exportação Científica -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    /* ── SYSTEM DESIGN BLUE3 CORE ── */
+    :root {
+      --primary: oklch(0.68 0.23 255);       /* Azul elétrico vibrante */
+      --accent: oklch(0.82 0.15 90);         /* Ouro fiduciário */
+      --bg: oklch(0.12 0.015 255);           /* Preto azulado profundo */
+      --text: oklch(0.98 0.005 255);         /* Branco suave */
+      --border: rgba(255, 255, 255, 0.08);   /* Bordas finas translúcidas */
+      --card-bg: rgba(255, 255, 255, 0.02);  /* Base glassmorphism */
+      
+      --space-grotesk: 'Space Grotesk', sans-serif;
+      --plus-jakarta: 'Plus Jakarta Sans', sans-serif;
+      --inter: 'Inter', sans-serif;
+      
+      --r-lg: 14px;
+      --r-md: 12px;
+      --r-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #030816;
+      color: var(--text);
+      font-family: var(--plus-jakarta);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* ── HEADER DA FERRAMENTA ── */
+    header.tool-header {
+      background: rgba(3, 8, 22, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .tool-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tool-logo-badge {
+      background: var(--primary);
+      color: #030816;
+      font-family: var(--space-grotesk);
+      font-weight: 800;
+      font-size: 16px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--r-sm);
+      box-shadow: 0 0 15px rgba(10, 132, 255, 0.35);
+    }
+
+    .tool-logo-text {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .tool-logo-sub {
+      color: rgba(255, 255, 255, 0.45);
+      font-family: var(--inter);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tool-header-actions {
+      display: flex;
+      gap: 16px;
+    }
+
+    .btn-header {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-header:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-header.btn-primary-action {
+      background: linear-gradient(135deg, var(--primary), #0056b3);
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 15px rgba(10, 132, 255, 0.3);
+    }
+
+    .btn-header.btn-primary-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(10, 132, 255, 0.45);
+    }
+
+    /* ── LAYOUT PRINCIPAL ── */
+    .tool-container {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      flex: 1;
+      height: calc(100vh - 69px);
+    }
+
+    /* ── PAINEL DE CONTROLE (ESQUERDA) ── */
+    .control-panel {
+      background: rgba(3, 8, 22, 0.95);
+      border-right: 1px solid var(--border);
+      padding: 32px 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .panel-section-title {
+      font-family: var(--space-grotesk);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 16px;
+    }
+
+    .template-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .template-option {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .template-option:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .template-option.active {
+      background: rgba(10, 132, 255, 0.05);
+      border-color: var(--primary);
+      box-shadow: inset 0 0 12px rgba(10, 132, 255, 0.15);
+    }
+
+    .template-option-title {
+      font-family: var(--space-grotesk);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .template-option-desc {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.4;
+    }
+
+    .accent-toggle-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .accent-btn {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 12px;
+      cursor: pointer;
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .accent-btn:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .accent-btn.active-blue {
+      border-color: var(--primary);
+      background: rgba(10, 132, 255, 0.08);
+      color: #72b1ff;
+    }
+
+    .accent-btn.active-gold {
+      border-color: var(--accent);
+      background: rgba(212, 175, 55, 0.08);
+      color: #ffd875;
+    }
+
+    .color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .color-dot.blue { background: var(--primary); }
+    .color-dot.gold { background: var(--accent); }
+
+    .help-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 16px;
+    }
+
+    .help-title {
+      font-family: var(--space-grotesk);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .help-list {
+      list-style-type: none;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      line-height: 1.5;
+    }
+
+    /* ── ÁREA DE EDIÇÃO DOS SLIDES (DIREITA) ── */
+    .editor-viewport {
+      background: #060c1d;
+      padding: 40px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 60px;
+      scroll-behavior: smooth;
+    }
+
+    /* ── ESTRUTURA DO SLIDE (REDUZIDO PARA A TELA, EXPORTA EM 1080×1350) ── */
+    .slide-scale-container {
+      width: 594px; /* 1080 * 0.55 */
+      height: 742.5px; /* 1350 * 0.55 */
+      position: relative;
+    }
+
+    .slide-wrapper {
+      width: 1080px;
+      height: 1350px;
+      background: var(--bg);
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: scale(0.55);
+      transform-origin: top left;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border);
+      box-sizing: border-box;
+      padding: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Efeitos de vinheta e glow no slide */
+    .slide-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.55) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── HEADER DO SLIDE (Slides 2-4) ── */
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      height: 50px;
+    }
+
+    .slide-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .slide-logo-box {
+      background: var(--primary);
+      color: #0c0d12;
+      font-family: var(--space-grotesk);
+      font-weight: 800;
+      font-size: 26px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      box-shadow: 0 0 25px rgba(10, 132, 255, 0.45);
+      transition: all 0.3s ease;
+    }
+
+    .slide-logo-text-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide-logo-name {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 26px;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .slide-logo-cargo {
+      font-family: var(--inter);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ── CONTEÚDO DO SLIDE ── */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+      margin: 30px 0;
+    }
+
+    /* ── ESTILOS ESPECÍFICOS DE SLIDES ── */
+    
+    /* 1. SLIDE CAPA */
+    .slide-body.capa-body {
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .slide-capa-category {
+      font-family: var(--inter);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.20em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .slide-capa-title {
+      font-family: var(--space-grotesk);
+      font-weight: 800;
+      font-size: 76px;
+      line-height: 1.10;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      text-shadow: 0 0 30px rgba(10, 132, 255, 0.2);
+      margin-bottom: 30px;
+    }
+
+    .slide-capa-desc {
+      font-family: var(--plus-jakarta);
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 1.50;
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 850px;
+    }
+
+    /* 2. SLIDE DIDÁTICO / CONTEÚDO */
+    .slide-body.content-body {
+      justify-content: flex-start;
+      padding-top: 40px;
+    }
+
+    .slide-content-category {
+      font-family: var(--inter);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.15em;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .slide-content-title {
+      font-family: var(--space-grotesk);
+      font-weight: 800;
+      font-size: 56px;
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-shadow: 0 0 20px rgba(10, 132, 255, 0.15);
+      margin-bottom: 40px;
+    }
+
+    /* Card didático em glassmorphic */
+    .slide-glass-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 48px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .slide-glass-card-text {
+      font-family: var(--plus-jakarta);
+      font-weight: 400;
+      font-size: 26px;
+      line-height: 1.60;
+      color: rgba(255, 255, 255, 0.90);
+    }
+
+    .slide-glass-card-text strong {
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* Card de pilares 2x2 para o slide 3 do Protocolo 9A */
+    .slide-pilares-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .slide-pilar-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 30px;
+      backdrop-filter: blur(12px);
+    }
+
+    .slide-pilar-title-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .slide-pilar-icon {
+      font-size: 22px;
+    }
+
+    .slide-pilar-title {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--text);
+    }
+
+    .slide-pilar-desc {
+      font-family: var(--plus-jakarta);
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* 3. SLIDE CTA FINAL */
+    .slide-body.cta-body {
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .slide-cta-icon {
+      font-size: 56px;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 0 15px rgba(10, 132, 255, 0.3));
+    }
+
+    .slide-cta-category {
+      font-family: var(--inter);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.20em;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .slide-cta-title {
+      font-family: var(--space-grotesk);
+      font-weight: 800;
+      font-size: 56px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-shadow: 0 0 25px rgba(10, 132, 255, 0.25);
+      margin-bottom: 30px;
+    }
+
+    .slide-cta-desc {
+      font-family: var(--plus-jakarta);
+      font-weight: 400;
+      font-size: 26px;
+      line-height: 1.50;
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 800px;
+      margin-bottom: 48px;
+    }
+
+    .slide-cta-button {
+      background: var(--accent);
+      color: #030816;
+      font-family: var(--space-grotesk);
+      font-weight: 800;
+      font-size: 24px;
+      padding: 20px 48px;
+      border-radius: var(--r-md);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      border: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide-cta-button-sub {
+      font-family: var(--inter);
+      font-weight: 700;
+      font-size: 17px;
+      color: rgba(3, 8, 22, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── RODAPÉ DO SLIDE ── */
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      height: 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 24px;
+    }
+
+    .slide-footer-link {
+      font-family: var(--inter);
+      font-weight: 500;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .slide-footer-badge {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    /* ── CONTROLES DO SLIDE NO EDITOR ── */
+    .slide-controls {
+      position: absolute;
+      top: -24px;
+      right: 0;
+      display: flex;
+      gap: 12px;
+      z-index: 50;
+    }
+
+    .btn-slide-control {
+      background: rgba(3, 8, 22, 0.9);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 12px;
+      padding: 6px 14px;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-slide-control:hover {
+      background: var(--primary);
+      color: #030816;
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(10, 132, 255, 0.4);
+    }
+
+    /* ── CONFIGURAÇÕES EDITÁVEIS ── */
+    [contenteditable="true"] {
+      border: 1px dashed transparent;
+      outline: none;
+      transition: all 0.2s ease;
+      cursor: text;
+    }
+
+    [contenteditable="true"]:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    [contenteditable="true"]:focus {
+      border-color: var(--primary);
+      background: rgba(10, 132, 255, 0.05);
+    }
+
+    /* Esconder elementos ao exportar com html2canvas */
+    .slide-wrapper.generating-png .slide-controls {
+      display: none !important;
+    }
+
+    .slide-wrapper.generating-png {
+      transform: none !important;
+      box-shadow: none !important;
+      border: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER DA FERRAMENTA -->
+  <header class="tool-header">
+    <div class="tool-logo-group">
+      <div class="tool-logo-badge">JB</div>
+      <div class="tool-logo-text-group">
+        <span class="tool-logo-text">Jhony Bosio</span>
+        <span class="tool-logo-sub">Instagram Content Generator</span>
+      </div>
+    </div>
+    <div class="tool-header-actions">
+      <button class="btn-header btn-primary-action" onclick="baixarTodosSlides()">
+        📥 Baixar Todos (PNG)
+      </button>
+    </div>
+  </header>
+
+  <!-- LAYOUT PRINCIPAL -->
+  <div class="tool-container">
+    
+    <!-- PAINEL DE CONTROLE -->
+    <aside class="control-panel">
+      
+      <!-- SEÇÃO 1: ACENTOS -->
+      <div>
+        <h4 class="panel-section-title">Paleta de Destaques</h4>
+        <div class="accent-toggle-group">
+          <button class="accent-btn active-blue" id="btn-accent-blue" onclick="setAccent('blue')">
+            <span class="color-dot blue"></span>
+            Azul Elétrico
+          </button>
+          <button class="accent-btn" id="btn-accent-gold" onclick="setAccent('gold')">
+            <span class="color-dot gold"></span>
+            Ouro Reais
+          </button>
+        </div>
+      </div>
+      
+      <!-- SEÇÃO 2: TEMPLATES -->
+      <div>
+        <h4 class="panel-section-title">Templates de Alta Conversão</h4>
+        <div class="template-selector">
+          <button class="template-option active" id="tpl-0" onclick="loadTemplate(0)">
+            <h5 class="template-option-title">1. Alocação Global</h5>
+            <p class="template-option-desc">Ideal para apresentar o conflito de interesses de bancos e apresentar o Protocolo 9A de ETFs.</p>
+          </button>
+          
+          <button class="template-option" id="tpl-1" onclick="loadTemplate(1)">
+            <h5 class="template-option-title">2. Blindagem Patrimonial</h5>
+            <p class="template-option-desc">Perfeito para expor o cerco tributário do ITCMD e holdings na transição para 2026.</p>
+          </button>
+          
+          <button class="template-option" id="tpl-2" onclick="loadTemplate(2)">
+            <h5 class="template-option-title">3. Offshore HNW</h5>
+            <p class="template-option-desc">Sofisticado, qualifica leads de altíssima renda sobre estruturação de capital e American Bonds.</p>
+          </button>
+        </div>
+      </div>
+      
+      <!-- SEÇÃO 3: AJUDA -->
+      <div class="help-box">
+        <h4 class="help-title">💡 Dicas do Construtor</h4>
+        <ul class="help-list">
+          <li>✨ <strong>Edição Direta:</strong> Clique em qualquer texto do slide no centro e altere à vontade.</li>
+          <li>🎯 <strong>Assinatura Fiel:</strong> A assinatura "Jhony Bosio" está travada para consistência total da grife.</li>
+          <li>📸 <strong>Exportação Pixel-Perfect:</strong> Ao clicar em baixar, o PNG é gerado no formato exato de 1080×1350px.</li>
+        </ul>
+      </div>
+      
+    </aside>
+
+    <!-- VIEWPORT DE EDIÇÃO -->
+    <main class="editor-viewport" id="editor-viewport">
+      
+      <!-- SLIDE 1: CAPA -->
+      <div class="slide-scale-container" id="scale-s1">
+        <div class="slide-wrapper" id="slide-s1">
+          <div class="slide-controls">
+            <button class="btn-slide-control" onclick="baixarSlide('slide-s1', '01_Capa')">📸 Baixar Capa</button>
+          </div>
+          
+          <!-- Capa NÃO possui header, conforme Design System -->
+          <div></div> 
+
+          <div class="slide-body capa-body">
+            <span class="slide-capa-category" contenteditable="true" id="s1-category">ALOCAÇÃO ESTRATÉGICA</span>
+            <h1 class="slide-capa-title" contenteditable="true" id="s1-title">O Fim do Conflito<br>de Interesses</h1>
+            <p class="slide-capa-desc" contenteditable="true" id="s1-desc">Descubra a engenharia fiduciária por trás do Protocolo 9A para blindar sua carteira.</p>
+          </div>
+
+          <div class="slide-footer">
+            <span class="slide-footer-link" contenteditable="true" id="s1-footer-link">jhonybosio.com</span>
+            <span class="slide-footer-badge" id="s1-badge">01/04</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: CONTEÚDO A -->
+      <div class="slide-scale-container" id="scale-s2">
+        <div class="slide-wrapper" id="slide-s2">
+          <div class="slide-controls">
+            <button class="btn-slide-control" onclick="baixarSlide('slide-s2', '02_A_Dor')">📸 Baixar Slide 2</button>
+          </div>
+          
+          <div class="slide-header">
+            <div class="slide-logo-group">
+              <div class="slide-logo-box" id="logo-box-s2">JB</div>
+              <div class="slide-logo-text-group">
+                <span class="slide-logo-name">Jhony Bosio</span>
+                <span class="slide-logo-cargo">Private Advisor</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-body content-body">
+            <span class="slide-content-category" contenteditable="true" id="s2-category">O DIAGNÓSTICO</span>
+            <h2 class="slide-content-title" contenteditable="true" id="s2-title">Taxas Ocultas no Seu Banco</h2>
+            <div class="slide-glass-card">
+              <p class="slide-glass-card-text" contenteditable="true" id="s2-desc">
+                A maioria dos investidores de alta renda no Brasil está presa no <strong>modelo de distribuição tradicional</strong>. Você paga até <strong>2.5% ao ano</strong> em comissões embutidas em fundos e COEs conflitados.
+              </p>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span class="slide-footer-link" contenteditable="true" id="s2-footer-link">jhonybosio.com</span>
+            <span class="slide-footer-badge" id="s2-badge">02/04</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: CONTEÚDO B -->
+      <div class="slide-scale-container" id="scale-s3">
+        <div class="slide-wrapper" id="slide-s3">
+          <div class="slide-controls">
+            <button class="btn-slide-control" onclick="baixarSlide('slide-s3', '03_A_Solucao')">📸 Baixar Slide 3</button>
+          </div>
+          
+          <div class="slide-header">
+            <div class="slide-logo-group">
+              <div class="slide-logo-box" id="logo-box-s3">JB</div>
+              <div class="slide-logo-text-group">
+                <span class="slide-logo-name">Jhony Bosio</span>
+                <span class="slide-logo-cargo">Private Advisor</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-body content-body">
+            <span class="slide-content-category" contenteditable="true" id="s3-category">A SOLUÇÃO</span>
+            <h2 class="slide-content-title" contenteditable="true" id="s3-title">As 9 Classes Globais da XP</h2>
+            
+            <div class="slide-pilares-grid" id="s3-pilares-grid">
+              <!-- Pilar 1 -->
+              <div class="slide-pilar-card">
+                <div class="slide-pilar-title-wrapper">
+                  <span class="slide-pilar-icon">🌐</span>
+                  <span class="slide-pilar-title" contenteditable="true" id="s3-p1-title">Alocação Estruturada</span>
+                </div>
+                <p class="slide-pilar-desc" contenteditable="true" id="s3-p1-desc">Distribuição precisa em 9 classes espelhando o relatório oficial da XP Investimentos.</p>
+              </div>
+              <!-- Pilar 2 -->
+              <div class="slide-pilar-card">
+                <div class="slide-pilar-title-wrapper">
+                  <span class="slide-pilar-icon">📉</span>
+                  <span class="slide-pilar-title" contenteditable="true" id="s3-p2-title">ETFs de Baixo Custo</span>
+                </div>
+                <p class="slide-pilar-desc" contenteditable="true" id="s3-p2-desc">Eliminação de taxas de administração abusivas com veículos de altíssima liquidez.</p>
+              </div>
+              <!-- Pilar 3 -->
+              <div class="slide-pilar-card">
+                <div class="slide-pilar-title-wrapper">
+                  <span class="slide-pilar-icon">🛡️</span>
+                  <span class="slide-pilar-title" contenteditable="true" id="s3-p3-title">Alinhamento Fiduciário</span>
+                </div>
+                <p class="slide-pilar-desc" contenteditable="true" id="s3-p3-desc">Remuneração fee-based transparente, revertendo 100% de rebates em benefício do cliente.</p>
+              </div>
+              <!-- Pilar 4 -->
+              <div class="slide-pilar-card">
+                <div class="slide-pilar-title-wrapper">
+                  <span class="slide-pilar-icon">⚖️</span>
+                  <span class="slide-pilar-title" contenteditable="true" id="s3-p4-title">Rebalanceamento Mecânico</span>
+                </div>
+                <p class="slide-pilar-desc" contenteditable="true" id="s3-p4-desc">Ajuste de portfólio matemático, vendendo o que subiu e comprando o que está barato.</p>
+              </div>
+            </div>
+            
+            <!-- Suporte a card alternativo simples para outros templates -->
+            <div class="slide-glass-card" id="s3-alternative-card" style="display: none;">
+              <p class="slide-glass-card-text" contenteditable="true" id="s3-alternative-desc"></p>
+            </div>
+          </div>
+
+          <div class="slide-footer">
+            <span class="slide-footer-link" contenteditable="true" id="s3-footer-link">jhonybosio.com</span>
+            <span class="slide-footer-badge" id="s3-badge">03/04</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: CTA FINAL -->
+      <div class="slide-scale-container" id="scale-s4">
+        <div class="slide-wrapper" id="slide-s4">
+          <div class="slide-controls">
+            <button class="btn-slide-control" onclick="baixarSlide('slide-s4', '04_Cta_Final')">📸 Baixar CTA</button>
+          </div>
+          
+          <div class="slide-header">
+            <div class="slide-logo-group">
+              <div class="slide-logo-box" id="logo-box-s4">JB</div>
+              <div class="slide-logo-text-group">
+                <span class="slide-logo-name">Jhony Bosio</span>
+                <span class="slide-logo-cargo">Private Advisor</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide-body cta-body">
+            <span class="slide-cta-icon" id="s4-icon">🏛️</span>
+            <span class="slide-cta-category" contenteditable="true" id="s4-category">WEALTH ACADEMY</span>
+            <h2 class="slide-cta-title" contenteditable="true" id="s4-title">Acesse Gratuitamente no Site</h2>
+            <p class="slide-cta-desc" contenteditable="true" id="s4-desc">Utilize nosso simulador científico de ETFs de forma 100% gratuita em nosso portal. Aprenda a montar sua carteira sob o Protocolo 9A.</p>
+            <button class="slide-cta-button" id="s4-button-el">
+              <span id="s4-btn-text" contenteditable="true">COMEÇAR CURSO GRÁTIS</span>
+              <span class="slide-cta-button-sub" id="s4-btn-sub" contenteditable="true">jhonybosio.com ➔</span>
+            </button>
+          </div>
+
+          <div class="slide-footer">
+            <span class="slide-footer-link" contenteditable="true" id="s4-footer-link">jhonybosio.com</span>
+            <span class="slide-footer-badge" id="s4-badge">04/04</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script>
+    // ── CONFIGURAÇÕES DOS TEMPLATES ──
+    const templates = [
+      // Template 0: Alocação Global
+      {
+        accent: 'blue',
+        slides: {
+          s1: {
+            category: 'ALOCAÇÃO ESTRATÉGICA',
+            title: 'O Fim do Conflito<br>de Interesses',
+            desc: 'Descubra a engenharia fiduciária por trás do Protocolo 9A para blindar sua carteira.'
+          },
+          s2: {
+            category: 'O DIAGNÓSTICO',
+            title: 'Taxas Ocultas no Seu Banco',
+            desc: 'A maioria dos investidores de alta renda no Brasil está presa no <strong>modelo de distribuição tradicional</strong>. Você paga até <strong>2.5% ao ano</strong> em comissões embutidas em fundos e COEs conflitados.'
+          },
+          s3: {
+            showGrid: true,
+            category: 'A SOLUÇÃO',
+            title: 'As 9 Classes Globais da XP',
+            p1: { title: 'Alocação Estruturada', desc: 'Distribuição precisa em 9 classes espelhando o relatório oficial da XP Investimentos.' },
+            p2: { title: 'ETFs de Baixo Custo', desc: 'Eliminação de taxas de administração abusivas com veículos de altíssima liquidez.' },
+            p3: { title: 'Alinhamento Fiduciário', desc: 'Remuneração fee-based transparente, revertendo 100% de rebates em benefício do cliente.' },
+            p4: { title: 'Rebalanceamento Mecânico', desc: 'Ajuste de portfólio matemático, vendendo o que subiu e comprando o que está barato.' }
+          },
+          s4: {
+            icon: '🏛️',
+            category: 'WEALTH ACADEMY',
+            title: 'Acesse Gratuitamente no Site',
+            desc: 'Utilize nosso simulador científico de ETFs de forma 100% gratuita em nosso portal. Aprenda a montar sua carteira sob o Protocolo 9A.',
+            btnText: 'COMEÇAR CURSO GRÁTIS',
+            btnSub: 'jhonybosio.com ➔'
+          }
+        }
+      },
+      // Template 1: Blindagem Patrimonial 2026
+      {
+        accent: 'gold',
+        slides: {
+          s1: {
+            category: 'BLINDAGEM PATRIMONIAL',
+            title: 'O Cerco Fiscal<br>de 2026',
+            desc: 'Como a Reforma Tributária afeta heranças, holdings e a tributação de doações a valor de mercado.'
+          },
+          s2: {
+            category: 'O IMPACTO',
+            title: 'Holding Familiar a Valor Real',
+            desc: 'O cerco se fechou. A cobrança do ITCMD agora exige avaliação a <strong>valor de mercado</strong> dos bens e alíquotas progressivas de até <strong>16%</strong> na maioria dos estados brasileiros.'
+          },
+          s3: {
+            showGrid: false,
+            category: 'A ESTRATÉGIA',
+            title: 'A Transição Patrimonial 2026',
+            alternativeDesc: 'É hora de estruturar sua holding sob a nova regra de transição tributária ou utilizar <strong>doações planejadas a valor de custo</strong> de forma legal antes da vigência plena das alíquotas progressivas.'
+          },
+          s4: {
+            icon: '🛡️',
+            category: 'WEALTH ACADEMY',
+            title: 'Aulas da Trilha 2 Liberadas',
+            desc: 'Toda a engenharia de proteção tributária e governança sucessória está explicada em detalhes na Trilha 2 do nosso portal.',
+            btnText: 'ACESSAR TRILHA GRÁTIS',
+            btnSub: 'jhonybosio.com ➔'
+          }
+        }
+      },
+      // Template 2: Offshore HNW
+      {
+        accent: 'blue',
+        slides: {
+          s1: {
+            category: 'INTERNACIONALIZAÇÃO',
+            title: 'O Segredo de<br>Contas Offshore',
+            desc: 'O que o seu banco oculta sobre a diversificação geográfica e a eficiência tributária internacional.'
+          },
+          s2: {
+            category: 'A DOR',
+            title: 'Risco Cambial & Concentração',
+            desc: 'Manter 100% da sua liquidez sob jurisdição brasileira e em reais é um <strong>risco sistêmico</strong>. Investidores de alta renda protegem seu poder de compra em moedas fortes e ativos globais.'
+          },
+          s3: {
+            showGrid: false,
+            category: 'A ESTRATÉGIA',
+            title: 'Bonds Globais & Contas PIC',
+            alternativeDesc: 'Utilize estruturas exclusivas (como as <strong>contas PIC ou Trusts</strong>) para reter lucros no exterior e investir diretamente em <strong>American Bonds</strong>, blindando sua liquidez de forma jurídica.'
+          },
+          s4: {
+            icon: '🔒',
+            category: 'SOLICITAR ACESSO',
+            title: 'Acesso Premium (Privado)',
+            desc: 'A Trilha 3 (Offshore & Alta Renda) possui acesso restrito e qualificado. Fale com Hermes no WhatsApp e inicie sua qualificação fiduciária imediata.',
+            btnText: 'FALAR COM HERMES NO WHATSAPP',
+            btnSub: 'LIBERAR TRILHA 3 ➔'
+          }
+        }
+      }
+    ];
+
+    // Estado da ferramenta
+    let currentAccent = 'blue';
+
+    // Configura o destaque de cor (Azul ou Ouro)
+    function setAccent(color) {
+      currentAccent = color;
+      
+      const btnBlue = document.getElementById('btn-accent-blue');
+      const btnGold = document.getElementById('btn-accent-gold');
+      
+      if (color === 'blue') {
+        document.documentElement.style.setProperty('--primary', 'oklch(0.68 0.23 255)');
+        btnBlue.classList.add('active-blue');
+        btnGold.classList.remove('active-gold');
+      } else {
+        document.documentElement.style.setProperty('--primary', 'oklch(0.82 0.15 90)');
+        btnBlue.classList.remove('active-blue');
+        btnGold.classList.add('active-gold');
+      }
+      
+      // Aplicar dinamicamente nos badges de logo das capas dos slides
+      document.querySelectorAll('.slide-logo-box').forEach(el => {
+        el.style.background = 'var(--primary)';
+        el.style.boxShadow = `0 0 25px ${color === 'blue' ? 'rgba(10, 132, 255, 0.45)' : 'rgba(212, 175, 55, 0.35)'}`;
+      });
+    }
+
+    // Carrega um template de copy
+    function loadTemplate(index) {
+      const data = templates[index];
+      
+      // Ajustar destaques de classe
+      document.querySelectorAll('.template-option').forEach((el, idx) => {
+        if (idx === index) el.classList.add('active');
+        else el.classList.remove('active');
+      });
+
+      // Configurar cor padrão do template
+      setAccent(data.accent);
+
+      // Slide 1 (Capa)
+      document.getElementById('s1-category').textContent = data.slides.s1.category;
+      document.getElementById('s1-title').innerHTML = data.slides.s1.title;
+      document.getElementById('s1-desc').textContent = data.slides.s1.desc;
+
+      // Slide 2
+      document.getElementById('s2-category').textContent = data.slides.s2.category;
+      document.getElementById('s2-title').textContent = data.slides.s2.title;
+      document.getElementById('s2-desc').innerHTML = data.slides.s2.desc;
+
+      // Slide 3 (Pode ser Grid de Pilares ou Card de Texto)
+      document.getElementById('s3-category').textContent = data.slides.s3.category;
+      document.getElementById('s3-title').textContent = data.slides.s3.title;
+      
+      const grid = document.getElementById('s3-pilares-grid');
+      const altCard = document.getElementById('s3-alternative-card');
+      
+      if (data.slides.s3.showGrid) {
+        grid.style.display = 'grid';
+        altCard.style.display = 'none';
+        
+        document.getElementById('s3-p1-title').textContent = data.slides.s3.p1.title;
+        document.getElementById('s3-p1-desc').textContent = data.slides.s3.p1.desc;
+        document.getElementById('s3-p2-title').textContent = data.slides.s3.p2.title;
+        document.getElementById('s3-p2-desc').textContent = data.slides.s3.p2.desc;
+        document.getElementById('s3-p3-title').textContent = data.slides.s3.p3.title;
+        document.getElementById('s3-p3-desc').textContent = data.slides.s3.p3.desc;
+        document.getElementById('s3-p4-title').textContent = data.slides.s3.p4.title;
+        document.getElementById('s3-p4-desc').textContent = data.slides.s3.p4.desc;
+      } else {
+        grid.style.display = 'none';
+        altCard.style.display = 'block';
+        document.getElementById('s3-alternative-desc').innerHTML = data.slides.s3.alternativeDesc;
+      }
+
+      // Slide 4 (CTA Final)
+      document.getElementById('s4-icon').textContent = data.slides.s4.icon;
+      document.getElementById('s4-category').textContent = data.slides.s4.category;
+      document.getElementById('s4-title').textContent = data.slides.s4.title;
+      document.getElementById('s4-desc').textContent = data.slides.s4.desc;
+      document.getElementById('s4-btn-text').textContent = data.slides.s4.btnText;
+      document.getElementById('s4-btn-sub').textContent = data.slides.s4.btnSub;
+      
+      // Ajuste de cores dos botões de CTA finais
+      const ctaBtn = document.getElementById('s4-button-el');
+      if (data.accent === 'gold') {
+        ctaBtn.style.background = 'var(--accent)';
+        ctaBtn.style.color = '#030816';
+        document.getElementById('s4-btn-sub').style.color = 'rgba(3, 8, 22, 0.6)';
+      } else {
+        ctaBtn.style.background = 'var(--primary)';
+        ctaBtn.style.color = '#ffffff';
+        document.getElementById('s4-btn-sub').style.color = 'rgba(255, 255, 255, 0.7)';
+      }
+    }
+
+    // Exportação Científica com html2canvas
+    function baixarSlide(slideId, nameSuffix) {
+      const slide = document.getElementById(slideId);
+      if (!slide) return;
+      
+      // Adicionar classe geradora temporária para tirar os controles e resetar o transform de escala
+      slide.classList.add('generating-png');
+      
+      // Renderizar o elemento com html2canvas de alta qualidade fiduciária
+      html2canvas(slide, {
+        width: 1080,
+        height: 1350,
+        scale: 2, // Garante nitidez máxima na exportação
+        backgroundColor: '#030816',
+        logging: false,
+        useCORS: true
+      }).then(canvas => {
+        // Remover classe geradora para voltar ao estado normal de edição com zoom reduzido
+        slide.classList.remove('generating-png');
+        
+        // Criar link e simular download instantâneo
+        const link = document.createElement('a');
+        link.download = `Carrossel_JB_${nameSuffix}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      }).catch(err => {
+        slide.classList.remove('generating-png');
+        console.error("Erro ao exportar o slide: ", err);
+      });
+    }
+
+    // Baixa todos os slides da tela de forma automática de uma vez
+    function baixarTodosSlides() {
+      const slidesToDownload = [
+        { id: 'slide-s1', suffix: '01_Capa' },
+        { id: 'slide-s2', suffix: '02_A_Dor' },
+        { id: 'slide-s3', suffix: '03_A_Solucao' },
+        { id: 'slide-s4', suffix: '04_Cta_Final' }
+      ];
+
+      let delay = 0;
+      slidesToDownload.forEach(item => {
+        setTimeout(() => {
+          baixarSlide(item.id, item.suffix);
+        }, delay);
+        delay += 1000; // Delay de 1 segundo entre downloads para evitar sobreposição ou bloqueio de downloads em lote pelo browser
+      });
+    }
+
+    // Inicialização do carrossel ao carregar
+    document.addEventListener('DOMContentLoaded', () => {
+      loadTemplate(0);
+    });
+  </script>
+
+</body>
+</html>
