@@ -89,102 +89,172 @@
       padding: 0 24px;
     }
 
-    /* Super Dock de Vidro no Topo */
+    /* Header / Super Dock Flutuante no Topo (100% Original) */
     .nav-dock-container {
       position: fixed;
       top: 20px;
       left: 0;
+      right: 0;
       width: 100%;
-      z-index: 1000;
       display: flex;
       justify-content: center;
+      z-index: 10000;
       padding: 0 24px;
+      pointer-events: none; /* Permite rolar atrás se clicar fora */
     }
+
     .nav-dock {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: var(--glass-blur);
-      border-radius: var(--r-full);
-      padding: 8px 12px;
+      pointer-events: auto; /* Reativa cliques */
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: rgba(3, 8, 22, 0.45);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(212, 175, 106, 0.22);
+      border-radius: 99px;
+      padding: 6px 10px 6px 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 100%;
+      width: fit-content;
+    }
+
+    .nav-dock:hover {
+      background: rgba(3, 8, 22, 0.6);
+      border-color: rgba(212, 175, 106, 0.4);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .dock-main-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
-      width: 100%;
-      max-width: 980px;
-      box-shadow: var(--shadow-lux), inset 0 1px 0 rgba(255,255,255,0.05);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .logo-link {
+
+    .dock-mobile-trigger {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--gold-primary);
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 50%;
+      transition: background 0.3s;
+    }
+
+    .dock-mobile-trigger:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    .dock-divider {
+      width: 1px;
+      height: 28px;
+      background: rgba(255,255,255,0.08);
+      border-right: 1px solid rgba(0,0,0,0.4);
+    }
+
+    .logo-wrap {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
-      padding-left: 12px;
     }
-    .logo-text {
+
+    .logo-img {
+      height: 34px;
+      width: auto;
+      display: block;
+    }
+
+    .logo-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-title {
       font-family: var(--font-title);
       font-weight: 800;
-      font-size: 14px;
+      font-size: 15px;
       color: var(--w);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
     }
-    .logo-badge {
-      font-size: 8px;
-      font-weight: 700;
+
+    .logo-sub {
+      font-family: var(--font-title);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
       color: var(--gold-primary);
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      padding: 1px 6px;
-      border-radius: var(--r-full);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      font-weight: 700;
+      margin-top: 1px;
     }
+
     .nav-links {
       display: flex;
+      gap: 4px;
       align-items: center;
-      gap: 8px;
     }
-    .nav-item {
-      color: var(--text-muted);
-      text-decoration: none;
+
+    .nav-link {
       font-family: var(--font-title);
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
       padding: 8px 14px;
-      border-radius: var(--r-full);
-      transition: all 0.2s ease;
-    }
-    .nav-item:hover {
-      color: var(--w);
-      background: rgba(255, 255, 255, 0.04);
-    }
-    .nav-item-active {
-      color: var(--gold-primary);
-      border: 1px solid rgba(212, 175, 55, 0.2);
-      background: rgba(212, 175, 55, 0.05);
-    }
-    .nav-btn {
-      font-family: var(--font-title);
-      font-size: 13px;
-      font-weight: 700;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       text-decoration: none;
-      background: #22C55E;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
       color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .nav-link.highlight-gold {
+      color: var(--gold-primary);
+      font-weight: 700;
+    }
+
+    .nav-link.highlight-gold:hover {
+      background: rgba(212, 175, 106, 0.12);
+      color: #fff;
+    }
+
+    .nav-btn-dock {
+      font-family: var(--font-title);
+      font-size: 12.5px;
+      font-weight: 800;
       padding: 10px 20px;
-      border-radius: var(--r-full);
-      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
-      transition: all 0.2s ease;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #fff;
+      border: none;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      white-space: nowrap;
     }
-    .nav-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(34, 197, 94, 0.35);
+
+    .nav-btn-dock:hover {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      transform: translateY(-1.5px);
+      box-shadow: 0 6px 24px rgba(16, 185, 129, 0.45);
     }
-    .nav-mobile-trigger {
-      display: none;
+
+    .nav-btn-dock:active {
+      transform: scale(0.97);
     }
 
     /* Conteúdo do Post (Design de Leitura de Luxo) */
@@ -460,6 +530,9 @@
 
     /* Responsividade */
     @media(max-width: 992px) {
+      .container {
+        padding: 0 24px;
+      }
       .nav-dock-container {
         top: 12px;
         padding: 0 16px;
@@ -472,50 +545,45 @@
         width: 100%;
         gap: 10px;
       }
-      .nav-dock[data-mobile-expanded="false"] .nav-links,
-      .nav-dock[data-mobile-expanded="false"] .nav-btn-wrapper {
-        display: none;
-      }
-      .nav-dock[data-mobile-expanded="true"] .nav-links {
-        display: flex;
-        flex-direction: column;
+      .dock-main-row {
         width: 100%;
-        align-items: center;
-        gap: 2px;
-        padding: 10px 0;
-        border-top: 1px solid var(--glass-border);
-      }
-      .nav-dock[data-mobile-expanded="true"] .nav-btn-wrapper {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        padding-top: 8px;
-        border-top: 1px solid var(--glass-border);
-      }
-      .nav-item {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-      }
-      .nav-btn {
-        width: 100%;
-        justify-content: center;
-      }
-      .logo-bar {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
       }
-      .nav-mobile-trigger {
-        display: flex;
-        align-items: center;
+      .dock-mobile-trigger {
+        display: block;
+      }
+      .dock-divider {
+        display: none;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 4px;
+        border-top: 1px solid rgba(255,255,255,0.06);
+        padding-top: 8px;
+      }
+      .nav-link {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 8px;
+        justify-content: flex-start;
+      }
+      .nav-btn-dock {
+        display: none;
+        width: 100%;
         justify-content: center;
-        background: none;
-        border: none;
-        color: var(--w);
-        cursor: pointer;
-        padding: 8px;
+        padding: 12px;
+        margin-top: 4px;
+      }
+      .nav-dock[data-mobile-expanded="true"] .nav-links {
+        display: flex;
+      }
+      .nav-dock[data-mobile-expanded="true"] .nav-btn-dock {
+        display: inline-flex;
       }
       .post-title {
         font-size: 28px;
@@ -544,36 +612,49 @@
 </head>
 <body data-mobile-expanded="false">
 
-  <!-- Super Dock de Vidro no Topo -->
-  <div class="nav-dock-container">
-    <nav class="nav-dock" id="navDock" data-mobile-expanded="false">
-      <div class="logo-bar">
-        <a href="https://www.jhonybosio.com" class="logo-link">
-          <span class="logo-text">Jhony Bosio</span>
-          <span class="logo-badge">Private Advisor</span>
+  <!-- Super Dock de Vidro no Topo (100% Original e Alinhado) -->
+  <nav class="nav-dock-container" id="navDockContainer">
+    <div class="nav-dock" id="navDock" data-mobile-expanded="false">
+      <div class="dock-main-row">
+        <!-- Logo Prime integrada -->
+        <a href="../" class="logo-wrap">
+          <img src="../logo-prime.png" alt="Logo Jhony Bosio" class="logo-img">
+          <div class="logo-meta">
+            <span class="logo-title">Jhony Bosio</span>
+            <span class="logo-sub">Private Advisor</span>
+          </div>
         </a>
-        <button class="nav-mobile-trigger" onclick="toggleMobileMenu(event)">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+
+        <!-- Botão Hamburguer Mobile (Visível apenas em telas menores) -->
+        <button class="dock-mobile-trigger" onclick="toggleMobileMenu(event)" aria-label="Abrir Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
       </div>
-      
-      <div class="nav-links">
-        <a href="https://www.jhonybosio.com#sobre" class="nav-item">Sobre</a>
-        <a href="https://www.jhonybosio.com#protocolo" class="nav-item">Protocolo 9A</a>
-        <a href="https://www.jhonybosio.com#academia" class="nav-item">Wealth Academy</a>
-        <a href="https://www.jhonybosio.com#mentoria" class="nav-item">Mentoria</a>
-        <a href="https://www.jhonybosio.com/linha-da-vida/" class="nav-item nav-item-active">Linha da Vida</a>
-        <a href="https://www.jhonybosio.com/blog/" class="nav-item">Blog</a>
+
+      <!-- Divisor vertical discreto -->
+      <div class="dock-divider"></div>
+
+      <!-- Links do Menu estilo Dock -->
+      <div class="nav-links" id="navLinks">
+        <a href="../#sobre" class="nav-link" onclick="closeMobileMenu()">Sobre</a>
+        <a href="../#protocolo" class="nav-link" onclick="closeMobileMenu()">Protocolo 9A</a>
+        <a href="../#academia" class="nav-link" onclick="closeMobileMenu()">Wealth Academy</a>
+        <a href="../#modelos" class="nav-link" onclick="closeMobileMenu()">3 Modelos XP</a>
+        <a href="../linha-da-vida/" class="nav-link highlight-gold" onclick="closeMobileMenu()">Linha da Vida</a>
+        <a href="../#faq" class="nav-link" onclick="closeMobileMenu()">FAQ</a>
+        <a href="./" class="nav-link" onclick="closeMobileMenu()">Blog</a>
       </div>
-      
-      <div class="nav-btn-wrapper">
-        <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20investimentos%20com%20o%20Jhony." target="_blank" class="nav-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-          Agendar com Hermes
-        </a>
-      </div>
-    </nav>
-  </div>
+
+      <!-- Divisor vertical discreto -->
+      <div class="dock-divider"></div>
+
+      <!-- Botão de Agendamento integrado no Dock -->
+      <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20investimentos%20com%20o%20Jhony." target="_blank" class="nav-btn-dock" id="navBtnDock">
+        <span>Agendar com Hermes</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-top: -1px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+      </a>
+    </div>
+  </nav>
 
   <!-- Wrapper do Post -->
   <div class="container">
@@ -676,9 +757,12 @@
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <a href="https://www.jhonybosio.com" class="logo-link" style="padding-left:0;">
-            <span class="logo-text">Jhony Bosio</span>
-            <span class="logo-badge">Private Advisor</span>
+          <a href="../" class="logo-wrap" style="padding-left:0;">
+            <img src="../logo-prime.png" alt="Logo Jhony Bosio" class="logo-img">
+            <div class="logo-meta">
+              <span class="logo-title">Jhony Bosio</span>
+              <span class="logo-sub">Private Advisor</span>
+            </div>
           </a>
           <p class="footer-desc">Assessoria de investimentos e alocação de patrimônio fiduciário em parceria com a Blue3 Investimentos e a XP Investimentos.</p>
         </div>
@@ -686,10 +770,10 @@
         <div class="footer-links-grid">
           <div>
             <span class="footer-col-head">Navegação</span>
-            <a href="https://www.jhonybosio.com#sobre" class="footer-link">Sobre mim</a>
-            <a href="https://www.jhonybosio.com#protocolo" class="footer-link">Protocolo 9A</a>
-            <a href="https://www.jhonybosio.com#academia" class="footer-link">Wealth Academy</a>
-            <a href="https://www.jhonybosio.com/blog/" class="footer-link">Blog Editorial</a>
+            <a href="../#sobre" class="footer-link">Sobre mim</a>
+            <a href="../#protocolo" class="footer-link">Protocolo 9A</a>
+            <a href="../#academia" class="footer-link">Wealth Academy</a>
+            <a href="./" class="footer-link">Blog Editorial</a>
           </div>
           <div>
             <span class="footer-col-head">Parceiros</span>
@@ -716,7 +800,7 @@
     </div>
   </footer>
 
-  <!-- Botão Flutuante de WhatsApp Móvel (CRO Mobile) -->
+  <!-- Botão Flutuante de WhatsApp Mobile (CRO Mobile) -->
   <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20investimentos%20com%20o%20Jhony." target="_blank" class="mobile-wa-float" id="mobileWhatsappBtn">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
