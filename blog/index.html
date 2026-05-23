@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights Fiduciários & Wealth Tech | Blog Jhony Bosio</title>
+  
+  <meta name="description" content="Acesse o blog editorial do Private Advisor Jhony Bosio. Artigos profundos sobre a tese fiduciária, Fee Fixo, eficiência tributária e inteligência artificial no mercado financeiro.">
+  
+  <!-- Meta Tags Open Graph (SEO e Compartilhamento WhatsApp/Redes) -->
+  <meta property="og:title" content="Insights Fiduciários & Wealth Tech | Blog Jhony Bosio">
+  <meta property="og:description" content="Acesse o blog editorial do Private Advisor Jhony Bosio. Artigos profundos sobre a tese fiduciária, Fee Fixo, eficiência tributária e inteligência artificial no mercado financeiro.">
+  <meta property="og:image" content="https://www.jhonybosio.com/logo-prime.png">
+  <meta property="og:url" content="https://www.jhonybosio.com/blog/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  <!-- Dados Estruturados de IA (Blog Schema) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": "https://www.jhonybosio.com/blog/#blog",
+    "name": "Insights Fiduciários & Wealth Tech | Blog Jhony Bosio",
+    "description": "Artigos profundos sobre a tese fiduciária, Fee Fixo da XP, eficiência tributária de ETFs e inteligência artificial aplicados ao Wealth Advisory de alta renda.",
+    "publisher": {
+      "@type": "Person",
+      "name": "Jhony Bosio",
+      "url": "https://www.jhonybosio.com"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg-dark: #030816;
+      --bg-dark-accent: #071126;
+      --gold-primary: #D4AF37;
+      --gold-hover: #F3E5AB;
+      --gold-metallic: linear-gradient(135deg, #c5a880 0%, #D4AF6A 50%, #A8893C 100%);
+      
+      --w: #ffffff;
+      --text-dimmed: rgba(255, 255, 255, 0.45);
+      --text-muted: rgba(255, 255, 255, 0.65);
+      
+      --glass-bg: rgba(7, 17, 38, 0.40);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-blur: blur(20px);
+      --shadow-lux: 0 20px 50px rgba(0, 0, 0, 0.40);
+      
+      --font-title: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      
+      --r-md: 16px;
+      --r-full: 9999px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--w);
+      font-family: var(--font-body);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Super Dock de Vidro no Topo */
+    .nav-dock-container {
+      position: fixed;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      padding: 0 24px;
+    }
+    .nav-dock {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: var(--glass-blur);
+      border-radius: var(--r-full);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+      max-width: 980px;
+      box-shadow: var(--shadow-lux), inset 0 1px 0 rgba(255,255,255,0.05);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      padding-left: 12px;
+    }
+    .logo-text {
+      font-family: var(--font-title);
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--w);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .logo-badge {
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      padding: 1px 6px;
+      border-radius: var(--r-full);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-item {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: var(--r-full);
+      transition: all 0.2s ease;
+    }
+    .nav-item:hover {
+      color: var(--w);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .nav-item-active {
+      color: var(--gold-primary);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      background: rgba(212, 175, 55, 0.05);
+    }
+    .nav-btn {
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      background: #22C55E;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: var(--r-full);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.25);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(34, 197, 94, 0.35);
+    }
+    .nav-mobile-trigger {
+      display: none;
+    }
+
+    /* Cabeçalho do Blog */
+    .blog-header {
+      margin-top: 160px;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+    .blog-pre {
+      font-family: var(--font-title);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--gold-primary);
+      margin-bottom: 12px;
+    }
+    .blog-title {
+      font-family: var(--font-title);
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .blog-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Grid de Artigos */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-bottom: 100px;
+    }
+
+    /* Card Glassmorphism de Destaque */
+    .post-card-featured {
+      background: var(--bg-dark-accent);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      min-height: 400px;
+      box-shadow: var(--shadow-lux);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .post-card-featured:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212, 175, 55, 0.2);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.50);
+    }
+    .post-img-wrapper {
+      flex: 1 1 50%;
+      background: linear-gradient(135deg, #071126 0%, #030816 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border-right: 1px solid var(--glass-border);
+    }
+    .post-img-placeholder {
+      font-family: var(--font-title);
+      font-size: 80px;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.03);
+      position: absolute;
+      user-select: none;
+    }
+    .post-img-graphic {
+      width: 65%;
+      height: auto;
+      z-index: 2;
+      opacity: 0.85;
+      transition: all 0.5s ease;
+    }
+    .post-card-featured:hover .post-img-graphic {
+      transform: scale(1.05) rotate(1deg);
+      opacity: 1;
+    }
+    .post-content-wrapper {
+      flex: 1 1 50%;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .post-card-meta {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold-primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .post-card-meta span::after {
+      content: "•";
+      margin-left: 12px;
+      color: rgba(255, 255, 255, 0.2);
+    }
+    .post-card-meta span:last-child::after {
+      content: "";
+    }
+    .post-card-title {
+      font-family: var(--font-title);
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: var(--w);
+    }
+    .post-card-title a {
+      color: var(--w);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .post-card-title a:hover {
+      color: var(--gold-primary);
+    }
+    .post-card-excerpt {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-title);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .read-more-btn:hover {
+      color: var(--w);
+      transform: translateX(4px);
+    }
+
+    /* Newsletter ou CTA Secundário */
+    .blog-newsletter-section {
+      background: var(--bg-dark-accent);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-md);
+      padding: 60px 40px;
+      text-align: center;
+      margin-bottom: 100px;
+      box-shadow: var(--shadow-lux);
+    }
+    .nl-title {
+      font-family: var(--font-title);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .nl-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      max-width: 540px;
+      margin: 0 auto 32px;
+    }
+    .nl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold-metallic);
+      color: #030816;
+      font-family: var(--font-title);
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 14px 36px;
+      border-radius: var(--r-full);
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+      transition: all 0.2s ease;
+    }
+    .nl-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(212, 175, 55, 0.35);
+    }
+
+    /* Footer */
+    footer {
+      background: #020612;
+      padding: 60px 0 40px;
+      border-top: 1px solid var(--glass-border);
+      font-size: 13px;
+      color: var(--text-dimmed);
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 64px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .footer-brand {
+      flex: 1 1 320px;
+    }
+    .footer-desc {
+      line-height: 1.6;
+      margin-top: 16px;
+      max-width: 420px;
+    }
+    .footer-links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-col-head {
+      font-family: var(--font-title);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--w);
+      margin-bottom: 16px;
+    }
+    .footer-link {
+      display: block;
+      color: var(--text-dimmed);
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color 0.15s ease;
+    }
+    .footer-link:hover {
+      color: var(--gold-primary);
+    }
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 24px;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .footer-legal {
+      line-height: 1.7;
+      max-width: 780px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.65);
+    }
+    .footer-meta {
+      text-align: right;
+    }
+    .xp-partner {
+      font-size: 11px;
+      color: var(--text-dimmed);
+    }
+    .xp-partner strong {
+      color: var(--w);
+    }
+
+    /* Botão Flutuante de WhatsApp Mobile (CRO) */
+    .mobile-wa-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 54px;
+      height: 54px;
+      background-color: #22C55E;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(34, 197, 94, 0.4);
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.8);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-wa-float.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+    .mobile-wa-float:active {
+      transform: scale(0.9);
+    }
+    .mobile-wa-float svg {
+      width: 26px;
+      height: 26px;
+      stroke-width: 2.2;
+    }
+
+    /* Responsividade */
+    @media(max-width: 992px) {
+      .nav-dock-container {
+        top: 12px;
+        padding: 0 16px;
+      }
+      .nav-dock {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 20px;
+        padding: 10px 14px;
+        width: 100%;
+        gap: 10px;
+      }
+      .nav-dock[data-mobile-expanded="false"] .nav-links,
+      .nav-dock[data-mobile-expanded="false"] .nav-btn-wrapper {
+        display: none;
+      }
+      .nav-dock[data-mobile-expanded="true"] .nav-links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        gap: 2px;
+        padding: 10px 0;
+        border-top: 1px solid var(--glass-border);
+      }
+      .nav-dock[data-mobile-expanded="true"] .nav-btn-wrapper {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding-top: 8px;
+        border-top: 1px solid var(--glass-border);
+      }
+      .nav-item {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+      }
+      .nav-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .logo-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .nav-mobile-trigger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: var(--w);
+        cursor: pointer;
+        padding: 8px;
+      }
+      .blog-title {
+        font-size: 32px;
+      }
+      .post-card-featured {
+        flex-direction: column;
+        min-height: auto;
+      }
+      .post-img-wrapper {
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border);
+        padding: 60px 0;
+      }
+      .post-content-wrapper {
+        padding: 24px;
+      }
+      .post-card-title {
+        font-size: 20px;
+      }
+      .blog-newsletter-section {
+        padding: 40px 20px;
+      }
+      .nl-title {
+        font-size: 22px;
+      }
+      .mobile-wa-float {
+        display: flex !important;
+      }
+    }
+
+    @media(min-width: 993px) {
+      .logo-bar {
+        display: flex;
+        align-items: center;
+      }
+      .mobile-wa-float {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body data-mobile-expanded="false">
+
+  <!-- Super Dock de Vidro no Topo -->
+  <div class="nav-dock-container">
+    <nav class="nav-dock" id="navDock" data-mobile-expanded="false">
+      <div class="logo-bar">
+        <a href="https://www.jhonybosio.com" class="logo-link">
+          <span class="logo-text">Jhony Bosio</span>
+          <span class="logo-badge">Private Advisor</span>
+        </a>
+        <button class="nav-mobile-trigger" onclick="toggleMobileMenu(event)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+      
+      <div class="nav-links">
+        <a href="https://www.jhonybosio.com#sobre" class="nav-item">Sobre</a>
+        <a href="https://www.jhonybosio.com#protocolo" class="nav-item">Protocolo 9A</a>
+        <a href="https://www.jhonybosio.com#academia" class="nav-item">Wealth Academy</a>
+        <a href="https://www.jhonybosio.com#mentoria" class="nav-item">Mentoria</a>
+        <a href="https://www.jhonybosio.com/linha-da-vida/" class="nav-item">Linha da Vida</a>
+        <a href="https://www.jhonybosio.com/blog/" class="nav-item nav-item-active">Blog</a>
+      </div>
+      
+      <div class="nav-btn-wrapper">
+        <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20investimentos%20com%20o%20Jhony." target="_blank" class="nav-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          Agendar com Hermes
+        </a>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Cabeçalho Principal do Blog -->
+  <div class="container">
+    <header class="blog-header">
+      <span class="blog-pre">CONTEÚDO INDEPENDENTE</span>
+      <h1 class="blog-title">Insights Fiduciários & Wealth Tech</h1>
+      <p class="blog-desc">Análises detalhadas e orientações fiduciárias sobre gestão de patrimônio, Fee Fixo, eficiência tributária e automação de finanças.</p>
+    </header>
+
+    <!-- Grid de Artigos -->
+    <main class="blog-grid">
+      
+      <!-- Artigo de Destaque -->
+      <article class="post-card-featured">
+        <div class="post-img-wrapper">
+          <div class="post-img-placeholder">WEALTH</div>
+          <!-- Gráfico sutil dourado e azul -->
+          <svg class="post-img-graphic" width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="url(#luxGrad)" stroke-width="1.2">
+            <defs>
+              <linearGradient id="luxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#D4AF37" />
+                <stop offset="100%" stop-color="#00E5FF" />
+              </linearGradient>
+            </defs>
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <div class="post-content-wrapper">
+          <div class="post-card-meta">
+            <span>23 de Maio, 2026</span>
+            <span>Wealth Tech</span>
+          </div>
+          <h2 class="post-card-title">
+            <a href="o-assessor-de-investimentos-2-0.html">O Assessor de Investimentos 2.0: Como a Inteligência Artificial e a Ética Fiduciária Redesenharam a Carreira de Jhony Bosio</a>
+          </h2>
+          <p class="post-card-excerpt">
+            Descubra os bastidores de como o advisor Jhony Bosio integrou robôs de IA como o Hermes e simuladores online ao modelo de Fee Fixo da XP para revolucionar o atendimento patrimonial HNW.
+          </p>
+          <a href="o-assessor-de-investimentos-2-0.html" class="read-more-btn">Ler Artigo Completo ➔</a>
+        </div>
+      </article>
+
+    </main>
+
+    <!-- Seção de Newsletter / Chamada pro Hermes -->
+    <section class="blog-newsletter-section">
+      <h2 class="nl-title">Quer blindar sua carteira de conflitos comerciais?</h2>
+      <p class="nl-desc">Receba análises estratégicas exclusivas e aprenda a eliminar taxas ocultas diretamente na sua caixa de entrada, ou dê o primeiro passo prático com nosso assistente fiduciário.</p>
+      <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20fazer%20um%20diagnóstico%20de%20investimentos%20fiduciário%20com%20o%20Jhony." target="_blank" class="nl-btn">Falar com o Hermes & Agendar Diagnóstico</a>
+    </section>
+
+  </div>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="https://www.jhonybosio.com" class="logo-link" style="padding-left:0;">
+            <span class="logo-text">Jhony Bosio</span>
+            <span class="logo-badge">Private Advisor</span>
+          </a>
+          <p class="footer-desc">Assessoria de investimentos e alocação de patrimônio fiduciário em parceria com a Blue3 Investimentos e a XP Investimentos.</p>
+        </div>
+        
+        <div class="footer-links-grid">
+          <div>
+            <span class="footer-col-head">Navegação</span>
+            <a href="https://www.jhonybosio.com#sobre" class="footer-link">Sobre mim</a>
+            <a href="https://www.jhonybosio.com#protocolo" class="footer-link">Protocolo 9A</a>
+            <a href="https://www.jhonybosio.com#academia" class="footer-link">Wealth Academy</a>
+            <a href="https://www.jhonybosio.com/blog/" class="footer-link">Blog Editorial</a>
+          </div>
+          <div>
+            <span class="footer-col-head">Parceiros</span>
+            <a href="https://www.blue3investimentos.com.br/" target="_blank" class="footer-link">Blue3 Investimentos</a>
+            <a href="https://www.xpi.com.br/" target="_blank" class="footer-link">XP Investimentos</a>
+          </div>
+        </div>
+      </div>
+      
+      <hr class="footer-divider">
+      
+      <div class="footer-bottom">
+        <p class="footer-legal">
+          Jhony Bosio é Assessor de Investimentos sócio da Blue3 Investimentos, escritório credenciado à XP Investimentos CCTVM S/A. Na forma da legislação da CVM, o Assessor de Investimentos atua na distribuição e mediação de produtos financeiros em conformidade com as regras estabelecidas (Regra CVM 178/2023). O investimento em ativos financeiros e de mercado de capitais envolve riscos e perdas patrimoniais. Resultados passados não são garantia de rentabilidade futura. A tomada de decisão de investimento cabe exclusivamente ao cliente, sob sua total responsabilidade e avaliação do perfil de risco (suitability).
+        </p>
+        
+        <div class="footer-meta">
+          <div class="xp-partner">Escritório credenciado <strong>XP Investimentos</strong></div>
+          <div style="margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.25)">
+            &copy; 2026 Jhony Bosio. Todos os direitos reservados.
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão Flutuante de WhatsApp Mobile (CRO Mobile) -->
+  <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20investimentos%20com%20o%20Jhony." target="_blank" class="mobile-wa-float" id="mobileWhatsappBtn">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+    </svg>
+  </a>
+
+  <script>
+    function toggleMobileMenu(event) {
+        event.stopPropagation();
+        const dock = document.getElementById('navDock');
+        const isExpanded = dock.getAttribute('data-mobile-expanded') === 'true';
+        dock.setAttribute('data-mobile-expanded', !isExpanded ? 'true' : 'false');
+    }
+
+    function closeMobileMenu() {
+        const dock = document.getElementById('navDock');
+        if (dock) {
+            dock.setAttribute('data-mobile-expanded', 'false');
+        }
+    }
+
+    document.addEventListener('click', function(event) {
+        const dock = document.getElementById('navDock');
+        if (dock && dock.getAttribute('data-mobile-expanded') === 'true') {
+            if (!dock.contains(event.target)) {
+                closeMobileMenu();
+            }
+        }
+    });
+
+    // Lógica do Botão Flutuante de WhatsApp (exclusivo mobile)
+    window.addEventListener('scroll', function() {
+        const mobileBtn = document.getElementById('mobileWhatsappBtn');
+        if (mobileBtn) {
+            if (window.scrollY > 400) {
+                mobileBtn.classList.add('visible');
+            } else {
+                mobileBtn.classList.remove('visible');
+            }
+        }
+    });
+  </script>
+</body>
+</html>
