@@ -429,12 +429,12 @@
         /* Split Workspace layout */
         .workspace-split {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
+            grid-template-columns: 1fr;
             gap: 30px;
             margin-top: 30px;
-        }
-        @media (max-width: 1050px) {
-            .workspace-split { grid-template-columns: 1fr; }
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Terminal card */
@@ -739,7 +739,7 @@
     <header>
         <a href="#" class="logo">
             <div class="logo-box"></div>
-            <span class="logo-text">JHONY BOSIO CO.</span>
+            <span class="logo-text">JHONY BOSIO</span>
         </a>
         <div style="display: flex; align-items: center; gap: 15px;">
             <div class="status-badge" id="statusBadge">
@@ -976,7 +976,7 @@
             },
             marketing: {
                 title: "Marketing Engine (timesmkt3)",
-                subtitle: "A engine de atração inteligente da Jhony Bosio Co. Representa o ecossistema <strong>timesmkt3</strong> integrado de pesquisa de mercado por IA, copywriting e edição de vídeo autônoma.",
+                subtitle: "A engine de atração inteligente da Jhony Bosio. Representa o ecossistema <strong>timesmkt3</strong> integrado de pesquisa de mercado por IA, copywriting e edição de vídeo autônoma.",
                 badgeText: "timesmkt3",
                 badgeClass: "badge-active",
                 pipeline: [
@@ -1052,9 +1052,6 @@
                         <div style="display: flex; gap: 8px; width: 100%;">
                             <button onclick="triggerToast('Abrindo editor Remotion no localhost...')" class="btn-action-secondary" style="flex: 1;">
                                 <span>🎬 Abrir Remotion</span>
-                            </button>
-                            <button onclick="copyCommand()" class="btn-action-secondary" style="flex: 1;">
-                                <span>Copiar Script Bash</span>
                             </button>
                         </div>
                     </div>
@@ -1175,7 +1172,7 @@
             },
             processos: {
                 title: "Processos & SOPs",
-                subtitle: "A espinha dorsal operacional da Jhony Bosio Co. Manuais de procedimento operacional padrão (SOPs), rotinas diárias e o <strong>Open Design Studio</strong>.",
+                subtitle: "A espinha dorsal operacional da Jhony Bosio. Manuais de procedimento operacional padrão (SOPs), rotinas diárias e o <strong>Open Design Studio</strong>.",
                 badgeText: "Governança",
                 badgeClass: "badge-active",
                 pipeline: [
@@ -1189,7 +1186,7 @@
                 notes: [
                     "<strong>Onboarding Sistematizado:</strong> Fluxo estruturado garantindo zero atrito no envio de documentos para a Blue3.",
                     "<strong>Compliance CVM 178:</strong> Regras claras sobre atuação transparente do assessor sem promessas irrealistas.",
-                    "<strong>Design System Tokens:</strong> Cores e tipografias oficiais da Jhony Bosio Co. automatizadas via código."
+                    "<strong>Design System Tokens:</strong> Cores e tipografias oficiais da Jhony Bosio. automatizadas via código."
                 ],
                 widgetHtml: `
                     <div class="opendesign-widget">
@@ -1260,9 +1257,6 @@
                             <a href="protocolo-9a-deck.html" target="_blank" class="btn-action-secondary" style="text-decoration: none; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--accent); color: #fff; background: rgba(27, 111, 239, 0.15);">
                                 <span>🎬 Slides da Aula VIP</span>
                             </a>
-                            <button onclick="copyCommand()" class="btn-action-secondary" style="flex: 1;">
-                                <span>Copiar Comando CLI</span>
-                            </button>
                         </div>
                     </div>
                 `
@@ -1405,49 +1399,35 @@
                     </div>
  
                     <!-- Split workspace -->
-                    <h2 class="section-title">Console Operacional & Mockup</h2>
+                    <h2 class="section-title">Painel Operacional Interativo</h2>
                     <div class="workspace-split">
-                        <!-- Terminal Column -->
-                        <div class="terminal-card">
-                            <div class="terminal-header">
-                                <div class="dots">
-                                    <div class="dot dot-r"></div>
-                                    <div class="dot dot-y"></div>
-                                    <div class="dot dot-g"></div>
-                                </div>
-                                <div class="terminal-title">${data.terminalTitle}</div>
-                            </div>
-                            <div class="terminal-body">
-                                <div class="terminal-line">
-                                    <span class="cmd-prompt">jhony@mac-hub:~$</span>
-                                    <span class="cmd-text">cd "Meu Drive/3. Hub de IA e Automacoes/scripts"</span>
-                                </div>
-                                <p style="color: rgba(255,255,255,0.3); font-size: 11px; margin-bottom: 12px;"># Executar compilação local da engine</p>
-                                
-                                <div class="code-box" onclick="copyCommand()">
-                                    <span class="btn-copy" id="btnCopyText">Copiar</span>
-                                    <pre id="cmdText">${data.command}</pre>
-                                </div>
-                                
-                                <p style="color: var(--blue-cyan); font-size: 12px; margin-top: 15px; font-weight: bold;">Especificações da Engine:</p>
-                                <ul class="doc-list">
-                                    ${data.notes.map(note => `<li>${note}</li>`).join('')}
-                                </ul>
-                            </div>
-                        </div>
- 
                         <!-- Interactive Simulator Mockup Area -->
-                        <div class="mockup-card">
+                        <div class="mockup-card" style="width: 100%;">
                             <div id="interactiveMockupContainer">
                                 ${data.widgetHtml}
                             </div>
                             
-                            <div class="bottom-actions">
+                            <!-- Diretrizes de Negócios e Compliance Integradas -->
+                            <div class="specs-panel" style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-glass);">
+                                <h4 style="font-family:'Plus Jakarta Sans'; font-size:11px; font-weight:800; color:var(--gold); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px; display:flex; align-items:center; gap:6px;">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-top: -1px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                                    Diretrizes Operacionais & Regras de Governança
+                                </h4>
+                                <ul class="doc-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; list-style: none; padding: 0; margin: 0;">
+                                    ${data.notes.map(note => `
+                                        <li style="padding: 10px 14px; border-left: 2px solid var(--blue-cyan); background: rgba(0, 209, 255, 0.02); border-radius: 0 8px 8px 0; font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.4; margin: 0;">
+                                            ${note}
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                            
+                            <div class="bottom-actions" style="margin-top: 24px;">
                                 ${data.actionsHtml}
                             </div>
                         </div>
                     </div>
- 
+                    
                     <footer class="compliance-notice">
                         JB HUB · Uso restrito ao proprietário credenciado. Simulador tático auxiliar de alocação de carteiras sem gestão discricionária direta, em conformidade com as diretrizes CVM Resolução 178/2023.
                     </footer>
