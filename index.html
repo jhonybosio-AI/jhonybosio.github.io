@@ -16,6 +16,17 @@
 
   <meta name="description" content="Jhony Bosio — Assessor de investimentos sócio da Blue3 Investimentos, parceiro XP. Especialista em alocação fiduciária, Fee-Based e eficiência de ETFs globais (Protocolo 9A).">
   
+  <!-- Meta Tags Open Graph (SEO e Compartilhamento WhatsApp/Redes) -->
+  <meta property="og:title" content="Jhony Bosio | Private Advisor">
+  <meta property="og:description" content="A era do alinhamento fiduciário e da clareza patrimonial. Tenha acesso à Wealth Academy, Protocolo 9A e Simuladores Independentes.">
+  <meta property="og:image" content="https://www.jhonybosio.com/logo-prime.png">
+  <meta property="og:url" content="https://www.jhonybosio.com">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jhony Bosio | Private Advisor">
+  <meta name="twitter:description" content="A era do alinhamento fiduciário e da clareza patrimonial. Tenha acesso à Wealth Academy, Protocolo 9A e Simuladores Independentes.">
+  <meta name="twitter:image" content="https://www.jhonybosio.com/logo-prime.png">
+  
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
   
@@ -1239,6 +1250,7 @@
       line-height: 1.7;
       max-width: 780px;
       font-size: 11px;
+      color: rgba(255, 255, 255, 0.65);
     }
     .footer-meta {
       text-align: right;
@@ -1720,6 +1732,46 @@
         padding: 32px 20px;
       }
     }
+
+    /* Botão Flutuante de WhatsApp Mobile (CRO) */
+    .mobile-wa-float {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 54px;
+      height: 54px;
+      background-color: #22C55E;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(34, 197, 94, 0.4);
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.8);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .mobile-wa-float.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+    .mobile-wa-float:active {
+      transform: scale(0.9);
+    }
+    .mobile-wa-float svg {
+      width: 26px;
+      height: 26px;
+      stroke-width: 2.2;
+    }
+    /* Ocultar em telas maiores do que mobile */
+    @media(min-width: 769px) {
+      .mobile-wa-float {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1973,7 +2025,7 @@
             <div class="model-icon">💎</div>
             <h3 class="model-title">Fee Fixo (Fee-Based)</h3>
             <span class="model-subtitle">Alinhamento Fiduciário</span>
-            <p class="model-desc">O cliente paga um percentual anualizado transparente e fixo sobre o volume total da carteira (ex: de 0.70% a 1.20% a.a.). Qualquer comissão embutida em produtos é devolvida 100% como cashback na conta do investidor.</p>
+            <p class="model-desc">O cliente paga um fee anualizado transparente e fixo (ex: 0.70% a 1.20% a.a.). 100% dos rebates e taxas de distribuição retornam como cashback na sua conta XP, recuperando ralos invisíveis de até 2.50% a.a. que drenam a rentabilidade do modelo tradicional.</p>
             <ul class="model-points">
               <li class="model-point"><span class="model-point-check">✓</span> Isenção total de conflito de interesses</li>
               <li class="model-point"><span class="model-point-check">✓</span> Cashback integral de taxas de distribuição</li>
@@ -2337,6 +2389,13 @@
     </div>
   </div>
 
+  <!-- Botão Flutuante de WhatsApp Móvel (CRO Mobile) -->
+  <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20investimentos%20com%20o%20Jhony." target="_blank" class="mobile-wa-float" id="mobileWhatsappBtn">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+    </svg>
+  </a>
+
   <script>
     // Script interativo simples para o FAQ Accordion
     document.querySelectorAll('.faq-question').forEach(item => {
@@ -2414,6 +2473,18 @@
           alert("Não foi possível copiar o link automaticamente. URL do Simulador: https://www.jhonybosio.com/linha-da-vida/");
         });
       }
+
+      // Lógica do Botão Flutuante de WhatsApp (exclusivo mobile)
+      window.addEventListener('scroll', function() {
+          const mobileBtn = document.getElementById('mobileWhatsappBtn');
+          if (mobileBtn) {
+              if (window.scrollY > 400) {
+                  mobileBtn.classList.add('visible');
+              } else {
+                  mobileBtn.classList.remove('visible');
+              }
+          }
+      });
   </script>
 </body>
 </html>
