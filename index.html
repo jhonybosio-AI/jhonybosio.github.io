@@ -1630,6 +1630,7 @@
         <a href="#protocolo" class="nav-link">Protocolo 9A</a>
         <a href="#academia" class="nav-link">Wealth Academy</a>
         <a href="#modelos" class="nav-link">3 Modelos XP</a>
+        <a href="./linha-da-vida/" class="nav-link" style="color: #c5a880; font-weight: 700;">Linha da Vida</a>
         <a href="#faq" class="nav-link">FAQ</a>
       </div>
       <a href="https://wa.me/5516981523120?text=Ol%C3%A1%20Hermes%2C%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20de%20investimentos%20com%20o%20Jhony." target="_blank" class="nav-btn">Agendar com Hermes</a>
@@ -2076,6 +2077,32 @@
       </div>
     </section>
 
+    <!-- Seção de Compartilhamento da Cultura Fiduciária (Verde) -->
+    <section class="section" style="padding: 40px 0; background: rgba(34, 197, 94, 0.02); border-top: 1px solid rgba(34, 197, 94, 0.08); border-bottom: 1px solid rgba(34, 197, 94, 0.08);">
+      <div class="container" style="text-align: center;">
+        <div style="max-width: 700px; margin: 0 auto; padding: 24px; background: rgba(3, 8, 22, 0.6); border: 1px dashed rgba(34, 197, 94, 0.25); border-radius: 16px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+          <h3 style="font-family: var(--font-title); font-size: 16px; font-weight: 800; color: #22C55E; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>📢 Espalhe a Cultura do Planejamento Patrimonial</span>
+          </h3>
+          <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px;">
+            Acredita que algum amigo, familiar ou parceiro de negócios precisa estruturar a vida financeira, mapear a linha da vida e planejar seus objetivos? Encaminhe nosso simulador livre ou fale com nosso especialista!
+          </p>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;">
+            <!-- Botão Verde de Compartilhar Link -->
+            <button onclick="shareSimulatorLinkRoot()" class="btn-green" style="padding: 10px 24px; font-size: 12px; border: none; box-shadow: 0 4px 15px rgba(34, 197, 94, 0.2); cursor: pointer; border-radius: var(--r-md); font-family: var(--font-title); font-weight: 700;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 6px; vertical-align: middle; margin-top: -2px;"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+              Encaminhar este simulador livre
+            </button>
+            
+            <!-- Botão Falar com Hermes -->
+            <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20investimentos%20e%20saber%20mais%20sobre%20a%20mentoria%20de%20planejamento." target="_blank" class="btn-ghost" style="padding: 9px 24px; font-size: 12px; text-decoration: none; border-radius: var(--r-md); display: inline-flex; align-items: center; justify-content: center;">
+              Contatar Hermes Privado
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer>
       <div class="container">
@@ -2211,6 +2238,61 @@
         closeClassModal();
       }
     });
+  </script>
+
+  <!-- Botão Suspenso / Painel de Ferramentas Fiduciárias -->
+  <div class="fiduciary-toolbox" style="position: fixed; bottom: 24px; left: 24px; z-index: 9999;">
+      <div class="toolbox-popover" style="position: absolute; bottom: 60px; left: 0; background: rgba(3, 8, 22, 0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(212, 175, 106, 0.35); border-radius: 12px; padding: 12px; width: 240px; opacity: 0; transform: translateY(10px); pointer-events: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 30px rgba(0,0,0,0.6); display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-size: 10px; font-weight: 800; color: #d4af6a; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px; margin-bottom: 4px; display: block; font-family: var(--font-title);">⚡ Ferramentas Livres</span>
+          
+          <a href="/linha-da-vida/" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; transition: 0.2s; font-family: var(--font-title);" onmouseover="this.style.background='rgba(212, 175, 106, 0.08)'; this.style.borderColor='rgba(212, 175, 106, 0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.03)';">
+              <span style="font-size: 14px;">⏳</span>
+              <div style="text-align: left;">
+                  <div style="color: #fff;">Simulador Linha da Vida</div>
+                  <div style="font-size: 8px; color: rgba(255,255,255,0.4); font-weight: normal; margin-top: 1px;">Mapeamento Patrimonial Livre</div>
+              </div>
+          </a>
+          
+          <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20investimentos%20com%20o%20Jhony%20e%20ativar%20meu%20Simulador%20de%20ETFs." target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; transition: 0.2s; font-family: var(--font-title);" onmouseover="this.style.background='rgba(34, 197, 94, 0.08)'; this.style.borderColor='rgba(34, 197, 94, 0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.03)';">
+               <span style="font-size: 14px;">📈</span>
+               <div style="text-align: left;">
+                   <div style="color: #fff;">Simulador de ETFs Globais</div>
+                   <div style="font-size: 8px; color: rgba(255,255,255,0.4); font-weight: normal; margin-top: 1px;">Triagem Automática com Hermes</div>
+               </div>
+          </a>
+          
+          <a href="/hub/" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; transition: 0.2s; font-family: var(--font-title);" onmouseover="this.style.background='rgba(0, 209, 255, 0.08)'; this.style.borderColor='rgba(0, 209, 255, 0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.03)';">
+               <span style="font-size: 14px;">🏛️</span>
+               <div style="text-align: left;">
+                   <div style="color: #fff;">Hub Operacional Private</div>
+                   <div style="font-size: 8px; color: rgba(255,255,255,0.4); font-weight: normal; margin-top: 1px;">Painel Consolidado de Soluções</div>
+               </div>
+          </a>
+      </div>
+      
+      <button class="toolbox-trigger" style="background: rgba(3, 8, 22, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 106, 0.35); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #d4af6a; box-shadow: 0 6px 24px rgba(212, 175, 106, 0.15); transition: all 0.3s ease; outline: none;" onmouseover="this.style.transform='scale(1.08)'; this.style.borderColor='rgba(212, 175, 106, 0.6)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(212, 175, 106, 0.35)';">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2 2v16"></path></svg>
+      </button>
+  </div>
+  
+  <style>
+      .fiduciary-toolbox:hover .toolbox-popover {
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+          pointer-events: auto !important;
+      }
+  </style>
+
+  <script>
+      function shareSimulatorLinkRoot() {
+        const hostUrl = window.location.origin + "/linha-da-vida/";
+        navigator.clipboard.writeText(hostUrl).then(() => {
+          alert("Link do simulador livre copiado com sucesso! Envie no WhatsApp para seus contatos. 📢");
+        }).catch(err => {
+          console.error("Erro ao copiar link:", err);
+          alert("Não foi possível copiar o link automaticamente. URL do Simulador: https://www.jhonybosio.com/linha-da-vida/");
+        });
+      }
   </script>
 </body>
 </html>
