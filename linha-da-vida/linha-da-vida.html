@@ -1256,8 +1256,79 @@
         body.generating-pdf .btn-remove,
         body.generating-pdf .autosave-badge,
         body.generating-pdf .brand-area,
-        body.generating-pdf .header-actions {
+        body.generating-pdf .header-actions,
+        body.generating-pdf .share-box {
             display: none !important;
+        }
+
+        /* Estilos adicionais para PDF em Preto e Branco (Impressão Econômica) */
+        body.generating-pdf-print {
+            background: #ffffff !important;
+            color: #000000 !important;
+        }
+        body.generating-pdf-print .app-container {
+            background: #ffffff !important;
+        }
+        body.generating-pdf-print main.workspace {
+            background: #ffffff !important;
+        }
+        body.generating-pdf-print .panel-card,
+        body.generating-pdf-print .family-card,
+        body.generating-pdf-print .gps-card,
+        body.generating-pdf-print .chart-wrapper,
+        body.generating-pdf-print .momento-panel,
+        body.generating-pdf-print .guidelines-module .panel-card {
+            background: #ffffff !important;
+            border: 1px solid #c5c5c5 !important;
+            color: #000000 !important;
+            box-shadow: none !important;
+        }
+        body.generating-pdf-print h1,
+        body.generating-pdf-print h2,
+        body.generating-pdf-print h3,
+        body.generating-pdf-print h4,
+        body.generating-pdf-print .panel-title,
+        body.generating-pdf-print .gps-card-label,
+        body.generating-pdf-print .timeline-item-title,
+        body.generating-pdf-print .momento-subtitle,
+        body.generating-pdf-print span,
+        body.generating-pdf-print label,
+        body.generating-pdf-print div,
+        body.generating-pdf-print p {
+            color: #000000 !important;
+        }
+        body.generating-pdf-print .family-card span,
+        body.generating-pdf-print .family-card .age-badge,
+        body.generating-pdf-print .family-card .family-card-role {
+            color: #000000 !important;
+        }
+        body.generating-pdf-print .timeline-badge,
+        body.generating-pdf-print .rent-btn,
+        body.generating-pdf-print .timeline-item::before {
+            border-color: #999999 !important;
+            color: #000000 !important;
+            background: #f5f5f5 !important;
+        }
+        body.generating-pdf-print #patrimonioChart {
+            filter: grayscale(1) invert(1) brightness(0.6) !important;
+        }
+        body.generating-pdf-print .event-pin {
+            border-color: #000000 !important;
+            background: #000000 !important;
+        }
+        body.generating-pdf-print .event-pin.past-pin {
+            background: #666666 !important;
+            border-color: #666666 !important;
+        }
+        body.generating-pdf-print .event-pin.now-pin {
+            background: #000000 !important;
+            border-color: #000000 !important;
+        }
+        body.generating-pdf-print .progress-ring circle {
+            stroke: #cccccc !important;
+        }
+        body.generating-pdf-print #progressRingFill {
+            stroke: #000000 !important;
         }
 
         /* ── Compliance Footer ─────────────────────────────────────── */
@@ -1295,10 +1366,16 @@
             </div>
         </div>
         <div class="header-actions" style="display: flex; align-items: center; gap: 10px;">
-            <!-- Botão Premium PDF -->
-            <button class="btn-pdf-export" onclick="exportToPDF()" style="display: flex; align-items: center; gap: 6px; background: var(--blue-cyan); color: #030816; border: none; padding: 8px 16px; border-radius: 99px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(0, 209, 255, 0.35)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+            <!-- Botão PDF Colorido -->
+            <button class="btn-pdf-export" onclick="exportToPDF(false)" style="display: flex; align-items: center; gap: 6px; background: var(--blue-cyan); color: #030816; border: none; padding: 8px 16px; border-radius: 99px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(0, 209, 255, 0.35)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-top: -1px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                <span>Exportar PDF</span>
+                <span>PDF (Cores)</span>
+            </button>
+
+            <!-- Botão PDF Econômico P&B -->
+            <button class="btn-pdf-export-bw" onclick="exportToPDF(true)" style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.06); color: #ffffff; border: 1px solid var(--border-glass); padding: 8px 16px; border-radius: 99px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.transform='translateY(-1px)';" onmouseout="this.style.background='rgba(255,255,255,0.06)'; this.style.transform='none';">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-top: -1px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <span>PDF (Econômico P&B)</span>
             </button>
             
             <!-- Botão Limpar Simulador -->
@@ -1336,6 +1413,9 @@
                     <div style="font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 10px; text-align: right;">
                         Total Consolidado: <strong style="color: var(--blue-cyan);" id="labelTotalPatr">R$ 0,00</strong>
                     </div>
+                    <div style="font-size: 8px; color: rgba(255,255,255,0.35); margin-top: 12px; line-height: 1.3; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 8px;">
+                        💡 <strong>Largada Financeira:</strong> Informe o patrimônio inicial alocado na XP e em outras instituições. Ele atua como base de partida para o cálculo do crescimento de juros reais.
+                    </div>
                 </div>
             </div>
             
@@ -1348,6 +1428,9 @@
                 <div class="dynamic-rows" id="familyInputsArea">
                     <!-- Gerado dinamicamente via JS -->
                 </div>
+                <div style="font-size: 8px; color: rgba(255,255,255,0.35); margin-top: 8px; line-height: 1.3; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 8px;">
+                    💡 <strong>Ciclos de Vida:</strong> Mapeie sua família. O simulador reajusta dinamicamente a idade de cada dependente ao longo dos anos para alinhar conquistas em comum.
+                </div>
             </div>
 
             <!-- Conquistas Passadas -->
@@ -1359,6 +1442,9 @@
                 <div class="dynamic-rows" id="pastInputsArea">
                     <!-- Gerado dinamicamente via JS -->
                 </div>
+                <div style="font-size: 8px; color: rgba(255,255,255,0.35); margin-top: 8px; line-height: 1.3; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 8px;">
+                    💡 <strong>História & Evolução:</strong> Registre conquistas antigas (como formaturas, casamentos ou marcos de carreira) para ilustrar a sua linha do tempo histórica.
+                </div>
             </div>
 
             <!-- Metas de Futuro -->
@@ -1369,6 +1455,9 @@
                 </div>
                 <div class="dynamic-rows" id="futureInputsArea">
                     <!-- Gerado dinamicamente via JS -->
+                </div>
+                <div style="font-size: 8px; color: rgba(255,255,255,0.35); margin-top: 8px; line-height: 1.3; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 8px;">
+                    💡 <strong>Direção Estratégica:</strong> Projete seus objetivos (compra de imóvel, estudos dos filhos, aposentadoria) e analise o patrimônio necessário para realizá-los.
                 </div>
             </div>
 
@@ -1510,6 +1599,71 @@
                     <div class="chart-label">Evolução Patrimonial Projetada</div>
                     <svg id="patrimonioChart" xmlns="http://www.w3.org/2000/svg"></svg>
                     <div class="chart-year-markers" id="chartYearMarkers"></div>
+                </div>
+            </section>
+
+            <!-- Diretrizes e Orientações Educativas (Fiduciário) -->
+            <section class="guidelines-module" style="margin-top: 24px;">
+                <div class="gps-header" style="margin-bottom: 14px;">
+                    <h3 style="font-size: 13px; font-weight:700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.05em; display:flex; align-items:center; gap:8px;">
+                        <span>📚 Orientações para o seu Planejamento Patrimonial</span>
+                    </h3>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                    <div class="panel-card" style="padding: 14px; background: rgba(255,255,255,0.01);">
+                        <h4 style="font-size: 11px; font-weight: 700; color: #fff; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                            <span>💰 Balanço de Largada</span>
+                        </h4>
+                        <p style="font-size: 9.5px; color: rgba(255,255,255,0.5); line-height: 1.5;">
+                            A consolidação inicial de seus ativos (XP e outros bancos) define a sua <strong>base de partida</strong>. O simulador projeta juros compostos reais baseados exclusivamente neste montante.
+                        </p>
+                    </div>
+                    <div class="panel-card" style="padding: 14px; background: rgba(255,255,255,0.01);">
+                        <h4 style="font-size: 11px; font-weight: 700; color: #fff; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                            <span>👥 Ciclos de Vida Familiar</span>
+                        </h4>
+                        <p style="font-size: 9.5px; color: rgba(255,255,255,0.5); line-height: 1.5;">
+                            O planejamento fiduciário acompanha as idades de cada dependente. Mapear as idades ajuda a antecipar fases críticas de despesas educacionais, transição de carreira e sucessão familiar.
+                        </p>
+                    </div>
+                    <div class="panel-card" style="padding: 14px; background: rgba(255,255,255,0.01);">
+                        <h4 style="font-size: 11px; font-weight: 700; color: #fff; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                            <span>📈 Rentabilidade Real (IPCA+)</span>
+                        </h4>
+                        <p style="font-size: 9.5px; color: rgba(255,255,255,0.5); line-height: 1.5;">
+                            O simulador trabalha com <strong>taxas reais de retorno</strong> (acima da inflação). Isso garante que os valores simulados no futuro tenham o mesmo <strong>poder de compra</strong> do dinheiro de hoje.
+                        </p>
+                    </div>
+                    <div class="panel-card" style="padding: 14px; background: rgba(255,255,255,0.01);">
+                        <h4 style="font-size: 11px; font-weight: 700; color: #fff; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                            <span>🎯 Rumo à Liberdade Financeira</span>
+                        </h4>
+                        <p style="font-size: 9.5px; color: rgba(255,255,255,0.5); line-height: 1.5;">
+                            Atingir a meta indica que seu patrimônio é capaz de gerar renda perpétua baseada na <strong>taxa de retirada segura (4% a.a.)</strong>, garantindo sua independência financeira contínua.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Espalhar Cultura do Planejamento & Contato com Jhony Bosio (Verde) -->
+            <section class="share-box" style="margin-top: 24px; padding: 20px; background: rgba(39, 201, 63, 0.04); border: 1px dashed rgba(39, 201, 63, 0.25); border-radius: 12px; text-align: center;">
+                <h4 style="font-size: 12px; font-weight: 700; color: #27C93F; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <span>📢 Espalhe a Cultura do Planejamento Patrimonial</span>
+                </h4>
+                <p style="font-size: 10.5px; color: rgba(255, 255, 255, 0.75); line-height: 1.5; max-width: 650px; margin: 0 auto 16px auto;">
+                    Acredita que algum amigo, familiar ou parceiro de negócios precisa estruturar a vida financeira e planejar seus objetivos? Encaminhe este simulador livre ou fale com nosso especialista!
+                </p>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+                    <!-- Botão Verde de Compartilhar Link -->
+                    <button onclick="shareSimulatorLink()" style="display: inline-flex; align-items: center; gap: 8px; background: #27C93F; color: #030816; border: none; padding: 9px 20px; border-radius: 99px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(39, 201, 63, 0.35)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        <span>Encaminhar este simulador livre</span>
+                    </button>
+                    <!-- Botão de Contato Direto -->
+                    <a href="https://wa.me/5516997068000?text=Olá%20Jhony,%20gostaria%20de%20agendar%20uma%20conversa%20sobre%20meu%20Planejamento%20Patrimonial%20Fiduciário%20que%20simulei." target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); color: #ffffff; border: 1px solid var(--border-glass); padding: 8px 20px; border-radius: 99px; font-size: 11px; font-weight: 700; text-decoration: none; cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif;" onmouseover="this.style.background='rgba(255,255,255,0.12)'; this.style.transform='translateY(-1px)';" onmouseout="this.style.background='rgba(255,255,255,0.06)'; this.style.transform='none';">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        <span>Contatar Jhony Bosio</span>
+                    </a>
                 </div>
             </section>
 
@@ -2174,30 +2328,51 @@
         }
 
         // ── Exportar em PDF (Relatório Paisagem Premium) ─────────────
-        function exportToPDF() {
+        function exportToPDF(isPrintFriendly = false) {
             const body = document.body;
             body.classList.add('generating-pdf');
+            if (isPrintFriendly) {
+                body.classList.add('generating-pdf-print');
+            }
             
             const target = document.querySelector('main.workspace');
             
             const titular = state.family.find(f => f.primary);
             const nameForFile = (titular && titular.name) ? titular.name.trim().replace(/\s+/g, '_') : 'Cliente';
+            const suffix = isPrintFriendly ? '_Impressao_Economica' : '';
             
             const opt = {
                 margin:       10,
-                filename:     `Planejamento_Patrimonial_${nameForFile}.pdf`,
+                filename:     `Planejamento_Patrimonial_${nameForFile}${suffix}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#030816' },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    backgroundColor: isPrintFriendly ? '#ffffff' : '#030816' 
+                },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
             };
             
             html2pdf().set(opt).from(target).save().then(() => {
                 body.classList.remove('generating-pdf');
+                body.classList.remove('generating-pdf-print');
                 showToast("PDF gerado e baixado com sucesso! 📄");
             }).catch(err => {
                 console.error("Erro ao gerar PDF:", err);
                 body.classList.remove('generating-pdf');
+                body.classList.remove('generating-pdf-print');
                 alert("Erro ao exportar PDF.");
+            });
+        }
+
+        // ── Encaminhar / Compartilhar Link do Simulador Livre ────────
+        function shareSimulatorLink() {
+            const hostUrl = window.location.origin + window.location.pathname;
+            navigator.clipboard.writeText(hostUrl).then(() => {
+                showToast("Link copiado com sucesso! Envie no WhatsApp para seus contatos. 📢");
+            }).catch(err => {
+                console.error("Erro ao copiar link:", err);
+                alert("Não foi possível copiar o link automaticamente. Copie a URL do navegador.");
             });
         }
 
