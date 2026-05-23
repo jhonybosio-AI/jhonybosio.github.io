@@ -1227,6 +1227,41 @@
             display: none;
         }
 
+        /* Estilos premium de exportação para PDF */
+        body.generating-pdf {
+            background: #030816 !important;
+        }
+        body.generating-pdf .sidebar {
+            display: none !important;
+        }
+        body.generating-pdf header {
+            display: none !important;
+        }
+        body.generating-pdf footer {
+            display: none !important;
+        }
+        body.generating-pdf .app-container {
+            padding: 0 !important;
+            margin: 0 !important;
+            display: block !important;
+            background: #030816 !important;
+        }
+        body.generating-pdf main.workspace {
+            width: 100% !important;
+            padding: 20px !important;
+            margin: 0 !important;
+            background: #030816 !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+        body.generating-pdf .btn-plus, 
+        body.generating-pdf .btn-remove,
+        body.generating-pdf .autosave-badge,
+        body.generating-pdf .brand-area,
+        body.generating-pdf .header-actions {
+            display: none !important;
+        }
+
         /* ── Compliance Footer ─────────────────────────────────────── */
         footer {
             background: #050C1A;
@@ -1248,36 +1283,33 @@
             letter-spacing: 0.1em;
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
  
     <!-- Header Corporativo -->
     <header>
         <div class="brand-area">
-            <div class="brand-logo">B3</div>
+            <div class="brand-logo" style="background: linear-gradient(135deg, var(--gold) 0%, #a68037 100%); color: #030816;">JB</div>
             <div class="brand-text">
                 <h1>Linha da Vida Patrimonial</h1>
                 <p>Planejamento Financeiro Centrado em Objetivos de Vida</p>
             </div>
         </div>
-        <div class="header-actions">
-            <!-- Usuário Conectado -->
-            <div class="user-badge" id="userHeaderBadge">
-                <span>Cliente: <strong id="headerClientName">Carregando...</strong></span>
-            </div>
+        <div class="header-actions" style="display: flex; align-items: center; gap: 10px;">
+            <!-- Botão Premium PDF -->
+            <button class="btn-pdf-export" onclick="exportToPDF()" style="display: flex; align-items: center; gap: 6px; background: var(--blue-cyan); color: #030816; border: none; padding: 8px 16px; border-radius: 99px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: 'Plus Jakarta Sans', sans-serif;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(0, 209, 255, 0.35)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-top: -1px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <span>Exportar PDF</span>
+            </button>
             
-            <button class="btn-supabase-status" onclick="openSyncModal()">
-                <div class="status-dot"></div>
-                <span id="labelCloudSyncStatus">Supabase Nuvem</span>
+            <!-- Botão Limpar Simulador -->
+            <button class="btn-logout" onclick="clearSimulator()" style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-glass); font-size: 11px; padding: 8px 16px; border-radius: 99px; cursor: pointer; color: #fff;" onmouseover="this.style.background='rgba(255, 59, 48, 0.1)'; this.style.borderColor='rgba(255, 59, 48, 0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.04)'; this.style.borderColor='var(--border-glass)';">
+                <span>Limpar Campos</span>
             </button>
 
-
-
             <!-- Voltar ao Hub -->
-            <a href="../dashboard/" class="btn-hub" style="margin-right: 8px;">Voltar ao Hub</a>
-
-            <!-- Botão de Logout -->
-            <button class="btn-logout" onclick="handleLogout()">Sair</button>
+            <a href="../hub/index.html" class="btn-hub" style="margin-right: 8px; text-decoration: none;">Voltar ao Hub</a>
         </div>
     </header>
 
@@ -1586,11 +1618,15 @@
             }
         };
 
-        // Estado padrão inicial da aplicação
+        // Estado padrão inicial da aplicação (offline e em branco)
         let state = {
+            name: "",
             patrXP: 0,
             patrOutros: 0,
-            family: [],
+            perfilRentabilidade: "MODERADO",
+            family: [
+                { id: "f1", name: "", birth: 1990, role: "Titular", emoji: "🧔", primary: true }
+            ],
             past: [],
             future: []
         };
@@ -1601,188 +1637,28 @@
 
         let currentActiveAccount = "";
 
-        // Inicializar aplicação & Verificar Login
+        // Inicializar aplicação em modo livre offline
         window.addEventListener('DOMContentLoaded', async () => {
-            // LER QUERY PARAMS PARA AUTO-LOGIN E CARREGAMENTO DINÂMICO
-            const urlParams = new URLSearchParams(window.location.search);
-            const paramXp = urlParams.get('xp');
-            const paramNome = urlParams.get('nome') || urlParams.get('name');
-            const paramPatrXP = urlParams.get('patrXP') || urlParams.get('patr');
-            const paramPatrOutros = urlParams.get('patrOutros') || urlParams.get('outros');
-
-            if (paramXp) {
-                // Realiza auto-login silencioso
-                sessionStorage.setItem('client_logged_xp', paramXp);
-                if (paramNome) {
-                    sessionStorage.setItem('client_logged_name', paramNome);
+            // Carregar dados salvos offline localmente se existirem
+            let clientData = localStorage.getItem('ruler_data_offline');
+            if (clientData) {
+                try {
+                    state = JSON.parse(clientData);
+                } catch (e) {
+                    console.error("Erro ao analisar dados salvos offline:", e);
                 }
-                
-                const xpVal = parseFloat(paramPatrXP);
-                const outrosVal = parseFloat(paramPatrOutros);
-                const normAccount = paramXp.replace(/[-\s]/g, '');
-                
-                let stateObj = null;
-
-                // Tenta carregar do Supabase Real se configurado
-                if (supabaseClient) {
-                    try {
-                        const { data, error } = await supabaseClient
-                            .from('reguas_vida')
-                            .select('*')
-                            .eq('conta_xp', normAccount)
-                            .single();
-                        
-                        if (data && !error) {
-                            stateObj = typeof data.dados_planejamento === 'string' 
-                                ? JSON.parse(data.dados_planejamento) 
-                                : data.dados_planejamento;
-                            console.log("⚡ Supabase Real: Dados carregados com sucesso para " + normAccount);
-                        } else if (error && error.code !== 'PGRST116') {
-                            console.warn("⚠️ Aviso ao buscar dados no Supabase:", error.message);
-                        }
-                    } catch (err) {
-                        console.error("❌ Erro ao se conectar ao Supabase Real:", err);
-                    }
-                }
-
-                if (!stateObj) {
-                    // Fallback para localStorage
-                    let clientData = localStorage.getItem(`ruler_data_${paramXp}`) || localStorage.getItem(`ruler_data_${normAccount}`);
-                    stateObj = clientData ? JSON.parse(clientData) : null;
-                }
-                
-                if (!stateObj) {
-                    let mockData = databaseMock[paramXp] || databaseMock[normAccount];
-                    if (!mockData) {
-                        for (const key in databaseMock) {
-                            if (key.replace(/[-\s]/g, '') === normAccount) {
-                                mockData = databaseMock[key];
-                                break;
-                            }
-                        }
-                    }
-                    if (mockData) {
-                        stateObj = JSON.parse(JSON.stringify(mockData));
-                    } else {
-                        const realName = paramNome || `Cliente XP ${paramXp}`;
-                        stateObj = {
-                            name: realName,
-                            patrXP: !isNaN(xpVal) ? xpVal : 1500000,
-                            patrOutros: !isNaN(outrosVal) ? outrosVal : 500000,
-                            family: [
-                                { id: "f1", name: realName, birth: 1978, role: "Titular", emoji: "🧔", primary: true },
-                                { id: "f2", name: "Cônjuge", birth: 1980, role: "Cônjuge", emoji: "👩", primary: false },
-                                { id: "f3", name: "Filho 1", birth: 2012, role: "Filho(a)", emoji: "👦", primary: false }
-                            ],
-                            past: [
-                                { id: "p1", year: 2005, desc: "Formatura e Início de Carreira" },
-                                { id: "p2", year: 2010, desc: "Casamento" }
-                            ],
-                            future: [
-                                { id: "u1", year: 2030, desc: "Filho na Faculdade" },
-                                { id: "u2", year: 2038, desc: "Liberdade Financeira (Independência)" }
-                            ]
-                        };
-                    }
-                }
-                
-                // Sobreescreve os patrimônios se foram fornecidos na URL
-                if (!isNaN(xpVal)) stateObj.patrXP = xpVal;
-                if (!isNaN(outrosVal)) stateObj.patrOutros = outrosVal;
-                
-                state = stateObj;
-                localStorage.setItem(`ruler_data_${paramXp}`, JSON.stringify(state));
             }
-
-            const loggedAccount = sessionStorage.getItem('client_logged_xp');
             
-            if (!loggedAccount) {
-                // Redireciona imediatamente para o login caso não esteja autenticado
-                window.location.href = "login.html";
-                return;
+            // Se o estado não tem a estrutura correta, garante o titular
+            if (!state.family || state.family.length === 0) {
+                state.family = [
+                    { id: "f1", name: state.name || "", birth: 1990, role: "Titular", emoji: "🧔", primary: true }
+                ];
             }
 
-            currentActiveAccount = loggedAccount;
-            
-            // Se já processou o paramXp acima, não há necessidade de ler novamente
-            if (!paramXp) {
-                const normAccount = currentActiveAccount.replace(/[-\s]/g, '');
-                let stateObj = null;
-
-                // Tenta carregar do Supabase Real se configurado
-                if (supabaseClient) {
-                    try {
-                        const { data, error } = await supabaseClient
-                            .from('reguas_vida')
-                            .select('*')
-                            .eq('conta_xp', normAccount)
-                            .single();
-                        
-                        if (data && !error) {
-                            stateObj = typeof data.dados_planejamento === 'string' 
-                                ? JSON.parse(data.dados_planejamento) 
-                                : data.dados_planejamento;
-                            console.log("⚡ Supabase Real: Dados de sessão carregados para " + normAccount);
-                        }
-                    } catch (err) {
-                        console.error("❌ Erro ao buscar dados de sessão no Supabase Real:", err);
-                    }
-                }
-
-                if (stateObj) {
-                    state = stateObj;
-                } else {
-                    let clientData = localStorage.getItem(`ruler_data_${currentActiveAccount}`) || localStorage.getItem(`ruler_data_${normAccount}`);
-                    
-                    if (clientData) {
-                        state = JSON.parse(clientData);
-                    } else {
-                        let mockData = databaseMock[currentActiveAccount] || databaseMock[normAccount];
-                        if (!mockData) {
-                            for (const key in databaseMock) {
-                                if (key.replace(/[-\s]/g, '') === normAccount) {
-                                    mockData = databaseMock[key];
-                                    break;
-                                }
-                            }
-                        }
-                        
-                        if (mockData) {
-                            state = JSON.parse(JSON.stringify(mockData));
-                        } else {
-                            const realName = sessionStorage.getItem('client_logged_name') || `Cliente XP ${currentActiveAccount}`;
-                            state = {
-                                name: realName,
-                                patrXP: 1500000,
-                                patrOutros: 500000,
-                                family: [
-                                    { id: "f1", name: realName, birth: 1978, role: "Titular", emoji: "🧔", primary: true },
-                                    { id: "f2", name: "Cônjuge", birth: 1980, role: "Cônjuge", emoji: "👩", primary: false },
-                                    { id: "f3", name: "Filho 1", birth: 2012, role: "Filho(a)", emoji: "👦", primary: false }
-                                ],
-                                past: [
-                                    { id: "p1", year: 2005, desc: "Formatura e Início de Carreira" },
-                                    { id: "p2", year: 2010, desc: "Casamento" }
-                                ],
-                                future: [
-                                    { id: "u1", year: 2030, desc: "Filho na Faculdade" },
-                                    { id: "u2", year: 2038, desc: "Liberdade Financeira (Independência)" }
-                                ]
-                            };
-                        }
-                    }
-                }
-            }
-
-            // ── Inicialização sempre executa, independente da fonte dos dados ──
-            // Exibir nome no Header
-            document.getElementById('headerClientName').innerText = state.name || `XP ${currentActiveAccount}`;
-            document.getElementById('modalActiveAccount').innerText = currentActiveAccount;
-            document.getElementById('labelCloudSyncStatus').innerText = `Sincronizado: ${currentActiveAccount}`;
-
-            // Preencher inputs de patrimônio com formatação de moeda
-            document.getElementById('inputPatrXP').value = formatMoney(state.patrXP || 0);
-            document.getElementById('inputPatrOutros').value = formatMoney(state.patrOutros || 0);
+            // Preencher os campos de patrimônio
+            document.getElementById('inputPatrXP').value = state.patrXP > 0 ? formatMoney(state.patrXP) : "";
+            document.getElementById('inputPatrOutros').value = state.patrOutros > 0 ? formatMoney(state.patrOutros) : "";
 
             calculateSumPatr();
             renderSidebarInputs();
@@ -1792,7 +1668,7 @@
             // Inicializar input de aporte
             document.getElementById('aporteInput').value = formatMoney(aporteAtual);
 
-            // Garantir que exista um perfil de rentabilidade definido e inicializar botões
+            // Inicializar botões de perfil de rentabilidade
             state.perfilRentabilidade = state.perfilRentabilidade || 'MODERADO';
             document.querySelectorAll('.rent-btn').forEach(btn => btn.classList.remove('active'));
             if (state.perfilRentabilidade === 'CONSERVADOR') {
@@ -1806,7 +1682,7 @@
             updateDashboard(2026);
         });
 
-        // ── Alterar Perfil de Rentabilidade Dinamicamente ─────────────
+                // ── Alterar Perfil de Rentabilidade Dinamicamente ─────────────
         function changeRentabilidadeProfile(profile) {
             state.perfilRentabilidade = profile;
             
@@ -1866,7 +1742,7 @@
         function scheduleAutoSave() {
             clearTimeout(autoSaveTimer);
             autoSaveTimer = setTimeout(() => {
-                localStorage.setItem(`ruler_data_${currentActiveAccount}`, JSON.stringify(state));
+                localStorage.setItem('ruler_data_offline', JSON.stringify(state));
                 const badge = document.getElementById('autosaveBadge');
                 badge.classList.add('show');
                 setTimeout(() => badge.classList.remove('show'), 2000);
@@ -2103,38 +1979,13 @@
         }
 
         // Ação do Botão "Gerar & Salvar Linha"
-        async function updateLifeRuler(showFeedback = false) {
+        function updateLifeRuler(showFeedback = false) {
             // Organizar arrays por ordem cronológica
             state.past.sort((a,b) => a.year - b.year);
             state.future.sort((a,b) => a.year - b.year);
 
             // Sincronizar localmente no cliente
-            localStorage.setItem(`ruler_data_${currentActiveAccount}`, JSON.stringify(state));
-            
-            // Sincronizar no Supabase Real se configurado
-            if (supabaseClient && currentActiveAccount) {
-                const normAccount = currentActiveAccount.replace(/[-\s]/g, '');
-                try {
-                    const { error } = await supabaseClient
-                        .from('reguas_vida')
-                        .upsert({
-                            conta_xp: normAccount,
-                            nome_cliente: state.name || `Cliente XP ${currentActiveAccount}`,
-                            patrimonio_xp: state.patrXP || 0,
-                            patrimonio_outros: state.patrOutros || 0,
-                            dados_planejamento: state,
-                            updated_at: new Date().toISOString()
-                        }, { onConflict: 'conta_xp' });
-                    
-                    if (error) {
-                        console.error("❌ Erro ao salvar no Supabase Real:", error.message);
-                    } else {
-                        console.log("⚡ Supabase Real: Dados persistidos com sucesso para " + normAccount);
-                    }
-                } catch (err) {
-                    console.error("❌ Erro na conexão com o Supabase Real:", err);
-                }
-            }
+            localStorage.setItem('ruler_data_offline', JSON.stringify(state));
             
             buildTicks();
             buildSliderEvents();
@@ -2142,7 +1993,7 @@
             updateDashboard(currentSelectedYear);
 
             if (showFeedback) {
-                showToast("Dados salvos e sincronizados com sucesso no Supabase! ⚡");
+                showToast("Dados do simulador salvos com sucesso localmente! ⚡");
             }
         }
 
@@ -2454,6 +2305,39 @@
         function handleLogout() {
             sessionStorage.removeItem('client_logged_xp');
             window.location.href = "login.html";
+        }
+
+        // ── Exportar em PDF (Relatório Paisagem Premium) ─────────────
+        function exportToPDF() {
+            const body = document.body;
+            body.classList.add('generating-pdf');
+            
+            const target = document.querySelector('main.workspace');
+            
+            const opt = {
+                margin:       10,
+                filename:     `Planejamento_Patrimonial_${state.name || 'Cliente'}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#030816' },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+            };
+            
+            html2pdf().set(opt).from(target).save().then(() => {
+                body.classList.remove('generating-pdf');
+                showToast("PDF gerado e baixado com sucesso! 📄");
+            }).catch(err => {
+                console.error("Erro ao gerar PDF:", err);
+                body.classList.remove('generating-pdf');
+                alert("Erro ao exportar PDF.");
+            });
+        }
+
+        // ── Limpar Campos do Simulador ─────────────────────────────
+        function clearSimulator() {
+            if (confirm("Tem certeza de que deseja limpar todos os campos e reiniciar o simulador?")) {
+                localStorage.removeItem('ruler_data_offline');
+                window.location.reload();
+            }
         }
 
         // ── Relatório Inteligente para o WhatsApp ─────────────────────
