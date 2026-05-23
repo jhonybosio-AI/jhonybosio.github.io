@@ -2600,16 +2600,35 @@
         });
       }
       
-      // 3. DADOS DO CTA FINAL (SLIDE DE FECHAMENTO)
-      let ctaTitle = "Conquiste sua Liberdade Financeira";
-      let ctaDesc = "Fale com o especialista Hermes e avalie as oportunidades de alocação no Protocolo 9A.";
+      // 3. DADOS DO CTA FINAL (SLIDE DE FECHAMENTO COM COPY DE ALTA CONVERSÃO)
+      let ctaTitle = "Pronto para dar o próximo passo?";
+      let ctaDesc = "Não tome decisões complexas de investimentos de forma isolada. Fale com nosso especialista Hermes e faça um diagnóstico fiduciário completo do seu portfólio hoje.";
       let ctaCat = "CONVERSÃO";
       
-      if (paragrafos.length > 2) {
-        const ultimoParagrafo = paragrafos[paragrafos.length - 1];
-        const frasesUltimo = ultimoParagrafo.split('. ');
-        ctaTitle = frasesUltimo[0].length < 60 ? frasesUltimo[0] : "Blindagem Patrimonial Ativa";
-        ctaDesc = ultimoParagrafo;
+      // Analisamos o título principal para gerar CTAs contextualizados ultra persuasivos
+      const tituloNormalizado = capaTitle.toLowerCase();
+      if (tituloNormalizado.includes("juro") || tituloNormalizado.includes("taxa") || tituloNormalizado.includes("selic") || tituloNormalizado.includes("caindo")) {
+        ctaTitle = "Sua carteira está pronta para a queda dos juros?";
+        ctaDesc = "A queda da Selic exige transições cirúrgicas na renda fixa e variável. Agende um diagnóstico fiduciário gratuito e proteja seu poder de compra.";
+      } else if (tituloNormalizado.includes("tribut") || tituloNormalizado.includes("reforma") || tituloNormalizado.includes("holding") || tituloNormalizado.includes("herança") || tituloNormalizado.includes("sucess")) {
+        ctaTitle = "Seu patrimônio familiar está blindado contra o novo imposto?";
+        ctaDesc = "As novas alíquotas progressivas exigem planejamento sucessório imediato. Agende uma conversa com o Hermes e planeje sua holding familiar.";
+      } else if (tituloNormalizado.includes("etf") || tituloNormalizado.includes("global") || tituloNormalizado.includes("internac") || tituloNormalizado.includes("exterior")) {
+        ctaTitle = "Quer diversificar seus investimentos globalmente de forma neutra?";
+        ctaDesc = "Esqueça conflitos de interesse de assessores tradicionais. Mapeie suas 9 classes globais com alinhamento fiduciário pleno.";
+      } else {
+        // Se for um tema geral, usar a primeira frase do último parágrafo de forma inteligente para preservar o contexto
+        if (paragrafos.length > 2) {
+          const ultimoParagrafo = paragrafos[paragrafos.length - 1];
+          const frasesUltimo = ultimoParagrafo.split('. ');
+          // Garante que o título não seja curto demais ou técnico (mínimo 20 caracteres)
+          if (frasesUltimo[0] && frasesUltimo[0].length > 20 && frasesUltimo[0].length < 65) {
+            ctaTitle = frasesUltimo[0];
+          } else {
+            ctaTitle = "Pronto para blindar seu patrimônio?";
+          }
+          ctaDesc = ultimoParagrafo.length > 220 ? ultimoParagrafo.substring(0, 210) + "..." : ultimoParagrafo;
+        }
       }
       
       blocos.push({
