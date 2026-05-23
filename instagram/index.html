@@ -180,11 +180,14 @@
     .control-panel {
       background: rgba(3, 8, 22, 0.95);
       border-right: 1px solid var(--border);
-      padding: 24px;
+      padding: 24px 24px 80px 24px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 24px;
+      height: calc(100vh - 69px);
+      max-height: calc(100vh - 69px);
+      -webkit-overflow-scrolling: touch;
     }
 
     .panel-section {
