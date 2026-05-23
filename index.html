@@ -2241,49 +2241,191 @@
   </script>
 
   <!-- Botão Suspenso / Painel de Ferramentas Fiduciárias -->
-  <div class="fiduciary-toolbox" style="position: fixed; bottom: 24px; left: 24px; z-index: 9999;">
-      <div class="toolbox-popover" style="position: absolute; bottom: 60px; left: 0; background: rgba(3, 8, 22, 0.95); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(212, 175, 106, 0.35); border-radius: 12px; padding: 12px; width: 240px; opacity: 0; transform: translateY(10px); pointer-events: none; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 10px 30px rgba(0,0,0,0.6); display: flex; flex-direction: column; gap: 8px;">
-          <span style="font-size: 10px; font-weight: 800; color: #d4af6a; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 6px; margin-bottom: 4px; display: block; font-family: var(--font-title);">⚡ Ferramentas Livres</span>
-          
-          <a href="/linha-da-vida/" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; transition: 0.2s; font-family: var(--font-title);" onmouseover="this.style.background='rgba(212, 175, 106, 0.08)'; this.style.borderColor='rgba(212, 175, 106, 0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.03)';">
-              <span style="font-size: 14px;">⏳</span>
-              <div style="text-align: left;">
-                  <div style="color: #fff;">Simulador Linha da Vida</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.4); font-weight: normal; margin-top: 1px;">Mapeamento Patrimonial Livre</div>
-              </div>
-          </a>
-          
-          <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20investimentos%20com%20o%20Jhony%20e%20ativar%20meu%20Simulador%20de%20ETFs." target="_blank" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; transition: 0.2s; font-family: var(--font-title);" onmouseover="this.style.background='rgba(34, 197, 94, 0.08)'; this.style.borderColor='rgba(34, 197, 94, 0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.03)';">
-               <span style="font-size: 14px;">📈</span>
-               <div style="text-align: left;">
-                   <div style="color: #fff;">Simulador de ETFs Globais</div>
-                   <div style="font-size: 8px; color: rgba(255,255,255,0.4); font-weight: normal; margin-top: 1px;">Triagem Automática com Hermes</div>
-               </div>
-          </a>
-          
-          <a href="/hub/" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); color: #fff; text-decoration: none; font-size: 11px; font-weight: 700; transition: 0.2s; font-family: var(--font-title);" onmouseover="this.style.background='rgba(0, 209, 255, 0.08)'; this.style.borderColor='rgba(0, 209, 255, 0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.03)';">
-               <span style="font-size: 14px;">🏛️</span>
-               <div style="text-align: left;">
-                   <div style="color: #fff;">Hub Operacional Private</div>
-                   <div style="font-size: 8px; color: rgba(255,255,255,0.4); font-weight: normal; margin-top: 1px;">Painel Consolidado de Soluções</div>
-               </div>
-          </a>
-      </div>
-      
-      <button class="toolbox-trigger" style="background: rgba(3, 8, 22, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 106, 0.35); width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #d4af6a; box-shadow: 0 6px 24px rgba(212, 175, 106, 0.15); transition: all 0.3s ease; outline: none;" onmouseover="this.style.transform='scale(1.08)'; this.style.borderColor='rgba(212, 175, 106, 0.6)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(212, 175, 106, 0.35)';">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle;"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2 2v16"></path></svg>
+  <!-- Fluid Navigation Menu (Canto Inferior Esquerdo) -->
+  <div class="fluid-menu-container" id="fluidMenu" data-expanded="false">
+      <!-- Primeiro Item (Gatilho sempre visível) -->
+      <button class="fluid-menu-trigger" onclick="toggleFluidMenu(event)" aria-label="Abrir Menu">
+          <span class="fluid-icon-menu">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </span>
+          <span class="fluid-icon-close">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </span>
       </button>
+
+      <!-- Outros Itens (Deslizam e expandem para cima) -->
+      <a href="/linha-da-vida/" class="fluid-menu-item" style="--index: 1;" title="Simulador Linha da Vida">
+          <span class="fluid-item-icon">⏳</span>
+          <span class="fluid-item-tooltip">Simulador Linha da Vida</span>
+      </a>
+
+      <a href="https://wa.me/5516981523120?text=Olá%20Hermes,%20gostaria%20de%20agendar%20um%20diagnóstico%20de%20investimentos%20com%20o%20Jhony%20e%20ativar%20meu%20Simulador%20de%20ETFs." target="_blank" class="fluid-menu-item" style="--index: 2;" title="Simulador de ETFs Globais">
+          <span class="fluid-item-icon">📈</span>
+          <span class="fluid-item-tooltip">Simulador de ETFs Globais</span>
+      </a>
   </div>
   
   <style>
-      .fiduciary-toolbox:hover .toolbox-popover {
-          opacity: 1 !important;
-          transform: translateY(0) !important;
-          pointer-events: auto !important;
+      .fluid-menu-container {
+          position: fixed;
+          bottom: 24px;
+          left: 24px;
+          width: 56px;
+          height: 56px;
+          z-index: 9999;
+      }
+
+      .fluid-menu-trigger {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          background: rgba(3, 8, 22, 0.85);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(212, 175, 106, 0.4);
+          color: #d4af6a;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          box-shadow: 0 6px 20px rgba(212, 175, 106, 0.15);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 100;
+          outline: none;
+      }
+
+      .fluid-menu-trigger:hover {
+          transform: scale(1.05);
+          border-color: rgba(212, 175, 106, 0.7);
+          box-shadow: 0 8px 24px rgba(212, 175, 106, 0.25);
+      }
+
+      .fluid-menu-trigger:active {
+          transform: scale(0.95);
+      }
+
+      .fluid-menu-trigger .fluid-icon-menu,
+      .fluid-menu-trigger .fluid-icon-close {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .fluid-menu-trigger .fluid-icon-menu {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+      }
+
+      .fluid-menu-trigger .fluid-icon-close {
+          opacity: 0;
+          transform: scale(0) rotate(-180deg);
+      }
+
+      .fluid-menu-container[data-expanded="true"] .fluid-menu-trigger .fluid-icon-menu {
+          opacity: 0;
+          transform: scale(0) rotate(180deg);
+      }
+
+      .fluid-menu-container[data-expanded="true"] .fluid-menu-trigger .fluid-icon-close {
+          opacity: 1;
+          transform: scale(1) rotate(0deg);
+      }
+
+      .fluid-menu-item {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 56px;
+          height: 56px;
+          border-radius: 50%;
+          background: rgba(3, 8, 22, 0.9);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-decoration: none;
+          transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15),
+                      opacity 0.3s ease,
+                      border-color 0.3s ease;
+          opacity: 0;
+          pointer-events: none;
+          z-index: 50;
+          will-change: transform;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+          clip-path: circle(50% at 50% 50%);
+      }
+
+      .fluid-menu-item:hover {
+          border-color: rgba(212, 175, 106, 0.5);
+          background: rgba(212, 175, 106, 0.08);
+      }
+
+      .fluid-item-icon {
+          font-size: 20px;
+          transition: transform 0.2s ease;
+      }
+
+      .fluid-menu-item:hover .fluid-item-icon {
+          transform: scale(1.1);
+      }
+
+      .fluid-menu-container[data-expanded="true"] .fluid-menu-item {
+          opacity: 1;
+          pointer-events: auto;
+          transform: translateY(calc(var(--index) * -64px));
+      }
+
+      .fluid-item-tooltip {
+          position: absolute;
+          left: 68px;
+          background: rgba(3, 8, 22, 0.95);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border: 1px solid rgba(212, 175, 106, 0.3);
+          color: #fff;
+          font-size: 11px;
+          font-weight: 700;
+          padding: 6px 12px;
+          border-radius: 8px;
+          white-space: nowrap;
+          opacity: 0;
+          transform: translateX(-10px);
+          pointer-events: none;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+          font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+
+      .fluid-menu-item:hover .fluid-item-tooltip {
+          opacity: 1;
+          transform: translateX(0);
       }
   </style>
 
   <script>
+      function toggleFluidMenu(event) {
+          event.stopPropagation();
+          const menu = document.getElementById('fluidMenu');
+          const isExpanded = menu.getAttribute('data-expanded') === 'true';
+          menu.setAttribute('data-expanded', !isExpanded ? 'true' : 'false');
+      }
+
+      document.addEventListener('click', function(event) {
+          const menu = document.getElementById('fluidMenu');
+          if (menu && menu.getAttribute('data-expanded') === 'true') {
+              if (!menu.contains(event.target)) {
+                  menu.setAttribute('data-expanded', 'false');
+              }
+          }
+      });
+
       function shareSimulatorLinkRoot() {
         const hostUrl = window.location.origin + "/linha-da-vida/";
         navigator.clipboard.writeText(hostUrl).then(() => {
