@@ -393,6 +393,17 @@
             margin-top: 4px;
         }
 
+        /* Small family cards for compact view */
+.family-card {
+    min-height: 80px;
+    padding: 8px;
+}
+.family-card h4 {
+    font-size: 0.9rem;
+}
+.family-card p, .family-card .family-age {
+    font-size: 0.8rem;
+}
         /* Custom Range Slider */
         .slider-wrapper {
             position: relative;
@@ -1356,6 +1367,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
+    <div class="compliance-banner" style="background:#050C1A;color:#fff;padding:8px 16px;display:flex;justify-content:space-between;align-items:center;font-size:12px;position:sticky;top:0;z-index:1000;">
+        <span>⚠️ Em conformidade com as normas XP &amp; Blue3. <a href="/knowledge/xp_compliance_norms/artifacts/compliance_guide.md" target="_blank" style="color:#ffd700;text-decoration:underline;">Leia o guia completo</a></span>
+        <button onclick="this.parentElement.style.display='none';" style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;">×</button>
+    </div>
  
     <!-- Header Corporativo -->
     <header>
@@ -2034,7 +2049,47 @@
             const titular = state.family.find(f => f.primary);
             const birthYear = titular ? titular.birth : 1978;
 
-            for (let yr = startYear; yr <= endYear; yr += 10) {
+            <!-- Grid de Idades Familiares -->
+<section class="family-grid" id="familyGrid">
+    <!-- Cards Familiares Gerados Dinamicamente -->
+</section>
+
+<!-- Timelines Paralelas -->
+<section class="timeline-section">
+    
+    <!-- Conquistas Passadas -->
+    <div class="timeline-box">
+        <h3>
+            <span>🏆 Conquistas do Passado</span>
+            <button class="btn-plus" onclick="addPastInput()" title="Adicionar Conquista">+</button>
+        </h3>
+        <div class="timeline-flow" id="pastTimelineFlow">
+            <!-- Preenchido via JS -->
+        </div>
+    </div>
+
+    <!-- Metas Futuras -->
+    <div class="timeline-box">
+        <h3>
+            <span>🎯 Metas Futuras Planejadas</span>
+            <button class="btn-plus" onclick="addFutureInput()" title="Adicionar Objetivo">+</button>
+        </h3>
+        <div class="timeline-flow" id="futureTimelineFlow">
+            <!-- Preenchido via JS -->
+        </div>
+    </div>
+
+</section>
+
+<!-- Mini Gráfico Patrimonial Integrado -->
+<div class="chart-wrapper" style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);">
+    <div class="chart-label" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">📈 Projeção de Evolução Patrimonial</span>
+        <span style="font-size: 8.5px; color: var(--gold); text-transform: none; font-weight: normal; letter-spacing: 0;">💡 Você pode clicar ou arrastar no gráfico para viajar no tempo!</span>
+    </div>
+    <svg id="patrimonioChart" xmlns="http://www.w3.org/2000/svg" style="height: 100px; margin-bottom: 6px;"></svg>
+    <div class="chart-year-markers" id="chartYearMarkers"></div>
+</div>
                 const age = yr - birthYear;
                 const span = document.createElement('span');
                 
