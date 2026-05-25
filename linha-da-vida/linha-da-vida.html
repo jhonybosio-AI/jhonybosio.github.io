@@ -1069,6 +1069,7 @@
             width: 100%;
             height: 80px;
             display: block;
+            cursor: col-resize;
         }
 
         .chart-year-markers {
@@ -1494,6 +1495,16 @@
                         <div class="slider-events" id="sliderEvents"></div>
                     </div>
                 </div>
+
+                <!-- Mini Gráfico Patrimonial Integrado -->
+                <div class="chart-wrapper" style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);">
+                    <div class="chart-label" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">📈 Projeção de Evolução Patrimonial</span>
+                        <span style="font-size: 8.5px; color: var(--gold); text-transform: none; font-weight: normal; letter-spacing: 0;">💡 Você pode clicar ou arrastar no gráfico para viajar no tempo!</span>
+                    </div>
+                    <svg id="patrimonioChart" xmlns="http://www.w3.org/2000/svg" style="height: 100px; margin-bottom: 6px;"></svg>
+                    <div class="chart-year-markers" id="chartYearMarkers"></div>
+                </div>
             </section>
 
             <!-- Grid de Idades Familiares -->
@@ -1593,12 +1604,6 @@
                             <span class="aporte-suffix">/ mês</span>
                         </div>
                     </div>
-                </div>
-                <!-- Mini Gráfico Patrimonial -->
-                <div class="chart-wrapper">
-                    <div class="chart-label">Evolução Patrimonial Projetada</div>
-                    <svg id="patrimonioChart" xmlns="http://www.w3.org/2000/svg"></svg>
-                    <div class="chart-year-markers" id="chartYearMarkers"></div>
                 </div>
             </section>
 
@@ -2033,7 +2038,7 @@
                 const age = yr - birthYear;
                 const span = document.createElement('span');
                 
-                const ageText = age >= 0 && age <= 100 ? `${age}a` : '--';
+                const ageText = age >= 0 ? `${age}a` : '--';
                 span.innerHTML = `${yr}<br><small style="font-size:7.5px; opacity:0.5">${ageText}</small>`;
                 ticksContainer.appendChild(span);
             }
@@ -2077,12 +2082,13 @@
 
             state.family.forEach(member => {
                 const age = year - member.birth;
+                const dynamicEmoji = getDynamicEmoji(member.emoji || "👤", member.role || "", age);
                 familyGrid.appendChild(createFamilyCard(
-                    member.emoji || "👤", 
+                    dynamicEmoji, 
                     member.name, 
                     member.role, 
                     age, 
-                    age >= 0 && age <= 100,
+                    age >= 0,
                     member.primary
                 ));
             });
@@ -2244,6 +2250,31 @@
             return card;
         }
 
+        // Escolhe o emoji do familiar dinamicamente de acordo com a idade simulada
+        function getDynamicEmoji(baseEmoji, role, age) {
+            if (age < 0) return "🥚"; // Ainda não nascido
+            
+            const r = role.toLowerCase();
+            const isFemale = r.includes("esposa") || 
+                             r.includes("filha") || 
+                             r.includes("mãe") || 
+                             r.includes("mae") ||
+                             r.includes("irmã") ||
+                             r.includes("irma") ||
+                             baseEmoji === "👩" || baseEmoji === "👧" || baseEmoji === "👵" || baseEmoji === "👶";
+                             
+            if (age < 2) return "👶"; // Bebê
+            if (age < 12) return isFemale ? "👧" : "👦"; // Criança
+            if (age < 18) return isFemale ? "👩‍🦰" : "🧑"; // Adolescente/Jovem
+            if (age < 60) {
+                if (r.includes("titular") || r.includes("pai") || r.includes("marido") || baseEmoji === "🧔") {
+                    return "🧔";
+                }
+                return isFemale ? "👩" : "👨"; // Adulto
+            }
+            return isFemale ? "👵" : "👴"; // Idoso
+        }
+
         // ── Mini Gráfico SVG ─────────────────────────────────────────
         function renderPatrimonioChart(basePatr, aporteAnual, taxa, currentYear) {
             const svg = document.getElementById('patrimonioChart');
@@ -2314,6 +2345,54 @@
                 const step = Math.ceil(years.length / 5);
                 const markers = years.filter((_, i) => i % step === 0 || i === years.length - 1);
                 markersEl.innerHTML = markers.map(y => `<span>${y}</span>`).join('');
+            }
+
+            // Ouvintes de clique e arrasto diretamente sobre o gráfico de patrimônio (linkando-o à linha do tempo)
+            if (!svg.dataset.hasEvents) {
+                svg.dataset.hasEvents = "true";
+                
+                const handleChartInteraction = (e) => {
+                    const rect = svg.getBoundingClientRect();
+                    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                    const x = clientX - rect.left;
+                    const pct = Math.max(0, Math.min(1, x / rect.width));
+                    
+                    const startYearValue = 2026;
+                    const currentYearValue = parseInt(document.getElementById('lifeSlider').value);
+                    const endYearValue = Math.max(2060, currentYearValue + 5);
+                    const range = endYearValue - startYearValue;
+                    const targetYear = Math.round(startYearValue + pct * range);
+                    
+                    if (targetYear >= 2000 && targetYear <= 2100) {
+                        const slider = document.getElementById('lifeSlider');
+                        slider.value = targetYear;
+                        handleSliderChange(targetYear);
+                    }
+                };
+
+                let isDragging = false;
+                svg.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    handleChartInteraction(e);
+                });
+                window.addEventListener('mousemove', (e) => {
+                    if (isDragging) handleChartInteraction(e);
+                });
+                window.addEventListener('mouseup', () => {
+                    isDragging = false;
+                });
+
+                // Suporte para dispositivos móveis
+                svg.addEventListener('touchstart', (e) => {
+                    isDragging = true;
+                    handleChartInteraction(e);
+                }, { passive: true });
+                window.addEventListener('touchmove', (e) => {
+                    if (isDragging) handleChartInteraction(e);
+                }, { passive: true });
+                window.addEventListener('touchend', () => {
+                    isDragging = false;
+                });
             }
         }
 
@@ -2412,8 +2491,9 @@
                 let familyText = "";
                 state.family.forEach(member => {
                     const age = year - member.birth;
-                    const displayAge = age >= 0 && age <= 100 ? `${age} anos` : "Não Nascido(a)";
-                    familyText += `• ${member.emoji || '👤'} *${member.name}* (${member.role}): ${displayAge}\n`;
+                    const displayAge = age >= 0 ? `${age} anos` : "Não Nascido(a)";
+                    const dynamicEmoji = getDynamicEmoji(member.emoji || '👤', member.role || '', age);
+                    familyText += `• ${dynamicEmoji} *${member.name}* (${member.role}): ${displayAge}\n`;
                 });
 
                 // Encontrar a meta ou conquista mais próxima desse ano
