@@ -393,17 +393,89 @@
             margin-top: 4px;
         }
 
-        /* Small family cards for compact view */
-.family-card {
-    min-height: 80px;
-    padding: 8px;
-}
-.family-card h4 {
-    font-size: 0.9rem;
-}
-.family-card p, .family-card .family-age {
-    font-size: 0.8rem;
-}
+        /* ── Family Grid compacto no topo ─────────────────────────── */
+        .family-grid-top {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 0;
+        }
+
+        .family-grid-top .family-card {
+            min-width: 100px;
+            max-width: 130px;
+            flex: 1 1 100px;
+            padding: 10px 8px;
+            border-radius: 10px;
+        }
+
+        .family-grid-top .avatar-ring {
+            width: 36px;
+            height: 36px;
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+
+        .family-grid-top .family-card h4 {
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .family-grid-top .family-card p {
+            font-size: 9px;
+            margin-bottom: 4px;
+        }
+
+        .family-grid-top .family-age {
+            font-size: 16px;
+        }
+
+        .family-grid-top .family-card.add-card {
+            min-height: 80px;
+            font-size: 11px;
+        }
+
+        .family-grid-top .family-card.add-card .plus-icon {
+            font-size: 20px;
+        }
+
+        /* Select de parentesco estilizado */
+        select.role-select {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            padding: 5px 8px;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 12px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            width: 100%;
+        }
+
+        select.role-select:focus {
+            border-color: var(--blue-cyan);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        select.role-select option {
+            background: #050C1A;
+            color: #fff;
+        }
+
+        /* Timeline compacta no topo */
+        .timeline-section-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-section-top {
+                grid-template-columns: 1fr;
+            }
+        }
         /* Custom Range Slider */
         .slider-wrapper {
             position: relative;
@@ -1486,8 +1558,40 @@
 
         <!-- Workspace Principal -->
         <main class="workspace">
-            
-            <!-- Linha de Controle Principal -->
+
+            <!-- ① Cards Familiares COMPACTOS no Topo -->
+            <section class="family-grid-top" id="familyGrid">
+                <!-- Cards Familiares Gerados Dinamicamente -->
+            </section>
+
+            <!-- ② Timelines Conquistas & Metas no Topo -->
+            <section class="timeline-section-top">
+
+                <!-- Conquistas Passadas -->
+                <div class="timeline-box">
+                    <h3>
+                        <span>🏆 Conquistas do Passado</span>
+                        <button class="btn-plus" onclick="addPastInput()" title="Adicionar Conquista">+</button>
+                    </h3>
+                    <div class="timeline-flow" id="pastTimelineFlow">
+                        <!-- Preenchido via JS -->
+                    </div>
+                </div>
+
+                <!-- Metas Futuras -->
+                <div class="timeline-box">
+                    <h3>
+                        <span>🎯 Metas Futuras Planejadas</span>
+                        <button class="btn-plus" onclick="addFutureInput()" title="Adicionar Objetivo">+</button>
+                    </h3>
+                    <div class="timeline-flow" id="futureTimelineFlow">
+                        <!-- Preenchido via JS -->
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ③ Linha de Controle Principal -->
             <section class="ruler-container">
                 <div class="ruler-header">
                     <div class="ruler-title">
@@ -1520,38 +1624,6 @@
                     <svg id="patrimonioChart" xmlns="http://www.w3.org/2000/svg" style="height: 100px; margin-bottom: 6px;"></svg>
                     <div class="chart-year-markers" id="chartYearMarkers"></div>
                 </div>
-            </section>
-
-            <!-- Grid de Idades Familiares -->
-            <section class="family-grid" id="familyGrid">
-                <!-- Cards Familiares Gerados Dinamicamente -->
-            </section>
-
-            <!-- Timelines Paralelas -->
-            <section class="timeline-section">
-                
-                <!-- Conquistas Passadas -->
-                <div class="timeline-box">
-                    <h3>
-                        <span>🏆 Conquistas do Passado</span>
-                        <button class="btn-plus" onclick="addPastInput()" title="Adicionar Conquista">+</button>
-                    </h3>
-                    <div class="timeline-flow" id="pastTimelineFlow">
-                        <!-- Preenchido via JS -->
-                    </div>
-                </div>
-
-                <!-- Metas Futuras -->
-                <div class="timeline-box">
-                    <h3>
-                        <span>🎯 Metas Futuras Planejadas</span>
-                        <button class="btn-plus" onclick="addFutureInput()" title="Adicionar Objetivo">+</button>
-                    </h3>
-                    <div class="timeline-flow" id="futureTimelineFlow">
-                        <!-- Preenchido via JS -->
-                    </div>
-                </div>
-
             </section>
 
             <!-- Momento Atual Panel -->
@@ -1909,18 +1981,61 @@
         }
 
         // Helpers de criação de linhas de input
+        // Mapeamento de parentesco → emoji base
+        const ROLE_EMOJI_MAP = {
+            'Titular':   '🧔',
+            'Cônjuge':   '👩',
+            'Esposa':    '👩',
+            'Marido':    '👨',
+            'Filho':     '👦',
+            'Filha':     '👧',
+            'Bebê':      '👶',
+            'Pet':       '🐕',
+            'Cão':       '🐕',
+            'Cachorro':  '🐕',
+            'Gato':      '🐈',
+            'Avô':       '👴',
+            'Avó':       '👵',
+            'Pai':       '👨',
+            'Mãe':       '👩',
+            'Irmão':     '🧑',
+            'Irmã':      '👩‍🦰',
+            'Sobrinho':  '👦',
+            'Sobrinha':  '👧',
+            'Outro':     '👤'
+        };
+
+        function getRoleEmoji(role) {
+            return ROLE_EMOJI_MAP[role] || '👤';
+        }
+
         function createFamilyInputRow(member) {
             const div = document.createElement('div');
             div.className = "dynamic-row";
             div.dataset.id = member.id;
 
+            const roleOptions = Object.keys(ROLE_EMOJI_MAP).map(r =>
+                `<option value="${r}" ${member.role === r ? 'selected' : ''}>${ROLE_EMOJI_MAP[r]} ${r}</option>`
+            ).join('');
+
             div.innerHTML = `
-                <input type="text" value="${member.name}" placeholder="Nome" style="width: 45%;" onchange="updateMemberData('${member.id}', 'name', this.value)">
-                <input type="text" value="${member.birth}" placeholder="Ano Nasc" style="width: 25%; font-family: 'JetBrains Mono';" onchange="updateMemberData('${member.id}', 'birth', parseInt(this.value.replace(/\\D/g,'')) || 1980)">
-                <input type="text" value="${member.role}" placeholder="Parentesco" style="width: 22%;" onchange="updateMemberData('${member.id}', 'role', this.value)">
+                <input type="text" value="${member.name}" placeholder="Nome" style="width: 38%;" onchange="updateMemberData('${member.id}', 'name', this.value)">
+                <input type="text" value="${member.birth}" placeholder="Ano Nasc" style="width: 22%; font-family: 'JetBrains Mono';" onchange="updateMemberData('${member.id}', 'birth', parseInt(this.value.replace(/\\D/g,'')) || 1980)">
+                <select class="role-select" style="width: 30%;" onchange="updateMemberRole('${member.id}', this.value)">
+                    ${roleOptions}
+                </select>
                 ${member.primary ? '' : `<button class="btn-remove" onclick="removeMemberRow('${member.id}')">×</button>`}
             `;
             return div;
+        }
+
+        function updateMemberRole(id, role) {
+            const member = state.family.find(f => f.id === id);
+            if (member) {
+                member.role = role;
+                member.emoji = getRoleEmoji(role);
+            }
+            updateLifeRuler();
         }
 
         function createPastInputRow(item) {
@@ -2042,59 +2157,19 @@
         function buildTicks() {
             const ticksContainer = document.getElementById('rulerTicks');
             ticksContainer.innerHTML = '';
-            
+
             const startYear = 2000;
             const endYear = 2100;
-            
+            const step = 5; // ← ticks de 5 em 5 anos
+
             const titular = state.family.find(f => f.primary);
             const birthYear = titular ? titular.birth : 1978;
 
-            <!-- Grid de Idades Familiares -->
-<section class="family-grid" id="familyGrid">
-    <!-- Cards Familiares Gerados Dinamicamente -->
-</section>
-
-<!-- Timelines Paralelas -->
-<section class="timeline-section">
-    
-    <!-- Conquistas Passadas -->
-    <div class="timeline-box">
-        <h3>
-            <span>🏆 Conquistas do Passado</span>
-            <button class="btn-plus" onclick="addPastInput()" title="Adicionar Conquista">+</button>
-        </h3>
-        <div class="timeline-flow" id="pastTimelineFlow">
-            <!-- Preenchido via JS -->
-        </div>
-    </div>
-
-    <!-- Metas Futuras -->
-    <div class="timeline-box">
-        <h3>
-            <span>🎯 Metas Futuras Planejadas</span>
-            <button class="btn-plus" onclick="addFutureInput()" title="Adicionar Objetivo">+</button>
-        </h3>
-        <div class="timeline-flow" id="futureTimelineFlow">
-            <!-- Preenchido via JS -->
-        </div>
-    </div>
-
-</section>
-
-<!-- Mini Gráfico Patrimonial Integrado -->
-<div class="chart-wrapper" style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);">
-    <div class="chart-label" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-        <span style="font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;">📈 Projeção de Evolução Patrimonial</span>
-        <span style="font-size: 8.5px; color: var(--gold); text-transform: none; font-weight: normal; letter-spacing: 0;">💡 Você pode clicar ou arrastar no gráfico para viajar no tempo!</span>
-    </div>
-    <svg id="patrimonioChart" xmlns="http://www.w3.org/2000/svg" style="height: 100px; margin-bottom: 6px;"></svg>
-    <div class="chart-year-markers" id="chartYearMarkers"></div>
-</div>
+            for (let yr = startYear; yr <= endYear; yr += step) {
                 const age = yr - birthYear;
                 const span = document.createElement('span');
-                
                 const ageText = age >= 0 ? `${age}a` : '--';
-                span.innerHTML = `${yr}<br><small style="font-size:7.5px; opacity:0.5">${ageText}</small>`;
+                span.innerHTML = `${yr}<br><small style="font-size:7px; opacity:0.45">${ageText}</small>`;
                 ticksContainer.appendChild(span);
             }
         }
@@ -2308,16 +2383,27 @@
         // Escolhe o emoji do familiar dinamicamente de acordo com a idade simulada
         function getDynamicEmoji(baseEmoji, role, age) {
             if (age < 0) return "🥚"; // Ainda não nascido
-            
+
             const r = role.toLowerCase();
-            const isFemale = r.includes("esposa") || 
-                             r.includes("filha") || 
-                             r.includes("mãe") || 
+
+            // Pets: manter o emoji base sempre (nunca dar avatar humano)
+            const isPet = r.includes("pet") || r.includes("cão") || r.includes("cao") ||
+                          r.includes("cachorro") || r.includes("gato") ||
+                          baseEmoji === "🐕" || baseEmoji === "🐈" || baseEmoji === "🐩";
+            if (isPet) return baseEmoji;
+
+            const isFemale = r.includes("esposa") ||
+                             r.includes("filha") ||
+                             r.includes("mãe") ||
                              r.includes("mae") ||
                              r.includes("irmã") ||
                              r.includes("irma") ||
+                             r.includes("cônjuge") ||
+                             r.includes("conjuge") ||
+                             r.includes("avó") ||
+                             r.includes("avo") ||
                              baseEmoji === "👩" || baseEmoji === "👧" || baseEmoji === "👵" || baseEmoji === "👶";
-                             
+
             if (age < 2) return "👶"; // Bebê
             if (age < 12) return isFemale ? "👧" : "👦"; // Criança
             if (age < 18) return isFemale ? "👩‍🦰" : "🧑"; // Adolescente/Jovem

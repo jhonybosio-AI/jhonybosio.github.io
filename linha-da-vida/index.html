@@ -528,44 +528,47 @@
             opacity: 1;
         }
 
-        /* ── Family Grid ────────────────────────────────:::::::::::: */
+        /* ── Family Grid Compacto ── */
         .family-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
         }
 
         .family-card {
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 8px;
+            padding: 8px 12px;
             display: flex;
-            flex-direction: column;
+            flex-direction: row; /* Horizontal! */
             align-items: center;
-            text-align: center;
+            text-align: left;
+            gap: 10px;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            min-height: 52px;
         }
 
         .family-card:hover {
             border-color: rgba(0, 209, 255, 0.2);
             background: rgba(255, 255, 255, 0.02);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         .avatar-ring {
-            width: 48px;
-            height: 48px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            border: 2px solid var(--border-glass);
+            border: 1px solid var(--border-glass);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            margin-bottom: 10px;
+            font-size: 14px;
+            margin-bottom: 0;
             background: rgba(255, 255, 255, 0.02);
+            flex-shrink: 0;
         }
 
         .family-card.active .avatar-ring {
@@ -581,25 +584,39 @@
         }
 
         .family-card h4 {
-            font-size: 16px;
+            font-size: 13px;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 2px;
+            margin-bottom: 0px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 80px;
         }
 
         .family-card p {
-            font-size: 12.5px;
+            font-size: 9px;
             color: rgba(255, 255, 255, 0.4);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 8px;
+            letter-spacing: 0.03em;
+            margin-bottom: 0px;
+        }
+
+        .family-info-col {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
+            min-width: 0;
         }
 
         .family-age {
-            font-size: 24px;
+            font-size: 14px;
             font-weight: 800;
             font-family: 'JetBrains Mono', monospace;
             color: #fff;
+            margin-left: auto;
+            white-space: nowrap;
         }
 
         .family-age.active {
@@ -616,19 +633,22 @@
             background: rgba(197, 168, 128, 0.01);
             justify-content: center;
             cursor: pointer;
-            min-height: 140px;
+            min-height: 52px;
+            padding: 8px 12px;
+            flex-direction: row;
+            gap: 8px;
         }
 
         .family-card.add-card:hover {
             border-color: var(--gold);
             background: rgba(197, 168, 128, 0.04);
-            box-shadow: 0 0 15px rgba(197, 168, 128, 0.1);
+            box-shadow: 0 0 10px rgba(197, 168, 128, 0.1);
         }
 
         .family-card.add-card .plus-icon {
-            font-size: 28px;
+            font-size: 16px;
             color: var(--gold);
-            margin-bottom: 6px;
+            margin-bottom: 0px;
             transition: all 0.3s;
         }
 
@@ -638,7 +658,7 @@
         }
 
         .family-card.add-card span {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 800;
             color: rgba(255,255,255,0.6);
             text-transform: uppercase;
@@ -1472,6 +1492,38 @@
         <!-- Workspace Principal -->
         <main class="workspace">
             
+            <!-- Grid de Idades Familiares (NO TOPO E COMPACTO) -->
+            <section class="family-grid" id="familyGrid" style="margin-bottom: 20px;">
+                <!-- Cards Familiares Gerados Dinamicamente -->
+            </section>
+
+            <!-- Timelines Paralelas -->
+            <section class="timeline-section">
+                
+                <!-- Conquistas Passadas -->
+                <div class="timeline-box">
+                    <h3>
+                        <span>🏆 Conquistas do Passado</span>
+                        <button class="btn-plus" onclick="addPastInput()" title="Adicionar Conquista">+</button>
+                    </h3>
+                    <div class="timeline-flow" id="pastTimelineFlow">
+                        <!-- Preenchido via JS -->
+                    </div>
+                </div>
+
+                <!-- Metas Futuras -->
+                <div class="timeline-box">
+                    <h3>
+                        <span>🎯 Metas Futuras Planejadas</span>
+                        <button class="btn-plus" onclick="addFutureInput()" title="Adicionar Objetivo">+</button>
+                    </h3>
+                    <div class="timeline-flow" id="futureTimelineFlow">
+                        <!-- Preenchido via JS -->
+                    </div>
+                </div>
+
+            </section>
+
             <!-- Linha de Controle Principal -->
             <section class="ruler-container">
                 <div class="ruler-header">
@@ -1507,37 +1559,7 @@
                 </div>
             </section>
 
-            <!-- Grid de Idades Familiares -->
-            <section class="family-grid" id="familyGrid">
-                <!-- Cards Familiares Gerados Dinamicamente -->
-            </section>
 
-            <!-- Timelines Paralelas -->
-            <section class="timeline-section">
-                
-                <!-- Conquistas Passadas -->
-                <div class="timeline-box">
-                    <h3>
-                        <span>🏆 Conquistas do Passado</span>
-                        <button class="btn-plus" onclick="addPastInput()" title="Adicionar Conquista">+</button>
-                    </h3>
-                    <div class="timeline-flow" id="pastTimelineFlow">
-                        <!-- Preenchido via JS -->
-                    </div>
-                </div>
-
-                <!-- Metas Futuras -->
-                <div class="timeline-box">
-                    <h3>
-                        <span>🎯 Metas Futuras Planejadas</span>
-                        <button class="btn-plus" onclick="addFutureInput()" title="Adicionar Objetivo">+</button>
-                    </h3>
-                    <div class="timeline-flow" id="futureTimelineFlow">
-                        <!-- Preenchido via JS -->
-                    </div>
-                </div>
-
-            </section>
 
             <!-- Momento Atual Panel -->
             <section class="momento-panel" id="momentoPanel">
@@ -1894,16 +1916,67 @@
         }
 
         // Helpers de criação de linhas de input
+        // Mapeamento de parentesco → emoji base
+        const ROLE_EMOJI_MAP = {
+            'Titular':   '🧔',
+            'Cônjuge':   '👩',
+            'Esposa':    '👩',
+            'Marido':    '👨',
+            'Filho':     '👦',
+            'Filha':     '👧',
+            'Bebê':      '👶',
+            'Pet':       '🐕',
+            'Cão':       '🐕',
+            'Cachorro':  '🐕',
+            'Gato':      '🐈',
+            'Avô':       '👴',
+            'Avó':       '👵',
+            'Pai':       '👨',
+            'Mãe':       '👩',
+            'Irmão':     '🧑',
+            'Irmã':      '👩‍🦰',
+            'Sobrinho':  '👦',
+            'Sobrinha':  '👧',
+            'Outro':     '👤'
+        };
+
+        function getRoleEmoji(role) {
+            return ROLE_EMOJI_MAP[role] || '👤';
+        }
+
+        function updateMemberRole(id, role) {
+            const member = state.family.find(f => f.id === id);
+            if (member) {
+                member.role = role;
+                member.emoji = getRoleEmoji(role);
+            }
+            updateLifeRuler();
+        }
+
         function createFamilyInputRow(member) {
             const div = document.createElement('div');
             div.className = "dynamic-row";
             div.dataset.id = member.id;
 
+            // Ajustar valores legados para baterem com o select
+            let normalizedRole = member.role;
+            if (member.role === 'Conj' || member.role === 'Cônjuge') normalizedRole = 'Cônjuge';
+            if (member.role === 'Cacho' || member.role === 'Cachorro' || member.role === 'Pet') normalizedRole = 'Pet';
+
             div.innerHTML = `
-                <input type="text" value="${member.name}" placeholder="Nome" style="width: 45%;" onchange="updateMemberData('${member.id}', 'name', this.value)">
-                <input type="text" value="${member.birth}" placeholder="Ano Nasc" style="width: 25%; font-family: 'JetBrains Mono';" onchange="updateMemberData('${member.id}', 'birth', parseInt(this.value.replace(/\\D/g,'')) || 1980)">
-                <input type="text" value="${member.role}" placeholder="Parentesco" style="width: 22%;" onchange="updateMemberData('${member.id}', 'role', this.value)">
-                ${member.primary ? '' : `<button class="btn-remove" onclick="removeMemberRow('${member.id}')">×</button>`}
+                <input type="text" value="${member.name}" placeholder="Nome" style="width: 40%;" onchange="updateMemberData('${member.id}', 'name', this.value)">
+                <input type="text" value="${member.birth}" placeholder="Ano" style="width: 20%; font-family: 'JetBrains Mono';" onchange="updateMemberData('${member.id}', 'birth', parseInt(this.value.replace(/\D/g,'')) || 1980)">
+                <select style="width: 32%; background: rgba(5, 12, 26, 0.6); color: #fff; border: 1px solid var(--border-glass); border-radius: 4px; padding: 4px; font-size: 11px;" onchange="updateMemberRole('${member.id}', this.value)">
+                    <option value="Titular" ${normalizedRole === 'Titular' ? 'selected' : ''}>Titular</option>
+                    <option value="Cônjuge" ${normalizedRole === 'Cônjuge' ? 'selected' : ''}>Cônjuge</option>
+                    <option value="Filho" ${normalizedRole === 'Filho' ? 'selected' : ''}>Filho</option>
+                    <option value="Filha" ${normalizedRole === 'Filha' ? 'selected' : ''}>Filha</option>
+                    <option value="Avô" ${normalizedRole === 'Avô' ? 'selected' : ''}>Avô</option>
+                    <option value="Avó" ${normalizedRole === 'Avó' ? 'selected' : ''}>Avó</option>
+                    <option value="Pet" ${normalizedRole === 'Pet' ? 'selected' : ''}>Pet</option>
+                    <option value="Dependente" ${normalizedRole === 'Dependente' ? 'selected' : ''}>Dependente</option>
+                </select>
+                ${member.primary ? '' : `<button class="btn-remove" onclick="removeMemberRow('${member.id}')" style="margin-left: 2px;">×</button>`}
             `;
             return div;
         }
@@ -2030,16 +2103,17 @@
             
             const startYear = 2000;
             const endYear = 2100;
+            const step = 5; // ← ticks de 5 em 5 anos
             
             const titular = state.family.find(f => f.primary);
             const birthYear = titular ? titular.birth : 1978;
 
-            for (let yr = startYear; yr <= endYear; yr += 10) {
+            for (let yr = startYear; yr <= endYear; yr += step) {
                 const age = yr - birthYear;
                 const span = document.createElement('span');
                 
                 const ageText = age >= 0 ? `${age}a` : '--';
-                span.innerHTML = `${yr}<br><small style="font-size:7.5px; opacity:0.5">${ageText}</small>`;
+                span.innerHTML = `${yr}<br><small style="font-size:7px; opacity:0.45">${ageText}</small>`;
                 ticksContainer.appendChild(span);
             }
         }
@@ -2243,8 +2317,10 @@
 
             card.innerHTML = `
                 <div class="avatar-ring">${emoji}</div>
-                <h4>${name}</h4>
-                <p>${role}</p>
+                <div class="family-info-col">
+                    <h4>${name}</h4>
+                    <p>${role}</p>
+                </div>
                 <div class="family-age ${wasBorn ? 'active' : ''}">${displayAge}</div>
             `;
             return card;
