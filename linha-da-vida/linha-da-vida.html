@@ -546,6 +546,22 @@
             box-shadow: 0 0 20px var(--blue-cyan), 0 0 40px rgba(0, 209, 255, 0.3);
         }
 
+        #rentabilidadeSlider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 2px solid var(--navy-dark);
+            box-shadow: 0 0 10px rgba(197, 168, 128, 0.6);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        #rentabilidadeSlider::-webkit-slider-thumb:active {
+            background: var(--blue-cyan);
+            box-shadow: 0 0 10px var(--blue-cyan);
+        }
+
         /* Eventos marcados no track */
         .slider-events {
             position: absolute;
@@ -1593,14 +1609,37 @@
 
             <!-- ③ Linha de Controle Principal -->
             <section class="ruler-container">
-                <div class="ruler-header">
-                    <div class="ruler-title">
+                <div class="ruler-header" style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 24px;">
+                    <div class="ruler-title" style="flex: 1; min-width: 280px;">
                         <h2>Sua Linha do Tempo Familiar</h2>
                         <p>Desloque o marcador para analisar a evolução de idade e objetivos no tempo de 2000 a 2100.</p>
+                        <!-- Badge e Subtítulo dinâmicos integrados -->
+                        <div class="ruler-momento-info" style="margin-top: 10px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <span class="ruler-momento-badge" id="momentoTitle" style="background: rgba(197, 168, 128, 0.1); border: 1px solid rgba(197, 168, 128, 0.25); color: var(--gold); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">📍 Você está aqui — 2026</span>
+                            <span class="ruler-momento-sub" id="momentoSubtitle" style="font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 500;">-- anos</span>
+                        </div>
                     </div>
-                    <div class="current-indicator">
-                        <div class="current-year" id="labelCurrentYear">2026</div>
-                        <div class="current-age-text" id="labelClientAge">-- anos (Você)</div>
+                    <div class="current-indicator-group" style="display: flex; align-items: center; gap: 24px;">
+                        <div class="current-indicator" style="text-align: right;">
+                            <div class="current-year" id="labelCurrentYear">2026</div>
+                            <div class="current-age-text" id="labelClientAge">-- anos (Você)</div>
+                        </div>
+                        <div class="ruler-progress-area" style="display: flex; flex-direction: column; align-items: flex-end;">
+                            <div style="font-size: 9px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Rumo à liberdade</div>
+                            <div class="progress-ring-container" style="display: flex; align-items: center; gap: 8px;">
+                                <svg width="36" height="36" class="progress-ring" viewBox="0 0 52 52">
+                                    <defs>
+                                        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stop-color="var(--gold)"/>
+                                            <stop offset="100%" stop-color="var(--blue-cyan)"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <circle class="progress-ring-track" cx="26" cy="26" r="22"/>
+                                    <circle class="progress-ring-fill" id="progressRingFill" cx="26" cy="26" r="22"/>
+                                </svg>
+                                <div class="progress-ring-pct" id="progressRingPct" style="font-size: 16px;">0%</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1626,32 +1665,6 @@
                 </div>
             </section>
 
-            <!-- Momento Atual Panel -->
-            <section class="momento-panel" id="momentoPanel">
-                <div class="momento-year-badge" id="momentoYear">2026</div>
-                <div class="momento-divider"></div>
-                <div class="momento-info">
-                    <div class="momento-title" id="momentoTitle">Sua posição atual na linha do tempo</div>
-                    <div class="momento-subtitle" id="momentoSubtitle">Arraste a linha para explorar o futuro</div>
-                </div>
-                <div class="momento-progress-area">
-                    <div class="momento-progress-label">Rumo à liberdade</div>
-                    <div class="progress-ring-container">
-                        <svg width="52" height="52" class="progress-ring" viewBox="0 0 52 52">
-                            <defs>
-                                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="var(--gold)"/>
-                                    <stop offset="100%" stop-color="var(--blue-cyan)"/>
-                                </linearGradient>
-                            </defs>
-                            <circle class="progress-ring-track" cx="26" cy="26" r="22"/>
-                            <circle class="progress-ring-fill" id="progressRingFill" cx="26" cy="26" r="22"/>
-                        </svg>
-                        <div class="progress-ring-pct" id="progressRingPct">0%</div>
-                    </div>
-                </div>
-            </section>
-
             <!-- Módulo GPS Financeiro -->
             <section class="gps-module">
                 <div class="gps-header">
@@ -1667,27 +1680,38 @@
                             <div class="gps-progress-fill" id="gpsProgressFill"></div>
                         </div>
                     </div>
-                    <div class="gps-card" style="display: flex; flex-direction: column; justify-content: space-between;">
-                        <div class="gps-card-label">Rendimento Real Almejado</div>
-                        <div class="rentabilidade-selector">
-                            <button class="rent-btn" id="rentConservador" onclick="changeRentabilidadeProfile('CONSERVADOR')">
-                                <span class="rent-title">Conservador</span>
-                                <span class="rent-rate">IPCA +3%</span>
+                    <div class="gps-card" style="display: flex; flex-direction: column; justify-content: space-between; gap: 8px;">
+                        <div class="gps-card-label" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <span>Rendimento Real Almejado</span>
+                            <strong style="color: var(--gold); font-family: 'JetBrains Mono', monospace;" id="rentabilidadeValorDisplay">IPCA + 4.0%</strong>
+                        </div>
+                        
+                        <!-- Botões Rápidos (Presets) compactos -->
+                        <div class="rentabilidade-selector" style="display: flex; gap: 6px; margin: 4px 0;">
+                            <button class="rent-btn" id="rentConservador" onclick="applyRentabilidadePreset(3.0)" style="flex: 1; padding: 6px 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: auto;">
+                                <span class="rent-title" style="font-size: 10px; font-weight: 700; text-transform: uppercase;">Conservador</span>
                             </button>
-                            <button class="rent-btn" id="rentModerado" onclick="changeRentabilidadeProfile('MODERADO')">
-                                <span class="rent-title">Moderado</span>
-                                <span class="rent-rate">IPCA +4%</span>
+                            <button class="rent-btn" id="rentModerado" onclick="applyRentabilidadePreset(4.0)" style="flex: 1; padding: 6px 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: auto;">
+                                <span class="rent-title" style="font-size: 10px; font-weight: 700; text-transform: uppercase;">Moderado</span>
                             </button>
-                            <button class="rent-btn" id="rentArrojado" onclick="changeRentabilidadeProfile('ARROJADO')">
-                                <span class="rent-title">Arrojado</span>
-                                <span class="rent-rate">IPCA +5%</span>
+                            <button class="rent-btn" id="rentArrojado" onclick="applyRentabilidadePreset(5.0)" style="flex: 1; padding: 6px 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: auto;">
+                                <span class="rent-title" style="font-size: 10px; font-weight: 700; text-transform: uppercase;">Arrojado</span>
                             </button>
+                        </div>
+                        
+                        <!-- Range Slider Dinâmico e Elegante -->
+                        <div class="rentabilidade-slider-container" style="display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 2px;">
+                            <span style="font-size: 9px; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace;">1%</span>
+                            <input type="range" id="rentabilidadeSlider" min="1" max="10" step="0.1" value="4.0" 
+                                   style="-webkit-appearance: none; width: 100%; height: 4px; border-radius: 99px; background: rgba(255, 255, 255, 0.05); outline: none; border: 1px solid var(--border-glass); cursor: pointer;"
+                                   oninput="handleRentabilidadeSlider(this.value)">
+                            <span style="font-size: 9px; color: rgba(255,255,255,0.4); font-family: 'JetBrains Mono', monospace;">10%</span>
                         </div>
                     </div>
                     <div class="gps-card">
                         <div class="gps-card-label">Aporte Mensal</div>
                         <div class="aporte-input-wrapper">
-                            <input type="text" class="aporte-input" id="aporteInput" placeholder="R$ 5.000" oninput="handleAporteInput(this)" onchange="handleAporteInput(this)">
+                            <input type="text" class="aporte-input" id="aporteInput" placeholder="R$ 5.000" oninput="handleAporteInput(this)" onfocus="handleAporteFocus(this)" onblur="handleAporteBlur(this)">
                             <span class="aporte-suffix">/ mês</span>
                         </div>
                     </div>
@@ -1785,7 +1809,7 @@
             name: "",
             patrXP: 0,
             patrOutros: 0,
-            perfilRentabilidade: "MODERADO",
+            rentabilidadeReal: 0.04, // Projeção padrão Moderado (IPCA+4)
             family: [
                 { id: "f1", name: "", birth: 1990, role: "Titular", emoji: "🧔", primary: true }
             ],
@@ -1806,7 +1830,7 @@
                 name: "",
                 patrXP: 0,
                 patrOutros: 0,
-                perfilRentabilidade: "MODERADO",
+                rentabilidadeReal: 0.04,
                 family: [
                     { id: "f1", name: "", birth: 1990, role: "Titular", emoji: "🧔", primary: true }
                 ],
@@ -1824,40 +1848,56 @@
             buildSliderEvents();
 
             // Inicializar input de aporte
-            document.getElementById('aporteInput').value = formatMoney(aporteAtual);
+            document.getElementById('aporteInput').value = formatAporte(aporteAtual);
 
-            // Inicializar botões de perfil de rentabilidade
-            state.perfilRentabilidade = state.perfilRentabilidade || 'MODERADO';
-            document.querySelectorAll('.rent-btn').forEach(btn => btn.classList.remove('active'));
-            if (state.perfilRentabilidade === 'CONSERVADOR') {
-                document.getElementById('rentConservador').classList.add('active');
-            } else if (state.perfilRentabilidade === 'ARROJADO') {
-                document.getElementById('rentArrojado').classList.add('active');
-            } else {
-                document.getElementById('rentModerado').classList.add('active');
-            }
+            // Inicializar slider e display de rentabilidade
+            const rentValPercent = state.rentabilidadeReal * 100;
+            document.getElementById('rentabilidadeSlider').value = rentValPercent.toFixed(1);
+            updateRentDisplayAndButtons(rentValPercent);
 
             updateDashboard(2026);
         });
 
-                // ── Alterar Perfil de Rentabilidade Dinamicamente ─────────────
-        function changeRentabilidadeProfile(profile) {
-            state.perfilRentabilidade = profile;
+        // ── Funções Dinâmicas do Slider e Presets de Rentabilidade Real ──────
+        function applyRentabilidadePreset(valPercent) {
+            state.rentabilidadeReal = valPercent / 100;
+            document.getElementById('rentabilidadeSlider').value = valPercent;
+            updateRentDisplayAndButtons(valPercent);
             
-            // Atualizar classes ativas nos botões
-            document.querySelectorAll('.rent-btn').forEach(btn => btn.classList.remove('active'));
-            if (profile === 'CONSERVADOR') {
-                document.getElementById('rentConservador').classList.add('active');
-            } else if (profile === 'MODERADO') {
-                document.getElementById('rentModerado').classList.add('active');
-            } else if (profile === 'ARROJADO') {
-                document.getElementById('rentArrojado').classList.add('active');
-            }
-            
-            // Forçar recálculo da simulação e salvar dados
             const currentYear = parseInt(document.getElementById('lifeSlider').value);
             updateDashboard(currentYear);
             scheduleAutoSave();
+        }
+
+        function handleRentabilidadeSlider(valStr) {
+            const valPercent = parseFloat(valStr);
+            state.rentabilidadeReal = valPercent / 100;
+            updateRentDisplayAndButtons(valPercent);
+            
+            const currentYear = parseInt(document.getElementById('lifeSlider').value);
+            updateDashboard(currentYear);
+            scheduleAutoSave();
+        }
+
+        function updateRentDisplayAndButtons(valPercent) {
+            // Atualizar o display de rentabilidade
+            const display = document.getElementById('rentabilidadeValorDisplay');
+            if (display) {
+                display.innerText = `IPCA + ${valPercent.toFixed(1)}%`;
+            }
+            
+            // Atualizar classes ativas dos botões preset
+            document.getElementById('rentConservador').classList.remove('active');
+            document.getElementById('rentModerado').classList.remove('active');
+            document.getElementById('rentArrojado').classList.remove('active');
+            
+            if (valPercent === 3.0) {
+                document.getElementById('rentConservador').classList.add('active');
+            } else if (valPercent === 4.0) {
+                document.getElementById('rentModerado').classList.add('active');
+            } else if (valPercent === 5.0) {
+                document.getElementById('rentArrojado').classList.add('active');
+            }
         }
 
         // ── Formatação de Moedas Real (R$) ───────────────────────────
@@ -1907,14 +1947,32 @@
             }, 1500);
         }
 
+        // Formatador customizado para o Aporte Mensal (incluindo negativos)
+        function formatAporte(value) {
+            const sign = value < 0 ? "-" : "";
+            const absVal = Math.abs(value);
+            return sign + "R$ " + absVal.toLocaleString("pt-BR", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+        }
+
         // Handler do campo de aporte editável
         function handleAporteInput(input) {
-            const raw = parseMoney(input.value);
-            if (!isNaN(raw) && raw >= 0) {
+            let text = input.value;
+            if (text === "-") return;
+            
+            const raw = parseMoney(text);
+            if (!isNaN(raw)) {
                 aporteAtual = raw;
                 const currentYear = parseInt(document.getElementById('lifeSlider').value);
                 updateDashboard(currentYear);
             }
+        }
+
+        function handleAporteFocus(input) {
+            input.value = aporteAtual;
+        }
+
+        function handleAporteBlur(input) {
+            input.value = formatAporte(aporteAtual);
         }
 
         // Constrói os marcadores de eventos no track do slider
@@ -2290,13 +2348,8 @@
             const targetWealth = 5000000;
             const aporteAnual = aporteAtual * 12;
             
-            // Rentabilidade real calculada dinamicamente com base no perfil de rentabilidade
-            let taxaReal = 0.04; // Moderado por padrão (IPCA+4)
-            if (state.perfilRentabilidade === 'CONSERVADOR') {
-                taxaReal = 0.03;
-            } else if (state.perfilRentabilidade === 'ARROJADO') {
-                taxaReal = 0.05;
-            }
+            // Rentabilidade real recuperada diretamente do estado flexível
+            const taxaReal = state.rentabilidadeReal !== undefined ? state.rentabilidadeReal : 0.04;
             
             const yearsElapsed = year - 2026;
             
@@ -2314,7 +2367,7 @@
             document.getElementById('gpsPatrimonio').innerText = formatMoney(simulatedWealth);
             
             // Barra de Progresso Financeiro
-            const progressPercent = Math.min((simulatedWealth / targetWealth) * 100, 100);
+            const progressPercent = Math.max(0, Math.min((simulatedWealth / targetWealth) * 100, 100));
             document.getElementById('gpsProgressFill').style.width = `${progressPercent}%`;
 
             // ── Anel de Progresso (Momento Panel) ───────────────────────
@@ -2625,7 +2678,8 @@
                 const name = (titular && titular.name) ? titular.name : 'Cliente';
                 const totalSimulated = document.getElementById('gpsPatrimonio').innerText;
                 const progressPct = document.getElementById('progressRingPct') ? document.getElementById('progressRingPct').innerText : '0%';
-                const perfil = state.perfilRentabilidade || 'MODERADO';
+                const rentValPercent = state.rentabilidadeReal !== undefined ? (state.rentabilidadeReal * 100).toFixed(1) : "4.0";
+                const perfil = `IPCA + ${rentValPercent}%`;
                 const aporte = formatMoney(aporteAtual);
 
                 // Montar o núcleo familiar e as idades correspondentes ao ano selecionado
