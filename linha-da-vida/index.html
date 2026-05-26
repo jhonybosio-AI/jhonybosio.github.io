@@ -591,12 +591,18 @@
             border-color: var(--blue-cyan);
             box-shadow: 0 0 10px rgba(0, 209, 255, 0.2);
             background: rgba(0, 209, 255, 0.05);
+            color: var(--blue-cyan);
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .family-card.primary.active .avatar-ring {
             border-color: var(--gold);
             box-shadow: 0 0 10px rgba(197, 168, 128, 0.2);
             background: rgba(197, 168, 128, 0.05);
+            color: var(--gold);
+            font-weight: 800;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         .family-card h4 {
@@ -1419,9 +1425,6 @@
             <button class="btn-logout" onclick="clearSimulator()" style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-glass); font-size: 11px; padding: 8px 16px; border-radius: 99px; cursor: pointer; color: #fff;" onmouseover="this.style.background='rgba(255, 59, 48, 0.1)'; this.style.borderColor='rgba(255, 59, 48, 0.3)';" onmouseout="this.style.background='rgba(255,255,255,0.04)'; this.style.borderColor='var(--border-glass)';">
                 <span>Limpar Campos</span>
             </button>
-
-            <!-- Voltar ao Hub -->
-            <a href="../hub/index.html" class="btn-hub" style="margin-right: 8px; text-decoration: none;">Voltar ao Hub</a>
         </div>
     </header>
 
@@ -1450,7 +1453,7 @@
                     <div style="font-size: 10px; color: rgba(255,255,255,0.4); margin-top: 10px; text-align: right;">
                         Total Consolidado: <strong style="color: var(--blue-cyan);" id="labelTotalPatr">R$ 0,00</strong>
                     </div>
-                    <div style="font-size: 12.5px; color: #ffffff; margin-top: 12px; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                    <div style="font-size: 10.5px; color: #ffffff; margin-top: 12px; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
                         💡 <strong>Largada Financeira:</strong> Informe o patrimônio inicial alocado na XP e em outras instituições. Ele atua como base de partida para o cálculo do crescimento de juros reais.
                     </div>
                 </div>
@@ -1465,7 +1468,7 @@
                 <div class="dynamic-rows" id="familyInputsArea">
                     <!-- Gerado dinamicamente via JS -->
                 </div>
-                <div style="font-size: 12.5px; color: #ffffff; margin-top: 8px; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                <div style="font-size: 10.5px; color: #ffffff; margin-top: 8px; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
                     💡 <strong>Ciclos de Vida:</strong> Mapeie sua família. O simulador reajusta dinamicamente a idade de cada dependente ao longo dos anos para alinhar conquistas em comum.
                 </div>
             </div>
@@ -1479,7 +1482,7 @@
                 <div class="dynamic-rows" id="pastInputsArea">
                     <!-- Gerado dinamicamente via JS -->
                 </div>
-                <div style="font-size: 12.5px; color: #ffffff; margin-top: 8px; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                <div style="font-size: 10.5px; color: #ffffff; margin-top: 8px; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
                     💡 <strong>História & Evolução:</strong> Registre conquistas antigas (como formaturas, casamentos ou marcos de carreira) para ilustrar a sua linha do tempo histórica.
                 </div>
             </div>
@@ -1493,7 +1496,7 @@
                 <div class="dynamic-rows" id="futureInputsArea">
                     <!-- Gerado dinamicamente via JS -->
                 </div>
-                <div style="font-size: 12.5px; color: #ffffff; margin-top: 8px; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                <div style="font-size: 10.5px; color: #ffffff; margin-top: 8px; line-height: 1.4; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
                     💡 <strong>Direção Estratégica:</strong> Projete seus objetivos (compra de imóvel, estudos dos filhos, aposentadoria) e analise o patrimônio necessário para realizá-los.
                 </div>
             </div>
@@ -2212,9 +2215,9 @@
 
             state.family.forEach(member => {
                 const age = year - member.birth;
-                const dynamicEmoji = getDynamicEmoji(member.emoji || "👤", member.role || "", age);
+                const initials = getInitials(member.name || member.role || "👤");
                 familyGrid.appendChild(createFamilyCard(
-                    dynamicEmoji, 
+                    initials, 
                     member.name, 
                     member.role, 
                     age, 
@@ -2375,6 +2378,17 @@
                 <div class="family-age ${wasBorn ? 'active' : ''}">${displayAge}</div>
             `;
             return card;
+        }
+
+        // Retorna as iniciais do nome (1 ou 2 letras em caixa alta)
+        function getInitials(name) {
+            if (!name) return "👤";
+            const parts = name.trim().split(/\s+/).filter(Boolean);
+            if (parts.length === 0) return "👤";
+            if (parts.length === 1) {
+                return parts[0].substring(0, 1).toUpperCase();
+            }
+            return (parts[0].substring(0, 1) + parts[1].substring(0, 1)).toUpperCase();
         }
 
         // Escolhe o emoji do familiar dinamicamente de acordo com a idade simulada
