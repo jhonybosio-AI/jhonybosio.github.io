@@ -171,7 +171,7 @@
     /* ── LAYOUT PRINCIPAL ── */
     .tool-container {
       display: grid;
-      grid-template-columns: 360px 1fr;
+      grid-template-columns: 33.333% 66.667%;
       flex: 1;
       height: calc(100vh - 69px);
     }
@@ -462,7 +462,7 @@
     .editor-viewport {
       background: #060c1d;
       padding: 40px;
-      overflow-y: auto;
+      overflow: auto;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -595,7 +595,8 @@
       justify-content: center;
       position: relative;
       z-index: 10;
-      margin: 30px 0;
+      margin: 0;
+      padding: 40px 0;
     }
 
     .slide-wrapper.layout-capa .slide-body.capa-body { display: flex; }
@@ -622,75 +623,78 @@
     .slide-capa-category {
       font-family: var(--inter);
       font-weight: 700;
-      font-size: 18px;
-      letter-spacing: 0.20em;
+      font-size: 22px;
+      letter-spacing: 0.22em;
       color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
 
     .slide-capa-title {
       font-family: var(--space-grotesk);
       font-weight: 800;
-      font-size: 76px;
-      line-height: 1.10;
-      letter-spacing: -0.03em;
+      font-size: 92px;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
       color: var(--text);
-      text-shadow: 0 0 30px rgba(10, 132, 255, 0.2);
-      margin-bottom: 30px;
+      text-shadow: 0 0 40px rgba(10, 132, 255, 0.25);
+      margin-bottom: 36px;
     }
 
     .slide-capa-desc {
       font-family: var(--plus-jakarta);
       font-weight: 400;
-      font-size: 28px;
+      font-size: 34px;
       line-height: 1.50;
-      color: rgba(255, 255, 255, 0.75);
-      max-width: 850px;
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 900px;
     }
 
     /* 2. CARD DIDÁTICO / TEXTO */
     .slide-body.texto-body {
-      justify-content: flex-start;
-      padding-top: 40px;
+      justify-content: center;
+      gap: 28px;
     }
 
     .slide-content-category {
       font-family: var(--inter);
       font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 0.15em;
+      font-size: 20px;
+      letter-spacing: 0.18em;
       color: var(--primary);
       text-transform: uppercase;
-      margin-bottom: 20px;
+      margin-bottom: 0;
     }
 
     .slide-content-title {
       font-family: var(--space-grotesk);
       font-weight: 800;
-      font-size: 56px;
-      line-height: 1.14;
-      letter-spacing: -0.02em;
+      font-size: 68px;
+      line-height: 1.10;
+      letter-spacing: -0.025em;
       color: var(--text);
-      text-shadow: 0 0 20px rgba(10, 132, 255, 0.15);
-      margin-bottom: 40px;
+      text-shadow: 0 0 25px rgba(10, 132, 255, 0.18);
+      margin-bottom: 0;
     }
 
     .slide-glass-card {
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
-      padding: 48px;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      padding: 52px 56px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 50px rgba(0, 0, 0, 0.25);
+      flex: 1;
+      display: flex;
+      align-items: center;
     }
 
     .slide-glass-card-text {
       font-family: var(--plus-jakarta);
       font-weight: 400;
-      font-size: 26px;
-      line-height: 1.60;
-      color: rgba(255, 255, 255, 0.90);
+      font-size: 32px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.92);
     }
 
     .slide-glass-card-text strong {
@@ -710,63 +714,67 @@
 
     /* 3. CARD PILARES 2x2 */
     .slide-body.pilares-body {
-      justify-content: flex-start;
-      padding-top: 40px;
+      justify-content: center;
+      gap: 28px;
     }
 
     .slide-pilares-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 22px;
+      gap: 24px;
+      flex: 1;
     }
 
     .slide-pilar-card {
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       border-radius: var(--r-md);
-      padding: 30px;
+      padding: 36px 32px;
       backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .slide-pilar-title-wrapper {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 14px;
+      margin-bottom: 14px;
     }
 
     .slide-pilar-icon {
-      font-size: 22px;
+      font-size: 30px;
     }
 
     .slide-pilar-title {
       font-family: var(--space-grotesk);
       font-weight: 700;
-      font-size: 22px;
+      font-size: 28px;
       color: var(--text);
     }
 
     .slide-pilar-desc {
       font-family: var(--plus-jakarta);
       font-weight: 400;
-      font-size: 15px;
-      line-height: 1.4;
-      color: rgba(255, 255, 255, 0.6);
+      font-size: 21px;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.65);
     }
 
-    /* 4. LAYOUT PERGUNTA & CONVERSÃO (NOVO DO PRINT!) */
+    /* 4. LAYOUT PERGUNTA & CONVERSÃO */
     .slide-body.pergunta-body {
-      justify-content: flex-start;
-      padding-top: 20px;
+      justify-content: center;
+      gap: 32px;
     }
     
     .slide-question-subtitle {
       font-family: var(--plus-jakarta);
-      font-size: 24px;
+      font-size: 30px;
       line-height: 1.5;
       color: rgba(255, 255, 255, 0.7);
-      margin-top: -30px;
-      margin-bottom: 35px;
+      margin-top: 0;
+      margin-bottom: 0;
     }
     
     .slide-glass-card.question-card {
@@ -775,24 +783,24 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 22px;
-      padding: 50px 40px;
-      margin-top: 10px;
+      gap: 28px;
+      padding: 60px 48px;
+      flex: 1;
     }
     
     .slide-card-question {
       font-family: var(--space-grotesk);
       font-weight: 700;
-      font-size: 36px;
+      font-size: 48px;
       color: var(--text);
-      line-height: 1.3;
+      line-height: 1.25;
     }
     
     .slide-card-question-sub {
       font-family: var(--plus-jakarta);
-      font-size: 20px;
+      font-size: 26px;
       color: rgba(255, 255, 255, 0.55);
-      margin-top: -6px;
+      margin-top: 0;
     }
     
     .slide-card-question-btn {
@@ -800,16 +808,16 @@
       color: #ffffff;
       font-family: var(--space-grotesk);
       font-weight: 800;
-      font-size: 20px;
-      padding: 16px 36px;
+      font-size: 26px;
+      padding: 20px 48px;
       border: none;
       border-radius: var(--r-sm);
-      box-shadow: 0 8px 25px rgba(10, 132, 255, 0.3);
+      box-shadow: 0 10px 30px rgba(10, 132, 255, 0.35);
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 8px;
       transition: all 0.2s ease;
     }
 
@@ -818,43 +826,40 @@
       align-items: center;
       text-align: center;
       justify-content: center;
+      gap: 24px;
     }
 
     .slide-cta-icon {
-      font-size: 56px;
-      margin-bottom: 24px;
-      filter: drop-shadow(0 0 15px rgba(10, 132, 255, 0.3));
+      font-size: 72px;
+      filter: drop-shadow(0 0 20px rgba(10, 132, 255, 0.35));
     }
 
     .slide-cta-category {
       font-family: var(--inter);
       font-weight: 700;
-      font-size: 18px;
-      letter-spacing: 0.20em;
+      font-size: 22px;
+      letter-spacing: 0.22em;
       color: var(--primary);
       text-transform: uppercase;
-      margin-bottom: 16px;
     }
 
     .slide-cta-title {
       font-family: var(--space-grotesk);
       font-weight: 800;
-      font-size: 56px;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
+      font-size: 68px;
+      line-height: 1.10;
+      letter-spacing: -0.025em;
       color: var(--text);
-      text-shadow: 0 0 25px rgba(10, 132, 255, 0.25);
-      margin-bottom: 30px;
+      text-shadow: 0 0 30px rgba(10, 132, 255, 0.28);
     }
 
     .slide-cta-desc {
       font-family: var(--plus-jakarta);
       font-weight: 400;
-      font-size: 26px;
+      font-size: 32px;
       line-height: 1.50;
-      color: rgba(255, 255, 255, 0.75);
-      max-width: 800px;
-      margin-bottom: 48px;
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 820px;
     }
 
     .slide-cta-button {
@@ -862,14 +867,14 @@
       color: #030816;
       font-family: var(--space-grotesk);
       font-weight: 800;
-      font-size: 24px;
-      padding: 20px 48px;
+      font-size: 28px;
+      padding: 24px 56px;
       border-radius: var(--r-md);
-      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+      box-shadow: 0 12px 36px rgba(212, 175, 55, 0.3);
       display: inline-flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       border: none;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -877,10 +882,611 @@
     .slide-cta-button-sub {
       font-family: var(--inter);
       font-weight: 700;
-      font-size: 17px;
+      font-size: 19px;
       color: rgba(3, 8, 22, 0.6);
       text-transform: uppercase;
       letter-spacing: 0.05em;
+    }
+
+    /* ── FUNDO DE SLIDE CUSTOMIZADO ── */
+    .slide-bg-custom {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.2; /* padrão inicial */
+      filter: blur(0px); /* padrão inicial */
+      transition: opacity 0.2s ease, filter 0.2s ease;
+    }
+
+    /* ── 6. LAYOUT DIDÁTICO GRÁFICO ── */
+    .slide-body.grafico-body {
+      justify-content: center;
+      display: none;
+      flex-direction: column;
+      gap: 28px;
+    }
+    
+    .slide-wrapper.layout-grafico .slide-body.grafico-body {
+      display: flex;
+    }
+    
+    .slide-grafico-container {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      flex: 1;
+    }
+    
+    .slide-grafico-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    
+    .slide-grafico-visual svg {
+      width: 380px;
+      height: 380px;
+      transform: rotate(-90deg);
+      filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.5));
+    }
+    
+    .slide-grafico-center-text {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .slide-grafico-center-value {
+      font-family: var(--space-grotesk);
+      font-weight: 800;
+      font-size: 60px;
+      color: var(--text);
+      line-height: 1;
+    }
+    
+    .slide-grafico-center-label {
+      font-family: var(--inter);
+      font-weight: 600;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 6px;
+    }
+    
+    .slide-grafico-legendas {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      justify-content: center;
+    }
+    
+    .slide-grafico-legenda-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 24px 28px;
+      backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .slide-grafico-legenda-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .slide-grafico-legenda-dot-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .slide-grafico-legenda-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+    }
+    
+    .slide-grafico-legenda-dot.color-primary {
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+    }
+    
+    .slide-grafico-legenda-dot.color-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    
+    .slide-grafico-legenda-title {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--text);
+    }
+    
+    .slide-grafico-legenda-value {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--primary);
+    }
+    
+    .slide-grafico-legenda-item.item-secondary .slide-grafico-legenda-value {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .slide-grafico-legenda-desc {
+      font-family: var(--plus-jakarta);
+      font-weight: 400;
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.45;
+    }
+    
+    /* Inputs flutuantes de edição rápida do gráfico Donut (ocultos ao baixar) */
+    .slide-grafico-input-control {
+      position: absolute;
+      top: 6px;
+      right: 12px;
+      background: rgba(3, 8, 22, 0.95);
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      padding: 2px 6px;
+      font-family: var(--space-grotesk);
+      font-size: 11px;
+      color: var(--text);
+      width: 50px;
+      text-align: center;
+      outline: none;
+      z-index: 20;
+    }
+    
+    .slide-wrapper.generating-png .slide-grafico-input-control {
+      display: none !important;
+    }
+
+    /* ── 7. LAYOUT DIDÁTICO ALERTA / SAVINGS ── */
+    .slide-body.alerta-body {
+      justify-content: center;
+      display: none;
+      flex-direction: column;
+      gap: 28px;
+    }
+    
+    .slide-wrapper.layout-alerta .slide-body.alerta-body {
+      display: flex;
+    }
+    
+    .slide-alerta-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-left: 6px solid var(--primary);
+      border-radius: var(--r-lg);
+      padding: 52px 56px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 12px 50px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      flex: 1;
+      justify-content: center;
+    }
+    
+    .slide-alerta-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .slide-alerta-icon {
+      font-size: 36px;
+      color: var(--primary);
+      filter: drop-shadow(0 0 10px rgba(10, 132, 255, 0.4));
+    }
+    
+    .slide-alerta-title {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 32px;
+      color: var(--text);
+    }
+    
+    .slide-alerta-text {
+      font-family: var(--plus-jakarta);
+      font-weight: 400;
+      font-size: 28px;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.65;
+    }
+    
+    .slide-alerta-text strong {
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* ── VALIDADOR DE DESIGN SYSTEM (STRICT MODE) ── */
+    .slide-wrapper.design-system-violation {
+      box-shadow: 0 0 0 5px #dc3545, 0 30px 80px rgba(220, 53, 69, 0.3) !important;
+      border-color: #dc3545 !important;
+    }
+
+    .slide-strict-badge {
+      position: absolute;
+      top: 15px;
+      left: 70px;
+      background: #dc3545;
+      color: #ffffff;
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: var(--r-sm);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .slide-wrapper.design-system-violation .slide-strict-badge {
+      display: flex;
+    }
+
+    /* Ocultar aviso na exportação final da imagem (html2canvas) */
+    .slide-wrapper.generating-png .slide-strict-badge {
+      display: none !important;
+    }
+
+    /* Switch Toggle Moderno no Painel Lateral */
+    .strict-control-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 14px 16px;
+      margin-bottom: 8px;
+    }
+
+    .strict-control-label-desc {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      max-width: 70%;
+    }
+
+    .strict-control-title {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .strict-control-desc {
+      font-family: var(--plus-jakarta);
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.45);
+      line-height: 1.3;
+    }
+
+    /* Switch Toggle Element */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(255, 255, 255, 0.1);
+      transition: .3s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      bottom: 3px;
+      background-color: var(--text);
+      transition: .3s cubic-bezier(0.16, 1, 0.3, 1);
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    input:checked + .slider {
+      background-color: #dc3545; /* Cor vermelha para o Strict Mode de validação */
+      border-color: #dc3545;
+      box-shadow: 0 0 10px rgba(220, 53, 69, 0.3);
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* ── CONFIGURAÇÕES DA INTELIGÊNCIA ARTIFICIAL ── */
+    .ia-config-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+    
+    .ia-key-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .ia-key-input-wrapper input {
+      padding-right: 40px; /* Espaço para o botão de mostrar/ocultar */
+    }
+    
+    .btn-toggle-key-visibility {
+      position: absolute;
+      right: 10px;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      transition: color 0.2s ease;
+      outline: none;
+    }
+    
+    .btn-toggle-key-visibility:hover {
+      color: var(--text);
+    }
+    
+    /* Loader de Processamento de IA (Premium) */
+    .ia-processing-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(3, 8, 22, 0.97);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      text-align: center;
+      border-radius: var(--r-md);
+      transition: opacity 0.3s ease;
+      padding: 48px;
+    }
+    
+    .ia-processing-glow {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .ia-processing-glow::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 3px dashed var(--primary);
+      animation: rotate-ia 6s linear infinite;
+      box-shadow: 0 0 30px rgba(10, 132, 255, 0.25), inset 0 0 30px rgba(10, 132, 255, 0.1);
+    }
+    
+    .ia-processing-glow::after {
+      content: '🧠';
+      font-size: 44px;
+      animation: pulse-ia 2.5s ease-in-out infinite;
+    }
+    
+    @keyframes rotate-ia {
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes pulse-ia {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(10, 132, 255, 0.4)); }
+      50% { transform: scale(1.12); filter: drop-shadow(0 0 22px rgba(10, 132, 255, 0.7)); }
+    }
+    
+    .ia-processing-title {
+      font-family: var(--space-grotesk);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    
+    .ia-processing-status {
+      font-family: var(--plus-jakarta);
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.6;
+      max-width: 80%;
+      min-height: 42px;
+    }
+
+    /* Barra de Progresso da IA */
+    .ia-progress-track {
+      width: 260px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 99px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ia-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), #5ac8fa);
+      border-radius: 99px;
+      transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 10px rgba(10, 132, 255, 0.5);
+    }
+
+    /* Steps de Progresso */
+    .ia-steps {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .ia-step {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      transition: all 0.4s ease;
+    }
+
+    .ia-step.active {
+      background: var(--primary);
+      box-shadow: 0 0 8px rgba(10, 132, 255, 0.6);
+      transform: scale(1.3);
+    }
+
+    .ia-step.done {
+      background: #30d158;
+      box-shadow: 0 0 6px rgba(48, 209, 88, 0.4);
+    }
+
+    /* Badge de Status da API Key */
+    .ia-key-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--plus-jakarta);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: all 0.3s ease;
+    }
+
+    .ia-key-status.no-key {
+      background: rgba(255, 149, 0, 0.12);
+      color: #ff9500;
+      border: 1px solid rgba(255, 149, 0, 0.3);
+    }
+
+    .ia-key-status.has-key {
+      background: rgba(48, 209, 88, 0.1);
+      color: #30d158;
+      border: 1px solid rgba(48, 209, 88, 0.25);
+    }
+
+    .ia-key-status.testing {
+      background: rgba(10, 132, 255, 0.1);
+      color: var(--primary);
+      border: 1px solid rgba(10, 132, 255, 0.25);
+    }
+
+    .ia-key-status.error {
+      background: rgba(255, 59, 48, 0.1);
+      color: #ff3b30;
+      border: 1px solid rgba(255, 59, 48, 0.25);
+    }
+
+    /* Botão de Testar API */
+    .btn-test-api {
+      background: rgba(10, 132, 255, 0.08);
+      border: 1px solid rgba(10, 132, 255, 0.2);
+      color: var(--primary);
+      font-family: var(--plus-jakarta);
+      font-weight: 700;
+      font-size: 11px;
+      padding: 6px 12px;
+      border-radius: var(--r-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-test-api:hover {
+      background: rgba(10, 132, 255, 0.18);
+      border-color: var(--primary);
+    }
+
+    /* Seção avançada de IA (collapsible) */
+    .ia-advanced-section {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .ia-advanced-section.expanded {
+      max-height: 320px;
+    }
+
+    .btn-ia-advanced-toggle {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.35);
+      font-family: var(--plus-jakarta);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: color 0.2s ease;
+    }
+
+    .btn-ia-advanced-toggle:hover {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .btn-ia-advanced-toggle .chevron {
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-ia-advanced-toggle.open .chevron {
+      transform: rotate(180deg);
     }
 
     /* ── RODAPÉ DO SLIDE ── */
@@ -1397,6 +2003,51 @@
           </button>
         </div>
       </div>
+
+      <!-- SEÇÃO 1.5: IMAGEM DE FUNDO CUSTOMIZADA -->
+      <div class="panel-section">
+        <h4 class="panel-section-title">Imagem de Fundo</h4>
+        <div class="ia-generator-form" style="gap: 12px;">
+          <div class="ia-field-group">
+            <label class="ia-label" for="bg-upload-input">Fundo do Slide Ativo</label>
+            <input type="file" id="bg-upload-input" accept="image/*" class="ia-input" style="padding: 6px 10px;" onchange="handleBackgroundUpload(this)">
+          </div>
+          
+          <div class="ia-field-group">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label class="ia-label" for="bg-opacity-slider">Opacidade (<span id="bg-opacity-val">20</span>%)</label>
+            </div>
+            <input type="range" id="bg-opacity-slider" min="0" max="100" value="20" class="ia-input" style="padding: 0; height: 6px; cursor: pointer;" oninput="updateBackgroundOpacity(this.value)">
+          </div>
+          
+          <div class="ia-field-group">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <label class="ia-label" for="bg-blur-slider">Desfoque (Blur: <span id="bg-blur-val">0</span>px)</label>
+            </div>
+            <input type="range" id="bg-blur-slider" min="0" max="20" value="0" class="ia-input" style="padding: 0; height: 6px; cursor: pointer;" oninput="updateBackgroundBlur(this.value)">
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px;">
+            <button class="btn-caption" onclick="removerBackgroundAtivo()" style="font-size: 10px; padding: 6px;">❌ Remover</button>
+            <button class="btn-caption btn-primary-caption" onclick="aplicarBackgroundTodos()" style="font-size: 10px; padding: 6px; font-weight: bold;">🌍 Aplicar a Todos</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO 1.8: VALIDADOR DE DESIGN SYSTEM (STRICT MODE) -->
+      <div class="panel-section">
+        <h4 class="panel-section-title">Validação Visual</h4>
+        <div class="strict-control-group">
+          <div class="strict-control-label-desc">
+            <span class="strict-control-title">Strict Mode (Manual Blue3)</span>
+            <span class="strict-control-desc">Impede que o texto exceda a caixa de leitura do slide ou altere as fontes oficiais.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="strict-mode-toggle" checked onchange="toggleStrictMode(this.checked)">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
       
       <!-- SEÇÃO 2: CONTROLES DE SLIDES -->
       <div class="panel-section">
@@ -1408,6 +2059,48 @@
         </div>
       </div>
       
+      <!-- SEÇÃO 2.5: CONFIGURAÇÕES DA INTELIGÊNCIA ARTIFICIAL -->
+      <div class="panel-section">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <h4 class="panel-section-title" style="margin-bottom: 0;">⚡ Motor de IA</h4>
+          <span id="ia-key-status-badge" class="ia-key-status no-key">⚠ Sem API Key</span>
+        </div>
+        <div class="ia-generator-form" style="gap: 10px;">
+          <div class="ia-field-group">
+            <label class="ia-label" for="ia-api-key">Gemini API Key</label>
+            <div style="position: relative; display: flex; align-items: center; width: 100%;">
+              <input type="password" id="ia-api-key" class="ia-input" style="padding-right: 40px;" placeholder="Cole sua chave do Google AI Studio...">
+              <button type="button" class="btn-toggle-key-visibility" onclick="toggleApiKeyVisibility()">👁️</button>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+            <div style="font-size: 9px; color: rgba(255, 255, 255, 0.3); line-height: 1.3; flex: 1; min-width: 0;">
+              🔒 Salva localmente. Nunca sai do seu navegador.
+            </div>
+            <button class="btn-test-api" id="btn-test-api" onclick="testarApiKey()">Testar Conexão</button>
+          </div>
+
+          <!-- Seção Avançada (Persona + Compliance) -->
+          <div style="padding-top: 2px;">
+            <button class="btn-ia-advanced-toggle" id="btn-ia-advanced-toggle" onclick="toggleIAAdvanced()">
+              <span class="chevron">▾</span> Persona &amp; Compliance
+            </button>
+          </div>
+
+          <div class="ia-advanced-section" id="ia-advanced-section">
+            <div class="ia-field-group" style="margin-top: 8px;">
+              <label class="ia-label" for="ia-persona">Brand Persona &amp; Tom de Voz</label>
+              <textarea id="ia-persona" class="ia-textarea" style="height: 72px;" placeholder="Defina a persona do produtor..."></textarea>
+            </div>
+            <div class="ia-field-group" style="margin-top: 8px;">
+              <label class="ia-label" for="ia-compliance">Diretrizes de Compliance</label>
+              <textarea id="ia-compliance" class="ia-textarea" style="height: 72px;" placeholder="Regras CVM / XP..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- SEÇÃO 3: CARREGAR COPYS DE ALTA CONVERSÃO -->
       <div class="panel-section">
         <h4 class="panel-section-title">Carregar Copys de Alta Conversão</h4>
@@ -1474,9 +2167,28 @@
     </aside>
 
     <!-- VIEWPORT DE EDIÇÃO (DIREITA) -->
-    <main class="editor-viewport" id="editor-viewport">
-      <!-- Os slides serão injetados dinamicamente via JS -->
-    </main>
+    <div style="position: relative; flex: 1; height: 100%; display: flex; flex-direction: column; overflow: hidden;">
+      <main class="editor-viewport" id="editor-viewport">
+        <!-- Os slides serão injetados dinamicamente via JS -->
+      </main>
+
+      <!-- OVERLAY DE CARREGAMENTO INTELIGENTE (IA) - PREMIUM -->
+      <div id="ia-processing-overlay" class="ia-processing-overlay">
+        <div class="ia-processing-glow"></div>
+        <h3 class="ia-processing-title">🧠 Cérebro Fiduciário Ativo</h3>
+        <p id="ia-processing-status" class="ia-processing-status">Iniciando motor de IA...</p>
+        <div class="ia-progress-track">
+          <div class="ia-progress-bar" id="ia-progress-bar"></div>
+        </div>
+        <div class="ia-steps">
+          <div class="ia-step" id="ia-step-0"></div>
+          <div class="ia-step" id="ia-step-1"></div>
+          <div class="ia-step" id="ia-step-2"></div>
+          <div class="ia-step" id="ia-step-3"></div>
+          <div class="ia-step" id="ia-step-4"></div>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -1490,6 +2202,8 @@
           <option value="capa">Capa</option>
           <option value="texto" selected>Didático Texto</option>
           <option value="pilares">Didático Pilares</option>
+          <option value="grafico">Didático Gráfico</option>
+          <option value="alerta">Didático Alerta / Savings</option>
           <option value="pergunta">Didático Pergunta & CTA</option>
           <option value="cta">CTA Final</option>
           <option value="xcom">Estilo X.com (Tweet)</option>
@@ -1503,6 +2217,14 @@
       </div>
 
       <div class="slide-wrapper layout-texto">
+        
+        <!-- ELEMENTO DE BACKGROUND CUSTOMIZADO -->
+        <div class="slide-bg-custom"></div>
+        
+        <!-- BADGE DE ALERTA DO STRICT MODE -->
+        <div class="slide-strict-badge">
+          <span>⚠️ Texto muito longo! Reduza a copy.</span>
+        </div>
         
         <!-- CABEÇALHO OFICIAL (Slides Didáticos/CTAs) -->
         <div class="slide-header">
@@ -1570,6 +2292,76 @@
               </div>
               <p class="slide-pilar-desc" contenteditable="true">Ajuste mecânico matemático de portfólio para capturar as distorções.</p>
             </div>
+          </div>
+        </div>
+
+        <!-- 3.5. BODY: DIDÁTICO GRÁFICO (DONUT SVG) -->
+        <div class="slide-body grafico-body">
+          <span class="slide-content-category" contenteditable="true">ALOCAÇÃO GLOBAL</span>
+          <h2 class="slide-content-title" contenteditable="true">Análise de Portfólio Neutro</h2>
+          
+          <div class="slide-grafico-container">
+            <!-- Gráfico Donut SVG Dinâmico -->
+            <div class="slide-grafico-visual">
+              <svg viewBox="0 0 100 100">
+                <!-- Círculo fundo escuro -->
+                <circle cx="50" cy="50" r="40" fill="transparent" stroke="rgba(255,255,255,0.05)" stroke-width="12"/>
+                <!-- Fatia secundária -->
+                <circle class="svg-slice-secondary" cx="50" cy="50" r="40" fill="transparent" stroke="rgba(255,255,255,0.15)" stroke-width="12" stroke-dasharray="251.2" stroke-dashoffset="0"/>
+                <!-- Fatia primária (azul/ouro/xp) -->
+                <circle class="svg-slice-primary" cx="50" cy="50" r="40" fill="transparent" stroke="var(--primary)" stroke-width="12" stroke-dasharray="251.2" stroke-dashoffset="100.48"/>
+              </svg>
+              <!-- Texto no centro do Donut -->
+              <div class="slide-grafico-center-text">
+                <span class="slide-grafico-center-value" contenteditable="true">60%</span>
+                <span class="slide-grafico-center-label" contenteditable="true">Fiduciário</span>
+              </div>
+            </div>
+            
+            <!-- Legendas com Inputs de Configuração flutuantes -->
+            <div class="slide-grafico-legendas">
+              <!-- Legenda 1 (Primária) -->
+              <div class="slide-grafico-legenda-item item-primary">
+                <input type="number" min="0" max="100" value="60" class="slide-grafico-input-control" oninput="handleGraficoValueChange(this, 'primary')" onmousedown="event.stopPropagation()">
+                <div class="slide-grafico-legenda-header">
+                  <div class="slide-grafico-legenda-dot-title">
+                    <span class="slide-grafico-legenda-dot color-primary"></span>
+                    <span class="slide-grafico-legenda-title" contenteditable="true">Modelo Fee-Only</span>
+                  </div>
+                  <span class="slide-grafico-legenda-value" contenteditable="true">60%</span>
+                </div>
+                <p class="slide-grafico-legenda-desc" contenteditable="true">Retorno de rebates e alocação 100% alinhada aos seus objetivos de longo prazo.</p>
+              </div>
+              
+              <!-- Legenda 2 (Secundária) -->
+              <div class="slide-grafico-legenda-item item-secondary">
+                <input type="number" min="0" max="100" value="40" class="slide-grafico-input-control" oninput="handleGraficoValueChange(this, 'secondary')" onmousedown="event.stopPropagation()">
+                <div class="slide-grafico-legenda-header">
+                  <div class="slide-grafico-legenda-dot-title">
+                    <span class="slide-grafico-legenda-dot color-secondary"></span>
+                    <span class="slide-grafico-legenda-title" contenteditable="true">Modelo Tradicional</span>
+                  </div>
+                  <span class="slide-grafico-legenda-value" contenteditable="true">40%</span>
+                </div>
+                <p class="slide-grafico-legenda-desc" contenteditable="true">Custos ocultos em COEs e produtos conflitados que reduzem a rentabilidade.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3.6. BODY: DIDÁTICO ALERTA / SAVINGS -->
+        <div class="slide-body alerta-body">
+          <span class="slide-content-category" contenteditable="true">AVISO DE ALOCAÇÃO</span>
+          <h2 class="slide-content-title" contenteditable="true">Atenção com Veículos Ocultos</h2>
+          
+          <div class="slide-alerta-card">
+            <div class="slide-alerta-header">
+              <span class="slide-alerta-icon" contenteditable="true">⚠️</span>
+              <h3 class="slide-alerta-title" contenteditable="true">Alerta de Conflito de Interesses</h3>
+            </div>
+            <p class="slide-alerta-text" contenteditable="true">
+              Investidores que possuem mais de <strong>R$ 1 milhão</strong> aplicados em bancos tradicionais perdem, em média, <strong>R$ 25.000 anuais</strong> apenas com taxas de rebate embutidas. O Protocolo 9A zera esse desperdício de forma legal.
+            </p>
           </div>
         </div>
 
@@ -1662,6 +2454,211 @@
     let currentTheme = 'blue3-blue'; // Novo estado de tema global
     let slideCounter = 0;
     let lastFocusedEditable = null;
+    let activeSlideId = null; // ID do slide ativo no editor
+    let strictModeActive = true; // Estado do Strict Mode do Design System
+
+    // Alternar estado do Strict Mode e validar todos os slides
+    function toggleStrictMode(enabled) {
+      strictModeActive = enabled;
+      const toggle = document.getElementById('strict-mode-toggle');
+      if (toggle) toggle.checked = enabled;
+      validarTodosSlides();
+    }
+
+    // Valida a consistência física e tipográfica de um slide específico (Detecção de overflow)
+    function validarConsistenciaSlide(slideWrapper) {
+      if (!slideWrapper) return;
+      
+      if (!strictModeActive) {
+        slideWrapper.classList.remove('design-system-violation');
+        return;
+      }
+      
+      // Detecção universal de overflow (conteúdo extrapolando clientHeight do slide de 1350px ou 1920px)
+      // Adiciona tolerância de 3px para evitar subpixel rendering errors nos navegadores
+      const isOverflowing = slideWrapper.scrollHeight > (slideWrapper.clientHeight + 3);
+      
+      if (isOverflowing) {
+        slideWrapper.classList.add('design-system-violation');
+      } else {
+        slideWrapper.classList.remove('design-system-violation');
+      }
+    }
+
+    // Valida todos os slides carregados na tela
+    function validarTodosSlides() {
+      document.querySelectorAll('.slide-wrapper').forEach(w => {
+        validarConsistenciaSlide(w);
+      });
+    }
+
+    // Monitorar digitação em elementos contenteditable para validar overflow em tempo real
+    document.addEventListener('input', (e) => {
+      if (e.target.hasAttribute('contenteditable')) {
+        const wrapper = e.target.closest('.slide-wrapper');
+        if (wrapper) {
+          validarConsistenciaSlide(wrapper);
+        }
+      }
+    });
+
+    // Monitorar clique para ativar o slide no editor
+    document.addEventListener('click', (e) => {
+      const wrapper = e.target.closest('.slide-wrapper');
+      if (wrapper) {
+        setActiveSlide(wrapper.id);
+      }
+    });
+
+    // Destaca o slide ativo e atualiza os controles do painel
+    function setActiveSlide(slideId) {
+      if (activeSlideId === slideId) return;
+      activeSlideId = slideId;
+      
+      // Remover outlines de todos os slides no editor
+      document.querySelectorAll('.slide-scale-container').forEach(el => {
+        el.style.outline = '';
+        el.style.outlineOffset = '';
+      });
+      
+      // Adicionar outline de destaque no slide ativo
+      const numStr = slideId.replace('slide-s', '');
+      const container = document.getElementById(`scale-s${numStr}`);
+      if (container) {
+        container.style.outline = '3px solid var(--primary)';
+        container.style.outlineOffset = '6px';
+        container.style.borderRadius = 'var(--r-sm)';
+      }
+      
+      // Sincronizar painel lateral de imagem de fundo
+      const slide = document.getElementById(slideId);
+      if (slide) {
+        const bgEl = slide.querySelector('.slide-bg-custom');
+        if (bgEl) {
+          // Sincronizar sliders de opacidade
+          const opacity = bgEl.style.opacity ? Math.round(parseFloat(bgEl.style.opacity) * 100) : 20;
+          document.getElementById('bg-opacity-slider').value = opacity;
+          document.getElementById('bg-opacity-val').textContent = opacity;
+          
+          // Sincronizar sliders de desfoque
+          let blur = 0;
+          const filterVal = bgEl.style.filter;
+          if (filterVal && filterVal.includes('blur')) {
+            const match = filterVal.match(/blur\((\d+)px\)/);
+            if (match) blur = parseInt(match[1]);
+          }
+          document.getElementById('bg-blur-slider').value = blur;
+          document.getElementById('bg-blur-val').textContent = blur;
+        }
+      }
+    }
+
+    // Lida com o upload de imagem de fundo do slide ativo
+    function handleBackgroundUpload(input) {
+      if (!activeSlideId) {
+        alert("Por favor, clique primeiro em qualquer slide no editor para selecioná-lo antes de carregar a imagem de fundo.");
+        input.value = '';
+        return;
+      }
+      
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const dataUrl = e.target.result;
+          const slide = document.getElementById(activeSlideId);
+          if (slide) {
+            const bgEl = slide.querySelector('.slide-bg-custom');
+            if (bgEl) {
+              bgEl.style.backgroundImage = `url(${dataUrl})`;
+              // Aplicar opacidade e blur padrão baseados nos sliders
+              const opacity = parseFloat(document.getElementById('bg-opacity-slider').value) / 100;
+              const blur = parseInt(document.getElementById('bg-blur-slider').value);
+              bgEl.style.opacity = opacity;
+              bgEl.style.filter = `blur(${blur}px)`;
+            }
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Atualiza a opacidade do background do slide ativo
+    function updateBackgroundOpacity(value) {
+      document.getElementById('bg-opacity-val').textContent = value;
+      if (!activeSlideId) return;
+      
+      const slide = document.getElementById(activeSlideId);
+      if (slide) {
+        const bgEl = slide.querySelector('.slide-bg-custom');
+        if (bgEl) {
+          bgEl.style.opacity = parseFloat(value) / 100;
+        }
+      }
+    }
+
+    // Atualiza o blur (desfoque) do background do slide ativo
+    function updateBackgroundBlur(value) {
+      document.getElementById('bg-blur-val').textContent = value;
+      if (!activeSlideId) return;
+      
+      const slide = document.getElementById(activeSlideId);
+      if (slide) {
+        const bgEl = slide.querySelector('.slide-bg-custom');
+        if (bgEl) {
+          bgEl.style.filter = `blur(${value}px)`;
+        }
+      }
+    }
+
+    // Remove a imagem de fundo do slide ativo
+    function removerBackgroundAtivo() {
+      if (!activeSlideId) {
+        alert("Selecione um slide primeiro.");
+        return;
+      }
+      
+      const slide = document.getElementById(activeSlideId);
+      if (slide) {
+        const bgEl = slide.querySelector('.slide-bg-custom');
+        if (bgEl) {
+          bgEl.style.backgroundImage = 'none';
+          document.getElementById('bg-upload-input').value = '';
+        }
+      }
+    }
+
+    // Aplica a imagem de fundo e efeitos do slide ativo a todos os slides
+    function aplicarBackgroundTodos() {
+      if (!activeSlideId) {
+        alert("Selecione um slide com imagem de fundo primeiro.");
+        return;
+      }
+      
+      const slide = document.getElementById(activeSlideId);
+      if (!slide) return;
+      
+      const bgEl = slide.querySelector('.slide-bg-custom');
+      if (!bgEl || !bgEl.style.backgroundImage || bgEl.style.backgroundImage === 'none') {
+        alert("O slide ativo não possui uma imagem de fundo para aplicar aos outros.");
+        return;
+      }
+      
+      const bgImg = bgEl.style.backgroundImage;
+      const opacity = bgEl.style.opacity || '0.2';
+      const filter = bgEl.style.filter || 'blur(0px)';
+      
+      if (confirm("Deseja aplicar esta imagem de fundo e efeitos a todos os slides do carrossel?")) {
+        document.querySelectorAll('.slide-wrapper').forEach(w => {
+          const targetBg = w.querySelector('.slide-bg-custom');
+          if (targetBg) {
+            targetBg.style.backgroundImage = bgImg;
+            targetBg.style.opacity = opacity;
+            targetBg.style.filter = filter;
+          }
+        });
+      }
+    }
 
     // Monitorar o elemento contenteditable focado no momento
     document.addEventListener('focusin', (e) => {
@@ -1672,6 +2669,11 @@
 
     // Função de Ajuste Fino de Fonte Dinâmico (A+ e A-)
     function alterarTamanhoFonte(direcao) {
+      if (strictModeActive) {
+        alert("O Strict Mode está ativo. Para manter a consistência visual da marca Jhony Bosio (Blue3), reduza o conteúdo textual (copy) do slide, e não o tamanho da fonte.\n\nSe for realmente necessário alterar o tamanho da fonte, desative a opção 'Strict Mode (Manual Blue3)' no painel esquerdo.");
+        return;
+      }
+      
       if (!lastFocusedEditable) {
         alert("Por favor, clique primeiro em algum texto do slide para selecioná-lo antes de ajustar o tamanho.");
         return;
@@ -1865,6 +2867,9 @@
           container.className = 'slide-scale-container format-reels';
         }
       });
+      
+      // Revalidar todos os slides sob o novo formato de tamanho físico
+      setTimeout(validarTodosSlides, 100);
     }
 
     // Função para Adicionar Novo Slide
@@ -1916,6 +2921,12 @@
       
       // Atualizar a numeração dos slides
       atualizarNumeracaoSlides();
+      
+      // Validar consistência do novo slide após renderização no DOM
+      setTimeout(() => {
+        const added = document.getElementById(slideId);
+        if (added) validarConsistenciaSlide(added);
+      }, 50);
       
       return slideId;
     }
@@ -1969,6 +2980,11 @@
       
       // Forçar atualização do acento de cor do novo layout
       setAccent(currentAccent);
+      
+      // Validar a consistência do slide com o novo layout
+      setTimeout(() => {
+        validarConsistenciaSlide(wrapper);
+      }, 50);
     }
 
     // Atualiza a numeração do rodapé de todos os slides de forma automatizada
@@ -1984,6 +3000,47 @@
           badge.textContent = `${num}/${tot}`;
         }
       });
+    }
+
+    // ── ATUALIZAÇÃO DO GRÁFICO DONUT SVG ──
+    function handleGraficoValueChange(inputEl, sliceType) {
+      const value = Math.max(0, Math.min(100, parseInt(inputEl.value) || 0));
+      inputEl.value = value;
+      
+      const slide = inputEl.closest('.slide-wrapper');
+      if (!slide) return;
+      
+      const labelVal = slide.querySelector('.slide-grafico-center-value');
+      const primaryInput = slide.querySelector('.item-primary .slide-grafico-input-control');
+      const secondaryInput = slide.querySelector('.item-secondary .slide-grafico-input-control');
+      const primaryValText = slide.querySelector('.item-primary .slide-grafico-legenda-value');
+      const secondaryValText = slide.querySelector('.item-secondary .slide-grafico-legenda-value');
+      
+      let primaryVal = 60;
+      let secondaryVal = 40;
+      
+      if (sliceType === 'primary') {
+        primaryVal = value;
+        secondaryVal = 100 - primaryVal;
+        if (secondaryInput) secondaryInput.value = secondaryVal;
+      } else {
+        secondaryVal = value;
+        primaryVal = 100 - secondaryVal;
+        if (primaryInput) primaryInput.value = primaryVal;
+      }
+      
+      // Atualizar os textos de porcentagem no slide
+      if (labelVal) labelVal.textContent = `${primaryVal}%`;
+      if (primaryValText) primaryValText.textContent = `${primaryVal}%`;
+      if (secondaryValText) secondaryValText.textContent = `${secondaryVal}%`;
+      
+      // Atualizar o SVG Donut
+      const svgSlicePrimary = slide.querySelector('.svg-slice-primary');
+      if (svgSlicePrimary) {
+        const totalCircumference = 251.3;
+        const offset = totalCircumference * (1 - (primaryVal / 100));
+        svgSlicePrimary.setAttribute('stroke-dashoffset', offset);
+      }
     }
 
     // ── PONTES DE INTERAÇÃO DO DOM PARA OS CONTROLES ──
@@ -2071,9 +3128,6 @@
 
     // Baixa todos os slides agregados em um único arquivo ZIP (À prova de bloqueios de navegador!)
     function baixarTodosSlides() {
-      const loader = document.getElementById('export-loader');
-      const statusText = document.getElementById('loader-status');
-      
       const wrappers = document.querySelectorAll('.slide-wrapper');
       const total = wrappers.length;
       
@@ -2081,6 +3135,18 @@
         alert("Não há slides para exportar.");
         return;
       }
+
+      // Verificar violações de design system se o Strict Mode estiver ligado
+      if (strictModeActive) {
+        const violations = document.querySelectorAll('.slide-wrapper.design-system-violation');
+        if (violations.length > 0) {
+          const confirmExport = confirm(`⚠️ DESIGN SYSTEM VIOLATION:\n\nVocê tem ${violations.length} slide(s) que ultrapassam o limite físico de leitura (o texto está muito longo ou vazando do slide).\n\nPara manter a consistência estética do Manual Blue3, recomendamos ajustar a copy. Deseja baixar o ZIP mesmo assim?`);
+          if (!confirmExport) return;
+        }
+      }
+      
+      const loader = document.getElementById('export-loader');
+      const statusText = document.getElementById('loader-status');
       
       if (typeof html2canvas === 'undefined') {
         alert("Erro: A biblioteca de geração de imagens (html2canvas-pro) não foi carregada corretamente. Por favor, aguarde alguns segundos ou recarregue a página.");
@@ -2384,6 +3450,33 @@
             wrapper.querySelector('.xcom-disclaimer').innerText = slideData.disclaimer;
           }
         }
+        else if (slideData.layout === 'grafico') {
+          wrapper.querySelector('.slide-content-category').textContent = slideData.category;
+          wrapper.querySelector('.slide-content-title').innerHTML = slideData.title;
+          wrapper.querySelector('.slide-grafico-center-value').textContent = slideData.value;
+          wrapper.querySelector('.slide-grafico-center-label').textContent = slideData.label;
+          
+          const items = wrapper.querySelectorAll('.slide-grafico-legenda-item');
+          if (items.length >= 2) {
+            items[0].querySelector('.slide-grafico-legenda-title').textContent = slideData.p1_title;
+            items[0].querySelector('.slide-grafico-legenda-value').textContent = slideData.p1_value;
+            items[0].querySelector('.slide-grafico-legenda-desc').textContent = slideData.p1_desc;
+            items[0].querySelector('.slide-grafico-input-control').value = parseInt(slideData.p1_value) || 60;
+            
+            items[1].querySelector('.slide-grafico-legenda-title').textContent = slideData.p2_title;
+            items[1].querySelector('.slide-grafico-legenda-value').textContent = slideData.p2_value;
+            items[1].querySelector('.slide-grafico-legenda-desc').textContent = slideData.p2_desc;
+            items[1].querySelector('.slide-grafico-input-control').value = parseInt(slideData.p2_value) || 40;
+          }
+          const primaryInput = wrapper.querySelector('.item-primary .slide-grafico-input-control');
+          if (primaryInput) handleGraficoValueChange(primaryInput, 'primary');
+        }
+        else if (slideData.layout === 'alerta') {
+          wrapper.querySelector('.slide-content-category').textContent = slideData.category;
+          wrapper.querySelector('.slide-content-title').innerHTML = slideData.title;
+          wrapper.querySelector('.slide-alerta-title').textContent = slideData.alertaTitle;
+          wrapper.querySelector('.slide-alerta-text').innerHTML = slideData.alertaText;
+        }
       });
 
       // Garantir numeração certa no carregamento
@@ -2396,72 +3489,278 @@
       setTimeout(gerarLegendaAutomatica, 350);
     }
 
-    // ── MOTOR DA IA: PROCESSADOR E GERADOR DE REFERÊNCIA ──
-    function gerarCarrosselDeReferencia() {
+    // ── MOTOR DA IA: PROCESSADOR E GERADOR DE REFERÊNCIA (FASE 3) ──
+    async function chamarGeminiAPI(apiKey, prompt) {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+      
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{ text: prompt }]
+          }],
+          generationConfig: {
+            responseMimeType: "application/json",
+            responseSchema: {
+              type: "object",
+              properties: {
+                slides: {
+                  type: "array",
+                  items: {
+                    type: "object",
+                    properties: {
+                      layout: {
+                        type: "string",
+                        enum: ["capa", "texto", "pilares", "grafico", "alerta", "pergunta", "cta", "xcom"],
+                        description: "O layout do slide."
+                      },
+                      category: {
+                        type: "string",
+                        description: "Categoria/Tema curto no topo do slide (Ex: O DIAGNÓSTICO, A SOLUÇÃO, CVM 178)"
+                      },
+                      title: {
+                        type: "string",
+                        description: "Título principal do slide. Use tags <br> para quebras de linha estéticas se necessário."
+                      },
+                      desc: {
+                        type: "string",
+                        description: "Conteúdo principal do slide. Use tags <br> ou <b> para negrito se necessário."
+                      },
+                      p1_title: { type: "string" },
+                      p1_desc: { type: "string" },
+                      p2_title: { type: "string" },
+                      p2_desc: { type: "string" },
+                      p3_title: { type: "string" },
+                      p3_desc: { type: "string" },
+                      p4_title: { type: "string" },
+                      p4_desc: { type: "string" },
+                      chart_center_value: { type: "string", description: "Valor central do gráfico (Ex: 60%, 2.5%, R$ 10M)" },
+                      chart_center_label: { type: "string", description: "Legenda do centro do gráfico (Ex: Fiduciário, Ao Ano)" },
+                      chart_item1_title: { type: "string" },
+                      chart_item1_value: { type: "integer" },
+                      chart_item1_desc: { type: "string" },
+                      chart_item2_title: { type: "string" },
+                      chart_item2_value: { type: "integer" },
+                      chart_item2_desc: { type: "string" }
+                    },
+                    required: ["layout", "category", "title", "desc"]
+                  }
+                },
+                legenda: {
+                  type: "string",
+                  description: "Legenda final estruturada para a publicação no Instagram, contendo hashtags e CTA para falar com o Hermes na bio."
+                }
+              },
+              required: ["slides", "legenda"]
+            }
+          }
+        })
+      });
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error?.message || `Erro HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      try {
+        const text = data.candidates[0].content.parts[0].text;
+        return JSON.parse(text);
+      } catch (err) {
+        console.error("Falha ao analisar JSON retornado pelo Gemini:", err, data);
+        throw new Error("A resposta da IA não está no formato estruturado esperado.");
+      }
+    }
+
+    // --- Gerenciador de Progresso do Overlay de IA ---
+    const IA_STEPS_MESSAGES = [
+      "Conectando ao Gemini 2.5 Flash...",
+      "Analisando referências e contexto fiduciário...",
+      "Estruturando copy sob normas CVM 178/2023...",
+      "Gerando layouts e Structured Outputs JSON...",
+      "Renderizando carrossel no editor..."
+    ];
+
+    function setIAProgress(stepIndex, total = 5) {
+      const bar = document.getElementById('ia-progress-bar');
+      const status = document.getElementById('ia-processing-status');
+      if (bar) bar.style.width = `${Math.round(((stepIndex + 1) / total) * 100)}%`;
+      if (status && IA_STEPS_MESSAGES[stepIndex]) status.textContent = IA_STEPS_MESSAGES[stepIndex];
+      for (let i = 0; i < total; i++) {
+        const dot = document.getElementById(`ia-step-${i}`);
+        if (!dot) continue;
+        if (i < stepIndex) { dot.className = 'ia-step done'; }
+        else if (i === stepIndex) { dot.className = 'ia-step active'; }
+        else { dot.className = 'ia-step'; }
+      }
+    }
+
+    function showIAOverlay() {
+      const overlay = document.getElementById('ia-processing-overlay');
+      const bar = document.getElementById('ia-progress-bar');
+      if (overlay) overlay.style.display = 'flex';
+      if (bar) bar.style.width = '0%';
+      for (let i = 0; i < 5; i++) {
+        const dot = document.getElementById(`ia-step-${i}`);
+        if (dot) dot.className = 'ia-step';
+      }
+    }
+
+    function hideIAOverlay() {
+      const overlay = document.getElementById('ia-processing-overlay');
+      if (overlay) overlay.style.display = 'none';
+    }
+
+    async function gerarCarrosselDeReferencia() {
       const urlInput = document.getElementById('ia-ref-url').value.trim();
       let textInput = document.getElementById('ia-ref-text').value.trim();
       const numSlides = parseInt(document.getElementById('ia-slides-count').value);
+      
+      const apiKey = localStorage.getItem('ia-api-key') || '';
+      const persona = localStorage.getItem('ia-persona') || DEFAULT_PERSONA;
+      const compliance = localStorage.getItem('ia-compliance') || DEFAULT_COMPLIANCE;
       
       if (!urlInput && !textInput) {
         alert("Por favor, preencha pelo menos um dos campos: link da reportagem (1) ou o texto bruto (2).");
         return;
       }
-      
-      const loader = document.getElementById('export-loader');
-      const statusText = document.getElementById('loader-status');
-      
-      // Mostrar Loader fiduciário
-      loader.style.display = 'flex';
-      statusText.textContent = "Processando referências com inteligência fiduciária...";
-      
-      // Se tiver apenas URL, simular a extração ou usar conteúdo premium pré-definido de finanças
-      if (urlInput && !textInput) {
-        statusText.textContent = "Lendo e interpretando artigo da web...";
-        let temaSimulado = "Reforma Tributária e Sucessão Patrimonial";
-        if (urlInput.toLowerCase().includes("inflacao") || urlInput.toLowerCase().includes("juros") || urlInput.toLowerCase().includes("selic") || urlInput.toLowerCase().includes("etf")) {
-          temaSimulado = "Alocação Fiduciária de Ativos Globais";
+
+      if (apiKey) {
+        // ── FLUXO INTELIGENTE COM IA (GEMINI) ──
+        showIAOverlay();
+        setIAProgress(0);
+
+        if (urlInput && !textInput) {
+          let temaSimulado = "Reforma Tributária e Sucessão Patrimonial";
+          const url = urlInput.toLowerCase();
+          if (url.includes("inflacao") || url.includes("juros") || url.includes("selic") || url.includes("etf") || url.includes("global")) {
+            temaSimulado = "Alocação Fiduciária de Ativos Globais";
+          } else if (url.includes("holding") || url.includes("sucess") || url.includes("heranca")) {
+            temaSimulado = "Reforma Tributária e Sucessão Patrimonial";
+          }
+          textInput = obterTextoMockPremium(temaSimulado);
         }
-        textInput = obterTextoMockPremium(temaSimulado);
+
+        try {
+          setIAProgress(1);
+          await new Promise(r => setTimeout(r, 400)); // UX: dar tempo para animação
+
+          setIAProgress(2);
+          const prompt = `Você é uma ferramenta integrada que auxilia o Private Advisor Jhony Bosio a criar carrosséis fiduciários de alto impacto para o Instagram.
+Sua missão é analisar o conteúdo de referência fornecido e produzir exatamente ${numSlides} slides estruturados e prontos para publicação, seguindo todas as diretrizes abaixo com precisão absoluta.
+
+## 1. BRAND PERSONA — TOM DE VOZ DO AUTOR:
+${persona}
+
+## 2. DIRETRIZES DE COMPLIANCE OBRIGATÓRIAS (CVM 178/2023 | XP v7):
+${compliance}
+
+VEDAÇÕES ABSOLUTAS (não podem aparecer em nenhuma copy):
+- Promessas de rentabilidade garantida, retornos certos ou lucros rápidos.
+- Sugestões de operações específicas sem embasamento técnico documentado.
+- Linguagem que indique gestão discricionária ou tomada de decisão pelo assessor.
+- Uso de selos ou certificações que o autor não possui (ex: gestor, analista CNPI).
+
+## 3. REGRAS DE ESTRUTURA E DESIGN DOS SLIDES:
+1. O carrossel deve conter EXATAMENTE ${numSlides} slides. Nem mais, nem menos.
+2. Slide 0 (primeiro): layout OBRIGATÓRIO = "capa" — título de gancho, categoria curta em maiúsculas, subtítulo de introdução.
+3. Slide final (último): layout = "cta" ou "pergunta" — CTA direto para falar com o Hermes no link da bio.
+4. Slides intermediários: variar inteligentemente entre "texto", "pilares", "grafico", "alerta", "xcom" conforme o conteúdo.
+5. TEXTOS CURTOS: limite físico do slide. Máximo de 15-18 palavras por título e 30-40 palavras por descrição. Use <br> para quebras estéticas.
+6. NÃO inclua a assinatura "Jhony Bosio" nos campos — ela é gerada automaticamente pelo editor.
+7. Para layout "pilares": preencha p1_title + p1_desc até p4_title + p4_desc com informações didáticas concisas (máx. 12 palavras por campo).
+8. Para layout "grafico": preencha chart_center_value, chart_center_label, e EXATAMENTE 2 itens (chart_item1 e chart_item2). A SOMA dos valores deve ser 100.
+9. Legenda final: estruturada, com emojis, hashtags fiduciárias e CTA para o Hermes.
+
+## 4. CONTEÚDO DE REFERÊNCIA:
+URL: ${urlInput || '(não fornecida)'}
+
+Texto Bruto:
+---
+${textInput}
+---
+`;
+
+          setIAProgress(3);
+          const result = await chamarGeminiAPI(apiKey, prompt);
+
+          setIAProgress(4);
+          await new Promise(r => setTimeout(r, 300));
+          renderizarCarrosselIA(result.slides, result.legenda);
+          
+          hideIAOverlay();
+
+          // Notificação inline no topo (sem alert bloqueante)
+          mostrarToastIA(`⚡ ${result.slides.length} slides gerados com sucesso pelo Gemini!`, 'success');
+
+        } catch (error) {
+          console.error("Erro na geração da IA:", error);
+          hideIAOverlay();
+          
+          if (confirm(`⚠️ Falha na IA do Gemini:\n${error.message}\n\nDeseja gerar usando o fatiador mecânico offline?`)) {
+            gerarCarrosselOffline(urlInput, textInput, numSlides);
+          }
+        }
+      } else {
+        // ── FALLBACK MECÂNICO LOCAL ──
+        mostrarToastIA('⚙️ Sem API Key — usando fatiador mecânico offline.', 'warning');
+        gerarCarrosselOffline(urlInput, textInput, numSlides);
       }
-      
-      setTimeout(() => {
-        statusText.textContent = "Dividindo texto em blocos didáticos balanceados...";
-        
-        // Algoritmo de divisão inteligente de texto
-        const blocos = dividirTextoInteligente(textInput, numSlides);
-        
-        // Limpar viewport
-        const viewport = document.getElementById('editor-viewport');
-        viewport.innerHTML = '';
-        slideCounter = 0;
-        
-        // Gerar os slides
-        blocos.forEach((bloco, idx) => {
-          let layoutPadrao = 'texto';
-          if (idx === 0) layoutPadrao = 'capa';
-          else if (idx === blocos.length - 1) layoutPadrao = 'pergunta';
-          
-          const slideId = adicionarNovoSlide(layoutPadrao);
-          const wrapper = document.getElementById(slideId);
-          
-          // Preencher TODOS os layouts com as informações correspondentes deste bloco
-          // 1. Capa
-          const capaCat = wrapper.querySelector('.slide-capa-category');
-          if (capaCat) capaCat.textContent = bloco.category.toUpperCase();
-          const capaTitle = wrapper.querySelector('.slide-capa-title');
-          if (capaTitle) capaTitle.innerHTML = bloco.title;
-          const capaDesc = wrapper.querySelector('.slide-capa-desc');
-          if (capaDesc) capaDesc.textContent = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "");
-          
-          // 2. Didático Texto
-          const contentCat = wrapper.querySelector('.slide-content-category');
-          if (contentCat) contentCat.textContent = bloco.category.toUpperCase();
-          const contentTitle = wrapper.querySelector('.slide-content-title');
-          if (contentTitle) contentTitle.innerHTML = bloco.title;
-          const cardText = wrapper.querySelector('.slide-glass-card-text');
-          if (cardText) cardText.innerHTML = bloco.desc;
-          
-          // 3. Didático Pilares
+    }
+
+    function renderizarCarrosselIA(slides, legenda) {
+      // Limpar viewport
+      const viewport = document.getElementById('editor-viewport');
+      viewport.innerHTML = '';
+      slideCounter = 0;
+
+      // Gerar os slides
+      slides.forEach((bloco, idx) => {
+        const layout = bloco.layout || (idx === 0 ? 'capa' : (idx === slides.length - 1 ? 'cta' : 'texto'));
+        const slideId = adicionarNovoSlide(layout);
+        const wrapper = document.getElementById(slideId);
+
+        // 1. Capa
+        const capaCat = wrapper.querySelector('.slide-capa-category');
+        if (capaCat) capaCat.textContent = bloco.category.toUpperCase();
+        const capaTitle = wrapper.querySelector('.slide-capa-title');
+        if (capaTitle) capaTitle.innerHTML = bloco.title;
+        const capaDesc = wrapper.querySelector('.slide-capa-desc');
+        if (capaDesc) capaDesc.textContent = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "");
+
+        // 2. Didático Texto
+        const contentCat = wrapper.querySelector('.slide-content-category');
+        if (contentCat) contentCat.textContent = bloco.category.toUpperCase();
+        const contentTitle = wrapper.querySelector('.slide-content-title');
+        if (contentTitle) contentTitle.innerHTML = bloco.title;
+        const cardText = wrapper.querySelector('.slide-glass-card-text');
+        if (cardText) cardText.innerHTML = bloco.desc;
+
+        // 3. Didático Pilares
+        if (layout === 'pilares') {
+          const cards = wrapper.querySelectorAll('.slide-pilar-card');
+          if (cards.length >= 4) {
+            const pilares = [
+              { t: bloco.p1_title || "Pilar 01", d: bloco.p1_desc || "" },
+              { t: bloco.p2_title || "Pilar 02", d: bloco.p2_desc || "" },
+              { t: bloco.p3_title || "Pilar 03", d: bloco.p3_desc || "" },
+              { t: bloco.p4_title || "Pilar 04", d: bloco.p4_desc || "" }
+            ];
+            cards.forEach((c, cIdx) => {
+              const pTitle = c.querySelector('.slide-pilar-title');
+              const pDesc = c.querySelector('.slide-pilar-desc');
+              if (pTitle && pDesc) {
+                pTitle.textContent = pilares[cIdx].t;
+                pDesc.textContent = pilares[cIdx].d || "Detalhe estratégico para sua blindagem de ativos globais.";
+              }
+            });
+          }
+        } else {
+          // Preencher pilares com conteúdo genérico de fallback se alternar o layout depois no editor
           const cards = wrapper.querySelectorAll('.slide-pilar-card');
           if (cards.length >= 4) {
             const partes = bloco.desc.replace(/<br>/g, " ").split('. ');
@@ -2474,48 +3773,135 @@
               }
             });
           }
-          
-          // 4. Didático Pergunta
-          const qSubtitle = wrapper.querySelector('.slide-question-subtitle');
-          if (qSubtitle) qSubtitle.textContent = "Ação imediata necessária...";
-          const cardQ = wrapper.querySelector('.slide-card-question');
-          if (cardQ) cardQ.textContent = bloco.title.replace('<br>', ' ').replace(/<\/?[^>]+(>|$)/g, "");
-          const cardQSub = wrapper.querySelector('.slide-card-question-sub');
-          if (cardQSub) cardQSub.textContent = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 75) + "...";
-          const cardQBtn = wrapper.querySelector('.slide-card-question-btn span');
-          if (cardQBtn) cardQBtn.textContent = idx === blocos.length - 1 ? "Falar com o Hermes" : "Saber Mais";
-          
-          // 5. CTA Final
-          const ctaCat = wrapper.querySelector('.slide-cta-category');
-          if (ctaCat) ctaCat.textContent = "WEALTH ACADEMY";
-          const ctaTitle = wrapper.querySelector('.slide-cta-title');
-          if (ctaTitle) ctaTitle.innerHTML = bloco.title;
-          const ctaDesc = wrapper.querySelector('.slide-cta-desc');
-          if (ctaDesc) ctaDesc.textContent = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "");
-          const ctaBtn = wrapper.querySelector('.slide-cta-btn-text');
-          if (ctaBtn) ctaBtn.textContent = "ACESSAR TRILHA GRÁTIS";
-          
-          // 6. X.com (Tweet)
-          const xText = wrapper.querySelector('.xcom-text');
-          if (xText) xText.innerText = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "");
-          const xCta = wrapper.querySelector('.xcom-cta');
-          if (xCta) xCta.innerText = idx === blocos.length - 1 ? "Acesse o link da bio e fale com o Hermes." : "Veja o próximo slide para entender.";
-        });
-        
-        // Atualizar numeração
-        atualizarNumeracaoSlides();
-        
-        // Sincronizar o tema e o acento ativo
-        setTheme(currentTheme);
-        
-        // Fechar loader
-        loader.style.display = 'none';
-        
-        // Gerar a Legenda Inteligente
+        }
+
+        // 4. Didático Pergunta
+        const qSubtitle = wrapper.querySelector('.slide-question-subtitle');
+        if (qSubtitle) qSubtitle.textContent = "Ação imediata necessária...";
+        const cardQ = wrapper.querySelector('.slide-card-question');
+        if (cardQ) cardQ.textContent = bloco.title.replace('<br>', ' ').replace(/<\/?[^>]+(>|$)/g, "");
+        const cardQSub = wrapper.querySelector('.slide-card-question-sub');
+        if (cardQSub) cardQSub.textContent = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "").substring(0, 75) + "...";
+        const cardQBtn = wrapper.querySelector('.slide-card-question-btn span');
+        if (cardQBtn) cardQBtn.textContent = idx === slides.length - 1 ? "Falar com o Hermes" : "Saber Mais";
+
+        // 5. CTA Final
+        const ctaCat = wrapper.querySelector('.slide-cta-category');
+        if (ctaCat) ctaCat.textContent = "WEALTH ACADEMY";
+        const ctaTitle = wrapper.querySelector('.slide-cta-title');
+        if (ctaTitle) ctaTitle.innerHTML = bloco.title;
+        const ctaDesc = wrapper.querySelector('.slide-cta-desc');
+        if (ctaDesc) ctaDesc.textContent = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "");
+        const ctaBtn = wrapper.querySelector('.slide-cta-btn-text');
+        if (ctaBtn) ctaBtn.textContent = "FALAR COM O HERMES";
+
+        // 6. X.com (Tweet)
+        const xText = wrapper.querySelector('.xcom-text');
+        if (xText) xText.innerText = bloco.desc.replace(/<\/?[^>]+(>|$)/g, "");
+        const xCta = wrapper.querySelector('.xcom-cta');
+        if (xCta) xCta.innerText = idx === slides.length - 1 ? "Acesse o link da bio e fale com o Hermes." : "Veja o próximo slide para entender.";
+
+        // 7. Didático Gráfico
+        if (layout === 'grafico') {
+          const centerVal = wrapper.querySelector('.slide-grafico-center-value');
+          if (centerVal) centerVal.textContent = bloco.chart_center_value || "60%";
+          const centerLabel = wrapper.querySelector('.slide-grafico-center-label');
+          if (centerLabel) centerLabel.textContent = bloco.chart_center_label || "Fiduciário";
+
+          const gItems = wrapper.querySelectorAll('.slide-grafico-legenda-item');
+          if (gItems.length >= 2) {
+            const v1 = bloco.chart_item1_value !== undefined ? bloco.chart_item1_value : 60;
+            const v2 = bloco.chart_item2_value !== undefined ? bloco.chart_item2_value : 40;
+            
+            if (gItems[0]) {
+              gItems[0].querySelector('.slide-grafico-legenda-title').textContent = bloco.chart_item1_title || "Modelo Fee-Only";
+              gItems[0].querySelector('.slide-grafico-legenda-value').textContent = `${v1}%`;
+              gItems[0].querySelector('.slide-grafico-legenda-desc').textContent = bloco.chart_item1_desc || "Retorno de rebates e alocação 100% fiduciária.";
+              gItems[0].querySelector('.slide-grafico-input-control').value = v1;
+            }
+            if (gItems[1]) {
+              gItems[1].querySelector('.slide-grafico-legenda-title').textContent = bloco.chart_item2_title || "Modelo Tradicional";
+              gItems[1].querySelector('.slide-grafico-legenda-value').textContent = `${v2}%`;
+              gItems[1].querySelector('.slide-grafico-legenda-desc').textContent = bloco.chart_item2_desc || "Custos ocultos que reduzem a rentabilidade.";
+              gItems[1].querySelector('.slide-grafico-input-control').value = v2;
+            }
+            // Forçar redesenho do donut SVG
+            const primaryInput = wrapper.querySelector('.item-primary .slide-grafico-input-control');
+            if (primaryInput) handleGraficoValueChange(primaryInput, 'primary');
+          }
+        } else {
+          // Fallback donut estático
+          const centerVal = wrapper.querySelector('.slide-grafico-center-value');
+          if (centerVal) centerVal.textContent = "60%";
+          const centerLabel = wrapper.querySelector('.slide-grafico-center-label');
+          if (centerLabel) centerLabel.textContent = "Fiduciário";
+          const gItems = wrapper.querySelectorAll('.slide-grafico-legenda-item');
+          if (gItems.length >= 2) {
+            if (gItems[0]) gItems[0].querySelector('.slide-grafico-input-control').value = 60;
+            if (gItems[1]) gItems[1].querySelector('.slide-grafico-input-control').value = 40;
+            const primaryInput = wrapper.querySelector('.item-primary .slide-grafico-input-control');
+            if (primaryInput) handleGraficoValueChange(primaryInput, 'primary');
+          }
+        }
+
+        // 8. Didático Alerta
+        const aTitle = wrapper.querySelector('.slide-alerta-title');
+        if (aTitle) aTitle.textContent = bloco.title.replace('<br>', ' ').replace(/<\/?[^>]+(>|$)/g, "");
+        const aText = wrapper.querySelector('.slide-alerta-text');
+        if (aText) aText.innerHTML = bloco.desc;
+      });
+
+      // Atualizar numeração
+      atualizarNumeracaoSlides();
+
+      // Sincronizar tema ativo
+      setTheme(currentTheme);
+
+      // Preencher legenda
+      if (legenda) {
+        document.getElementById('caption-text').value = legenda;
+      } else {
         gerarLegendaAutomatica();
+      }
+
+      // Rodar validador de design system (Strict Mode) e scroll para primeiro slide
+      setTimeout(() => {
+        document.querySelectorAll('#editor-viewport .slide-scale-container').forEach(sc => {
+          validarConsistenciaSlide(sc);
+        });
+        // Scroll suave para o primeiro slide gerado
+        const primeiroPainel = document.querySelector('#editor-viewport .slide-scale-container');
+        if (primeiroPainel) {
+          primeiroPainel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 150);
+    }
+
+    function gerarCarrosselOffline(urlInput, textInput, numSlides) {
+      const loader = document.getElementById('export-loader');
+      const statusText = document.getElementById('loader-status');
+      
+      loader.style.display = 'flex';
+      statusText.textContent = "Processando referências com inteligência local...";
+      
+      if (urlInput && !textInput) {
+        statusText.textContent = "Lendo e interpretando artigo da web...";
+        let temaSimulado = "Reforma Tributária e Sucessão Patrimonial";
+        if (urlInput.toLowerCase().includes("inflacao") || urlInput.toLowerCase().includes("juros") || urlInput.toLowerCase().includes("selic") || urlInput.toLowerCase().includes("etf")) {
+          temaSimulado = "Alocação Fiduciária de Ativos Globais";
+        }
+        textInput = obterTextoMockPremium(temaSimulado);
+      }
+      
+      setTimeout(() => {
+        statusText.textContent = "Dividindo texto em blocos didáticos balanceados...";
+        const blocos = dividirTextoInteligente(textInput, numSlides);
         
-        alert(`⚡ Carrossel com ${numSlides} slides criado com sucesso com base nas referências!`);
-      }, 1500);
+        renderizarCarrosselIA(blocos, "");
+        
+        loader.style.display = 'none';
+        alert(`⚡ Carrossel Offline com ${numSlides} slides criado com sucesso! Configure uma Gemini API Key para gerar via IA do Gemini.`);
+      }, 1000);
     }
 
     function dividirTextoInteligente(texto, numSlides) {
@@ -2706,6 +4092,32 @@ Fale com o Hermes hoje mesmo para realizar uma simulação científica do impact
           });
           legenda += `\n`;
         }
+        else if (layout === 'grafico') {
+          const title = slide.querySelector('.slide-content-title')?.innerText.replace(/\n/g, ' ').trim() || "";
+          const centerVal = slide.querySelector('.slide-grafico-center-value')?.textContent.trim() || "";
+          const centerLabel = slide.querySelector('.slide-grafico-center-label')?.textContent.trim() || "";
+          
+          legenda += `📊 ${title} [${centerVal} - ${centerLabel}]\n`;
+          
+          const items = slide.querySelectorAll('.slide-grafico-legenda-item');
+          items.forEach(item => {
+            const lTitle = item.querySelector('.slide-grafico-legenda-title')?.textContent.trim() || "";
+            const lValue = item.querySelector('.slide-grafico-legenda-value')?.textContent.trim() || "";
+            const lDesc = item.querySelector('.slide-grafico-legenda-desc')?.textContent.trim() || "";
+            if (lTitle) {
+              legenda += `• ${lTitle} (${lValue}): ${lDesc}\n`;
+            }
+          });
+          legenda += `\n`;
+        }
+        else if (layout === 'alerta') {
+          const title = slide.querySelector('.slide-content-title')?.innerText.replace(/\n/g, ' ').trim() || "";
+          const cardTitle = slide.querySelector('.slide-alerta-title')?.textContent.trim() || "";
+          const cardText = slide.querySelector('.slide-alerta-text')?.innerText.trim() || "";
+          
+          legenda += `⚠️ ${title}\n`;
+          if (cardTitle) legenda += `↳ ${cardTitle}: ${cardText}\n\n`;
+        }
         else if (layout === 'pergunta') {
           const title = slide.querySelector('.slide-content-title')?.innerText.replace(/\n/g, ' ').trim() || "";
           const question = slide.querySelector('.slide-card-question')?.textContent.trim() || "";
@@ -2781,10 +4193,171 @@ Fale com o Hermes hoje mesmo para realizar uma simulação científica do impact
       }
     }
 
+    // --- LÓGICA DE INTELIGÊNCIA ARTIFICIAL (FASE 3) ---
+    const DEFAULT_PERSONA = `Você é o Private Advisor Jhony Bosio, sócio da Blue3 Investimentos (XP). Tom de voz: sofisticado, técnico, direto e sem sensacionalismo. Público-alvo: investidores de alta renda (High Net Worth, patrimônio > R$1M). Linguagem transmite autoridade fiduciária e transparência total. Nunca use jargão de vendas ou hipérboles. Prefira dados concretos e educação financeira de verdade.`;
+    const DEFAULT_COMPLIANCE = `Compliance CVM 178/2023 | Manual XP v7 | Fee-Based 2026:
+- NUNCA prometer retornos garantidos, rentabilidade mínima ou lucros rápidos.
+- NUNCA sugerir operações específicas sem embasamento técnico documentado.
+- NUNCA utilizar certificações que não possui (gestor, analista CNPI).
+- Toda copy deve ser neutra, transparente e fiduciária.
+- CTAs permitidos: convidar para diagnóstico gratuito, conversa com especialista, acesso a material educacional.
+- Evitar comparações diretas com concorrentes nominados.`;
+
+    function initIAPersistence() {
+      const apiKeyInput = document.getElementById('ia-api-key');
+      const personaInput = document.getElementById('ia-persona');
+      const complianceInput = document.getElementById('ia-compliance');
+
+      // Carregar do localStorage ou usar a chave padrão do projeto
+      const DEFAULT_API_KEY = '';
+      const savedApiKey = localStorage.getItem('ia-api-key') || DEFAULT_API_KEY;
+      const savedPersona = localStorage.getItem('ia-persona') || DEFAULT_PERSONA;
+      const savedCompliance = localStorage.getItem('ia-compliance') || DEFAULT_COMPLIANCE;
+
+      apiKeyInput.value = savedApiKey;
+      personaInput.value = savedPersona;
+      complianceInput.value = savedCompliance;
+
+      // Persistir a chave padrão no localStorage se ainda não estiver salva
+      if (!localStorage.getItem('ia-api-key') && savedApiKey) {
+        localStorage.setItem('ia-api-key', savedApiKey);
+      }
+
+      // Salvar automaticamente no localStorage e atualizar badge
+      apiKeyInput.addEventListener('input', () => {
+        const val = apiKeyInput.value.trim();
+        localStorage.setItem('ia-api-key', val);
+        atualizarBadgeApiKey(val);
+      });
+      personaInput.addEventListener('input', () => {
+        localStorage.setItem('ia-persona', personaInput.value.trim());
+      });
+      complianceInput.addEventListener('input', () => {
+        localStorage.setItem('ia-compliance', complianceInput.value.trim());
+      });
+
+      // Atualizar badge na inicialização
+      atualizarBadgeApiKey(savedApiKey);
+    }
+
+    function toggleApiKeyVisibility() {
+      const input = document.getElementById('ia-api-key');
+      const btn = input.nextElementSibling;
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🙈';
+      } else {
+        input.type = 'password';
+        btn.textContent = '👁️';
+      }
+    }
+
+    // --- UTILITÁRIOS DE IA ---
+
+    function atualizarBadgeApiKey(key) {
+      const badge = document.getElementById('ia-key-status-badge');
+      if (!badge) return;
+      if (key && key.length > 5) {
+        badge.className = 'ia-key-status has-key';
+        badge.textContent = '✓ API Conectada';
+      } else {
+        badge.className = 'ia-key-status no-key';
+        badge.textContent = '⚠ Sem API Key';
+      }
+    }
+
+    async function testarApiKey() {
+      const apiKey = document.getElementById('ia-api-key').value.trim();
+      const badge = document.getElementById('ia-key-status-badge');
+      const btn = document.getElementById('btn-test-api');
+      
+      if (!apiKey) {
+        badge.className = 'ia-key-status error';
+        badge.textContent = '✗ Insira a chave';
+        setTimeout(() => atualizarBadgeApiKey(''), 2000);
+        return;
+      }
+
+      badge.className = 'ia-key-status testing';
+      badge.textContent = '↻ Testando...';
+      btn.disabled = true;
+
+      try {
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: 'Responda apenas: OK' }] }] })
+        });
+        if (res.ok) {
+          badge.className = 'ia-key-status has-key';
+          badge.textContent = '✓ Chave Válida!';
+          localStorage.setItem('ia-api-key', apiKey);
+          setTimeout(() => {
+            badge.textContent = '✓ API Conectada';
+          }, 2500);
+        } else {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.error?.message || `HTTP ${res.status}`);
+        }
+      } catch (e) {
+        badge.className = 'ia-key-status error';
+        badge.textContent = '✗ Chave Inválida';
+        console.error('Erro ao testar API Key:', e.message);
+        setTimeout(() => atualizarBadgeApiKey(apiKey), 3000);
+      } finally {
+        btn.disabled = false;
+      }
+    }
+
+    function toggleIAAdvanced() {
+      const section = document.getElementById('ia-advanced-section');
+      const btn = document.getElementById('btn-ia-advanced-toggle');
+      if (!section || !btn) return;
+      const isOpen = section.classList.contains('expanded');
+      section.classList.toggle('expanded', !isOpen);
+      btn.classList.toggle('open', !isOpen);
+    }
+
+    function mostrarToastIA(mensagem, tipo = 'success') {
+      const existing = document.getElementById('ia-toast');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'ia-toast';
+      const cores = {
+        success: { bg: 'rgba(48, 209, 88, 0.12)', border: 'rgba(48, 209, 88, 0.3)', color: '#30d158' },
+        warning: { bg: 'rgba(255, 149, 0, 0.12)', border: 'rgba(255, 149, 0, 0.3)', color: '#ff9500' },
+        error:   { bg: 'rgba(255, 59, 48, 0.12)',  border: 'rgba(255, 59, 48, 0.3)',  color: '#ff3b30' }
+      };
+      const c = cores[tipo] || cores.success;
+      toast.style.cssText = `
+        position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+        background: ${c.bg}; border: 1px solid ${c.border}; color: ${c.color};
+        font-family: var(--plus-jakarta); font-size: 13px; font-weight: 700;
+        padding: 12px 20px; border-radius: 12px; backdrop-filter: blur(12px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        transform: translateY(12px); opacity: 0;
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      `;
+      toast.textContent = mensagem;
+      document.body.appendChild(toast);
+      requestAnimationFrame(() => {
+        toast.style.transform = 'translateY(0)';
+        toast.style.opacity = '1';
+      });
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(12px)';
+        setTimeout(() => toast.remove(), 400);
+      }, 4000);
+    }
+
     // Inicialização do carrossel ao carregar
     document.addEventListener('DOMContentLoaded', () => {
       setTheme('blue3-blue');
       loadTemplate(0);
+      initIAPersistence();
     });
   </script>
 
